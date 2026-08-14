@@ -1,0 +1,483 @@
+<title>Khác biệt hoá Edupia Class</title>
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --surface-muted: #F1EFEA;
+    --border: #E4E1D8;
+    --text: #201F1C;
+    --text-soft: #5C594F;
+    --accent: #2A3B5C;
+    --accent-soft: #DDE3EE;
+    --accent-contrast: #FFFFFF;
+    --good: #2F7A54;
+    --good-bg: #E4F3EA;
+    --medium: #A8762E;
+    --medium-bg: #F7ECD9;
+    --low: #B0542F;
+    --low-bg: #F8E6DC;
+    --unverified: #5C6B8A;
+    --unverified-bg: #E7EAF2;
+    --disputed: #8E2F52;
+    --disputed-bg: #F4DFE7;
+    --shadow: 0 1px 2px rgba(32,31,28,0.06), 0 8px 24px rgba(32,31,28,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161C;
+      --surface: #1B1E27;
+      --surface-muted: #222532;
+      --border: #2E3242;
+      --text: #EDEDEB;
+      --text-soft: #A9ACB8;
+      --accent: #8AA0D6;
+      --accent-soft: #232B42;
+      --accent-contrast: #10131B;
+      --good: #5FBE8B;
+      --good-bg: #163326;
+      --medium: #D9A855;
+      --medium-bg: #3A2E12;
+      --low: #E08A63;
+      --low-bg: #3B2116;
+      --unverified: #9DAAC9;
+      --unverified-bg: #232941;
+      --disputed: #D97DA3;
+      --disputed-bg: #3A1F2A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161C;
+    --surface: #1B1E27;
+    --surface-muted: #222532;
+    --border: #2E3242;
+    --text: #EDEDEB;
+    --text-soft: #A9ACB8;
+    --accent: #8AA0D6;
+    --accent-soft: #232B42;
+    --accent-contrast: #10131B;
+    --good: #5FBE8B;
+    --good-bg: #163326;
+    --medium: #D9A855;
+    --medium-bg: #3A2E12;
+    --low: #E08A63;
+    --low-bg: #3B2116;
+    --unverified: #9DAAC9;
+    --unverified-bg: #232941;
+    --disputed: #D97DA3;
+    --disputed-bg: #3A1F2A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection { background: var(--accent-soft); }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, "Iowan Old Style", "Noto Serif", "Times New Roman", serif;
+    text-wrap: balance;
+    color: var(--text);
+    line-height: 1.25;
+  }
+
+  .shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+    display: grid;
+    grid-template-columns: 240px minmax(0, 780px);
+    gap: 48px;
+    justify-content: center;
+  }
+  @media (max-width: 980px) {
+    .shell { grid-template-columns: minmax(0, 1fr); }
+    .toc { display: none; }
+  }
+
+  /* ---------- Header ---------- */
+  header.hero {
+    background: linear-gradient(180deg, var(--accent-soft), var(--bg) 140%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 24px 40px;
+  }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 14px;
+  }
+  h1.title { font-size: clamp(28px, 4vw, 40px); margin: 0 0 14px; }
+  .decision-line { color: var(--text-soft); font-size: 17px; max-width: 62ch; margin: 0 0 22px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .meta-chip {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 12px; font-size: 13px; color: var(--text-soft); display: flex; gap: 6px; align-items: baseline;
+  }
+  .meta-chip b { color: var(--text); font-weight: 600; }
+
+  /* ---------- TOC ---------- */
+  .toc { position: sticky; top: 32px; align-self: start; padding-top: 40px; }
+  .toc-title { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 10px; }
+  .toc a {
+    display: block; padding: 6px 0; font-size: 14px; color: var(--text-soft);
+    text-decoration: none; border-left: 2px solid transparent; padding-left: 12px; margin-left: -1px;
+  }
+  .toc a:hover { color: var(--accent); border-left-color: var(--border); }
+
+  main { padding-top: 40px; min-width: 0; }
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  section h2 { font-size: 24px; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 18px; }
+  section h2 .num { color: var(--accent); font-variant-numeric: tabular-nums; margin-right: 8px; }
+  p { margin: 0 0 16px; max-width: 72ch; }
+  ul, ol { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 8px; max-width: 70ch; }
+
+  /* ---------- Summary card ---------- */
+  .summary-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px 28px 8px; box-shadow: var(--shadow);
+  }
+  .finding {
+    display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--border);
+  }
+  .finding:first-child { border-top: none; padding-top: 0; }
+  .flag {
+    flex: none; width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700; margin-top: 2px;
+  }
+  .flag.risk { background: var(--disputed-bg); color: var(--disputed); }
+  .flag.watch { background: var(--medium-bg); color: var(--medium); }
+  .flag.note { background: var(--unverified-bg); color: var(--unverified); }
+  .finding p { margin: 0; }
+  .finding strong { color: var(--text); }
+
+  /* ---------- Badges ---------- */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .badge.verified { background: var(--good-bg); color: var(--good); }
+  .badge.medium { background: var(--medium-bg); color: var(--medium); }
+  .badge.low { background: var(--low-bg); color: var(--low); }
+  .badge.unverified { background: var(--unverified-bg); color: var(--unverified); border: 1px dashed var(--unverified); }
+  .badge.disputed { background: var(--disputed-bg); color: var(--disputed); border: 1px dashed var(--disputed); }
+
+  .cite { text-decoration: none; font-size: 0.85em; font-weight: 700; color: var(--accent); padding: 0 1px; }
+  .cite:hover { text-decoration: underline; }
+
+  /* ---------- Dimension blocks ---------- */
+  .dim-scope { color: var(--text-soft); font-size: 14px; font-style: italic; margin: -8px 0 20px; }
+  .callout {
+    background: var(--surface-muted); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;
+    padding: 14px 18px; margin: 18px 0; font-size: 15px;
+  }
+  .callout.warn { border-left-color: var(--disputed); }
+
+  /* ---------- Recommendations ---------- */
+  .rec {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 14px; display: flex; gap: 16px;
+  }
+  .rec .rec-tag {
+    flex: none; width: 44px; height: 44px; border-radius: 10px; background: var(--accent-soft);
+    color: var(--accent); font-family: Georgia, "Noto Serif", serif; font-weight: 700; font-size: 17px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rec p { margin: 0; }
+  .rec p + p { margin-top: 6px; font-size: 13.5px; color: var(--text-soft); }
+
+  /* ---------- Tables ---------- */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 640px; }
+  caption { caption-side: top; text-align: left; font-size: 13px; color: var(--text-soft); padding: 8px 4px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  thead th { background: var(--surface-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-soft); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--surface-muted); }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  details.appendix { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px; }
+  details.appendix summary {
+    cursor: pointer; padding: 14px 18px; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 10px;
+  }
+  details.appendix summary::-webkit-details-marker { display: none; }
+  details.appendix summary::before { content: "▸"; color: var(--accent); transition: transform 0.15s; }
+  details.appendix[open] summary::before { transform: rotate(90deg); }
+  details.appendix .table-wrap { border: none; border-top: 1px solid var(--border); border-radius: 0; margin: 0 4px 4px; width: calc(100% - 8px); }
+
+  footer.page-footer { max-width: 780px; margin: 40px auto 0; padding: 24px; color: var(--text-soft); font-size: 13px; border-top: 1px solid var(--border); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Nghiên cứu cạnh tranh · Competitive Research</div>
+    <h1 class="title">Khác biệt hoá concept Edupia Class</h1>
+    <p class="decision-line">Chọn concept nào trong C1–C4 để xây cho Edupia Class (390.000 VND/tháng), dựa trên bằng chứng bên ngoài kiểm chứng các rủi ro khác biệt hoá AI-chẩn đoán (C3), con người/GVCN (C4), bundling (C2), và nền tảng (C1) mà bản brief đã gắn cờ chưa xác nhận.</p>
+    <div class="meta-row">
+      <span class="meta-chip">📅 <b>14/08/2026</b></span>
+      <span class="meta-chip">Loại: <b>Cạnh tranh (Competitive)</b></span>
+      <span class="meta-chip">Độ sâu: <b>Chuẩn — 2 vòng × 3 nhánh</b></span>
+      <span class="meta-chip">Xác minh: <b>Normal — spot-check claim trọng yếu</b></span>
+      <span class="meta-chip">Nguồn: <b>28 nguồn, 9 claim theo dõi</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Mục lục">
+    <div class="toc-title">Mục lục</div>
+    <a href="#summary">Tóm tắt điều hành</a>
+    <a href="#dim1">1. Offer &amp; Positioning</a>
+    <a href="#dim2">2. Pricing &amp; Packaging</a>
+    <a href="#dim3">3. Customer Voice</a>
+    <a href="#cross">Cross-dimension insights</a>
+    <a href="#contrary">Contrary evidence</a>
+    <a href="#recs">Khuyến nghị</a>
+    <a href="#open">Câu hỏi mở</a>
+    <a href="#sources">Nguồn tham khảo</a>
+    <a href="#staleness">Staleness map</a>
+  </nav>
+
+  <main>
+    <section id="summary">
+      <h2><span class="num">§</span>Tóm tắt điều hành</h2>
+      <div class="summary-card">
+        <div class="finding">
+          <div class="flag risk">⚠</div>
+          <p><strong>Không đối thủ nào (trong ~17 đối thủ rà soát qua 2 vòng) kết hợp giáo viên cố định/cam kết với giá 300.000–500.000 VND/tháng.</strong> Sản phẩm có giáo viên thật định giá từ 600.000 VND/tháng trở lên (Kyna English 520K là biên gần nhất); sản phẩm ở dải giá thấp là tự học, không giáo viên <a class="cite" href="#src-1">[1]</a><a class="cite" href="#src-12">[12]</a><a class="cite" href="#src-13">[13]</a><a class="cite" href="#src-16">[16]</a><a class="cite" href="#src-20">[20]</a>. Đây là khoảng trống cấu trúc thật — <strong>C4 sẽ là chưa từng có tiền lệ được đối thủ chứng minh khả thi ở mức giá này.</strong> Cơ hội khác biệt hoá thật, nhưng không có benchmark rủi ro biên lợi nhuận/tỷ lệ 1:2.000 từ đối thủ.</p>
+        </div>
+        <div class="finding">
+          <div class="flag watch">◆</div>
+          <p><strong>Không đối thủ nào công khai cơ chế AI với độ chi tiết gần "1.473 NLO" của C3</strong> — mọi tuyên bố tìm được (Monkey Stories, iSMART) dừng ở ngôn ngữ marketing chung chung, không công bố số đơn vị kiến thức hay ngưỡng mastery <a class="cite" href="#src-1">[1]</a><a class="cite" href="#src-2">[2]</a><a class="cite" href="#src-3">[3]</a><a class="cite" href="#src-4">[4]</a><a class="cite" href="#src-5">[5]</a>. Có thể là khác biệt hoá thật cho C3 — nhưng vì thị trường mù mờ chung, không loại trừ đối thủ có công nghệ tương đương không công bố. Rủi ro nằm ở <em>thực thi đúng độ chi tiết đã hứa</em>, không phải ở việc dễ sao chép.</p>
+        </div>
+        <div class="finding">
+          <div class="flag risk">⚠</div>
+          <p><strong>Case Đắk Lắk (Tuổi Trẻ, 18/4/2025):</strong> phụ huynh phản ứng dữ dội khi chương trình "môn kỹ năng" bundled (iSMART) bị đưa vào giờ chính khoá bắt buộc ở ~400.000 VND/tháng, giáo viên thực tế chủ yếu người Việt thay vì nước ngoài như cam kết, học sinh không đăng ký bị tách lớp riêng — Sở GD&amp;ĐT phải lên tiếng chính thức <a class="cite" href="#src-24">[24]</a>. Rủi ro có thật cho C2 — nhưng đặc thù ở <em>kênh trường-học-chính-khoá-bắt-buộc</em>, không phải bundling nói chung: Thông tư 29 cho phép liên kết ngoài chính khoá <a class="cite" href="#src-28">[28]</a>.</p>
+        </div>
+        <div class="finding">
+          <div class="flag note">i</div>
+          <p><strong>Rủi ro lớn nhất của chính nghiên cứu này:</strong> tiếng nói khách hàng trực tiếp (đánh giá app store, review thật) hầu như không tiếp cận được qua công cụ trong 2 vòng nghiên cứu. Không có bằng chứng trực tiếp về việc phụ huynh Việt Nam tin/nghi ngờ tuyên bố AI-chẩn đoán, hay coi trọng vai trò "giáo viên chủ nhiệm" — câu hỏi này vẫn cần <strong>khảo sát T9</strong> trả lời.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="dim1">
+      <h2><span class="num">1</span>Offer &amp; feature teardown + Positioning</h2>
+      <p class="dim-scope">Đối thủ rà soát: Monkey Junior/Stories, ELSA Speak, VUS, iSMART, Antoree, Cambly Kids, Yola, VIP English Kid, WISE Kids, KidsUP, Alokiddy.</p>
+
+      <p><strong>Cá nhân hoá AI — độ cụ thể cơ chế.</strong> Monkey Stories quảng cáo "lộ trình học cá nhân hoá" (AI + ~350 bài/7 giai đoạn/1.400+ truyện tương tác) nhưng không công bố quy trình chẩn đoán, số kỹ năng rời rạc, hay ngưỡng mastery — năng lực AI cụ thể duy nhất là "AI M-Speak" chấm phát âm <a class="cite" href="#src-1">[1]</a>. iSMART tuyên bố AI "phân tích dữ liệu học tập" nhưng không giải thích cơ chế thích ứng <a class="cite" href="#src-2">[2]</a>. PR "kỷ nguyên AI" của iSMART xuất hiện gần giống hệt trên VietnamNet và VnExpress (24/3/2025) — một thông cáo, không phải hai nguồn độc lập <a class="cite" href="#src-3">[3]</a><a class="cite" href="#src-4">[4]</a>; một bài thứ ba, độc lập tác giả (Giáo dục Việt Nam, 3/12/2025), lặp lại đúng mức mù mờ này <a class="cite" href="#src-5">[5]</a> — <strong>xác nhận qua 3 nhà xuất bản rằng thị trường không công bố cơ chế cụ thể</strong>, chứ không xác nhận được bản thân cơ chế.</p>
+      <p><strong>Không đối thủ nào khảo sát mô tả cá nhân hoá với độ chi tiết gần "1.000+ đơn vị kiến thức rời rạc."</strong></p>
+
+      <p><strong>Quan hệ giáo viên cố định.</strong> Antoree cho phép "học cố định" nhưng học sinh có thể tự do đổi <a class="cite" href="#src-6">[6]</a>. Cambly Kids đặt lịch tự chọn, có "lưu giáo viên yêu thích" — tiện ích, không đảm bảo; một nguồn tổng hợp review độc lập xác nhận cùng mẫu hình <a class="cite" href="#src-7">[7]</a><a class="cite" href="#src-8">[8]</a>. VIP English Kid tương tự: "tự do lựa chọn GV, đổi thoải mái" <a class="cite" href="#src-10">[10]</a>. VUS triển khai 2.700+ giáo viên nhưng không tuyên bố GV cố định theo học sinh <a class="cite" href="#src-9">[9]</a>. <strong>Không đối thủ nào công bố SLA về liên tục giáo viên</strong> (giới hạn đổi, tỷ lệ giữ cùng GV, tần suất liên hệ phụ huynh).</p>
+
+      <div class="callout warn">
+        <strong>Khoảng trống định vị (whitespace) — phát hiện quan trọng nhất của trục này.</strong> Sau khi rà soát ~17 đối thủ qua 2 vòng (kể cả truy vấn trực tiếp "giáo viên chủ nhiệm", "giáo viên riêng giá rẻ", "390000/tháng"), <strong>không tìm được sản phẩm nào kết hợp giáo viên cố định với giá 300.000–500.000 VND/tháng.</strong> Mọi sản phẩm rơi vào: (a) tự học/AI, giá thấp, không GV thật; hoặc (b) có GV thật, giá trên 500k/tháng, thường chỉ liên tục tuỳ chọn <a class="cite" href="#src-10">[10]</a><a class="cite" href="#src-11">[11]</a>. Độ tin cậy: trung bình-cao.
+      </div>
+    </section>
+
+    <section id="dim2">
+      <h2><span class="num">2</span>Pricing &amp; packaging</h2>
+
+      <p><strong>Dải 300.000–500.000 VND/tháng là "vùng trống"</strong> giữa tự học rẻ và có-giáo-viên đắt. Monkey Junior (~66.600đ/tháng) và Monkey Stories (~58.000đ/tháng) là tự học, thấp hơn 390k khoảng 6–7 lần <a class="cite" href="#src-12">[12]</a>. ELSA Pro ~91.000–122.000đ/tháng cùng mô hình <a class="cite" href="#src-13">[13]</a>. Ở đầu kia: VUS xác nhận trực tiếp trên trang riêng "Chỉ từ 1,8Tr/tháng" <a class="cite" href="#src-16">[16]</a> — con số 5.350.000đ từng dẫn từ nguồn thứ cấp nhiều khả năng là giá theo khoá, không phải theo tháng <a class="cite" href="#src-15">[15]</a>; Cambly Kids tính theo buổi (355.000–550.000đ/buổi) <a class="cite" href="#src-14">[14]</a>; Yola không công bố giá tự phục vụ ở đâu cả — "gate" hoàn toàn sau tư vấn, giống iSMART <a class="cite" href="#src-17">[17]</a><a class="cite" href="#src-19">[19]</a>; Antoree tính theo giờ 115.000–340.000đ <a class="cite" href="#src-18">[18]</a>.</p>
+
+      <p><strong>Trường hợp biên gần nhất:</strong> Kyna English quảng cáo mô hình 1:1 có GV thật "Chỉ từ 520K/tháng" — gần dải mục tiêu nhất (chỉ cao hơn trần 500k ~4%), nhưng "chỉ từ" là ngôn ngữ khuyến mãi, giá thực tế điển hình có thể cao hơn <a class="cite" href="#src-20">[20]</a>. Khảo sát giá trung tâm 2025 (Camkey) củng cố thêm: lớp nhỏ/GV thật tập trung trên 1,4–2Tr/tháng <a class="cite" href="#src-21">[21]</a>.</p>
+
+      <p><strong>Bundling — tiền lệ hiếm.</strong> "Monkey Pro" gộp Toán vào giá gốc tiếng Anh (1.299.000đ/năm ≈108.000đ/tháng, rẻ hơn mua riêng) — nhưng là bundle ứng dụng tự học <a class="cite" href="#src-12">[12]</a>. iSMART gần nhất về cấu trúc CLIL (Anh qua Toán/Khoa học) ở quy mô lớn, nhưng giá bị khoá sau tư vấn <a class="cite" href="#src-19">[19]</a>. <strong>Không tìm được ví dụ live-class đại trà nào gộp thêm môn/hoạt động vào một giá</strong> — nên báo cáo là chưa giải quyết, không phải bằng chứng hiếm hay phổ biến.</p>
+
+      <p style="color:var(--text-soft); font-size:14px;">Xu hướng giá theo thời gian: không xác định được — Wayback Machine bị chặn hoàn toàn ở cấp công cụ (đã thử fetch trực tiếp và CDX API, cả 2 vòng) — giới hạn công cụ, không phải thiếu dữ liệu.</p>
+    </section>
+
+    <section id="dim3">
+      <h2><span class="num">3</span>Customer voice</h2>
+      <p>Trục có độ phủ mỏng nhất sau 2 vòng. <strong>Không lấy được văn bản đánh giá App Store/Google Play thực tế cho bất kỳ đối thủ nào trong 7 đối thủ chính</strong> — trang review render bằng JavaScript, không có trong HTML fetch được; không có trang tổng hợp bên thứ ba thay thế được. Giới hạn công cụ xác nhận qua cả 2 vòng, không phải phát hiện sentiment tiêu cực.</p>
+
+      <p><strong>Tin cậy vào AI:</strong> một bài Threads so sánh ELSA/Duolingo/Prep khen AI ELSA chấm phát âm chi tiết nhưng chê thiếu luyện giao tiếp ngữ cảnh thực <a class="cite" href="#src-22">[22]</a>; review Edu2Review (2020, đã cũ) khen tương tự <a class="cite" href="#src-27">[27]</a>. Cả hai là bối cảnh người học trưởng thành, chưa xác nhận là phụ huynh. Một đánh giá biên tập thừa nhận độ chính xác AI của ELSA "~95-96%, chưa hoàn hảo tuyệt đối" <a class="cite" href="#src-23">[23]</a>. Một cụm bài "Monkey Junior lừa đảo?" hội tụ: phần lớn khiếu nại do mua tài khoản chia sẻ hoặc kỳ vọng phi thực tế — <strong>không phải do AI/nội dung sai lệch</strong> <a class="cite" href="#src-25">[25]</a>. Antoree chỉ có 2 review (2016, 2018), không đề cập AI/GV/bundling <a class="cite" href="#src-26">[26]</a>. <strong>Không tìm được trích dẫn trực tiếp nào của phụ huynh VN về niềm tin vào "AI chẩn đoán chính xác điểm yếu con"</strong> — khoảng trống thật.</p>
+
+      <p><strong>Giá trị giáo viên cố định:</strong> blog chính chủ VUS trích lời phụ huynh không định danh — cờ đỏ "marketing plant" điển hình, chỉ hữu ích như tín hiệu VUS chọn nhấn mạnh gì <a class="cite" href="#src-9">[9]</a>. <strong>Không tìm được bằng chứng trực tiếp nào về việc phụ huynh VN coi trọng/xem nhẹ vai trò "giáo viên chủ nhiệm."</strong></p>
+
+      <div class="callout warn">
+        <strong>Case Đắk Lắk — phát hiện mạnh nhất của trục này.</strong> Tuổi Trẻ (18/4/2025) đưa tin phụ huynh Đắk Lắk phản ứng công khai khi chương trình "môn kỹ năng" iSMART bị đưa vào giờ chính khoá bắt buộc, giá ~400.000đ/tháng, GV thực tế chủ yếu người Việt thay vì nước ngoài như cam kết, học sinh không đăng ký bị tách lớp riêng gây tổn thương tâm lý — Sở GD&amp;ĐT lên tiếng chính thức <a class="cite" href="#src-24">[24]</a>. Độ tin cậy cao nhưng <strong>một nguồn duy nhất</strong> — chưa có nguồn báo chí độc lập thứ hai.
+      </div>
+
+      <p><strong>Bối cảnh pháp lý:</strong> Thông tư 29/2024/TT-BGDĐT (hiệu lực 2/2025) cho phép trường liên kết dạy tiếng Anh/kỹ năng sống <em>ngoài</em> chính khoá bắt buộc; chỉ cấm trùng lặp nội dung chính khoá, theo lời một quan chức Bộ GD&amp;ĐT <a class="cite" href="#src-28">[28]</a>. Thu hẹp — không loại bỏ — rủi ro bundling. Chưa tìm được case thứ hai ngoài iSMART.</p>
+    </section>
+
+    <section id="cross">
+      <h2><span class="num">§</span>Cross-dimension insights</h2>
+      <ul>
+        <li><strong>Không có "đối thủ đã chứng minh điều này thành công" để dựa vào cho cả C3 lẫn C4.</strong> Trục 1&amp;2: sản phẩm có GV thật luôn định giá xa trên 390k; sản phẩm ở dải 390k luôn thiếu GV thật hoặc cơ chế AI công bố. Nếu xây đúng C3/C4 như brief mô tả, công ty là người đi đầu ở cấu hình này — tiềm năng khác biệt hoá thật, nhưng không benchmark rủi ro vận hành nào để đối chiếu.</li>
+        <li>Việc iSMART khoá giá sau tư vấn (trục 2) và là đối thủ duy nhất có case phản ứng dữ dội (trục 3) có thể liên quan — một giả thuyết nối hai trục, chưa xác nhận trực tiếp.</li>
+        <li>Toàn thị trường mô tả AI/liên tục giáo viên bằng ngôn ngữ marketing mơ hồ (trục 1) — khác biệt hoá dựa trên tuyên bố, không phải đã chứng minh công khai, là chuẩn mực. Nếu Edupia Class công bố số cụ thể và giao đúng, đây là điều bất thường so với thị trường — cơ hội định vị thật nếu giao đúng, rủi ro uy tín nếu không.</li>
+      </ul>
+    </section>
+
+    <section id="contrary">
+      <h2><span class="num">§</span>Contrary evidence</h2>
+      <p style="color:var(--text-soft);">Red-team pass không chạy trong lượt này (<code>red_team = off</code>, không kích hoạt tại cổng phê duyệt kế hoạch). Không có phản biện đối kháng riêng ngoài các giới hạn/mâu thuẫn đã nêu trực tiếp trong từng trục (VD: con số VUS 5,35Tr khả năng lỗi đơn vị; case Đắk Lắk chỉ một nguồn báo chí).</p>
+    </section>
+
+    <section id="recs">
+      <h2><span class="num">§</span>Khuyến nghị</h2>
+
+      <div class="rec"><div class="rec-tag">C3</div><div>
+        <p>Không đối thủ nào công bố độ chi tiết gần "1.473 NLO" — tiềm năng khác biệt hoá thật nếu giao đúng, nhưng thị trường mù mờ chung nên không loại trừ công nghệ tương đương chưa công bố. Xác nhận độ chi tiết <em>thực giao</em> (không chỉ thiết kế) qua Pilot trước khi chốt positioning copy; cân nhắc dùng thử trực tiếp sản phẩm 1–2 đối thủ thay vì tiếp tục dựa vào trang công khai.</p>
+        <p>Liên quan mục 4.2–4.3 brief — câu hỏi "đối chiếu triết lý AI nhanh, không xây R&amp;D lớn".</p>
+      </div></div>
+
+      <div class="rec"><div class="rec-tag">C4</div><div>
+        <p>Khoảng trống thị trường thật — không đối thủ nào kết hợp GV cố định + giá đại trà. Cơ hội khác biệt hoá thật, nhưng cũng không có benchmark nào để giảm rủi ro biên lợi nhuận/tỷ lệ 1:2.000. Kết quả Pilot GVCN (Giai đoạn 0) — không phải competitive benchmarking — phải là bằng chứng quyết định.</p>
+        <p>Liên quan mục 5.4 brief — câu hỏi Pilot GVCN, ngưỡng khả thi thật.</p>
+      </div></div>
+
+      <div class="rec"><div class="rec-tag">C2</div><div>
+        <p>Case Đắk Lắk là tiền lệ cảnh báo cụ thể, nhưng đặc thù ở kênh trường-học-chính-khoá-bắt-buộc và khoảng cách lời hứa-thực tế nhân sự — không phải bundling nói chung (Thông tư 29 cho phép liên kết ngoài chính khoá). Xác nhận kênh GTM buổi STEAM/KNS là tự nguyện/trực tiếp-người-tiêu-dùng, và cam kết GV khớp đúng thực tế giao.</p>
+        <p>Liên quan mục 3.4 brief — câu hỏi tuyển GV Kỹ năng sống/STEAM.</p>
+      </div></div>
+
+      <div class="rec"><div class="rec-tag">C1</div><div>
+        <p>Xác nhận cụ thể hơn rủi ro brief đã tự nêu ("giá trị chưa đủ khác biệt") — đối thủ tự học thật (Monkey, ELSA) rẻ hơn 390k khoảng 6–10 lần, C1 không có tuyên bố khác biệt để neo giá cao hơn nhóm này. Nghiên cứu ngoài không giải quyết được câu hỏi WTP — khảo sát T9 (Van Westendorp) là bằng chứng quyết định cho riêng C1.</p>
+        <p>Liên quan mục 2.3 brief.</p>
+      </div></div>
+
+      <div class="rec"><div class="rec-tag">4/4</div><div>
+        <p>Không có phát hiện nào cho phép nhóm dựa vào "đối thủ đã chứng minh điều này hoạt động" cho C3 hay C4 — cả hai là người đi đầu ở cấu hình này tại VN theo bằng chứng thu thập được. Nêu rõ đây là điều chỉnh rủi ro tường minh trong exit criteria T10, không giả định ngầm rằng cấu hình đã được thị trường kiểm chứng.</p>
+      </div></div>
+    </section>
+
+    <section id="open">
+      <h2><span class="num">§</span>Câu hỏi mở</h2>
+      <ol>
+        <li><strong>Tiếng nói khách hàng trực tiếp</strong> về niềm tin AI-chẩn đoán và giá trị GV cố định — không lấy được qua tìm kiếm/fetch. → Khảo sát T9 nên hỏi trực tiếp hai góc này.</li>
+        <li><strong>Con số VUS "SmartKids ~5,35Tr VND"</strong> — khả năng lỗi đơn vị (giá/khoá vs giá/tháng); trang học phí chi tiết VUS không truy cập được (lỗi DNS). → Cần Deepen hoặc kiểm tra trực tiếp.</li>
+        <li><strong>Giá Kyna English "520K/tháng"</strong> — chưa xác định giá tự phục vụ thật hay giá mồi, gói gồm bao nhiêu buổi/tuần. → Deepen hoặc liên hệ tư vấn.</li>
+        <li><strong>Case bundling-backlash khác</strong> ngoài iSMART/Đắk Lắk dưới Thông tư 29 — vòng 2 chưa tìm toàn diện. → Cần tìm sâu hơn nếu GTM của C2 tiến gần kênh trường học.</li>
+        <li><strong>Dữ liệu xu hướng giá theo thời gian</strong> — Wayback Machine bị chặn hoàn toàn trong môi trường này. → Cần công cụ khác hoặc kiểm tra thủ công.</li>
+      </ol>
+    </section>
+
+    <section id="sources">
+      <h2><span class="num">§</span>Nguồn tham khảo</h2>
+      <details class="appendix" open>
+        <summary>28 nguồn — bấm để mở/thu gọn bảng đầy đủ</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Claim / phát hiện hỗ trợ</th><th>Publisher</th><th>Ngày XB</th><th>Độ tin cậy</th></tr></thead>
+            <tbody id="source-table"></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section id="staleness">
+      <h2><span class="num">§</span>Staleness map</h2>
+      <p style="color:var(--text-soft); font-size:14px;">Cửa sổ làm mới theo pack cạnh tranh: giá &amp; tính năng ≤ 3 tháng · sentiment khách hàng ≤ 12 tháng. Tính thủ công (môi trường không có <code>uv</code>/Python để chạy <code>recon_kit.py staleness</code>) theo đúng logic script. Ngày hôm nay: 14/08/2026.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Claim (lớp)</th><th>Ngày nguồn</th><th>Cửa sổ</th><th>Hạn kiểm lại</th><th>Trạng thái</th></tr></thead>
+          <tbody>
+            <tr><td>Case Đắk Lắk <a class="cite" href="#src-24">[24]</a> (sentiment-bundling)</td><td class="num">2025-04-18</td><td class="num">12 th.</td><td class="num">2026-04-18</td><td><span class="badge disputed">⚠ quá hạn ~4 tháng</span></td></tr>
+            <tr><td>Thông tư 29 <a class="cite" href="#src-28">[28]</a> (pháp lý)</td><td class="num">2025-02-15</td><td class="num">12 th.</td><td class="num">2026-02-15</td><td><span class="badge disputed">⚠ quá hạn ~6 tháng</span></td></tr>
+            <tr><td>iSMART "kỷ nguyên AI" PR <a class="cite" href="#src-3">[3]</a><a class="cite" href="#src-4">[4]</a> (positioning)</td><td class="num">2025-03-24</td><td class="num">3 th.</td><td class="num">2025-06-24</td><td><span class="badge disputed">⚠ quá hạn rất lâu</span></td></tr>
+            <tr><td>iSMART AI, nguồn độc lập <a class="cite" href="#src-5">[5]</a> (capability)</td><td class="num">2025-12-03</td><td class="num">3 th.</td><td class="num">2026-03-03</td><td><span class="badge disputed">⚠ quá hạn ~5 tháng</span></td></tr>
+            <tr><td>ELSA review cũ <a class="cite" href="#src-27">[27]</a> (sentiment-ai)</td><td class="num">2020-04-01</td><td class="num">12 th.</td><td class="num">2021-04-01</td><td><span class="badge low">⚠ quá hạn từ lâu — chỉ tham khảo</span></td></tr>
+            <tr><td>Giá VUS/Kyna/Monkey/ELSA/Cambly <a class="cite" href="#src-16">[16]</a><a class="cite" href="#src-20">[20]</a><a class="cite" href="#src-12">[12]</a><a class="cite" href="#src-13">[13]</a><a class="cite" href="#src-14">[14]</a> (pricing)</td><td class="num">2026-08</td><td class="num">3 th.</td><td class="num">2026-11-14</td><td><span class="badge verified">● còn hiệu lực</span></td></tr>
+            <tr><td>Whitespace finding — GV cố định + giá đại trà (capability, kết luận của báo cáo này)</td><td class="num">2026-08</td><td class="num">3 th.</td><td class="num">2026-11-14</td><td><span class="badge verified">● còn hiệu lực</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px;"><strong>Hạn kiểm lại sớm nhất trong số claim còn hiệu lực:</strong> 2026-11-14. Nhiều claim đã quá hạn <em>ngay tại thời điểm hoàn thành báo cáo</em> (case Đắk Lắk, Thông tư 29, PR iSMART) — dùng được làm bối cảnh/tiền lệ, nhưng nên kiểm tra lại trước khi dùng làm căn cứ quyết định BOD ở mốc 1/12.</p>
+    </section>
+
+    <footer class="page-footer">
+      Trang này là bản trình bày đầy đủ của <code>research.md</code> — cùng claim, cùng số liệu, cùng trích dẫn; không phải nguồn sự thật thứ hai. Bản gốc Markdown và memlog quyết định nằm cùng thư mục <code>02_discovery/research/competitive-edupia-class-concept-differentiation-2026-08-14/</code>.
+    </footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var sources = [
+    ["1","Monkey Stories: không công bố cơ chế chẩn đoán/mastery cụ thể","Monkey.edu.vn","https://monkey.edu.vn/monkey-junior/monkey-stories","không rõ","medium"],
+    ["2","iSMART “hành trình cá nhân hoá”: ngôn ngữ marketing, không cơ chế","iSMART Education","https://ismart.edu.vn/vi/tieng-anh-truc-tuyen-cung-hanh-trinh-ca-nhan-hoa-hoc-tap-tai-ismart.html","không rõ","medium"],
+    ["3","iSMART “kỷ nguyên AI” PR (bản VietnamNet)","VietnamNet","https://vietnamnet.vn/ismart-education-dong-hanh-the-he-tre-viet-nam-trong-ky-nguyen-ai-2383985.html","2025-03-24","low"],
+    ["4","iSMART “kỷ nguyên AI” PR (bản VnExpress, cùng nội dung)","VnExpress","https://vnexpress.net/ismart-education-dong-hanh-the-he-tre-viet-nam-trong-ky-nguyen-ai-4865295.html","~2025-03","low"],
+    ["5","iSMART AI feature — nguồn độc lập thứ ba, vẫn mù mờ","Giáo dục Việt Nam","https://giaoduc.net.vn/he-thong-tinh-nang-ai-ismart-chien-luoc-phat-trien-nang-luc-tu-hoc-cua-hoc-sinh-trong-ky-nguyen-so-post256369.gd","2025-12-03","verified"],
+    ["6","Antoree “học cố định” là tuỳ chọn, không đảm bảo","Antoree Community","https://community.antoree.com/article/hoc-tieng-anh-truc-tuyen-mot-kem-mot-tai-antoree-co-tot-khong-4f9d5e0a/","không rõ","low"],
+    ["7","Cambly Kids: đặt lịch tự chọn giáo viên, không đảm bảo","Happy Teacher Mama","https://www.happyteachermama.com/cambly-kids-the-ultimate-guide/","không rõ","low"],
+    ["8","Cambly Kids: mẫu hình tự chọn xác nhận qua tổng hợp review","JustUseApp","https://justuseapp.com/en/app/1454321866/cambly-kids/reviews","2025","medium"],
+    ["9","VUS: đội ngũ 2.700+ GV, không tuyên bố GV cố định theo học sinh","VUS","https://vus.edu.vn/blog-vus/khoa-hoc-tieng-anh-cho-tre-em","không rõ","medium"],
+    ["10","VIP English Kid: 600k/tháng, GV tự chọn/đổi thoải mái","VIP English Kid","https://kids.vipenglisheducation.com/","không rõ","medium"],
+    ["11","KidsUP: ứng dụng tự học, không quan hệ GV thật","KidsUP","https://www.kidsup.net/kidsup-english/","không rõ","low"],
+    ["12","Monkey Junior/Stories/Pro: giá &amp; bundle Toán+Anh","Monkey.edu.vn","https://monkey.edu.vn/dang-ky-hoc","không rõ","medium"],
+    ["13","ELSA Pro: các gói giá","ELSA Speak VN","https://vn.elsaspeak.com/elsa-shop/","không rõ","medium"],
+    ["14","Cambly Kids: giá theo buổi","Cambly","https://www.cambly.com/kids/plans","không rõ","medium"],
+    ["15","VUS SmartKids ~5,35Tr — nguồn thứ cấp, khả năng lỗi đơn vị","muaban.net","https://muaban.net/blog/hoc-phi-vus-moi-nhat-533025/","không rõ","disputed"],
+    ["16","VUS: “Chỉ từ 1,8Tr/tháng” — xác nhận trên trang chính chủ","VUS","https://tienganh.vus.edu.vn/","không rõ","verified"],
+    ["17","Yola: không công bố giá tự phục vụ","Yola","https://yola.vn/","không rõ","verified"],
+    ["18","Antoree: giá theo giờ 115k-340k","Edu2Review","https://edu2review.com/reviews/hoc-phi-anh-ngu-antoree-1397.html","không rõ","medium"],
+    ["19","iSMART: giá bị khoá sau tư vấn","iSMART","https://online.ismart.edu.vn/school-fee/","không rõ","verified"],
+    ["20","Kyna English: “Chỉ từ 520K/tháng”","Kyna English","https://kynaenglish.vn/","không rõ","medium"],
+    ["21","Khảo sát giá trung tâm tiếng Anh trẻ em 2025","Camkey English","https://camkeyenglish.edu.vn/hoc-phi-cac-trung-tam-tieng-anh-cho-tre-em-nam-2025-cap-nhat-moi-nhat-tai-ha-noi/","2025","low"],
+    ["22","So sánh ELSA/Duolingo/Prep — tiếng nói người dùng thật","Threads","https://www.threads.com/@emmanguyen13/post/DFhgAFbpItP?hl=vi","gần đây","medium"],
+    ["23","ELSA: đánh giá biên tập về độ chính xác AI (~95-96%)","sadesign.vn","https://sadesign.vn/danh-gia-chi-tiet-elsa-speak-2025-ung-dung-hoc-phat-am-tieng-anh-than-ky-hay-chi-la-chieu-tro-marketing","2025","low"],
+    ["24","Case Đắk Lắk: phụ huynh phản ứng bundling chính khoá iSMART","Tuổi Trẻ","https://tuoitre.vn/phu-huynh-buc-xuc-viec-mon-ky-nang-dua-vao-chinh-khoa-so-giao-duc-va-dao-tao-len-tieng-20250418092455325.htm","2025-04-18","unverified"],
+    ["25","Cụm bài “Monkey Junior lừa đảo?”: chủ yếu do tài khoản chia sẻ","medayroi.com","https://medayroi.com/monkey-junior-lua-dao/","không rõ","medium"],
+    ["26","Antoree: chỉ 2 review, không đề cập AI/GV cố định/bundling","Edu2Review","https://edu2review.com/danh-gia/Tieng-anh-truc-tuyen-antoree","2016-11 / 2018-06","low"],
+    ["27","ELSA: review khen độ chính xác phát âm (đã cũ)","Edu2Review","https://edu2review.com/danh-gia/ung-dung-anh-ngu-elsa-speak","2020-04-01","low"],
+    ["28","Thông tư 29/2024: ranh giới pháp lý liên kết ngoài chính khoá","VietnamNet","https://vietnamnet.vn/thong-tu-29-co-hieu-luc-truong-co-duoc-lien-ket-day-tieng-anh-ky-nang-song-2371342.html","2025-02-15","unverified"]
+  ];
+  var badgeText = {verified: "Đã xác minh", medium: "Trung bình", low: "Thấp", unverified: "Chưa xác minh", disputed: "Có tranh chấp"};
+  var tbody = document.getElementById("source-table");
+  sources.forEach(function (row) {
+    var n = row[0], claim = row[1], pub = row[2], url = row[3], date = row[4], conf = row[5];
+    var tr = document.createElement("tr");
+    tr.id = "src-" + n;
+
+    var tdN = document.createElement("td");
+    tdN.textContent = "[" + n + "]";
+    tr.appendChild(tdN);
+
+    var tdClaim = document.createElement("td");
+    tdClaim.textContent = claim;
+    tr.appendChild(tdClaim);
+
+    var tdPub = document.createElement("td");
+    var a = document.createElement("a");
+    a.href = url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = pub;
+    tdPub.appendChild(a);
+    tr.appendChild(tdPub);
+
+    var tdDate = document.createElement("td");
+    tdDate.className = "num";
+    tdDate.textContent = date;
+    tr.appendChild(tdDate);
+
+    var tdConf = document.createElement("td");
+    var span = document.createElement("span");
+    span.className = "badge " + conf;
+    span.textContent = badgeText[conf] || conf;
+    tdConf.appendChild(span);
+    tr.appendChild(tdConf);
+
+    tbody.appendChild(tr);
+  });
+})();
+</script>
