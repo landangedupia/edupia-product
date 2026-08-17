@@ -1,0 +1,130 @@
+DOUSHEN  Â·  è±ç¥
+AI SiÃªu NhÃ¢n Danh SÆ°
+Gia sÆ° AI 1-kÃ¨m-1 mÃ´ phá»ng nhÃ¢n cÃ¡ch giÃ¡o viÃªn ngÃ´i sao
+cho mÃ´n NhÃ¢n vÄn & Ngá»¯ vÄn
+Há» sinh thÃ¡i: AI Super Training Ground (AI è¶è½è®­ç»åº)  Â·  Cáº­p nháº­t: 17/08/2026
+BÃ¡o cÃ¡o NghiÃªn cá»©u Sáº£n pháº©m
+1
+
+Tá»ng quan sáº£n pháº©m
+Chuyá»n dá»ch tá»« AI cháº©n ÄoÃ¡n dá»¯ liá»u sang AI âmÃ´ phá»ng nhÃ¢n cÃ¡châ (hyper-anthropomorphic)
+KhÃ¡c vá»i mÃ´ hÃ¬nh cháº©n ÄoÃ¡n lá» há»ng kiáº¿n thá»©c truyá»n thá»ng, AI SiÃªu NhÃ¢n Danh SÆ° mÃ´ phá»ng chÃ¢n thá»±c phong cÃ¡ch, giá»ng Äiá»u vÃ  phÆ°Æ¡ng phÃ¡p sÆ° pháº¡m cá»§a cÃ¡c âgiÃ¡o viÃªn ngÃ´i saoâ dá»±a trÃªn há» sÆ¡ há»c táº­p cÃ¡ nhÃ¢n tá»«ng há»c sinh.
+Äá»t phÃ¡ lá»n nháº¥t: phá»¥c vá»¥ hÃ ng ngÃ n â hÃ ng váº¡n há»c sinh Äá»ng thá»i, má»i ngÆ°á»i váº«n nháº­n chiáº¿n lÆ°á»£c tÆ°Æ¡ng tÃ¡c 1-Äá»i-1 theo thá»i gian thá»±c.
+Trá»ng tÃ¢m mÃ´n há»c
+NhÃ¢n vÄn Â· Ngá»¯ vÄn â ÄÃ²i há»i cáº£m xÃºc, biá»u Äáº¡t ngÃ´n ngá»¯ vÃ  phong cÃ¡ch cÃ¡ nhÃ¢n
+700 triá»u+
+node thá»±c thá» trong Knowledge Graph
+10.000+
+há»c sinh há»c Äá»ng thá»i, cÃ¡ nhÃ¢n hÃ³a riÃªng biá»t
+3 bÆ°á»c
+Training â Profiling â Multimodal Monitoring
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+2
+2
+
+Äá»nh vá» thá» trÆ°á»ng
+Con ÄÆ°á»ng khÃ³ hÆ¡n: NhÃ¢n vÄn thay vÃ¬ Khoa há»c tá»± nhiÃªn
+Äá»i thá»§ (Squirrel AI, iFlytek)
+â
+Táº­p trung Khoa há»c tá»± nhiÃªn: ToÃ¡n, LÃ½, HÃ³a
+â
+Cháº©n ÄoÃ¡n lá» há»ng kiáº¿n thá»©c dá»±a trÃªn dá»¯ liá»u thuáº§n tÃºy
+â
+PhÆ°Æ¡ng phÃ¡p tiáº¿p cáº­n: lÃ m bÃ i tráº¯c nghiá»m, phÃ¢n tÃ­ch ÄÃºng/sai
+â
+KhÃ´ng mÃ´ phá»ng cáº£m xÃºc hay phong cÃ¡ch giÃ¡o viÃªn
+Doushen â AI SiÃªu NhÃ¢n Danh SÆ°
+â
+Táº­p trung NhÃ¢n vÄn: Ngá»¯ vÄn, biá»u Äáº¡t, cáº£m xÃºc
+â
+MÃ´ phá»ng phong cÃ¡ch, giá»ng Äiá»u âgiÃ¡o viÃªn ngÃ´i saoâ
+â
+GraphRAG + Knowledge Graph chá»ng âmÃ¹i AIâ, chá»ng áº£o giÃ¡c
+â
+Dáº¡y âÄÃºngâ vÃ  dáº¡y âhayâ â cÃ³ cáº£m há»©ng, cÃ³ cÃ¡ tÃ­nh
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+3
+3
+
+Kiáº¿n trÃºc cÃ´ng nghá» ná»n táº£ng
+Káº¿t há»£p tá»± phÃ¡t triá»n vÃ  há»£p tÃ¡c cÃ¹ng Microsoft
+1
+TÃ­ch há»£p End-to-End (ç«¯æ¨¡ä¸ä½)
+Gáº¯n káº¿t trá»±c tiáº¿p giao diá»n ngÆ°á»i dÃ¹ng vá»i LLM tá»± phÃ¡t triá»n âDoushen Ciyuanâ (è±ç¥è¾æºå¤§æ¨¡å), giáº£m Äá» trá», tÄng Äá»ng bá».
+2
+GraphRAG chá»ng âmÃ¹i AIâ
+Ná»n táº£ng ná»i dung âDoushen Jiuxiaoâ + GraphRAG (Microsoft): giá»¯ âcháº¥tâ giÃ¡o viÃªn ná»i tiáº¿ng, tá»± nhiÃªn nhÆ° ngÆ°á»i tháº­t, chÃ­nh xÃ¡c há»c thuáº­t.
+3
+Knowledge Graph khá»ng lá»
+HÆ¡n 700 triá»u node thá»±c thá» (Äá»ng phÃ¡t triá»n cÃ¹ng Microsoft), suy luáº­n Äa bÆ°á»c (multi-hop reasoning) liÃªn káº¿t kiáº¿n thá»©c liÃªn mÃ´n.
+Quy trÃ¬nh 3 bÆ°á»c: Training  â  Profiling  â  Multimodal Monitoring
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+4
+4
+
+Cá nhÃ¢n hÃ³a 1-Äá»i-1 quy mÃ´ lá»n
+Kháº£ nÄng má» rá»ng (scalability) chÆ°a tá»«ng cÃ³ vá»i phÆ°Æ¡ng phÃ¡p dáº¡y 1-kÃ¨m-1
+Váº¡n ngÆ°á»i
+Äá»ng thá»i hÆ°á»ng chiáº¿n lÆ°á»£c
+giáº£ng dáº¡y cÃ¡ nhÃ¢n hÃ³a riÃªng biá»t
+Má»i há»c sinh cÃ³ âBáº£n Äá» tri thá»©c cÃ¡ nhÃ¢nâ riÃªng â AI thiáº¿t káº¿ lá» trÃ¬nh, bÃ i giáº£ng, pháº£n há»i hoÃ n toÃ n biá»t láº­p.
+SiÃªu Luyá»n Äáº¡o SÆ° sá» 1
+AI mÃ´ phá»ng Chá»§ tá»ch Dou Xin â chá»§ Äá»ng tÆ°Æ¡ng tÃ¡c, giao tiáº¿p thá»i gian thá»±c.
+Sinh ná»i dung Äa phÆ°Æ¡ng tiá»n
+Tá»± Äá»ng táº¡o cÃ´ng cá»¥ giáº£ng dáº¡y báº±ng hÃ¬nh áº£nh, Ã¢m thanh, video ngay khi dáº¡y (Generative Multimedia).
+ÄÃ¡nh giÃ¡ nÄng lá»±c AI
+VÆ°á»£t giÃ¡o viÃªn tháº­t vá»: kháº£ nÄng má» rá»ng, há» thá»ng tiáº¿n hÃ³a, bao quÃ¡t kiáº¿n thá»©c.
+Háº¡n cháº¿ duy nháº¥t
+Chá» sá» cáº£m xÃºc (EQ) â váº«n cÃ²n khoáº£ng cÃ¡ch so vá»i con ngÆ°á»i.
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+6
+6
+
+TÃ­nh nÄng ná»i báº­t â Doushen AI App
+3 trá»¥ cá»t: Danh sÆ° AI Â· TÆ°Æ¡ng tÃ¡c mÃ´ hÃ¬nh hÃ³a Â· Triá»n khai há»n há»£p
+1
+Digital Avatar
+Há»c sinh táº¡o Báº£n sao sá» (Digital Avatar) cá»§a riÃªng mÃ¬nh.
+2
+Lá»p há»c riÃªng tÆ°
+Private Tutoring & Q&A â há»i ÄÃ¡p riÃªng tÆ° 1-kÃ¨m-1.
+3
+Cá» váº¥n viáº¿t vÄn
+Cháº¥m sá»­a bÃ i thá»i gian thá»±c â trá»ng tÃ¢m cho mÃ´n Ngá»¯ vÄn.
+4
+NhÃ¢n báº£n giá»ng nÃ³i
+Deep voice cloning truyá»n táº£i cáº£m xÃºc, cÃ¡ tÃ­nh giÃ¡o viÃªn gá»c vÃ o tá»«ng cÃ¢u giáº£ng.
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+7
+7
+
+Cáº­p nháº­t cÃ´ng nghá» má»i nháº¥t (2025 â nay)
+MÃ´ hÃ¬nh âAI Dual-Teacherâ â CÆ¡ cháº¿ Hybrid XÄng-Äiá»n
+GiÃ¡o viÃªn tháº­t â âÄá»ng cÆ¡ xÄngâ
+Táº¡o Äá»ng lá»±c chÃ­nh â Äáº£m nhiá»m truyá»n Äáº¡t ná»i dung cá»t lÃµi vÃ  cáº£m há»©ng cho há»c sinh.
+AI â âÄá»ng cÆ¡ Äiá»nâ
+Xá»­ lÃ½ chi tiáº¿t â phÃ¢n tÃ­ch dá»¯ liá»u, cháº¥m bÃ i, bÃ¹ Äáº¯p lá» há»ng kiáº¿n thá»©c cÃ¡ nhÃ¢n.
+â  Chuyá»n Äá»i giá»¯a con ngÆ°á»i vÃ  AI diá»n ra liá»n máº¡ch
+NgoÃ i ra: Lá»p há»c Live nhiá»u-Äá»i-má»t AI SiÃªu Dáº¡ng NhÃ¢n (ná»­a Äáº§u 2025) â dÃ¹ng mÃ´ hÃ¬nh thá» giÃ¡c lá»n (Visual Large Model) giÃ¡m sÃ¡t nÃ©t máº·t, sá»± chÃº Ã½ há»c sinh; tá»± Äá»ng Äiá»u chá»nh cáº£m xÃºc, ngá»¯ Äiá»u, phÆ°Æ¡ng phÃ¡p theo thá»i gian thá»±c khi há»c sinh chÃ¡n náº£n hay máº¥t táº­p trung.
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+8
+8
+
+Káº¿t luáº­n
+Tháº¿ há» thá»© hai (Gen 2) cá»§a EdTech AI
+Tá»« AI nhÆ° âcÃ´ng cá»¥ giáº£i bÃ i táº­pâ sang ângÆ°á»i tháº§y áº£o cÃ³ cáº£m xÃºc vÃ  phong cÃ¡châ, giáº£i quyáº¿t bÃ i toÃ¡n khÃ³ nháº¥t cá»§a giÃ¡o dá»¥c trá»±c tuyáº¿n: má» rá»ng quy mÃ´ lá»p há»c nhÆ°ng váº«n giá»¯ cÃ¡ nhÃ¢n hÃ³a sÃ¢u sáº¯c vÃ  gáº¯n káº¿t cáº£m xÃºc kiá»u 1-kÃ¨m-1.
+1
+TrÃ­ tuá» cá»§a danh sÆ°
+NÄng lá»±c giáº£ng dáº¡y vÆ°á»£t trá»i, mang phong cÃ¡ch giÃ¡o viÃªn hÃ ng Äáº§u.
+2
+TÆ°Æ¡ng tÃ¡c sá»ng Äá»ng
+Giao diá»n trá»±c quan, mÃ´ hÃ¬nh hÃ³a, cuá»n hÃºt ngÆ°á»i há»c.
+3
+Cam káº¿t káº¿t quáº£ há»c táº­p
+Chuyá»n hÃ³a cÃ´ng nghá» thÃ nh Äiá»m sá», kiáº¿n thá»©c cháº¥t lÆ°á»£ng cao.
+âKhÃ´ng Äá»i thá»§ nÃ o cÃ³ thá» káº¿t há»£p Äá»ng thá»i cáº£ 3 yáº¿u tá» trÃªn trong má»t sáº£n pháº©m duy nháº¥tâ â Doushen
+Doushen Â· AI SiÃªu NhÃ¢n Danh SÆ°
+9
+9
+
+[GHI CHÃš IMPORT: file gá»c ngÆ°á»i dÃ¹ng cung cáº¥p bá» cáº¯t (truncated) á» slide 5 "MÃ´ hÃ¬nh Dual-Teacher" / cuá»i cÃ¹ng cá»§a pháº§n káº¿t luáº­n â ná»i dung sau dÃ¢y cÃ³ thá» thiáº¿u má»t pháº§n cÃ¢u cuá»i. KhÃ´ng suy diá»…n thÃªm ná»i dung khÃ´ng cÃ³ trong báº£n gá»c.]

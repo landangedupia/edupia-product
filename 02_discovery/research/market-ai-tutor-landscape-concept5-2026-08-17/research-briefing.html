@@ -1,0 +1,301 @@
+<title>AI gia sư toàn cầu — Concept thứ 5 Edupia Class</title>
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --surface-muted: #F1EFEA;
+    --border: #E4E1D8;
+    --text: #201F1C;
+    --text-soft: #5C594F;
+    --accent: #2A3B5C;
+    --accent-soft: #DDE3EE;
+    --accent-contrast: #FFFFFF;
+    --good: #2F7A54;
+    --good-bg: #E4F3EA;
+    --medium: #A8762E;
+    --medium-bg: #F7ECD9;
+    --low: #B0542F;
+    --low-bg: #F8E6DC;
+    --unverified: #5C6B8A;
+    --unverified-bg: #E7EAF2;
+    --disputed: #8E2F52;
+    --disputed-bg: #F4DFE7;
+    --shadow: 0 1px 2px rgba(32,31,28,0.06), 0 8px 24px rgba(32,31,28,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161C; --surface: #1B1E27; --surface-muted: #222532; --border: #2E3242;
+      --text: #EDEDEB; --text-soft: #A9ACB8; --accent: #8AA0D6; --accent-soft: #232B42; --accent-contrast: #10131B;
+      --good: #5FBE8B; --good-bg: #163326; --medium: #D9A855; --medium-bg: #3A2E12;
+      --low: #E08A63; --low-bg: #3B2116; --unverified: #9DAAC9; --unverified-bg: #232941;
+      --disputed: #D97DA3; --disputed-bg: #3A1F2A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161C; --surface: #1B1E27; --surface-muted: #222532; --border: #2E3242;
+    --text: #EDEDEB; --text-soft: #A9ACB8; --accent: #8AA0D6; --accent-soft: #232B42; --accent-contrast: #10131B;
+    --good: #5FBE8B; --good-bg: #163326; --medium: #D9A855; --medium-bg: #3A2E12;
+    --low: #E08A63; --low-bg: #3B2116; --unverified: #9DAAC9; --unverified-bg: #232941;
+    --disputed: #D97DA3; --disputed-bg: #3A1F2A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; line-height: 1.65;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+  header.page { padding: 40px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  header.page h1 { font-size: 1.6rem; margin: 0 0 10px; line-height: 1.3; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px 10px; font-size: 0.82rem; color: var(--text-soft); }
+  .meta-chip { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; padding: 3px 11px; }
+  .decision-line { margin-top: 14px; font-size: 0.98rem; color: var(--text-soft); background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; }
+  .decision-line strong { color: var(--text); }
+
+  nav.toc { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 10px 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; }
+  nav.toc a { color: var(--text-soft); text-decoration: none; font-size: 0.83rem; margin-right: 18px; }
+  nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  section { margin-bottom: 36px; }
+  h2 { font-size: 1.2rem; border-left: 4px solid var(--accent); padding-left: 10px; margin: 0 0 14px; }
+  h3 { font-size: 1.02rem; margin: 20px 0 8px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .exec-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .exec-card p { margin: 0 0 14px; }
+  .exec-card p:last-child { margin-bottom: 0; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
+  .badge.verified { background: var(--good-bg); color: var(--good); }
+  .badge.medium { background: var(--medium-bg); color: var(--medium); }
+  .badge.low { background: var(--low-bg); color: var(--low); }
+  .badge.unverified { background: var(--unverified-bg); color: var(--unverified); border: 1.5px dashed var(--unverified); }
+  .badge.disputed { background: var(--disputed-bg); color: var(--disputed); border: 1.5px solid var(--disputed); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-soft); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: .02em; }
+  .tbl-wrap { overflow-x: auto; margin: 10px 0 18px; }
+
+  a { color: var(--accent); }
+  a.src-link { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  .cite { font-size: 0.78em; vertical-align: super; text-decoration: none; color: var(--accent); font-weight: 600; }
+
+  .callout { border-radius: 10px; padding: 12px 16px; margin: 10px 0; font-size: 0.94rem; }
+  .callout.warn { background: var(--low-bg); color: var(--low); }
+  .callout.confirmed { background: var(--good-bg); color: var(--good); }
+  .callout.gap { background: var(--unverified-bg); color: var(--unverified); }
+
+  details.src-appendix { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px 20px; }
+  details.src-appendix > summary { cursor: pointer; padding: 14px 0; font-weight: 600; }
+
+  .rec-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .rec-card.primary { border-left: 4px solid var(--good); }
+  .rec-card.secondary { border-left: 4px solid var(--accent); }
+  .rec-card.excluded { border-left: 4px solid var(--low); background: var(--low-bg); }
+  .rec-card h3 { margin-top: 0; }
+  ul.tight li { margin-bottom: 6px; }
+
+  footer.page { margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-soft); }
+</style>
+
+<div class="wrap">
+
+<header class="page">
+  <h1>AI gia sư trên thị trường EdTech toàn cầu — định hướng concept thứ 5 cho Edupia Class</h1>
+  <div class="meta-row">
+    <span class="meta-chip">Loại: Market research</span>
+    <span class="meta-chip">Nguồn: mixed (2 import + native run)</span>
+    <span class="meta-chip">Preset: standard</span>
+    <span class="meta-chip">Validation: normal</span>
+    <span class="meta-chip">Cập nhật: 2026-08-17</span>
+    <span class="meta-chip">Trạng thái: complete</span>
+  </div>
+  <div class="decision-line"><strong>Quyết định nghiên cứu này phục vụ:</strong> Xác định một concept thứ 5 khả thi để bổ sung vào bộ C1–C4 của Edupia Class (390.000 VND/tháng), dựa trên mẫu hình sản phẩm AI gia sư đang nổi lên trên thị trường EdTech toàn cầu.</div>
+</header>
+
+<nav class="toc">
+  <a href="#exec">Tóm tắt điều hành</a>
+  <a href="#d1">1. Competitive landscape</a>
+  <a href="#d2">2. Pricing</a>
+  <a href="#d3">3. Pain points</a>
+  <a href="#d4">4. Customer segments</a>
+  <a href="#cross">Cross-dimension</a>
+  <a href="#contrary">Contrary evidence</a>
+  <a href="#rec">Đề xuất concept 5</a>
+  <a href="#open">Open questions</a>
+  <a href="#sources">Nguồn</a>
+  <a href="#stale">Staleness</a>
+</nav>
+
+<section id="exec">
+  <h2>Tóm tắt điều hành</h2>
+  <div class="exec-card">
+    <p><span class="badge low">KHOẢNG TRỐNG GIÁ</span> Không có sản phẩm AI-tutor nào tìm được, ở bất kỳ archetype nào, định giá đúng vào dải đại trà $10–20/tháng (~230.000–460.000 VND) mà đồng thời định vị rõ ràng cho gia đình nhạy giá. Thị trường tách thành 2 cực: app hội thoại AI toàn cầu (Dino AI, ELSA Speak, Speak) định giá $11–60+/tháng; AI-tutor đặc thù thị trường mới nổi (Arivihan, Super Tutor — Ấn Độ) định giá $2–4/tháng <a class="cite" href="#src-31">[31]</a><a class="cite" href="#src-32">[32]</a>. <strong>390k VND/tháng của Edupia Class rơi đúng vào khoảng trống giữa hai cực này</strong> — cùng mẫu hình "chưa ai chứng minh khả thi" mà nghiên cứu cạnh tranh trước đó (2026-08-14) đã tìm thấy cho C3/C4 tại Việt Nam.</p>
+    <p><span class="badge verified">XÁC NHẬN</span> Mẫu hình "gia sư song hành AI+người" (dual-teacher) không phải phát minh riêng của Doushen — đây là mẫu hình có tên, đang hoạt động thật, với ít nhất một đối thủ lớn khác (TAL/Xueersi, ra mắt "AI双师互动课堂" 6/2026) áp dụng cùng cấu trúc <a class="cite" href="#src-20">[20]</a>. <strong>Kết nối quan trọng nhất với Edupia:</strong> cấu trúc này gần trùng khớp chức năng với đúng vấn đề vận hành lớn nhất của Concept 4 (GVCN mở rộng, tỷ lệ 1:2.000) — chỉ khác là AI đảm nhiệm phần "theo sát liên tục" thay vì đòi hỏi thêm đầu người.</p>
+    <p><span class="badge low">RỦI RO NIỀM TIN</span> AI mô phỏng nhân cách (archetype "anthropomorphic-companion") có tiền lệ backlash thật, nghiêm trọng ở category liền kề: Character.AI đối mặt kiện tụng liên quan cái chết của 2 thiếu niên, phải gỡ "open-ended chat" cho dưới 18 tuổi <a class="cite" href="#src-23">[23]</a>. Đủ nghiêm trọng để loại trừ hướng "AI có nhân cách/cảm xúc riêng biệt" khỏi mọi đề xuất concept cho trẻ em.</p>
+    <p><span class="badge unverified">KHOẢNG TRỐNG BẰNG CHỨNG</span> Dino AI — case mẫu gần nhất với phân khúc ESL trẻ em của Edupia — gần như không để lại dấu vết sentiment người dùng thật kiểm chứng được (rating 5.0/5.0 trên mẫu nhỏ ~8.000 lượt tải) <a class="cite" href="#src-21">[21]</a>. Đồng thời claim của import Doushen về đối thủ (Squirrel AI/iFlytek) <span class="badge disputed">DISPUTED</span> bị một nguồn độc lập khác mâu thuẫn — xem mục 1.</p>
+  </div>
+</section>
+
+<section id="d1">
+  <h2>1. Competitive landscape — mẫu hình định vị</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/competitive-landscape-r1-1.md</code> · ~13 search + 5 fetch, 2 vòng</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Archetype</th><th>Ví dụ xác nhận</th><th>Đặc điểm</th></tr>
+    <tr><td>(a) AI-chẩn-đoán thuần</td><td>Squirrel AI <a class="cite" href="#src-4">[4]</a><a class="cite" href="#src-5">[5]</a>, iFlytek <a class="cite" href="#src-6">[6]</a><a class="cite" href="#src-7">[7]</a>, Khanmigo <a class="cite" href="#src-1">[1]</a>, Google LearnLM <a class="cite" href="#src-11">[11]</a></td><td>Gap detection + routing trên kho kiến thức có cấu trúc, chủ yếu Toán/Khoa học tự nhiên</td></tr>
+    <tr><td>(b) AI-mô-phỏng-nhân-cách</td><td>Character.ai persona (yếu) <a class="cite" href="#src-9">[9]</a><a class="cite" href="#src-10">[10]</a>; Duolingo Lily (một phần) <a class="cite" href="#src-3">[3]</a></td><td><span class="badge low">tín hiệu ngược</span> MagicSchool đã rút lui khỏi hướng này, bỏ persona "Raina" <a class="cite" href="#src-8">[8]</a></td></tr>
+    <tr><td>(c) AI-luyện-hội-thoại</td><td>Duolingo Max <a class="cite" href="#src-3">[3]</a>, <strong>ELSA Speak</strong> (VN, 50tr+ user) <a class="cite" href="#src-12">[12]</a><a class="cite" href="#src-13">[13]</a>, Speak (OpenAI) <a class="cite" href="#src-15">[15]</a><a class="cite" href="#src-16">[16]</a>, Loora <a class="cite" href="#src-17">[17]</a>, Prep Edu (VN) <a class="cite" href="#src-14">[14]</a>, <strong>chính Dino AI</strong> <a class="cite" href="#src-21">[21]</a></td><td>Archetype gần nhất với bối cảnh ESL trẻ em của Edupia Class</td></tr>
+    <tr><td>(d) Hybrid người+AI</td><td>Doushen ("AI双师") <a class="cite" href="#src-18">[18]</a>, <strong>TAL/Xueersi</strong> (ra mắt 6/2026) <a class="cite" href="#src-20">[20]</a></td><td><span class="badge verified">xác nhận</span> mẫu hình có tên, đang hoạt động, không riêng Doushen</td></tr>
+  </table></div>
+  <div class="callout gap"><span class="badge disputed">DISPUTED</span> Import Doushen tuyên bố đối đầu trực tiếp Squirrel AI/iFlytek. Nghiên cứu độc lập không xác nhận — nguồn Caixin Global (7/2025) nêu tập đối thủ khác hẳn (Doubao Aixue/Gauth, New Oriental, Gaotu, Jingzhunxue, NetEase Youdao, TAL). Coi claim này của import là chưa xác minh.</div>
+  <p><span class="badge verified">XÁC NHẬN</span> Mẫu hình "song sư" AI+người không hiếm — có nguồn gốc từ khái niệm live-stream thuần-người 2013-2014 (TAL, NetEase Youdao) <a class="cite" href="#src-7">[7]</a>, làn sóng AI chỉ thay GV phụ bằng AI <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-20">[20]</a>. Không tìm được ví dụ tương đương có thương hiệu rõ ràng ở phương Tây/Đông Nam Á.</p>
+</section>
+
+<section id="d2">
+  <h2>2. Pricing & mô hình kinh doanh</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/pricing-business-model-r1-1.md</code> · ~23 tool call, 2 vòng</p>
+  <div class="callout confirmed"><span class="badge verified">XÁC MINH + SỬA LỖI IMPORT</span> Giá Dino AI PRO xác minh qua App Store trực tiếp. Deck nội bộ đã <strong>gộp nhầm giá USD (Mỹ) và SGD (Singapore) thành một dải rồi ghi nhãn sai là "SGD"</strong>. Giá thật: US $10.99/$37.99/$99.99/$229.99 (tuần/tháng/quý/năm) <a class="cite" href="#src-22">[22]</a>; SG S$17.98/$59.98/$149.98/$349.98 <a class="cite" href="#src-23">[23]</a>.</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Gói</th><th>US (USD)</th><th>Singapore (SGD)</th></tr>
+    <tr><td>Tuần</td><td>$10.99</td><td>S$17.98</td></tr>
+    <tr><td>Tháng</td><td>$37.99</td><td>S$59.98</td></tr>
+    <tr><td>Quý</td><td>$99.99</td><td>S$149.98</td></tr>
+    <tr><td>Năm</td><td>$229.99</td><td>S$349.98</td></tr>
+  </table></div>
+  <p><span class="badge unverified">KHOẢNG TRỐNG</span> Không tìm được sản phẩm AI-tutor nào định giá đúng dải $10-20/tháng mà đồng thời định vị cho gia đình nhạy giá:</p>
+  <ul class="tight">
+    <li>App hội thoại AI toàn cầu (Dino AI, ELSA $11.99–16.59/tháng <a class="cite" href="#src-24">[24]</a>, Speak) → luôn &gt;$20/tháng, hoặc trợ giá phi lợi nhuận (Khanmigo $4/tháng, Mỹ-only) <a class="cite" href="#src-1">[1]</a></li>
+    <li>AI-tutor thị trường mới nổi (Arivihan, Super Tutor — Ấn Độ) → ~$2-4/tháng, nhắm rõ phân khúc nhạy giá <a class="cite" href="#src-31">[31]</a><a class="cite" href="#src-32">[32]</a></li>
+    <li><strong>390k VND/tháng (~$15-16) của Edupia Class nằm đúng vào khoảng trống giữa hai cực</strong> — không có tiền lệ đối thủ AI-tutor toàn cầu nào ở đúng dải giá này</li>
+  </ul>
+  <p><span class="badge unverified">CHƯA CÔNG BỐ</span> Doushen: giá gói B2C không công khai — chỉ có tuyên bố ý định của nhà sáng lập (12/2024) về định giá "gần miễn phí hoặc bundle phần cứng" <a class="cite" href="#src-25">[25]</a>; robot đồng hành 1.999 NDT <a class="cite" href="#src-18">[18]</a>.</p>
+</section>
+
+<section id="d3">
+  <h2>3. Pain points & rủi ro đã biết</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/pain-points-segments-r1-1.md</code> · ~14 search + 4 fetch</p>
+  <p><span class="badge medium">RỦI RO KỸ THUẬT</span> Độ chính xác ASR với giọng trẻ em: khác biệt formant/thanh quản gây khó ngay cả model lớn <a class="cite" href="#src-27">[27]</a>; vendor chuyên biệt tự báo cáo ~86% độ chính xác trên tập khó <a class="cite" href="#src-28">[28]</a>.</p>
+  <p><span class="badge verified">XÁC NHẬN</span> Hứng thú giảm dần/phản hồi AI hời hợt: ngay cả app đánh giá tốt (Speak, 4.8★) vẫn bị phê bình phản hồi hời hợt; nội dung AI của chính Duolingo bị contractor ẩn danh mô tả "rất chán", nhiều lỗi — nguồn báo chí có tên tác giả <a class="cite" href="#src-29">[29]</a>.</p>
+  <div class="callout warn"><span class="badge verified">PHÁP LÝ CÓ THẬT</span> COPPA — FTC đã xử lý Amazon (giữ dữ liệu giọng nói trẻ em bất chấp yêu cầu xóa), Edmodo, Microsoft <a class="cite" href="#src-30">[30]</a>. Nhưng <span class="badge unverified">không tìm được</span> review/phàn nàn thật nào của phụ huynh nêu đích danh lo ngại này về app cụ thể — rủi ro hiện diện như lịch sử pháp lý, chưa phải sentiment tự phát.</div>
+  <div class="callout warn"><span class="badge low">TIỀN LỆ NGHIÊM TRỌNG, KHÁC CATEGORY</span> Character.AI: kiện tụng liên quan 2 ca tử vong thiếu niên (2024), gỡ trò chuyện mở cho dưới 18 tuổi cuối 2025 <a class="cite" href="#src-23">[23]</a>. Không phải "AI mô phỏng GV thật cho bài học có cấu trúc" như Doushen, nhưng là tiền lệ gần nhất về rủi ro nhân-cách-hóa AI cho trẻ vị thành niên.</div>
+  <p><span class="badge unverified">KẾT QUẢ ÂM (đáng ghi nhận)</span> Dino AI: không lấy được review 1-3 sao thật (rate-limit/trang không render); rating 5.0/5.0 trên mẫu nhỏ (~8.000 lượt tải) là cờ vàng về tính đại diện <a class="cite" href="#src-21">[21]</a>.</p>
+</section>
+
+<section id="d4">
+  <h2>4. Customer segments & hành vi</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/pain-points-segments-r1-1.md</code>, Part B</p>
+  <p><span class="badge medium">AI-tutor</span> được báo cáo là loại công cụ AI học tập phổ biến nhất trong một khảo sát (31%); Khanmigo tăng ~68.000 → 1,4 triệu người dùng trong ~18 tháng <a class="cite" href="#src-34">[34]</a>. App AI-làm-bài-tập gốc Trung Quốc phổ biến ở Mỹ, thay thế chi phí thấp cho gia sư riêng — bằng chứng chỉ ở mức giai thoại <a class="cite" href="#src-35">[35]</a>.</p>
+  <div class="callout gap"><span class="badge unverified">KHÔNG TÌM ĐƯỢC</span> Case nào được kiểm chứng độc lập tốt về một sản phẩm AI-tutor bán thành công thật ở phân khúc đại trà/nhạy giá. BYJU'S được báo cáo thị trường trích dẫn lặp lại nhưng các nguồn này đọc như văn bản quảng bá công thức hóa — gắn cờ confidence thấp.</div>
+</section>
+
+<section id="cross">
+  <h2>Cross-dimension insights</h2>
+  <div class="card"><strong>Kết nối quan trọng nhất với Edupia:</strong> mẫu hình "AI song hành/dual-teacher" (archetype d, xác nhận thật qua Doushen + TAL/Xueersi <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-20">[20]</a>) có cấu trúc chức năng gần trùng khớp với đúng vấn đề vận hành lớn nhất của Concept 4 (GVCN mở rộng, tỷ lệ 1:2.000). Điểm khác biệt cốt lõi: ở mẫu hình xác nhận qua nghiên cứu này, <strong>AI đảm nhiệm lớp giám sát liên tục, con người chỉ giữ lớp nội dung cốt lõi/cảm hứng</strong> — ngược với hướng hiện tại của C4.</div>
+  <div class="card">Cùng một mẫu hình "chưa ai chứng minh" xuất hiện lại độc lập với nghiên cứu cạnh tranh trước (2026-08-14, thị trường VN): ở đó, không đối thủ VN nào kết hợp giáo viên cố định + giá đại trà; ở đây, không sản phẩm AI-tutor toàn cầu nào kết hợp giá đại trà thật với định vị nhạy giá. <strong>390k VND/tháng nằm ở giao điểm của hai khoảng trống chưa ai chứng minh này.</strong></div>
+  <div class="card">Rủi ro archetype (b) — AI mô phỏng nhân cách — nên bị loại trừ khỏi mọi đề xuất concept mới nhắm trẻ em, dựa trên tiền lệ Character.AI <a class="cite" href="#src-23">[23]</a> và tín hiệu MagicSchool rút lui <a class="cite" href="#src-8">[8]</a>.</div>
+  <div class="card">Import Doushen có ít nhất 1 claim bị nghiên cứu độc lập mâu thuẫn (tập đối thủ) — nhắc lại bài học: tài liệu marketing/deck không trích nguồn nội bộ luôn là một nguồn duy nhất chưa kiểm chứng, kể cả khi có số liệu kỹ thuật ấn tượng.</div>
+</section>
+
+<section id="contrary">
+  <h2>Contrary evidence</h2>
+  <p>Red-team pass không chạy trong lượt này (<code>red_team = off</code>, mặc định). Phản biện mạnh nhất tự nhiên xuất hiện trong nghiên cứu: claim đối thủ của Doushen bị nguồn Caixin mâu thuẫn (mục 1); MagicSchool rút lui khỏi persona hóa AI ngay khi ngành có xu hướng ngược lại (mục 1).</p>
+</section>
+
+<section id="rec">
+  <h2>Đề xuất concept thứ 5</h2>
+  <div class="callout warn">⚠ Đây là đề xuất dựa trên mẫu hình quan sát được từ thị trường toàn cầu, <strong>KHÔNG phải bằng chứng đã kiểm chứng</strong> rằng nó sẽ thành công ở Edupia Class. Cần đi qua đúng quy trình khảo sát T9/Pilot mà brief C1-C4 đã thiết kế.</div>
+
+  <div class="rec-card primary">
+    <h3>Đề xuất chính — "AI Song Hành" (AI Dual-Teacher Layer)</h3>
+    <p><strong>Ý tưởng cốt lõi:</strong> Thay vì mở rộng GVCN theo tỷ lệ 1:2.000 (rủi ro vận hành lớn nhất của C4), dùng một lớp AI liên tục đảm nhiệm giám sát/nhắc bài/phát hiện lỗ hổng/trả lời câu hỏi đơn giản thời gian thực xuyên suốt tuần — <strong>GVCN chỉ can thiệp khi AI leo thang ngoại lệ</strong>. Đây là cấu trúc đã được TAL/Xueersi và Doushen chứng minh vận hành thật ở quy mô lớn <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-20">[20]</a> — không phải mô hình lý thuyết.</p>
+    <p><strong>Bằng chứng ủng hộ:</strong> mẫu hình dual-teacher có thật, hoạt động ở ≥2 công ty edtech lớn; giải quyết trực tiếp nút thắt vận hành (F3/K6) đã xác định là rủi ro sống còn nhất của C4.</p>
+    <p><strong>Rủi ro:</strong> không có ví dụ tương đương ở phương Tây/Đông Nam Á — Edupia sẽ là người đi đầu tại VN; độ phức tạp kỹ thuật của AI giám sát liên tục cao hơn cả Adaptive Learning của C3.</p>
+  </div>
+
+  <div class="rec-card secondary">
+    <h3>Đề xuất phụ — làm sâu archetype (c) "AI luyện hội thoại"</h3>
+    <p>Gần nhất với những gì Edupia Speak (C1) đã có. Case xác nhận thật (ELSA Speak — sáng lập VN, 50tr+ user <a class="cite" href="#src-12">[12]</a><a class="cite" href="#src-13">[13]</a>; chính Dino AI <a class="cite" href="#src-21">[21]</a>) cho thấy đây là archetype ít rủi ro niềm tin nhất. Rủi ro chính: đông đối thủ nhất, khó có USP khác biệt.</p>
+  </div>
+
+  <div class="rec-card excluded">
+    <h3>Loại trừ rõ ràng — archetype (b) AI mô phỏng nhân cách/cảm xúc riêng biệt</h3>
+    <p>Không nên đưa vào bất kỳ concept nào cho trẻ em, dựa trên tiền lệ Character.AI <a class="cite" href="#src-23">[23]</a> và tín hiệu ngành rút lui (MagicSchool <a class="cite" href="#src-8">[8]</a>).</p>
+  </div>
+</section>
+
+<section id="open">
+  <h2>Open questions</h2>
+  <ol class="tight">
+    <li>Cấu trúc chi phí thật của lớp "AI song hành" liên tục — chưa có benchmark kỹ thuật; cần Deepen hoặc đối chiếu Engineering.</li>
+    <li>Doushen: 700 triệu+ node Knowledge Graph và tập đối thủ Squirrel AI/iFlytek — cả hai claim chưa xác minh độc lập (một bị mâu thuẫn).</li>
+    <li>Sentiment thật của phụ huynh Việt Nam với 2 archetype đề xuất — chưa có dữ liệu, đưa vào khảo sát T9.</li>
+    <li>Giá gói B2C thật của Doushen — không công khai, cần Deepen vào chính app.</li>
+    <li>Case BYJU'S như tiền lệ đại trà — cần xử lý hoài nghi trước khi dùng làm căn cứ.</li>
+  </ol>
+</section>
+
+<section id="sources">
+  <h2>Nguồn tham khảo</h2>
+  <details class="src-appendix" open>
+    <summary>35 nguồn (bấm để thu gọn/mở rộng)</summary>
+    <div class="tbl-wrap"><table>
+      <tr><th>#</th><th>Claim/finding</th><th>Publisher</th><th>Ngày</th><th>Độ tin cậy</th></tr>
+      <tr id="src-1"><td>[1]</td><td>Khanmigo: sản phẩm & giá</td><td><a class="src-link" href="https://www.khanmigo.ai/pricing" target="_blank" rel="noopener">Khanmigo (chính chủ)</a></td><td>evergreen</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-3"><td>[3]</td><td>Duolingo Max — Video Call with Lily, $29.99/tháng</td><td><a class="src-link" href="https://blog.duolingo.com/duolingo-max" target="_blank" rel="noopener">Duolingo blog</a></td><td>rolling</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-4"><td>[4]</td><td>Squirrel AI — quy mô tự nhận (24tr học sinh)</td><td><a class="src-link" href="https://hundred.org/en/innovations/squirrel-ai-learning" target="_blank" rel="noopener">HundrED</a></td><td>undated</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-5"><td>[5]</td><td>Squirrel AI — thông tin nền</td><td><a class="src-link" href="https://en.wikipedia.org/wiki/Squirrel_AI" target="_blank" rel="noopener">Wikipedia</a></td><td>undated</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-6"><td>[6]</td><td>iFlytek — doanh thu AI Learning Machine +104% YoY</td><td><a class="src-link" href="https://www.ciw.news/p/iflyteks-ai-tutor-doubled-revenue" target="_blank" rel="noopener">CIW News</a></td><td>2025 H1</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-7"><td>[7]</td><td>iFlytek — sản phẩm chính chủ</td><td><a class="src-link" href="https://global.iflytek.com/news/iflytek-releases-new-iflytek-learning-pad/" target="_blank" rel="noopener">iFlytek</a></td><td>2025</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-8"><td>[8]</td><td>MagicSchool — bỏ persona "Raina"</td><td><a class="src-link" href="https://www.magicschool.ai/blog-posts/ai-teaching-tools-updates-2026" target="_blank" rel="noopener">MagicSchool</a></td><td>2026-02</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-9"><td>[9]</td><td>Character.ai tutor persona (không chính thức)</td><td><a class="src-link" href="https://character.ai/character/lUN33UZc/cybus-tutor-futuristic-education" target="_blank" rel="noopener">Character.ai</a></td><td>undated</td><td><span class="badge low">low</span></td></tr>
+      <tr id="src-10"><td>[10]</td><td>Character study tutor personas</td><td><a class="src-link" href="https://edtechinsiders.substack.com/p/character-study-the-world-of-ai-personalities" target="_blank" rel="noopener">EdTech Insiders</a></td><td>undated</td><td><span class="badge low">low</span></td></tr>
+      <tr id="src-11"><td>[11]</td><td>Google DeepMind LearnLM/Guided Learning</td><td><a class="src-link" href="https://storage.googleapis.com/deepmind-media/LearnLM/learnLM_nov25.pdf" target="_blank" rel="noopener">Google DeepMind PDF</a></td><td>2025-11</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-12"><td>[12]</td><td>ELSA Speak — Voice AI Tutor, 50tr+ user</td><td><a class="src-link" href="https://blog.elsaspeak.com/en/elsa-voice-ai-tutor-generative-ai/" target="_blank" rel="noopener">ELSA blog</a></td><td>undated</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-13"><td>[13]</td><td>ELSA — người sáng lập Việt Nam</td><td><a class="src-link" href="https://e.vnexpress.net/news/tech/how-vietnamese-entrepreneur-utilizes-ai-to-teach-english-to-50-million-learners-worldwide-4849115.html" target="_blank" rel="noopener">VnExpress International</a></td><td>undated</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-14"><td>[14]</td><td>Prep Edu (VN) — PREP AI Virtual Speaking Room</td><td><a class="src-link" href="https://en.wikipedia.org/wiki/Prep_Edu" target="_blank" rel="noopener">Wikipedia</a></td><td>undated</td><td><span class="badge low">low</span></td></tr>
+      <tr id="src-15"><td>[15]</td><td>Speak — Series C $78M, định giá $1 tỷ</td><td><a class="src-link" href="https://www.speak.com/blog/series-c" target="_blank" rel="noopener">Speak</a></td><td>2024-11</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-16"><td>[16]</td><td>Speak — 15M+ lượt tải, $100M+ ARR</td><td><a class="src-link" href="https://www.forbes.com/sites/rashishrivastava/2025/11/12/this-startup-is-racing-duolingo-to-replace-human-language-tutors-with-ai/" target="_blank" rel="noopener">Forbes</a></td><td>2025-11</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-17"><td>[17]</td><td>Loora AI — định vị luyện hội thoại người lớn</td><td><a class="src-link" href="https://www.loora.com/" target="_blank" rel="noopener">Loora</a></td><td>undated</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-18"><td>[18]</td><td>Doushen — dòng "AI双师", robot 1.999 NDT</td><td><a class="src-link" href="https://www.webull.com/news/14086270177657856" target="_blank" rel="noopener">Zhitongcaijing/Webull</a> · <a class="src-link" href="https://www.sohu.com/a/860439853_122217312" target="_blank" rel="noopener">Sohu</a></td><td>2025-12-25</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-20"><td>[20]</td><td>TAL/Xueersi — "AI双师互动课堂", ra mắt 6/2026</td><td><a class="src-link" href="https://www.jiemodui.com/N/139454.html" target="_blank" rel="noopener">芥末堆 Jiemodui</a></td><td>2026-06-30</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-21"><td>[21]</td><td>Dino AI — App Store listing, liên hệ @vipkid.com.cn</td><td><a class="src-link" href="https://apps.apple.com/us/app/dino-ai-daily-english/id6757214119" target="_blank" rel="noopener">App Store US</a></td><td>live listing</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-22"><td>[22]</td><td>Dino AI PRO — giá US</td><td><a class="src-link" href="https://apps.apple.com/us/app/dino-ai/id6773257149" target="_blank" rel="noopener">App Store US</a></td><td>live listing</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-23"><td>[23]</td><td>Dino AI PRO giá SG; Character.AI kiện tụng</td><td><a class="src-link" href="https://apps.apple.com/sg/app/dino-ai/id6773257149" target="_blank" rel="noopener">App Store SG</a> · <a class="src-link" href="https://futurism.com/artificial-intelligence/children-character-ai-addicted" target="_blank" rel="noopener">Futurism</a></td><td>live · 2025-2026</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-24"><td>[24]</td><td>ELSA Speak Pro/Premium — $11.99–16.59/tháng</td><td>Nguồn thứ cấp (softwarefinder.com)</td><td>2026</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-25"><td>[25]</td><td>Doushen — định giá "gần miễn phí" (tuyên bố sáng lập)</td><td><a class="src-link" href="https://m.21jingji.com/article/20241217/herald/474de4a5c98553070ae79963d657e150.html" target="_blank" rel="noopener">21财经</a></td><td>2024-12-17</td><td><span class="badge medium">medium-high</span></td></tr>
+      <tr id="src-26"><td>[26]</td><td>Squirrel AI — phân phối qua trung tâm/trường</td><td>Nguồn thứ cấp tổng hợp</td><td>2026</td><td><span class="badge low">low</span></td></tr>
+      <tr id="src-27"><td>[27]</td><td>ASR trẻ em — thách thức kỹ thuật</td><td><a class="src-link" href="https://the-learning-agency.com/the-cutting-ed/article/how-speech-recognition-systems-struggle-with-childrens-voices/" target="_blank" rel="noopener">The Learning Agency</a></td><td>undated</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-28"><td>[28]</td><td>Speechace — ~86% độ chính xác ASR trẻ em (tự công bố)</td><td><a class="src-link" href="https://www.speechace.com/using-the-speechace-api-as-voice-ai-for-kids/" target="_blank" rel="noopener">Speechace</a></td><td>undated</td><td><span class="badge low">low</span></td></tr>
+      <tr id="src-29"><td>[29]</td><td>Duolingo AI — nội dung "rất chán" (lời contractor)</td><td><a class="src-link" href="https://aftermath.site/duolingo-ai/" target="_blank" rel="noopener">Aftermath</a></td><td>2025-04-29</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-30"><td>[30]</td><td>FTC xử lý Amazon/Edmodo/Microsoft — dữ liệu giọng nói trẻ em</td><td><a class="src-link" href="https://fas.org/publication/childrens-online-voice-privacy/" target="_blank" rel="noopener">Federation of American Scientists</a></td><td>2024-06-28</td><td><span class="badge verified">high</span></td></tr>
+      <tr id="src-31"><td>[31]</td><td>Arivihan (Ấn Độ) — định vị "12 lần rẻ hơn", ~₹300/tháng</td><td><a class="src-link" href="https://arivihan.com/" target="_blank" rel="noopener">Arivihan</a></td><td>undated</td><td><span class="badge medium">high định vị / low giá</span></td></tr>
+      <tr id="src-32"><td>[32]</td><td>Super Tutor (Ấn Độ) — đối lập luyện thi ₹3.000-15.000/tháng</td><td><a class="src-link" href="https://supertutor.in/" target="_blank" rel="noopener">Super Tutor</a></td><td>undated</td><td><span class="badge medium">medium</span></td></tr>
+      <tr id="src-34"><td>[34]</td><td>AI-tutor — mức độ phổ biến, tăng trưởng Khanmigo</td><td><a class="src-link" href="https://www.demandsage.com/ai-in-education-statistics/" target="_blank" rel="noopener">DemandSage</a></td><td>2026</td><td><span class="badge low">low-medium</span></td></tr>
+      <tr id="src-35"><td>[35]</td><td>App AI-làm-bài-tập gốc TQ phổ biến ở Mỹ</td><td><a class="src-link" href="https://techcrunch.com/2024/05/25/ai-tutors-are-quietly-changing-how-kids-in-the-us-study-and-the-leading-apps-are-from-china" target="_blank" rel="noopener">TechCrunch</a></td><td>2024-05-25</td><td><span class="badge medium">medium</span></td></tr>
+    </table></div>
+  </details>
+</section>
+
+<section id="stale">
+  <h2>Staleness map</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Claim</th><th>Ngày nguồn</th><th>Cửa sổ</th><th>Hạn kiểm lại</th><th>Trạng thái</th></tr>
+    <tr><td>Giá Dino AI, Khanmigo, ELSA, Speak</td><td>2026-08</td><td>3 tháng</td><td>2026-11-17</td><td><span class="badge verified">còn hiệu lực</span></td></tr>
+    <tr><td>Duolingo Max giá & tính năng</td><td>rolling/undated</td><td>3 tháng</td><td>kiểm lại khi dùng</td><td><span class="badge unverified">không xác định độ mới</span></td></tr>
+    <tr><td>TAL/Xueersi "AI双师互动课堂"</td><td>2026-06-30</td><td>12 tháng</td><td>2027-06-30</td><td><span class="badge verified">còn hiệu lực, rất mới</span></td></tr>
+    <tr><td>Doushen định giá "gần miễn phí"</td><td>2024-12-17</td><td>3 tháng</td><td>quá hạn ~20 tháng</td><td><span class="badge low">quá hạn nặng</span></td></tr>
+    <tr><td>iFlytek doanh thu H1 2025</td><td>2025 (H1)</td><td>18 tháng</td><td>~2026-12</td><td><span class="badge medium">gần hạn</span></td></tr>
+    <tr><td>Duolingo AI nội dung "rất chán"</td><td>2025-04-29</td><td>2 năm</td><td>2027-10</td><td><span class="badge verified">còn hiệu lực</span></td></tr>
+    <tr><td>FTC/COPPA enforcement</td><td>2024-06-28</td><td>12 tháng</td><td>quá hạn ~14 tháng (nhưng là tiền lệ)</td><td><span class="badge low">cần khung diễn giải đúng</span></td></tr>
+    <tr><td>Character.AI backlash/kiện tụng</td><td>2025-2026</td><td>2 năm</td><td>~2027-2028</td><td><span class="badge verified">còn hiệu lực</span></td></tr>
+  </table></div>
+  <p style="color:var(--text-soft);font-size:0.88rem">Hạn kiểm lại sớm nhất trong số claim còn "trong hạn": <strong>2026-11-17</strong>. Doushen "gần miễn phí" đã quá hạn nặng nhất — chỉ dùng làm bối cảnh lịch sử.</p>
+</section>
+
+<footer class="page">
+  Trang này là bản trình bày đầy đủ của <code>research.md</code> — cùng claim, cùng số liệu, cùng trích dẫn. Đọc <code>research.md</code> để có bản Markdown gốc. Tính thủ công (không chạy được <code>recon_kit.py escape-sources/staleness</code> do môi trường thiếu uv/Python) — nội dung nguồn đã được rà soát thủ công, không tự động escape.
+</footer>
+
+</div>
