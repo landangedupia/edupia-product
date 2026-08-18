@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept AI Tutor 390k — Brainstorm Keepsake</title>
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#f3ecdc;
+  --bg-soft:#e9dfc7;
+  --paper:#fffcf4;
+  --ink:#2a2318;
+  --ink-soft:#5c5240;
+  --ink-faint:#8b8168;
+  --line:#d7c9a4;
+  --line-strong:#b7a677;
+  --cold:#276b66;      /* AI Class — self-learning, rẻ */
+  --cold-soft:#dcece9;
+  --warm:#b5551f;      /* Tutor sống — người thật, đắt */
+  --warm-soft:#f3ddc9;
+  --gold:#a8791a;      /* AI Tutor 390k — điểm giữa / niềm tin */
+  --gold-soft:#f2e2b8;
+  --gold-strong:#8a5f10;
+  --shadow:0 2px 10px rgba(42,35,24,.10);
+  --shadow-lift:0 10px 28px rgba(42,35,24,.16);
+  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-hand: "Segoe Print", "Bradley Hand", "Comic Sans MS", var(--font-sans);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b170f;
+    --bg-soft:#221c13;
+    --paper:#252016;
+    --ink:#ecdfc4;
+    --ink-soft:#c3b394;
+    --ink-faint:#8d8266;
+    --line:#4a4028;
+    --line-strong:#6b5c34;
+    --cold:#63b3a9;
+    --cold-soft:#1f3532;
+    --warm:#e3924f;
+    --warm-soft:#3a2a19;
+    --gold:#e0b84a;
+    --gold-soft:#3a2f14;
+    --gold-strong:#f0cf7a;
+    --shadow:0 2px 10px rgba(0,0,0,.35);
+    --shadow-lift:0 14px 34px rgba(0,0,0,.5);
+  }
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-sans);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%;}
+h1,h2,h3,h4{font-family:var(--font-serif); margin:0 0 .3em; color:var(--ink); font-weight:700;}
+p{margin:0 0 .8em;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 clamp(16px,4vw,48px);}
+section{padding:clamp(48px,8vw,96px) 0;}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:.5em;
+  font-size:.78rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold-strong); font-weight:700; margin-bottom:.8em;
+}
+.eyebrow .num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:1.7em; height:1.7em; border-radius:50%;
+  background:var(--gold-soft); color:var(--gold-strong); font-family:var(--font-serif);
+}
+.lede{font-size:1.05rem; color:var(--ink-soft); max-width:60ch;}
+
+/* badges: idea / insight / question / decision */
+.tag{
+  display:inline-flex; align-items:center; gap:.35em;
+  font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; font-weight:700;
+  padding:.22em .6em; border-radius:999px; white-space:nowrap;
+}
+.tag-idea{background:var(--cold-soft); color:var(--cold);}
+.tag-insight{background:var(--gold-soft); color:var(--gold-strong);}
+.tag-question{background:transparent; color:var(--ink-faint); border:1.5px dashed var(--line-strong);}
+.tag-decision{background:var(--warm-soft); color:var(--warm);}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px);
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -10%, var(--cold-soft), transparent 60%),
+    radial-gradient(ellipse 900px 500px at 90% 0%, var(--warm-soft), transparent 60%),
+    var(--bg);
+  border-bottom:1px solid var(--line);
+}
+.hero .kicker{
+  font-size:.8rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-faint); margin-bottom:1.2em;
+}
+.hero h1{
+  font-size:clamp(2rem,5vw,3.4rem);
+  line-height:1.08;
+  max-width:16ch;
+}
+.hero h1 em{font-style:italic; color:var(--gold-strong);}
+.hero .lede{font-size:1.15rem; margin-top:.6em;}
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:.6em 1.4em;
+  margin-top:1.8em; font-size:.85rem; color:var(--ink-soft);
+}
+.meta-row div{display:flex; gap:.4em; align-items:baseline;}
+.meta-row b{color:var(--ink); font-weight:700;}
+
+/* Positioning spectrum */
+.spectrum{
+  margin-top:clamp(36px,6vw,64px);
+  background:var(--paper); border:1px solid var(--line); border-radius:18px;
+  padding:clamp(20px,4vw,32px); box-shadow:var(--shadow);
+}
+.spectrum-label{font-size:.8rem; color:var(--ink-faint); margin-bottom:1em; text-transform:uppercase; letter-spacing:.1em;}
+.spectrum-track{
+  position:relative; height:14px; border-radius:999px; margin:44px 6px 54px;
+  background:linear-gradient(90deg, var(--cold) 0%, var(--gold) 50%, var(--warm) 100%);
+}
+.spectrum-point{position:absolute; top:50%; transform:translate(-50%,-50%); text-align:center;}
+.spectrum-point .dot{width:20px; height:20px; border-radius:50%; background:var(--paper); border:4px solid var(--dot-c,var(--ink)); margin:0 auto;}
+.spectrum-point.p1{left:2%;} .spectrum-point.p1 .dot{--dot-c:var(--cold);}
+.spectrum-point.p2{left:50%;} .spectrum-point.p2 .dot{width:26px;height:26px; --dot-c:var(--gold); box-shadow:0 0 0 6px var(--gold-soft);}
+.spectrum-point.p3{left:98%;} .spectrum-point.p3 .dot{--dot-c:var(--warm);}
+.spectrum-point .cap{
+  position:absolute; width:180px; left:50%; transform:translateX(-50%);
+  font-size:.82rem; line-height:1.35;
+}
+.spectrum-point.p1 .cap, .spectrum-point.p3 .cap{top:26px;}
+.spectrum-point.p2 .cap{bottom:30px;}
+.spectrum-point .cap b{display:block; font-family:var(--font-serif); font-size:1rem; margin-bottom:.15em;}
+.spectrum-point.p1 .cap b{color:var(--cold);}
+.spectrum-point.p2 .cap b{color:var(--gold-strong); font-size:1.1rem;}
+.spectrum-point.p3 .cap b{color:var(--warm);}
+
+/* context note */
+.context-note{
+  background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.context-note .wrap{display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;}
+.context-note .pin{font-size:1.6rem; line-height:1;}
+.context-note p{margin:0; color:var(--ink-soft); max-width:70ch; font-size:.95rem;}
+.context-note b{color:var(--ink);}
+
+/* ============ TECHNIQUE SECTION HEADERS ============ */
+.tech-head{margin-bottom:clamp(28px,5vw,44px);}
+.tech-head h2{font-size:clamp(1.5rem,3.4vw,2.2rem);}
+.tech-head .sub{color:var(--ink-soft); font-size:.9rem; font-style:italic;}
+
+/* ============ 1. BRAIN WRITING ============ */
+.bw-roadmap{
+  display:flex; align-items:stretch; gap:0; flex-wrap:wrap; margin-bottom:48px;
+}
+.bw-stage{
+  flex:1 1 220px; background:var(--paper); border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; box-shadow:var(--shadow); position:relative;
+}
+.bw-stage .stage-no{
+  font-family:var(--font-serif); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold-strong); font-weight:700; margin-bottom:.5em;
+}
+.bw-stage h4{font-size:1.05rem; margin-bottom:.4em;}
+.bw-stage p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+.bw-arrow{
+  flex:0 0 44px; display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem; color:var(--line-strong); align-self:center;
+}
+@media(max-width:760px){ .bw-arrow{ width:100%; flex-basis:100%; transform:rotate(90deg); padding:2px 0;} }
+
+.notes-field{
+  display:flex; flex-wrap:wrap; gap:26px 22px; padding-top:8px;
+}
+.note{
+  background:var(--paper); border:1px solid var(--line); border-radius:4px;
+  box-shadow:var(--shadow); padding:16px 18px; width:236px;
+  font-size:.86rem; color:var(--ink-soft);
+  position:relative;
+}
+.note:nth-child(odd){transform:rotate(-1.6deg);}
+.note:nth-child(even){transform:rotate(1.4deg);}
+.note::before{
+  content:""; position:absolute; top:-9px; left:50%; transform:translateX(-50%) rotate(-8deg);
+  width:34px; height:14px; background:var(--gold-soft); opacity:.85; border-radius:2px;
+}
+.note .tag{margin-bottom:.6em;}
+.note p{margin:0; color:var(--ink);}
+
+/* ============ 2. SCAMPER ============ */
+.scamper-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;
+}
+.lens{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:18px 20px;
+  box-shadow:var(--shadow); display:flex; flex-direction:column; gap:.5em;
+}
+.lens.is-question{border-style:dashed; border-color:var(--line-strong);}
+.lens .letter-row{display:flex; align-items:center; gap:10px;}
+.lens .letter{
+  font-family:var(--font-serif); font-size:1.5rem; font-weight:700; color:var(--paper);
+  background:var(--cold); width:38px; height:38px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+}
+.lens.is-question .letter{background:var(--ink-faint);}
+.lens .name{font-weight:700; font-size:.95rem;}
+.lens .body{font-size:.85rem; color:var(--ink-soft);}
+.lens .body + .body{margin-top:.6em; padding-top:.6em; border-top:1px dashed var(--line);}
+
+/* ============ 3. MIND MAP ============ */
+.mindmap-radial{
+  position:relative; width:100%; max-width:620px; aspect-ratio:1/1; margin:0 auto;
+}
+.mindmap-radial svg{position:absolute; inset:0; width:100%; height:100%;}
+.mm-node{
+  position:absolute; transform:translate(-50%,-50%);
+  background:var(--paper); border:1px solid var(--line); border-radius:999px;
+  padding:.55em 1em; font-size:.8rem; font-weight:600; text-align:center;
+  box-shadow:var(--shadow); white-space:nowrap; max-width:150px; white-space:normal;
+}
+.mm-node.center{
+  background:var(--gold); color:var(--paper); font-family:var(--font-serif); font-weight:700;
+  font-size:.92rem; padding:1em 1.2em; border-radius:20px; max-width:180px; box-shadow:var(--shadow-lift);
+  border:none; line-height:1.25;
+}
+.mm-node.hot{border-color:var(--gold-strong); border-width:2px; color:var(--gold-strong); font-weight:700;}
+.mindmap-tree{display:none;}
+.mm-deep{
+  margin-top:34px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px;
+}
+.mm-deep-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px 22px;
+  box-shadow:var(--shadow);
+}
+.mm-deep-card .from{font-size:.72rem; color:var(--gold-strong); text-transform:uppercase; letter-spacing:.08em; font-weight:700; margin-bottom:.6em;}
+.mm-deep-card h4{font-size:1rem; margin-bottom:.5em;}
+.mm-split{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:.6em;}
+@media(max-width:520px){.mm-split{grid-template-columns:1fr;}}
+.mm-split .yes, .mm-split .no{border-radius:10px; padding:12px 14px; font-size:.83rem;}
+.mm-split .yes{background:var(--cold-soft); color:var(--cold);}
+.mm-split .no{background:var(--warm-soft); color:var(--warm);}
+.mm-split b{display:block; font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.3em;}
+
+@media(max-width:760px){
+  .mindmap-radial{display:none;}
+  .mindmap-tree{display:block;}
+  .mtree-center{
+    background:var(--gold); color:var(--paper); font-family:var(--font-serif); font-weight:700;
+    border-radius:14px; padding:14px 18px; text-align:center; margin-bottom:0; box-shadow:var(--shadow-lift);
+  }
+  .mtree-list{list-style:none; margin:0; padding:0 0 0 18px; border-left:2px solid var(--line-strong);}
+  .mtree-list li{
+    position:relative; margin:14px 0; padding:10px 14px; background:var(--paper);
+    border:1px solid var(--line); border-radius:10px; font-size:.85rem; font-weight:600; box-shadow:var(--shadow);
+  }
+  .mtree-list li::before{
+    content:""; position:absolute; left:-18px; top:50%; width:16px; height:2px; background:var(--line-strong);
+  }
+  .mtree-list li.hot{border-color:var(--gold-strong); border-width:2px; color:var(--gold-strong);}
+}
+
+/* ============ 4. JTBD ============ */
+.jtbd-wrap{display:grid; grid-template-columns:1.1fr .9fr; gap:26px;}
+@media(max-width:760px){.jtbd-wrap{grid-template-columns:1fr;}}
+.hire-slip{
+  background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:26px 28px;
+  box-shadow:var(--shadow-lift); position:relative; overflow:hidden;
+}
+.hire-slip::after{
+  content:"THUÊ"; position:absolute; top:14px; right:-34px; transform:rotate(28deg);
+  background:var(--warm); color:var(--paper); font-family:var(--font-serif); font-weight:700;
+  font-size:.75rem; letter-spacing:.15em; padding:5px 42px;
+}
+.hire-slip h4{font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); margin-bottom:1em;}
+.hire-slip .who{font-family:var(--font-serif); font-size:1.3rem; margin-bottom:.5em;}
+.hire-list{list-style:none; margin:0; padding:0;}
+.hire-list li{
+  display:flex; gap:10px; padding:9px 0; border-top:1px dashed var(--line); font-size:.92rem; color:var(--ink-soft);
+}
+.hire-list li:first-child{border-top:none;}
+.hire-list li::before{content:"✓"; color:var(--cold); font-weight:700; flex:0 0 auto;}
+
+.moment-card{
+  background:var(--gold-soft); border:1px solid var(--gold); border-radius:16px; padding:24px 26px;
+  display:flex; flex-direction:column; gap:.8em; justify-content:center;
+}
+.moment-card .bolt{font-size:1.6rem;}
+.moment-card h4{font-size:1rem; color:var(--gold-strong);}
+.moment-card p{font-size:.9rem; color:var(--ink); margin:0;}
+
+/* ============ 5. TRIZ ============ */
+.triz-clash{
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-bottom:10px;
+}
+@media(max-width:640px){.triz-clash{grid-template-columns:1fr;}}
+.triz-force{
+  border-radius:14px; padding:20px 22px; font-size:.88rem; box-shadow:var(--shadow);
+}
+.triz-force.push-right{background:var(--cold-soft); color:var(--cold); border:1px solid var(--cold);}
+.triz-force.push-left{background:var(--warm-soft); color:var(--warm); border:1px solid var(--warm);}
+.triz-force h4{font-size:.95rem; margin-bottom:.5em;}
+.triz-force ul{margin:.4em 0 0; padding-left:1.1em;}
+.triz-vs{
+  font-family:var(--font-serif); font-weight:700; font-size:1.3rem; color:var(--ink-faint);
+  display:flex; align-items:center; justify-content:center; width:52px; height:52px;
+  border:2px solid var(--line-strong); border-radius:50%; background:var(--paper);
+}
+@media(max-width:640px){.triz-vs{margin:8px auto; transform:rotate(90deg);}}
+.triz-resolve{
+  margin-top:18px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  background:var(--paper); border:2px solid var(--gold); border-radius:16px; padding:22px 26px;
+  box-shadow:var(--shadow-lift);
+}
+.triz-resolve .big-arrow{font-size:2.2rem; color:var(--gold-strong); flex:0 0 auto;}
+.triz-resolve .txt h4{color:var(--gold-strong); font-size:1rem; margin-bottom:.4em;}
+.triz-resolve .txt p{margin:0; font-size:.92rem; color:var(--ink-soft);}
+.triz-resolve .txt p+p{margin-top:.5em;}
+
+/* ============ CONVERGENCE ============ */
+.converge{background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.cluster-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:56px;}
+.cluster-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:var(--shadow);
+  border-top:5px solid var(--c, var(--gold));
+}
+.cluster-card .letter{font-family:var(--font-serif); font-size:1.8rem; font-weight:700; color:var(--c,var(--gold));}
+.cluster-card .name{font-size:.9rem; font-weight:600; margin-top:.3em;}
+.cA{--c:#7d8f6b;} .cB{--c:#4c7c9e;} .cC{--c:var(--gold-strong);} .cD{--c:var(--warm);} .cE{--c:#8a6bb0;}
+
+.rank-title{font-size:.85rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint); margin-bottom:18px;}
+.rank-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+.rank-list li{display:grid; grid-template-columns:28px 130px 1fr; align-items:center; gap:14px;}
+@media(max-width:560px){.rank-list li{grid-template-columns:24px 90px 1fr;}}
+.rank-list .pos{font-family:var(--font-serif); font-weight:700; color:var(--ink-faint);}
+.rank-list .lbl{font-weight:700; font-size:.88rem;}
+.rank-list .bar-track{background:var(--bg); border-radius:999px; height:22px; overflow:hidden; border:1px solid var(--line);}
+.rank-list .bar{height:100%; border-radius:999px; display:flex; align-items:center; justify-content:flex-end; padding-right:10px;}
+.rank-list .bar span{color:var(--paper); font-size:.7rem; font-weight:700;}
+.r1 .bar{width:100%; background:var(--gold-strong);}
+.r2 .bar{width:82%; background:var(--warm);}
+.r3 .bar{width:64%; background:#4c7c9e;}
+.r4 .bar{width:46%; background:#7d8f6b;}
+.r5 .bar{width:28%; background:#8a6bb0;}
+.rank-note{margin-top:16px; font-size:.8rem; color:var(--ink-faint);}
+
+/* ============ SYNTHESIS / CLIMAX ============ */
+.synthesis{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(ellipse 1000px 600px at 50% 0%, var(--gold-soft), transparent 65%),
+    var(--ink) ;
+  color:#f3ead0;
+  padding:clamp(64px,10vw,120px) 0;
+}
+:root:not([data-theme="light"]) .synthesis{ background: radial-gradient(ellipse 1000px 600px at 50% 0%, var(--gold-soft), transparent 65%), #0e0c08; }
+.synthesis .wrap{position:relative; z-index:1;}
+.synthesis .eyebrow{color:var(--gold-strong);}
+.synthesis .eyebrow .num{background:rgba(255,255,255,.12); color:var(--gold-strong);}
+.q-central{
+  font-family:var(--font-serif); font-style:italic; font-size:clamp(1.3rem,3vw,1.9rem);
+  color:#f3ead0; max-width:22ch; line-height:1.3; margin:0 auto 56px; text-align:center;
+  position:relative; padding:0 .2em;
+}
+.q-central::before{content:"“"; }
+.q-central::after{content:"”"; }
+
+.trust-stages{display:flex; gap:0; align-items:stretch; flex-wrap:wrap; position:relative; margin-bottom:8px;}
+.trust-stage{
+  flex:1 1 220px; background:rgba(255,252,244,.06); border:1px solid rgba(240,207,122,.35);
+  border-radius:14px; padding:20px 20px 22px; position:relative;
+}
+.trust-stage .stage-no{font-family:var(--font-serif); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-strong); margin-bottom:.5em;}
+.trust-stage h4{color:#f3ead0; font-size:1rem; margin-bottom:.4em;}
+.trust-stage p{color:#cbbf9e; font-size:.85rem; margin:0;}
+.trust-arrow{flex:0 0 30px; display:flex; align-items:center; justify-content:center; color:var(--gold-strong); font-size:1.2rem;}
+@media(max-width:760px){.trust-arrow{width:100%; flex-basis:100%; transform:rotate(90deg);}}
+.trust-thread{
+  margin-top:14px; padding:14px 18px; border-radius:12px; text-align:center;
+  background:rgba(240,207,122,.1); border:1px dashed var(--gold-strong);
+  color:var(--gold-strong); font-size:.85rem; font-weight:700; letter-spacing:.02em;
+}
+
+.synth-logic{margin-top:44px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+.synth-logic .pt{
+  background:rgba(255,252,244,.05); border:1px solid rgba(240,207,122,.2); border-radius:12px; padding:16px 18px;
+  font-size:.86rem; color:#d9cead;
+}
+.synth-logic .pt b{color:#f3ead0;}
+
+.punch{
+  margin-top:56px; text-align:center; font-family:var(--font-serif); font-weight:700;
+  font-size:clamp(1.4rem,3.6vw,2.3rem); color:var(--gold-strong); line-height:1.3; max-width:26ch; margin-inline:auto;
+  text-shadow:0 2px 24px rgba(240,207,122,.25);
+}
+
+/* ============ FOOTER ============ */
+footer{padding:40px 0 70px; text-align:center;}
+footer .wrap{display:flex; flex-direction:column; align-items:center; gap:8px;}
+footer .art{font-size:.85rem; color:var(--ink-soft);}
+footer .src{font-size:.72rem; color:var(--ink-faint); font-family:monospace;}
+footer .mark{font-family:var(--font-serif); font-style:italic; color:var(--gold-strong); font-size:.95rem;}
+
+/* side nav dots */
+.sidenav{
+  position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:20;
+  display:flex; flex-direction:column; gap:10px;
+}
+.sidenav a{
+  width:9px; height:9px; border-radius:50%; background:var(--line-strong);
+  display:block; text-indent:-9999px; transition:transform .2s, background .2s;
+}
+.sidenav a:hover{background:var(--gold-strong); transform:scale(1.4);}
+@media(max-width:900px){.sidenav{display:none;}}
+</style>
+</head>
+<body>
+
+<nav class="sidenav" aria-hidden="true">
+  <a href="#t1" title="Brain Writing"></a>
+  <a href="#t2" title="SCAMPER"></a>
+  <a href="#t3" title="Mind Mapping"></a>
+  <a href="#t4" title="JTBD"></a>
+  <a href="#t5" title="TRIZ"></a>
+  <a href="#converge" title="Hội tụ"></a>
+  <a href="#synthesis" title="Tổng hợp"></a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Phiên brainstorm · Facilitator mode · 2026-08-18</div>
+    <h1>Concept <em>AI Tutor 390k</em> — đứng giữa hai thái cực</h1>
+    <p class="lede">Tìm các hướng phát triển concept phù hợp với phân khúc giá 390k, nằm giữa hai sản phẩm hiện có của Edupia — cả về giá lẫn mô hình tương tác.</p>
+    <div class="meta-row">
+      <div><b>5 kỹ thuật</b>&nbsp;theo thứ tự</div>
+      <div>Brain&nbsp;Writing → SCAMPER → Mind&nbsp;Mapping → JTBD → TRIZ</div>
+    </div>
+
+    <div class="spectrum">
+      <div class="spectrum-label">Định vị trên trục giá &amp; mô hình tương tác</div>
+      <div class="spectrum-track">
+        <div class="spectrum-point p1">
+          <div class="dot"></div>
+          <div class="cap"><b>Edupia AI Class</b>Self-learning · rẻ nhất</div>
+        </div>
+        <div class="spectrum-point p2">
+          <div class="dot"></div>
+          <div class="cap"><b>Concept AI Tutor — 390k</b>Ở giữa: gia sư AI</div>
+        </div>
+        <div class="spectrum-point p3">
+          <div class="dot"></div>
+          <div class="cap"><b>Edupia Tutor</b>Gia sư sống, nhóm 1–4 / 1–6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="context-note">
+  <div class="wrap">
+    <div class="pin">📌</div>
+    <p><b>Bối cảnh xác nhận từ user:</b> "Edupia Tutor" trong phiên này = gia sư sống theo nhóm 1–4/1–6 (không phải Tutor 1-1 cá nhân hóa cao đã nhắc ở product-brief trước đó). Khung 3 điểm cho brainstorm: <b>Edupia AI Class</b> (self-learning, rẻ nhất) — <b>Concept AI Tutor</b> (390k, giữa) — <b>Edupia Tutor 1-4/1-6</b> (gia sư sống, đắt hơn). Vận hành Tutor hiện tại: học live trên ClassIn với GV thật, sau đó học sinh tự làm bài tập về nhà + tự ôn luyện.</p>
+  </div>
+</section>
+
+<main>
+
+<!-- ============ 1. BRAIN WRITING ============ -->
+<section id="t1">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow"><span class="num">1</span>Brain Writing Round Robin</div>
+      <h2>Những tờ giấy được truyền tay</h2>
+      <div class="sub">Mỗi ý được viết ra rồi truyền tiếp — vòng đầu tiên phác ra cả một lộ trình 3 giai đoạn.</div>
+    </div>
+
+    <div class="bw-roadmap">
+      <div class="bw-stage">
+        <div class="stage-no">Giai đoạn 1</div>
+        <h4>AI là "trợ giảng"</h4>
+        <p>Hỗ trợ &amp; tương tác liên tục với học sinh trong lúc tự học (bài tập về nhà / tự ôn luyện) — chưa thay thế gia sư sống.</p>
+      </div>
+      <div class="bw-arrow">→</div>
+      <div class="bw-stage">
+        <div class="stage-no">Giai đoạn 2</div>
+        <h4>AI đồng dạy</h4>
+        <p>Gia sư AI trực tiếp dạy trong lớp học online; giáo viên người thật đóng vai trợ giảng — support &amp; giám sát.</p>
+      </div>
+      <div class="bw-arrow">→</div>
+      <div class="bw-stage">
+        <div class="stage-no">Giai đoạn 3</div>
+        <h4>AI độc lập</h4>
+        <p>Gia sư AI chạy độc lập hoàn toàn trong lớp; có thể có "trợ giảng AI" khác hỗ trợ/giám sát chéo — không còn người thật.</p>
+      </div>
+    </div>
+
+    <div class="notes-field">
+      <div class="note">
+        <span class="tag tag-idea">Ý tưởng</span>
+        <p>Tận dụng đội ngũ giáo viên đông đảo hiện tại của Edupia Tutor để xây "chân dung" (persona) cho gia sư AI — thay vì tạo AI vô danh từ đầu.</p>
+      </div>
+      <div class="note">
+        <span class="tag tag-idea">Ý tưởng</span>
+        <p>3 yếu tố cụ thể lấy từ GV thật để đưa vào chân dung AI: <b>giọng nói</b>, <b>cách giảng bài</b>, <b>cách tương tác</b> với học sinh.</p>
+      </div>
+      <div class="note">
+        <span class="tag tag-insight">Insight</span>
+        <p>Học sinh có thể nhận ra AI qua giọng nói / cách nói chuyện / tương tác — không giấu được hoàn toàn.</p>
+      </div>
+      <div class="note">
+        <span class="tag tag-idea">Ý tưởng</span>
+        <p>Niềm tin (học sinh + phụ huynh) không đến từ việc "giả làm người", mà từ việc AI đưa ra quyết định đáng tin cậy, chính xác về kết quả học tập, và gợi ý đúng đắn cách học cho từng học sinh.</p>
+      </div>
+      <div class="note">
+        <span class="tag tag-idea">Ý tưởng</span>
+        <p>Có thể định giá 390k ngay từ Giai đoạn 1 — so với self-learning thuần của AI Class, thêm tương tác với gia sư-AI đã tự nó là giá trị gia tăng đủ để biện minh mức giá.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. SCAMPER ============ -->
+<section id="t2">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow"><span class="num">2</span>SCAMPER Method</div>
+      <h2>7 lăng kính lên mô hình lớp học hiện tại</h2>
+      <div class="sub">Áp lên mô hình lớp học Edupia Tutor hiện tại: GV thật · ClassIn · nhóm 1-4/1-6.</div>
+    </div>
+
+    <div class="scamper-grid">
+      <div class="lens">
+        <div class="letter-row"><div class="letter">S</div><div class="name">Substitute</div></div>
+        <div class="body">Thay AI vào 2 phần trước tiên: (1) chấm-chữa bài sau buổi học, (2) tương tác liên tục với học sinh lúc tự học/làm bài tập về nhà — giữ nguyên buổi học sống với GV thật.</div>
+      </div>
+      <div class="lens">
+        <div class="letter-row"><div class="letter">C</div><div class="name">Combine</div></div>
+        <div class="body">Trước mỗi buổi học sống, GV thật xem dữ liệu học tập mà AI đã thu thập/phân tích trong lúc học sinh tự học ở nhà — buổi học sống được chuẩn bị/điều chỉnh theo dữ liệu đó, thay vì dạy chung chung.</div>
+      </div>
+      <div class="lens">
+        <div class="letter-row"><div class="letter">A</div><div class="name">Adapt</div></div>
+        <div class="body">Mượn nguyên lý dùng Claude Code cho công việc sản phẩm: nạp context liên tục, AI xây "chân dung" người dùng theo thời gian rồi đưa gợi ý. Áp dụng: dữ liệu học tập nạp vào AI để xây "chân dung học sinh" liên tục, AI đưa gợi ý cho giáo viên — không chỉ báo cáo tĩnh một lần.</div>
+      </div>
+      <div class="lens is-question">
+        <div class="letter-row"><div class="letter">M</div><div class="name">Modify</div></div>
+        <div class="body"><span class="tag tag-question">Câu hỏi mở</span></div>
+        <div class="body">Khía cạnh chọn để đẩy cực đoan: số học sinh 1 GV phụ trách khi có AI hỗ trợ. Chưa có số liệu hiện tại — cần bổ sung trước khi ước lượng mức tăng khả thi. (Liên hệ câu hỏi "Talktime GVCN thật" bỏ ngỏ ở product-brief v2.0, tier 1.3.)</div>
+      </div>
+      <div class="lens">
+        <div class="letter-row"><div class="letter">P</div><div class="name">Put to other use</div></div>
+        <div class="body">Chân dung học sinh làm cơ sở dữ liệu cho đội Sales tư vấn gói học phù hợp — thay vì tư vấn chung chung.</div>
+        <div class="body">Nếu học sinh tương tác với AI đủ nhiều/liên tục/sâu, dữ liệu đó có thể giúp nhà trường/phụ huynh phát hiện SỚM dấu hiệu tâm lý/hành vi của con — một hướng sản phẩm khác hẳn mục tiêu học tập ban đầu.</div>
+      </div>
+      <div class="lens is-question">
+        <div class="letter-row"><div class="letter">E</div><div class="name">Eliminate</div></div>
+        <div class="body"><span class="tag tag-question">Câu hỏi mở</span></div>
+        <div class="body">Không xác định được thành phần nào có thể loại bỏ hẳn khỏi mô hình lớp học hiện tại — user chưa có đủ thông tin về quy trình vận hành hiện tại để trả lời.</div>
+      </div>
+      <div class="lens">
+        <div class="letter-row"><div class="letter">R</div><div class="name">Reverse</div></div>
+        <div class="body">Đảo trình tự: AI dạy kiến thức mới trước (học sinh chủ động, học lại nhiều lần nếu chưa hiểu — không giới hạn như với người thật) → con người (GV) là "chốt chặn" cuối: tương tác, giải đáp, khen thưởng, ghi nhận. GV xác nhận/đảm bảo chất lượng output của AI, không còn là người truyền đạt kiến thức đầu tiên.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. MIND MAPPING ============ -->
+<section id="t3">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow"><span class="num">3</span>Mind Mapping</div>
+      <h2>Node trung tâm và 8 nhánh</h2>
+      <div class="sub">"Concept AI Tutor — 390k, giữa AI Class và Tutor 1-4/1-6" — rồi đào sâu vào 2 nhánh nóng nhất.</div>
+    </div>
+
+    <!-- radial (desktop) -->
+    <div class="mindmap-radial">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
+        <g stroke="var(--line-strong)" stroke-width="2.5" fill="none">
+          <line x1="500" y1="500" x2="880" y2="500"/>
+          <line x1="500" y1="500" x2="769" y2="769"/>
+          <line x1="500" y1="500" x2="500" y2="880"/>
+          <line x1="500" y1="500" x2="231" y2="769"/>
+          <line x1="500" y1="500" x2="120" y2="500"/>
+          <line x1="500" y1="500" x2="231" y2="231"/>
+          <line x1="500" y1="500" x2="500" y2="120"/>
+          <line x1="500" y1="500" x2="769" y2="231"/>
+        </g>
+      </svg>
+      <div class="mm-node center" style="left:50%; top:50%;">Concept AI Tutor<br>390k</div>
+      <div class="mm-node hot" style="left:88%; top:50%;">Chi phí đầu tư</div>
+      <div class="mm-node" style="left:76.9%; top:76.9%;">Phân khúc khách hàng</div>
+      <div class="mm-node" style="left:50%; top:88%;">Rủi ro</div>
+      <div class="mm-node" style="left:23.1%; top:76.9%;">Lộ trình triển khai</div>
+      <div class="mm-node" style="left:12%; top:50%;">Thị trường</div>
+      <div class="mm-node" style="left:23.1%; top:23.1%;">Đối thủ</div>
+      <div class="mm-node hot" style="left:50%; top:12%;">Nhu cầu khách hàng</div>
+      <div class="mm-node" style="left:76.9%; top:23.1%;">Lợi nhuận</div>
+    </div>
+
+    <!-- tree (mobile fallback) -->
+    <div class="mindmap-tree">
+      <div class="mtree-center">Concept AI Tutor — 390k</div>
+      <ul class="mtree-list">
+        <li class="hot">Nhu cầu khách hàng</li>
+        <li class="hot">Chi phí đầu tư</li>
+        <li>Phân khúc khách hàng</li>
+        <li>Rủi ro</li>
+        <li>Lộ trình triển khai</li>
+        <li>Thị trường</li>
+        <li>Đối thủ</li>
+        <li>Lợi nhuận</li>
+      </ul>
+    </div>
+
+    <div class="mm-deep">
+      <div class="mm-deep-card">
+        <div class="from">↳ đào sâu · nhu cầu khách hàng</div>
+        <h4>Yếu tố then chốt để chấp nhận giá 390k: sự tiến bộ THẬT của học sinh</h4>
+        <p style="font-size:.86rem;color:var(--ink-soft)">Tiến bộ phải được phụ huynh <b>nhìn thấy</b> cụ thể qua chân dung học sinh, nhận xét, báo cáo AI trả ra — cảm thấy đúng đắn/đáng tin cậy; kết quả rõ ràng, theo dõi liên tục, khác biệt rõ so với tự học thuần túy (AI Class).</p>
+        <div class="mm-split">
+          <div class="yes"><b>Vì sao chấp nhận</b>Tiến bộ nhìn thấy được, liên tục, khác biệt rõ với self-learning</div>
+          <div class="no"><b>Vì sao KHÔNG chấp nhận</b>Định kiến / chưa tin tưởng hoàn toàn vào AI, đặc biệt trong giáo dục</div>
+        </div>
+      </div>
+      <div class="mm-deep-card">
+        <div class="from">↳ đào sâu · chi phí đầu tư</div>
+        <h4>Hạng mục tốn thời gian/chi phí nhất</h4>
+        <p style="font-size:.86rem;color:var(--ink-soft)">Xây dựng AI tạo <b>"chân dung người học"</b> VÀ <b>"chân dung giáo viên"</b> — cả hai, không chỉ một — là hạng mục đầu tư lớn nhất so với năng lực hiện có ở AI Class/Tutor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. JTBD ============ -->
+<section id="t4">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow"><span class="num">4</span>Job to Be Done</div>
+      <h2>Phụ huynh không mua sản phẩm — họ "thuê" ai đó</h2>
+      <div class="sub">Reframe: khách hàng không chọn tính năng, họ thuê một người làm thay một công việc.</div>
+    </div>
+
+    <div class="jtbd-wrap">
+      <div class="hire-slip">
+        <h4>Bản "hợp đồng thuê" ngầm định</h4>
+        <div class="who">Phụ huynh thuê AI Tutor để…</div>
+        <ul class="hire-list">
+          <li>Làm người đồng hành, học cùng con</li>
+          <li>Giải đáp cho con</li>
+          <li>Theo dõi tiến độ học tập của con</li>
+          <li>Nhắc nhở &amp; động viên con học</li>
+        </ul>
+        <p style="margin-top:14px; font-size:.85rem; color:var(--ink-faint);">— việc mà chính phụ huynh muốn làm, nhưng không có đủ thời gian và chuyên môn.</p>
+      </div>
+
+      <div class="moment-card">
+        <div class="bolt">🔔</div>
+        <h4>Khoảnh khắc "có người làm thay mình"</h4>
+        <p>Lúc phụ huynh nhận được nhắc nhở/cảnh báo <b>CHỦ ĐỘNG</b> từ AI — về tiến độ, chất lượng học tập, hoặc vấn đề con đang gặp phải — chứ không phải tự vào xem báo cáo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. TRIZ ============ -->
+<section id="t5">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow"><span class="num">5</span>TRIZ Contradiction</div>
+      <h2>Mâu thuẫn cốt lõi — và hướng thắng cả hai</h2>
+      <div class="sub">Hai lực đối nghịch cùng tác động lên một mức giá cố định: 390k.</div>
+    </div>
+
+    <div class="triz-clash">
+      <div class="triz-force push-right">
+        <h4>Càng sâu / càng liên tục →</h4>
+        <ul>
+          <li>Độ sâu &amp; chính xác của chân dung AI</li>
+          <li>Mức độ AI thay được vai trò con người</li>
+          <li>Tần suất / độ liên tục AI theo sát học sinh</li>
+        </ul>
+        <p style="margin-top:.6em;">…càng cao/tốt → chi phí xây dựng ban đầu + chi phí vận hành mỗi học sinh càng đắt.</p>
+      </div>
+      <div class="triz-vs">VS</div>
+      <div class="triz-force push-left">
+        <h4>← Giá phải giữ nguyên</h4>
+        <p>Giá bán phải giữ ở <b>390k</b> — thấp hơn Tutor, chỉ cao hơn AI Class.</p>
+        <p style="margin-top:.6em;">Áp lực trực tiếp lên biên lợi nhuận.</p>
+      </div>
+    </div>
+
+    <div class="triz-resolve">
+      <div class="big-arrow">⇒</div>
+      <div class="txt">
+        <h4>Hướng "thắng cả hai"</h4>
+        <p>Không chỉ dựa vào 390k/tháng để bù chi phí xây chân dung AI — coi <b>dữ liệu / chân dung người dùng</b> thu thập được là một nguồn giá trị RIÊNG, ngoài tiền thuê bao.</p>
+        <p>Khấu hao chi phí đầu tư ban đầu qua toàn bộ <b>vòng đời dữ liệu tích lũy</b>, không chỉ qua giá bán tháng — kết nối trực tiếp với 2 ý ở Mind Map: chân dung dùng cho Sales tư vấn gói, và phát hiện sớm dấu hiệu tâm lý/hành vi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONVERGENCE ============ -->
+<section id="converge" class="converge">
+  <div class="wrap">
+    <div class="tech-head">
+      <div class="eyebrow">✦ Hội tụ</div>
+      <h2>5 cụm ý tưởng, xếp theo Impact</h2>
+      <div class="sub">Move 1: Affinity Clustering — giữ nguyên trạng, không gộp/tách/đổi tên. Move 2: Forced Ranking theo Impact.</div>
+    </div>
+
+    <div class="cluster-grid">
+      <div class="cluster-card cA"><div class="letter">A</div><div class="name">Mô hình vận hành / lộ trình sản phẩm</div></div>
+      <div class="cluster-card cB"><div class="letter">B</div><div class="name">Chân dung AI (persona engine)</div></div>
+      <div class="cluster-card cC"><div class="letter">C</div><div class="name">Niềm tin &amp; trải nghiệm phụ huynh</div></div>
+      <div class="cluster-card cD"><div class="letter">D</div><div class="name">Kinh tế: giá &amp; mâu thuẫn chi phí</div></div>
+      <div class="cluster-card cE"><div class="letter">E</div><div class="name">Giá trị phụ từ dữ liệu <span style="font-weight:400; color:var(--ink-faint);">(hướng gỡ mâu thuẫn D)</span></div></div>
+    </div>
+
+    <div class="rank-title">Xếp hạng theo Impact — người dùng tự xếp thứ tự (không phải điểm số đo lường)</div>
+    <ul class="rank-list">
+      <li class="r1"><span class="pos">1</span><span class="lbl">C · Niềm tin</span><span class="bar-track"><span class="bar"><span>Niềm tin &amp; trải nghiệm phụ huynh</span></span></span></li>
+      <li class="r2"><span class="pos">2</span><span class="lbl">D · Kinh tế</span><span class="bar-track"><span class="bar"><span>Giá &amp; mâu thuẫn chi phí</span></span></span></li>
+      <li class="r3"><span class="pos">3</span><span class="lbl">B · Persona</span><span class="bar-track"><span class="bar"><span>Chân dung AI</span></span></span></li>
+      <li class="r4"><span class="pos">4</span><span class="lbl">A · Vận hành</span><span class="bar-track"><span class="bar"><span>Mô hình / lộ trình</span></span></span></li>
+      <li class="r5"><span class="pos">5</span><span class="lbl">E · Dữ liệu</span><span class="bar-track"><span class="bar"><span>Giá trị phụ dữ liệu</span></span></span></li>
+    </ul>
+    <div class="rank-note">Kết quả: <b style="color:var(--ink);">C &gt; D &gt; B &gt; A &gt; E</b></div>
+  </div>
+</section>
+
+<!-- ============ SYNTHESIS ============ -->
+<section id="synthesis" class="synthesis">
+  <div class="wrap">
+    <div class="eyebrow"><span class="num">✦</span>Tổng hợp cuối</div>
+    <p class="q-central">làm sao để xây dựng được 1 concept với đủ niềm tin từ người dùng để có thể win</p>
+
+    <div class="trust-stages">
+      <div class="trust-stage">
+        <div class="stage-no">Giai đoạn 1</div>
+        <h4>AI chứng minh mình đáng tin</h4>
+        <p>Ở vai trò rủi ro thấp (trợ giảng) — trong khi tích lũy chân dung dữ liệu.</p>
+      </div>
+      <div class="trust-arrow">→</div>
+      <div class="trust-stage">
+        <div class="stage-no">Giai đoạn 2</div>
+        <h4>AI đồng dạy</h4>
+        <p>Người thật vẫn giám sát &amp; support song song.</p>
+      </div>
+      <div class="trust-arrow">→</div>
+      <div class="trust-stage">
+        <div class="stage-no">Giai đoạn 3</div>
+        <h4>AI độc lập</h4>
+        <p>Có thể có trợ giảng AI khác giám sát chéo.</p>
+      </div>
+    </div>
+    <div class="trust-thread">Con người luôn đứng giữa AI và kết quả tới phụ huynh — hạ tầng niềm tin giữ xuyên suốt cả 3 giai đoạn, không chỉ là bánh xe tập lái ở giai đoạn 1</div>
+
+    <div class="synth-logic">
+      <div class="pt"><b>Cùng một cơ chế.</b> Ý Combine (GV xem dữ liệu AI trước buổi live) và ý Reverse/TRIZ (con người là "chốt chặn" cuối) — thực ra là cùng một cơ chế người-xác-nhận-AI.</div>
+      <div class="pt"><b>D/E thực chất phục vụ C.</b> Hướng gỡ mâu thuẫn TRIZ (dữ liệu là tài sản riêng, cụm E) đồng thời giải bài toán niềm tin: càng nhiều dữ liệu/chân dung chính xác tích lũy, càng có bằng chứng cụ thể chống định kiến AI.</div>
+      <div class="pt"><b>3 giai đoạn = lộ trình xây niềm tin</b>, không chỉ là lộ trình thay thế con người bằng AI.</div>
+    </div>
+
+    <p class="punch">Công thức niềm tin nằm sẵn trong chính cấu trúc 3-giai-đoạn + cơ chế người-xác-nhận-AI — không cần một tính năng "gây niềm tin" riêng biệt.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="mark">— hết phiên brainstorm —</div>
+    <div class="art">Artifact được chọn: HTML keepsake này &amp; intent doc đi kèm.</div>
+    <div class="src">Nguồn: .memlog.md · brainstorm-ai-tutor-390k-positioning-2026-08-18 · 2026-08-18</div>
+  </div>
+</footer>
+
+</body>
+</html>
