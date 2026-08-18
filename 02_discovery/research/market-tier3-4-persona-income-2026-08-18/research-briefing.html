@@ -1,0 +1,338 @@
+<title>Chân dung khách hàng tier 3/4 — Edupia Class</title>
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --surface-muted: #F1EFEA;
+    --border: #E4E1D8;
+    --text: #201F1C;
+    --text-soft: #5C594F;
+    --accent: #2A3B5C;
+    --accent-soft: #DDE3EE;
+    --accent-contrast: #FFFFFF;
+    --good: #2F7A54;
+    --good-bg: #E4F3EA;
+    --medium: #A8762E;
+    --medium-bg: #F7ECD9;
+    --low: #B0542F;
+    --low-bg: #F8E6DC;
+    --unverified: #5C6B8A;
+    --unverified-bg: #E7EAF2;
+    --disputed: #8E2F52;
+    --disputed-bg: #F4DFE7;
+    --shadow: 0 1px 2px rgba(32,31,28,0.06), 0 8px 24px rgba(32,31,28,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161C; --surface: #1B1E27; --surface-muted: #222532; --border: #2E3242;
+      --text: #EDEDEB; --text-soft: #A9ACB8; --accent: #8AA0D6; --accent-soft: #232B42; --accent-contrast: #10131B;
+      --good: #5FBE8B; --good-bg: #163326; --medium: #D9A855; --medium-bg: #3A2E12;
+      --low: #E08A63; --low-bg: #3B2116; --unverified: #9DAAC9; --unverified-bg: #232941;
+      --disputed: #D97DA3; --disputed-bg: #3A1F2A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161C; --surface: #1B1E27; --surface-muted: #222532; --border: #2E3242;
+    --text: #EDEDEB; --text-soft: #A9ACB8; --accent: #8AA0D6; --accent-soft: #232B42; --accent-contrast: #10131B;
+    --good: #5FBE8B; --good-bg: #163326; --medium: #D9A855; --medium-bg: #3A2E12;
+    --low: #E08A63; --low-bg: #3B2116; --unverified: #9DAAC9; --unverified-bg: #232941;
+    --disputed: #D97DA3; --disputed-bg: #3A1F2A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; line-height: 1.65;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 80px; }
+  header.page { padding: 40px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  header.page h1 { font-size: 1.6rem; margin: 0 0 10px; line-height: 1.3; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px 10px; font-size: 0.82rem; color: var(--text-soft); }
+  .meta-chip { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; padding: 3px 11px; }
+  .decision-line { margin-top: 14px; font-size: 0.98rem; color: var(--text-soft); background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; }
+  .decision-line strong { color: var(--text); }
+
+  nav.toc { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 10px 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; }
+  nav.toc a { color: var(--text-soft); text-decoration: none; font-size: 0.83rem; margin-right: 18px; }
+  nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+  section { margin-bottom: 36px; }
+  h2 { font-size: 1.2rem; border-left: 4px solid var(--accent); padding-left: 10px; margin: 0 0 14px; }
+  h3 { font-size: 1.02rem; margin: 20px 0 8px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .exec-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 12px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .exec-card p { margin: 0 0 14px; }
+  .exec-card p:last-child { margin-bottom: 0; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
+  .badge.verified { background: var(--good-bg); color: var(--good); }
+  .badge.medium { background: var(--medium-bg); color: var(--medium); }
+  .badge.low { background: var(--low-bg); color: var(--low); }
+  .badge.unverified { background: var(--unverified-bg); color: var(--unverified); border: 1.5px dashed var(--unverified); }
+  .badge.disputed { background: var(--disputed-bg); color: var(--disputed); border: 1.5px solid var(--disputed); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--text-soft); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: .02em; }
+  .tbl-wrap { overflow-x: auto; margin: 10px 0 18px; }
+
+  a { color: var(--accent); }
+  a.src-link { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  .cite { font-size: 0.78em; vertical-align: super; text-decoration: none; color: var(--accent); font-weight: 600; }
+
+  .callout { border-radius: 10px; padding: 12px 16px; margin: 10px 0; font-size: 0.94rem; }
+  .callout.warn { background: var(--low-bg); color: var(--low); }
+  .callout.confirmed { background: var(--good-bg); color: var(--good); }
+  .callout.gap { background: var(--unverified-bg); color: var(--unverified); }
+
+  details.src-appendix { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 4px 20px; }
+  details.src-appendix > summary { cursor: pointer; padding: 14px 0; font-weight: 600; }
+
+  .rec-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .rec-card.primary { border-left: 4px solid var(--good); }
+  .rec-card.secondary { border-left: 4px solid var(--accent); }
+  .rec-card.excluded { border-left: 4px solid var(--low); background: var(--low-bg); }
+  .rec-card h3 { margin-top: 0; }
+  ul.tight li { margin-bottom: 6px; }
+  ol.tight li { margin-bottom: 6px; }
+
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 720px) { .persona-grid { grid-template-columns: 1fr; } }
+  .persona-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .persona-card h3 { margin-top: 0; }
+  .persona-card ul { padding-left: 18px; margin: 8px 0; }
+  .persona-card li { margin-bottom: 6px; font-size: 0.92rem; }
+
+  footer.page { margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-soft); }
+</style>
+
+<div class="wrap">
+
+<header class="page">
+  <h1>Chân dung khách hàng tier 3/4 tại Việt Nam, phân khúc giá ~390-400k</h1>
+  <div class="meta-row">
+    <span class="meta-chip">Loại: Market research</span>
+    <span class="meta-chip">Nguồn: native run (3 assistant song song)</span>
+    <span class="meta-chip">Preset: standard</span>
+    <span class="meta-chip">Validation: normal</span>
+    <span class="meta-chip">Cập nhật: 2026-08-18</span>
+    <span class="meta-chip">Trạng thái: complete</span>
+  </div>
+  <div class="decision-line"><strong>Quyết định nghiên cứu này phục vụ:</strong> Xây persona tổng quát cho phụ huynh tier 3 (huyện) và tier 4 (tỉnh/thành không trực thuộc trung ương) tại Việt Nam, dùng cho chiến lược GTM của Edupia Class ở vùng giá ~390-400k VND/tháng.</div>
+</header>
+
+<nav class="toc">
+  <a href="#exec">Tóm tắt điều hành</a>
+  <a href="#d1">1. Vấn đề phân loại tier 3/4</a>
+  <a href="#d2">2. Nhân khẩu học &amp; thu nhập</a>
+  <a href="#d3">3. Hành vi chi tiêu &amp; pain points</a>
+  <a href="#d4">4. Khả năng chi trả</a>
+  <a href="#persona">Persona tổng hợp</a>
+  <a href="#cross">Cross-dimension</a>
+  <a href="#rec">Khuyến nghị</a>
+  <a href="#open">Open questions</a>
+  <a href="#sources">Nguồn</a>
+  <a href="#stale">Staleness</a>
+</nav>
+
+<section id="exec">
+  <h2>Tóm tắt điều hành</h2>
+  <div class="exec-card">
+    <p><span class="badge low">LỆCH ĐỊNH NGHĨA</span> Định nghĩa "tier 3/4" của dự án (huyện = tier 3, tỉnh không trực thuộc TW = tier 4) không tương ứng với hệ thống chuẩn nào — và quan trọng hơn, <strong>không tương quan tốt với thu nhập</strong>. Vùng lương tối thiểu I-IV (thước đo thu nhập-địa lý có thẩm quyền gần nhất) được gán ở <strong>cấp huyện</strong>, không cấp tỉnh <a class="cite" href="#src-5">[5]</a><a class="cite" href="#src-6">[6]</a>; nhiều tỉnh không trực thuộc TW (Bình Dương 8,29tr, Đồng Nai 6,57tr) có thu nhập <strong>cao hơn</strong> một số thành phố trực thuộc TW <a class="cite" href="#src-4">[4]</a>.</p>
+    <p><span class="badge medium">KHÔNG ĐỒNG NHẤT</span> Ở mức thu nhập nông thôn trung bình toàn quốc, 390-400k/tháng chỉ chiếm ~2,4-2,5% thu nhập hộ ước tính <a class="cite" href="#src-24">[24]</a> — nhưng ở vùng nghèo nhất cả nước (Trung du miền núi phía Bắc), cùng mức giá chiếm <strong>10,3-10,5% thu nhập bình quân đầu người</strong> <a class="cite" href="#src-24">[24]</a>, sát/vượt ngưỡng "chi tiêu định kỳ chấp nhận được" 10-15% theo tham khảo ngành bảo hiểm <a class="cite" href="#src-34">[34]</a>.</p>
+    <p><span class="badge unverified">KHOẢNG TRỐNG LỚN NHẤT</span> Không tìm được bất kỳ dữ liệu giá/traction nào riêng cho tier 3/4 đối với sản phẩm edtech tiếng Anh — Việt Nam hay khu vực. ~80% doanh thu chuỗi trung tâm tiếng Anh thương hiệu tập trung thành phố lớn <a class="cite" href="#src-15">[15]</a>; ELSA, Kyna, VUIHOC chỉ có số liệu toàn quốc/toàn cầu <a class="cite" href="#src-28">[28]</a><a class="cite" href="#src-29">[29]</a><a class="cite" href="#src-30">[30]</a>. Persona bên dưới là <strong>suy luận từ proxy</strong>, không phải khảo sát trực tiếp.</p>
+    <p><span class="badge verified">BẰNG CHỨNG THẬT VỀ NHU CẦU</span> Trường công vùng khó khăn thiếu GV tiếng Anh trầm trọng (Thanh Hóa: 2 GV/418 học sinh; Lào Cai: lớp gộp 70 học sinh) <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-19">[19]</a> — một hiệu trưởng địa phương xác nhận trực tiếp rào cản kép: nhận thức <em>và</em> khả năng chi trả <a class="cite" href="#src-19">[19]</a>.</p>
+  </div>
+</section>
+
+<section id="d1">
+  <h2>1. Vấn đề phân loại "tier 3/4" tại Việt Nam</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/tier-definition-income-r1-1.md</code></p>
+  <p>Không có hệ thống "tier 1-4" chính thức, công khai cho các tỉnh/thành Việt Nam từ Nielsen, Kantar, Q&amp;Me hay GSO <a class="cite" href="#src-8">[8]</a><a class="cite" href="#src-9">[9]</a>. Kantar Worldpanel thực tế chỉ dùng "Urban 4 Cities" (TP.HCM, Hà Nội, Đà Nẵng, Cần Thơ — không gồm Hải Phòng) so với "Rural Vietnam" <a class="cite" href="#src-8">[8]</a>. Việt Nam có hệ phân loại đô thị chính thức (loại I-V, Nghị quyết 1210/2016) nhưng theo từng đô thị cụ thể, không theo toàn tỉnh <a class="cite" href="#src-7">[7]</a>.</p>
+  <div class="callout warn"><span class="badge low">MISMATCH</span> Thước đo gần nhất với ý định phân khúc theo thu nhập — vùng lương tối thiểu I-IV (Nghị định 74/2024/NĐ-CP) — được gán ở <strong>cấp huyện</strong>, không cấp tỉnh <a class="cite" href="#src-5">[5]</a>. Ví dụ: trong tỉnh Bình Phước ("tier 4" theo định nghĩa dự án), phần lớn là Vùng III, riêng 3 huyện Bù Đăng/Bù Gia Mập/Bù Đốp là Vùng IV <a class="cite" href="#src-6">[6]</a> — không đồng nhất trong cùng một tỉnh.</div>
+  <p><span class="badge low">BẰNG CHỨNG TRỰC TIẾP</span> Top 10 tỉnh/thành thu nhập cao nhất 2023: Bình Dương 8,29tr (cao nhất cả nước), Hà Nội 6,86tr, Đồng Nai 6,57tr, TP.HCM 6,51tr, Hải Phòng 6,39tr, Đà Nẵng 6,22tr, Cần Thơ 5,7tr, Nam Định 5,5tr, Vĩnh Phúc 5,46tr, Hải Dương ~5,33tr <a class="cite" href="#src-4">[4]</a>. 3/10 tỉnh này <strong>không</strong> trực thuộc TW nhưng thu nhập cao hơn/ngang một số thành phố trực thuộc TW.</p>
+</section>
+
+<section id="d2">
+  <h2>2. Nhân khẩu học &amp; thu nhập hộ gia đình</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/tier-definition-income-r1-1.md</code>, <code>digests/affordability-price-sensitivity-r1-1.md</code></p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Năm</th><th>Toàn quốc</th><th>Thành thị</th><th>Nông thôn</th></tr>
+    <tr><td>2022 <a class="cite" href="#src-3">[3]</a></td><td>4,67 triệu</td><td>5,95 triệu</td><td>3,86 triệu</td></tr>
+    <tr><td>2023 <a class="cite" href="#src-1">[1]</a></td><td>4,96 triệu</td><td>6,26 triệu</td><td>4,17 triệu</td></tr>
+    <tr><td>2024 <a class="cite" href="#src-24">[24]</a></td><td>—</td><td>—</td><td>4,5045 triệu (+8,0%)</td></tr>
+    <tr><td>2025 sơ bộ <a class="cite" href="#src-26">[26]</a></td><td>~5,9-6,0 triệu</td><td>—</td><td>chưa công bố</td></tr>
+  </table></div>
+  <p><span class="badge verified">CHÊNH LỆCH VÙNG MIỀN</span> Đông Nam Bộ 6,52 triệu (cao nhất, 2023) — Trung du &amp; miền núi phía Bắc 3,44 triệu (thấp nhất) <a class="cite" href="#src-2">[2]</a>. Năm 2024: Đông Nam Bộ ~7,1tr so với Trung du miền núi phía Bắc ~3,8tr <a class="cite" href="#src-24">[24]</a> — khoảng cách gần gấp đôi.</p>
+  <p>Quy mô hộ: 3,6 người/hộ nông thôn, 3,4 thành thị <a class="cite" href="#src-24">[24]</a>. Nghề nghiệp: nông-lâm-ngư nghiệp 26,0% việc làm toàn quốc; lao động tự sản tự tiêu 3,7 triệu người (87,0% nông thôn) <a class="cite" href="#src-13">[13]</a>. Tỷ lệ không đi học đúng tuổi: 9,5% nông thôn so với 5,7% thành thị <a class="cite" href="#src-10">[10]</a><a class="cite" href="#src-11">[11]</a>.</p>
+  <div class="callout gap"><span class="badge unverified">KHÔNG TÌM ĐƯỢC</span> Số liệu trực tiếp "số hộ có con trong độ tuổi đi học ở tier 3/4" — ước tính thô dân số ngoài 5 thành phố trực thuộc TW ~75-78 triệu người, độ tin cậy thấp, cần tự suy luận thêm <a class="cite" href="#src-12">[12]</a>.</div>
+</section>
+
+<section id="d3">
+  <h2>3. Hành vi chi tiêu &amp; pain points giáo dục tiếng Anh</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/spending-behavior-pain-points-r1-1.md</code></p>
+  <p><span class="badge verified">XÁC NHẬN</span> Chi tiêu giáo dục hộ gia đình (VHLSS 2020): nông thôn ≈5,1tr/học sinh/năm so với thành thị 10,7tr (gấp 2,1 lần) <a class="cite" href="#src-14">[14]</a>. Học thêm (bao gồm gia sư/ngoại khóa) chiếm 17,5% chi giáo dục — <strong>không tách được phần riêng cho tiếng Anh</strong>.</p>
+  <div class="callout warn"><span class="badge verified">PAIN POINT THẬT</span> Tại Thanh Hóa: trường Pù Nhi 14 lớp chỉ 2 GV tiếng Anh; trường Linh Sơn 418 học sinh do 2 GV phụ trách <a class="cite" href="#src-18">[18]</a>. Tại Lào Cai: lớp gộp tới 70 học sinh do thiếu GV; hiệu trưởng địa phương: nhiều phụ huynh dân tộc thiểu số "chưa nhận thức được lợi ích... và không đủ khả năng đầu tư riêng" <a class="cite" href="#src-19">[19]</a>.</div>
+  <p><span class="badge unverified">KHOẢNG TRỐNG GIÁ TIER 3/4</span> Giá gia sư (200.000-500.000đ/giờ) <a class="cite" href="#src-16">[16]</a> và trung tâm (VUS, Langmaster...) <a class="cite" href="#src-17">[17]</a> tìm được đều là bảng giá toàn quốc/chuỗi thành phố lớn — <strong>không xác nhận là giá tier 3/4</strong>. EY-Parthenon: ~80% doanh thu chuỗi trung tâm thương hiệu tập trung thành phố lớn <a class="cite" href="#src-15">[15]</a>; khảo sát 350 phụ huynh cho thấy 72% thích học trực tiếp hơn online, nhưng chưa xác nhận cơ cấu mẫu có đại diện tier 3/4 <a class="cite" href="#src-15">[15]</a>.</p>
+  <p><span class="badge medium">HOÀI NGHI MARKETING</span> Điều tra Dân Việt (Hà Nội, proxy — không phải tier 3/4 trực tiếp): phụ huynh mất tiền vì đổi GV liên tục, chiêu trò "cam kết đầu ra" khóa gia đình vào chu kỳ đóng phí <a class="cite" href="#src-21">[21]</a>. Kênh khám phá: truyền miệng, nhóm Zalo/Facebook, telesale <a class="cite" href="#src-20">[20]</a><a class="cite" href="#src-23">[23]</a> (độ tin cậy thấp, chưa có khảo sát định lượng).</p>
+</section>
+
+<section id="d4">
+  <h2>4. Khả năng chi trả &amp; độ nhạy giá ở mức 390-400k/tháng</h2>
+  <p style="color:var(--text-soft);font-size:0.85rem">Nguồn: <code>digests/affordability-price-sensitivity-r1-1.md</code></p>
+  <div class="callout confirmed"><span class="badge medium">PHÉP TÍNH SUY LUẬN</span> Với thu nhập đầu người nông thôn 4.504.500đ/tháng và hộ 3,6 người <a class="cite" href="#src-24">[24]</a>: 390-400k = <strong>8,66-8,88% thu nhập đầu người</strong>, <strong>2,40-2,47% thu nhập hộ ước tính</strong>. Ở vùng nghèo nhất (Trung du miền núi phía Bắc, ~3,8tr/tháng): <strong>10,3-10,5% thu nhập đầu người</strong> <a class="cite" href="#src-24">[24]</a>.</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Điểm neo giá tham chiếu</th><th>Giá/tháng</th><th>So với 390-400k</th></tr>
+    <tr><td>Netflix Việt Nam — Mobile/480p <a class="cite" href="#src-27">[27]</a></td><td>~74.000đ</td><td>thấp hơn nhiều</td></tr>
+    <tr><td>Netflix Việt Nam — 4K (gói cao nhất) <a class="cite" href="#src-27">[27]</a></td><td>~273.000đ</td><td>thấp hơn ~30%</td></tr>
+    <tr><td>Học phí công lập nông thôn (trần) <a class="cite" href="#src-31">[31]</a></td><td>100.000-200.000đ</td><td>bằng ~1/2</td></tr>
+    <tr><td>Bảo hiểm nhân thọ tối thiểu (tham khảo mềm) <a class="cite" href="#src-34">[34]</a></td><td>~500.000đ</td><td>cao hơn</td></tr>
+  </table></div>
+  <p style="color:var(--text-soft);font-size:0.85rem">Việt Nam đã miễn học phí công lập toàn quốc từ năm học 2025-2026 <a class="cite" href="#src-31">[31]</a> — khoản "chi giáo dục bắt buộc" quen thuộc đang giảm về 0.</p>
+  <div class="callout gap"><span class="badge unverified">KHÔNG TÌM ĐƯỢC</span> Sản phẩm edtech nào (VN/khu vực) công bố chiến lược/giá/traction riêng tier 3/4: ELSA (34tr người dùng toàn cầu) <a class="cite" href="#src-28">[28]</a>, Kyna English (150k học viên, Series B) <a class="cite" href="#src-29">[29]</a>, VUIHOC (độ tin cậy thấp, chưa xác minh sơ cấp) <a class="cite" href="#src-30">[30]</a> — tất cả toàn quốc/toàn cầu.</div>
+  <p><span class="badge medium">THANH TOÁN</span> 41% người trả lời nông thôn không phân biệt được chuyển khoản với ví điện tử (qua nguồn thứ cấp, chưa xác minh trực tiếp) <a class="cite" href="#src-32">[32]</a>; Mobile Money viễn thông chiếm 72% người dùng ở vùng nông thôn/miền núi <a class="cite" href="#src-32">[32]</a>; xu hướng nghiêng tiền mặt/COD ở nông thôn <a class="cite" href="#src-33">[33]</a> (độ tin cậy thấp).</p>
+</section>
+
+<section id="persona">
+  <h2>Persona tổng hợp</h2>
+  <div class="callout warn">⚠ Đọc như <strong>giả thuyết cần kiểm chứng</strong>, không phải kết luận đã xác nhận — không có khảo sát sơ cấp nào trong nghiên cứu này nhắm trực tiếp phụ huynh tier 3/4. Vì tier 3/4 không đồng nhất về thu nhập (Mục 1), khuyến nghị 2 persona phụ thay vì một persona chung.</div>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <h3>Persona A — Phụ huynh tỉnh/huyện khá giả</h3>
+      <p style="color:var(--text-soft);font-size:0.85rem">Gần Vùng I/II, hoặc tỉnh thu nhập cao (Bình Dương, Đồng Nai, Nam Định, Vĩnh Phúc, Hải Dương)</p>
+      <ul>
+        <li>Thu nhập đầu người gần/vượt trung bình toàn quốc (~5-8tr+/tháng) <a class="cite" href="#src-4">[4]</a><a class="cite" href="#src-24">[24]</a></li>
+        <li>390-400k chiếm tỷ trọng nhỏ — khả năng chi trả không phải rào cản chính <a class="cite" href="#src-24">[24]</a></li>
+        <li>Có trung tâm ngoại ngữ tại thị trấn/tỉnh lỵ, nhưng thiếu GV bản ngữ/chất lượng cao <a class="cite" href="#src-15">[15]</a></li>
+        <li>Rào cản chính có thể là <strong>niềm tin</strong> (hoài nghi marketing) hơn là giá <a class="cite" href="#src-21">[21]</a></li>
+      </ul>
+    </div>
+    <div class="persona-card">
+      <h3>Persona B — Phụ huynh vùng khó khăn</h3>
+      <p style="color:var(--text-soft);font-size:0.85rem">Vùng III/IV — Trung du miền núi phía Bắc, Tây Nguyên, Bắc Trung Bộ</p>
+      <ul>
+        <li>Thu nhập đầu người thấp nhất cả nước (~3,4-3,8tr/tháng) <a class="cite" href="#src-2">[2]</a><a class="cite" href="#src-24">[24]</a></li>
+        <li>390-400k chiếm ~10-10,5% thu nhập đầu người <a class="cite" href="#src-24">[24]</a> — sát ngưỡng "chấp nhận được" 10-15% <a class="cite" href="#src-34">[34]</a></li>
+        <li>Trường công thiếu GV tiếng Anh trầm trọng — nhu cầu thật, chưa đáp ứng <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-19">[19]</a></li>
+        <li>Rào cản kép xác nhận trực tiếp: nhận thức <em>và</em> khả năng chi trả <a class="cite" href="#src-19">[19]</a></li>
+        <li>Hạn chế thanh toán số — cần phương thức thay thế <a class="cite" href="#src-32">[32]</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Đặc điểm chung</h3>
+    <ul class="tight">
+      <li>Kênh khám phá: truyền miệng, nhóm Zalo/Facebook, tiếp nhận telesale <a class="cite" href="#src-20">[20]</a><a class="cite" href="#src-23">[23]</a> (độ tin cậy thấp)</li>
+      <li>Chi "học thêm" 17,5% chi tiêu giáo dục, không tách riêng tiếng Anh <a class="cite" href="#src-14">[14]</a></li>
+      <li>Hoài nghi cam kết đầu ra/marketing quá đà (proxy Hà Nội, dùng thận trọng) <a class="cite" href="#src-21">[21]</a></li>
+      <li>Quy mô hộ 3,6 người, ~2,1 người trong độ tuổi lao động/hộ <a class="cite" href="#src-24">[24]</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="cross">
+  <h2>Cross-dimension insights</h2>
+  <div class="card"><strong>Mục 1 × Mục 4:</strong> "Tier 3/4" không phải một phân khúc giá đồng nhất — chênh lệch thu nhập vùng miền (gần gấp đôi) <a class="cite" href="#src-24">[24]</a> cộng với vùng lương tối thiểu gán cấp huyện <a class="cite" href="#src-5">[5]</a><a class="cite" href="#src-6">[6]</a> nghĩa là cùng một giá 390-400k vừa "rẻ" vừa "đắt tương đối" tùy tiểu vùng, dù cùng nằm trong định nghĩa "tier 3/4" ban đầu.</div>
+  <div class="card"><strong>Mục 2 × Mục 3:</strong> Vùng chi tiêu giáo dục thấp nhất cả nước (Bắc Trung Bộ &amp; Tây Nguyên, 3,1tr/học sinh/năm) <a class="cite" href="#src-14">[14]</a> cũng là nơi thiếu GV tiếng Anh trầm trọng nhất được ghi nhận trực tiếp <a class="cite" href="#src-18">[18]</a><a class="cite" href="#src-19">[19]</a> — nhu cầu bị giới hạn bởi nhận thức + khả năng chi trả, không phải thiếu nhu cầu.</div>
+  <div class="card"><strong>Mục 3 × bản chất online:</strong> 72% phụ huynh (mẫu chưa xác nhận đại diện) thích học trực tiếp hơn online <a class="cite" href="#src-15">[15]</a> — rủi ro cấu trúc chưa đo riêng cho tier 3/4 với một sản phẩm thuần online như Edupia Class.</div>
+</section>
+
+<section id="rec">
+  <h2>Khuyến nghị</h2>
+  <div class="rec-card primary">
+    <h3>1. Đổi biến phân khúc: từ "tỉnh không trực thuộc TW" sang vùng lương tối thiểu/vùng kinh tế-xã hội</h3>
+    <p>Vùng I-IV (cấp huyện) hoặc 6 vùng kinh tế-xã hội GSO có độ phân giải tốt hơn và tương quan trực tiếp với thu nhập đã đo được <a class="cite" href="#src-5">[5]</a><a class="cite" href="#src-6">[6]</a><a class="cite" href="#src-24">[24]</a>. Feeds: <code>00_context/users.md</code> (hiện trống), mục "Khách hàng mục tiêu" của product brief.</p>
+  </div>
+  <div class="rec-card secondary">
+    <h3>2. Đưa phân khúc thu nhập vùng miền vào khảo sát WTP/Van Westendorp T9/2026</h3>
+    <p>Tách mẫu theo Đông Nam Bộ/Đồng bằng sông Hồng (thu nhập cao) so với Trung du miền núi phía Bắc/Tây Nguyên (thu nhập thấp) — cách duy nhất lấp khoảng trống lớn nhất của nghiên cứu này.</p>
+  </div>
+  <div class="rec-card secondary">
+    <h3>3. Cân nhắc giá phân tầng/trợ giá cho Persona B</h3>
+    <p>Ở 390-400k, Persona B rơi vào vùng "sát ngưỡng chấp nhận" (~10% thu nhập đầu người) theo phép tính suy luận Mục 4 — chưa xác nhận bằng khảo sát thực tế.</p>
+  </div>
+  <div class="rec-card secondary">
+    <h3>4. Kiểm tra riêng sở thích online vs. trực tiếp cho tier 3/4</h3>
+    <p>Khảo sát EY-Parthenon (72% thích trực tiếp) không xác nhận cơ cấu vùng miền — rủi ro cấu trúc chưa đo cho sản phẩm thuần online.</p>
+  </div>
+  <div class="rec-card secondary">
+    <h3>5. Chuẩn bị phương thức thanh toán thay thế cho Persona B</h3>
+    <p>Mobile Money viễn thông, không chỉ chuyển khoản/thẻ ngân hàng — tín hiệu độ tin cậy trung bình/thấp, nhưng đáng chuẩn bị trước.</p>
+  </div>
+</section>
+
+<section id="open">
+  <h2>Câu hỏi mở</h2>
+  <ol class="tight">
+    <li>Không có khảo sát nào đo trực tiếp chi tiêu tiếng Anh/độ nhạy giá/hành vi mua của phụ huynh tier 3/4 — cần khảo sát T9/2026 lấp khoảng trống này.</li>
+    <li>Đợt sáp nhập tỉnh 2025 ảnh hưởng thế nào đến ranh giới 63 tỉnh dùng trong dữ liệu VHLSS 2022-2024 trích dẫn ở đây?</li>
+    <li>Không có số liệu chính thức "số hộ có con trong độ tuổi đi học tại tier 3/4" — cần tự tính từ tháp dân số GSO nếu cần quy mô thị trường chính xác hơn.</li>
+    <li>Chưa xác nhận cơ cấu mẫu khảo sát 350 phụ huynh của EY-Parthenon có đại diện tier 3/4 hay không.</li>
+    <li>Không tìm được case edtech VN/khu vực nào có chiến lược GTM tier 3/4 công khai — bổ sung nếu công ty biết case tham chiếu (kể cả ngoài edtech).</li>
+  </ol>
+</section>
+
+<section id="sources">
+  <h2>Nguồn tham khảo</h2>
+  <details class="src-appendix" open>
+    <summary>33 nguồn (bấm để thu gọn/mở rộng)</summary>
+    <div class="tbl-wrap"><table>
+      <tr><th>#</th><th>Nội dung hỗ trợ</th><th>Publisher</th><th>Ngày</th><th>Độ tin cậy</th></tr>
+      <tr id="src-1"><td>[1]</td><td>Thu nhập bình quân đầu người 2023</td><td><a class="src-link" href="https://www.nso.gov.vn/tin-tuc-thong-ke/2024/04/thong-cao-bao-chi-ket-qua-khao-sat-muc-song-dan-cu-nam-2023/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2024-04</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-2"><td>[2]</td><td>Thu nhập theo 6 vùng kinh tế-xã hội 2023</td><td><a class="src-link" href="https://vietnamnet.vn/tinh-nao-co-thu-nhap-binh-quan-dau-nguoi-cao-nhat-viet-nam-2345830.html" target="_blank" rel="noopener">VietNamNet (trích GSO)</a></td><td>2024</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-3"><td>[3]</td><td>Thu nhập 2022, chênh lệch ngũ vị phân</td><td><a class="src-link" href="https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2023/05/thong-cao-bao-chi-ket-qua-khao-sat-muc-song-dan-cu-2022/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2023-05</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-4"><td>[4]</td><td>Top 10 tỉnh/thành thu nhập cao nhất 2023</td><td><a class="src-link" href="https://tienphong.vn/mot-tinh-phia-nam-co-thu-nhap-binh-quan-dau-nguoi-cao-nhat-nuoc-post1633023.tpo" target="_blank" rel="noopener">Tiền Phong</a> · <a class="src-link" href="https://cafef.vn/tiet-lo-10-tinh-thanh-co-thu-nhap-binh-quan-cao-nhat-ca-nuoc-moi-nhat-188240501131904864.chn" target="_blank" rel="noopener">CafeF</a></td><td>2024</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-5"><td>[5]</td><td>Nghị định 74/2024/NĐ-CP — vùng lương tối thiểu I-IV</td><td><a class="src-link" href="https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-dinh-74-2024-nd-cp-quy-dinh-muc-luong-toi-thieu-vung-119240701122135822.htm" target="_blank" rel="noopener">Cổng TTĐT Chính phủ</a></td><td>2024-06</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-6"><td>[6]</td><td>Ví dụ Vùng III/IV cấp huyện — Bình Phước</td><td><a class="src-link" href="https://ebh.vn/tin-tuc/muc-luong-toi-thieu-vung-nam-2024" target="_blank" rel="noopener">EBH.vn</a></td><td>2024</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-7"><td>[7]</td><td>Phân loại đô thị I-V</td><td><a class="src-link" href="https://luatminhkhue.vn/do-thi-loai-i-ii-iii-iv-v-va-do-thi-loai-dac-biet-tai-viet-nam.aspx" target="_blank" rel="noopener">Luật Minh Khuê</a></td><td>2016/2024-2025</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-8"><td>[8]</td><td>Kantar "Urban 4 Cities" vs "Rural"</td><td><a class="src-link" href="https://www.dmspro.vn/kantar-vietnam-brand-footprint-2024-which-brands-dominated-the-fmcg-market-in-2023?lang=en" target="_blank" rel="noopener">DMSpro (trích Kantar)</a></td><td>2024</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-9"><td>[9]</td><td>Quy ước tier city không chính thức</td><td><a class="src-link" href="https://www.vietnam-briefing.com/news/understanding-vietnams-middle-class-size-spending-patterns-and-opportunities-for-businesses.html/" target="_blank" rel="noopener">Vietnam Briefing</a></td><td>2024</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-10"><td>[10]</td><td>Tổng điều tra dân số và nhà ở 2019</td><td><a class="src-link" href="https://www.gso.gov.vn/su-kien/2019/12/thong-cao-bao-chi-ket-qua-tong-dieu-tra-dan-so-va-nha-o-nam-2019/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2019-12</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-11"><td>[11]</td><td>Khảo sát SDGCW (đối chiếu tỷ lệ đi học)</td><td><a class="src-link" href="https://www.unicef.org/vietnam/media/8761/file/Gi%C3%A1o%20d%E1%BB%A5c.pdf" target="_blank" rel="noopener">UNICEF Việt Nam</a></td><td>2020-2021</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-12"><td>[12]</td><td>Dân số các thành phố trực thuộc TW</td><td><a class="src-link" href="https://tuoitre.vn/mat-do-dan-so-tai-tp-hcm-gap-1-7-lan-so-voi-ha-noi-20250222214719029.htm" target="_blank" rel="noopener">Tuổi Trẻ</a> · <a class="src-link" href="https://cafef.vn/thanh-pho-truc-thuoc-trung-uong-co-mat-do-dan-so-thap-nhat-188230504105345573.chn" target="_blank" rel="noopener">CafeF</a></td><td>2023-2025</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-13"><td>[13]</td><td>Lao động việc làm quý 4/2024</td><td><a class="src-link" href="https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2025/01/thong-cao-bao-chi-ve-tinh-hinh-lao-dong-viec-lam-quy-iv-va-nam-2024/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2025-01</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-14"><td>[14]</td><td>Chi tiêu giáo dục hộ gia đình (VHLSS 2020)</td><td><a class="src-link" href="https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2021/09/chi-tieu-cho-giao-duc-dao-tao-cua-cac-ho-gia-dinh-o-viet-nam-nhung-nam-gan-day/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2021-09</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-15"><td>[15]</td><td>Thị trường đào tạo tiếng Anh Việt Nam 2024</td><td><a class="src-link" href="https://www.ey.com/vi_vn/insights/strategy/thi-truong-dao-tao-tieng-anh-tai-viet-nam-cuoc-dua-chuan-hoa-va-mo-rong-tang-truong" target="_blank" rel="noopener">EY Vietnam</a></td><td>2024</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-16"><td>[16]</td><td>Bảng giá gia sư tiếng Anh</td><td><a class="src-link" href="https://giasudaytot.com/gia-thue-giao-vien-tieng-anh/" target="_blank" rel="noopener">Gia Sư Dạy Tốt</a></td><td>2026</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-17"><td>[17]</td><td>Học phí trung tâm tiếng Anh (VUS, Thần Đồng, Langmaster)</td><td><a class="src-link" href="https://ila.edu.vn/hoc-phi-cac-trung-tam-tieng-anh-cho-tre-em" target="_blank" rel="noopener">ILA</a> · <a class="src-link" href="https://langmaster.edu.vn/hoc-phi-cac-trung-tam-tieng-anh-cho-tre-em" target="_blank" rel="noopener">Langmaster</a></td><td>2026</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-18"><td>[18]</td><td>Thiếu GV tiếng Anh vùng cao Thanh Hóa</td><td><a class="src-link" href="https://baothanhhoa.vn/nhieu-kho-khan-trong-day-nbsp-va-hoc-tieng-anh-o-vung-cao-287813.htm" target="_blank" rel="noopener">Báo Thanh Hóa</a></td><td>2026-05</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-19"><td>[19]</td><td>Thiếu GV/rào cản chi phí Lào Cai</td><td><a class="src-link" href="https://giaoduc.net.vn/mong-co-nguon-luc-de-pho-cap-tieng-anh-cho-hoc-sinh-vung-cao-khu-vuc-nong-thon-post245993.gd" target="_blank" rel="noopener">Tạp chí Giáo dục Việt Nam</a></td><td>2024-10</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-20"><td>[20]</td><td>Kênh telesale giáo dục</td><td><a class="src-link" href="https://vicoaching.vn/kich-ban-telesale-giao-duc/" target="_blank" rel="noopener">ViCoaching</a> · <a class="src-link" href="https://bell24vietnam.vn/en/kien-thuc/telesale-khoa-hoc-tieng-anh/" target="_blank" rel="noopener">Bell24 Vietnam</a></td><td>2024-2025</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-21"><td>[21]</td><td>Khiếu nại marketing trung tâm tiếng Anh (Hà Nội)</td><td><a class="src-link" href="https://danviet.vn/du-chieu-quang-cao-du-phu-huynh-vao-trong-cua-trung-tam-tieng-anh-20240416144407881-d1156506.html" target="_blank" rel="noopener">Dân Việt</a></td><td>2024-04</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-23"><td>[23]</td><td>Kênh truyền miệng/Zalo-Facebook</td><td><a class="src-link" href="https://tse-tesol.edu.vn/3-cach-marketing-giao-duc-hieu-qua/" target="_blank" rel="noopener">TESOL Simple Education</a> · <a class="src-link" href="https://giayphepthanhlapcongty.vn/cach-marketing-cho-trung-tam-tieng-anh/" target="_blank" rel="noopener">Giấy Phép Thành Lập Công Ty</a></td><td>không rõ</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-24"><td>[24]</td><td>Thu nhập/quy mô hộ nông thôn 2024 (KSMS 2024)</td><td><a class="src-link" href="https://www.nso.gov.vn/tin-tuc-thong-ke/2025/05/thong-cao-bao-chi-ket-qua-khao-sat-muc-song-dan-cu-nam-2024/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2025-05</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-25"><td>[25]</td><td>Tăng trưởng thu nhập nông thôn (Tổng điều tra nông thôn 2025)</td><td><a class="src-link" href="https://www.nso.gov.vn/tin-tuc-thong-ke/2026/04/thong-cao-bao-chi-mot-so-ket-qua-chinh-thuc-cua-tong-dieu-tra-nong-thon-nong-nghiep-nam-2025/" target="_blank" rel="noopener">GSO/NSO</a></td><td>2026-04</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-26"><td>[26]</td><td>Thu nhập bình quân 2025 (sơ bộ)</td><td><a class="src-link" href="https://bnews.vn/cuc-thong-ke-nam-2025-thu-nhap-binh-quan-dau-nguoi-tang-9-3/404745.html" target="_blank" rel="noopener">bnews.vn</a> · <a class="src-link" href="https://en.vietnamplus.vn/per-capita-income-rises-93-in-2025-statistics-office-post335798.vnp" target="_blank" rel="noopener">VietnamPlus</a></td><td>2026-01</td><td><span class="badge verified">cao</span></td></tr>
+      <tr id="src-27"><td>[27]</td><td>Giá Netflix Việt Nam sau tăng VAT</td><td><a class="src-link" href="https://dtinews.dantri.com.vn/culture-and-sport/netflix-and-other-online-services-raise-prices-in-vietnam-20250702110042169.htm" target="_blank" rel="noopener">Dân Trí</a> · <a class="src-link" href="https://e.vnexpress.net/news/tech/enterprises/netflix-raises-premium-plan-price-in-vietnam-to-over-10-after-tax-hike-4909052.html" target="_blank" rel="noopener">VnExpress Intl</a></td><td>2025-07</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-28"><td>[28]</td><td>ELSA Speak — người dùng/gọi vốn Series C</td><td><a class="src-link" href="https://www.dealstreetasia.com/stories/elsa-funding-round-361190" target="_blank" rel="noopener">DealStreetAsia</a></td><td>2025</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-29"><td>[29]</td><td>Kyna English — gọi vốn Series B</td><td><a class="src-link" href="https://www.edtechreview.in/news/kyna-english-raises-series-b-funding-to-fuel-growth-and-expansion/" target="_blank" rel="noopener">EdTechReview</a> · <a class="src-link" href="https://vir.com.vn/kyna-english-secures-series-b-funding-to-expand-southeast-asia-operations-121181.html" target="_blank" rel="noopener">VIR</a></td><td>2025-01</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-30"><td>[30]</td><td>VUIHOC — giải thưởng/gọi vốn</td><td><a class="src-link" href="https://vuihoc.vn/" target="_blank" rel="noopener">VUIHOC (tự công bố)</a></td><td>không rõ</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-31"><td>[31]</td><td>Miễn học phí công lập toàn quốc từ 2025-2026</td><td><a class="src-link" href="https://vnexpress.net/hoc-sinh-cong-lap-toan-quoc-duoc-mien-hoc-phi-tu-nam-hoc-2025-2026-4906573.html" target="_blank" rel="noopener">VnExpress</a></td><td>2025</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-32"><td>[32]</td><td>Payment literacy gap &amp; Mobile Money nông thôn</td><td><a class="src-link" href="https://knowledge.antom.com/vietnams-cashless-future-urban-and-rural-opportunities" target="_blank" rel="noopener">Antom (trích Ngân hàng Nhà nước)</a></td><td>không rõ</td><td><span class="badge medium">trung bình</span></td></tr>
+      <tr id="src-33"><td>[33]</td><td>Ưa chuộng tiền mặt/COD ở nông thôn</td><td><a class="src-link" href="https://knowledge.antom.com/vietnams-cashless-future-urban-and-rural-opportunities" target="_blank" rel="noopener">Antom (trích TGM Research)</a></td><td>2025</td><td><span class="badge low">thấp</span></td></tr>
+      <tr id="src-34"><td>[34]</td><td>Hướng dẫn tỷ lệ phí bảo hiểm/thu nhập</td><td><a class="src-link" href="https://www.baovietnhantho.com.vn/goc-chuyen-gia/bao-hiem-nhan-tho-bao-nhieu-tien" target="_blank" rel="noopener">Bảo Việt Nhân Thọ</a></td><td>không rõ</td><td><span class="badge low">thấp</span></td></tr>
+    </table></div>
+  </details>
+</section>
+
+<section id="stale">
+  <h2>Staleness map</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th>Nhóm claim</th><th>Ngày nguồn</th><th>Cửa sổ</th><th>Trạng thái tại 2026-08-18</th></tr>
+    <tr><td>Giá dịch vụ định kỳ (Netflix, gia sư, trung tâm)</td><td>2025-07 / 2026</td><td>3 tháng</td><td><span class="badge low">đã quá hạn (Netflix)</span></td></tr>
+    <tr><td>Quy mô/tăng trưởng thị trường ELT (EY-Parthenon)</td><td>2024</td><td>18 tháng</td><td><span class="badge low">đã quá hạn</span></td></tr>
+    <tr><td>Traction/gọi vốn edtech (ELSA, Kyna, VUIHOC)</td><td>2025 / 2025-01</td><td>12 tháng</td><td><span class="badge medium">đã/sắp quá hạn</span></td></tr>
+    <tr><td>Thu nhập/chi tiêu hộ gia đình (GSO, bản mới nhất)</td><td>2025-05 / 2026-04</td><td>24 tháng</td><td><span class="badge verified">còn mới</span></td></tr>
+    <tr><td>Chính sách vùng lương tối thiểu (NĐ 74/2024)</td><td>2024-06</td><td>đến khi thay thế</td><td><span class="badge verified">còn hiệu lực</span></td></tr>
+    <tr><td>Hành vi thanh toán nông thôn</td><td>không rõ</td><td>12 tháng</td><td><span class="badge unverified">chưa xác định độ mới</span></td></tr>
+  </table></div>
+  <p style="color:var(--text-soft);font-size:0.88rem">Nhóm giá dịch vụ định kỳ và quy mô thị trường ELT đã quá hạn kiểm tra lại tại thời điểm hoàn thành báo cáo — nên re-check trước khi dùng trực tiếp cho quyết định giá.</p>
+</section>
+
+<footer class="page">
+  Trang này là bản trình bày đầy đủ của <code>research.md</code> — cùng claim, cùng số liệu, cùng trích dẫn. Đọc <code>research.md</code> để có bản Markdown gốc kèm bảng nguồn/staleness map chi tiết hơn. Tính thủ công (không chạy được <code>recon_kit.py escape-sources/staleness</code> do môi trường thiếu uv/Python) — nội dung nguồn đã được rà soát thủ công, mọi URL nhúng đều là http(s) hợp lệ.
+</footer>
+
+</div>
