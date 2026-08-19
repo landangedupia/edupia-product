@@ -1,17 +1,17 @@
 ---
 title: 'market research: AI gia sư (AI tutor) trên thị trường EdTech toàn cầu — định hướng concept thứ 5 cho Edupia Class'
 type: 'market'
-topic: 'Sản phẩm AI gia sư (AI tutor) trên thị trường EdTech toàn cầu, dùng 2 case mẫu (Dino AI, Doushen) làm điểm neo'
-decision: 'Xác định một concept thứ 5 khả thi để bổ sung vào bộ C1–C4 của Edupia Class (390k VND/tháng), dựa trên mẫu hình sản phẩm AI gia sư đang nổi lên trên thị trường EdTech toàn cầu'
-source: 'mixed — 2 import (Dino AI, Doushen, do người dùng cung cấp) + native run (web fan-out)'
+topic: 'Sản phẩm AI gia sư (AI tutor) trên thị trường EdTech toàn cầu, dùng 2 case mẫu (Dino AI, Doushen) làm điểm neo; Deepen 2026-08-19 bổ sung 2 archetype cụ thể — AI nhân hóa giáo viên ngôi sao & AI tích hợp mascot/gamification'
+decision: 'Xác định một concept thứ 5 khả thi để bổ sung vào bộ C1–C4 của Edupia Class (390k VND/tháng), dựa trên mẫu hình sản phẩm AI gia sư đang nổi lên trên thị trường EdTech toàn cầu. Deepen 2026-08-19 phục vụ quyết định hẹp hơn: tái cấu trúc Concept 3 (mục 4, product-brief) thành 2 định hướng — 3.1 AI nhân hóa giáo viên ngôi sao, 3.2 AI tích hợp mascot + gamification hóa.'
+source: 'mixed — 2 import (Dino AI, Doushen, do người dùng cung cấp) + native run (web fan-out) + Deepen 2026-08-19 (2 dimension mới, native run)'
 status: complete
 preset: 'standard'
 validation: 'normal'
 created: '2026-08-17'
-updated: '2026-08-17'
-verified_claims: 10
-unverified_claims: 30
-disputed_claims: 2
+updated: '2026-08-19'
+verified_claims: 17
+unverified_claims: 55
+disputed_claims: 4
 ---
 
 # Market research: AI gia sư trên thị trường EdTech toàn cầu — định hướng concept thứ 5 cho Edupia Class
@@ -82,12 +82,54 @@ Bốn archetype định vị được xác nhận có sản phẩm thật đang 
 
 **⚠ Không tìm được case nào được kiểm chứng độc lập tốt về một sản phẩm AI-tutor bán thành công thật ở phân khúc đại trà/nhạy giá.** Ứng viên gần nhất (BYJU'S — Ấn Độ) được báo cáo thị trường trích dẫn lặp lại như player đại trà, nhưng các nguồn này đọc như văn bản quảng bá công thức hóa của ngành báo cáo (số liệu chính xác giả tạo không nguồn gốc, vd. "giảm chi phí 40-60%/học sinh") — **gắn cờ confidence thấp, không dùng làm căn cứ** — và không nhắc đến vấn đề tài chính/niềm tin đã biết của BYJU'S.
 
+## 5. Archetype "AI nhân hóa giáo viên ngôi sao" [MỚI, Deepen 2026-08-19]
+
+*Nguồn: `digests/star-teacher-persona-r1-1.md`, 8 search + 5 fetch (3 thành công), 18 tool call, dừng vì novelty exhaustion. Phục vụ quyết định hẹp: liệu định hướng 3.1 — AI được xây để mang danh tính/giọng nói/phong cách của một "giáo viên ngôi sao" cụ thể, nhân bản chất lượng của GV đó ra quy mô lớn — có tiền lệ thị trường và rủi ro gì.*
+
+**⚠ Phát hiện quan trọng nhất: không tìm được bất kỳ sản phẩm nào, ở bất kỳ thị trường nào tìm kiếm (Trung Quốc, Hong Kong, Mỹ, Việt Nam), kết hợp cả 3 điều kiện — (a) nhân bản AI giọng nói/hình ảnh/phong cách của một giáo viên "ngôi sao" có thật cụ thể, (b) nhắm học sinh K-12/trẻ em/ESL, và (c) định giá ở dải đại trà $10-20/tháng [57].** Các case gần nhất đều lệch ít nhất 1 điều kiện: Georgia Tech "DAI-vid" [36] và HKUST-Guangzhou (Einstein/Nash) [37] là AI avatar giáo dục đại học, đóng gói trong học phí/miễn phí, không phải subscription tiêu dùng; Spheria.ai [38][39] là công cụ B2B2C cho GV tự tạo AI Twin (~$16/tháng, chưa xác minh độc lập), không phải sản phẩm tiêu dùng có thương hiệu; **hệ thống gia sư ngôi sao Hong Kong** [43]-[47] là tiền lệ "GV ngôi sao mở rộng quy mô" rõ nhất và đúng bản chất kinh tế nhất — nhưng hoàn toàn là người thật livestream, **không có lớp AI nào** [46].
+
+**● Kinh tế của mô hình "GV ngôi sao" (Hong Kong, người thật, không phải AI) — tham chiếu định lượng có giá trị:** GV ngôi sao hàng đầu Hong Kong kiếm HK$10 triệu+/năm; một GV tiếng Anh nổi tiếng từng đạt đỉnh HK$18 triệu; một GV môn Trung văn từ chối đề nghị HK$85 triệu (2015); GV hạng trung ~HK$300.000/tháng (~5 lần lương GV thông thường) [44]. Cơ chế: một GV ngôi sao livestream tới 1.000 học sinh tạo doanh thu tương đương 20 lớp học truyền thống trên 1 lương GV [44]. **Nhận định của phụ huynh trong thị trường này: "Phụ huynh không quan tâm triết lý giảng dạy. Họ quan tâm điểm số"** [45] — quyết định mua hàng dựa trên track-record thi cử + thương hiệu cá nhân, không phải phương pháp sư phạm. ⚠ Đây là số liệu một-nguồn (chỉ 1 bài báo), cần đối chiếu độc lập trước khi dùng làm căn cứ định lượng.
+
+**⚠ Rủi ro pháp lý/niềm tin với việc nhân bản AI giọng nói/hình ảnh một người thật đang leo thang, không đứng yên kể từ nghiên cứu 08-17:**
+- Vụ kiện diễn viên lồng tiếng chống Lovo Inc. — tòa án liên bang Mỹ từ chối bác bỏ khiếu nại "right of publicity" theo điều khoản "digital replica" mới của bang New York, dù không có yếu tố hình ảnh (chỉ giọng nói) [49]. ◆ Chỉ xác minh qua snippet, được 3 công ty luật độc lập trích dẫn cùng một phán quyết — coi là corroborated nhưng chưa fetch được văn bản gốc.
+- Bang Tennessee ban hành **ELVIS Act** — cấm nhân bản AI trái phép giọng nói/hình ảnh một người cho mục đích thương mại [50].
+- **Mới nhất (29/7/2026, <1 tháng trước khi nghiên cứu này chạy):** một học khu ở New York (Salamanca) tạm dừng kế hoạch triển khai robot AI hình người "Sally" (Realbotix, ~$60.000) sau phản ứng dữ dội từ công đoàn, phụ huynh và Ủy viên Giáo dục bang — một phần vì công ty sản xuất robot có liên hệ với dòng sản phẩm búp bê tình dục siêu thực, một phần vì thỏa thuận bảo mật dữ liệu học sinh chưa giải quyết [51]. **Đây không phải là nhân bản một GV ngôi sao cụ thể — nhưng là tiền lệ mới nhất, cụ thể nhất (tên quan chức, số tiền, ngày tháng) về việc cộng đồng phản ứng thế nào khi một AI "giống người" xuất hiện trước mặt trẻ em.**
+- Character.AI tiếp tục đối mặt nhiều vụ kiện liên quan tổn hại trẻ vị thành niên từ chatbot nhân cách hóa [53] — củng cố thêm (không phải phát hiện mới) cảnh báo đã có từ nghiên cứu 08-17.
+
+**◆ Lead chưa xác minh, đáng chú ý nhất nhưng confidence thấp nhất:** một kết quả tìm kiếm tổng hợp (aggregator, chưa xác minh danh tính công ty) mô tả (các) nền tảng Trung Quốc nhân bản giọng nói của "giáo viên nổi tiếng" (网红老师) để tạo AI teacher cá nhân hóa, gồm cả đọc thơ cổ điển [40]; một đại học Trung Quốc khác (Henan Normal University) xây "bản sao số" (digital twin) của GV thật làm trợ giảng 24/7 [41]. **Cả hai đều KHÔNG được fetch trực tiếp, chỉ qua snippet — đây là lead gần đúng bản chất định hướng 3.1 nhất tìm được nhưng cần một lượt Deepen riêng để xác minh trước khi dùng làm bằng chứng.**
+
+**● Việt Nam: tìm kiếm trực tiếp không thấy sản phẩm nào** kết hợp AI + thương hiệu "giáo viên nổi tiếng" — chỉ thấy các trung tâm gia sư truyền thống (Gia Sư Sao Việt, Gia Sư Trí Tuệ 24h...) không có yếu tố nhân bản AI hay định vị GV ngôi sao [48]. ◆ Kết luận "không tìm thấy" dựa trên 1 phiên tìm kiếm, không phải rà soát toàn diện.
+
+**⚠ Chưa tìm được bằng chứng so sánh trực tiếp** niềm tin/sẵn sàng chi trả của phụ huynh cho AI "mang persona GV ngôi sao" so với AI trung tính/không persona — toàn bộ dữ liệu sentiment tìm được (Superprof [54], Intelligent.com [55]) nói về AI-tutor nói chung, không tách riêng theo biến số persona. Claim [55] (Intelligent.com, khảo sát 05/2023) đã **quá hạn cửa sổ làm mới 2 năm** cho dữ liệu hành vi — dùng làm bối cảnh lịch sử, không phải hiện trạng.
+
+**Chưa research: Ấn Độ và Đông Nam Á (ngoài Việt Nam)** — hết budget trong phiên này; brief gốc có nêu Ấn Độ nhưng không tìm kiếm được. Byju's/Vedantu có dùng định vị "GV/nhà sáng lập ngôi sao" trong marketing theo hiểu biết chung (◆ chưa xác minh trong phiên này) — cần một lượt tìm kiếm riêng trước khi đưa vào bất kỳ kết luận nào.
+
+## 6. Archetype "AI tích hợp mascot + gamification hóa" [MỚI, Deepen 2026-08-19]
+
+*Nguồn: `digests/mascot-gamification-r1-1.md`, 18 tool call, dừng vì đã phủ đủ 5 câu hỏi (claim trọng yếu đã đối chiếu chéo) + novelty exhaustion cho nhánh Việt Nam. Phục vụ quyết định hẹp: liệu định hướng 3.2 — AI được nhúng vào một nhân vật mascot (hoạt hình/con vật/giả tưởng) kết hợp cơ chế trò chơi hóa — có tiền lệ, bằng chứng hiệu quả, và rủi ro gì.*
+
+**● Khác biệt cốt lõi với archetype 3.1: mascot + gamification là mẫu hình đã có tiền lệ thật, hoạt động ở quy mô lớn, với AI cá nhân hóa thật đứng sau nhân vật — không phải mẫu hình còn bỏ trống như 3.1.** Duolingo: hệ thống "Birdbrain" cá nhân hóa ~1,25 tỷ bài tập/ngày bằng half-life regression + GPT-4 roleplay + bandit algorithm; tính năng "Explain My Answer" (GPT-4) trả lời theo lỗi sai cụ thể của học sinh, đóng khung như chính con cú Duo đang nói chuyện — không phải mascot trang trí [58]. Prodigy Math: theo chính công ty, thuật toán "tự động phát hiện điểm mạnh/điểm yếu", giữ học sinh trong Zone of Proximal Development, đưa về lại kỹ năng tiên quyết khi học sinh gặp khó — gắn trong thế giới game phù thủy/RPG [60].
+
+**⚠ Nhưng KHÔNG phải mọi mascot đều gắn AI thật — Khan Academy Kids là phản ví dụ quan trọng.** Nhân vật gấu "Kodi Bear" của Khan Academy Kids xuất hiện như một thiết bị UX/thiết kế nhân vật (dẫn dắt hoạt động, ăn mừng tiến bộ) — không tìm được bằng chứng nào cho thấy lời thoại/phản hồi của Kodi Bear được AI cá nhân hóa theo tiến độ thật của từng học sinh; sản phẩm AI-tutor thật của Khan Academy (Khanmigo) là một sản phẩm tách biệt, dạng text, không gắn với mascot [63]. ◆ Đây là absence-of-evidence (nguồn confidence thấp, 1 trang catalog thiết kế), không phải xác nhận tuyệt đối "Kodi Bear không có AI" — nhưng đủ để cảnh báo: **"có mascot" không tự động nghĩa là "AI đứng sau mascot"** — đây chính là câu hỏi thiết kế cốt lõi nếu Edupia Class chọn định hướng 3.2.
+
+**● Cập nhật giá Dino AI (đã đổi tên "Daily Speaking") — không mâu thuẫn với nghiên cứu 08-17 như digest gốc mô tả, chỉ xác nhận thêm:** ứng dụng trước đây tên "Dino AI: Daily English" nay đổi tên "Daily Speaking: Let's Talk" (từ bản 2.7.8) [64]. Giá hiện tại: $37.99/tháng, $229.99/năm — **khớp với giá tháng $37.99 đã xác minh trong nghiên cứu 08-17** (dải giá gốc US $10.99/tuần–$37.99/tháng–$99.99/quý–$229.99/năm); không phải một phát hiện "giá tăng" như digest tự diễn giải, mà là xác nhận lại cùng một điểm dữ liệu qua tên thương hiệu mới. **DinoLingo** là một sản phẩm/công ty khác hẳn (không phải cùng "Dino AI"), giá $19.95/tháng hoặc $199/năm [65] — ⚠ tên gọi trùng "Dino" dễ gây nhầm hai sản phẩm khác nhau thành một, cả nghiên cứu 08-17 lẫn Deepen này đều cần giữ tách biệt rõ khi trích dẫn.
+
+**● Prodigy Math là ví dụ rõ nhất về mascot+gamification lọt đúng dải giá đại trà $10-20/tháng:** Core $9.95, Plus $14.95, Ultra $19.95/tháng — xác nhận qua 2 nguồn độc lập (trang giá chính chủ + Brighterly) [62]. Monkey Junior (Việt Nam) — sản phẩm mascot lớn nhất tìm được ở Việt Nam, tự nhận "5 triệu+ phụ huynh, 100 quốc gia" [69] (◆ số liệu công ty tự công bố, chưa kiểm toán độc lập) — nhưng **không tìm được bằng chứng cá nhân hóa AI thật đứng sau mascot**, chỉ là cơ chế nội dung/UX (đọc theo màu, ghi âm giọng trẻ) [69]; giá ước tính dưới dải mục tiêu (~$36.99/gói, đơn vị thời gian chưa xác nhận rõ) [70].
+
+**⚠ Rủi ro "dark pattern"/thiết kế thao túng — có thật nhưng đang tranh cãi, không phải kết luận đã đóng:** Duolingo bị nhiều nhà phê bình độc lập mô tả cơ chế streak + thông báo đẩy dùng chính dữ liệu hành vi (bandit algorithm huấn luyện trên ~200 triệu mẫu) để tối đa hóa khả năng mở lại app — kèm giai thoại lan truyền rộng (chưa xác minh nguồn gốc) về việc app hỏi một đứa trẻ "quitter tiếng Tây Ban Nha nói sao" sau khi mất streak [59][66]. **Nhưng một bài phản biện độc lập khác bác bỏ thẳng nhãn "dark pattern"** — lập luận không có yếu tố lừa dối, chỉ là nhắc lại mục tiêu người dùng tự đặt ra [66] — **disputed, không kết luận một chiều**. Prodigy có phê bình cụ thể hơn, từ nguồn độc lập có tên tác giả (Common Sense Media): lên cấp phụ thuộc vào điểm dễ kiếm hơn nếu trả phí, nhiều tính năng khóa sau "nhiều gói thành viên tốn kém", phụ huynh/trẻ mô tả app "giống một trò kiếm tiền... khiến trẻ thất vọng và mất hứng" [61]. FTC (Mỹ) đã có báo cáo chính thức (09/2022) về dark pattern nhắm trẻ em, và tiền lệ xử phạt Fortnite/Epic Games $520 triệu vì dùng dark pattern khiến người chơi mua hàng ngoài ý muốn — tiền lệ pháp lý lớn nhất trong ngành game/sản phẩm số cho trẻ em [68]. ◆ Không fetch được trực tiếp trang FTC (lỗi 403), dựa vào 2 nguồn thứ cấp corroborating.
+
+**● Bằng chứng học thuật (2 nghiên cứu peer-reviewed, chỉ đọc được ở mức abstract):** trò chơi hóa cải thiện thật sự hứng thú/động lực học tập của trẻ trong lúc dùng, nhưng hiệu ứng **giảm nhẹ sau khi ngừng can thiệp** (không biến mất hoàn toàn, vẫn cao hơn baseline ban đầu) [71]; một RCT khác (2025) xác nhận tác động tích cực lên nhận thức/cảm xúc/động lực [72] — ◆ cả hai chưa xác minh được cỡ mẫu/độ tuổi cụ thể, chưa rõ có áp dụng đúng nhóm K-12 hay không.
+
+**⚠ Khoảng trống Việt Nam quan trọng cho định hướng 3.2:** không tìm được giám sát pháp lý/báo chí nào tại Việt Nam về dark pattern trong EdTech trẻ em (mọi bằng chứng rủi ro ở trên là Mỹ/toàn cầu) — và không tìm được ví dụ mascot Việt Nam thứ hai ngoài Monkey Junior/VMonkey trong ngân sách phiên này (Prep.vn không dùng mascot; ELSA Speak chưa được kiểm tra trong phiên này — nhiều khả năng thuộc archetype 3.1 hơn do định vị persona giống người, không phải mascot, nhưng đây là suy đoán chưa xác minh).
+
 ## Cross-dimension insights
 
 - **Kết nối quan trọng nhất với bối cảnh nội bộ Edupia:** mẫu hình "AI song hành/dual-teacher" (archetype d, xác nhận thật qua Doushen + TAL/Xueersi [18][20]) có cấu trúc chức năng gần như trùng khớp với đúng vấn đề mà Concept 4 (GVCN mở rộng) của Edupia Class đang gặp phải nhất — chi phí/độ phức tạp vận hành khi scale sự "theo sát liên tục" theo đầu người (tỷ lệ 1:2.000). Điểm khác biệt cốt lõi: ở mẫu hình dual-teacher xác nhận qua nghiên cứu này, **AI đảm nhiệm lớp giám sát/theo sát liên tục, con người chỉ giữ lớp nội dung cốt lõi/cảm hứng** — ngược với hướng hiện tại của C4 (đòi hỏi mở rộng đầu người GVCN để làm chính việc theo sát liên tục đó).
 - **Cùng một mẫu hình "không ai đã chứng minh" xuất hiện lại ở đây, độc lập với nghiên cứu cạnh tranh trước** (research.md, 2026-08-14, thị trường Việt Nam): ở đó, không đối thủ Việt Nam nào kết hợp giáo viên cố định + giá đại trà (whitespace cho C4); ở đây, không sản phẩm AI-tutor toàn cầu nào kết hợp giá đại trà thật ($10-20/tháng) với định vị nhạy giá. **390k VND/tháng nằm ở giao điểm của hai khoảng trống chưa ai chứng minh này** — củng cố nhận định trước đó rằng Edupia Class, dù chọn hướng nào (C3, C4, hay một concept mới dựa trên archetype d), đều đang đi tiên phong, không bắt kịp đối thủ.
 - **Rủi ro archetype (b) — AI mô phỏng nhân cách — nên bị loại trừ khỏi mọi đề xuất concept mới nhắm trẻ em**, dựa trên tiền lệ backlash Character.AI [23] và tín hiệu MagicSchool chủ động rút lui khỏi persona hóa [8] — ngay cả khi khác category sản phẩm, mức độ nghiêm trọng của tiền lệ (kiện tụng liên quan tử vong) đủ cao để áp dụng nguyên tắc phòng ngừa.
 - **Import Doushen có ít nhất 1 claim bị nghiên cứu độc lập mâu thuẫn** (tập đối thủ Squirrel AI/iFlytek) — nhắc lại bài học từ báo cáo cạnh tranh trước: tài liệu marketing/deck không trích nguồn nội bộ nên luôn được coi là một nguồn duy nhất chưa kiểm chứng, kể cả khi trình bày chi tiết/có số liệu kỹ thuật ấn tượng (700 triệu+ node Knowledge Graph — claim này bản thân cũng chưa xác minh độc lập được).
+- **[MỚI, Deepen 08-19] Archetype 3.1 và 3.2 xác nhận một sự bất đối xứng rủi ro/tiền lệ rõ rệt — quan trọng nhất của cả lượt Deepen này:** 3.2 (mascot + gamification) có tiền lệ AI-thật-đứng-sau-mascot hoạt động ở quy mô toàn cầu (Duolingo, Prodigy) và ít nhất 1 case lọt đúng dải giá đại trà (Prodigy $9.95-19.95/tháng) [60][62] — nhưng đi kèm rủi ro thao túng/monetization đã có tiền lệ pháp lý cụ thể (FTC, Fortnite $520 triệu) [68]. 3.1 (giáo viên ngôi sao AI) **không có tiền lệ sản phẩm thật nào ở đúng cấu hình mong muốn** (K-12 + AI-clone + giá đại trà) [57] — case gần nhất về kinh tế "GV ngôi sao mở rộng quy mô" (Hong Kong) hoàn toàn không dùng AI [46], còn rủi ro pháp lý nhân bản giọng nói/hình ảnh người thật đang leo thang (Lovo, ELVIS Act, backlash robot NY tháng 7/2026) [49][50][51]. **Hệ quả trực tiếp: 3.2 là hướng có nhiều bằng chứng thị trường để giảm rủi ro triển khai hơn; 3.1 là hướng nhiều khoảng trống/rủi ro hơn nhưng cũng ít bị "đã có ai làm rồi" hơn — hai hướng có hồ sơ rủi ro khác nhau về bản chất, không chỉ khác nhau về mức độ.**
+- **[MỚI, Deepen 08-19] Cả 3.1 lẫn 3.2 đều không tìm được ví dụ Việt Nam thật sự phù hợp** — 3.1 không tìm được sản phẩm nào [48]; 3.2 chỉ có 1 ví dụ (Monkey Junior/VMonkey) và không có bằng chứng AI thật đứng sau mascot của sản phẩm đó [69] — nối tiếp đúng mẫu hình "Edupia đi tiên phong, không bắt kịp đối thủ" đã ghi nhận ở nghiên cứu 08-17 (mục Cross-dimension insights, dòng đầu tiên) và nghiên cứu cạnh tranh 08-14.
 
 ## Contrary evidence
 
@@ -113,6 +155,35 @@ Archetype gần nhất về bản chất với những gì C1's Edupia Speak đ�
 
 **Archetype (b) — AI mô phỏng nhân cách/cảm xúc riêng biệt cho trẻ em — không nên đưa vào bất kỳ concept nào**, dựa trên tiền lệ backlash Character.AI [23] và tín hiệu ngành đang rút lui khỏi hướng này (MagicSchool [8]). Nếu Edupia Class muốn một "AI có tính cách" như Doushen, nên giới hạn nghiêm ngặt trong phạm vi bài học có cấu trúc, không cho phép hội thoại mở/quan hệ cảm xúc tự do với trẻ em.
 
+## Recommendations — 2 định hướng cho Concept 3 [MỚI, Deepen 2026-08-19]
+
+**⚠ Đây là hai định hướng thị trường song song để đối chiếu (shape=explore), KHÔNG phải một khuyến nghị chọn 1-trong-2.** Cả hai đều cần qua khảo sát T9/Pilot trước khi coi là chính thức — đúng nguyên tắc đã áp dụng cho toàn bộ concept board. Hai định hướng này **không thay thế** đề xuất "AI Song Hành"/"AI luyện hội thoại" (archetype c/d) ở trên — đó là câu hỏi "AI làm gì" (cơ chế kỹ thuật/vận hành); 3.1/3.2 dưới đây là câu hỏi khác: "AI xuất hiện trước học sinh dưới hình hài nào" (persona/thương hiệu). Về nguyên tắc, 3.1 hoặc 3.2 có thể là lớp vỏ persona bọc quanh cơ chế "AI Song Hành" hoặc "AI luyện hội thoại" đã đề xuất, không loại trừ nhau.
+
+### 3.1 — AI nhân hóa giáo viên ngôi sao
+
+**Ý tưởng cốt lõi:** AI mang danh tính/giọng nói/phong cách của một "giáo viên ngôi sao" — nhân bản chất lượng giảng dạy của một GV xuất sắc (thật hoặc dàn dựng như một nhân vật thương hiệu) ra quy mô lớn, gợi lại đúng cơ chế kinh tế đã chứng minh ở mô hình gia sư ngôi sao Hong Kong [43][44] nhưng thay người thật livestream bằng AI.
+
+- **Bằng chứng ủng hộ:** cơ chế kinh tế "1 GV ngôi sao phục vụ 1.000 học sinh = doanh thu 20 lớp truyền thống" đã chứng minh thật ở Hong Kong (dù bằng người, không phải AI) [44] — cho thấy JTBD "muốn học với GV giỏi nhất" có sức mua thật, không phải giả thuyết; phụ huynh trong thị trường đó quyết định mua theo track-record/thương hiệu, không phải phương pháp sư phạm [45] — một tín hiệu tốt cho việc "thương hiệu AI" có thể đủ mạnh để bán, không nhất thiết cần chứng minh sư phạm phức tạp trước.
+- **⚠ Rủi ro cần lưu ý — nghiêm trọng hơn bất kỳ đề xuất nào khác trong toàn bộ Concept 3:** không tìm được tiền lệ sản phẩm thật nào đúng cấu hình mong muốn (K-12 + AI-clone + giá đại trà) ở bất kỳ thị trường nào tìm kiếm [57] — Edupia Class sẽ hoàn toàn không có ai đi trước để tham chiếu rủi ro vận hành/kinh tế, mức độ rủi ro cao hơn cả "AI Song Hành" (vốn đã có TAL/Xueersi, Doushen làm tiền lệ). Rủi ro pháp lý nhân bản giọng nói/hình ảnh người thật đang leo thang tại các thị trường đã có luật (Lovo, ELVIS Act) [49][50] — nếu định hướng này dựa trên việc nhân bản một GV thật cụ thể của Edupia, cần rà soát pháp lý về quyền hình ảnh/giọng nói trước khi phát triển, không chỉ rủi ro niềm tin. Tiền lệ backlash gần nhất (robot AI hình người bị học khu Mỹ tạm dừng, 7/2026) [51] cho thấy phản ứng cộng đồng với AI "giống người" trước mặt trẻ em có thể xảy ra nhanh và công khai.
+- **◆ Khuyến nghị thiết kế, chưa kiểm chứng:** nếu theo đuổi 3.1, nên xây một **nhân vật GV thương hiệu nguyên bản** (không nhân bản một GV thật cụ thể còn đang dạy) để né rủi ro quyền hình ảnh/giọng nói — gần với cách Hong Kong xây "thương hiệu GV ngôi sao" qua track-record + marketing hơn là qua công nghệ nhân bản; điều này cũng đồng nghĩa 3.1 gần với một bài toán thương hiệu/marketing hơn là một bài toán công nghệ AI thuần túy, khác bản chất với 3.2.
+
+### 3.2 — AI tích hợp mascot + gamification hóa
+
+**Ý tưởng cốt lõi:** AI xuất hiện qua một nhân vật mascot (hoạt hình/con vật/giả tưởng) gắn với cơ chế trò chơi hóa (điểm, streak, cấp độ, phần thưởng) — mascot không chỉ trang trí mà là giao diện của chính lớp cá nhân hóa AI (theo mẫu Duolingo/Prodigy, không phải mẫu Khan Academy Kids).
+
+- **Bằng chứng ủng hộ:** đây là archetype duy nhất trong cả 2 định hướng mới có tiền lệ AI-thật-đứng-sau-persona hoạt động ở quy mô toàn cầu, đã kiểm chứng qua nguồn chính chủ — Duolingo (~1,25 tỷ bài tập/ngày cá nhân hóa) [58], Prodigy (thuật toán ZPD, giá $9.95-19.95/tháng lọt đúng dải mục tiêu, xác nhận 2 nguồn độc lập) [60][62]. Rủi ro niềm tin thấp hơn hẳn 3.1 — mascot hoạt hình không chạm vào rủi ro nhân bản người thật/quyền hình ảnh.
+- **⚠ Rủi ro cần lưu ý:** rủi ro không nằm ở niềm tin/pháp lý mà ở **thao túng hành vi trẻ em vì mục tiêu doanh thu** — đã có tiền lệ pháp lý cụ thể, nghiêm trọng (FTC dark-patterns report, Fortnite $520 triệu) [68], và phê bình cụ thể có tên tác giả nhắm đúng archetype này (Common Sense Media về Prodigy: "giống một trò kiếm tiền... trẻ thất vọng, mất hứng") [61]. Đây là rủi ro cần đọc cùng với nguyên tắc "Lợi nhuận là KPI cao nhất" của công ty — chính áp lực tối ưu doanh thu là điều khiến archetype này dễ trượt sang dark-pattern nhất theo đúng case Prodigy vừa tìm được; cần rào chắn thiết kế rõ ràng (không khóa tiến độ học thật sau paywall, không dùng cơ chế "mất streak = tội lỗi" đã bị phê bình ở Duolingo [59][66]) ngay từ đầu, không phải sửa sau khi bị phản ứng.
+- **◆ Câu hỏi thiết kế cốt lõi, chưa trả lời:** mascot có thật sự "là AI" (lời thoại/gợi ý sinh động theo tiến độ thật của từng học sinh, như Duolingo/Prodigy) hay chỉ là lớp vỏ UX trang trí bọc ngoài một hệ thống nội dung tĩnh (như nghi vấn với Khan Academy Kids) [63]? Câu trả lời quyết định liệu 3.2 có tận dụng đúng hạ tầng Adaptive Learning đang xây cho mức 1.2/1.3 (mục 2.2 product-brief) hay chỉ là một lớp thiết kế/thương hiệu không cần đầu tư AI mới — ảnh hưởng trực tiếp đến effort estimate.
+
+### So sánh nhanh 3.1 vs 3.2
+
+| Tiêu chí | 3.1 — GV ngôi sao AI | 3.2 — Mascot + gamification |
+|---|---|---|
+| Tiền lệ sản phẩm đúng cấu hình (K-12 + đại trà) | ✕ Không tìm được [57] | ● Có (Prodigy, đúng dải giá) [60][62] |
+| Loại rủi ro chính | Pháp lý/niềm tin (nhân bản người thật) [49][50][51] | Thao túng hành vi/monetization (đã có tiền lệ phạt) [68] |
+| Bản chất đầu tư nếu theo đuổi | Gần với bài toán thương hiệu/marketing hơn AI thuần túy | Bài toán AI cá nhân hóa thật (nếu làm đúng) — có thể dùng chung hạ tầng Adaptive Learning |
+| Bằng chứng Việt Nam | ✕ Không có [48] | ◆ 1 ví dụ (Monkey Junior), không rõ có AI thật [69] |
+
 ## Open questions
 
 1. **Cấu trúc chi phí thật của lớp "AI song hành" liên tục** (khác AI Tutor 30 phút batch của C3) — chưa có benchmark chi phí kỹ thuật nào trong nghiên cứu này; cần Deepen kỹ thuật riêng hoặc đối chiếu với đội Engineering trước khi đưa vào concept board chính thức.
@@ -120,6 +191,11 @@ Archetype gần nhất về bản chất với những gì C1's Edupia Speak đ�
 3. **Sentiment thật của phụ huynh Việt Nam** với cả 2 archetype đề xuất (dual-teacher AI, luyện hội thoại AI) — hoàn toàn chưa có dữ liệu; nên đưa câu hỏi này vào khảo sát T9 cùng các câu hỏi đã đặt ra cho C3/C4 trước đó.
 4. **Giá gói B2C thật của Doushen** — không công khai, cần một lượt Deepen vào chính app 豆神AI (ngoài khả năng agent tìm kiếm web thuần).
 5. **Case BYJU'S như tiền lệ đại trà** — báo cáo thị trường trích dẫn không phê phán, có vấn đề tài chính đã biết chưa được đối chiếu — cần xử lý hoài nghi trước khi dùng làm bất kỳ căn cứ nào.
+6. **[MỚI, Deepen 08-19] Lead "网红老师"/giáo viên nổi tiếng Trung Quốc bị nhân bản giọng nói** [40] và "digital teacher clone" của Henan Normal University [41] — đây là 2 lead gần đúng bản chất định hướng 3.1 nhất tìm được nhưng cả hai đều chỉ qua snippet, chưa fetch trực tiếp, danh tính công ty (đặc biệt lead [40]) còn mơ hồ — cần một lượt Deepen riêng, ưu tiên cao nếu BOD chọn theo đuổi 3.1.
+7. **[MỚI, Deepen 08-19] Ấn Độ và Đông Nam Á (ngoài Việt Nam) hoàn toàn chưa được tìm kiếm** cho cả 2 archetype mới — brief gốc có nêu Ấn Độ là khu vực quan tâm nhưng hết ngân sách trong phiên Deepen này; Byju's/Vedantu có thể có định vị liên quan đến 3.1 theo hiểu biết chung, chưa xác minh.
+8. **[MỚI, Deepen 08-19] Chưa xác minh trực tiếp ELSA Speak (Việt Nam) thuộc archetype nào** — digest 3.2 suy đoán ELSA gần với 3.1 hơn (persona giống người, không phải mascot) nhưng không kiểm tra trong phiên này; cần một lượt tra cứu ngắn trước khi dùng ELSA làm ví dụ cho bất kỳ định hướng nào.
+9. **[MỚI, Deepen 08-19] Câu hỏi thiết kế cốt lõi của 3.2 chưa trả lời:** mascot có thật sự được AI cá nhân hóa hay chỉ là lớp vỏ UX — quyết định effort estimate và liệu 3.2 dùng chung hạ tầng Adaptive Learning của mức 1.2/1.3 hay không (xem mục 6, "Recommendations 3.2").
+10. **[MỚI, Deepen 08-19] Câu hỏi pháp lý cốt lõi của 3.1 chưa trả lời:** nếu theo đuổi 3.1 bằng cách nhân bản một GV thật cụ thể của Edupia (khác với xây nhân vật thương hiệu nguyên bản) — cần rà soát pháp lý quyền hình ảnh/giọng nói tại Việt Nam trước khi phát triển, không có trong phạm vi nghiên cứu thị trường này.
 
 ## Nguồn tham khảo
 
@@ -157,12 +233,49 @@ Archetype gần nhất về bản chất với những gì C1's Edupia Speak đ�
 | [32] | Super Tutor (Ấn Độ) — định vị đối lập luyện thi truyền thống ₹3.000-15.000/tháng, có gói miễn phí + Pro/Premium; giá gói cụ thể chưa lấy được (trang /pricing/ riêng) | [Super Tutor (chính chủ)](https://supertutor.in/) | undated | 2026-08-17 | medium (định vị), chưa xác nhận (giá) |
 | [34] | AI-tutor — mức độ phổ biến, tăng trưởng Khanmigo (nguồn thứ cấp) | [DemandSage](https://www.demandsage.com/ai-in-education-statistics/) | 2026 | 2026-08-17 | low-medium |
 | [35] | App AI-làm-bài-tập gốc TQ phổ biến ở Mỹ, thay thế gia sư chi phí thấp | [TechCrunch](https://techcrunch.com/2024/05/25/ai-tutors-are-quietly-changing-how-kids-in-the-us-study-and-the-leading-apps-are-from-china) | 2024-05-25 | 2026-08-17 | medium |
+| [36] | Georgia Tech "DAI-vid" — GS tự nhân bản AI avatar cho khóa edX | [Georgia Tech College of Computing](https://www.cc.gatech.edu/) (qua search, chưa fetch full) | 2025-10 | 2026-08-19 | high |
+| [37] | HKUST-Guangzhou — AI avatar giảng bài mô phỏng Einstein, John Nash | [Nature](https://www.nature.com/) (title/snippet only) | undated | 2026-08-19 | medium |
+| [38] | Spheria.ai — nền tảng GV tự tạo "AI Twin" | [Spheria.ai](https://spheria.ai/) | undated | 2026-08-19 | medium |
+| [39] | Spheria Pro plan ~$16/tháng | Spheria.ai (snippet, fetch trực tiếp lỗi 404) | undated | 2026-08-19 | low |
+| [40] | Nền tảng TQ (danh tính chưa xác nhận) nhân bản giọng "giáo viên nổi tiếng" | ai-bot.cn (aggregator) | undated | 2026-08-19 | low |
+| [41] | Henan Normal University — "digital teacher clone" trợ giảng 24/7 | Dahe Cube (大河网) | 2024-10-13 | 2026-08-19 | low-medium |
+| [42] | "Call Annie" — AI avatar chung (không persona GV cụ thể) được phụ huynh TQ tự phát dùng làm gia sư ESL | [Sixth Tone](https://www.sixthtone.com/) | undated (~2023) | 2026-08-19 | medium |
+| [43] | Hệ thống "gia sư ngôi sao" Hong Kong — cấu trúc ngành, người thật | [Dim Sum Daily](https://dimsumdaily.hk/) | 2025-04-29 | 2026-08-19 | high |
+| [44] | Kinh tế gia sư ngôi sao HK — thu nhập GV, doanh thu/lớp | Dim Sum Daily (cùng bài [43]) | 2025-04-29 | 2026-08-19 | high (số liệu 1 nguồn) |
+| [45] | Quote phụ huynh HK: "quan tâm điểm số, không quan tâm triết lý" | Dim Sum Daily (cùng bài [43]) | 2025-04-29 | 2026-08-19 | high |
+| [46] | Mô hình gia sư ngôi sao HK không có lớp AI/công nghệ scale | Dim Sum Daily (cùng bài [43]) | 2025-04-29 | 2026-08-19 | high |
+| [47] | Nền tảng K12 online TQ dùng celebrity endorsement trong "chiến tranh quảng cáo" | Medium (GETChina Insights) | undated | 2026-08-19 | medium |
+| [48] | Việt Nam — không tìm thấy sản phẩm AI + thương hiệu GV nổi tiếng | (absence of evidence, 1 phiên tìm kiếm) | n/a | 2026-08-19 | medium |
+| [49] | Vụ kiện Lovo Inc. — diễn viên lồng tiếng, right-of-publicity theo luật "digital replica" NY sống sót qua motion to dismiss | Michael Best & Friedrich LLP (+ Lexology, Fred Law corroborating) | 2025 (tháng chưa xác nhận) | 2026-08-19 | medium |
+| [50] | Tennessee ELVIS Act — cấm nhân bản AI giọng nói/hình ảnh thương mại trái phép | Rocklaw PLLC | undated (luật hiệu lực 2024) | 2026-08-19 | medium |
+| [51] | Học khu NY (Salamanca) tạm dừng robot AI hình người "Sally" sau phản ứng dữ dội | NPR (wire, đa kênh syndicate) | 2026-07-29 | 2026-08-19 | high |
+| [52] | Deepfake ngày càng đe dọa nhân viên trường học (kể cả GV/hiệu trưởng) | Education Week (fetch lỗi 403, dựa snippet) | 2024-05 | 2026-08-19 | low-medium |
+| [53] | Character.AI — nhiều vụ kiện/giám sát pháp lý vì tổn hại trẻ vị thành niên | CBS News / Forbes / Futurism / AI Incident Database | 2025-01 trở đi | 2026-08-19 | medium-high |
+| [54] | Khảo sát Superprof — đa số GV/phụ huynh hoài nghi AI sẽ vượt gia sư người | Superprof (qua nguồn thứ cấp, chưa xác minh) | undated | 2026-08-19 | low |
+| [55] | Khảo sát Intelligent.com — phần lớn học sinh/phụ huynh thích ChatGPT hơn gia sư trực tiếp | Intelligent.com | 2023-05 | 2026-08-19 | medium, **quá hạn** (>2 năm) |
+| [56] | Dải giá $10-20/tháng đã có nhiều AI-tutor "trung tính" (không persona ngôi sao) | ibl.ai blog | 2026 | 2026-08-19 | medium |
+| [57] | Không tìm được sản phẩm AI-clone-GV-ngôi-sao nào ở đúng dải giá đại trà, bất kỳ thị trường nào | (tổng hợp từ [36]-[56]) | n/a | 2026-08-19 | medium |
+| [58] | Duolingo "Birdbrain" — cá nhân hóa AI thật đứng sau mascot Duo (~1,25 tỷ bài tập/ngày, GPT-4) | buildmvpfast.com (tổng hợp từ tài liệu kỹ thuật Duolingo) | 2026 (undated) | 2026-08-19 | medium |
+| [59] | Duolingo — bandit algorithm tối ưu thời điểm gửi thông báo đẩy (huấn luyện ~200 triệu mẫu) | tinomwadeyi.substack.com | undated | 2026-08-19 | low-medium |
+| [60] | Prodigy Math — thuật toán ZPD tự phát hiện điểm mạnh/yếu, gắn trong thế giới game | Prodigy Education (chính chủ) | undated | 2026-08-19 | high |
+| [61] | Prodigy — phê bình pay-to-win/monetization từ Common Sense Media | Common Sense Media (Debbie Gorrell) | undated (app cập nhật 12/2025) | 2026-08-19 | high |
+| [62] | Prodigy — giá $9.95/$14.95/$19.95/tháng, lọt dải đại trà | Prodigy Education + Brighterly (corroborating) | live/2026 | 2026-08-19 | high |
+| [63] | Khan Academy Kids — mascot "Kodi Bear" có vẻ trang trí/kịch bản, không rõ có AI cá nhân hóa | svgapp.ai (catalog thiết kế, không phải nguồn chính chủ) | undated | 2026-08-19 | low |
+| [64] | Dino AI đổi tên "Daily Speaking", giá $37.99/tháng, $229.99/năm — khớp với giá tháng đã xác minh trong nghiên cứu 08-17 | Apple App Store listing | live, bản 2.7.8 | 2026-08-19 | medium |
+| [65] | DinoLingo (sản phẩm khác, không phải "Dino AI") — giá $19.95/tháng hoặc $199/năm | educationalappstore.com | undated | 2026-08-19 | low-medium |
+| [66] | Duolingo — phê bình "dark pattern" streak/mascot gây tội lỗi, và bài phản biện bác bỏ nhãn này | opinionsandconditions.substack.com (Julie By Default) | 2025-05-17 | 2026-08-19 | medium, **disputed** |
+| [67] | "Streak creep" — hiện tượng trò chơi hóa làm giảm động lực nội tại theo thời gian | The Decision Lab | undated | 2026-08-19 | medium |
+| [68] | FTC báo cáo dark patterns nhắm trẻ em (09/2022) + tiền lệ phạt Fortnite/Epic $520 triệu | FTC (fetch lỗi 403, dựa snippet) + Fairplay for Kids + Columbia STLR (corroborating) | 2022-09 | 2026-08-19 | medium |
+| [69] | Monkey Junior/VMonkey (VN) — quy mô lớn (tự công bố "5 triệu+ phụ huynh"), không tìm được bằng chứng AI cá nhân hóa đứng sau mascot | Infonet/VietnamNet | undated | 2026-08-19 | low-medium |
+| [70] | Monkey Junior — giá ước tính ~$36.99/gói, dưới dải mục tiêu, đơn vị thời gian chưa rõ | Apple App Store (search snippet) | live, undated | 2026-08-19 | low |
+| [71] | Nghiên cứu peer-reviewed (2023) — trò chơi hóa tăng hứng thú đọc của trẻ, hiệu ứng giảm nhẹ (không mất hẳn) sau khi ngừng | Springer / Educational Technology Research and Development | 2023 | 2026-08-19 | medium |
+| [72] | RCT (2025) — trò chơi hóa số cải thiện nhận thức/cảm xúc/động lực | Springer / Journal of Computers in Education | 2025 | 2026-08-19 | low-medium |
 
-*Danh sách trên ưu tiên các nguồn có claim trọng yếu (load-bearing) cho phần Executive Summary/Recommendations. Danh sách đầy đủ tất cả claim (bao gồm các nguồn confidence thấp/leads chưa dùng) nằm trong `digests/*.md` — 3 file digest Run + 2 file digest import.*
+*Danh sách trên ưu tiên các nguồn có claim trọng yếu (load-bearing) cho phần Executive Summary/Recommendations. Danh sách đầy đủ tất cả claim (bao gồm các nguồn confidence thấp/leads chưa dùng) nằm trong `digests/*.md` — 3 file digest Run gốc + 2 file digest import + 2 file digest Deepen 08-19 (star-teacher-persona, mascot-gamification).*
 
 ## Staleness map
 
-Cửa sổ làm mới theo market pack: size/growth ≤18 tháng · pricing & feature claims ≤3 tháng · behavior data ≤2 năm · GTM benchmarks ≤12 tháng. Tính thủ công (không chạy được `recon_kit.py staleness` do môi trường thiếu `uv`/Python) — ngày hôm nay: 2026-08-17.
+Cửa sổ làm mới theo market pack: size/growth ≤18 tháng · pricing & feature claims ≤3 tháng · behavior data ≤2 năm · GTM benchmarks ≤12 tháng. Tính thủ công (không chạy được `recon_kit.py staleness` do môi trường thiếu `uv`/Python) — ngày gốc: 2026-08-17; Deepen bổ sung ngày 2026-08-19.
 
 | Claim (lớp) | Ngày nguồn | Cửa sổ | Hạn kiểm lại | Trạng thái |
 |---|---|---|---|---|
@@ -174,5 +287,11 @@ Cửa sổ làm mới theo market pack: size/growth ≤18 tháng · pricing & fe
 | Duolingo AI nội dung "rất chán" [29] (pain-point) | 2025-04-29 (cập nhật 2025-10-27) | 2 năm (behavior) | 2027-10 | ● còn hiệu lực |
 | FTC/COPPA enforcement [30] (regulatory) | 2024-06-28 | 12 tháng (GTM benchmark, gần nhất với class regulatory) | **đã quá hạn ~14 tháng** theo cửa sổ 12 tháng — nhưng đây là lịch sử xử phạt, không phải claim "hiện trạng", vẫn dùng được làm tiền lệ | ⚠ cần khung diễn giải đúng (tiền lệ, không phải tin mới) |
 | Character.AI backlash/kiện tụng [23] (trust-sentiment) | 2025-2026 (đưa tin, vụ việc gốc 2024) | 2 năm (behavior) | ~2027-2028 | ● còn hiệu lực |
+| Giá Prodigy [62], Dino AI/Daily Speaking [64], DinoLingo [65] (pricing) | live/2026-08 | 3 tháng | 2026-11-19 | ● còn hiệu lực |
+| NY robot "Sally" bị tạm dừng [51] (trust-legal) | 2026-07-29 | 2 năm (behavior/trust) | 2028-07 | ● còn hiệu lực, rất mới |
+| Vụ kiện Lovo/luật NY digital-replica [49] (trust-legal) | 2025 (tháng chưa rõ) | 12 tháng (GTM/regulatory benchmark) | ~2026-Q4/2027 tùy tháng chính xác | ⚠ cần xác nhận tháng cụ thể để tính hạn chính xác |
+| FTC dark-patterns report + Fortnite settlement [68] (regulatory) | 2022-09 | 12 tháng | **đã quá hạn ~3.5 năm theo cửa sổ 12 tháng** — dùng làm tiền lệ pháp lý, không phải hiện trạng thực thi mới | ⚠ khung diễn giải: tiền lệ lịch sử, vẫn có giá trị cảnh báo |
+| Khảo sát Intelligent.com [55] (behavior) | 2023-05 | 2 năm | **đã quá hạn** (~3 năm tính đến 2026-08) | ⚠ quá hạn, chỉ dùng làm bối cảnh lịch sử |
+| Nghiên cứu gamification 2023/2025 [71][72] (behavior) | 2023 / 2025 | 2 năm | 2025-hết hạn (71) / 2027 (72) | ⚠ [71] cận/qua hạn — kiểm lại nếu dùng làm căn cứ định lượng |
 
-**Hạn kiểm lại sớm nhất trong số claim còn "trong hạn":** 2026-11-17 (các claim giá xác nhận trực tiếp). **Doushen "gần miễn phí" [25] đã quá hạn nặng nhất** — chỉ dùng làm bối cảnh lịch sử về ý định chiến lược, không phải giá hiện tại; nếu concept mới cần dùng Doushen làm case định giá, bắt buộc phải Deepen lại trước khi trình BOD.
+**Hạn kiểm lại sớm nhất trong số claim còn "trong hạn":** 2026-11-17 (các claim giá xác nhận trực tiếp gốc 08-17) và 2026-11-19 (các claim giá Deepen 08-19). **Doushen "gần miễn phí" [25] và khảo sát Intelligent.com [55] đã quá hạn nặng nhất** — chỉ dùng làm bối cảnh lịch sử, không phải hiện trạng; nếu Concept 3 cần dùng Doushen hoặc khảo sát sentiment làm căn cứ định lượng, bắt buộc phải Deepen lại trước khi trình BOD. **Đối với 3.1 cụ thể:** lead [40][41] (nhân bản giọng GV nổi tiếng TQ) là ưu tiên Deepen cao nhất nếu BOD chọn theo đuổi định hướng này — hiện confidence quá thấp để dùng làm căn cứ.

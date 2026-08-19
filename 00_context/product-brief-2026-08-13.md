@@ -15,6 +15,8 @@ T8/2026 · Quy ước: ● Dữ liệu thật / đã chốt — ◆ Giả địn
 | v1.0 | 2026-08-13 | 4 concept độc lập (C1–C4), mỗi concept là một phương án cạnh tranh ngang hàng — chọn 1 trong 4. |
 | v2.0 | 2026-08-17 | ⚠ **Đổi khung quyết định:** tái cấu trúc thành **3 định hướng concept (concept family)**, mỗi định hướng có các phương án/mức đầu tư nội bộ để chọn sâu hơn — không còn "chọn 1 trong 4" mà là "chọn 1 định hướng, rồi chọn mức đầu tư/biến thể trong định hướng đó". **Concept 1** (mới) gộp old C1 + C3 + C4 thành 1 thang 3 mức đầu tư tăng dần (nội dung JTBD/positioning/feature giữ nguyên từ v1.0, chỉ đổi khung trình bày). **Concept 2** (mới) mở rộng old C2 từ 1 biến thể (KNS/STEAM gộp) thành 3 biến thể theo môn học. **Concept 3** (mới hoàn toàn) — Gia sư AI 1:1 — xây dựng từ nghiên cứu thị trường AI gia sư toàn cầu (`02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md`, 2026-08-17), chưa có Pilot nội bộ nào đối chiếu. ⚠ Biến thể 2.1 (thêm môn Toán) **đảo ngược có chủ đích** quyết định v1.0 "không chọn Toán để tránh cạnh tranh UniClass" — xem cảnh báo ở mục 3.1. |
 | **v2.1** | **2026-08-18** | Làm giàu mục 4 (Concept 3) từ kết quả phiên brainstorming định vị 390k (`02_discovery/brainstorming/brainstorm-ai-tutor-390k-positioning-2026-08-18/`) — không đổi mục 1-3, 5. Bổ sung: khung định vị 3 điểm (Edupia AI Class ↔ Concept 3 390k ↔ Edupia Tutor nhóm, mục 4.1); lộ trình 3 giai đoạn xây niềm tin (mục 4.5, mới) — cơ chế "con người là chốt chặn xác nhận output AI trước khi tới phụ huynh" giữ xuyên suốt cả 3 giai đoạn, không chỉ giai đoạn 1; Persona Engine — chân dung GV+HS (mục 4.4); hướng gỡ kinh tế TRIZ — dữ liệu là tài sản riêng (mục 4.3). ⚠ Phát hiện thêm 2 khoảng trống thuật ngữ, cả hai đã được user chốt trong cùng ngày: (1) "Edupia Tutor" — xác nhận là **một họ sản phẩm** bao gồm 1-1/1-4/1-6 ở các mức giá khác nhau (không phải "1-1" và "1-4/1-6" là 2 sản phẩm riêng) — hệ quả: phạm vi cannibalization của Concept 3 mở rộng ra toàn họ Tutor, không chỉ biến thể 1-1 như phân tích gốc ở mục 4.1; (2) "Edupia AI Class" — xác nhận = "Edupia Class" = "AI Class Plus" (cùng 1 sản phẩm, khác UniClass), thay quy tắc glossary v2.0 — kèm hệ quả mới về diễn giải khung định vị 3 điểm ở mục 4.1. Cả hai đã cập nhật `00_context/glossary.md`. Lịch sử quyết định đầy đủ: `00_context/.memlog.md`. |
+| **v2.2** | **2026-08-19** | ⚠ **Tái cấu trúc mục 4 (Concept 3) thành 2 biến thể định vị/persona** — 3.1 "AI nhân hóa giáo viên ngôi sao" và 3.2 "AI tích hợp mascot + gamification hóa" — theo yêu cầu user, dựa trên Deepen nghiên cứu thị trường mới (`02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md`, mục 5-6, cập nhật 2026-08-19). Đây là trục **persona/thương hiệu** ("AI xuất hiện dưới hình hài nào") — khác trục **cơ chế kỹ thuật** Phương án A/B đã có ("AI Song Hành" / "AI luyện hội thoại", nay là mục 4.3) — hai trục không loại trừ nhau, 3.1/3.2 có thể là lớp vỏ bọc quanh A hoặc B. Nội dung bối cảnh/cannibalization/thuật ngữ của v2.0-v2.1 giữ nguyên, chuyển vào mục 4.0. ⚠ **Phát hiện rủi ro bất đối xứng quan trọng:** 3.1 không có bất kỳ tiền lệ sản phẩm nào đúng cấu hình (K-12 + AI-clone + giá đại trà) ở thị trường nào tìm kiếm được, cộng thêm rủi ro pháp lý quyền hình ảnh/giọng nói đang leo thang (vụ kiện Lovo, đạo luật ELVIS Act, tiền lệ backlash robot AI hình người tại một học khu Mỹ tháng 7/2026); 3.2 có tiền lệ AI-cá-nhân-hóa-thật đứng sau mascot hoạt động thật ở quy mô lớn (Duolingo, Prodigy — Prodigy lọt đúng dải giá đại trà) nhưng mang rủi ro khác — thao túng hành vi trẻ em vì áp lực doanh thu, đã có tiền lệ pháp lý cụ thể (FTC, án phạt Fortnite $520 triệu) và trực tiếp cọ xát với nguyên tắc "Lợi nhuận là KPI cao nhất" của công ty (mục 1.3). Cả hai đều không tìm được ví dụ Việt Nam phù hợp — tiếp nối đúng mẫu hình "Edupia đi tiên phong, không bắt kịp đối thủ" đã ghi nhận từ v2.0. |
+| **v2.3** | **2026-08-19** | Viết lại toàn bộ mục 5 (Kế hoạch triển khai) theo lộ trình chi tiết do user cung cấp trực tiếp — thay khung mốc thô "T8/T9/T10/1-11/1-12/1-1" (v2.0-v2.2) bằng 8 mốc cụ thể từ trước 31/08/2026 (trình bày concept) đến T1/2027 (bắt đầu code). Thay đổi cấu trúc quan trọng nhất: **2 vòng test bán** thay vì 1 (T11 vòng 1 thu tiền thật + hoàn tiền/tặng tháng học vì sản phẩm chưa hoàn thiện, T12 vòng 2 sau khi làm mịn) — mốc "chọn phương án concept" dời từ khung "T9" cũ sang cửa sổ 15/10-30/10, ngay sau khảo sát; khảo sát 100 phụ huynh xác nhận rõ phạm vi **Tier 3/Tier 4**, qua điện thoại + trực tiếp tận nhà. Cập nhật RACI, milestone gates, risk register tương ứng — bổ sung 3 rủi ro mới (niềm tin khách hàng với cơ chế thu tiền-hoàn tiền, mâu thuẫn kết quả 2 vòng test bán, đại diện tính Tier 3/4). ⚠ **Phát hiện xung đột chưa giải quyết:** deadline BOD ở mục 1.2 ("hoàn thiện phương án định vị trước 1/11/2026") không còn khớp — T11 theo lộ trình mới là lúc đang test bán, không phải mốc hoàn thiện; đã gắn cờ ở cả mục 1.2 và đầu mục 5, cần Product xác nhận lại với BOD. **Cùng ngày, 2 chỉnh sửa bổ sung theo yêu cầu user:** (1) rút gọn cảnh báo biến thể 2.1 (mục 3.1) chỉ còn đúng 1 câu về rủi ro cùng môn với UniClass, bỏ phần diễn giải dài về lịch sử đảo ngược quyết định v1.0; (2) làm rõ khung định vị 3 điểm (mục 1.1, 4.0, glossary) — giá hiện hành Edupia AI Class là **250k VND/tháng**, 390k là giá **mục tiêu** sau đầu tư Concept 1/2/3; còn 2 phương án cấu trúc sản phẩm chưa chốt (sản phẩm mới riêng biệt ở 390k, hay nâng cấp trực tiếp sản phẩm 250k hiện có). |
 
 ---
 
@@ -24,13 +26,15 @@ T8/2026 · Quy ước: ● Dữ liệu thật / đã chốt — ◆ Giả địn
 
 Edupia Class là sản phẩm phổ thông (mass) duy nhất đang xây dựng ở mức giá 390k — không so sánh với sản phẩm nào khác như một bậc thấp hơn, vì đây là sản phẩm độc lập, duy nhất.
 
+● **Làm rõ (2026-08-19, xác nhận từ user):** "390k" trong toàn bộ brief này là mức giá **mục tiêu** sau khi đầu tư Concept 1/2/3 — giá hiện hành của Edupia AI Class hôm nay là **250k VND/tháng**. Sau khi chốt concept, công ty còn 2 phương án cấu trúc sản phẩm chưa quyết định: hình thành sản phẩm mới riêng biệt ở 390k, hoặc nâng cấp trực tiếp sản phẩm 250k hiện có lên 390k. Xem đầy đủ ở mục 4.0.
+
 | | Edupia Class (390k) | Tutor 1-4 / Tutor 1-1 |
 |---|---|---|
 | Phân khúc | Đại trà (mass) — quy mô thị trường lớn nhất | Cao cấp — cá nhân hóa cao |
 | Vai trò chiến lược | Product Growth Engine — dẫn dắt tăng trưởng người dùng, doanh thu, lợi nhuận | Duy trì tốc độ tăng trưởng hiện tại, không mở rộng quy mô |
 | Cách thắng | Ứng dụng AI/dữ liệu vào tất cả công đoạn ảnh hưởng hiệu quả học tập | Nâng chất lượng gia sư, tối ưu vận hành, tăng tỷ lệ gia hạn |
 
-⚠ **Lưu ý mới ở v2.0:** Concept 3 (Gia sư AI 1:1) đưa Edupia Class tới gần ranh giới định vị của Tutor 1-1 hơn bất kỳ concept nào trước đây — xem cảnh báo cannibalization ở mục 4.1.
+⚠ **Lưu ý mới ở v2.0:** Concept 3 (Gia sư AI 1:1) đưa Edupia Class tới gần ranh giới định vị của Tutor 1-1 hơn bất kỳ concept nào trước đây — xem cảnh báo cannibalization ở mục 4.0.
 
 ### 1.2. Cơ sở chiến lược & mục tiêu dự án
 
@@ -39,7 +43,7 @@ Edupia Class là sản phẩm phổ thông (mass) duy nhất đang xây dựng �
 - Định vị sản phẩm: "Educa lựa chọn tập trung nguồn lực vào phân khúc đại trà... tái định vị AI Class và Uniclass theo hướng nâng cao chất lượng và hiệu quả học tập thông qua công nghệ AI, từ đó dịch chuyển lên phân khúc giá cao hơn nhưng vẫn nằm trong khả năng chi trả của đại đa số gia đình Việt Nam."
 - Cách thắng: "Lợi thế của các sản phẩm này không nằm ở việc thu hút giáo viên nổi tiếng nhất hay mức độ trưởng thành về công nghệ cá nhân hóa nhất, mà ở khả năng tạo ra hiệu quả học tập vượt trội nhất thông qua việc ứng dụng AI/Dữ liệu vào tất cả các công đoạn."
 - Tài chính: Lợi nhuận là KPI cao nhất của công ty. Mục tiêu lợi nhuận 2026: 20 tỷ / 2027: 70 tỷ / 2028: 130 tỷ.
-- Deadline chính thức (Kế hoạch H2/2026): hoàn thiện phương án định vị AI Class mới trước 1/11/2026 (PIC: Liêm).
+- Deadline chính thức (Kế hoạch H2/2026): hoàn thiện phương án định vị AI Class mới trước 1/11/2026 (PIC: Liêm). ⚠ **[v2.3]** Deadline này không còn khớp với lộ trình chi tiết mới ở mục 5 — tháng 11/2026 nay là lúc chạy test bán thật (vòng 1), không phải mốc "hoàn thiện phương án". ◆ Cần Product xác nhận lại với BOD: deadline 1/11 đã lùi/đổi ý nghĩa, hay đây là 2 mốc khác nhau cần tách bạch (vd. "phương án" = concept đã chọn xong từ 30/10, còn 1/11 là mốc báo cáo/tổng hợp riêng)?
 
 **Mục tiêu dự án:** Xác định định hướng nào — và ở mức đầu tư/biến thể nào — hiện thực hóa đúng vai trò Product Growth Engine, thắng bằng ứng dụng AI/dữ liệu toàn diện, ở mức giá 390k, được khách hàng và thị trường chấp nhận, và chứng minh được khả năng tạo lợi nhuận.
 
@@ -55,11 +59,11 @@ Edupia Class là sản phẩm phổ thông (mass) duy nhất đang xây dựng �
 
 | Tiêu chí | Concept 1 — Làm mịn & nâng cấp | Concept 2 — Làm mịn + Thêm môn | Concept 3 — Gia sư AI 1:1 (MỚI) |
 |---|---|---|---|
-| Số phương án nội bộ | 3 mức đầu tư tăng dần: 1.1 → 1.2 → 1.3 (mỗi mức chứa trọn mức trước) | 3 biến thể theo môn: 2.1 / 2.2 / 2.3 (không nhất thiết loại trừ nhau) | ◆ 2 phương án kỹ thuật thay thế nhau (A: AI Song Hành · B: AI luyện hội thoại) — chưa Pilot để chia sâu hơn |
-| Cấu phần chính | 1.1: Practice + Speak nâng cấp · 1.2: 1.1 + AI Tutor 30' + Adaptive Learning + Parent Mode · 1.3: 1.2 + Big Class buổi 3 + GVCN mở rộng + Parent Mode 1:2.000 | 2.1: + môn phổ thông (Toán, Tiếng Việt...) · 2.2: + STEM/STEAM/AI · 2.3: + Kỹ năng sống/ngoại khóa | ◆ AI đảm nhiệm vai trò "gia sư" liên tục cho học sinh — cấu phần cụ thể chưa chốt, xem mục 4.4 |
-| Ứng dụng AI/dữ liệu toàn diện | Tăng dần theo mức: 1.1 một phần → 1.3 mạnh nhất | Không đổi so với mức Concept 1 làm nền (Concept 2 không tự thêm tầng AI mới) | ◆ Về lý thuyết mạnh nhất — AI là toàn bộ giá trị cốt lõi — nhưng hoàn toàn chưa kiểm chứng nội bộ |
-| Được khách hàng/thị trường chấp nhận | ◆ Chờ khảo sát T9 | ◆ Chờ khảo sát T9 | ◆◆ Chờ khảo sát T9 — rủi ro cao hơn 2 định hướng kia vì không có Pilot nội bộ, chỉ có bằng chứng thị trường ngoài |
-| Rủi ro chính | 1.1: giá trị chưa đủ khác biệt · 1.3: vận hành GVCN tỷ lệ 1:2.000 chưa kiểm chứng | Môn tặng thêm không có nhu cầu; 2.1 tự cạnh tranh UniClass (thay đổi có chủ đích, cần BOD duyệt) | Không có Pilot nội bộ; ranh giới với sản phẩm Tutor 1-1 hiện có chưa rõ (rủi ro cannibalization nội bộ) |
+| Số phương án nội bộ | 3 mức đầu tư tăng dần: 1.1 → 1.2 → 1.3 (mỗi mức chứa trọn mức trước) | 3 biến thể theo môn: 2.1 / 2.2 / 2.3 (không nhất thiết loại trừ nhau) | **[v2.2]** 2 biến thể persona/định vị: 3.1 (AI nhân hóa GV ngôi sao) / 3.2 (AI tích hợp mascot + gamification) — không loại trừ nhau, cả hai đều có thể kết hợp với 1 trong 2 phương án kỹ thuật A/B (AI Song Hành / AI luyện hội thoại, nay ở mục 4.3) — xem mục 4.0.1 |
+| Cấu phần chính | 1.1: Practice + Speak nâng cấp · 1.2: 1.1 + AI Tutor 30' + Adaptive Learning + Parent Mode · 1.3: 1.2 + Big Class buổi 3 + GVCN mở rộng + Parent Mode 1:2.000 | 2.1: + môn phổ thông (Toán, Tiếng Việt...) · 2.2: + STEM/STEAM/AI · 2.3: + Kỹ năng sống/ngoại khóa | 3.1: AI mang danh tính/giọng nói/phong cách một "GV ngôi sao" · 3.2: AI nhúng trong nhân vật mascot + cơ chế trò chơi hóa — cấu phần kỹ thuật nền tảng dùng chung xem mục 4.3 |
+| Ứng dụng AI/dữ liệu toàn diện | Tăng dần theo mức: 1.1 một phần → 1.3 mạnh nhất | Không đổi so với mức Concept 1 làm nền (Concept 2 không tự thêm tầng AI mới) | 3.1: gần với bài toán thương hiệu/marketing hơn AI thuần túy (◆ trừ khi kết hợp Phương án A) · 3.2: bài toán AI cá nhân hóa thật nếu làm đúng (mascot phải phản ánh dữ liệu học tập thật, không chỉ trang trí — xem mục 4.2) |
+| Được khách hàng/thị trường chấp nhận | ◆ Chờ khảo sát T9 | ◆ Chờ khảo sát T9 | ◆◆ Chờ khảo sát T9 — rủi ro cao hơn 2 định hướng kia vì không có Pilot nội bộ; **[v2.2]** 3.1 và 3.2 có hồ sơ rủi ro khác nhau về bản chất (không chỉ mức độ) — xem mục 4.0.1 |
+| Rủi ro chính | 1.1: giá trị chưa đủ khác biệt · 1.3: vận hành GVCN tỷ lệ 1:2.000 chưa kiểm chứng | Môn tặng thêm không có nhu cầu; 2.1 tự cạnh tranh UniClass (thay đổi có chủ đích, cần BOD duyệt) | Không có Pilot nội bộ; ranh giới với sản phẩm Tutor 1-1 hiện có chưa rõ (cannibalization); **[v2.2]** 3.1: không tiền lệ thị trường + rủi ro pháp lý quyền hình ảnh/giọng nói leo thang · 3.2: rủi ro thao túng hành vi trẻ em vì áp lực doanh thu, cọ xát trực tiếp nguyên tắc "Lợi nhuận là KPI cao nhất" (mục 1.3) |
 
 **Đối chiếu bảng điểm concept (nếu đã chạy Vòng 1 calibration đầy đủ):** `02_discovery/concept-evaluation-scorecard-2026-08-15.md` áp dụng Concept Evaluation Framework cho 4 concept v1.0 — kết luận tương ứng ở khung v2.0: mức 1.1 không qua bất kỳ Strategic Gate nào (Stop); mức 1.2 và 1.3 đều ở trạng thái Validate với Raw Score gần bằng nhau (62.6 vs 64.0, chênh dưới ngưỡng 5 điểm) — nghĩa là câu hỏi thật trong Concept 1 không phải "chọn mức nào" mà là **"đầu tư đến mức nào thì dừng"**, và quyết định 1.2-vs-1.3 nên chờ kết quả Pilot GVCN Giai đoạn 0 thay vì chọn theo điểm số. Bảng điểm này chưa chạy cho Concept 2 (biến thể 2.1/2.2) hay Concept 3 (hoàn toàn mới) — nên chạy bổ sung trước T9 nếu muốn có cùng một khung so sánh cho cả 3 định hướng.
 
@@ -240,7 +244,7 @@ Rủi ro chính của mức 1.3: đây là mức duy nhất trong Concept 1 đò
 
 > **Đối chiếu chiến lược kinh doanh:** Chiến lược kinh doanh 2026-2028 chủ trương giảm phụ thuộc vào mở rộng đội ngũ con người (Sale chỉ tăng 10% nhân sự đến 2028 dù tăng trưởng mạnh). Mức 1.3 đòi hỏi vai trò con người nặng hơn trên mỗi học sinh (GVCN mở rộng, tỷ lệ 1:2.000) — cần đối chiếu với triết lý này khi trình bày với BOD.
 
-⚠ **Kết nối với Concept 3 (v2.0):** nghiên cứu thị trường AI gia sư toàn cầu (mục 4) tìm thấy mẫu hình "AI song hành/dual-teacher" (TAL/Xueersi, Doushen) — cấu trúc trong đó AI đảm nhiệm phần giám sát/theo sát liên tục mà mức 1.3 đang đòi hỏi mở rộng đầu người GVCN để làm. Đây là một hướng thay thế đáng cân nhắc cho rủi ro vận hành của mức 1.3 — xem mục 4.4.
+⚠ **Kết nối với Concept 3 (v2.0):** nghiên cứu thị trường AI gia sư toàn cầu (mục 4) tìm thấy mẫu hình "AI song hành/dual-teacher" (TAL/Xueersi, Doushen) — cấu trúc trong đó AI đảm nhiệm phần giám sát/theo sát liên tục mà mức 1.3 đang đòi hỏi mở rộng đầu người GVCN để làm. Đây là một hướng thay thế đáng cân nhắc cho rủi ro vận hành của mức 1.3 — xem mục 4.3.
 
 #### Khách hàng mục tiêu
 
@@ -319,7 +323,7 @@ Trigger: Con bị đổi giáo viên gây xáo trộn (ở dịch vụ trước 
 | Talktime GVCN thật của công ty hiện tại là bao nhiêu phút/ngày (không giả định theo Tutor 2.3)? | Vận hành | Trước T9 | Toàn bộ tính toán khối lượng công việc GVCN đang dựa trên số liệu tham chiếu, chưa xác nhận |
 | Giá vốn/buổi ở cấu trúc đầy đủ (AI + GVCN mở rộng) là bao nhiêu, đối chiếu sàn margin công ty yêu cầu? | Finance | Trước 1/12 | Không thể "chốt & hoàn thiện phương án xây sản phẩm" nếu chưa biết concept có sinh lời theo đúng KPI cao nhất của công ty |
 | Ai phê duyệt việc mức 1.3 đòi hỏi cả AI mạnh và con người mở rộng cùng lúc, đi ngược triết lý giảm phụ thuộc nhân sự của chiến lược kinh doanh? | BOD | Trước 1/12 | Rủi ro cam kết nguồn lực rồi mới phát hiện mâu thuẫn chiến lược ở cấp BOD |
-| Có nên cân nhắc phương án "AI Song Hành" (Concept 3, mục 4.4) để hạ tỷ lệ GVCN cần thiết xuống dưới 1:2.000, thay vì chấp nhận tỷ lệ đó? | Product + BOD | Trước T9 | Nếu không cân nhắc, có thể đầu tư vào đúng hướng vận hành rủi ro nhất trong khi có phương án khác đã có tiền lệ thị trường |
+| Có nên cân nhắc phương án "AI Song Hành" (Concept 3, mục 4.3) để hạ tỷ lệ GVCN cần thiết xuống dưới 1:2.000, thay vì chấp nhận tỷ lệ đó? | Product + BOD | Trước T9 | Nếu không cân nhắc, có thể đầu tư vào đúng hướng vận hành rủi ro nhất trong khi có phương án khác đã có tiền lệ thị trường |
 
 ---
 
@@ -339,7 +343,7 @@ Trigger: Con bị đổi giáo viên gây xáo trộn (ở dịch vụ trước 
 
 ### 3.1 Biến thể 2.1 — Thêm môn phổ thông (Toán, Tiếng Việt...)
 
-⚠ **Thay đổi có chủ đích so với v1.0 — cần đọc trước khi dùng biến thể này.** Brief v1.0 (mục 3.1, old C2) từng ghi rõ: *"Không chọn Toán để tránh tự cạnh tranh với UniClass"*. Biến thể 2.1 đảo ngược trực tiếp quyết định đó. Theo xác nhận của Product trong buổi cập nhật v2.0 (2026-08-17), đây là **thay đổi có chủ đích**, không phải sơ suất — nhưng **lý do kinh doanh cụ thể cho việc đảo ngược chưa được cung cấp trong buổi làm việc này**. ◆ Cần Product/BOD bổ sung rõ: vì sao chấp nhận rủi ro tự cạnh tranh UniClass ở thời điểm này (vd. UniClass đã đổi định vị? phân khúc khách hàng không còn trùng? mục tiêu tăng trưởng ưu tiên hơn rủi ro cannibalization nội bộ?) — trước khi biến thể này được trình BOD chính thức.
+⚠ **Rủi ro cùng môn với UniClass:** biến thể 2.1 đưa Edupia Class vào đúng phạm vi môn học (Toán, Tiếng Việt...) mà UniClass — sản phẩm khác của Educa — đang phục vụ, khác 2 biến thể còn lại (2.2, 2.3 — môn bổ trợ, không cạnh tranh nội bộ). Rủi ro tự ăn thị phần giữa 2 sản phẩm cùng công ty.
 
 #### Bối cảnh và vị trí sản phẩm
 
@@ -539,11 +543,11 @@ Trigger: Phụ huynh đang có ý định đăng ký thêm hoạt động ngoạ
 
 ---
 
-## 4. Concept 3 — Phát triển Gia sư AI 1:1 (Tutor AI) [MỚI, v2.0 · làm giàu v2.1]
+## 4. Concept 3 — Phát triển Gia sư AI 1:1 (Tutor AI) [MỚI, v2.0 · làm giàu v2.1 · tái cấu trúc thành 2 định hướng v2.2]
 
-*Xây dựng từ `02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md` (nghiên cứu thị trường AI gia sư toàn cầu, 2026-08-17). ⚠ Đây là định hướng duy nhất trong v2.0 chưa có bất kỳ Pilot nội bộ nào — toàn bộ nội dung dưới đây dựa trên mẫu hình quan sát được từ thị trường ngoài, không phải bằng chứng nội bộ đã kiểm chứng.*
+*Xây dựng từ `02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md` (nghiên cứu thị trường AI gia sư toàn cầu, 2026-08-17; Deepen 2026-08-19 bổ sung mục 5-6 cho 2 định hướng 3.1/3.2 dưới đây). ⚠ Đây là định hướng duy nhất trong v2.0 chưa có bất kỳ Pilot nội bộ nào — toàn bộ nội dung dưới đây dựa trên mẫu hình quan sát được từ thị trường ngoài, không phải bằng chứng nội bộ đã kiểm chứng.*
 
-### 4.1 Bối cảnh và vị trí sản phẩm
+### 4.0 Bối cảnh và vị trí sản phẩm
 
 Khác biệt về bản chất so với Concept 1 và Concept 2 (cả hai vẫn giữ Big Class + GV thật làm trung tâm, AI chỉ hỗ trợ): Concept 3 định vị **AI là gia sư**, không phải AI hỗ trợ lớp học. Đây là bước dịch chuyển xa nhất khỏi cấu trúc Edupia Class hiện có trong toàn bộ 3 định hướng.
 
@@ -562,9 +566,25 @@ Khác biệt về bản chất so với Concept 1 và Concept 2 (cả hai vẫn 
 
 ● **Thuật ngữ đã chốt (2026-08-18):** "Edupia AI Class" = "Edupia Class" = "AI Class Plus" — cùng một sản phẩm, không phải 3 sản phẩm khác nhau (xác nhận trực tiếp từ user; đã cập nhật `00_context/glossary.md`, thay quy tắc "không dùng AI Class thay thế" ghi ở v2.0).
 
-⚠ **Hệ quả mới cần Product làm rõ:** Nếu "Edupia AI Class" chính là "Edupia Class" — sản phẩm 390k được mô tả xuyên suốt brief này, mà Concept 1/2/3 đều là các mức đầu tư/định hướng CỦA nó — thì điểm neo "rẻ nhất" trong khung định vị 3 điểm không thể là một sản phẩm giá thấp hơn 390k tách biệt. Cách hiểu hợp lý hơn: khung định vị đang so sánh **Edupia Class ở cấu hình/mức đầu tư hiện tại (self-learning, trước khi đầu tư Concept 3)** với **Edupia Class sau khi đầu tư Concept 3** — tức là 2 điểm trên cùng một trục đầu tư của cùng một sản phẩm, không phải 3 sản phẩm độc lập ở 3 mức giá. ◆ Cần Product xác nhận cách hiểu này (và làm rõ liệu Concept 3 có giữ nguyên giá 390k hay là một mức giá mới, cao hơn cấu hình self-learning hiện tại) trước khi dùng khung định vị 3 điểm này cho khảo sát T9.
+● **Làm rõ (2026-08-19, xác nhận từ user):** khung định vị đang so sánh **Edupia Class ở cấu hình/mức đầu tư hiện tại** (self-learning, giá hiện hành **250k VND/tháng**) với **Edupia Class sau khi đầu tư Concept 1/2/3** (mục tiêu **390k VND/tháng**) — đúng là 2 điểm trên cùng một trục đầu tư của cùng một sản phẩm, không phải 3 sản phẩm độc lập ở 3 mức giá, khớp với suy luận ban đầu của brief.
 
-### 4.2 Khách hàng mục tiêu
+◆ **Còn mở — 2 phương án cấu trúc sản phẩm, chưa chốt:** (a) sau khi chốt concept, hình thành **1 sản phẩm mới riêng biệt** định giá 390k, hoặc (b) **nâng cấp trực tiếp** Edupia AI Class hiện có lên concept mới, đồng thời nâng giá từ 250k lên 390k. Hai phương án khác nhau đáng kể về go-to-market (sản phẩm mới cần xây nhận diện từ đầu, so với nâng giá trên nền khách hàng hiện có — rủi ro phản ứng từ khách hàng đang trả 250k) — cần Product/BOD chốt trước khi dùng khung định vị 3 điểm này cho khảo sát.
+
+### 4.0.1 Hai định hướng persona/định vị — 3.1 và 3.2 [MỚI, v2.2]
+
+*Nguồn: `research.md` mục 5-6 (Deepen 2026-08-19). Đây là trục quyết định **"AI xuất hiện trước học sinh dưới hình hài nào"** — khác trục cơ chế kỹ thuật **"AI làm gì"** (Phương án A "AI Song Hành" / B "AI luyện hội thoại", nay ở mục 4.3, giữ nguyên từ v2.0/v2.1). Hai trục **không loại trừ nhau** — 3.1 hoặc 3.2 có thể là lớp vỏ persona bọc quanh cơ chế A hoặc B. Giống Concept 2, đây là 2 **biến thể** song song (không nhất thiết loại trừ nhau, không phải các mức đầu tư chứa nhau như Concept 1).*
+
+| Tiêu chí | 3.1 — AI nhân hóa giáo viên ngôi sao | 3.2 — AI tích hợp mascot + gamification hóa |
+|---|---|---|
+| Ý tưởng cốt lõi | AI mang danh tính/giọng nói/phong cách một "giáo viên ngôi sao" — nhân bản chất lượng dạy ra quy mô lớn | AI nhúng trong một nhân vật mascot (hoạt hình/con vật/giả tưởng) gắn cơ chế trò chơi hóa — mascot là giao diện của chính lớp cá nhân hóa AI, không chỉ trang trí |
+| Tiền lệ sản phẩm đúng cấu hình (K-12 + đại trà) | ✕ Không tìm được ở bất kỳ thị trường nào tìm kiếm (TQ, HK, Mỹ, VN) | ● Có — Duolingo, Prodigy (Prodigy $9.95-19.95/tháng lọt đúng dải giá) |
+| Loại rủi ro chính | Pháp lý/niềm tin — nhân bản giọng nói/hình ảnh người thật (vụ kiện Lovo, đạo luật ELVIS Act, backlash robot AI hình người tại 1 học khu Mỹ, 7/2026) | Thao túng hành vi/monetization trẻ em — đã có tiền lệ pháp lý cụ thể (FTC dark-patterns report, án phạt Fortnite/Epic $520 triệu) |
+| Bản chất đầu tư nếu theo đuổi | Gần với bài toán thương hiệu/marketing hơn là AI thuần túy (trừ khi kết hợp Phương án A) | Bài toán AI cá nhân hóa thật nếu làm đúng — có thể dùng chung hạ tầng Adaptive Learning (mục 2.2) |
+| Bằng chứng Việt Nam | ✕ Không tìm được | ◆ 1 ví dụ (Monkey Junior/VMonkey), không rõ có AI cá nhân hóa thật đứng sau mascot hay không |
+
+⚠ **Nhận định của người làm market research:** Đây là một sự bất đối xứng rủi ro/tiền lệ rõ rệt, không phải khác biệt về mức độ. 3.2 là hướng có nhiều bằng chứng thị trường hơn để giảm rủi ro triển khai; 3.1 là hướng nhiều khoảng trống/rủi ro pháp lý hơn nhưng cũng chưa "ai làm rồi" — nếu BOD ưu tiên tốc độ và giảm rủi ro pháp lý, 3.2 có nền tảng vững hơn để bắt đầu Pilot; nếu BOD chấp nhận đi tiên phong đổi lấy khả năng khác biệt hoá mạnh hơn (đúng tinh thần "GV ngôi sao" của mô hình Hong Kong, dù ở đó hoàn toàn là người thật), 3.1 cần thêm một vòng rà soát pháp lý trước khi đi xa hơn nghiên cứu thị trường. **Cả hai đều chưa có Pilot nội bộ — không đề xuất chọn 1 trong 2 chỉ dựa trên bảng này, cần qua đúng quy trình khảo sát T9 đã thiết kế cho toàn bộ concept board (mục 5).**
+
+### 4.0.2 Khách hàng mục tiêu — JTBD nền tảng chung
 
 *Đối thủ thay thế (Competitive Alternative)*
 
@@ -587,7 +607,9 @@ Trigger: Phụ huynh đang cân nhắc thuê gia sư 1-1 nhưng thấy giá quá
 
 *Nhận định bổ sung [MỚI, v2.1, ● brainstorm 08-18]:* JTBD cụ thể hơn tầng Cảm xúc ở trên: phụ huynh **"thuê" AI Tutor làm thay vai trò đồng hành** — học cùng con, giải đáp cho con, theo dõi/nhắc nhở/động viên — việc chính họ muốn làm nhưng thiếu thời gian và chuyên môn. Khoảnh khắc JTBD được thoả mãn rõ nhất không phải khi phụ huynh chủ động vào xem báo cáo, mà khi **AI chủ động gửi cảnh báo/nhắc nhở** về tiến độ, chất lượng học tập, hoặc vấn đề con đang gặp — đây là bằng chứng cụ thể cho cảm giác "có người làm thay mình" mà tầng Cảm xúc đang mô tả ở mức khái quát hơn. Rào cản chính cần vượt qua trước khi JTBD này thành hiện thực: định kiến/chưa tin tưởng hoàn toàn vào AI, đặc biệt trong giáo dục — xem cơ chế xử lý ở mục 4.3 và 4.5.
 
-### 4.3 Giải pháp
+### 4.0.3 Giải pháp — Positioning/USP nền tảng chung
+
+*Positioning statement/USP dưới đây là khung nền chung cho cả 3.1 và 3.2 — mỗi biến thể có bản positioning/USP riêng, cụ thể hơn, ở mục 4.1/4.2 tương ứng.*
 
 *Positioning Statement*
 
@@ -604,33 +626,91 @@ Trigger: Phụ huynh đang cân nhắc thuê gia sư 1-1 nhưng thấy giá quá
 
 | Gain mong muốn | Gain Creator |
 |---|---|
-| Con được theo sát liên tục như GVCN mở rộng nhưng không đòi hỏi mở rộng đầu người tương ứng | ◆ Lớp "AI Song Hành" — AI đảm nhiệm giám sát/nhắc bài/phát hiện lỗ hổng liên tục, leo thang cho GVCN chỉ khi có ngoại lệ (xem Phương án A, mục 4.4) |
+| Con được theo sát liên tục như GVCN mở rộng nhưng không đòi hỏi mở rộng đầu người tương ứng | ◆ Lớp "AI Song Hành" — AI đảm nhiệm giám sát/nhắc bài/phát hiện lỗ hổng liên tục, leo thang cho GVCN chỉ khi có ngoại lệ (xem Phương án A, mục 4.3) |
 
 *USP (◆ dự thảo, chưa kiểm chứng): "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và can thiệp liên tục — mẫu hình 'AI song hành' đã vận hành thật ở quy mô lớn tại thị trường khác, lần đầu áp dụng tại Việt Nam."*
 
 > **Đánh giá của người làm market research (dựa trên `research.md` 08-17):**
 > - **● Xác nhận:** mẫu hình "AI song hành/dual-teacher" không phải giả thuyết lý thuyết — TAL/Xueersi (một trong những công ty edtech lớn nhất Trung Quốc) ra mắt sản phẩm cùng cấu trúc tháng 6/2026; Doushen cũng vận hành mẫu hình tương tự. Đây là bằng chứng vận hành thật, không phải chỉ ý tưởng.
 > - **⚠ Chưa có tiền lệ ở đúng dải giá 390k:** không sản phẩm AI-tutor toàn cầu nào tìm được định giá đúng dải $10-20/tháng (khớp 390k VND) mà đồng thời định vị cho gia đình nhạy giá — thị trường tách hẳn thành cực cao ($20-60+/tháng: Dino AI, ELSA, Speak) và cực thấp ($2-4/tháng: Arivihan, Super Tutor — Ấn Độ). Edupia Class sẽ đi tiên phong ở đúng cấu hình này, không có benchmark rủi ro vận hành/kinh tế để đối chiếu — cùng mẫu hình rủi ro đã ghi nhận cho mức 1.2/1.3 (research.md 08-14).
-> - **⚠ Rủi ro niềm tin nghiêm trọng nếu chọn sai archetype:** archetype "AI mô phỏng nhân cách/cảm xúc riêng biệt" (như Doushen) có tiền lệ backlash thật — Character.AI đối mặt kiện tụng liên quan cái chết của 2 thiếu niên, phải gỡ tính năng trò chuyện mở cho người dùng dưới 18 tuổi. Concept 3 **không nên** đi theo archetype này cho trẻ em — xem loại trừ rõ ràng ở mục 4.4.
+> - **⚠ Rủi ro niềm tin nghiêm trọng nếu chọn sai archetype:** archetype "AI mô phỏng nhân cách/cảm xúc riêng biệt" (như Doushen) có tiền lệ backlash thật — Character.AI đối mặt kiện tụng liên quan cái chết của 2 thiếu niên, phải gỡ tính năng trò chuyện mở cho người dùng dưới 18 tuổi. Concept 3 **không nên** đi theo archetype này cho trẻ em — xem loại trừ rõ ràng ở mục 4.3.
 >
 > **Bổ sung từ brainstorm định vị 08-18 [MỚI, v2.1]** (`brainstorm-ai-tutor-390k-positioning-2026-08-18/brainstorm-intent.md`):
 > - **● Cơ chế niềm tin:** Niềm tin của phụ huynh (và học sinh) không đến từ việc AI "giả làm người" — học sinh vẫn nhận ra AI qua giọng nói/cách nói chuyện, không giấu được hoàn toàn — mà đến từ việc AI đưa ra **quyết định đáng tin cậy, chính xác về kết quả học tập**, thể hiện qua tiến bộ được phụ huynh **nhìn thấy cụ thể** (chân dung học sinh, nhận xét, báo cáo AI tạo, theo dõi liên tục) — khác biệt rõ so với self-learning thuần (◆ xem khoảng trống thuật ngữ "Edupia AI Class" ở mục 4.1). Đây là cơ sở trực tiếp cho lộ trình 3 giai đoạn ở mục 4.5.
 > - **● Kinh tế 390k (TRIZ):** Có thể định giá 390k ngay từ Giai đoạn 1 — so với self-learning thuần, chỉ riêng việc bổ sung tương tác gia sư-AI đã là giá trị gia tăng đủ biện minh mức giá. Nhưng mâu thuẫn cốt lõi: độ sâu/chính xác chân dung AI + mức độ AI thay được vai trò con người + tần suất AI theo sát càng cao → chi phí xây dựng và vận hành mỗi học sinh càng đắt, trong khi giá bán giữ cố định 390k → áp lực trực tiếp lên biên lợi nhuận (cùng rủi ro "chưa có tiền lệ đúng dải giá 390k" đã nêu ở đánh giá research.md 08-17 phía trên). ◆ **Hướng gỡ được đề xuất, chưa kiểm chứng vận hành:** không chỉ dựa vào doanh thu thuê bao tháng để bù chi phí xây chân dung AI — coi **dữ liệu/chân dung người dùng tích luỹ được là một nguồn giá trị riêng**, khấu hao chi phí đầu tư ban đầu qua toàn bộ vòng đời dữ liệu, không chỉ qua giá thuê bao. Cần Finance đối chiếu tính khả thi của cách khấu hao này trước khi dùng làm luận điểm biên lợi nhuận chính thức.
 
-### 4.4 Cấu trúc sản phẩm — 2 phương án kỹ thuật thay thế nhau
+### 4.1 Biến thể 3.1 — AI nhân hóa giáo viên ngôi sao [MỚI, v2.2]
+
+*Nguồn: `research.md` mục 5 (Deepen 2026-08-19).*
+
+#### Bối cảnh
+
+AI mang danh tính/giọng nói/phong cách một "giáo viên ngôi sao" cụ thể — nhân bản chất lượng giảng dạy ra quy mô lớn, gợi lại cơ chế kinh tế đã chứng minh thật ở mô hình gia sư ngôi sao Hong Kong (1 GV livestream tới 1.000 học sinh tạo doanh thu tương đương 20 lớp truyền thống trên 1 lương GV; GV hạng trung thu nhập ~5 lần GV thông thường) — nhưng ở đó hoàn toàn là người thật, không có lớp AI nào.
+
+#### Khách hàng mục tiêu
+
+*JTBD delta so với JTBD nền tảng (mục 4.0.2):* lớp Xã hội và Cảm xúc được neo cụ thể hơn vào **niềm tin vào một thương hiệu/track-record giáo viên cụ thể**, không chỉ "có AI đồng hành nói chung" — gần với insight từ thị trường Hong Kong: phụ huynh ở đó quyết định mua theo track-record thi cử/thương hiệu cá nhân của GV, không phải phương pháp sư phạm.
+
+#### Giải pháp
+
+*Positioning Statement (◆ dự thảo, chưa kiểm chứng):* Đối với phụ huynh muốn con học với một "giáo viên giỏi nhất" nhưng không đủ khả năng chi trả gia sư ngôi sao người thật — Edupia Class [3.1] là AI mang phong cách và chất lượng giảng dạy của một giáo viên ngôi sao, sẵn sàng mọi lúc. Khác với AI trung tính/vô danh, 3.1 mượn đúng cơ chế niềm tin đã chứng minh ở mô hình gia sư ngôi sao — thương hiệu giáo viên là lý do mua hàng.
+
+> ⚠ **Rủi ro cần lưu ý — nghiêm trọng hơn bất kỳ đề xuất nào khác trong toàn bộ Concept 3:** không tìm được tiền lệ sản phẩm thật nào đúng cấu hình mong muốn (K-12 + AI-clone + giá đại trà) ở bất kỳ thị trường nào tìm kiếm (TQ, HK, Mỹ, VN) — Edupia Class sẽ hoàn toàn không có ai đi trước để tham chiếu rủi ro vận hành/kinh tế, rủi ro cao hơn cả Phương án A "AI Song Hành" (vốn đã có TAL/Xueersi, Doushen làm tiền lệ, xem mục 4.3). Rủi ro pháp lý nhân bản giọng nói/hình ảnh người thật đang leo thang tại các thị trường đã có luật — vụ kiện diễn viên lồng tiếng chống Lovo Inc. (khiếu nại "right of publicity" theo luật "digital replica" mới của bang New York sống sót qua motion to dismiss), đạo luật ELVIS Act (Tennessee, cấm nhân bản AI giọng nói/hình ảnh thương mại trái phép). Tiền lệ backlash gần nhất (29/7/2026): một học khu ở New York tạm dừng kế hoạch triển khai robot AI hình người sau phản ứng dữ dội từ công đoàn, phụ huynh và quan chức giáo dục bang — cho thấy phản ứng cộng đồng với AI "giống người" trước mặt trẻ em có thể xảy ra nhanh và công khai.
+
+> ◆ **Khuyến nghị thiết kế, chưa kiểm chứng:** nếu theo đuổi 3.1, nên xây một **nhân vật giáo viên thương hiệu nguyên bản** (không nhân bản giọng nói/hình ảnh một GV thật cụ thể còn đang dạy tại Edupia) để né rủi ro quyền hình ảnh/giọng nói — gần với cách Hong Kong xây "thương hiệu GV ngôi sao" qua track-record + marketing hơn là qua công nghệ nhân bản người thật. Điều này đồng nghĩa 3.1 gần với một bài toán thương hiệu/marketing hơn là một bài toán công nghệ AI thuần túy — khác bản chất với 3.2.
+
+#### Câu hỏi cần chốt — riêng 3.1
+
+| Câu hỏi | Owner quyết định | Deadline | Hệ quả nếu chưa chốt |
+|---|---|---|---|
+| Nếu theo đuổi 3.1, có nhân bản giọng nói/hình ảnh một GV thật cụ thể của Edupia hay xây nhân vật thương hiệu nguyên bản? | Product + Pháp lý | Trước khi phát triển bất kỳ prototype nào | Nếu nhân bản người thật mà chưa rà soát pháp lý quyền hình ảnh/giọng nói tại Việt Nam, rủi ro pháp lý tương tự vụ Lovo Inc. |
+| Lead "nền tảng Trung Quốc nhân bản giọng giáo viên nổi tiếng" (research.md ref [40][41]) — danh tính công ty thật là gì, có đáng làm case study không? | Product + Research | Trước khi trình BOD nếu chọn 3.1 | Hiện confidence quá thấp (chỉ qua snippet, chưa fetch) để dùng làm bằng chứng — cần Deepen riêng |
+| Có nên định vị 3.1 như lớp vỏ persona bọc quanh Phương án A "AI Song Hành" (mục 4.3) thay vì một cơ chế kỹ thuật riêng? | Product + Engineering | Trước T9 | Ảnh hưởng trực tiếp effort — nếu không kết hợp, 3.1 cần xây cả persona lẫn cơ chế từ đầu |
+
+### 4.2 Biến thể 3.2 — AI tích hợp mascot + gamification hóa [MỚI, v2.2]
+
+*Nguồn: `research.md` mục 6 (Deepen 2026-08-19).*
+
+#### Bối cảnh
+
+AI xuất hiện qua một nhân vật mascot (hoạt hình/con vật/giả tưởng) gắn với cơ chế trò chơi hóa (điểm, streak, cấp độ, phần thưởng) — mascot không chỉ trang trí mà là giao diện của chính lớp cá nhân hóa AI, theo mẫu Duolingo (hệ thống "Birdbrain" cá nhân hóa ~1,25 tỷ bài tập/ngày, tính năng giải thích lỗi sai theo GPT-4 đóng khung như chính con cú Duo đang nói) và Prodigy Math (thuật toán tự phát hiện điểm mạnh/yếu, giữ học sinh trong vùng phát triển gần nhất, gắn trong thế giới game phù thủy). ⚠ Không phải mọi mascot đều gắn AI thật — Khan Academy Kids là phản ví dụ: mascot gấu "Kodi Bear" có vẻ là thiết bị UX/kịch bản, không có bằng chứng cá nhân hóa AI thật đứng sau; sản phẩm AI thật của Khan Academy (Khanmigo) tách biệt hoàn toàn, không gắn mascot.
+
+#### Khách hàng mục tiêu
+
+*JTBD delta so với JTBD nền tảng (mục 4.0.2):* đối tượng trải nghiệm trực tiếp mở rộng ra chính học sinh (không chỉ phụ huynh là người quyết định mua) — job chính là **hứng thú/động lực học qua cơ chế trò chơi**, khác về bản chất với job "có người lớn đồng hành đáng tin cậy" của 3.1. Bằng chứng học thuật (2 nghiên cứu peer-reviewed) xác nhận trò chơi hóa cải thiện thật hứng thú/động lực trong lúc dùng, dù hiệu ứng giảm nhẹ (không mất hẳn) sau khi ngừng can thiệp.
+
+#### Giải pháp
+
+*Positioning Statement (◆ dự thảo, chưa kiểm chứng):* Đối với phụ huynh muốn con vừa học vừa hứng thú, không phải ép học — Edupia Class [3.2] có một người bạn AI đồng hành dưới hình hài nhân vật quen thuộc, biến việc luyện tập thành hành trình game hóa nhưng vẫn bám sát đúng tiến độ học thật của con. Khác với mascot chỉ trang trí (không có AI thật đứng sau), 3.2 cam kết mascot phản ánh đúng dữ liệu học tập cá nhân hóa của từng học sinh.
+
+> ⚠ **Rủi ro cần lưu ý:** rủi ro không nằm ở niềm tin/pháp lý như 3.1 mà ở **thao túng hành vi trẻ em vì mục tiêu doanh thu** — đã có tiền lệ pháp lý cụ thể, nghiêm trọng (báo cáo dark-patterns của FTC năm 2022 nhắm đúng dịch vụ trẻ em; án phạt Fortnite/Epic Games $520 triệu vì dùng dark pattern khiến người chơi mua hàng ngoài ý muốn — tiền lệ lớn nhất ngành game/sản phẩm số cho trẻ em), và phê bình cụ thể có tên tác giả nhắm đúng archetype này (Common Sense Media về Prodigy: lên cấp phụ thuộc điểm dễ kiếm hơn nếu trả phí, nhiều tính năng khóa sau gói thành viên, phụ huynh/trẻ mô tả app "giống một trò kiếm tiền... khiến trẻ thất vọng, mất hứng"). **Đây là rủi ro cần đọc cùng nguyên tắc "Lợi nhuận là KPI cao nhất" của công ty (mục 1.3)** — chính áp lực tối ưu doanh thu là điều khiến archetype này dễ trượt sang dark-pattern nhất theo đúng case Prodigy vừa tìm được; cần rào chắn thiết kế rõ ràng (không khóa tiến độ học thật sau paywall, không dùng cơ chế "mất streak = tội lỗi" đã bị phê bình ở Duolingo — dù một bài phản biện độc lập khác bác bỏ nhãn "dark pattern" cho Duolingo, coi đây là nhắc nhở mục tiêu tự đặt, không phải lừa dối — tranh cãi chưa ngã ngũ) ngay từ đầu, không phải sửa sau khi bị phản ứng.
+
+> ◆ **Câu hỏi thiết kế cốt lõi, chưa trả lời:** mascot có thật sự "là AI" (lời thoại/gợi ý sinh động theo tiến độ thật của từng học sinh, như Duolingo/Prodigy) hay chỉ là lớp vỏ UX trang trí bọc ngoài một hệ thống nội dung tĩnh (như nghi vấn với Khan Academy Kids)? Câu trả lời quyết định liệu 3.2 có tận dụng đúng hạ tầng Adaptive Learning đang xây cho mức 1.2/1.3 (mục 2.2) hay chỉ là một lớp thiết kế/thương hiệu không cần đầu tư AI mới — ảnh hưởng trực tiếp effort estimate.
+
+#### Câu hỏi cần chốt — riêng 3.2
+
+| Câu hỏi | Owner quyết định | Deadline | Hệ quả nếu chưa chốt |
+|---|---|---|---|
+| Mascot của 3.2 có gắn AI cá nhân hóa thật (dùng chung Adaptive Learning mục 1.2) hay chỉ là lớp thiết kế/UX? | Product + Engineering | Trước T9 | Ảnh hưởng trực tiếp effort estimate — 2 kịch bản khác hẳn nhau về đầu tư kỹ thuật |
+| Rào chắn thiết kế nào ngăn 3.2 trượt sang dark-pattern (paywall khóa tiến độ học thật, cơ chế streak gây tội lỗi)? | Product + MKT + Pháp lý | Trước khi viết PRD | Nếu không có rào chắn từ đầu, rủi ro lặp lại đúng phê bình đã có tiền lệ pháp lý (FTC/Fortnite) với chính sản phẩm nhắm trẻ em |
+| Có ví dụ Việt Nam thứ hai ngoài Monkey Junior/VMonkey đáng tham chiếu không (vd. cần kiểm tra ELSA Speak — research.md nghi ngờ ELSA gần 3.1 hơn nhưng chưa xác minh)? | Product + Research | Trước khảo sát T9 | Thiếu tham chiếu Việt Nam làm giảm độ tin cậy khi trình bày cho BOD |
+
+### 4.3 Cơ chế kỹ thuật dùng chung — 2 phương án thay thế nhau [đổi số từ 4.4, v2.0/v2.1, không đổi nội dung]
+
+*Cả 2 phương án A/B dưới đây trả lời câu hỏi "AI làm gì" — trực giao với câu hỏi "AI xuất hiện dưới hình hài nào" của 3.1/3.2 (mục 4.0.1). Về nguyên tắc, 3.1 hoặc 3.2 có thể kết hợp với Phương án A hoặc B.*
 
 ◆ Chưa chốt — cần Pilot/BOD quyết định trước khi viết PRD.
 
-**Persona Engine — hạng mục nền tảng dùng chung cho cả 2 phương án [MỚI, v2.1, ● brainstorm 08-18]:** Cả Phương án A và B đều cần xây "chân dung" (persona) hai chiều — **chân dung giáo viên** (lấy từ đội ngũ GV thật đông đảo hiện có của Edupia Tutor: giọng nói, cách giảng bài, cách tương tác với học sinh — dùng để AI "học" phong cách GV thay vì tạo AI vô danh từ đầu) và **chân dung học sinh** (nạp liên tục dữ liệu học tập để AI chủ động đưa gợi ý cho giáo viên, không chỉ báo cáo tĩnh một lần — nguyên lý tương tự cách AI-agent nạp context liên tục để hiểu người dùng theo thời gian). Phiên brainstorm xác định đây là hạng mục đầu tư lớn nhất so với năng lực hiện có ở Concept 1/2 (AI Class/Tutor) — lớn hơn cả Adaptive Learning của mức 1.2, vì phải xây **cả hai** chân dung cùng lúc. ◆ Chưa có effort estimate cụ thể; cần Engineering đối chiếu với hạ tầng Adaptive Learning đang xây cho mức 1.2/1.3 (xem câu hỏi cuối mục 4.5) trước khi ước lượng.
+**Persona Engine — hạng mục nền tảng dùng chung cho cả 2 phương án [MỚI, v2.1, ● brainstorm 08-18]:** Cả Phương án A và B đều cần xây "chân dung" (persona) hai chiều — **chân dung giáo viên** (lấy từ đội ngũ GV thật đông đảo hiện có của Edupia Tutor: giọng nói, cách giảng bài, cách tương tác với học sinh — dùng để AI "học" phong cách GV thay vì tạo AI vô danh từ đầu) và **chân dung học sinh** (nạp liên tục dữ liệu học tập để AI chủ động đưa gợi ý cho giáo viên, không chỉ báo cáo tĩnh một lần — nguyên lý tương tự cách AI-agent nạp context liên tục để hiểu người dùng theo thời gian). Phiên brainstorm xác định đây là hạng mục đầu tư lớn nhất so với năng lực hiện có ở Concept 1/2 (AI Class/Tutor) — lớn hơn cả Adaptive Learning của mức 1.2, vì phải xây **cả hai** chân dung cùng lúc. ◆ Chưa có effort estimate cụ thể; cần Engineering đối chiếu với hạ tầng Adaptive Learning đang xây cho mức 1.2/1.3 (xem câu hỏi cuối mục 4.4) trước khi ước lượng.
 
 | Phương án | Mô tả | Effort | Rủi ro |
 |---|---|---|---|
 | **A — "AI Song Hành"** (archetype dual-teacher, theo TAL/Xueersi, Doushen) | AI đảm nhiệm lớp giám sát liên tục xuyên suốt tuần (không phải phiên cố định 30' như mức 1.2) — nhắc bài, phát hiện lỗ hổng, trả lời câu hỏi đơn giản thời gian thực; leo thang cho GVCN chỉ khi có ngoại lệ. Kế thừa Adaptive Learning từ mức 1.2 nhưng cần chuyển từ batch sang real-time. | Rất cao — hạ tầng kỹ thuật lớn hơn cả Adaptive Learning của mức 1.2 | Không có tiền lệ ở phương Tây/Đông Nam Á; Edupia sẽ là người đi đầu tại Việt Nam |
 | **B — "AI luyện hội thoại"** (archetype conversational-practice, theo Dino AI, ELSA Speak, Speak) | AI hội thoại giọng nói tương tác thời gian thực, không cần Knowledge Graph khổng lồ. Gần với hướng nâng cấp Speak đã có ở mức 1.1/1.2. | Trung bình-Cao — thấp hơn Phương án A | Archetype đông đối thủ nhất (Dino AI, ELSA, Speak, Duolingo Max, Loora đều cạnh tranh trực diện) — khó có USP khác biệt nếu chỉ dừng ở mức "luyện hội thoại AI" |
 
-**Loại trừ rõ ràng:** archetype "AI mô phỏng nhân cách/cảm xúc riêng biệt" cho trẻ em — không đưa vào bất kỳ phương án nào của Concept 3, dựa trên tiền lệ Character.AI (mục 4.3).
+**Loại trừ rõ ràng:** archetype "AI mô phỏng nhân cách/cảm xúc riêng biệt" cho trẻ em — không đưa vào bất kỳ phương án nào của Concept 3, dựa trên tiền lệ Character.AI (mục 4.0.3). **[v2.2]** Lưu ý: đây là lý do trực tiếp 3.1 (mục 4.1) không nên nhân bản người thật theo hướng "AI có tính cách riêng" — nếu theo đuổi 3.1, giữ nghiêm ngặt trong phạm vi bài học có cấu trúc, đúng nguyên tắc loại trừ này.
 
-### 4.5 Lộ trình triển khai — 3 giai đoạn xây niềm tin [MỚI, v2.1]
+### 4.4 Lộ trình triển khai — 3 giai đoạn xây niềm tin [MỚI, v2.1, đổi số từ 4.5 ở v2.2]
 
 *Nguồn: `02_discovery/brainstorming/brainstorm-ai-tutor-390k-positioning-2026-08-18/`. Đây là kết quả hội tụ (converge) của phiên brainstorming — không phải Pilot hay dữ liệu vận hành thật, cùng mức độ chắc chắn ◆ như phần còn lại của Concept 3.*
 
@@ -646,9 +726,9 @@ Trigger: Phụ huynh đang cân nhắc thuê gia sư 1-1 nhưng thấy giá quá
 
 ● **Đã chốt (2026-08-18, quyết định user):** cơ chế xác nhận niềm tin ở Giai đoạn 3 là con người ở vai trò **giám sát/audit định kỳ**, không phải hiện diện/xác nhận từng buổi như GĐ1-2. Đây là câu trả lời chính thức cho khoảng trống mà phiên brainstorm để ngỏ — giải quyết mâu thuẫn bề mặt giữa "không còn người thật trong lớp" và insight "niềm tin cần giữ xuyên suốt": cơ chế chốt chặn con người **không biến mất**, chỉ đổi tần suất (định kỳ thay vì liên tục/từng buổi) khi AI đã đủ trưởng thành để chạy độc lập. ◆ Còn mở: tần suất/chu kỳ audit cụ thể là bao nhiêu (hàng tuần? hàng tháng? theo mẫu ngẫu nhiên hay theo cảnh báo rủi ro?), và điều kiện nào khiến một trường hợp bị "leo thang" từ audit định kỳ trở lại giám sát chủ động — cần Product/Engineering thiết kế cụ thể trước PRD.
 
-*Quan hệ với Phương án A/B (mục 4.4):* ◆ Chưa xác định rõ trong phiên brainstorm — lộ trình 3 giai đoạn có thể là (a) một trục thời gian độc lập áp dụng cho cả Phương án A và B, hoặc (b) một lộ trình trưởng thành cụ thể dẫn tới Phương án A (từ hỗ trợ tự học → dạy trực tiếp → độc lập hoàn toàn khớp đúng archetype "AI Song Hành" hơn "AI luyện hội thoại"). Xem câu hỏi bổ sung ở bảng dưới.
+*Quan hệ với Phương án A/B (mục 4.3):* ◆ Chưa xác định rõ trong phiên brainstorm — lộ trình 3 giai đoạn có thể là (a) một trục thời gian độc lập áp dụng cho cả Phương án A và B, hoặc (b) một lộ trình trưởng thành cụ thể dẫn tới Phương án A (từ hỗ trợ tự học → dạy trực tiếp → độc lập hoàn toàn khớp đúng archetype "AI Song Hành" hơn "AI luyện hội thoại"). Xem câu hỏi bổ sung ở bảng dưới.
 
-*Giá trị phụ từ dữ liệu (ưu tiên thấp nhất trong 5 hướng của phiên — không phải cam kết sản phẩm):* Chân dung học sinh tích luỹ qua lộ trình trên có thể phục vụ 2 mục đích ngoài học tập: (1) cơ sở dữ liệu cho Sales tư vấn gói học phù hợp thay vì tư vấn chung chung; (2) ◆ phát hiện sớm dấu hiệu tâm lý/hành vi của học sinh — một hướng sản phẩm khác hẳn mục tiêu học tập ban đầu, **ghi nhận như khả năng mở, chưa phải cam kết sản phẩm**. ⚠ Ý (2) chạm vào dữ liệu nhạy cảm của trẻ em — cần rà soát pháp lý/đạo đức trước khi phát triển thêm, đặc biệt đối chiếu với tiền lệ rủi ro niềm tin đã nêu ở mục 4.3 (vụ Character.AI). Về kinh tế, hướng gỡ mâu thuẫn TRIZ ở mục 4.3 (dữ liệu là tài sản riêng, khấu hao qua vòng đời) dựa trực tiếp vào giá trị phụ này.
+*Giá trị phụ từ dữ liệu (ưu tiên thấp nhất trong 5 hướng của phiên — không phải cam kết sản phẩm):* Chân dung học sinh tích luỹ qua lộ trình trên có thể phục vụ 2 mục đích ngoài học tập: (1) cơ sở dữ liệu cho Sales tư vấn gói học phù hợp thay vì tư vấn chung chung; (2) ◆ phát hiện sớm dấu hiệu tâm lý/hành vi của học sinh — một hướng sản phẩm khác hẳn mục tiêu học tập ban đầu, **ghi nhận như khả năng mở, chưa phải cam kết sản phẩm**. ⚠ Ý (2) chạm vào dữ liệu nhạy cảm của trẻ em — cần rà soát pháp lý/đạo đức trước khi phát triển thêm, đặc biệt đối chiếu với tiền lệ rủi ro niềm tin đã nêu ở mục 4.0.3 (vụ Character.AI). Về kinh tế, hướng gỡ mâu thuẫn TRIZ ở mục 4.0.3 (dữ liệu là tài sản riêng, khấu hao qua vòng đời) dựa trực tiếp vào giá trị phụ này.
 
 *Câu hỏi cần chốt — toàn Concept 3*
 
@@ -660,72 +740,93 @@ Trigger: Phụ huynh đang cân nhắc thuê gia sư 1-1 nhưng thấy giá quá
 | Ranh giới ngôn ngữ nào cần giữ để tránh overpromise "gia sư riêng", tương tự rủi ro đã xảy ra với GVCN ở mức 1.3? | Product + MKT | Trước khi viết SA/SB | Nếu không, rủi ro kỳ vọng sai lệch dẫn đến churn, lặp lại đúng bài học từ mức 1.3 |
 | Nếu chọn Phương án A, có tận dụng được hạ tầng Adaptive Learning đang xây cho mức 1.2/1.3 không, hay phải xây riêng? | Engineering | Trước T9 | Ảnh hưởng trực tiếp việc Concept 3 có thể chia sẻ effort với Concept 1 hay là một khoản đầu tư hoàn toàn tách biệt |
 | **[MỚI, v2.1]** Số liệu học sinh/GV hiện tại của Edupia Tutor (nhóm 1-4/1-6) là bao nhiêu? | Vận hành + Product | Trước T9 | Không có số liệu này, không ước lượng được mức tăng tỷ lệ HS/GV khả thi khi AI hỗ trợ — liên hệ trực tiếp câu hỏi "Talktime GVCN thật" còn bỏ ngỏ ở mục 2.3 |
-| **[MỚI, v2.1]** Thành phần nào trong quy trình vận hành hiện tại của Edupia Tutor (kể cả sau buổi học) có thể loại bỏ hẳn khi có AI? | Vận hành | Trước T9 | Phiên brainstorm chưa trả lời được (thiếu thông tin quy trình vận hành) — cần buổi làm việc riêng với đội vận hành Tutor trước khi ước lượng effort lộ trình 4.5 |
-| **[MỚI, v2.1]** Lộ trình 3 giai đoạn (mục 4.5) quan hệ thế nào với Phương án A/B — trục thời gian độc lập, hay lộ trình trưởng thành dẫn riêng tới Phương án A? | Product + Engineering | Trước T9 | Ảnh hưởng trực tiếp cách trình bày roadmap cho BOD — hiện đang có 2 khung (phương án kỹ thuật A/B và lộ trình giai đoạn) chưa được hợp nhất |
-| **[MỚI, v2.1, chốt 08-18]** Cơ chế Giai đoạn 3 đã chốt = giám sát/audit định kỳ. Còn lại: tần suất/chu kỳ audit cụ thể là bao nhiêu, và điều kiện nào kích hoạt leo thang từ audit định kỳ trở lại giám sát chủ động? | Product + Engineering | Trước khi dùng lộ trình 4.5 làm cơ sở kỹ thuật cho PRD | Không có tần suất/ngưỡng leo thang cụ thể, không ước lượng được effort vận hành GĐ3 hay đo được mức độ "niềm tin xuyên suốt" có thực sự được giữ hay chỉ là hình thức |
+| **[MỚI, v2.1]** Thành phần nào trong quy trình vận hành hiện tại của Edupia Tutor (kể cả sau buổi học) có thể loại bỏ hẳn khi có AI? | Vận hành | Trước T9 | Phiên brainstorm chưa trả lời được (thiếu thông tin quy trình vận hành) — cần buổi làm việc riêng với đội vận hành Tutor trước khi ước lượng effort lộ trình 4.4 |
+| **[MỚI, v2.1]** Lộ trình 3 giai đoạn (mục 4.4) quan hệ thế nào với Phương án A/B — trục thời gian độc lập, hay lộ trình trưởng thành dẫn riêng tới Phương án A? | Product + Engineering | Trước T9 | Ảnh hưởng trực tiếp cách trình bày roadmap cho BOD — hiện đang có 2 khung (phương án kỹ thuật A/B và lộ trình giai đoạn) chưa được hợp nhất |
+| **[MỚI, v2.1, chốt 08-18]** Cơ chế Giai đoạn 3 đã chốt = giám sát/audit định kỳ. Còn lại: tần suất/chu kỳ audit cụ thể là bao nhiêu, và điều kiện nào kích hoạt leo thang từ audit định kỳ trở lại giám sát chủ động? | Product + Engineering | Trước khi dùng lộ trình 4.4 làm cơ sở kỹ thuật cho PRD | Không có tần suất/ngưỡng leo thang cụ thể, không ước lượng được effort vận hành GĐ3 hay đo được mức độ "niềm tin xuyên suốt" có thực sự được giữ hay chỉ là hình thức |
 | **[MỚI, v2.1, cập nhật 08-18]** Danh tính đã chốt: Edupia Tutor = 1 họ sản phẩm (1-1/1-4/1-6, giá tăng dần). Còn lại: khảo sát T9 đo mức độ chồng lấn khách hàng với Concept 3 cho **toàn dải giá** Edupia Tutor (không chỉ điểm giá 1-1 cao nhất) theo cách nào? Tên chính thức của Concept 3 (tránh nhầm với "Edupia Tutor") là gì? | BOD + Product | Trước khi trình BOD chính thức | Nếu chỉ đo cannibalization ở điểm giá 1-1 như thiết kế khảo sát ban đầu, bỏ sót rủi ro với các mức giá 1-4/1-6 thấp hơn — nơi khoảng cách giá với Concept 3 (390k) hẹp hơn, rủi ro chuyển đổi khách hàng cao hơn |
-| **[MỚI, v2.1, cập nhật 08-18]** Danh tính "Edupia AI Class" đã chốt = Edupia Class = AI Class Plus (cùng sản phẩm, không phải UniClass). Còn lại: khung định vị 3 điểm đang so sánh 2 cấu hình/mức đầu tư của **cùng một sản phẩm** (self-learning hiện tại vs. sau đầu tư Concept 3), không phải 3 sản phẩm 3 mức giá — Concept 3 giữ nguyên 390k hay là mức giá mới? | Product | Trước khi dùng khung định vị 3 điểm cho khảo sát T9 | Nếu không làm rõ, khung định vị 3 điểm có thể truyền đạt sai bản chất (nghe như 3 sản phẩm cạnh tranh nhau, trong khi thực chất là 1 sản phẩm ở 2 mức đầu tư + 1 sản phẩm khác hẳn) khi trình bày cho BOD/khảo sát |
+| **[MỚI, v2.1, cập nhật 08-19]** Danh tính "Edupia AI Class" đã chốt = Edupia Class = AI Class Plus (cùng sản phẩm, không phải UniClass). Khung định vị 3 điểm đang so sánh 2 cấu hình/mức đầu tư của **cùng một sản phẩm** (self-learning hiện tại 250k vs. mục tiêu 390k sau đầu tư Concept 1/2/3) — đã xác nhận (xem mục 4.0). Còn lại: sản phẩm mới riêng biệt ở 390k, hay nâng cấp trực tiếp sản phẩm 250k hiện có lên 390k? | Product + BOD | Trước khi dùng khung định vị 3 điểm cho khảo sát | 2 phương án khác nhau đáng kể về go-to-market và trải nghiệm khách hàng hiện tại (đang trả 250k) — nếu không chốt, khảo sát có thể đo nhầm đối tượng (khách hàng mới vs. khách hàng nâng cấp) |
+| **[MỚI, v2.2]** Theo đuổi 3.1, 3.2, cả hai song song, hay đưa cả hai vào khảo sát T9 để thị trường quyết định? Nếu cả hai, thứ tự ưu tiên Pilot là gì — 3.2 trước (nhiều tiền lệ/rủi ro thấp hơn) rồi 3.1 sau, hay 2 Pilot song song? | BOD + Product | Trước khi trình BOD chính thức (cùng mốc với dòng "tên chính thức Concept 3" ở trên) | Không chốt, hai định hướng có hồ sơ rủi ro/effort khác hẳn nhau (mục 4.0.1) dễ bị gộp chung thành "Concept 3" mơ hồ khi trình bày, làm loãng cả câu hỏi khảo sát lẫn quyết định đầu tư |
+| **[MỚI, v2.2]** Nếu chọn 3.1 — rà soát pháp lý quyền hình ảnh/giọng nói tại Việt Nam (nhân bản GV thật vs. xây nhân vật thương hiệu nguyên bản) đã có ai phụ trách chưa? | Pháp lý + Product | Trước khi phát triển bất kỳ prototype 3.1 nào | Đây là rủi ro duy nhất trong toàn bộ concept board (Concept 1-3) có tiền lệ pháp lý quốc tế cụ thể (vụ Lovo Inc., ELVIS Act) — không rà soát trước có thể dẫn tới phải dừng/sửa sau khi đã đầu tư |
+| **[MỚI, v2.2]** Nếu chọn 3.2 — mascot có gắn AI cá nhân hóa thật hay chỉ là lớp thiết kế/UX (xem mục 4.2)? Rào chắn dark-pattern nào cần có trước khi viết PRD? | Product + Engineering + Pháp lý | Trước T9 | Nếu không trả lời, effort estimate sai lệch (mascot-AI-thật vs. mascot-trang-trí là 2 khoản đầu tư khác hẳn) và rủi ro lặp lại đúng phê bình pay-to-win đã có tiền lệ pháp lý (FTC/Fortnite) với sản phẩm nhắm trẻ em |
 
 ---
 
-## 5. Kế hoạch triển khai
+## 5. Kế hoạch triển khai [MỚI, v2.3 — lộ trình chi tiết do user cung cấp 2026-08-19, thay thế khung mốc thời gian v2.0-v2.2]
 
-*Từ chốt định hướng đến bắt đầu xây dựng sản phẩm — 5 tháng.*
+*Từ trình bày concept đến bắt đầu xây dựng sản phẩm — khoảng 5 tháng (từ trước 31/08/2026 đến T1/2027). Quy trình: họp trình bày concept → xây dựng kế hoạch khảo sát → xử lý kết quả & chọn phương án concept → chuẩn bị bán → test bán 2 vòng → xây sản phẩm.*
 
-⚠ **Cập nhật khung quyết định so với v1.0:** exit criteria T9 trước đây là "1 phương án được chọn" trong số 4 concept ngang hàng. Ở v2.0, việc "chọn phương án" nghĩa là chọn **1 định hướng (Concept 1/2/3) + 1 mức/biến thể nội bộ cụ thể** (vd. "Concept 1 mức 1.2" hoặc "Concept 2 biến thể 2.3" hoặc "Concept 3 phương án B") — không phải chỉ chọn số thứ tự concept. Cần thống nhất lại với BOD cách diễn giải "1 phương án" ở mốc T9 theo đúng khung mới này.
+⚠ **Cập nhật khung quyết định so với v1.0/v2.0:** "chọn phương án" nghĩa là chọn **1 định hướng (Concept 1/2/3) + 1 mức/biến thể nội bộ cụ thể** (vd. "Concept 1 mức 1.2", "Concept 2 biến thể 2.3", "Concept 3 biến thể 3.1 hoặc 3.2 + phương án kỹ thuật A/B") — không phải chỉ chọn số thứ tự concept. Ở v2.3, mốc chọn phương án chuyển từ "T9" (khung cũ) sang cửa sổ **15/10-30/10/2026**, ngay sau khi có báo cáo khảo sát.
 
 | Mốc thời gian | Nội dung chính |
 |---|---|
-| T8/2026 | Chốt các định hướng — hoàn thiện 3 concept board (bao gồm bổ sung Concept 3 mới và các câu hỏi mở của biến thể 2.1) |
-| T9/2026 | Khảo sát & chốt 1 định hướng + 1 mức/biến thể cụ thể + hoàn thiện tài liệu đào tạo sale |
-| T10/2026 | Chốt phương án & bán thử — pilot sale quy mô nhỏ |
-| 1/11/2026 | Tinh chỉnh bám tiếp — trùng deadline chính thức theo Kế hoạch H2/2026 |
-| 1/12/2026 | Chốt & hoàn thiện phương án xây sản phẩm — PRD + kế hoạch nguồn lực |
-| 1/1/2027 | Bắt đầu làm — khởi động xây dựng chính thức |
+| **Trước 31/08/2026** | Hoàn thiện và trình bày slide các phương án concept sản phẩm dự kiến (BOD/team) |
+| **01-15/09/2026** | Xây dựng chi tiết phương pháp, bảng hỏi và phương án khảo sát |
+| **15/09-15/10/2026** | Triển khai khảo sát thực tế ~100 phụ huynh, qua điện thoại và trực tiếp tận nhà, tại khu vực **Tier 3 và Tier 4** |
+| **15/10-30/10/2026** | Xử lý kết quả khảo sát, **chọn phương án concept**, xây dựng kịch bản bán hàng, chuẩn bị nội dung Marketing, đào tạo đội ngũ Sale |
+| **Tháng 11/2026** | Chạy chiến dịch **test bán thật — vòng 1**: quảng cáo thật, Sale gọi điện tư vấn và **thu tiền thật** để đo tỷ lệ chốt. Sau khi kết thúc, vận hành gọi hoàn tiền cho khách hàng + tặng thêm 1 tháng học trải nghiệm, vì sản phẩm thực tế chưa hoàn thiện |
+| **Tháng 12/2026** | Lấy phản hồi từ vòng 1, làm mịn kịch bản bán hàng và sản phẩm, tiến hành **test bán lần cuối — vòng 2** |
+| **Tháng 1/2027** | Bắt đầu đổ nguồn lực chính thức để code/hoàn thiện sản phẩm — 1 đến 6 tháng tùy concept được chọn |
 
-> **Lưu ý vận hành song song:** Pilot vận hành GVCN (Giai đoạn 0, riêng cho mức 1.3) chạy song song với T8-T9, không chờ đến khi có kết quả khảo sát — để có dữ liệu vận hành thật trước khi quyết định phương án cuối cùng. ◆ **Mới ở v2.0:** cần bổ sung một Pilot nội bộ riêng cho Concept 3 (chưa xác định phạm vi) trước T9, vì đây là định hướng duy nhất hoàn toàn dựa bằng chứng thị trường ngoài — nếu không có Pilot, khảo sát T9 sẽ đo purchase intent cho một concept mà công ty chưa có bất kỳ dữ liệu vận hành nội bộ nào để đối chiếu.
+> ⚠ **Xung đột với deadline BOD hiện có, chưa giải quyết:** mục 1.2 ghi deadline chính thức (Kế hoạch H2/2026) "hoàn thiện phương án định vị AI Class mới trước 1/11/2026" — nhưng theo lộ trình trên, tháng 11 là lúc đang chạy test bán thật (vòng 1), không phải mốc "đã hoàn thiện". ◆ Cần Product xác nhận lại ý nghĩa deadline 1/11 với BOD (xem ghi chú tại mục 1.2) trước khi dùng bảng mốc này để báo cáo chính thức.
+
+> **Lưu ý vận hành song song:** Pilot vận hành GVCN (Giai đoạn 0, riêng cho mức 1.3) nên chạy song song với giai đoạn 01/09-15/10 (xây khảo sát + khảo sát thực tế), không chờ đến khi có kết quả khảo sát — để có dữ liệu vận hành thật trước khi bước vào cửa sổ chọn phương án 15/10-30/10. ◆ Tương tự, cần một Pilot nội bộ riêng cho Concept 3 (chưa xác định phạm vi) hoàn thành trước 15/10, vì đây là định hướng duy nhất hoàn toàn dựa bằng chứng thị trường ngoài (cả 3.1 lẫn 3.2, xem mục 4.0.1) — nếu không có Pilot, khảo sát sẽ đo purchase intent cho một concept mà công ty chưa có bất kỳ dữ liệu vận hành nội bộ nào để đối chiếu.
+
+> ⚠ **[MỚI, v2.3] Rủi ro niềm tin từ cơ chế "thu tiền thật rồi hoàn tiền":** test bán vòng 1 (T11) thu tiền thật từ khách hàng cho một sản phẩm chưa hoàn thiện, sau đó hoàn tiền + tặng 1 tháng học. Đây là cơ chế đo lường hợp lý về mặt nghiên cứu (tỷ lệ chốt thật mạnh hơn purchase-intent khảo sát nhiều) nhưng có rủi ro uy tín thương hiệu thật nếu khách hàng cảm thấy bị "gài" hoặc quy trình hoàn tiền chậm/không rõ ràng — đặc biệt với nhóm khách hàng Tier 3/4 vốn nhạy cảm hơn về tài chính (theo `02_discovery/research/market-tier3-4-persona-income-2026-08-18/research.md`). Xem risk register mục 5.3 để có mitigation cụ thể — chưa có trong khung v2.0-v2.2.
 
 ### 5.1. Workstream & RACI
 
 | Đầu việc | Responsible | Accountable | Consulted | Informed |
 |---|---|---|---|---|
-| Hoàn thiện 3 concept board (bao gồm Concept 3 mới) | Product (Liêm) | Product | Sales, MKT, Academic | BOD |
+| Hoàn thiện & trình bày slide concept (trước 31/08) | Product (Liêm) | Product | Sales, MKT, Academic | BOD |
 | Chốt lý do kinh doanh cho biến thể 2.1 (Toán/UniClass) | Product + BOD | BOD | Product UniClass, Finance | Toàn bộ team liên quan |
 | Chốt định vị Concept 3 (substitute Tutor 1-1 hay noncustomer mới) | Product + BOD | BOD | Sales Tutor 1-1, Finance | Toàn bộ team liên quan |
+| **[MỚI]** Chốt theo đuổi 3.1, 3.2, hay cả hai (xem mục 4.0.1) | Product + BOD | BOD | Pháp lý, Sales Tutor 1-1 | Toàn bộ team liên quan |
 | Pilot vận hành GVCN (Giai đoạn 0, mức 1.3) | Vận hành | Product | HR, Finance | BOD |
 | ◆ Pilot nội bộ Concept 3 (phạm vi chưa xác định) | Product + Vận hành | Product | Engineering | BOD |
-| Khảo sát 100 phụ huynh | Product/Research | Product | MKT | BOD, Sales |
-| Soạn tài liệu đào tạo Sale | Sales Enablement | Sales Lead | Product | Telesale team |
-| Bán thử (Pilot sale) | Telesale | Sales Lead | Product | BOD |
-| Chốt PRD & kế hoạch nguồn lực | Product | Product | Engineering, Academic, Finance | BOD |
+| Xây bảng hỏi & phương án khảo sát (01-15/09) | Product/Research | Product | MKT, Sales | BOD |
+| Khảo sát thực tế 100 phụ huynh, Tier 3/4 (15/09-15/10) | Product/Research | Product | MKT | BOD, Sales |
+| **[MỚI]** Xử lý kết quả khảo sát & chọn phương án concept (15/10-30/10) | Product | Product | BOD, MKT, Sales, Engineering | Toàn bộ team liên quan |
+| Xây kịch bản bán hàng + nội dung Marketing (15/10-30/10) | Sales Enablement + MKT | Sales Lead | Product | Telesale team |
+| Đào tạo đội ngũ Sale (15/10-30/10) | Sales Enablement | Sales Lead | Product | Telesale team |
+| Test bán thật — vòng 1, kể cả chạy quảng cáo (T11) | Telesale + MKT | Sales Lead | Product | BOD |
+| **[MỚI]** Hoàn tiền + tặng tháng học trải nghiệm sau vòng 1 | Vận hành + CSKH | Vận hành | Finance, Sales | BOD, khách hàng đã mua |
+| **[MỚI]** Làm mịn kịch bản bán hàng & sản phẩm từ phản hồi vòng 1 (T12) | Product + Sales | Product | Engineering, Academic | BOD |
+| **[MỚI]** Test bán lần cuối — vòng 2 (T12) | Telesale + MKT | Sales Lead | Product | BOD |
+| Chốt PRD & kế hoạch nguồn lực (trước T1/2027) | Product | Product | Engineering, Academic, Finance | BOD |
 | Phê duyệt ngân sách/nguồn lực | — | BOD | Finance, Product | Toàn bộ team liên quan |
+| Đổ nguồn lực chính thức code/hoàn thiện sản phẩm (T1/2027, 1-6 tháng tùy concept) | Engineering + Academic | Product | — | BOD |
 
 ### 5.2. Milestone gates — Entry/Exit criteria
 
 | Mốc | Entry criteria (điều kiện để bắt đầu) | Exit criteria (điều kiện để coi là xong) |
 |---|---|---|
-| T8/2026 — Chốt định hướng | 3 concept board đã rà soát nội bộ, biến thể 2.1 đã có lý do kinh doanh từ BOD | 3 concept board hoàn chỉnh + Pilot GVCN đã khởi động + định vị Concept 3 (cannibalization) đã chốt |
-| T9/2026 — Khảo sát | Concept board đã pilot test 10-20 mẫu | Báo cáo khảo sát + 1 định hướng + 1 mức/biến thể được chọn theo tiêu chí đã thống nhất |
-| T10/2026 — Bán thử | Tài liệu đào tạo Sale hoàn chỉnh + (nếu là mức 1.3) có số liệu Pilot GVCN + (nếu là Concept 3) có số liệu Pilot nội bộ | Có tỷ lệ chuyển đổi thật từ khách hàng thật, không phải purchase intent khảo sát |
-| 1/11/2026 — Tinh chỉnh | Có dữ liệu bán thử | Phiên bản concept đã tinh chỉnh — đồng thời là deadline chính thức nộp BOD theo Kế hoạch H2/2026 |
-| 1/12/2026 — Chốt PRD | Toàn bộ câu hỏi cần chốt ở mục 2-4 đã có câu trả lời | PRD + kế hoạch nguồn lực được BOD phê duyệt |
-| 1/1/2027 — Bắt đầu làm | PRD đã duyệt, ngân sách đã cấp | Team Engineering/Academic bắt đầu sprint đầu tiên |
+| Trước 31/08 — Trình bày concept | 3 concept board đã rà soát nội bộ (gồm Concept 3 với 3.1/3.2), biến thể 2.1 đã có lý do kinh doanh từ BOD, định vị Concept 3 (cannibalization + 3.1 vs 3.2) đã có khung để trình bày | Slide trình bày hoàn chỉnh trước BOD/team |
+| 01-15/09 — Xây khảo sát | Slide concept đã trình bày | Bảng hỏi + phương án khảo sát hoàn chỉnh, sẵn sàng triển khai tại Tier 3/4 |
+| 15/09-15/10 — Khảo sát thực tế | Bảng hỏi đã pilot test 10-20 mẫu | Báo cáo khảo sát ~100 phụ huynh Tier 3/4 hoàn chỉnh |
+| 15/10-30/10 — Chọn phương án & chuẩn bị bán | Có báo cáo khảo sát | 1 định hướng + 1 mức/biến thể được chọn theo tiêu chí đã thống nhất, kịch bản bán hàng + Marketing + đội Sale sẵn sàng |
+| Tháng 11 — Test bán vòng 1 | Kịch bản bán + Marketing sẵn sàng, (nếu là mức 1.3) có số liệu Pilot GVCN, (nếu là Concept 3) có số liệu Pilot nội bộ | Có tỷ lệ chốt thật từ khách hàng thật (không phải purchase-intent khảo sát); toàn bộ khách hàng vòng 1 đã được hoàn tiền + tặng tháng học đúng cam kết |
+| Tháng 12 — Làm mịn & Test bán vòng 2 | Có dữ liệu/phản hồi vòng 1 | Kịch bản/sản phẩm đã làm mịn theo phản hồi; có tỷ lệ chốt vòng 2 để đối chiếu vòng 1 |
+| Trước T1/2027 — Chốt PRD | Có dữ liệu 2 vòng test bán, toàn bộ câu hỏi cần chốt ở mục 2-4 đã có câu trả lời | PRD + kế hoạch nguồn lực được BOD phê duyệt |
+| Tháng 1/2027 — Bắt đầu làm | PRD đã duyệt, ngân sách đã cấp | Team Engineering/Academic bắt đầu sprint đầu tiên |
 
-> **Rủi ro tiến độ cần nêu rõ:** Exit criteria của T9 yêu cầu "1 định hướng + 1 mức/biến thể được chọn", nhưng nếu là mức 1.3 hoặc Concept 3, các câu hỏi cần chốt ở mục 2.3/4.4 cho thấy vẫn còn nhiều câu hỏi chưa trả lời trước T10/1-12 — nghĩa là "chọn phương án" ở T9 chỉ nên là chọn có điều kiện (conditional), không phải chốt cuối cùng. Cần thống nhất với BOD rằng báo cáo 1/11 là phương án đã qua khảo sát nhưng một số điều kiện vận hành/tài chính vẫn đang xác nhận song song.
+> **Rủi ro tiến độ cần nêu rõ:** exit criteria của cửa sổ 15/10-30/10 yêu cầu "1 định hướng + 1 mức/biến thể được chọn", nhưng nếu là mức 1.3 hoặc Concept 3 (đặc biệt 3.1, xem mục 4.1), các câu hỏi cần chốt ở mục 2.3/4.1/4.2 cho thấy vẫn còn nhiều câu hỏi chưa trả lời trước khi bước vào test bán — nghĩa là "chọn phương án" ở cửa sổ này chỉ nên là chọn có điều kiện (conditional), không phải chốt cuối cùng. Cần thống nhất với BOD rằng phương án bước vào test bán T11 là phương án đã qua khảo sát nhưng một số điều kiện vận hành/tài chính/pháp lý vẫn đang xác nhận song song.
 
 ### 5.3. Risk register
 
 | Rủi ro | Owner | Trigger (dấu hiệu nhận biết) | Mitigation |
 |---|---|---|---|
-| Purchase intent khảo sát thổi phồng so với hành vi mua thật | Product/Research | Top-2-Box khảo sát T9 cao nhưng chuyển đổi bán thử T10 thấp hơn nhiều | Luôn đối chiếu song song 2 chỉ số, không quyết định chỉ dựa vào khảo sát |
-| Pilot GVCN cho ngưỡng khả thi thấp hơn 1:2.000 | Vận hành | Số liệu Pilot ở T8-T9 | Có phương án dự phòng: giảm phạm vi GVCN (chỉ giám sát ngoại lệ, gần với mẫu hình AI Song Hành của Concept 3) hoặc tăng giá tương ứng |
-| BOD chưa quyết định phạm vi Mastery Profile đúng hạn | Product | Không có quyết định trước T8 | Escalate sớm, đưa vào agenda BOD gần nhất, không chờ tự nhiên có quyết định |
-| Deadline 1/11 (BOD) và deadline nội bộ (tinh chỉnh, chưa xong PRD) lệch nhau | Product | Ngay từ bây giờ — đã xác nhận ở mục 5.2 | Thống nhất trước với BOD về bản chất báo cáo 1/11 là "có điều kiện", tránh hiểu nhầm là bản cuối |
-| Mức 1.3 không đạt sàn margin công ty yêu cầu | Finance | Kết quả tính giá vốn/buổi trước 1/12 | Chuẩn bị phương án B (giảm phạm vi GVCN) trước khi trình BOD, không để 1/12 mới phát hiện |
-| ⚠ **[MỚI]** Biến thể 2.1 (Toán) bị trình BOD mà chưa có lý do kinh doanh cụ thể cho việc đảo ngược quyết định UniClass | Product | Nếu biến thể 2.1 xuất hiện trong tài liệu khảo sát T9 mà mục "Lý do kinh doanh" ở mục 3.1 vẫn còn ◆ | Không đưa biến thể 2.1 vào khảo sát cho đến khi BOD xác nhận lý do bằng văn bản |
-| ⚠ **[MỚI]** Concept 3 cannibalize doanh thu Tutor 1-1 mà không được đo lường/quản lý | Product + Sales Tutor 1-1 | Nếu khảo sát T9 không tách riêng câu hỏi đo mức độ chồng lấn khách hàng | Thiết kế khảo sát T9 phải có câu hỏi riêng đo tỷ lệ phụ huynh đang cân nhắc Tutor 1-1 mà chuyển sang chọn Concept 3 |
-| ⚠ **[MỚI]** Concept 3 được bán trước khi có Pilot nội bộ, dẫn đến overpromise tương tự rủi ro GVCN ở mức 1.3 | Product + Sales | Nếu SA/SB của Concept 3 được soạn trước khi có kết quả Pilot | Áp dụng đúng nguyên tắc đã rút ra từ mức 1.3: Pilot vận hành → xác nhận Job thật giao được ở mức nào → mới viết content bán hàng |
+| Purchase intent khảo sát (15/09-15/10) thổi phồng so với hành vi mua thật | Product/Research | Top-2-Box khảo sát cao nhưng tỷ lệ chốt test bán T11 thấp hơn nhiều | Luôn đối chiếu song song 2 chỉ số, không quyết định chỉ dựa vào khảo sát |
+| Pilot GVCN cho ngưỡng khả thi thấp hơn 1:2.000 | Vận hành | Số liệu Pilot trước 15/10 | Có phương án dự phòng: giảm phạm vi GVCN (chỉ giám sát ngoại lệ, gần với mẫu hình AI Song Hành của Concept 3) hoặc tăng giá tương ứng |
+| BOD chưa quyết định phạm vi Mastery Profile đúng hạn | Product | Không có quyết định trước 31/08 | Escalate sớm, đưa vào agenda BOD gần nhất, không chờ tự nhiên có quyết định |
+| **[v2.3]** Deadline 1/11 (BOD, mục 1.2) không còn khớp ý nghĩa với lộ trình mới (T11 = đang test bán, không phải đã hoàn thiện) | Product | Ngay từ bây giờ — đã xác nhận ở đầu mục 5 | Product xác nhận lại với BOD ý nghĩa thật của deadline 1/11 trước khi dùng bảng mốc này báo cáo chính thức — không để đến gần deadline mới phát hiện lệch |
+| Mức 1.3 không đạt sàn margin công ty yêu cầu | Finance | Kết quả tính giá vốn/buổi trước khi chốt PRD (T1/2027) | Chuẩn bị phương án B (giảm phạm vi GVCN) trước khi trình BOD, không để sát PRD mới phát hiện |
+| ⚠ Biến thể 2.1 (Toán) bị trình BOD mà chưa có lý do kinh doanh cụ thể cho việc đảo ngược quyết định UniClass | Product | Nếu biến thể 2.1 xuất hiện trong khảo sát mà mục "Lý do kinh doanh" ở mục 3.1 vẫn còn ◆ | Không đưa biến thể 2.1 vào khảo sát cho đến khi BOD xác nhận lý do bằng văn bản |
+| ⚠ Concept 3 cannibalize doanh thu Tutor 1-1 mà không được đo lường/quản lý | Product + Sales Tutor 1-1 | Nếu khảo sát 15/09-15/10 không tách riêng câu hỏi đo mức độ chồng lấn khách hàng | Thiết kế bảng hỏi phải có câu hỏi riêng đo tỷ lệ phụ huynh đang cân nhắc Tutor 1-1 mà chuyển sang chọn Concept 3 |
+| ⚠ Concept 3 được bán trước khi có Pilot nội bộ, dẫn đến overpromise tương tự rủi ro GVCN ở mức 1.3 | Product + Sales | Nếu kịch bản bán hàng Concept 3 được soạn (15/10-30/10) trước khi có kết quả Pilot | Áp dụng đúng nguyên tắc đã rút ra từ mức 1.3: Pilot vận hành → xác nhận Job thật giao được ở mức nào → mới viết kịch bản bán hàng |
+| **[MỚI, v2.3]** Khách hàng phản ứng tiêu cực với cơ chế "thu tiền thật rồi hoàn tiền + tặng tháng học" ở test bán vòng 1 (T11) — rủi ro uy tín thương hiệu, đặc biệt với nhóm Tier 3/4 nhạy cảm tài chính | Vận hành + CSKH + MKT | Phàn nàn/review tiêu cực trong hoặc ngay sau chiến dịch T11 | Kịch bản Sale phải minh bạch ngay từ đầu cuộc gọi rằng đây là giai đoạn thử nghiệm có hoàn tiền + quà tặng; quy trình hoàn tiền cần SLA rõ ràng (vd. hoàn trong X ngày làm việc), không để khách hàng phải chủ động đòi |
+| **[MỚI, v2.3]** Kết quả test bán vòng 1 (T11) và vòng 2 (T12) mâu thuẫn nhau (vd. tỷ lệ chốt vòng 2 thấp hơn hẳn vòng 1 dù đã làm mịn) | Product | Đối chiếu tỷ lệ chốt 2 vòng sau T12 | Chốt trước tiêu chí "tin vòng nào" (vd. vòng 2 là kết quả chính thức vì đã làm mịn, vòng 1 chỉ là baseline) — tránh tranh cãi hồi tố sau khi có số liệu |
+| **[MỚI, v2.3]** Khảo sát + test bán chỉ tập trung Tier 3/4 — kết quả có thể không đại diện nếu Edupia Class sau này bán rộng ra Tier 1/2 | Product/Research | Nếu phạm vi thị trường mục tiêu chính thức của Edupia Class (mục 1.1) không giới hạn ở Tier 3/4 | Xác nhận rõ với BOD: kết quả khảo sát/test bán chỉ đại diện Tier 3/4; nếu Edupia Class nhắm cả Tier 1/2, cần khảo sát bổ sung riêng trước khi coi kết quả T9-T12 là toàn diện |
 
 ---
 
-*Nguồn: Google Docs "4 CONCEPT SẢN PHẨM — BẢN CUỐI CÙNG" (T8/2026, v1.0), lấy trực tiếp qua Google Drive để tránh lỗi encoding. Lưu vào repo ngày 2026-08-13. Cập nhật lên v2.0 ngày 2026-08-17 — tái cấu trúc thành 3 concept family, bổ sung Concept 3 (Gia sư AI 1:1) dựa trên `02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md`. Cập nhật lên v2.1 ngày 2026-08-18 — làm giàu mục 4 (Concept 3) dựa trên `02_discovery/brainstorming/brainstorm-ai-tutor-390k-positioning-2026-08-18/`. Lịch sử quyết định đầy đủ: `00_context/.memlog.md`.*
+*Nguồn: Google Docs "4 CONCEPT SẢN PHẨM — BẢN CUỐI CÙNG" (T8/2026, v1.0), lấy trực tiếp qua Google Drive để tránh lỗi encoding. Lưu vào repo ngày 2026-08-13. Cập nhật lên v2.0 ngày 2026-08-17 — tái cấu trúc thành 3 concept family, bổ sung Concept 3 (Gia sư AI 1:1) dựa trên `02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md`. Cập nhật lên v2.1 ngày 2026-08-18 — làm giàu mục 4 (Concept 3) dựa trên `02_discovery/brainstorming/brainstorm-ai-tutor-390k-positioning-2026-08-18/`. Cập nhật lên v2.2 ngày 2026-08-19 — tái cấu trúc mục 4 (Concept 3) thành 2 biến thể persona/định vị 3.1 (AI nhân hóa giáo viên ngôi sao) và 3.2 (AI tích hợp mascot + gamification hóa), dựa trên Deepen nghiên cứu thị trường mới (`02_discovery/research/market-ai-tutor-landscape-concept5-2026-08-17/research.md`, mục 5-6). Cập nhật lên v2.3 cùng ngày 2026-08-19 — viết lại mục 5 (Kế hoạch triển khai) theo lộ trình chi tiết do user cung cấp trực tiếp (trình bày concept → khảo sát Tier 3/4 → chọn phương án → 2 vòng test bán → xây sản phẩm). Lịch sử quyết định đầy đủ: `00_context/.memlog.md`.*
