@@ -2,7 +2,7 @@
 
 Nguồn: `product_features_and_operations_AI_Class.md` (cập nhật 03-06-2026) và `product-features.md` (cập nhật 2026-05-28, bản trình bày lại — không có dữ kiện mới ngoài định dạng). Do người dùng cung cấp trực tiếp, chưa qua kiểm chứng thêm bởi Product — coi là **Fact** về trạng thái sản phẩm tại thời điểm cập nhật nêu trên.
 
-**Lưu ý thuật ngữ:** theo `00_context/glossary.md` (cập nhật 2026-08-18), "Edupia AI Class" / "AI Class Plus" là tên gọi đồng nghĩa/nội bộ của cùng sản phẩm **Edupia Class**. Tài liệu nguồn dùng tên module "AI Practice", "AI Speak", "AI Club" — glossary dùng "Edupia Practice", "Edupia Speak", "Edupia Club" cho các module tương ứng. Chưa rõ đây là đổi tên thương hiệu hay chỉ là cách gọi khác nhau giữa tài liệu vận hành và tài liệu concept — ⚠ cần Product xác nhận trước khi dùng tên module trong content chính thức.
+**Lưu ý thuật ngữ:** theo `00_context/glossary.md` (cập nhật 2026-08-18), "Edupia AI Class" / "AI Class Plus" là tên gọi đồng nghĩa/nội bộ của cùng sản phẩm **Edupia Class**. Tài liệu nguồn dùng tên module "AI Practice", "AI Speak", "AI Club" — glossary dùng "Edupia Practice", "Edupia Speak", "Edupia Club" cho các module tương ứng. ✅ **Cập nhật 2026-08-20 (xác nhận từ user):** đây chỉ là cách gọi khác nhau giữa tài liệu vận hành và tài liệu concept, không phải đổi tên thương hiệu — cùng nói đến các tính năng như nhau.
 
 Phạm vi: các tính năng hiện có cho luồng **Paid user**.
 
