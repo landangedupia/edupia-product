@@ -17,7 +17,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## Slide 2 — Agenda
 
-*(footer: AI Class New · 1/9)*
+*(footer: AI Class New · 1/11)*
 
 **Agenda**
 
@@ -32,7 +32,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ### Slide 3 — Vì sao là 390k – 400k?
 
-*(footer: AI Class New · 2/9)*
+*(footer: AI Class New · 2/11)*
 
 **Mục tiêu chiến lược (Chiến lược Educa 2026-2028)**
 - Educa tập trung nguồn lực vào phân khúc đại trà (mass) — tái định vị Edupia AI Class theo hướng nâng chất lượng học tập bằng AI, dịch chuyển lên mức giá cao hơn nhưng vẫn trong khả năng chi trả của đa số gia đình Việt Nam.
@@ -45,7 +45,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ### Slide 4 — Quy mô thị trường Tier 3/4
 
-*(footer: AI Class New · 3/9)*
+*(footer: AI Class New · 3/11)*
 
 *Số liệu tham khảo, có sai số — suy luận từ dữ liệu thu nhập GSO (KSMS 2024), chưa có khảo sát trực tiếp tier 3/4. Sẽ được xác nhận lại qua khảo sát WTP tháng 9.*
 
@@ -58,9 +58,103 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## PHẦN 2 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM
 
-### Slide 5 — Tổng quan nhanh 3 định hướng
+> **[Đã duyệt — đã build vào pptx 22/08/2026]** 2 slide dưới đây là slide mới, chèn trước "Tổng quan nhanh 3 định hướng" để dẫn dắt: từ (1) khoảng trống thị trường quan sát được, sang (2) khung tư duy giải thích vì sao có đúng 3 hướng tạo giá trị, rồi mới vào (3) tổng quan 3 concept cụ thể.
 
-*(footer: AI Class New · 4/9)*
+### Slide 5 (MỚI) — Khoảng trống thị trường
+
+*(footer: AI Class New · 4/11)*
+
+*Định vị các lựa chọn học tiếng Anh hiện có theo 2 trục: mức độ cá nhân hóa và chi phí — cho thấy khoảng trống ở đúng mức giá 390k mà chưa lựa chọn nào lấp đầy.*
+
+```
+                    MỨC ĐỘ CÁ NHÂN HÓA
+                           ↑
+                           │
+                 PRIVATE TUTOR
+                           ●
+                           │
+                  SMALL-GROUP
+                    TUTOR ●
+                           │
+                           │
+                    ┌──────────────┐
+                    │   AI TUTOR   │
+                    │              │
+                    │ MARKET GAP   │
+                    │   @ 390K     │
+                    └──────────────┘
+                           │
+                 BIG CLASS + AI
+                           ●
+                           │
+                    BIG CLASS
+                           ●
+                           │
+                  SELF LEARNING
+                           ●
+                           └──────────────────→
+                                  CHI PHÍ
+```
+
+Đọc theo thứ tự tăng dần cả 2 trục (chi phí thấp/cá nhân hóa thấp → chi phí cao/cá nhân hóa cao):
+
+| Điểm trên trục | Tương ứng sản phẩm |
+|---|---|
+| Self Learning | Edupia AI Class hiện tại (250k, tự học) |
+| Big Class | Lớp học nhóm đông, GV thật, chưa có AI hỗ trợ sâu |
+| Big Class + AI | Concept 1/2 (Option 1.2/1.3 + môn thêm) — làm mịn & nâng cấp trên nền Big Class |
+| **AI Tutor — Market Gap @ 390k** | **Concept 3 — chưa có lựa chọn nào lấp khoảng trống này** |
+| Small-Group Tutor | Edupia Tutor 1-4/1-6 |
+| Private Tutor | Edupia Tutor 1-1 |
+
+*Liên hệ: khoảng trống này chính là câu trả lời trực quan cho câu hỏi đặt ra ở Slide 3 ("thị trường đang có phân khúc công ty đang bỏ lỡ") — nằm giữa nhóm sản phẩm tự động hóa hoàn toàn (Self Learning → Big Class + AI) và nhóm sản phẩm gia sư người thật (Small-Group Tutor → Private Tutor).*
+
+### Slide 6 (MỚI) — Từ yếu tố tạo tiến bộ đến 3 hướng tạo giá trị
+
+*(footer: AI Class New · 5/11)*
+
+*Giải thích khung tư duy đứng sau việc có đúng 3 định hướng concept — mỗi concept là một hướng tạo giá trị khác nhau, không phải 3 lựa chọn ngẫu nhiên.*
+
+```
+   Teacher + AI + Environment + Accountability
+                    ↓
+            STUDENT PROGRESS
+
+          HOW CAN WE CREATE MORE VALUE?
+                         │
+        ┌────────────────┼────────────────┐
+        ↓                ↓                ↓
+
+     DEEPEN           EXPAND          TRANSFORM
+
+   Làm tốt hơn       Nhiều giá trị    Thay đổi
+   mô hình hiện tại  hơn cho gia đình  mô hình
+
+        ↓                ↓                ↓
+
+    CONCEPT 1         CONCEPT 2         CONCEPT 3
+
+  Content (1.1)      + 1-2 môn          AI Tutor
+  + AI (1.2)
+  + GVCN (1.3)
+```
+
+| Yếu tố tạo tiến bộ học sinh | Teacher · AI · Environment · Accountability — 4 yếu tố cộng hưởng tạo nên Student Progress |
+|---|---|
+| Câu hỏi chiến lược | Làm sao tạo thêm giá trị từ nền tảng 4 yếu tố này? → 3 hướng trả lời độc lập nhau |
+| **DEEPEN** (Đào sâu) | Làm tốt hơn mô hình hiện tại → **Concept 1**: đào sâu Content (Option 1.1), AI (Option 1.2), con người/GVCN (Option 1.3) trên cùng một khung Big Class |
+| **EXPAND** (Mở rộng) | Nhiều giá trị hơn cho gia đình → **Concept 2**: mở rộng thêm 1-2 môn học ngoài tiếng Anh, cùng một gia đình dùng nhiều hơn |
+| **TRANSFORM** (Chuyển đổi) | Thay đổi mô hình → **Concept 3**: AI Tutor — đổi hẳn vai trò AI từ hỗ trợ sang gia sư chính |
+
+*Liên hệ: 3 hướng Deepen/Expand/Transform ánh xạ trực tiếp 1:1 với 3 Concept sẽ trình bày chi tiết ngay sau — dùng slide "Tổng quan nhanh 3 định hướng" tiếp theo để đi vào cụ thể từng concept.*
+
+---
+
+## PHẦN 2 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM (tiếp)
+
+### Slide 7 — Tổng quan nhanh 3 định hướng
+
+*(footer: AI Class New · 6/11)*
 
 | | Concept 1 — Làm mịn & nâng cấp | Concept 2 — Làm mịn + Thêm môn | Concept 3 — Gia sư AI 1:1 |
 |---|---|---|---|
@@ -69,9 +163,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *Lưu ý: so với bản nháp trước, Concept 2 rút từ 3 Option còn 2 Option (Option 2.2/2.3 cũ gộp làm một "môn ngoài GDPT"); Concept 3 đổi tên gọi kỹ thuật thành "AI Tutor 1-1".*
 
-### Slide 6 — Concept 1: Làm mịn và nâng cấp
+### Slide 8 — Concept 1: Làm mịn và nâng cấp
 
-*(footer: AI Class New · 5/9)*
+*(footer: AI Class New · 7/11)*
 
 Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có — không đổi mô hình sản phẩm.
 
@@ -91,9 +185,9 @@ Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có
 
 USP: "Chương trình tiếng Anh trực tuyến có giáo viên thật và công cụ luyện tập, luyện nói được tối ưu bằng AI."
 
-### Slide 7 — Concept 2: Làm mịn và thêm môn
+### Slide 9 — Concept 2: Làm mịn và thêm môn
 
-*(footer: AI Class New · 6/9)*
+*(footer: AI Class New · 8/11)*
 
 Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/tuần môn khác (ngoài tiếng Anh).
 
@@ -107,9 +201,9 @@ Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/
 
 USP: "Chương trình tiếng Anh trực tuyến có thêm 1 buổi học với môn học khác mỗi tuần, giúp con phát triển toàn diện và phụ huynh không cần tìm thêm hoạt động bổ trợ ở nơi khác."
 
-### Slide 8 — Concept 3: Gia sư AI 1:1 (MỚI)
+### Slide 10 — Concept 3: Gia sư AI 1:1 (MỚI)
 
-*(footer: AI Class New · 7/9)*
+*(footer: AI Class New · 9/11)*
 
 AI là gia sư chính, không chỉ hỗ trợ lớp học như Concept 1/Concept 2.
 
@@ -127,9 +221,9 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ## PHẦN 3 — KẾ HOẠCH TRIỂN KHAI
 
-### Slide 9 — Lộ trình triển khai (2026 - 2027)
+### Slide 11 — Lộ trình triển khai (2026 - 2027)
 
-*(footer: AI Class New · 8/9)*
+*(footer: AI Class New · 10/11)*
 
 | Mốc | Nội dung |
 |---|---|
@@ -147,9 +241,9 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ## PHẦN 4 — SƠ ĐỒ PHÂN CHIA TRÁCH NHIỆM
 
-### Slide 10 — Phân chia trách nhiệm theo 4 bộ phận
+### Slide 12 — Phân chia trách nhiệm theo 4 bộ phận
 
-*(footer: AI Class New · 9/9)*
+*(footer: AI Class New · 11/11)*
 
 | Giai đoạn | Chiến lược | Sản phẩm & Công nghệ | Marketing | Sales |
 |---|---|---|---|---|
