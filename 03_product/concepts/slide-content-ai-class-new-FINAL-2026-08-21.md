@@ -1,8 +1,12 @@
-# Slide content — Edupia AI Class New: 3 định hướng concept (FINAL — đã chốt với stakeholder)
+# Slide content — Edupia AI Class New: 3 định hướng concept (FINAL — bản mới nhất, cập nhật 2026-08-25)
 
 **Trạng thái:** Đây là bản nội dung **cuối cùng đã được chốt** sau khi Lân review với các stakeholder, trích xuất nguyên văn từ file nguồn `[Edupia AI Class New] Concept slides 08_2026 (1).pptx` (lưu 21/08/2026). Bản này **thay thế** bản nháp trước đó (`slide-content-ai-class-plus-2026-08-20.md`, giữ lại làm tài liệu lịch sử/tham khảo quá trình xây dựng nội dung) — không tiếp tục chỉnh sửa file cũ.
 
 **Thay đổi cấu trúc lớn nhất so với bản nháp trước:** rút gọn từ 24 slide xuống còn **10 slide**. Bỏ: slide Mục tiêu tài chính riêng, các slide Cấu trúc sản phẩm/Bối cảnh/Khách hàng mục tiêu/Positioning riêng cho từng Option, 2 case study (Duolingo, Squirrel AI/TAL Xueersi), slide Lộ trình 3 giai đoạn của Concept 3, slide Next Step. Mỗi Concept giờ gói gọn trong **1 slide duy nhất**. Tên sản phẩm đổi từ "Edupia Class / AI Class Plus" → **"Edupia AI Class New"** (gọi tắt "AI Class New").
+
+✅ **[FINAL — bản mới nhất, chốt 2026-08-25]** So với bản build 22/08/2026, đã: (1) chèn thêm **PHẦN 2 — Chân dung khách hàng mục tiêu** (Slide 4-5, tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`) giữa "Mục tiêu chiến lược" và "Định hướng concept sản phẩm"; (2) tạm bỏ Slide "Quy mô thị trường Tier 3/4" khỏi bộ slide chính — nội dung giữ nguyên văn ở mục "PHỤ LỤC — Nội dung tạm ẩn" cuối file để khôi phục khi cần; (3) JTBD ở Slide 5 viết theo đúng khung Functional/Emotional/Social (glossary), Pain point viết rõ bằng câu, không dùng mã chữ A/B/C. Bộ slide hiện có **13 slide** (12 nội dung + bìa) — số Slide/PHẦN/footer đã cập nhật nhất quán toàn bộ.
+
+**Đã build vào `AI-Class-New-slide-deck-FINAL-2026-08-21-branded.pptx`** — chỉnh trực tiếp file pptx đã có Brand Guideline (không tạo file mới) bằng cách chỉnh sửa OOXML: xoá slide Tier 3/4, chèn 2 slide bảng mới (Chân dung khách hàng, Pain Point & JTBD — cột Tầng dùng merge ô thật, không lặp nhãn), cập nhật số Slide/PHẦN/footer toàn bộ, tính lại layout Agenda cho mục thứ 5. Đã kiểm tra: toàn bộ XML hợp lệ, quan hệ rels/Content_Types/sldIdLst nhất quán, không có tham chiếu treo. ⚠ **Chưa mở thử trong PowerPoint để xem trực quan** (máy không có PowerPoint/LibreOffice để render) — nên mở kiểm tra 1 lần trước khi trình bày chính thức. File `-original.pptx` (bản gốc, không chỉnh sửa) giữ nguyên, không đổi.
 
 ---
 
@@ -17,14 +21,15 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## Slide 2 — Agenda
 
-*(footer: AI Class New · 1/11)*
+*(footer: AI Class New · 1/12)*
 
 **Agenda**
 
 1. Mục tiêu chiến lược
-2. Định hướng concept sản phẩm
-3. Kế hoạch triển khai
-4. Phân chia trách nhiệm
+2. Chân dung khách hàng mục tiêu *(MỚI)*
+3. Định hướng concept sản phẩm
+4. Kế hoạch triển khai
+5. Phân chia trách nhiệm
 
 ---
 
@@ -32,7 +37,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ### Slide 3 — Vì sao là 390k – 400k?
 
-*(footer: AI Class New · 2/11)*
+*(footer: AI Class New · 2/12)*
 
 **Mục tiêu chiến lược (Chiến lược Educa 2026-2028)**
 - Educa tập trung nguồn lực vào phân khúc đại trà (mass) — tái định vị Edupia AI Class theo hướng nâng chất lượng học tập bằng AI, dịch chuyển lên mức giá cao hơn nhưng vẫn trong khả năng chi trả của đa số gia đình Việt Nam.
@@ -43,26 +48,75 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 - Edupia AI Class New sẽ là sản phẩm mass ở dải giá này — vai trò Product Growth Engine: dẫn dắt tăng trưởng người dùng, doanh thu, lợi nhuận.
 - Giá bán: 390k là giá mục tiêu sau khi đầu tư 1 trong 3 concept dưới đây.
 
-### Slide 4 — Quy mô thị trường Tier 3/4
+---
 
-*(footer: AI Class New · 3/11)*
+## PHẦN 2 — CHÂN DUNG KHÁCH HÀNG MỤC TIÊU
 
-*Số liệu tham khảo, có sai số — suy luận từ dữ liệu thu nhập GSO (KSMS 2024), chưa có khảo sát trực tiếp tier 3/4. Sẽ được xác nhận lại qua khảo sát WTP tháng 9.*
+> **[FINAL — đã chốt, đã build vào pptx 2026-08-25]** 2 slide dưới đây tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`, chèn sau "Vì sao là 390k-400k?" (Phần 1) và trước "Định hướng concept sản phẩm" (Phần 3, trước đây là Phần 2) — trả lời "khách hàng là ai, đau ở đâu, đang cố làm gì" trước khi vào giải pháp. **Lưu ý phạm vi:** nguồn chỉ mô tả **Tệp 1** (khách hàng cũ, đang dùng ở 250k, mục tiêu nâng gói lên 390k) — KHÔNG bao gồm Tệp 2 (khách hàng mới, thị trường Tier 3/4 — xem slide "Quy mô thị trường Tier 3/4" đang tạm ẩn ở mục Phụ lục cuối file). Quy ước ký hiệu giữ theo nguồn: ● dữ liệu có sẵn · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống. Slide 5 chỉ trình bày Pain Point & JTBD nguyên trạng từ nguồn — chưa mapping với 3 Concept.
 
-- Dân số ngoài 5 thành phố trực thuộc TW: ~75-78 triệu người (số tham khảo).
-- Thu nhập bình quân đầu người/tháng (nông thôn, toàn quốc): ~4,5 triệu — chênh lệch vùng miền lớn, từ ~7,1 triệu (Đông Nam Bộ) đến ~3,8 triệu (Trung du miền núi phía Bắc).
-- Ở mức thu nhập nông thôn trung bình, 390-400k/tháng ≈ 2,4-2,5% thu nhập hộ gia đình — khoản chi tương đối nhỏ. Ở vùng thu nhập thấp nhất cả nước, cùng mức giá chiếm ~10-10,5% thu nhập đầu người — sát ngưỡng chi tiêu định kỳ chấp nhận được.
-- "Tier 3/4" không phải một phân khúc thu nhập đồng nhất — nên đọc là 2 nhóm: (A) tỉnh/huyện khá giả (rào cản chính là niềm tin, không phải giá) và (B) vùng khó khăn (rào cản kép: nhận thức + khả năng chi trả).
+### Slide 4 (MỚI) — Chân dung khách hàng mục tiêu (Tệp 1 — khách hàng cũ)
+
+*(footer: AI Class New · 3/12)*
+
+| Chiều | Nội dung |
+|---|---|
+| Ai ra quyết định | Mẹ, 30–45 tuổi, có con lớp 1–6 |
+| Vị trí | Thành phố tỉnh, thị xã, nông thôn (⚠ rộng hơn phạm vi Tier 3/4 mà chiến lược 390k đang nhắm cho khách hàng mới — xem ghi chú cuối slide) |
+| Nghề nghiệp | Nhân viên văn phòng, kinh doanh nhỏ, lao động phổ thông — làm toàn thời gian (>8h/ngày) |
+| Thu nhập hộ gia đình | 10–20 triệu/tháng (phân khúc "Good") — hiện chi trả được 200–250k/tháng |
+| Trình độ tiếng Anh | Đa số không biết tiếng Anh — không tự kèm con được |
+| Bối cảnh | Con đang học TA ở trường; ~50% từng/đang học thêm nhà giáo viên; đã nghe/thử vài sản phẩm TA online; một số đã học trung tâm |
+
+**3 câu trích dẫn định vị gốc:** "Dù khó khăn, tôi cố gắng để đầu tư vào học tập cho con" · "Tôi sợ mình không có điều kiện nên không thể lo cho con được học bằng bạn bằng bè" · "Tôi muốn đầu tư cho con học tiếng Anh để đời con không khổ như bố mẹ"
+
+**Trigger (kích hoạt tìm giải pháp):** Họp phụ huynh thấy con điểm kém/bị cô phê bình · Thấy "con nhà người ta" nói TA trôi chảy · Thấy con nhà người ta học chỗ khác hiệu quả
+
+**Mong muốn ngầm (Aspiration — job của người mẹ, không phải của con):** Muốn "giao khoán" con cho chương trình để vơi bớt trách nhiệm · Muốn con không thua kém "con nhà người ta" · Muốn đầu tư cho tương lai con tốt đẹp hơn
+
+*⚠ Ghi chú phạm vi: đây là chân dung Tệp 1 (khách hàng cũ) — chưa xác nhận trùng khớp bao nhiêu % với chân dung khách hàng mới Tier 3/4. Cần khảo sát T9-T10 làm rõ trước khi dùng chung 1 persona cho cả 2 tệp.*
+
+### Slide 5 (MỚI) — Pain Point & JTBD
+
+*(footer: AI Class New · 4/12)*
+
+**[Cập nhật 2026-08-25]** Tái cấu trúc từ danh sách "5 Job" phẳng sang đúng khung JTBD chuẩn theo `00_context/glossary.md` (Chức năng/Cảm xúc/Xã hội — tầng Thực dụng chưa có dữ liệu).
+
+**Functional**
+
+| Job (góc nhìn phụ huynh) | Pain point liên quan |
+|---|---|
+| Con học giỏi | Con học TA chưa tốt/tiến bộ chậm — phát âm sai, "câm" khi giao tiếp |
+| Có người giám sát, đốc thúc con học thay bố mẹ | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác |
+| Muốn con không học lệch | ◆ Con học lệch, thiếu cân bằng giữa các môn (giả định đa môn, chưa xác nhận) |
+| Duy trì việc học hiệu quả trong khả năng chi trả lâu dài | Chi phí cao khi dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian đưa đón |
+| Quản lý toàn bộ việc học của con ở một nơi, không phải tự tổng hợp | Khó quản lý khi con học nhiều môn/nhiều trung tâm; khó biết con học gì, yếu đâu |
+
+**Emotional**
+
+| Job (góc nhìn phụ huynh) | Pain point liên quan |
+|---|---|
+| Yên tâm con tiến bộ thực chất mà không cần tự kèm | Con học TA chưa tốt; phụ huynh bận, phải nhắc nhở/đốc thúc con |
+| Tin mình đã chọn đúng, đầu tư đủ, không thua kém gia đình khác | Học online "không ai quản" nên không yên tâm; sợ mất tiền mà không hiệu quả |
+
+**Social**
+
+| Job (góc nhìn phụ huynh) | Pain point liên quan |
+|---|---|
+| Hãnh diện, tự hào với người thân, bạn bè khi con đạt thành tích cao, muốn chia sẻ | Lo con thua thiệt, thua kém "con nhà người ta" |
+
+*⚠ "Muốn con không học lệch" là ◆ giả định chưa xác nhận theo nguồn Pain Point gốc — chưa rõ gói 390k có thực sự đa môn hay không. Cần khảo sát T9–T10 xác nhận trước khi dùng trong content bán hàng thật.*
+
+*Tâm lý mua hàng liên quan (theo tài liệu đào tạo 06/2025): Loss Aversion và Information Gap là 2 rào cản chính khi nâng giá 250k→390k — cần cơ chế học thử/hoàn tiền mạnh hơn mức đang áp dụng, xem `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 4.*
 
 ---
 
-## PHẦN 2 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM
+## PHẦN 3 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM
 
 > **[Đã duyệt — đã build vào pptx 22/08/2026]** 2 slide dưới đây là slide mới, chèn trước "Tổng quan nhanh 3 định hướng" để dẫn dắt: từ (1) khoảng trống thị trường quan sát được, sang (2) khung tư duy giải thích vì sao có đúng 3 hướng tạo giá trị, rồi mới vào (3) tổng quan 3 concept cụ thể.
 
-### Slide 5 (MỚI) — Khoảng trống thị trường
+### Slide 6 (MỚI) — Khoảng trống thị trường
 
-*(footer: AI Class New · 4/11)*
+*(footer: AI Class New · 5/12)*
 
 *Định vị các lựa chọn học tiếng Anh hiện có theo 2 trục: mức độ cá nhân hóa và chi phí — cho thấy khoảng trống ở đúng mức giá 390k mà chưa lựa chọn nào lấp đầy.*
 
@@ -109,9 +163,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *Liên hệ: khoảng trống này chính là câu trả lời trực quan cho câu hỏi đặt ra ở Slide 3 ("thị trường đang có phân khúc công ty đang bỏ lỡ") — nằm giữa nhóm sản phẩm tự động hóa hoàn toàn (Self Learning → Big Class + AI) và nhóm sản phẩm gia sư người thật (Small-Group Tutor → Private Tutor).*
 
-### Slide 6 (MỚI) — Từ yếu tố tạo tiến bộ đến 3 hướng tạo giá trị
+### Slide 7 (MỚI) — Từ yếu tố tạo tiến bộ đến 3 hướng tạo giá trị
 
-*(footer: AI Class New · 5/11)*
+*(footer: AI Class New · 6/12)*
 
 *Giải thích khung tư duy đứng sau việc có đúng 3 định hướng concept — mỗi concept là một hướng tạo giá trị khác nhau, không phải 3 lựa chọn ngẫu nhiên.*
 
@@ -150,11 +204,11 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ---
 
-## PHẦN 2 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM (tiếp)
+## PHẦN 3 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM (tiếp)
 
-### Slide 7 — Tổng quan nhanh 3 định hướng
+### Slide 8 — Tổng quan nhanh 3 định hướng
 
-*(footer: AI Class New · 6/11)*
+*(footer: AI Class New · 7/12)*
 
 | | Concept 1 — Làm mịn & nâng cấp | Concept 2 — Làm mịn + Thêm môn | Concept 3 — Gia sư AI 1:1 |
 |---|---|---|---|
@@ -163,9 +217,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *Lưu ý: so với bản nháp trước, Concept 2 rút từ 3 Option còn 2 Option (Option 2.2/2.3 cũ gộp làm một "môn ngoài GDPT"); Concept 3 đổi tên gọi kỹ thuật thành "AI Tutor 1-1".*
 
-### Slide 8 — Concept 1: Làm mịn và nâng cấp
+### Slide 9 — Concept 1: Làm mịn và nâng cấp
 
-*(footer: AI Class New · 7/11)*
+*(footer: AI Class New · 8/12)*
 
 Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có — không đổi mô hình sản phẩm.
 
@@ -185,9 +239,9 @@ Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có
 
 USP: "Chương trình tiếng Anh trực tuyến có giáo viên thật và công cụ luyện tập, luyện nói được tối ưu bằng AI."
 
-### Slide 9 — Concept 2: Làm mịn và thêm môn
+### Slide 10 — Concept 2: Làm mịn và thêm môn
 
-*(footer: AI Class New · 8/11)*
+*(footer: AI Class New · 9/12)*
 
 Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/tuần môn khác (ngoài tiếng Anh).
 
@@ -201,9 +255,9 @@ Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/
 
 USP: "Chương trình tiếng Anh trực tuyến có thêm 1 buổi học với môn học khác mỗi tuần, giúp con phát triển toàn diện và phụ huynh không cần tìm thêm hoạt động bổ trợ ở nơi khác."
 
-### Slide 10 — Concept 3: Gia sư AI 1:1 (MỚI)
+### Slide 11 — Concept 3: Gia sư AI 1:1 (MỚI)
 
-*(footer: AI Class New · 9/11)*
+*(footer: AI Class New · 10/12)*
 
 AI là gia sư chính, không chỉ hỗ trợ lớp học như Concept 1/Concept 2.
 
@@ -219,11 +273,11 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ---
 
-## PHẦN 3 — KẾ HOẠCH TRIỂN KHAI
+## PHẦN 4 — KẾ HOẠCH TRIỂN KHAI
 
-### Slide 11 — Lộ trình triển khai (2026 - 2027)
+### Slide 12 — Lộ trình triển khai (2026 - 2027)
 
-*(footer: AI Class New · 10/11)*
+*(footer: AI Class New · 11/12)*
 
 | Mốc | Nội dung |
 |---|---|
@@ -239,11 +293,11 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ---
 
-## PHẦN 4 — SƠ ĐỒ PHÂN CHIA TRÁCH NHIỆM
+## PHẦN 5 — SƠ ĐỒ PHÂN CHIA TRÁCH NHIỆM
 
-### Slide 12 — Phân chia trách nhiệm theo 4 bộ phận
+### Slide 13 — Phân chia trách nhiệm theo 4 bộ phận
 
-*(footer: AI Class New · 11/11)*
+*(footer: AI Class New · 12/12)*
 
 | Giai đoạn | Chiến lược | Sản phẩm & Công nghệ | Marketing | Sales |
 |---|---|---|---|---|
@@ -253,6 +307,21 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 | Tháng 11 — Test bán vòng 1 | Theo dõi kết quả, tham vấn quyết định tiếp theo | Hỗ trợ kỹ thuật, theo dõi vận hành hoàn tiền | Chạy chiến dịch quảng cáo thật | Gọi điện tư vấn, thu tiền thật, đo tỷ lệ chốt |
 | Tháng 12 — Làm mịn & Test bán vòng 2 | Theo dõi kết quả 2 vòng, chuẩn bị đối chiếu | Làm mịn sản phẩm theo phản hồi | Làm mịn nội dung quảng cáo | Làm mịn kịch bản bán, chạy vòng 2 |
 | Tháng 1/2027 — Bắt đầu xây dựng | Phê duyệt ngân sách/nguồn lực (qua BOD) | Đổ nguồn lực code/hoàn thiện sản phẩm | — | — |
+
+---
+
+## PHỤ LỤC — Nội dung tạm ẩn (không thuộc bộ slide hiện tại)
+
+> **[TẠM BỎ 2026-08-25]** Slide "Quy mô thị trường Tier 3/4" (trước đây là Slide 4, footer 3/13) đã được rút khỏi bộ slide chính theo yêu cầu — giữ nguyên văn dưới đây để khôi phục khi cần. Không đánh số slide/footer khi ở trạng thái này.
+
+### Quy mô thị trường Tier 3/4 (tạm ẩn)
+
+*Số liệu tham khảo, có sai số — suy luận từ dữ liệu thu nhập GSO (KSMS 2024), chưa có khảo sát trực tiếp tier 3/4. Sẽ được xác nhận lại qua khảo sát WTP tháng 9.*
+
+- Dân số ngoài 5 thành phố trực thuộc TW: ~75-78 triệu người (số tham khảo).
+- Thu nhập bình quân đầu người/tháng (nông thôn, toàn quốc): ~4,5 triệu — chênh lệch vùng miền lớn, từ ~7,1 triệu (Đông Nam Bộ) đến ~3,8 triệu (Trung du miền núi phía Bắc).
+- Ở mức thu nhập nông thôn trung bình, 390-400k/tháng ≈ 2,4-2,5% thu nhập hộ gia đình — khoản chi tương đối nhỏ. Ở vùng thu nhập thấp nhất cả nước, cùng mức giá chiếm ~10-10,5% thu nhập đầu người — sát ngưỡng chi tiêu định kỳ chấp nhận được.
+- "Tier 3/4" không phải một phân khúc thu nhập đồng nhất — nên đọc là 2 nhóm: (A) tỉnh/huyện khá giả (rào cản chính là niềm tin, không phải giá) và (B) vùng khó khăn (rào cản kép: nhận thức + khả năng chi trả).
 
 ---
 
