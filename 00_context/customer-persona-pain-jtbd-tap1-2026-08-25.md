@@ -49,7 +49,7 @@
 ## 2. Pain Points
 
 **Kết quả học tập**
-- Con học tiếng Anh chưa tốt/tiến bộ chậm — phát âm sai, giỏi ngữ pháp nhưng "câm" khi giao tiếp
+- Con học tiếng Anh chưa tốt/tiến bộ chậm — phát âm sai, giỏi ngữ pháp nhưng không tự tin khi giao tiếp
 - ◆ *(giả định phạm vi mở rộng, chưa xác nhận)* Con học lệch, thiếu cân bằng giữa các môn — chỉ tập trung tiếng Anh, thiếu môn khác
 
 **Gánh nặng của phụ huynh**
@@ -81,7 +81,7 @@
 
 | Job (góc nhìn phụ huynh) | Pain point liên quan |
 |---|---|
-| Con học giỏi | Con học tiếng Anh chưa tốt/tiến bộ chậm — phát âm sai, giỏi ngữ pháp nhưng "câm" khi giao tiếp |
+| Con học giỏi | Con học tiếng Anh chưa tốt/tiến bộ chậm — phát âm sai, giỏi ngữ pháp nhưng không tự tin khi giao tiếp |
 | Có người giám sát, đốc thúc con học thay bố mẹ | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác, dễ sao nhãng |
 | Muốn con không học lệch | ◆ Con học lệch, thiếu cân bằng giữa các môn — chỉ tập trung tiếng Anh, thiếu môn khác (giả định mở rộng phạm vi, chưa xác nhận — xem mục 5, rủi ro #2) |
 | Duy trì việc học hiệu quả trong khả năng chi trả lâu dài | Chi phí cao khi phải dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian, công sức đưa đón |

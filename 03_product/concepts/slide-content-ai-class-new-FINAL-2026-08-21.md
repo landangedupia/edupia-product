@@ -52,7 +52,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## PHẦN 2 — CHÂN DUNG KHÁCH HÀNG MỤC TIÊU
 
-> **[FINAL — đã chốt, đã build vào pptx 2026-08-25]** 2 slide dưới đây tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`, chèn sau "Vì sao là 390k-400k?" (Phần 1) và trước "Định hướng concept sản phẩm" (Phần 3, trước đây là Phần 2) — trả lời "khách hàng là ai, đau ở đâu, đang cố làm gì" trước khi vào giải pháp. **Lưu ý phạm vi:** nguồn chỉ mô tả **Tệp 1** (khách hàng cũ, đang dùng ở 250k, mục tiêu nâng gói lên 390k) — KHÔNG bao gồm Tệp 2 (khách hàng mới, thị trường Tier 3/4 — xem slide "Quy mô thị trường Tier 3/4" đang tạm ẩn ở mục Phụ lục cuối file). Quy ước ký hiệu giữ theo nguồn: ● dữ liệu có sẵn · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống. Slide 5 chỉ trình bày Pain Point & JTBD nguyên trạng từ nguồn — chưa mapping với 3 Concept.
+> **[FINAL — đã chốt, đã build vào pptx 2026-08-25]** 2 slide dưới đây tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`, chèn sau "Vì sao là 390k-400k?" (Phần 1) và trước "Định hướng concept sản phẩm" (Phần 3, trước đây là Phần 2) — trả lời "khách hàng là ai, đau ở đâu, đang cố làm gì" trước khi vào giải pháp. **Lưu ý phạm vi:** nguồn chỉ mô tả **Tệp 1** (khách hàng cũ, đang dùng ở 250k, mục tiêu nâng gói lên 390k) — KHÔNG bao gồm Tệp 2 (khách hàng mới, thị trường Tier 3/4 — xem slide "Quy mô thị trường Tier 3/4" đang tạm ẩn ở mục Phụ lục cuối file). Quy ước ký hiệu giữ theo nguồn: ● dữ liệu có sẵn · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống. Slide 5 trình bày Pain Point & JTBD theo 3 hướng giá trị, gieo mạch dẫn tới Slide 7 (khung Deepen/Expand/Transform) và Slide 8-12 (3 Concept cụ thể) — nhưng cố ý chưa nêu tên Concept tại Slide 5.
 
 ### Slide 4 (MỚI) — Chân dung khách hàng mục tiêu (Tệp 1 — khách hàng cũ)
 
@@ -79,32 +79,36 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *(footer: AI Class New · 4/12)*
 
-**[Cập nhật 2026-08-25]** Tái cấu trúc từ danh sách "5 Job" phẳng sang đúng khung JTBD chuẩn theo `00_context/glossary.md` (Chức năng/Cảm xúc/Xã hội — tầng Thực dụng chưa có dữ liệu).
-
-**Functional**
+**[Cập nhật 2026-08-25]** Bảng đọc theo thứ tự: **Job (gắn nhãn tầng `[...]`) → Pain point → Nhu cầu** (cột/dòng tổng kết đặt cuối mỗi nhóm, không đặt đầu) — để mạch trình bày đi từ "JTBD cụ thể thuộc tầng nào" đến "JTBD đó giải quyết nhu cầu tổng quát nào của khách hàng". Bảng theo 3 tầng Functional/Emotional/Social gốc vẫn giữ nguyên ở `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 3, dùng làm tham chiếu. Cố ý **chưa nêu tên Concept cụ thể** tại slide này để tránh "lộ" giải pháp trước khi trình bày; xem ghi chú dàn dựng bên dưới bảng.
 
 | Job (góc nhìn phụ huynh) | Pain point liên quan |
 |---|---|
-| Con học giỏi | Con học TA chưa tốt/tiến bộ chậm — phát âm sai, "câm" khi giao tiếp |
-| Có người giám sát, đốc thúc con học thay bố mẹ | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác |
-| Muốn con không học lệch | ◆ Con học lệch, thiếu cân bằng giữa các môn (giả định đa môn, chưa xác nhận) |
-| Duy trì việc học hiệu quả trong khả năng chi trả lâu dài | Chi phí cao khi dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian đưa đón |
-| Quản lý toàn bộ việc học của con ở một nơi, không phải tự tổng hợp | Khó quản lý khi con học nhiều môn/nhiều trung tâm; khó biết con học gì, yếu đâu |
+| **[Functional]** Muốn con học giỏi môn tiếng Anh | Con học TA chưa tốt/tiến bộ chậm — phát âm sai, không tự tin khi giao tiếp |
+| **[Emotional]** Yên tâm con tiến bộ thực chất mà không cần tự kèm | Con học TA chưa tốt; phụ huynh bận, phải nhắc nhở/đốc thúc con |
 
-**Emotional**
+**→ Nhu cầu: Muốn con học giỏi tiếng Anh**
 
 | Job (góc nhìn phụ huynh) | Pain point liên quan |
 |---|---|
-| Yên tâm con tiến bộ thực chất mà không cần tự kèm | Con học TA chưa tốt; phụ huynh bận, phải nhắc nhở/đốc thúc con |
-| Tin mình đã chọn đúng, đầu tư đủ, không thua kém gia đình khác | Học online "không ai quản" nên không yên tâm; sợ mất tiền mà không hiệu quả |
+| **[Functional]** Muốn con phát triển toàn diện, không học lệch | ◆ Con học lệch, thiếu cân bằng giữa các môn (giả định đa môn, chưa xác nhận) |
+| **[Functional]** Quản lý toàn bộ việc học của con ở một nơi, không phải tự tổng hợp | Khó quản lý khi con học nhiều môn/nhiều trung tâm; khó biết con học gì, yếu đâu |
+| **[Functional]** Duy trì việc học hiệu quả trong khả năng chi trả lâu dài | Chi phí cao khi dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian đưa đón |
 
-**Social**
+**→ Nhu cầu: Muốn con học giỏi toàn diện**
 
 | Job (góc nhìn phụ huynh) | Pain point liên quan |
 |---|---|
-| Hãnh diện, tự hào với người thân, bạn bè khi con đạt thành tích cao, muốn chia sẻ | Lo con thua thiệt, thua kém "con nhà người ta" |
+| **[Functional]** Có người giám sát, đốc thúc con học thay bố mẹ, con được học cá nhân hóa | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác |
+| **[Emotional]** Tin mình đã chọn đúng, đầu tư đủ, không thua kém gia đình khác | Học online "không ai quản" nên không yên tâm; sợ mất tiền mà không hiệu quả |
+| **[Social]** Hãnh diện, tự hào với người thân, bạn bè khi con đạt thành tích cao, muốn chia sẻ | Lo con thua thiệt, thua kém "con nhà người ta" |
 
-*⚠ "Muốn con không học lệch" là ◆ giả định chưa xác nhận theo nguồn Pain Point gốc — chưa rõ gói 390k có thực sự đa môn hay không. Cần khảo sát T9–T10 xác nhận trước khi dùng trong content bán hàng thật.*
+**→ Nhu cầu: Muốn con được đồng hành, đốc thúc học tập**
+
+*⚠ "Muốn con phát triển toàn diện, không học lệch" là ◆ giả định chưa xác nhận theo nguồn Pain Point gốc — chưa rõ gói 390k có thực sự đa môn hay không. Cần khảo sát T9–T10 xác nhận trước khi dùng trong content bán hàng thật.*
+
+**Ghi chú dàn dựng (không đọc trên slide):** Thứ tự 3 Nhu cầu cố ý khớp 1:1 với thứ tự DEEPEN/EXPAND/TRANSFORM ở Slide 7 và Concept 1/2/3 ở Slide 8-12 (Nhu cầu 1 "học giỏi tiếng Anh" → Concept 1, Nhu cầu 2 "học giỏi toàn diện" → Concept 2, Nhu cầu 3 "đồng hành, đốc thúc" → Concept 3) — Slide 5 gieo "vấn đề phụ huynh đang cần" theo đúng 3 hướng, Slide 7 sẽ "giải thích khung tư duy" cho 3 hướng đó, rồi Slide 8-12 mới nêu cụ thể từng Concept. Không thuyết trình mối liên hệ này trực tiếp ở Slide 5 — để khán giả tự nhận ra khi đến Slide 7-8, tạo hiệu ứng mạch lạc.
+
+*(Trên pptx, bảng dựng dưới dạng 1 bảng thật với 3 cột theo đúng thứ tự đọc: Job | Pain point | Nhu cầu — cột Nhu cầu ở ngoài cùng bên phải, merge ô theo từng nhóm để không lặp lại nhãn.)*
 
 *Tâm lý mua hàng liên quan (theo tài liệu đào tạo 06/2025): Loss Aversion và Information Gap là 2 rào cản chính khi nâng giá 250k→390k — cần cơ chế học thử/hoàn tiền mạnh hơn mức đang áp dụng, xem `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 4.*
 
