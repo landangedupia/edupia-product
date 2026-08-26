@@ -16,6 +16,10 @@
 
 ✅ **[Build pptx 2026-08-26]** Đã đồng bộ toàn bộ nội dung trên vào `AI-Class-New-slide-deck-FINAL-2026-08-21-branded.pptx` bằng cách chỉnh sửa OOXML trực tiếp: (1) viết lại nội dung Slide 5 (Nhóm I, 4 khối JTBD dạng văn xuôi, không bảng) và thêm mới Slide 6 (Nhóm II, 3 khối JTBD) theo đúng mẫu khối "thanh màu + tiêu đề + Mục tiêu/Pain point" đã dùng cho các slide Concept; (2) thêm mới Slide 7 (Phân tích, Đánh giá Concept hiện tại) với bảng 3 cột (Cấu phần | JTBD | Đánh giá) + 2 dòng ghi chú Nhóm II/Đánh giá tổng thể; (3) cập nhật số Slide/footer nhất quán từ 1/14 đến 14/14 trên toàn bộ 15 slide; (4) cập nhật `presentation.xml` (sldIdLst, rels, Content_Types) để chèn đúng vị trí 2 slide mới. Đã kiểm tra: toàn bộ 80 phần XML/rels trong gói đều well-formed, mọi rId trong sldIdLst và trong rels của từng slide mới đều trỏ đến part tồn tại, không có tham chiếu treo. Có bật `<a:normAutofit/>` cho các khối JTBD và 2 ghi chú ở Slide 7 để PowerPoint tự co chữ nếu tràn khung — do khối Nhóm I phải nén còn ~85% chiều cao gốc để chứa đủ 4 khối JTBD (thay vì 3 như mẫu gốc). ⚠ **Chưa mở thử trong PowerPoint để xem trực quan** (máy không có PowerPoint/LibreOffice để render) — bản pptx đã build có rủi ro sai lệch layout/tràn chữ chưa phát hiện được, đặc biệt ở Slide 5 (4 khối JTBD) và Slide 7 (bảng + 2 ghi chú, không gian hơi hẹp). **Cần mở kiểm tra bằng mắt trước khi trình bày** — cuộc họp là 27/08/2026, chỉ còn 1 ngày.
 
+✅ **[Cập nhật 2026-08-26 v4]** Thêm **1 slide phụ lục ở cuối bộ slide** — "Hướng phân tích JTBD thay thế" (mục `## SLIDE PHỤ LỤC` gần cuối file). Slide này **không thuộc mạch trình bày chính** (Slide 1-15), **không đánh số footer** (theo quy ước mục Phụ lục), **không thay thế Slide 5-6** — chỉ trình bày nếu cuộc họp muốn đào sâu. Khác biệt so với Slide 5-6: (a) giữ lại đầy đủ tầng **Chức năng / Cảm xúc / Xã hội** cho từng JTBD (Slide 5-6 đã lược bỏ cho gọn); (b) nêu 2 điều chỉnh khung để thảo luận — tái khung Nhóm II thành *giai đoạn chuyển cấp* nối tiếp Nhóm I thay vì phân khúc song song (dẫn chứng: Dang Hai-Anh; VnExpress), và bổ sung 2 JTBD ẩn (trấn an sau thất bại trước đó; không thua kém "con nhà người ta"). Bộ slide nay có 16 slide vật lý (15 chính + 1 phụ lục không đánh số). Đã đồng bộ vào pptx — xem dòng build ngay dưới.
+
+✅ **[Build pptx 2026-08-26 v4]** Đã thêm slide phụ lục vào `AI-Class-New-slide-deck-FINAL-2026-08-21-branded.pptx` bằng chỉnh sửa OOXML trực tiếp: (1) tạo mới `ppt/slides/slide17.xml` — bố cục 2 cột theo đúng mẫu khối JTBD ("thanh màu + tiêu đề + dòng nội dung") của Slide 5-6: cột trái Nhóm I (JTBD 1-4, mỗi khối 3 dòng Chức năng/Cảm xúc/Xã hội + 1 dòng ⚠ xung đột ở JTBD 3), cột phải Nhóm II (JTBD 5-6) và khối "JTBD ẩn" (JTBD 7-8, chỉ văn xuôi vì nguồn chưa bóc tách tầng); (2) footer ghi "PHỤ LỤC" thay vì số trang; (3) tạo `ppt/slides/_rels/slide17.xml.rels`; cập nhật `[Content_Types].xml` (+Override slide17), `ppt/_rels/presentation.xml.rels` (+rId23), `ppt/presentation.xml` (thêm `<p:sldId id="272" r:id="rId23"/>` ở **cuối** sldIdLst), `docProps/app.xml` (Slides 15→16, +"Slide 16"). Đã kiểm tra: toàn bộ 70 phần XML/rels well-formed; 16/16 mục sldIdLst trỏ đến part tồn tại và có Override trong Content_Types; mọi rId trong slide17.xml (r:embed rId1/rId2) khớp rels; gói lại đúng thứ tự ([Content_Types].xml → _rels/.rels → còn lại), chênh đúng +2 entry so với bản cũ (slide17.xml, slide17.xml.rels). Mọi khối chữ đều bật `<a:normAutofit/>`. ⚠ **Chưa mở thử trong PowerPoint** (máy không có PowerPoint/LibreOffice để render) — cần mở kiểm tra bằng mắt Slide 17 (đặc biệt cột trái: 4 khối JTBD × 3-4 dòng, có thể sát khung) trước khi trình bày. Bản `-original.pptx` không đổi; bản cũ vẫn khôi phục được qua `git checkout`.
+
 ---
 
 ## Slide 1 — Trang bìa
@@ -347,6 +351,86 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 | Tháng 11 — Test bán vòng 1 | Theo dõi kết quả, tham vấn quyết định tiếp theo | Hỗ trợ kỹ thuật, theo dõi vận hành hoàn tiền | Chạy chiến dịch quảng cáo thật | Gọi điện tư vấn, thu tiền thật, đo tỷ lệ chốt |
 | Tháng 12 — Làm mịn & Test bán vòng 2 | Theo dõi kết quả 2 vòng, chuẩn bị đối chiếu | Làm mịn sản phẩm theo phản hồi | Làm mịn nội dung quảng cáo | Làm mịn kịch bản bán, chạy vòng 2 |
 | Tháng 1/2027 — Bắt đầu xây dựng | Phê duyệt ngân sách/nguồn lực (qua BOD) | Đổ nguồn lực code/hoàn thiện sản phẩm | — | — |
+
+---
+
+## SLIDE PHỤ LỤC — HƯỚNG PHÂN TÍCH JTBD THAY THẾ
+
+> **[Thêm 2026-08-26 v4]** Slide này **đặt ở cuối bộ slide, mang ý nghĩa phụ lục** — chỉ trình bày nếu cuộc họp 27/08 muốn đào sâu phân tích các JTBD chính. **Không đánh số footer. Không thay thế Slide 5-6** — là một cách nhìn bổ sung.
+
+### Slide PL — Phân tích sâu các JTBD chính (bản đầy đủ tầng Chức năng / Cảm xúc / Xã hội)
+
+*(slide phụ lục — không đánh số footer)*
+
+**Vì sao có slide này:** Slide 5-6 trình bày 7 JTBD ở dạng rút gọn (JTBD → Mục tiêu → Pain point), cố ý lược bỏ tầng Cảm xúc/Xã hội cho gọn. Slide phụ lục này giữ lại **đầy đủ 3 tầng Chức năng / Cảm xúc / Xã hội** cho từng JTBD, đồng thời đề xuất **2 điều chỉnh khung** để thảo luận:
+> 1. **Tái khung Nhóm II** thành *giai đoạn chuyển cấp* nối tiếp Nhóm I — không phải phân khúc khách hàng song song. Theo phản biện trong báo cáo, dữ liệu VN (Dang Hai-Anh; VnExpress) cho thấy đây là một hành trình theo cấp học chứ không phải phân khúc khách hàng khác.
+> 2. **Bổ sung 2 JTBD ẩn** (JTBD 7-8) có bằng chứng mạnh nhưng chưa đưa vào Slide 5-6.
+
+#### Nhóm I — Đầu tư mạnh phát triển năng lực Tiếng Anh
+
+**JTBD 1 — Thành tích đo lường được**
+
+*Khi con đi học về hoặc sau mỗi kỳ kiểm tra mà tôi không biết con đang ở đâu so với bạn bè, tôi muốn có một minh chứng rõ ràng, cụ thể (điểm số, chứng chỉ) về năng lực tiếng Anh của con, để tôi có thể yên tâm rằng khoản tiền mình bỏ ra là xứng đáng và tôi không phải người mẹ đầu tư sai chỗ.*
+
+- **Chức năng:** điểm cao, có chứng chỉ theo lộ trình.
+- **Cảm xúc (bổ sung):** giải tỏa lo sợ "đầu tư mà không có kết quả" — đặc biệt mạnh với phụ huynh đã từng thử sản phẩm khác mà thất vọng.
+- **Xã hội (bổ sung):** có "bằng chứng" để nói với người khác (chồng, ông bà, bạn bè) rằng quyết định của mình là đúng.
+
+**JTBD 2 — Tự tin giao tiếp thực tế**
+
+*Khi tôi nghĩ tới việc con đi ra ngoài xã hội hoặc gặp người nước ngoài mà không nói được gì dù đã học tiếng Anh nhiều năm, tôi muốn con nghe-nói được, tự tin mở miệng, để tôi có thể tin rằng việc học không chỉ để thi mà thực sự dùng được, và con sẽ không thua thiệt như thế hệ mình.*
+
+- **Chức năng:** nghe-nói, phát âm chuẩn.
+- **Cảm xúc (bổ sung):** nỗi sợ "học nhiều năm mà vẫn câm tiếng Anh" giống chính phụ huynh từng trải qua.
+- **Xã hội (bổ sung):** mong con có thứ mình không có được — gắn với JTBD ẩn "đổi đời qua ngoại ngữ".
+
+**JTBD 3 — Yêu thích, tự giác học**
+
+*Khi tôi mệt mỏi vì phải nhắc nhở, quát mắng con học mỗi tối và cảm thấy việc học biến thành cuộc chiến giữa hai mẹ con, tôi muốn con tự giác ngồi vào bàn mà không cần tôi thúc ép, để tôi có thể giữ được không khí gia đình nhẹ nhàng và không phải làm "người xấu" mỗi tối.*
+
+- **Chức năng:** chủ động học, không đối phó.
+- **Cảm xúc (bổ sung):** mệt mỏi vì xung đột hằng ngày với con, cảm giác tội lỗi khi phải quát mắng.
+- **Xã hội (bổ sung):** giữ hòa khí gia đình.
+- ⚠ **Lưu ý xung đột thiết kế:** JTBD này dễ mâu thuẫn với JTBD 1 nếu sản phẩm dùng nặng điểm số/thi đua để "chứng minh" — cần cân bằng, không để cơ chế phục vụ JTBD 1 phá JTBD 3.
+
+**JTBD 4 — Giải phóng thời gian, áp lực kèm con**
+
+*Khi tôi đi làm cả ngày, không biết tiếng Anh và không đủ sức kèm con mỗi tối, tôi muốn có một giải pháp tự vận hành, đáng tin cậy để lo việc học tiếng Anh thay tôi, để tôi có thể yên tâm đi làm mà không cảm thấy mình là người mẹ thiếu trách nhiệm vì không tự kèm được con.*
+
+- **Chức năng:** không cần giám sát/kèm cặp hằng ngày.
+- **Cảm xúc (bổ sung — đây là phần bị thiếu nhiều nhất ở slide gốc):** giải tỏa mặc cảm/tội lỗi vì không giỏi tiếng Anh, không có thời gian.
+- **Xã hội (bổ sung):** vẫn được nhìn nhận là "mẹ có trách nhiệm" dù bận.
+
+#### Nhóm II — Không nên tách riêng, mà là giai đoạn tiếp theo của Nhóm I
+
+Theo phản biện trong báo cáo, dữ liệu VN (Dang Hai-Anh; VnExpress) cho thấy đây là một hành trình theo cấp học chứ không phải phân khúc khách hàng khác. Nên viết lại thành JTBD "giai đoạn chuyển cấp" gắn liền với Nhóm I, không phải nhóm song song:
+
+**JTBD 5 — Không bị hổng môn khi áp lực chuyển cấp tới gần**
+
+*Khi con sắp thi chuyển cấp (lớp 6, lớp 10) và tôi thấy mọi người xung quanh đều cho con học thêm đa môn, tôi muốn con không bị lệch hay hổng ở bất kỳ môn thi nào, để tôi có thể an tâm rằng con không tụt lại vì mình chỉ lo mỗi tiếng Anh.*
+
+- **Chức năng:** điểm đồng đều, đủ năng lực thi.
+- **Cảm xúc (bổ sung):** lo âu so sánh xã hội — sợ "ai cũng học mà mình không cho con học".
+- **Xã hội (bổ sung):** áp lực đồng thuận cộng đồng phụ huynh xung quanh kỳ thi chuyển cấp.
+
+**JTBD 6 — Không phải quản lý nhiều nơi cùng lúc**
+
+*Khi con vừa học tiếng Anh chỗ này vừa phải tìm thêm chỗ học Toán/Văn ở nơi khác, tôi muốn một giải pháp gộp được nhiều môn cùng một chỗ, để tôi có thể bớt thời gian đưa đón, bớt phải nhớ nhiều lịch, nhiều khoản chi.*
+
+- **Chức năng:** đóng gói đa môn.
+- **Cảm xúc (bổ sung):** mệt mỏi vì quản lý phân mảnh.
+
+#### JTBD ẩn cần cân nhắc bổ sung
+
+*(không có trong slide gốc, nhưng có bằng chứng mạnh)*
+
+**JTBD 7 — Trấn an sau thất bại trước đó**
+
+*Khi tôi đã từng bỏ tiền cho một giải pháp mà không thấy hiệu quả, tôi muốn có bằng chứng/cam kết rõ ràng trước khi bỏ tiền lần nữa, để tôi có thể tin rằng lần này sẽ khác, không lặp lại cảm giác phí tiền.*
+
+**JTBD 8 — Không thua kém "con nhà người ta"**
+
+*Khi nghe hàng xóm/bạn bè khoe con đạt chứng chỉ hay đỗ trường tốt, tôi muốn con mình có thành tích tương đương hoặc hơn, để tôi có thể tự tin khi so sánh, không cảm thấy mình thua kém trong mắt người khác.*
 
 ---
 
