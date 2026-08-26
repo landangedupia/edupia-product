@@ -1,4 +1,4 @@
-# Slide content — Edupia AI Class New: 3 định hướng concept (FINAL — bản mới nhất, cập nhật 2026-08-25)
+# Slide content — Edupia AI Class New: 3 định hướng concept (FINAL — bản mới nhất, cập nhật 2026-08-26)
 
 **Trạng thái:** Đây là bản nội dung **cuối cùng đã được chốt** sau khi Lân review với các stakeholder, trích xuất nguyên văn từ file nguồn `[Edupia AI Class New] Concept slides 08_2026 (1).pptx` (lưu 21/08/2026). Bản này **thay thế** bản nháp trước đó (`slide-content-ai-class-plus-2026-08-20.md`, giữ lại làm tài liệu lịch sử/tham khảo quá trình xây dựng nội dung) — không tiếp tục chỉnh sửa file cũ.
 
@@ -7,6 +7,14 @@
 ✅ **[FINAL — bản mới nhất, chốt 2026-08-25]** So với bản build 22/08/2026, đã: (1) chèn thêm **PHẦN 2 — Chân dung khách hàng mục tiêu** (Slide 4-5, tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`) giữa "Mục tiêu chiến lược" và "Định hướng concept sản phẩm"; (2) tạm bỏ Slide "Quy mô thị trường Tier 3/4" khỏi bộ slide chính — nội dung giữ nguyên văn ở mục "PHỤ LỤC — Nội dung tạm ẩn" cuối file để khôi phục khi cần; (3) JTBD ở Slide 5 viết theo đúng khung Functional/Emotional/Social (glossary), Pain point viết rõ bằng câu, không dùng mã chữ A/B/C. Bộ slide hiện có **13 slide** (12 nội dung + bìa) — số Slide/PHẦN/footer đã cập nhật nhất quán toàn bộ.
 
 **Đã build vào `AI-Class-New-slide-deck-FINAL-2026-08-21-branded.pptx`** — chỉnh trực tiếp file pptx đã có Brand Guideline (không tạo file mới) bằng cách chỉnh sửa OOXML: xoá slide Tier 3/4, chèn 2 slide bảng mới (Chân dung khách hàng, Pain Point & JTBD — cột Tầng dùng merge ô thật, không lặp nhãn), cập nhật số Slide/PHẦN/footer toàn bộ, tính lại layout Agenda cho mục thứ 5. Đã kiểm tra: toàn bộ XML hợp lệ, quan hệ rels/Content_Types/sldIdLst nhất quán, không có tham chiếu treo. ⚠ **Chưa mở thử trong PowerPoint để xem trực quan** (máy không có PowerPoint/LibreOffice để render) — nên mở kiểm tra 1 lần trước khi trình bày chính thức. File `-original.pptx` (bản gốc, không chỉnh sửa) giữ nguyên, không đổi.
+
+✅ **[Cập nhật 2026-08-26]** Tái cấu trúc Slide 5 (Pain Point & JTBD) từ **3 nhóm nhu cầu xuống còn 2 nhóm nhu cầu**, theo quyết định của Lân: nhóm nhu cầu thứ 3 cũ ("Muốn con được đồng hành, đốc thúc học tập" — job giám sát/đốc thúc, tin đã chọn đúng, hãnh diện tự hào — vốn dẫn tới Concept 3) được **bỏ hẳn khỏi mạch Slide 5-6**, không gộp vào 2 nhóm còn lại — giữ nguyên văn ở mục "PHỤ LỤC — Nội dung tạm ẩn" để dùng lại khi xây content riêng cho Concept 3. Slide 5 cũ tách thành **Slide 5 và Slide 6 mới** (mỗi nhóm nhu cầu 1 slide) — toàn bộ Slide/PHẦN/footer từ Slide 6 cũ trở đi dịch lên +1. Bộ slide hiện có **14 slide** (13 nội dung + bìa). Đã đồng bộ vào pptx ở lần build 2026-08-26 (xem cuối file) — không còn áp dụng riêng lẻ, xem trạng thái hợp nhất ở dòng build mới nhất.
+
+✅ **[Cập nhật 2026-08-26 v2]** Viết lại nội dung Slide 5-6 theo đúng 7 JTBD đã thống nhất qua trao đổi (4 JTBD Nhóm I "Đầu tư mạnh Tiếng Anh", 3 JTBD Nhóm II "Phát triển toàn diện") — trình bày từng JTBD dạng văn xuôi (JTBD → Mục tiêu → Pain point), **bỏ định dạng bảng và nhãn tầng Functional/Emotional/Social** đã dùng ở bản 2026-08-25/2026-08-26. Số slide/footer không đổi (vẫn Slide 5 và Slide 6, 14 slide tổng). ⚠ **2 điểm cần bạn xác nhận:** (1) Job "Nuôi dưỡng sự yêu thích và tự giác học" (Nhóm I #3) dùng chung pain point với nhóm nhu cầu 3 đã rút ở bản v1 cùng ngày — chỉ đổi góc diễn giải từ "phụ huynh cần người giám sát thay" sang "muốn con tự giác"; (2) Job "Vượt qua các kỳ thi chuyển cấp/Đại học" (Nhóm II #2) **chưa có pain point tương ứng** trong nguồn `customer-persona-pain-jtbd-tap1-2026-08-25.md` — chưa được xác nhận bằng nghiên cứu nội bộ. Pain point này sau đó được bổ sung theo yêu cầu, đánh dấu rõ *(giả định, cần validate ở kết quả khảo sát T9)*.
+
+✅ **[Cập nhật 2026-08-26 v3]** Thêm **Slide 7 (MỚI) — Phân tích, Đánh giá Concept hiện tại (Current State)**, chèn sau Slide 6 và trước Phần 3 — đối chiếu từng cấu phần sản phẩm hiện có (Big Class + AI Practice, AI Speak, Edupia Club, GVCN) với 7 JTBD ở Slide 5-6 để trả lời "đã giải quyết được gì / còn thiếu gì", theo nội dung do Lân cung cấp. Kết luận: giải quyết tốt 3/4 JTBD Nhóm I, còn thiếu rõ ở JTBD 4 (GVCN kèm con chưa đủ để giải phóng thời gian cho bố mẹ) và hoàn toàn chưa đáp ứng Nhóm II (toàn diện). Toàn bộ Slide/footer từ Slide 7 cũ (Khoảng trống thị trường) trở đi dịch lên +1. Bộ slide hiện có **15 slide** (14 nội dung + bìa).
+
+✅ **[Build pptx 2026-08-26]** Đã đồng bộ toàn bộ nội dung trên vào `AI-Class-New-slide-deck-FINAL-2026-08-21-branded.pptx` bằng cách chỉnh sửa OOXML trực tiếp: (1) viết lại nội dung Slide 5 (Nhóm I, 4 khối JTBD dạng văn xuôi, không bảng) và thêm mới Slide 6 (Nhóm II, 3 khối JTBD) theo đúng mẫu khối "thanh màu + tiêu đề + Mục tiêu/Pain point" đã dùng cho các slide Concept; (2) thêm mới Slide 7 (Phân tích, Đánh giá Concept hiện tại) với bảng 3 cột (Cấu phần | JTBD | Đánh giá) + 2 dòng ghi chú Nhóm II/Đánh giá tổng thể; (3) cập nhật số Slide/footer nhất quán từ 1/14 đến 14/14 trên toàn bộ 15 slide; (4) cập nhật `presentation.xml` (sldIdLst, rels, Content_Types) để chèn đúng vị trí 2 slide mới. Đã kiểm tra: toàn bộ 80 phần XML/rels trong gói đều well-formed, mọi rId trong sldIdLst và trong rels của từng slide mới đều trỏ đến part tồn tại, không có tham chiếu treo. Có bật `<a:normAutofit/>` cho các khối JTBD và 2 ghi chú ở Slide 7 để PowerPoint tự co chữ nếu tràn khung — do khối Nhóm I phải nén còn ~85% chiều cao gốc để chứa đủ 4 khối JTBD (thay vì 3 như mẫu gốc). ⚠ **Chưa mở thử trong PowerPoint để xem trực quan** (máy không có PowerPoint/LibreOffice để render) — bản pptx đã build có rủi ro sai lệch layout/tràn chữ chưa phát hiện được, đặc biệt ở Slide 5 (4 khối JTBD) và Slide 7 (bảng + 2 ghi chú, không gian hơi hẹp). **Cần mở kiểm tra bằng mắt trước khi trình bày** — cuộc họp là 27/08/2026, chỉ còn 1 ngày.
 
 ---
 
@@ -21,7 +29,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## Slide 2 — Agenda
 
-*(footer: AI Class New · 1/12)*
+*(footer: AI Class New · 1/14)*
 
 **Agenda**
 
@@ -37,7 +45,7 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ### Slide 3 — Vì sao là 390k – 400k?
 
-*(footer: AI Class New · 2/12)*
+*(footer: AI Class New · 2/14)*
 
 **Mục tiêu chiến lược (Chiến lược Educa 2026-2028)**
 - Educa tập trung nguồn lực vào phân khúc đại trà (mass) — tái định vị Edupia AI Class theo hướng nâng chất lượng học tập bằng AI, dịch chuyển lên mức giá cao hơn nhưng vẫn trong khả năng chi trả của đa số gia đình Việt Nam.
@@ -52,11 +60,11 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## PHẦN 2 — CHÂN DUNG KHÁCH HÀNG MỤC TIÊU
 
-> **[FINAL — đã chốt, đã build vào pptx 2026-08-25]** 2 slide dưới đây tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`, chèn sau "Vì sao là 390k-400k?" (Phần 1) và trước "Định hướng concept sản phẩm" (Phần 3, trước đây là Phần 2) — trả lời "khách hàng là ai, đau ở đâu, đang cố làm gì" trước khi vào giải pháp. **Lưu ý phạm vi:** nguồn chỉ mô tả **Tệp 1** (khách hàng cũ, đang dùng ở 250k, mục tiêu nâng gói lên 390k) — KHÔNG bao gồm Tệp 2 (khách hàng mới, thị trường Tier 3/4 — xem slide "Quy mô thị trường Tier 3/4" đang tạm ẩn ở mục Phụ lục cuối file). Quy ước ký hiệu giữ theo nguồn: ● dữ liệu có sẵn · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống. Slide 5 trình bày Pain Point & JTBD theo 3 hướng giá trị, gieo mạch dẫn tới Slide 7 (khung Deepen/Expand/Transform) và Slide 8-12 (3 Concept cụ thể) — nhưng cố ý chưa nêu tên Concept tại Slide 5.
+> **[Cập nhật 2026-08-26 v3]** 4 slide dưới đây tổng hợp từ `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md`, chèn sau "Vì sao là 390k-400k?" (Phần 1) và trước "Định hướng concept sản phẩm" (Phần 3, trước đây là Phần 2) — trả lời "khách hàng là ai, đau ở đâu, đang cố làm gì, và concept hiện tại đã đáp ứng tới đâu" trước khi vào giải pháp. **Lưu ý phạm vi:** nguồn chỉ mô tả **Tệp 1** (khách hàng cũ, đang dùng ở 250k, mục tiêu nâng gói lên 390k) — KHÔNG bao gồm Tệp 2 (khách hàng mới, thị trường Tier 3/4 — xem slide "Quy mô thị trường Tier 3/4" đang tạm ẩn ở mục Phụ lục cuối file). Quy ước ký hiệu giữ theo nguồn: ● dữ liệu có sẵn · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống. Slide 5-6 trình bày Pain Point & JTBD theo **2 hướng giá trị** (Tiếng Anh giỏi, Toàn diện); Slide 7 (MỚI) đối chiếu concept hiện tại với 7 JTBD đó để chỉ ra đã giải quyết gì/còn thiếu gì — gieo mạch dẫn tới khung Deepen/Expand ở Slide 9 và Concept 1/Concept 2 ở Slide 11-12. Cố ý chưa nêu tên Concept mới cụ thể ở Slide 5-7. ⚠ Kể từ 2026-08-26, Concept 3 (Slide 13) **không còn nhu cầu riêng được gieo trước** ở Phần 2 — xem ghi chú dàn dựng cuối Slide 6 và nội dung gốc đã rút ra ở PHỤ LỤC.
 
 ### Slide 4 (MỚI) — Chân dung khách hàng mục tiêu (Tệp 1 — khách hàng cũ)
 
-*(footer: AI Class New · 3/12)*
+*(footer: AI Class New · 3/14)*
 
 | Chiều | Nội dung |
 |---|---|
@@ -75,42 +83,70 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *⚠ Ghi chú phạm vi: đây là chân dung Tệp 1 (khách hàng cũ) — chưa xác nhận trùng khớp bao nhiêu % với chân dung khách hàng mới Tier 3/4. Cần khảo sát T9-T10 làm rõ trước khi dùng chung 1 persona cho cả 2 tệp.*
 
-### Slide 5 (MỚI) — Pain Point & JTBD
+### Slide 5 (MỚI) — Pain Point & JTBD: Nhóm I — Đầu tư mạnh phát triển năng lực Tiếng Anh
 
-*(footer: AI Class New · 4/12)*
+*(footer: AI Class New · 4/14)*
 
-**[Cập nhật 2026-08-25]** Bảng đọc theo thứ tự: **Job (gắn nhãn tầng `[...]`) → Pain point → Nhu cầu** (cột/dòng tổng kết đặt cuối mỗi nhóm, không đặt đầu) — để mạch trình bày đi từ "JTBD cụ thể thuộc tầng nào" đến "JTBD đó giải quyết nhu cầu tổng quát nào của khách hàng". Bảng theo 3 tầng Functional/Emotional/Social gốc vẫn giữ nguyên ở `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 3, dùng làm tham chiếu. Cố ý **chưa nêu tên Concept cụ thể** tại slide này để tránh "lộ" giải pháp trước khi trình bày; xem ghi chú dàn dựng bên dưới bảng.
+**[Cập nhật 2026-08-26 v2]** Trình bày từng JTBD một (không kẻ bảng): **JTBD → Mục tiêu → Pain point**. Cố ý **chưa nêu tên Concept cụ thể** tại slide này; xem ghi chú dàn dựng cuối Slide 6.
 
-| Job (góc nhìn phụ huynh) | Pain point liên quan |
-|---|---|
-| **[Functional]** Muốn con học giỏi môn tiếng Anh | Con học TA chưa tốt/tiến bộ chậm — phát âm sai, không tự tin khi giao tiếp |
-| **[Emotional]** Yên tâm con tiến bộ thực chất mà không cần tự kèm | Con học TA chưa tốt; phụ huynh bận, phải nhắc nhở/đốc thúc con |
+**1. Đạt thành tích học thuật rõ ràng, đo lường được về Tiếng Anh**
+Mục tiêu: Con đạt điểm cao tiếng Anh trên trường, đồng thời thi đạt các chứng chỉ tiếng Anh theo lộ trình phù hợp — đây là bằng chứng cụ thể cho việc đầu tư đã có hiệu quả, không phải cảm nhận chung chung.
+Pain point: Con học tiếng Anh chưa tốt/tiến bộ chậm — phát âm sai, giỏi ngữ pháp nhưng không tự tin khi giao tiếp. (Nguồn: `customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 2 "Kết quả học tập")
 
-**→ Nhu cầu: Muốn con học giỏi tiếng Anh**
+**2. Tự tin giao tiếp bằng tiếng Anh trong thực tế**
+Mục tiêu: Con nghe – nói được, dạn dĩ khi phải dùng tiếng Anh ngoài đời, không chỉ giỏi trên giấy — phụ huynh coi khả năng ứng dụng thực tế quan trọng ngang hoặc hơn điểm số.
+Pain point: Cùng một pain point gốc với Job 1 ở trên (phát âm sai, giỏi ngữ pháp nhưng không tự tin khi giao tiếp) — tách thành job riêng vì đây là khía cạnh "ứng dụng ngoài đời", khác khía cạnh "điểm số/chứng chỉ" ở Job 1.
 
-| Job (góc nhìn phụ huynh) | Pain point liên quan |
-|---|---|
-| **[Functional]** Muốn con phát triển toàn diện, không học lệch | ◆ Con học lệch, thiếu cân bằng giữa các môn (giả định đa môn, chưa xác nhận) |
-| **[Functional]** Quản lý toàn bộ việc học của con ở một nơi, không phải tự tổng hợp | Khó quản lý khi con học nhiều môn/nhiều trung tâm; khó biết con học gì, yếu đâu |
-| **[Functional]** Duy trì việc học hiệu quả trong khả năng chi trả lâu dài | Chi phí cao khi dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian đưa đón |
+**3. Nuôi dưỡng sự yêu thích và tự giác học**
+Mục tiêu: Con chủ động, hào hứng học tiếng Anh thay vì học đối phó/bị ép — phụ huynh tin rằng chỉ khi con thực sự thích, việc đầu tư mới bền vững và duy trì được lâu dài.
+Pain point: Phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác, dễ sao nhãng — phụ huynh cảm giác bất lực/tự trách vì không tự dạy được con. ⚠ *Job này cùng nguồn pain point với "nhóm nhu cầu 3" đã rút khỏi Slide 5-6 ở bản cập nhật 2026-08-26 trước đó (xem PHỤ LỤC) — nguồn viết theo góc "phụ huynh muốn có người giám sát/đốc thúc thay mình" (job của người trả tiền), còn job này viết theo góc "muốn con tự giác" (job của người học). Đưa lại nội dung này vào Nhóm I là phục hồi một phần nhóm đã rút, chỉ đổi góc nhìn — nhờ bạn xác nhận đây đúng là chủ đích trước khi build vào pptx.*
 
-**→ Nhu cầu: Muốn con học giỏi toàn diện**
+**4. Giải phóng thời gian và áp lực kèm con cho bố mẹ**
+Mục tiêu: Phụ huynh không đủ thời gian hoặc năng lực tiếng Anh để tự kèm con — cần một giải pháp đảm nhiệm việc này thay họ, để họ yên tâm mà không phải trực tiếp giám sát, đưa đón hay kèm cặp mỗi ngày.
+Pain point: Phụ huynh bận, không có thời gian kèm con (làm toàn thời gian >8h/ngày); không giỏi tiếng Anh nên không tự hỗ trợ được con khi con gặp vấn đề.
 
-| Job (góc nhìn phụ huynh) | Pain point liên quan |
-|---|---|
-| **[Functional]** Có người giám sát, đốc thúc con học thay bố mẹ, con được học cá nhân hóa | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác |
-| **[Emotional]** Tin mình đã chọn đúng, đầu tư đủ, không thua kém gia đình khác | Học online "không ai quản" nên không yên tâm; sợ mất tiền mà không hiệu quả |
-| **[Social]** Hãnh diện, tự hào với người thân, bạn bè khi con đạt thành tích cao, muốn chia sẻ | Lo con thua thiệt, thua kém "con nhà người ta" |
+### Slide 6 (MỚI) — Pain Point & JTBD: Nhóm II — Phát triển toàn diện, giỏi đều các môn
 
-**→ Nhu cầu: Muốn con được đồng hành, đốc thúc học tập**
+*(footer: AI Class New · 5/14)*
 
-*⚠ "Muốn con phát triển toàn diện, không học lệch" là ◆ giả định chưa xác nhận theo nguồn Pain Point gốc — chưa rõ gói 390k có thực sự đa môn hay không. Cần khảo sát T9–T10 xác nhận trước khi dùng trong content bán hàng thật.*
+**1. Đạt điểm cao đồng đều ở tất cả các môn**
+Mục tiêu: Con không bị lệch môn hay hổng kiến thức ở bất kỳ môn chính khóa nào — đảm bảo nền tảng học thuật toàn diện thay vì chỉ dồn lực vào một môn.
+Pain point: ◆ Con học lệch, thiếu cân bằng giữa các môn — chỉ tập trung tiếng Anh, thiếu môn khác (giả định mở rộng phạm vi đa môn, chưa xác nhận gói 390k có thực sự đa môn hay không — cần khảo sát T9-T10).
 
-**Ghi chú dàn dựng (không đọc trên slide):** Thứ tự 3 Nhu cầu cố ý khớp 1:1 với thứ tự DEEPEN/EXPAND/TRANSFORM ở Slide 7 và Concept 1/2/3 ở Slide 8-12 (Nhu cầu 1 "học giỏi tiếng Anh" → Concept 1, Nhu cầu 2 "học giỏi toàn diện" → Concept 2, Nhu cầu 3 "đồng hành, đốc thúc" → Concept 3) — Slide 5 gieo "vấn đề phụ huynh đang cần" theo đúng 3 hướng, Slide 7 sẽ "giải thích khung tư duy" cho 3 hướng đó, rồi Slide 8-12 mới nêu cụ thể từng Concept. Không thuyết trình mối liên hệ này trực tiếp ở Slide 5 — để khán giả tự nhận ra khi đến Slide 7-8, tạo hiệu ứng mạch lạc.
+**2. Vượt qua các kỳ thi mang tính bước ngoặt (chuyển cấp, Đại học)**
+Mục tiêu: Con có đủ năng lực tổng hợp để vượt qua các kỳ thi quan trọng (thi vào 10, thi tốt nghiệp/Đại học) — đây là mục tiêu tổng hòa của việc học đều nhiều môn, không phải mục tiêu riêng của một môn nào.
+Pain point: ◆ Lo con không đủ điểm/năng lực để đỗ vào trường cấp 3 hoặc Đại học mong muốn khi kỳ thi đến gần; cảm giác chuẩn bị chưa đủ vì việc học hiện tại rời rạc theo từng môn, không có ai giúp tổng hợp/đánh giá năng lực tổng thể của con trước một kỳ thi cụ thể. *(giả định, cần validate ở kết quả khảo sát T9 — không có trong nguồn `customer-persona-pain-jtbd-tap1-2026-08-25.md`)*
 
-*(Trên pptx, bảng dựng dưới dạng 1 bảng thật với 3 cột theo đúng thứ tự đọc: Job | Pain point | Nhu cầu — cột Nhu cầu ở ngoài cùng bên phải, merge ô theo từng nhóm để không lặp lại nhãn.)*
+**3. Giải phóng thời gian và áp lực kèm con cho bố mẹ**
+Mục tiêu: Phụ huynh không đủ thời gian/kiến thức để tự kèm nhiều môn cùng lúc, nhất là khi chương trình học nặng dần lên ở cấp 2 — cần một giải pháp "đóng gói" nhiều môn để không phải tự tìm, quản lý, sắp xếp ở nhiều nơi khác nhau.
+Pain point: ◆ Khó quản lý việc học khi con học nhiều môn/nhiều trung tâm/nền tảng khác nhau; ◆ chi phí cao khi dùng nhiều lớp/trung tâm cộng dồn; tốn thời gian, công sức đưa đón.
+
+**Ghi chú dàn dựng (không đọc trên slide):** Nhóm I (4 JTBD) và Nhóm II (3 JTBD) cố ý khớp với **DEEPEN** và **EXPAND** ở khung tư duy Slide 9, và với **Concept 1** (Slide 11) / **Concept 2** (Slide 12) — Nhóm I → Concept 1, Nhóm II → Concept 2. Slide 7 (MỚI) chen giữa để đối chiếu concept hiện tại với 2 nhóm JTBD này trước khi vào khung Deepen/Expand/Transform. Không thuyết trình mối liên hệ Nhóm↔Concept trực tiếp ở Slide 5-6 — để khán giả tự nhận ra khi đến Slide 9-10.
+
+⚠ **Thay đổi 2026-08-26 (v2):** Bỏ khung tầng Functional/Emotional/Social (glossary) và định dạng bảng đã dùng ở bản trước — nay trình bày từng JTBD dạng văn xuôi (JTBD/Mục tiêu/Pain point) theo yêu cầu. Nhóm nhu cầu thứ 3 cũ ("đồng hành, đốc thúc học tập" — dẫn tới Concept 3) vẫn giữ nguyên trạng thái đã rút khỏi Slide 5-6 (xem PHỤ LỤC) — **trừ** Job "tự giác học" ở Nhóm I #3 phía trên, vốn cùng gốc pain point và đã được đưa lại dưới góc nhìn khác (xem ghi chú tại Job đó). Hệ quả cũ vẫn còn: **Concept 3** (Slide 13, **TRANSFORM**) không có nhu cầu riêng được gieo trước ở Phần 2.
 
 *Tâm lý mua hàng liên quan (theo tài liệu đào tạo 06/2025): Loss Aversion và Information Gap là 2 rào cản chính khi nâng giá 250k→390k — cần cơ chế học thử/hoàn tiền mạnh hơn mức đang áp dụng, xem `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 4.*
+
+### Slide 7 (MỚI) — Phân tích, Đánh giá Concept hiện tại (Current State)
+
+*(footer: AI Class New · 6/14)*
+
+**[Cập nhật 2026-08-26 v3]** Thay vì chỉ giới thiệu concept hiện tại, slide này trả lời 2 câu hỏi: **Concept hiện tại đang giải quyết được gì?** và **Concept hiện tại còn thiếu gì?** — đối chiếu trực tiếp với 7 JTBD ở Slide 5-6.
+
+**Nhóm I — Đầu tư mạnh phát triển năng lực Tiếng Anh**
+
+| Cấu phần hiện tại (Edupia AI Class 250k) | JTBD được giải quyết (Slide 5) | Đánh giá |
+|---|---|---|
+| Big Class + AI Practice — Giáo viên bám sát SGK (2 buổi/tuần) | JTBD 1: Đạt thành tích học thuật rõ ràng, đo lường được về Tiếng Anh | ✅ Đã giải quyết |
+| AI Speak — 1h luyện nói | JTBD 2: Tự tin giao tiếp bằng tiếng Anh trong thực tế | ✅ Đã giải quyết |
+| Edupia Club — Quốc tế | JTBD 3: Nuôi dưỡng sự yêu thích và tự giác học | ✅ Đã giải quyết |
+| GVCN kèm con | JTBD 4: Giải phóng thời gian và áp lực kèm con cho bố mẹ | ⚠ Chưa rõ ràng — cấu phần hiện tại chưa đủ để giải quyết trọn vẹn job này |
+
+**Nhóm II — Phát triển toàn diện, giỏi đều các môn**
+
+⚠ Concept hiện tại **chưa đáp ứng được** nhu cầu này — cả 3 JTBD ở Slide 6 (đạt điểm đều các môn, vượt qua kỳ thi bước ngoặt, giải phóng thời gian quản lý đa môn) đều chưa có cấu phần sản phẩm nào giải quyết.
+
+**Đánh giá tổng thể:** Concept hiện tại giải quyết tốt 3/4 JTBD ở Nhóm I, nhưng còn khoảng trống rõ ở JTBD 4 (giải phóng thời gian cho bố mẹ) và hoàn toàn chưa chạm tới Nhóm II — đây chính là 2 khoảng trống mà 3 định hướng concept ở Phần 3 cần trả lời.
 
 ---
 
@@ -118,9 +154,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 > **[Đã duyệt — đã build vào pptx 22/08/2026]** 2 slide dưới đây là slide mới, chèn trước "Tổng quan nhanh 3 định hướng" để dẫn dắt: từ (1) khoảng trống thị trường quan sát được, sang (2) khung tư duy giải thích vì sao có đúng 3 hướng tạo giá trị, rồi mới vào (3) tổng quan 3 concept cụ thể.
 
-### Slide 6 (MỚI) — Khoảng trống thị trường
+### Slide 8 (MỚI) — Khoảng trống thị trường
 
-*(footer: AI Class New · 5/12)*
+*(footer: AI Class New · 7/14)*
 
 *Định vị các lựa chọn học tiếng Anh hiện có theo 2 trục: mức độ cá nhân hóa và chi phí — cho thấy khoảng trống ở đúng mức giá 390k mà chưa lựa chọn nào lấp đầy.*
 
@@ -167,9 +203,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *Liên hệ: khoảng trống này chính là câu trả lời trực quan cho câu hỏi đặt ra ở Slide 3 ("thị trường đang có phân khúc công ty đang bỏ lỡ") — nằm giữa nhóm sản phẩm tự động hóa hoàn toàn (Self Learning → Big Class + AI) và nhóm sản phẩm gia sư người thật (Small-Group Tutor → Private Tutor).*
 
-### Slide 7 (MỚI) — Từ yếu tố tạo tiến bộ đến 3 hướng tạo giá trị
+### Slide 9 (MỚI) — Từ yếu tố tạo tiến bộ đến 3 hướng tạo giá trị
 
-*(footer: AI Class New · 6/12)*
+*(footer: AI Class New · 8/14)*
 
 *Giải thích khung tư duy đứng sau việc có đúng 3 định hướng concept — mỗi concept là một hướng tạo giá trị khác nhau, không phải 3 lựa chọn ngẫu nhiên.*
 
@@ -210,9 +246,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 ## PHẦN 3 — ĐỊNH HƯỚNG CONCEPT SẢN PHẨM (tiếp)
 
-### Slide 8 — Tổng quan nhanh 3 định hướng
+### Slide 10 — Tổng quan nhanh 3 định hướng
 
-*(footer: AI Class New · 7/12)*
+*(footer: AI Class New · 9/14)*
 
 | | Concept 1 — Làm mịn & nâng cấp | Concept 2 — Làm mịn + Thêm môn | Concept 3 — Gia sư AI 1:1 |
 |---|---|---|---|
@@ -221,9 +257,9 @@ Khối Sản phẩm và Công nghệ · 27/08/2026
 
 *Lưu ý: so với bản nháp trước, Concept 2 rút từ 3 Option còn 2 Option (Option 2.2/2.3 cũ gộp làm một "môn ngoài GDPT"); Concept 3 đổi tên gọi kỹ thuật thành "AI Tutor 1-1".*
 
-### Slide 9 — Concept 1: Làm mịn và nâng cấp
+### Slide 11 — Concept 1: Làm mịn và nâng cấp
 
-*(footer: AI Class New · 8/12)*
+*(footer: AI Class New · 10/14)*
 
 Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có — không đổi mô hình sản phẩm.
 
@@ -243,9 +279,9 @@ Giữ nguyên Big Class + AI Practice + AI Speak + Edupia Club + GVCN hiện có
 
 USP: "Chương trình tiếng Anh trực tuyến có giáo viên thật và công cụ luyện tập, luyện nói được tối ưu bằng AI."
 
-### Slide 10 — Concept 2: Làm mịn và thêm môn
+### Slide 12 — Concept 2: Làm mịn và thêm môn
 
-*(footer: AI Class New · 9/12)*
+*(footer: AI Class New · 11/14)*
 
 Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/tuần môn khác (ngoài tiếng Anh).
 
@@ -259,9 +295,9 @@ Giữ nền Concept 1 nâng cấp làm mịn sản phẩm + thêm 1 buổi Live/
 
 USP: "Chương trình tiếng Anh trực tuyến có thêm 1 buổi học với môn học khác mỗi tuần, giúp con phát triển toàn diện và phụ huynh không cần tìm thêm hoạt động bổ trợ ở nơi khác."
 
-### Slide 11 — Concept 3: Gia sư AI 1:1 (MỚI)
+### Slide 13 — Concept 3: Gia sư AI 1:1 (MỚI)
 
-*(footer: AI Class New · 10/12)*
+*(footer: AI Class New · 12/14)*
 
 AI là gia sư chính, không chỉ hỗ trợ lớp học như Concept 1/Concept 2.
 
@@ -279,9 +315,9 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ## PHẦN 4 — KẾ HOẠCH TRIỂN KHAI
 
-### Slide 12 — Lộ trình triển khai (2026 - 2027)
+### Slide 14 — Lộ trình triển khai (2026 - 2027)
 
-*(footer: AI Class New · 11/12)*
+*(footer: AI Class New · 13/14)*
 
 | Mốc | Nội dung |
 |---|---|
@@ -299,9 +335,9 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 
 ## PHẦN 5 — SƠ ĐỒ PHÂN CHIA TRÁCH NHIỆM
 
-### Slide 13 — Phân chia trách nhiệm theo 4 bộ phận
+### Slide 15 — Phân chia trách nhiệm theo 4 bộ phận
 
-*(footer: AI Class New · 12/12)*
+*(footer: AI Class New · 14/14)*
 
 | Giai đoạn | Chiến lược | Sản phẩm & Công nghệ | Marketing | Sales |
 |---|---|---|---|---|
@@ -326,6 +362,18 @@ USP: "Gia sư AI 1:1 luôn sẵn sàng, theo dõi và đồng hành cùng con tr
 - Thu nhập bình quân đầu người/tháng (nông thôn, toàn quốc): ~4,5 triệu — chênh lệch vùng miền lớn, từ ~7,1 triệu (Đông Nam Bộ) đến ~3,8 triệu (Trung du miền núi phía Bắc).
 - Ở mức thu nhập nông thôn trung bình, 390-400k/tháng ≈ 2,4-2,5% thu nhập hộ gia đình — khoản chi tương đối nhỏ. Ở vùng thu nhập thấp nhất cả nước, cùng mức giá chiếm ~10-10,5% thu nhập đầu người — sát ngưỡng chi tiêu định kỳ chấp nhận được.
 - "Tier 3/4" không phải một phân khúc thu nhập đồng nhất — nên đọc là 2 nhóm: (A) tỉnh/huyện khá giả (rào cản chính là niềm tin, không phải giá) và (B) vùng khó khăn (rào cản kép: nhận thức + khả năng chi trả).
+
+> **[TẠM BỎ 2026-08-26]** Nhóm nhu cầu 3 dưới đây (trước đây là 1 trong 3 nhóm ở Slide 5, footer 4/12) đã được rút khỏi Slide 5-6 theo quyết định của Lân khi tái cấu trúc JTBD từ 3 xuống 2 nhóm nhu cầu — giữ nguyên văn dưới đây để dùng khi xây content riêng cho Concept 3 (AI Tutor 1:1, Slide 13). Nguồn: `00_context/customer-persona-pain-jtbd-tap1-2026-08-25.md` mục 3.
+
+### Pain Point & JTBD — Nhóm nhu cầu 3 cũ: Đồng hành, đốc thúc học tập (tạm ẩn)
+
+| Job (góc nhìn phụ huynh) | Pain point liên quan |
+|---|---|
+| **[Functional]** Có người giám sát, đốc thúc con học thay bố mẹ, con được học cá nhân hóa | Phụ huynh phải liên tục nhắc nhở, đốc thúc vì con chưa tự giác |
+| **[Emotional]** Tin mình đã chọn đúng, đầu tư đủ, không thua kém gia đình khác | Học online "không ai quản" nên không yên tâm; sợ mất tiền mà không hiệu quả |
+| **[Social]** Hãnh diện, tự hào với người thân, bạn bè khi con đạt thành tích cao, muốn chia sẻ | Lo con thua thiệt, thua kém "con nhà người ta" |
+
+**→ Nhu cầu (cũ): Muốn con được đồng hành, đốc thúc học tập**
 
 ---
 
