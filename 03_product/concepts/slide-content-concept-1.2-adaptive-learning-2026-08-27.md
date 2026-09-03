@@ -1,9 +1,13 @@
 # Slide content — Edupia AI Class Plus (Concept 1.2): Đầu tư tầng công nghệ AI
 
-**Trạng thái:** 🟡 Đã build [`AI-Class-Plus-concept-1.2-slide-deck-2026-08-27.pptx`](AI-Class-Plus-concept-1.2-slide-deck-2026-08-27.pptx) — **19 slide vật lý** = bìa + mục lục + 4 slide divider (01–04, không đánh số) + **13 slide nội dung** (đánh số N/15, số 3–15). Style: font Arial, tiêu đề hero, lockup "EDUPIA / AI CLASS PLUS" góc phải, divider nền tối, màu `004671` + `A5BE00`. ⚠ Chưa mở thử trong PowerPoint (máy không có PowerPoint/LibreOffice) — cần mở kiểm tra bằng mắt.
-**Ngày soạn:** 2026-08-27 · **Cập nhật:** 2026-08-27 (theo review Lân + **bỏ cấu phần AI Tutor 1-1 30′**).
+**Trạng thái:** 🟡 Đã build [`AI-Class-Plus-concept-1.2-slide-deck-2026-08-27.pptx`](AI-Class-Plus-concept-1.2-slide-deck-2026-08-27.pptx) — bản build 2026-08-27 có **19 slide vật lý** = bìa + mục lục + 4 slide divider (01–04, không đánh số) + **13 slide nội dung**. ⚠ **Bản build này ĐÃ LỖI THỜI** — chưa có cấu phần AI Tutor 1-1 30′ được thêm lại theo quyết định 2026-08-28 (xem callout dưới). Cần bổ sung slide mới (Slide 12 trong outline cập nhật) rồi build lại trước khi dùng chính thức. ⚠ Chưa mở thử trong PowerPoint (máy không có PowerPoint/LibreOffice) — cần mở kiểm tra bằng mắt.
+**Ngày soạn:** 2026-08-27 · **Cập nhật:** 2026-08-28 (theo họp review Sale — **thêm lại AI Tutor 1-1 30′ cuối buổi**).
 
-> ⚠ **Thay đổi lớn 2026-08-27:** Concept 1.2 (bản slide này) **bỏ cấu phần "AI Tutor 1-1 30 phút sau mỗi buổi Big Class"** (Lân quyết). Concept 1.2 nay = tầng công nghệ AI (Adaptive Learning) **bám vào các cấu phần hiện có** (Big Class + BTVN Adaptive/AI Practice + AI Speak + Edupia Club + GVCN) — không thêm buổi học mới. Cơ chế "vá lỗ hổng": Routing Engine giao đúng NLO yếu vào **BTVN Adaptive** ngay sau buổi Big Class (kênh chính) + Practice/Speak bám theo. ⚠ Điều này lệch với tài liệu concept nội bộ [`concept-1.2-adaptive-learning-2026-08-27.md`](concept-1.2-adaptive-learning-2026-08-27.md) (vẫn để AI Tutor 30′ là điểm chạm #2) — cần cập nhật tài liệu đó cho khớp.
+> ⚠ **Lịch sử thay đổi cấu phần AI Tutor 1-1 30′:**
+> - **2026-08-27:** Lân quyết **bỏ** cấu phần "AI Tutor 1-1 30 phút sau mỗi buổi Big Class" khỏi Concept 1.2. Cơ chế "vá lỗ hổng" khi đó dồn hết vào **BTVN Adaptive** (Routing Engine giao đúng NLO yếu ngay sau Big Class) + Practice/Speak bám theo — không thêm buổi học mới.
+> - **2026-08-28 (họp review Sale — ghi đè quyết định trên):** Theo đề xuất của Chị Trang (GĐ trung tâm telesale), họp thống nhất **thêm lại** cấu phần này — nay gọi là **"Buổi bổ trợ AI Tutor 1-1 (30 phút cuối buổi)"**. Cơ chế: khi hệ thống phát hiện học sinh yếu/không theo kịp bài chính khóa, chuyển ngay sang học 1-1 với AI Tutor trong 30 phút cuối buổi để vá lỗ hổng tại chỗ — kết hợp cùng AI Practice và AI Speak thành "bộ ba" vá lỗ hổng, được đánh giá là điểm chạm bán hàng mạnh cho Sale. Xem [`00_context/meeting-notes/2026-08-28-review-slide-concept-sale.md`](../../00_context/meeting-notes/2026-08-28-review-slide-concept-sale.md).
+> - **Kết quả:** Slide này (Phiên bản 1) nay **khớp lại** với tài liệu concept nội bộ [`concept-1.2-adaptive-learning-2026-08-27.md`](concept-1.2-adaptive-learning-2026-08-27.md), vốn chưa bao giờ xoá AI Tutor 1-1 khỏi bảng 8 điểm chạm (điểm chạm #2). Cơ chế "vá lỗ hổng" của Concept 1.2 hiện có **2 kênh**: (1) AI Tutor 1-1 30′ — vá ngay tại chỗ cuối buổi Big Class; (2) BTVN Adaptive — củng cố thêm sau đó qua bài tập ở nhà.
+
 **Mục đích:** Bộ slide đi sâu cho **Concept 1.2** (một trong 2 concept BOD chốt tiếp tục làm rõ sau họp 27/08 — cùng với Concept 3), phục vụ họp kick-off và làm đầu vào cho khảo sát T9 + test bán T11.
 
 **Nguồn:**
@@ -16,9 +20,9 @@
 1. **Bối cảnh và cơ hội thị trường** — 2 slide (Vì sao cần AL · Cơ hội: benchmark + khoảng trống)
 2. **Khách hàng mục tiêu** — 2 slide (chân dung · pain point & JTBD)
 3. **Giải pháp** — 2 slide (SA/SB/SE + USP gộp 1 slide · so sánh giải pháp)
-4. **Cấu trúc sản phẩm và mô tả tính năng** — 7 slide (cấu trúc 3 layer · nền tảng chung · **5 thành phần**: Big Class · BTVN Adaptive & AI Practice · AI Speak · Edupia Club · GVCN & Parent Mode)
+4. **Cấu trúc sản phẩm và mô tả tính năng** — 8 slide (cấu trúc 3 layer · nền tảng chung · **6 thành phần**: Big Class · **AI Tutor 1-1 (30′ cuối buổi)** · BTVN Adaptive & AI Practice · AI Speak · Edupia Club · GVCN & Parent Mode)
 
-**Bộ slide chính = Slide 1–15.** PHỤ LỤC A (kiến trúc, Content Engine, Governance, 8 điểm chạm) và PHỤ LỤC B (roadmap · KPI · 5 câu hỏi BOD · điểm mù) **giữ trong tài liệu, KHÔNG generate vào pptx** — kéo ra khi cần trong Q&A / kick-off.
+**Bộ slide chính = Slide 1–16.** PHỤ LỤC A (kiến trúc, Content Engine, Governance, 8 điểm chạm) và PHỤ LỤC B (roadmap · KPI · 5 câu hỏi BOD · điểm mù) **giữ trong tài liệu, KHÔNG generate vào pptx** — kéo ra khi cần trong Q&A / kick-off.
 
 **Quy ước cờ:** ● dữ liệu có sẵn/kiểm chứng nội bộ · ◆ giả định/suy luận chưa kiểm chứng · ⚠ rủi ro/khoảng trống phải xử lý trước khi ra quyết định hoặc đưa vào content bán hàng.
 
@@ -122,7 +126,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 
 | SA — Ưu điểm sản phẩm | SB — Lợi ích cảm nhận | SE — Cảm xúc phụ huynh |
 |---|---|---|
-| Sau mỗi buổi Big Class, Adaptive Learning tự chẩn đoán con yếu NLO nào và giao đúng phần đó vào BTVN / luyện tập / luyện nói | Con được luyện đúng chỗ hổng ngay sau buổi học — không học lại cái đã biết, không dàn trải | Yên tâm: lỗ hổng của con được bắt ngay, không tích lại tới kỳ thi |
+Ngay trong buổi Big Class, phát hiện con yếu NLO nào là chuyển thẳng sang AI Tutor 1-1 vá tại chỗ (30′ cuối buổi); sau buổi học, Adaptive Learning tiếp tục giao đúng phần đó vào BTVN / luyện tập / luyện nói | Con được luyện đúng chỗ hổng ngay trong và sau buổi học — không học lại cái đã biết, không dàn trải | Yên tâm: lỗ hổng của con được bắt và vá ngay tại chỗ, không tích lại tới kỳ thi |
 | Chẩn đoán & điều hướng theo 1.473 NLO (Gap Detection + Routing Engine) — cùng bậc chi tiết ALEKS/Carnegie | Con học đến đâu chắc đến đấy; lỗ hổng phát hiện sớm thay vì đợi tới kỳ thi | Nhẹ nhõm vì hết cảnh mù mờ không biết con học tới đâu, hổng chỗ nào |
 | BTVN Adaptive — Staircase Difficulty: độ khó câu tự điều chỉnh theo năng lực của con | Con làm bài "vừa sức" — không nản vì quá khó, không chán vì quá dễ | Vui vẻ: khi thấy con không bị chán nản khi làm bài |
 | Nâng cấp kho đề Practice + AI Mock Test, tăng độ chính xác chấm phát âm AI Speak | Luyện tập và luyện nói bám cùng lỗ hổng đang học — không rời rạc | — |
@@ -155,11 +159,12 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 - *Nội dung:* cá nhân hoá theo NLO Taxonomy (1.473 đơn vị), bám sát SGK Global Success.
 - *Mastery Profile:* tầng Adaptive Learning (Gap Detection → Routing Engine) chọn đúng lỗ hổng cho mọi thành phần.
 
-**Layer 2 — 4 thành phần học tập (giữ nguyên cấu phần hiện có, thêm tầng AI điều hướng):**
+**Layer 2 — 5 thành phần học tập (giữ nguyên cấu phần hiện có + AI Tutor 1-1 thêm lại 2026-08-28, cộng tầng AI điều hướng):**
 
 | Thành phần | Tần suất | Vai trò |
 |---|---|---|
 | **Big Class** *(trung tâm — không đổi)* | 2 buổi/tuần | Giáo viên thật dạy live bám SGK; GV Star gán NLO + Quick Check phát hiện lỗ hổng |
+| **AI Tutor 1-1** *(thêm lại 2026-08-28)* | 30′ cuối buổi Big Class, khi hệ thống phát hiện học sinh yếu/không theo kịp | Chuyển ngay sang học 1-1 với AI Tutor để vá lỗ hổng tại chỗ — không đợi tới BTVN |
 | **BTVN Adaptive / AI Practice** | Bài tập ôn luyện sau mỗi buổi | Routing Engine giao đúng 1–2 NLO con yếu nhất; Staircase Difficulty; trộn 40% yếu / 40% mới / 20% ôn |
 | **AI Speak** | Mỗi ngày (tối đa 1h) | Luyện nói tình huống thật — chủ đề theo NLO yếu |
 | **Edupia Club** | Hoạt động ngoại khoá | Rèn tự tin & kỹ năng xã hội — thử thách bám đúng NLO đang học |
@@ -183,13 +188,25 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 **Chức năng chính:**
 - GV Star giảng bài theo chương trình, tổ chức tương tác lớp.
 - Gán NLO cho từng học sinh dựa trên biểu hiện trong buổi (qua Quick Check) → sinh tín hiệu cho Gap Detection.
-- Là điểm khởi đầu của vòng lặp: Big Class + Quick Check phát hiện lỗ hổng → Routing Engine điều hướng BTVN / luyện tập / luyện nói bám đúng NLO yếu.
+- Là điểm khởi đầu của vòng lặp: Big Class + Quick Check phát hiện lỗ hổng → chuyển ngay sang AI Tutor 1-1 (30′ cuối buổi) hoặc điều hướng BTVN / luyện tập / luyện nói bám đúng NLO yếu.
 
 ---
 
-## Slide 12 — Thành phần 2: BTVN Adaptive & AI Practice
+## Slide 12 — Thành phần 2: AI Tutor 1-1 (30′ cuối buổi) *⚠ thêm lại 2026-08-28*
 
-**Là gì:** hệ thống bài tập ôn luyện sau mỗi buổi + kho đề chuẩn theo SGK (Global Success, I Learn Smart Start, Family and Friends…) + kho đề thi (tháng, giữa kỳ, cuối kỳ). **Đây là kênh chính tầng AI dùng để "vá lỗ hổng"** — thay cho một buổi học riêng.
+**Là gì:** buổi bổ trợ 1-1 với AI Tutor diễn ra ngay trong 30 phút cuối của buổi Big Class — không phải một buổi học riêng vào ngày khác. Cấu phần này từng bị bỏ khỏi Concept 1.2 ngày 2026-08-27, được **thêm lại theo đề xuất của Chị Trang (GĐ trung tâm telesale)** tại họp review Sale 2026-08-28.
+
+**Chức năng chính:**
+- Khi Quick Check trong Big Class phát hiện học sinh yếu hoặc không theo kịp bài chính khóa (mô hình lớp đông), hệ thống **lập tức chuyển học sinh sang học tương tác 1-1 với AI Tutor** trong 30 phút cuối buổi để vá ngay lỗ hổng vừa phát hiện — không đợi tới BTVN sau buổi học.
+- Giải quyết đúng tình huống học sinh tự học ở nhà gặp bài không hiểu, nản chí và bỏ cuộc — vì được vá tại chỗ, ngay trong buổi.
+- Kết hợp cùng AI Practice và AI Speak tạo thành "bộ ba" vá lỗ hổng liên tục (ngay trong buổi → sau buổi → luyện tập hằng ngày).
+- ⚠ Cần làm rõ trước khi build: cơ chế kỹ thuật chuyển học sinh giữa Big Class (nhóm) và AI Tutor (1-1) ngay trong cùng 1 buổi — chưa có trong kiến trúc PL-A3 hiện tại, cần Product + Engineering thiết kế.
+
+---
+
+## Slide 13 — Thành phần 3: BTVN Adaptive & AI Practice
+
+**Là gì:** hệ thống bài tập ôn luyện sau mỗi buổi + kho đề chuẩn theo SGK (Global Success, I Learn Smart Start, Family and Friends…) + kho đề thi (tháng, giữa kỳ, cuối kỳ). Cùng với AI Tutor 1-1 (Slide 12), đây là **kênh củng cố** sau buổi học — vá tiếp những gì AI Tutor chưa kịp xử lý hết trong 30 phút.
 
 **Chức năng chính:**
 - **Routing Engine giao đúng 1–2 NLO con yếu nhất** vào phiên BTVN ngay sau buổi Big Class (`priority = ppct_weight × (1−mastery) × prereq_boost`).
@@ -200,7 +217,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 
 ---
 
-## Slide 13 — Thành phần 3: AI Speak
+## Slide 14 — Thành phần 4: AI Speak
 
 **Là gì:** phòng luyện nói với nhân vật ảo AI, mỗi ngày tối đa 1 giờ; học sinh nhập vai tình huống thực tế (mua sắm, du lịch, thể thao…).
 
@@ -211,7 +228,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 
 ---
 
-## Slide 14 — Thành phần 4: Edupia Club
+## Slide 15 — Thành phần 5: Edupia Club
 
 **Là gì:** câu lạc bộ hoạt động ngoại khoá trực tuyến theo mô hình CLB trường quốc tế — không phải hoạt động "cho vui" tách biệt.
 
@@ -222,7 +239,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 
 ---
 
-## Slide 15 — Thành phần 5: Giáo viên chủ nhiệm & Parent Mode
+## Slide 16 — Thành phần 6: Giáo viên chủ nhiệm & Parent Mode
 
 **Giáo viên chủ nhiệm (GVCN):** đồng hành, theo dõi tiến độ, hỗ trợ, nhắc lịch, gọi điện báo kết quả — dùng cùng bộ số với báo cáo phụ huynh.
 
@@ -251,22 +268,23 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ  ·  CONCEPT 1.2
 
 ---
 
-## PL-A2 — NLO xuyên suốt 8 điểm chạm
+## PL-A2 — NLO xuyên suốt các điểm chạm
 
-> ⚠ Bảng gốc (deck nguồn) có điểm chạm "AI Tutor 1-1 — vá lỗ hổng 30′". Bản Concept 1.2 này **bỏ AI Tutor 30′** — vai trò "vá lỗ hổng" chuyển sang **BTVN Adaptive** (điểm chạm #2 dưới).
+> ✅ **2026-08-28:** khớp lại với bảng gốc (deck nguồn) — AI Tutor 1-1 (vá lỗ hổng 30′) đã được thêm lại làm điểm chạm #2, theo quyết định họp review Sale (xem callout đầu tài liệu). BTVN Adaptive lùi xuống điểm chạm #3, đóng vai trò củng cố sau đó. Việc thêm lại này khiến bảng có **9 điểm chạm** thay vì 8 như deck nguồn — ⚠ cần Product xác nhận giữ nguyên 9 điểm hay gộp bớt trước khi trình BOD.
 
 | # | Điểm chạm | Vai trò |
 |---|---|---|
 | 1 | Big Class | GV Star gán NLO + Quick Check phát hiện lỗ hổng |
-| 2 | BTVN Adaptive | Routing Engine giao đúng NLO yếu; Staircase Difficulty |
-| 3 | Luyện tập / Mocktest | Theo NLO chuẩn |
-| 4 | AI Speak | Chủ đề luyện nói theo NLO yếu |
-| 5 | Mastery Map | Bản đồ nắm vững |
-| 6 | Báo cáo Phụ huynh | Dịch sang ngôn ngữ dễ hiểu |
-| 7 | Đánh giá 3–6 tháng | Khoá cải thiện |
-| 8 | Báo cáo Sale | Cross-sell có căn cứ |
+| 2 | AI Tutor 1-1 | Vá lỗ hổng ngay tại chỗ, 30′ cuối buổi Big Class |
+| 3 | BTVN Adaptive | Routing Engine giao đúng NLO yếu; Staircase Difficulty |
+| 4 | Luyện tập / Mocktest | Theo NLO chuẩn |
+| 5 | AI Speak | Chủ đề luyện nói theo NLO yếu |
+| 6 | Mastery Map | Bản đồ nắm vững |
+| 7 | Báo cáo Phụ huynh | Dịch sang ngôn ngữ dễ hiểu |
+| 8 | Đánh giá 3–6 tháng | Khoá cải thiện |
+| 9 | Báo cáo Sale | Cross-sell có căn cứ |
 
-> Cả 8 bước **đọc/ghi vào cùng 1 Mastery Profile duy nhất**.
+> Cả 9 bước **đọc/ghi vào cùng 1 Mastery Profile duy nhất**.
 
 ---
 
@@ -363,7 +381,7 @@ Mastery Map và báo cáo đánh giá **KHÔNG được tinh chỉnh để phụ
 3. **⚠ Số benchmark toàn cầu** (AUC Riiid, IPO Alef, +3,61% SAINT, atama+ +10,7%→+17,2%) lấy từ deck nguồn — cần đối chiếu tài liệu gốc.
 4. **⚠ Bảng giá đối thủ VN** (Slide 8 — so sánh giải pháp) là ước lượng — cần bảng giá gốc, không dùng blog review trong deck.
 5. **⚠ KPI GVCN** — nếu gộp cả Option 1.3 (GVCN 1:2.000): benchmark advising NACADA ~250:1 → 1:2.000 cao gấp ~8x ngưỡng high-touch; không marketing "chăm sóc cá nhân" ở tỷ lệ này.
-6. **⚠ Bỏ AI Tutor 30′ làm mỏng USP.** Không còn "buổi kèm riêng" — điểm khác biệt còn lại chủ yếu là tầng dữ liệu AI + Mastery Map. Cần kiểm tra ở khảo sát T9 xem phụ huynh có sẵn sàng trả ~390k cho "Adaptive + báo cáo" khi không có thêm giờ học người/AI trực tiếp.
+6. ✅ **Đã xử lý 2026-08-28 (đảo ngược):** điểm mù "bỏ AI Tutor 30′ làm mỏng USP" (từng ghi ở đây) không còn áp dụng — họp review Sale 28/08 đã **thêm lại AI Tutor 1-1 30′ cuối buổi** theo đề xuất Chị Trang, khôi phục "buổi kèm riêng" làm điểm chạm bán hàng. ⚠ Điểm mù mới phát sinh: cơ chế kỹ thuật chuyển học sinh giữa Big Class và AI Tutor ngay trong buổi (xem Slide 12) chưa có trong kiến trúc — cần Product + Engineering thiết kế trước khi build.
 7. **Điểm cộng nên khai thác:** khuyến nghị "lấy Option 1.2 làm chủ đạo" **trùng khớp** kết luận scorecard nội bộ 2026-08-15 — 2 luồng phân tích độc lập cùng 1 kết luận, nên nêu rõ khi trình BOD.
 
 ---
