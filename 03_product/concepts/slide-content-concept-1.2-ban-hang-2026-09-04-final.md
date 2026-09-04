@@ -7,6 +7,8 @@
 
 **Đối chiếu với bản 09-03 gộp cũ:** nội dung giữ nguyên phần lớn 21 slide "Phiên bản 2" đã chốt (5 điều bố mẹ mong muốn → 5 giá trị, AI Tutor 30′ cuối buổi, điểm danh đầu/cuối buổi, nguyên tắc "Live"). Cấu trúc phần trong bản final rút gọn còn 5 PHẦN với 25 slide nội dung (không đếm số slide "(tiếp)" tự tách khi build — số trong file build vật lý là 27).
 
+**Cập nhật 2026-09-04:** AI Tutor đổi từ "30 phút cuối buổi, chỉ kích hoạt khi con chưa theo kịp" → **"30 phút sau mỗi buổi, mặc định cho mọi học sinh"**, phân theo chân dung: Khá giỏi (nâng cao/mở rộng kiến thức) và Trung bình/yếu (vá lỗ hổng, củng cố kiến thức vừa học). Slide 19, 22 bên dưới đã cập nhật theo logic mới.
+
 ---
 
 ## Slide 1 — Trang bìa
@@ -215,7 +217,7 @@ Con vẫn học các buổi như hiện tại — nhưng mỗi hoạt động đ
 | Hoạt động | Tần suất | Con được gì |
 |---|---|---|
 | Buổi học chính | 2 buổi/tuần | Cô giáo thật dạy theo chương trình, nhận ra con đang vướng ở đâu |
-| Kèm riêng 30 phút cuối buổi | Khi con cần | Nếu con chưa theo kịp, được kèm 1-1 với AI ngay lúc đó |
+| Kèm riêng 30 phút sau buổi học | Sau mỗi buổi | Mặc định con nào cũng được kèm 1-1 với AI — con học tốt được nâng cao mở rộng, con chưa theo kịp được vá lỗ hổng ngay |
 | Bài tập về nhà | Sau mỗi buổi | Được giao đúng phần cần luyện, bài vừa sức |
 | Phòng luyện nói cùng AI | Mỗi ngày, tối đa 1 giờ | Luyện nói thường xuyên theo đúng trình độ và phần cần củng cố |
 | Câu lạc bộ | Ngoại khoá | Tăng tự tin, kỹ năng xã hội và gắn với nội dung đang học |
@@ -256,15 +258,17 @@ Con vẫn học với cô giáo tại đúng khung giờ cố định mỗi tu�
 
 ---
 
-## Slide 22 — Con chưa hiểu bài? Được kèm ngay trong buổi
+## Slide 22 — Sau mỗi buổi học, con nào cũng được kèm riêng 30 phút
 
-**Kèm riêng 30 phút cuối buổi:** nếu trong buổi học chính con chưa theo kịp, con được chuyển sang học riêng 1-1 với AI trong 30 phút cuối buổi để xử lý phần vừa hổng.
+**Kèm riêng 30 phút sau buổi học:** đây là bước mặc định sau mỗi buổi học chính — không riêng gì con chưa theo kịp. Hệ thống chia làm 2 hướng theo đúng năng lực của con:
+- **Con học khá giỏi:** kèm riêng để nâng cao, mở rộng thêm kiến thức ngoài nội dung vừa học.
+- **Con học trung bình/yếu:** kèm riêng để vá đúng lỗ hổng, củng cố lại kiến thức vừa học.
 
-**Vì sao điều này quan trọng?** Con thường dễ nản nhất khi: Không hiểu bài → về nhà tự làm → không biết hỏi ai → bỏ cuộc. Edupia cố gắng xử lý ngay từ bước: Chưa hiểu → kèm ngay → hiểu bài → về nhà luyện tiếp.
+**Vì sao điều này quan trọng?** Con thường dễ nản nhất khi: Không hiểu bài → về nhà tự làm → không biết hỏi ai → bỏ cuộc. Ngược lại, con học tốt cũng dễ chán nếu chỉ học đúng những gì cả lớp học. Edupia xử lý cả hai chiều ngay sau buổi học: con chưa hiểu thì được củng cố ngay, con đã vững thì được học thêm.
 
 ### Cách nói với phụ huynh
 
-> "Nếu trong buổi học con chưa theo kịp, con được kèm riêng ngay 30 phút cuối để xử lý phần chưa hiểu. Như vậy con không phải mang chỗ hổng đó về nhà rồi tự mò một mình."
+> "Sau mỗi buổi học, con nào cũng được kèm riêng 30 phút với AI — không phải đợi con học kém mới có. Nếu con theo kịp tốt, AI sẽ dạy thêm để mở rộng kiến thức. Nếu con chưa theo kịp, AI sẽ củng cố lại đúng phần con chưa hiểu, để con không phải mang chỗ hổng đó về nhà rồi tự mò một mình."
 
 ---
 

@@ -9,8 +9,9 @@
 - Khối lớp mục tiêu: **1–8** (trước ghi nhầm 1–6).
 - Thu nhập hộ: **15–30 triệu/tháng** (trước ghi nhầm 10–20tr).
 - Giá: **~390k/tháng** (giữ nguyên).
-- Thứ tự 6 thành phần cấu trúc sản phẩm đổi: **Big Class Plus → BTVN Adaptive/AI Practice → AI Tutor (kèm riêng 30′ cuối buổi) → AI Speak → Edupia Club → GVCN & Parent Mode** (bản cũ đặt AI Tutor ngay sau Big Class, ở vị trí thành phần #2).
+- Thứ tự 6 thành phần cấu trúc sản phẩm đổi: **Big Class Plus → BTVN Adaptive/AI Practice → AI Tutor (kèm riêng 30′ sau mỗi buổi) → AI Speak → Edupia Club → GVCN & Parent Mode** (bản cũ đặt AI Tutor ngay sau Big Class, ở vị trí thành phần #2).
 - Tên gọi thành phần 1 đổi từ "Big Class" → **"Big Class Plus"**.
+- **Cập nhật 2026-09-04:** AI Tutor giữ nguyên **30 phút**, nhưng đổi vị trí/điều kiện từ "30 phút cuối buổi, chỉ kích hoạt khi học sinh chưa theo kịp" → **"30 phút sau mỗi buổi, mặc định cho mọi học sinh"**, phân theo chân dung: Khá giỏi (nâng cao/mở rộng kiến thức) và Trung bình/yếu (vá lỗ hổng, củng cố kiến thức vừa học).
 
 ---
 
@@ -103,7 +104,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ · CONCEPT 1.2
 | BTVN Adaptive — Staircase Difficulty: độ khó câu tự điều chỉnh theo năng lực của con | Con làm bài "vừa sức" — không nản vì quá khó, không chán vì quá dễ | Vui vẻ: khi thấy con không bị chán nản khi làm bài |
 | Parent Mode — Mastery Map | Phụ huynh nhìn thấy tiến bộ cụ thể, đo được, đối chiếu với điểm ở trường | Tự hào khi thấy con tiến bộ rõ ràng qua từng tuần — có cái để khoe |
 
-**USP:** *"Chương trình tiếng Anh trực tuyến có giáo viên thật, cộng thêm gia sư AI kèm riêng 30 phút sau mỗi buổi vá đúng lỗ hổng của con theo 1.473 đơn vị kiến thức — và một bản đồ tiến bộ phụ huynh đọc được, khớp chuẩn nhà trường."*
+**USP:** *"Chương trình tiếng Anh trực tuyến có giáo viên thật, cộng thêm gia sư AI kèm riêng 30 phút sau mỗi buổi — vá lỗ hổng hoặc nâng cao mở rộng tuỳ năng lực của con — theo 1.473 đơn vị kiến thức, và một bản đồ tiến bộ phụ huynh đọc được, khớp chuẩn nhà trường."*
 
 ---
 
@@ -135,7 +136,7 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ · CONCEPT 1.2
 |---|---|---|
 | Big Class Plus | 2 buổi/tuần | Giáo viên Star dạy live bám SGK: gọi tên con, động viên và tương tác với con. Gán NLO cho từng học sinh để phát hiện lỗ hổng kiến thức |
 | + BTVN Adaptive / AI Practice | Bài tập ôn luyện sau mỗi buổi | Staircase Difficulty; trộn 40% NLO yếu / 40% mới / 20% ôn chống quên |
-| + AI Tutor (kèm riêng 30 phút cuối buổi) | 30 phút cuối mỗi buổi Big Class Plus | Gia sư AI kèm 1-1 vá đúng lỗ hổng NLO vừa phát hiện; trợ giảng AI tổng kết buổi và giao BTVN Adaptive tương ứng |
+| + AI Tutor (kèm riêng 30 phút sau mỗi buổi) | 30 phút sau mỗi buổi Big Class Plus — mặc định cho mọi học sinh | Gia sư AI kèm 1-1, phân theo chân dung: Khá giỏi → nâng cao, mở rộng kiến thức; Trung bình/yếu → vá lỗ hổng NLO vừa phát hiện, củng cố kiến thức vừa học. Trợ giảng AI tổng kết buổi và giao BTVN Adaptive tương ứng |
 | + AI Speak | Mỗi ngày (tối đa 1h) | Luyện nói tình huống thật — chủ đề theo NLO yếu. Chấm điểm và chữa phát âm cho học sinh |
 | Edupia Club | Hoạt động ngoại khoá | Rèn tự tin & kỹ năng xã hội — thử thách bám đúng NLO đang học |
 
@@ -174,13 +175,13 @@ KHỐI SẢN PHẨM – CÔNG NGHỆ · CONCEPT 1.2
 
 ---
 
-## Slide 16 — Thành phần 3: Kèm riêng 30 phút cuối buổi (AI Tutor)
+## Slide 16 — Thành phần 3: Kèm riêng 30 phút sau buổi học (AI Tutor)
 
-**Là gì:** Gia sư AI kèm 1-1 trong 30 phút cuối mỗi buổi Big Class Plus, vá đúng lỗ hổng NLO vừa phát hiện trong buổi học; đồng thời trợ giảng AI tổng kết cuối buổi và giao bài tập về nhà.
+**Là gì:** Gia sư AI kèm 1-1 trong 30 phút sau mỗi buổi Big Class Plus — mặc định cho mọi học sinh, không cần điều kiện kích hoạt. Nội dung kèm riêng phân theo chân dung năng lực của học sinh (dựa trên Mastery Profile): học sinh khá giỏi được nâng cao/mở rộng kiến thức; học sinh trung bình/yếu được vá lỗ hổng và củng cố kiến thức vừa học. Đồng thời trợ giảng AI tổng kết buổi và giao bài tập về nhà.
 
 **Chức năng chính:**
-- Kích hoạt khi Gap Detection phát hiện học sinh chưa theo kịp nội dung buổi học (NLO chưa đạt).
-- Dạy 1-1 tập trung đúng NLO vừa hổng — không dạy lại toàn bộ nội dung buổi học.
+- Mặc định diễn ra sau mỗi buổi Big Class Plus cho toàn bộ học sinh — không phải tính năng chỉ kích hoạt khi có lỗ hổng.
+- Phân luồng theo chân dung học sinh: **Khá giỏi** → dạy 1-1 nâng cao, mở rộng kiến thức ngoài nội dung vừa học; **Trung bình/yếu** → dạy 1-1 tập trung đúng NLO vừa hổng để củng cố, không dạy lại toàn bộ nội dung buổi học.
 - Trợ giảng AI nhận xét kết quả học tập cuối buổi và nhắc bài tập về nhà (BTVN Adaptive) tương ứng.
 - Dữ liệu ghi thẳng vào Mastery Profile — nối tiếp vòng lặp Big Class → Adaptive.
 
