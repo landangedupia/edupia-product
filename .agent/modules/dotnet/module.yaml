@@ -1,0 +1,6 @@
+name: ".NET"
+version: "1.0.0"
+description: ".NET 8 with Clean Architecture"
+language: "C#"
+framework: ".NET 8 / ASP.NET Core"
+stack_type: "backend"

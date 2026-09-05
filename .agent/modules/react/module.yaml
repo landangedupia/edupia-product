@@ -1,0 +1,14 @@
+name: "React"
+version: "1.0.0"
+description: "React 18 SPA with hooks, React Query, and Zustand"
+language: "TypeScript"
+framework: "React"
+stack_type: "frontend"
+default_layer_order:
+  - Types / interfaces
+  - API client (React Query hooks)
+  - State store (Zustand)
+  - Custom hooks (business logic)
+  - UI components (presentational)
+  - Page / feature components (container)
+test_framework: "Vitest + React Testing Library"

@@ -1,0 +1,90 @@
+build:
+  compile: "tsc --noEmit && vite build"        # type-check, then bundle to dist/ (base './')
+  test: "vitest run"
+  run: "vite"                                    # dev server with HMR
+  lint: "eslint . --ext .ts"
+
+architecture:
+  style: "Phaser 3 scene state machine + framework-free domain logic + direct backend API (token injected by host) + thin native window bridge"
+  key_rules:
+    - "Keep GAME LOGIC that can be pure (scoring, spawn tables, weight/physics math) in framework-free TS modules under src/domain/ — no Phaser imports there, so it unit-tests in Node"
+    - "Scenes orchestrate; they call domain functions and drive Phaser objects — they do NOT hold complex business math inline"
+    - "One responsibility per scene: BootScene (read host config), PreloadScene (load assets + game data), MenuScene, GameScene, GameOverScene, UIScene (HUD overlay run in parallel)"
+    - "Game objects (Miner, Hook, Gold) are Phaser.GameObjects subclasses (prefabs) — reusable, self-contained"
+    - "APPROACH A: the game calls the backend DIRECTLY (fetch). Host (Flutter) injects a HostConfig (apiBase, token, userId, sessionId) into the WebView BEFORE load — the game never hard-codes URLs or tokens"
+    - "All backend I/O goes through ONE API client (src/api/) that reads the token from HostConfig and sets the Authorization header — never scatter raw fetch() across scenes"
+    - "The native bridge (GameContract) is thin: window CONTROL only (onReady, onClose/back). Data does NOT go through native in Approach A — it goes over HTTP"
+    - "Tuning numbers live in src/config/constants.ts, never hard-coded in scenes"
+    - "Vite base MUST be './' so the built bundle works from file:// inside a WebView"
+    - "Use Phaser Arcade Physics for collision/overlap; avoid hand-rolled loops unless the mechanic needs it"
+    - "Cross-scene / game↔UI communication uses an event emitter (this.game.events or a shared EventBus), not direct scene references"
+    - "Debug console (eruda) is loaded ONLY when the URL has ?debug=1 — never bundled into the default runtime path"
+    - "Never trust HostConfig blindly — validate it at boot (BootScene) and fail loudly (call onClose) if apiBase/token is missing"
+  folder_structure: |
+    .
+    ├── index.html                 ← <div id="game"> + <script type="module" src="/src/main.ts">
+    ├── vite.config.ts             ← base: './', @vitejs/plugin-legacy for old WebView
+    ├── tsconfig.json
+    ├── public/assets/             ← images, audio, atlases, tilemaps (copied as-is)
+    ├── src/
+    │   ├── main.ts                ← Phaser.Game config + scene list, mount debug bridge
+    │   ├── contracts/
+    │   │   ├── game-contract.ts   ← GameContract (window control) + HostConfig shape
+    │   │   └── api.dto.ts         ← backend request/response DTOs (GameDataDto, ResultDto)
+    │   ├── config/
+    │   │   ├── constants.ts       ← GRAVITY, HOOK_SPEED, SPAWN_TABLE...
+    │   │   ├── host-config.ts     ← read + validate window.GAME_CONFIG injected by Flutter
+    │   │   └── game-config.ts     ← Phaser.Types.Core.GameConfig
+    │   ├── api/                   ← client.ts (fetch + auth header), game.api.ts (loadData, submitResult)
+    │   ├── domain/                ← PURE TS, no Phaser: scoring.ts, spawn.ts, hook-physics.ts
+    │   ├── scenes/                ← BootScene.ts, PreloadScene.ts, MenuScene.ts, GameScene.ts, GameOverScene.ts, UIScene.ts
+    │   ├── objects/               ← Miner.ts, Hook.ts, Gold.ts (Phaser.GameObjects prefabs)
+    │   ├── bridge/                ← native-bridge.ts (onReady/onClose), event-bus.ts
+    │   └── debug/                 ← eruda.ts (lazy-loaded when ?debug=1)
+    └── tests/                     ← *.test.ts (Vitest → domain/) + e2e/*.spec.ts (Playwright)
+
+coding_standards:
+  naming:
+    scenes: "PascalCase + 'Scene' suffix (BootScene, GameScene, UIScene)"
+    game_objects: "PascalCase prefab class (Miner, Hook, Gold)"
+    domain_functions: "camelCase pure functions (calcScore, rollSpawn, retractSpeed)"
+    contracts: "PascalCase interface, 'Contract'/'Dto' suffix (GameContract, ScoreDto)"
+    constants: "SCREAMING_SNAKE_CASE (GRAVITY, HOOK_SPEED, SPAWN_TABLE)"
+    scene_keys: "kebab or PascalCase string key matching class (scene.start('GameScene'))"
+    files:
+      scene: "{Name}Scene.ts"
+      object: "{Object}.ts"
+      domain: "{topic}.ts"
+      contract: "game-contract.ts / {topic}.dto.ts"
+      test: "{unit}.test.ts"
+  patterns:
+    scenes: "Phaser scene lifecycle: init(data) → preload() → create() → update(t, dt); transition via this.scene.start('Key', data)"
+    hud: "UIScene launched in parallel (this.scene.launch('UIScene')) and rendered above GameScene"
+    physics: "Arcade Physics — this.physics.add.overlap(hook, goldGroup, onGrab)"
+    assets: "Load everything in PreloadScene with a progress bar; reference by key afterwards"
+    animation: "Tweens (this.tweens.add) for hook swing/retract easing; sprite sheet anims for characters"
+    state_transfer: "Pass data between scenes via scene.start('Key', payload); load game data once in PreloadScene via the API client, then hand it to GameScene"
+    host_config: "Flutter injects window.GAME_CONFIG = { apiBase, token, userId, sessionId } via initialUserScripts/evaluateJavascript BEFORE the page loads; read + validate it once in host-config.ts"
+    api_client: "APPROACH A — game calls backend directly. One fetch wrapper sets Authorization: Bearer <token> from HostConfig; game.api.ts exposes loadData()/submitResult() returning typed DTOs; handle 401/timeout and surface to the player"
+    native_bridge: "Thin GameContract = window control only. onReady() when boot ok; onClose() on back/X button → Flutter pops the WebView. NO data over the bridge in Approach A"
+    events: "EventBus (Phaser.Events.EventEmitter) for game→HUD updates (score changed, time left)"
+    webview: "Vite base './' + @vitejs/plugin-legacy + core-js for ES5 WebViews; toggle legacy per Android min-SDK"
+    debug: "eruda (or vConsole) lazy-imported only when new URLSearchParams(location.search).get('debug') === '1'"
+
+testing:
+  unit: "Vitest — target src/domain/ pure functions (scoring, spawn rolls, retract speed by weight). No Phaser, no DOM, no canvas mock needed"
+  e2e: "Playwright — run vite preview, load the page, drive canvas via keyboard/pointer, assert on the HUD DOM overlay or exposed window.__gameState"
+  patterns:
+    - "Split logic so the testable part imports zero Phaser — Phaser scenes stay thin wrappers"
+    - "Inject a seeded RNG into spawn functions so tests are deterministic"
+    - "Expose a minimal window.__gameState (score, scene) in dev/e2e builds for Playwright assertions"
+    - "Mock the native bridge with a fake GameContract in tests; assert onReady/onClose are called"
+    - "Mock fetch (or the API client) in unit tests; assert loadData()/submitResult() send the right URL, auth header, and payload"
+    - "In e2e, stub window.GAME_CONFIG and intercept backend routes with Playwright page.route() so tests need no real server"
+    - "Do not pixel-diff the canvas — assert on state and HUD text instead"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|integration"

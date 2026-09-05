@@ -1,0 +1,146 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SDD Framework — Trace Gate (GitHub Actions)
+#
+# COPY file này vào .github/workflows/ của project. Nó KHÔNG tự chạy từ
+# .agent/templates/ — mọi thứ trong .agent/ là bản sinh ra, bị ghi đè mỗi lần
+# /update-framework.
+#
+# VÌ SAO CẦN (GAPS-v3 G39): framework phát hiện được một lớp lỗi mà build xanh +
+# test từng-UC xanh KHÔNG thấy — luồng ghép chạy vào hàm rỗng (SEAM_UNWIRED,
+# STUB_UNRESOLVED), hoặc code trỏ vào scenario đã bị xoá (ORPHANED, TRACE_ORPHAN).
+# Nhưng trước G39 việc phát hiện đó phụ thuộc vào có người TỰ NGUYỆN chạy
+# /validate-traces trong Claude Code rồi đọc report bằng mắt. Cái gì không chặn
+# thì sau sprint thứ ba không ai làm. Đây là chỗ nó chặn.
+#
+# GIỚI HẠN — đọc trước khi tin:
+#   Job này chứng minh "report khớp SỔ, và sổ không có cờ 🔴".
+#   Nó KHÔNG chứng minh "sổ khớp CODE" — việc đó cần quét tag trong source, đọc
+#   .feature, so version, tức cần /validate-traces (một lệnh LLM, không chạy được
+#   trong CI thường). Nên nó bắt ca phổ biến "quên chạy lại /validate-traces",
+#   nhưng KHÔNG bắt ca "sửa code mà không đụng sổ".
+#   Muốn bịt nốt: xem job `require-fresh-audit` ở cuối file.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Trace Gate
+
+on:
+  pull_request:
+  push:
+    branches: [main, master, develop]
+
+jobs:
+  trace-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Cần lịch sử để job require-fresh-audit so được diff. Bỏ nếu không dùng job đó.
+          fetch-depth: 0
+          # Spec/trace nằm trong submodule (umbrella + spec_source)? Bỏ comment:
+          # submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ── 1. Cấu trúc sổ ───────────────────────────────────────────────────────
+      # Sổ trace 24 cột do LLM ghi bằng tay. Một dấu tab thiếu dồn mọi ô sang trái
+      # và ô `status` nhận một ngày tháng — trước G38 không gì báo. Bước này chặn.
+      # Cũng bắt marker conflict git lọt vào sổ (T7) và sổ thiếu luật merge (T10).
+      - name: Lint sổ trace
+        run: npx -y @educa-corp/sdd-framework@latest --lint-trace
+
+      # ── 2. Cổng chặn PR ──────────────────────────────────────────────────────
+      # --gate-trace tự chạy lại lint ở tầng G1, nên bước 1 ở trên là để có log
+      # riêng dễ đọc khi đỏ. Muốn gọn thì bỏ bước 1 và chỉ giữ bước này.
+      - name: Trace gate (cờ 🔴 chặn PR)
+        run: npx -y @educa-corp/sdd-framework@latest --gate-trace
+
+      # ── 3. (tuỳ chọn) Đưa kết quả vào PR summary ─────────────────────────────
+      - name: Ghi kết quả vào job summary
+        if: always()
+        run: |
+          npx -y @educa-corp/sdd-framework@latest --gate-trace --json --warn-only \
+            > gate.json || true
+          {
+            echo '## Trace Gate'
+            echo '```json'
+            cat gate.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # Ép audit phải TƯƠI khi thứ report đang KHẲNG ĐỊNH bị đổi.
+  #
+  # Bịt cái lỗ mà trace-gate không bịt được: gate chứng minh "report khớp SỔ",
+  # không chứng minh "sổ khớp CODE" — việc đó cần /validate-traces, một lệnh LLM
+  # không chạy được ở đây. Nên job này dùng một PROXY: không verify được thì ĐÒI
+  # BẰNG CHỨNG có người vừa verify.
+  #
+  # ĐO BẰNG TAG, KHÔNG BẰNG `src/**`:
+  #   Framework có luật boundary-only tagging — chỉ Controller/Handler/Middleware/
+  #   Steps mang tag @trace; Entity/Repository/DTO/Interface/Base KHÔNG. Nên câu
+  #   hỏi "PR có sửa src/ không?" chặn cả PR chỉ thêm một field vào DTO — một file
+  #   không mang lời khẳng định trace nào. Cái gì báo oan thì bị tắt, rồi mất luôn
+  #   phần thật sự cần chặn.
+  #   Câu hỏi đúng: "PR có chạm dòng nào mang tag mà report đang khẳng định không?"
+  #
+  #   sửa log trong Controller  → cho qua      (bản `src/**` cũ: chặn oan)
+  #   thêm field vào DTO        → cho qua      (bản cũ: chặn oan)
+  #   thêm method + @implements → CHẶN
+  #   lấp một @trace.stub       → CHẶN
+  #
+  # KHÔNG cần sửa gì theo layout project — tag là tag, ở đâu cũng vậy.
+  #
+  # BẢY TAG dưới đây là NGUỒN của đúng 4 cờ chặn PR. Chúng được khai trong
+  # bin/trace-schema.json → gate.audit_invalidating_tags, và self-check R10 fail
+  # build nếu file này không nhắc đủ — tag đổi tên mà đây không biết thì grep
+  # không khớp gì, job LUÔN XANH, và cổng mù trong im lặng.
+  #
+  # GIỚI HẠN ĐÃ BIẾT: đổi tên class (AuthService → AuthenticationService) không
+  # chạm dòng tag ⇒ job này bỏ lọt, dù cột implemented_by giờ trỏ vào tên không
+  # còn. Chấp nhận có chủ ý: ca đó ít gặp và KHÔNG im lặng (/validate-traces lần
+  # sau báo ngay), còn báo oan thì xảy ra mỗi ngày.
+  #   Muốn chặt hơn (bắt cả rename, giá là chặn cả việc sửa log trong Controller):
+  #   đổi bước dưới thành — lấy danh sách file đã đổi, rồi `grep -l` bảy tag đó
+  #   TRÊN NỘI DUNG FILE thay vì trên diff.
+  # ───────────────────────────────────────────────────────────────────────────
+  require-fresh-audit:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+
+      - name: Đổi thứ report khẳng định thì audit phải đổi theo
+        shell: bash
+        run: |
+          BASE="origin/${{ github.base_ref }}"
+
+          # 7 tag sinh ra 4 cờ chặn PR — khai ở bin/trace-schema.json,
+          # gate.audit_invalidating_tags (self-check R10 canh danh sách này khớp).
+          TAGS='@trace\.(implements|verifies|seam_port|seam_pending|stub|stub_owner|stub_for)'
+
+          # Chạm dòng mang tag = report có thể đã hết đúng. -U0 để chỉ lấy dòng thật đổi.
+          touched=$(git diff -U0 "$BASE"...HEAD | grep -E "^[+-].*${TAGS}" | head -5 || true)
+          audit=$(git diff --name-only "$BASE"...HEAD | grep -E 'trace-report\.json$' | head -1 || true)
+
+          if [ -n "$touched" ] && [ -z "$audit" ]; then
+            echo "::error::PR đổi tag trace nhưng không kèm trace-report.json được sinh lại."
+            echo ""
+            echo "Những dòng này đã đổi:"
+            echo "$touched" | sed 's/^/    /'
+            echo ""
+            echo "Trace gate chỉ chứng minh 'report khớp SỔ'. Tag vừa đổi mà chưa audit lại"
+            echo "thì mọi cờ 🔴 trong report nói về trạng thái TRƯỚC khi bạn sửa."
+            echo ""
+            echo "Chạy trong Claude Code:  /validate-traces"
+            echo "Rồi commit:              {trace_dir}/trace-report.json + *.tsv"
+            exit 1
+          fi
+
+          if [ -n "$touched" ]; then
+            echo "✅ Tag trace có đổi, và audit đã được sinh lại cùng PR."
+          else
+            echo "✅ PR không chạm tag nào mà report đang khẳng định — audit vẫn còn đúng."
+          fi

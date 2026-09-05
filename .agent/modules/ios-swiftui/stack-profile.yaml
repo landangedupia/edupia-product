@@ -1,0 +1,55 @@
+build:
+  compile: "xcodebuild -scheme {AppName} -configuration Release"
+  test: "xcodebuild test -scheme {AppName}"
+  run: "Open in Xcode → Run (⌘R)"
+  lint: "swiftlint"
+
+architecture:
+  style: "MVVM + Clean Architecture (View → ViewModel → UseCase → Repository)"
+  key_rules:
+    - "Views are pure SwiftUI — no business logic, no direct API calls"
+    - "ViewModels are ObservableObject classes; bind via @StateObject / @ObservedObject"
+    - "UseCases encapsulate single business operations"
+    - "Repositories abstract data sources (network, cache, local DB)"
+    - "Dependency injection via environment or constructor injection"
+    - "Use Combine or async/await for async flows — never DispatchQueue in ViewModel"
+  folder_structure: |
+    Sources/
+    ├── Core/
+    │   ├── Network/      ← URLSession wrapper, interceptors
+    │   ├── Theme/        ← Color, Font, Spacing tokens
+    │   └── Utils/
+    ├── Shared/
+    │   └── Components/   ← reusable SwiftUI views (AppButton, AppTextField...)
+    ├── Features/
+    │   └── {Domain}/
+    │       ├── Views/
+    │       ├── ViewModels/
+    │       ├── UseCases/
+    │       └── Repository/
+
+coding_standards:
+  naming:
+    views: "PascalCase + View suffix (e.g., OrderListView, CreateOrderView)"
+    viewmodels: "PascalCase + ViewModel suffix (e.g., OrderListViewModel)"
+    usecases: "PascalCase + UseCase suffix (e.g., CreateOrderUseCase)"
+    files:
+      view: "{Feature}View.swift"
+      viewmodel: "{Feature}ViewModel.swift"
+      usecase: "{Feature}UseCase.swift"
+  patterns:
+    async: "async/await + Combine"
+    navigation: "NavigationStack (iOS 16+)"
+    persistence: "Core Data or SwiftData"
+    networking: "URLSession or Alamofire"
+
+testing:
+  unit: "XCTest + Quick/Nimble"
+  ui: "XCUITest"
+  patterns:
+    - "Test ViewModel by injecting mock repositories"
+    - "UI tests use accessibility identifiers — set .accessibilityIdentifier on Views"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"

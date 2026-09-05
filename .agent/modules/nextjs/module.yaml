@@ -1,0 +1,14 @@
+name: "Next.js"
+version: "1.0.0"
+description: "Next.js 14+ App Router with Server Components, Server Actions, and React Query"
+language: "TypeScript"
+framework: "Next.js"
+stack_type: "fullstack"
+default_layer_order:
+  - Types / interfaces
+  - Server Actions (mutations)
+  - Data access layer (DAL) — server-side DB/API calls
+  - Server Components (data fetching + layout)
+  - Client Components (interactive UI)
+  - API Routes (for external consumers / webhooks)
+test_framework: "Vitest + React Testing Library + Playwright (E2E)"

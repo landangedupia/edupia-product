@@ -1,0 +1,15 @@
+name: "Phaser Game"
+version: "1.0.0"
+description: "HTML5 game with Phaser 3 + TypeScript + Vite, packaged for Android WebView (file://)"
+language: "TypeScript"
+framework: "Phaser 3"
+stack_type: "frontend"
+default_layer_order:
+  - Contracts / types (GameContract, DTOs shared with the native host)
+  - Config (game config, tuning constants, asset manifest)
+  - Domain logic (pure TS: scoring, spawn tables, physics helpers — framework-free)
+  - Scenes (Boot → Preload → Menu → Game → GameOver, UI overlay scene)
+  - Game objects / prefabs (Phaser.GameObjects subclasses: Miner, Hook, Gold)
+  - Bridge (WebView ↔ native messaging via GameContract)
+  - Bootstrap (main.ts → new Phaser.Game)
+test_framework: "Vitest (pure domain logic) + Playwright (in-browser smoke)"

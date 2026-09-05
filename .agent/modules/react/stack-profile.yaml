@@ -1,0 +1,63 @@
+build:
+  compile: "npm run build"
+  test: "npm test"
+  run: "npm run dev"
+  lint: "npm run lint"
+
+architecture:
+  style: "Feature-based (components → hooks → queries → store)"
+  key_rules:
+    - "Business logic lives in custom hooks, not in components"
+    - "Server state managed by React Query (useQuery / useMutation)"
+    - "Client-only UI state managed by Zustand or useState"
+    - "Components must be pure functions — no direct API calls inside JSX"
+    - "Shared UI primitives in components/ui/, feature logic in features/{name}/"
+    - "Never fetch data directly in a component — use a custom hook"
+  folder_structure: |
+    src/
+    ├── api/              ← axios instance, interceptors
+    ├── components/
+    │   └── ui/           ← reusable primitives (Button, Modal, Table...)
+    ├── features/
+    │   └── {domain}/
+    │       ├── components/   ← feature-specific UI
+    │       ├── hooks/        ← useOrderList, useCreateOrder...
+    │       ├── queries/      ← React Query definitions
+    │       ├── store/        ← Zustand slice (if needed)
+    │       └── types.ts
+    ├── pages/            ← route-level page components
+    └── lib/              ← utilities, formatters, constants
+
+coding_standards:
+  naming:
+    components: "PascalCase (e.g., OrderList, CreateOrderModal)"
+    hooks: "camelCase with 'use' prefix (e.g., useOrderList, useCreateOrder)"
+    query_keys: "SCREAMING_SNAKE_CASE array (e.g., ['ORDER_LIST', customerId])"
+    stores: "camelCase + Store suffix (e.g., useCartStore)"
+    files:
+      component: "{Feature}.tsx"
+      hook: "use{Feature}.ts"
+      query: "{feature}.queries.ts"
+      store: "{feature}.store.ts"
+      types: "{feature}.types.ts"
+  patterns:
+    data_fetching: "React Query (TanStack Query v5)"
+    global_state: "Zustand slices"
+    forms: "React Hook Form + Zod validation"
+    api_client: "Axios with interceptors for auth + error handling"
+    error_boundary: "React ErrorBoundary wraps each feature route"
+
+testing:
+  unit: "Vitest + React Testing Library"
+  e2e: "Playwright or Cypress"
+  patterns:
+    - "Test behavior, not implementation — query by role/label, not className"
+    - "Mock React Query with a QueryClient wrapper in test setup"
+    - "Use MSW (Mock Service Worker) to mock API calls in tests"
+    - "renderWithProviders() helper wraps component with QueryClient + Router"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|integration"

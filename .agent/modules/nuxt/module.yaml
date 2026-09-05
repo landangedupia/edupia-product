@@ -1,0 +1,14 @@
+name: "Nuxt"
+version: "1.0.0"
+description: "Nuxt 3 with SSR/SSG, Composition API, Pinia, and useFetch"
+language: "TypeScript"
+framework: "Nuxt 3"
+stack_type: "frontend"
+default_layer_order:
+  - Types / interfaces
+  - Server API routes (server/api/)
+  - Composables (useFetch / useAsyncData)
+  - State store (Pinia)
+  - UI components (presentational)
+  - Page components (pages/)
+test_framework: "Vitest + Vue Test Utils + @nuxt/test-utils"

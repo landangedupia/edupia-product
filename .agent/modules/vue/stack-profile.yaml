@@ -1,0 +1,65 @@
+build:
+  compile: "npm run build"
+  test: "npm run test"
+  run: "npm run dev"
+  lint: "npm run lint"
+
+architecture:
+  style: "Feature-based (components → composables → queries → store)"
+  key_rules:
+    - "Business logic lives in composables, not in component setup()"
+    - "Server state managed by Vue Query (@tanstack/vue-query)"
+    - "Client-only UI state managed by Pinia stores"
+    - "Components must be pure — no direct API calls inside <template> or setup()"
+    - "Shared UI primitives in components/ui/, feature logic in features/{name}/"
+    - "Never fetch data directly in a component — use a composable"
+    - "Props defined with defineProps<{}>(), emits with defineEmits<{}>()"
+  folder_structure: |
+    src/
+    ├── api/              ← axios instance, interceptors
+    ├── components/
+    │   └── ui/           ← reusable primitives (BaseButton, BaseInput...)
+    ├── features/
+    │   └── {domain}/
+    │       ├── components/   ← feature-specific UI
+    │       ├── composables/  ← useOrderList, useCreateOrder...
+    │       ├── queries/      ← Vue Query definitions
+    │       ├── store/        ← Pinia slice (if needed)
+    │       └── types.ts
+    ├── pages/            ← route-level page components (Vue Router)
+    ├── router/           ← route definitions
+    └── lib/              ← utilities, formatters, constants
+
+coding_standards:
+  naming:
+    components: "PascalCase (e.g., OrderList, CreateOrderModal)"
+    composables: "camelCase with 'use' prefix (e.g., useOrderList, useCreateOrder)"
+    stores: "camelCase + Store suffix (e.g., useCartStore) — defined with defineStore()"
+    query_keys: "SCREAMING_SNAKE_CASE string/array (e.g., ['ORDER_LIST', customerId])"
+    files:
+      component: "{Feature}.vue"
+      composable: "use{Feature}.ts"
+      query: "{feature}.queries.ts"
+      store: "{feature}.store.ts"
+      types: "{feature}.types.ts"
+  patterns:
+    data_fetching: "Vue Query (TanStack Query v5 for Vue)"
+    global_state: "Pinia stores"
+    forms: "VeeValidate + Zod"
+    api_client: "Axios with interceptors for auth + error handling"
+    reactivity: "ref() for primitives, reactive() for objects, computed() for derived state"
+
+testing:
+  unit: "Vitest + Vue Test Utils"
+  e2e: "Playwright or Cypress"
+  patterns:
+    - "Test behavior, not implementation — query by role/label via @testing-library/vue"
+    - "Mock Vue Query with VueQueryPlugin wrapper in test setup"
+    - "Use MSW (Mock Service Worker) to mock API calls in tests"
+    - "mountWithProviders() helper wraps component with Pinia + VueQuery + Router"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|integration"

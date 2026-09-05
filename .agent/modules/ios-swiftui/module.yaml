@@ -1,0 +1,13 @@
+name: "iOS (SwiftUI)"
+version: "1.0.0"
+description: "Native iOS development with SwiftUI + Swift"
+language: "Swift"
+framework: "SwiftUI"
+stack_type: "mobile"
+default_layer_order:
+  - Models / entities
+  - Repository (data sources)
+  - UseCase (business operations)
+  - ViewModel (ObservableObject state)
+  - View (SwiftUI presentation)
+test_framework: "XCTest + Quick/Nimble"

@@ -1,0 +1,40 @@
+build:
+  compile: "go build ./..."
+  test: "go test ./..."
+  run: "go run ./cmd/{service-name}"
+
+architecture:
+  style: "Domain-driven layout"
+  directory_structure:
+    cmd/: "Main entry points, one per binary (e.g., cmd/api/main.go)"
+    internal/domain/: "Domain entities, interfaces, and business rules"
+    internal/repo/: "Repository implementations (DB, cache)"
+    internal/handler/: "HTTP handlers (Gin/Echo) — thin, delegate to use cases"
+    internal/usecase/: "Use case implementations (business logic)"
+    pkg/: "Reusable packages safe for external use"
+    config/: "Configuration loading (env vars, YAML)"
+  key_rules:
+    - "Define interfaces in the consumer package (dependency inversion)"
+    - "internal/ packages cannot be imported outside the module"
+    - "Handlers must not contain business logic — only parse, call use case, respond"
+    - "Use cases own business rules and call repository interfaces"
+    - "Repositories implement persistence — never call use cases"
+
+coding_standards:
+  naming:
+    packages: "lowercase single word (e.g., order, handler, repo)"
+    interfaces: "Describe behavior, no 'I' prefix (e.g., OrderRepository, not IOrderRepository)"
+    structs: "PascalCase for exported, camelCase for unexported"
+    methods: "PascalCase for exported, camelCase for unexported"
+  patterns:
+    error_handling: "Return error as last return value; use errors.Is/As; wrap with fmt.Errorf(\"...: %w\", err)"
+    interfaces: "Define small interfaces at point of use; prefer 1-2 method interfaces"
+    constructors: "NewXxx(deps...) *Xxx — always use constructor functions"
+
+testing:
+  framework: "Standard library testing package + testify"
+  patterns:
+    - "Table-driven tests for all cases"
+    - "Use testify/assert and testify/mock"
+    - "Test file: {file}_test.go in same package (white-box) or {pkg}_test package (black-box)"
+    - "Integration tests in internal/{pkg}/integration_test.go with build tag //go:build integration"

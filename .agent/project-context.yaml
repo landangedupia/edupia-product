@@ -1,0 +1,89 @@
+# =============================================================
+# Project Context — SDD Framework
+# =============================================================
+# SINGLE SOURCE OF TRUTH cho path/routing mà mọi lệnh framework dùng.
+#
+# LƯU Ý ĐẶC BIỆT CHO REPO NÀY: đây là repo "Edupia Product OS" đã có cấu trúc
+# riêng (00_context/ → 07_feedback/, xem CLAUDE.md gốc). Để tránh trùng lặp
+# 2 nơi lưu cùng loại thông tin, các path bên dưới được ánh xạ vào cấu trúc
+# CÓ SẴN thay vì dùng default specs/ + feedback/ của framework. Xem quyết định
+# trong 06_decisions/decision-log.md (cần bổ sung entry khi commit).
+# =============================================================
+
+project:
+  name: "Edupia AI Class New"
+  description: "PO Spec repo — Product OS cho sản phẩm Edupia Class / AI Class (concept, chiến lược, khám phá, PRD). Không chứa code chạy được."
+
+# ----- File Paths -----
+paths:
+  # Feature-package layout (PRD/BDD/tech-docs/design-spec) — dùng thư mục
+  # 04_delivery/specs/ đã có sẵn (trống) thay vì tạo specs/ mới ở root, để
+  # không trùng với 03_product/ (concept/taxonomy hiện có).
+  specs_dir: "04_delivery/specs"
+
+  # Không áp dụng — repo này không có code chạy được (PO Spec repo).
+  src_dir: "N/A — PO Spec repo, không có code"
+
+  refinement_dir: ".agent/review"
+
+  qc_dir: "docs"
+  qc_skills_dir: ".agent/skills/qc"
+
+  # /define-product ghi trực tiếp vào 00_context/ (nơi đã có product-brief,
+  # personas, current-state...) thay vì tạo specs/product-definition/ mới.
+  product_definitions_dir: "00_context"
+
+  # Glossary chuẩn ĐÃ CÓ SẴN — không tạo business-dictionary.md/core-entities.md
+  # mới trong specs/domain-knowledge/ (sẽ trùng lặp). Theo CLAUDE.md gốc, luôn
+  # kiểm tra CẢ HAI file glossary trước khi đưa ra thuật ngữ mới:
+  domain_knowledge_dir: "00_context"
+  business_dictionary: "00_context/glossary.md"
+  # Glossary thứ hai cần đối chiếu song song (framework chỉ đọc 1 path ở đây,
+  # nhưng PO/agent vẫn phải tự check thêm 03_product/taxonomy/glossary.md):
+  # secondary_business_dictionary: "03_product/taxonomy/glossary.md"
+
+  # Chưa có file entity glossary máy-đọc-được nào tương đương — để mặc định,
+  # framework sẽ tự flag "Entities: missing" (không chặn) cho đến khi cần.
+  core_entities: "specs/domain-knowledge/core-entities.md"
+
+  lessons_file: "specs/domain-knowledge/lessons-learned.md"
+
+  tech_docs_dir: "04_delivery/specs"
+  trace_dir: ".trace"   # không dùng — PO Spec repo skip trace (không có code/BDD chạy)
+
+  # Feedback — repo đã có 07_feedback/ (learnings/, user-feedback/). Các lệnh
+  # /report-bug và /propose-scenario không áp dụng cho repo không-code, giữ
+  # default framework (sẽ không được dùng trong thực tế).
+  bug_reports_dir: "feedback/bug-reports"
+  bdd_proposals_dir: "feedback/bdd-proposals"
+  prd_change_requests_dir: "feedback/prd-change-requests"
+
+# ----- Tech Stack — N/A (PO Spec repo, không có code) -----
+tech_stack:
+  language: "N/A"
+  framework: "N/A"
+  build_tool: "N/A"
+  test_framework: "N/A"
+  database: "N/A"
+  module: "N/A"
+
+conventions:
+  build_command: "N/A"
+  test_command: "N/A"
+  service_run: "N/A"
+  ticket_prefix: "{{TICKET_PREFIX}}"   # TODO: chốt prefix ticket (vd AICN, FT...) trước khi chạy /generate-prd đầu tiên
+
+domains:
+  - "ai-class-core"        # Concept 1/1.2, Big Class, curriculum, giá 390k (Edupia Class / AI Class Plus)
+  - "ai-tutor"              # Concept 3/3.1 — Gia sư AI 1:1, AI Song Hành, Adaptive Learning/Gap Detection
+  - "ai-practice-speak"     # Edupia Practice (luyện bài) + Edupia Speak (luyện phát âm)
+  - "parent-mode"           # Mastery Map/Profile, báo cáo phụ huynh, vai trò GVCN
+  - "edupia-club"           # Nền tảng hoạt động bổ trợ (Edupia Club / AI Club)
+  - "pricing-growth"        # Nghiên cứu giá WTP/Van Westendorp, khảo sát, purchase intent
+
+# ----- Architecture — N/A (PO Spec repo, không có code) -----
+architecture:
+  style: "N/A"
+  layers: "N/A"
+  key_rules:
+    - "N/A"

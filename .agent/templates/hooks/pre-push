@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+# ─────────────────────────────────────────────────────────────────────────────
+# SDD Framework — git pre-push hook
+#
+# CÀI (từ gốc project):
+#   cp .agent/templates/hooks/pre-push .git/hooks/pre-push
+#   chmod +x .git/hooks/pre-push
+#
+# Trên Windows: Git for Windows chạy hook bằng sh nên file này dùng được như vậy.
+#
+# VÌ SAO CÓ HOOK NÀY khi đã có CI (GAPS-v3 G39/G40): nó chặn ở chỗ RẺ NHẤT.
+# Cụ thể là T7 — marker conflict git (`<<<<<<< HEAD`) lọt vào sổ trace. Một khi
+# thứ đó vào nhánh chung thì mọi người kéo về đều có sổ hỏng, và sổ trace là dữ
+# liệu KHÔNG dựng lại được. Bắt trước lúc push tốn 2 giây; bắt ở CI thì đã muộn
+# một vòng, bắt bằng mắt thì thường là ba tuần sau.
+#
+# CỐ Ý CHỈ LINT, KHÔNG GATE:
+#   --lint-trace  = cấu trúc sổ. Nhanh, offline được sau lần đầu, và một lỗi ở đây
+#                   LUÔN là lỗi thật (tab lệch, marker conflict, enum sai).
+#   --gate-trace  = cờ 🔴. Cần trace-report.json còn tươi, mà giữa lúc làm việc thì
+#                   nó thường chưa tươi — đỏ liên tục ⇒ người ta gõ --no-verify ⇒
+#                   mất luôn cả phần lint. Cờ 🔴 để CI chặn.
+#
+# Bỏ qua một lần (dùng có ý thức, đừng thành phản xạ):  git push --no-verify
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Không có node thì im lặng cho qua — hook không được làm người ta không push được
+# vì lý do không liên quan tới việc họ đang làm.
+command -v node >/dev/null 2>&1 || exit 0
+
+# Không có sổ trace thì không có gì để kiểm (project chưa chạy /generate-bdd lần nào).
+# Sửa đường dẫn nếu trace_dir của project khác (vd ../.trace, hay {spec_source}/.trace).
+TRACE_DIR=".trace"
+[ -d "$TRACE_DIR" ] || exit 0
+
+echo "→ Lint sổ trace trước khi push ..."
+
+if npx -y @educa-corp/sdd-framework@latest --lint-trace --trace "$TRACE_DIR"; then
+  exit 0
+fi
+
+cat <<'MSG'
+
+──────────────────────────────────────────────────────────────────────
+🔴 PUSH BỊ CHẶN — sổ trace hỏng cấu trúc.
+
+Sổ trace là dữ liệu KHÔNG regenerate được. Đẩy một sổ hỏng lên nhánh
+chung thì mọi người kéo về đều nhận bản hỏng.
+
+Thường gặp nhất — marker conflict git chưa giải (T7):
+  1. Mở file lint vừa nêu, xoá 3 dòng <<<<<<<  =======  >>>>>>>
+  2. GIỮ CẢ HAI BÊN, đừng chọn một bên (mất row là mất vĩnh viễn)
+  3. npx @educa-corp/sdd-framework --lint-trace     # xác nhận sạch
+  4. /validate-traces trong Claude Code             # reconcile row trùng
+
+Playbook đầy đủ: docs/02-concepts/traceability.md
+Bỏ qua một lần: git push --no-verify
+──────────────────────────────────────────────────────────────────────
+
+MSG
+exit 1

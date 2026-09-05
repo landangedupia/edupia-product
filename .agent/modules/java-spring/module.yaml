@@ -1,0 +1,15 @@
+name: "Java Spring Boot"
+version: "1.0.0"
+description: "Spring Boot 3.x with layered architecture"
+language: "Java"
+framework: "Spring Boot"
+stack_type: "backend"
+default_layer_order:
+  - DTO
+  - Entity/Model
+  - Repository
+  - Service interface
+  - Service impl
+  - Facade (optional)
+  - Controller
+test_framework: "JUnit 5 + Mockito"

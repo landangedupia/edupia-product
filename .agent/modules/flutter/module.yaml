@@ -1,0 +1,14 @@
+name: "Flutter"
+version: "1.0.0"
+description: "Cross-platform mobile (iOS + Android) with Flutter/Dart"
+language: "Dart"
+framework: "Flutter"
+stack_type: "mobile"
+default_layer_order:
+  - Models / entities (domain)
+  - Repositories (data layer)
+  - Use cases (domain logic)
+  - BLoC / Cubit or Riverpod providers (state)
+  - Widgets (presentation)
+  - Pages / screens
+test_framework: "flutter_test + mocktail"

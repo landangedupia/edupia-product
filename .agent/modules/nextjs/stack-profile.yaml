@@ -1,0 +1,74 @@
+build:
+  compile: "npm run build"
+  test: "npm test"
+  run: "npm run dev"
+  lint: "npm run lint"
+  e2e: "npx playwright test"
+
+architecture:
+  style: "App Router — Server Components + Server Actions + Client Components"
+  key_rules:
+    - "Default to Server Components — only add 'use client' when interactivity is needed"
+    - "Data fetching happens in Server Components or Server Actions — never in useEffect"
+    - "Server Actions handle all mutations (form submits, data writes)"
+    - "Data Access Layer (DAL) abstracts all DB/external API calls — used only on server"
+    - "Client Components are 'leaf nodes' — keep them small and focused on interactivity"
+    - "API Routes (/api) used only for external consumers or webhooks, not for own UI"
+    - "Use Next.js cache() and unstable_cache for data memoization"
+  folder_structure: |
+    app/
+    ├── (auth)/               ← route group: auth pages
+    ├── (dashboard)/          ← route group: authenticated pages
+    │   └── orders/
+    │       ├── page.tsx      ← Server Component (list page)
+    │       ├── [id]/
+    │       │   └── page.tsx  ← Server Component (detail page)
+    │       └── _components/  ← feature-scoped Client Components
+    ├── api/                  ← API Routes (webhooks, external consumers)
+    └── layout.tsx
+    lib/
+    ├── dal/                  ← Data Access Layer (server-only DB/API calls)
+    │   └── orders.dal.ts
+    ├── actions/              ← Server Actions
+    │   └── order.actions.ts
+    └── validations/          ← Zod schemas (shared server+client)
+        └── order.schema.ts
+    components/
+    └── ui/                   ← shared primitive Client Components
+
+coding_standards:
+  naming:
+    server_components: "PascalCase, no suffix — co-locate in app/ route folder"
+    client_components: "PascalCase + 'use client' at top — in _components/ folders"
+    server_actions: "camelCase verb + noun (e.g., createOrder, cancelOrder) in lib/actions/"
+    dal_functions: "camelCase (e.g., getOrderById, listOrdersByCustomer) in lib/dal/"
+    files:
+      page: "app/{route}/page.tsx"
+      layout: "app/{route}/layout.tsx"
+      server_action: "lib/actions/{domain}.actions.ts"
+      dal: "lib/dal/{domain}.dal.ts"
+      schema: "lib/validations/{domain}.schema.ts"
+  patterns:
+    mutations: "Server Actions with useFormState / useTransition"
+    data_fetching: "Server Component async/await + fetch with revalidate options"
+    client_state: "Zustand or Context API (avoid for server-derived data)"
+    forms: "React Hook Form (client) OR native <form> with Server Actions"
+    error_handling: "error.tsx (route-level) + try/catch in Server Actions returning {error}"
+    loading: "loading.tsx (Suspense boundary) per route segment"
+    auth: "next-auth v5 (Auth.js) or middleware-based session check"
+
+testing:
+  unit: "Vitest + React Testing Library for Client Components"
+  integration: "Vitest + MSW for Server Actions"
+  e2e: "Playwright — full browser tests"
+  patterns:
+    - "Test Server Components by rendering with async render utilities"
+    - "Mock fetch/DB calls for Server Action tests"
+    - "Playwright tests cover full user flows (auth → action → result)"
+    - "Use @playwright/test fixtures for auth state reuse"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|e2e"

@@ -1,0 +1,15 @@
+name: "PHP Laravel"
+version: "1.0.0"
+description: "Laravel 11 backend with service-repository pattern"
+language: "PHP"
+framework: "Laravel"
+stack_type: "backend"
+default_layer_order:
+  - Form Request (validation)
+  - Model / Eloquent
+  - Repository interface
+  - Repository impl
+  - Service
+  - Controller (Resource Controller)
+  - Resource (API response transformer)
+test_framework: "PHPUnit + Pest"

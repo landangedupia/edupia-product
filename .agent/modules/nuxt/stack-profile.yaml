@@ -1,0 +1,58 @@
+build:
+  compile: "npm run build"
+  test: "npm run test"
+  run: "npm run dev"
+  lint: "npm run lint"
+
+architecture:
+  style: "Pages + Composables + Server routes (SSR/SSG)"
+  key_rules:
+    - "Pages in pages/ are route-level containers — no business logic"
+    - "Business logic in composables/ using useAsyncData or useFetch"
+    - "Server-side logic in server/api/ routes (nitro)"
+    - "Client-only state in Pinia stores; server state via useAsyncData"
+    - "Shared UI primitives in components/ui/, auto-imported by Nuxt"
+    - "Use useRoute/useRouter instead of $route/$router in Composition API"
+    - "'use client' equivalent: wrap client-only code in onMounted or <ClientOnly>"
+  folder_structure: |
+    ├── components/
+    │   └── ui/           ← auto-imported UI primitives (BaseButton, BaseInput...)
+    ├── composables/      ← auto-imported composables (useOrderList...)
+    ├── pages/            ← file-based routing
+    ├── server/
+    │   └── api/          ← nitro server routes (GET /api/orders.ts)
+    ├── stores/           ← Pinia stores (auto-imported)
+    ├── plugins/          ← Nuxt plugins
+    └── utils/            ← auto-imported utilities
+
+coding_standards:
+  naming:
+    components: "PascalCase (auto-imported, e.g., OrderList, BaseButton)"
+    composables: "camelCase with 'use' prefix (auto-imported, e.g., useOrderList)"
+    stores: "camelCase + Store suffix via defineStore()"
+    server_routes: "method.path.ts (e.g., get.orders.ts or [id].get.ts)"
+    files:
+      component: "{Feature}.vue"
+      composable: "use{Feature}.ts"
+      store: "{feature}.store.ts"
+      server_route: "{resource}.get.ts / {resource}.post.ts"
+  patterns:
+    data_fetching: "useAsyncData() for SSR data, useFetch() for client fetches"
+    global_state: "Pinia stores"
+    forms: "VeeValidate + Zod"
+    api_client: "$fetch (ofetch) — built-in to Nuxt, SSR-compatible"
+    ssr_hydration: "useState() for shared SSR/client state to avoid hydration mismatch"
+
+testing:
+  unit: "Vitest + @nuxt/test-utils"
+  e2e: "Playwright via @nuxt/test-utils/e2e"
+  patterns:
+    - "Use mountSuspended() for components that need Nuxt context"
+    - "Use registerEndpoint() to mock server routes in tests"
+    - "Test pages with renderSuspended() from @nuxt/test-utils"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|integration"

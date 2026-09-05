@@ -1,0 +1,66 @@
+# QC automation module — Python + pytest-playwright + Page Object
+# Used by the /qc-* commands (the official QC automation pipeline ported from the QC team).
+# This is the QC test-authoring/execution stack, independent of the dev implementation
+# module (java-spring, react, flutter, …). Selected via tech_stack.qc_module or per /qc-* run.
+
+build:
+  test: "python3 -m pytest"
+  e2e: "python3 -m pytest -m e2e"
+  report: "python3 -m pytest --html=reports/<feature>/report.html --self-contained-html"
+  show_trace: "python3 -m playwright show-trace <test-results/<nodeid>/trace.zip>"
+
+architecture:
+  style: "Page Object Model over pytest-playwright — Markdown test-case first, Python second"
+  key_rules:
+    - "Markdown-first: never generate Python until a reviewed .Test.md exists for the feature"
+    - "No Allure, no hand-written dashboard, no record_video — use Playwright Trace + pytest-html"
+    - "No hard-coded URL/credential/timeout — read from Env.* and CONFIG[...]"
+    - "No time.sleep() — use Playwright auto-wait / expect()"
+    - "Each test independent via pytest-playwright fixtures (page / logged_in_page / …)"
+    - "Page Object extends slim BasePage; split 3 layers: locators _x(), actions verb_noun(), assertions assert_x() using expect()"
+    - "Locator priority: data-testid → role → label/text → CSS → avoid XPath"
+    - "test-id values come from the FE tech-design §2b Test Selectors contract (tech-doc gộp cấp PRD: {TICKET-ID}-tech-design.md, bảng Test Selectors §4.5.6 — lọc theo cột "Serves SC") — prefer them (no runtime scan); fall back to role/text only when an actionable element has no test-id there, and note the gap"
+    - "Group tests by (role, account) so login/logout never interleaves across roles"
+    - "Cover 100% of TCs in the .Test.md — every TC ends Pass/Fail/Skip, none left Draft"
+  folder_structure: |
+    {qc_artifact_dir}test-cases/   ← test-case Markdown (.Test.md) — source of truth (mặc định docs/, lộ ra ngoài)
+    pages/                         ← Page Object Model
+    │   ├── base_page.py           ← slim BasePage (click/fill/wait/screenshot)
+    │   └── <feature>_page.py
+    tests/                         ← pytest scripts, 1-1 with test-cases/
+    │   ├── conftest.py            ← fixtures: browser, page, logged_in_page, tracing
+    │   └── <project>/test_<feature>.py
+    utils/                         ← config_loader, logger, steps, test_ordering, report helpers
+    test_data/                     ← JSON datasets
+    config/config.yaml             ← browser, timeout, video/screenshot/trace toggles
+    reports/  test-results/        ← generated (gitignored): html report, trace.zip, screenshots
+
+coding_standards:
+  naming:
+    test_case_id: "TC_<FEATURE>_<NNN>"
+    test_class: "TestFeatureHappyCase"
+    test_function: "test_TC<NNN>_<snake_case>"
+    page_object: "<feature>_page.py with <Feature>Page class extending BasePage"
+    files:
+      test_case_md: "{qc_artifact_dir}test-cases/TC_<FEATURE>.Test.md"
+      page_object: "pages/<feature>_page.py"
+      test_script: "tests/<project>/test_<feature>.py"
+  patterns:
+    steps: "wrap steps with `with step(\"…\")` (from utils.steps import step)"
+    assertions: "Playwright expect() — never bare assert on dynamic UI"
+    fixtures: "auth fixtures register via register_auth_fixtures([...]) in project conftest"
+    fail_triage: "classify each FAIL as script-bug (fix selector/logic) vs product-gap (keep FAIL + evidence, never fake-pass)"
+
+testing:
+  layers: "functional (gui-screen / gui-feature / api), integration (api/db/gui/kafka), e2e (journey), non-functional, exploratory"
+  runner: "pytest-playwright; trace via context.tracing.start in conftest"
+  report: "pytest-html (--html ... --self-contained-html) + Playwright Trace viewer"
+
+trace_tags:
+  # QC tests map back to the framework's scenarios — drives qc_status in the trace TSV.
+  verifies: "# @trace.verifies={UC-ID}-SC{N}"
+  source: "# @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  test_type: "# @trace.test_type=functional|integration|e2e|non-functional"
+
+# qc_status: /qc-run-test writes pass|fail|skip|not_run + qc_run_at into {trace_dir}/{UC-ID}.tsv
+# (parallel to dev_selftest), surfaced in Living Docs as the OFFICIAL QC automation result.

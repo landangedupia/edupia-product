@@ -1,0 +1,38 @@
+build:
+  compile: "ng build"
+  test: "ng test --watch=false"
+  run: "ng serve"
+
+architecture:
+  style: "Component → Service → HTTP Client → Backend API"
+  key_rules:
+    - "Smart (container) components manage state and inject services"
+    - "Dumb (presentational) components receive data via @Input and emit via @Output"
+    - "Business logic lives in services, not in component classes"
+    - "Use OnPush change detection for all pure presentational components"
+    - "HTTP calls must be in services, never in component files"
+
+coding_standards:
+  naming:
+    components: "PascalCase + Component suffix (e.g., OrderListComponent)"
+    services: "PascalCase + Service suffix (e.g., OrderService)"
+    pipes: "PascalCase + Pipe suffix (e.g., CurrencyFormatPipe)"
+    directives: "PascalCase + Directive suffix (e.g., HighlightDirective)"
+    guards: "PascalCase + Guard suffix (e.g., AuthGuard)"
+    files:
+      component: "{feature}.component.ts / .html / .scss"
+      service: "{feature}.service.ts"
+      model: "{feature}.model.ts"
+      store: "{feature}.store.ts"
+  patterns:
+    state_management: "NgRx (complex) or Angular Signals (simple/medium)"
+    http_error_handling: "HttpInterceptor catches 4xx/5xx globally"
+    lazy_loading: "All feature modules must be lazily loaded"
+
+testing:
+  unit: "Jasmine + Karma or Jest"
+  e2e: "Cypress or Playwright"
+  patterns:
+    - "Use TestBed.configureTestingModule for component tests"
+    - "Mock services with jasmine.createSpyObj or jest.fn()"
+    - "Test component DOM via DebugElement and By.css selectors"

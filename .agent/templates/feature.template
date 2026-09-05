@@ -1,0 +1,123 @@
+# ============================================================
+# @trace.id: {TICKET-ID}-UC{N}
+# @trace.title: <Feature name>
+# @trace.revision: 1  ← field tĩnh; version theo dõi bằng @trace.bdd_version
+# @trace.domain: <domain>
+# @trace.platform: {active_platform — web | app | system}   ← BẮT BUỘC mọi mode; phải khớp segment bdd/{platform}/ của path
+# @trace.service: {service của ĐÚNG platform file này — BẮT BUỘC mọi mode. Nguồn của cột TSV `service`; trace gộp không tách theo service nên đây là chỗ DUY NHẤT mang thông tin sở hữu ở cấp row. Bốn giá trị: {path} · "unrouted" (chưa ai quyết repo — HỢP LỆ, cờ 🟠, KHÔNG chặn) · "unresolved" (config sai cấu trúc — bug) · "—" (single-service). KHÔNG ghi "multi": file này đã có MỘT platform xác định nên service_candidates.{platform}.path đã biết — ghi path đó (G51)}
+# @trace.module: {active_module trong umbrella mode; "unknown" trong spec repo mode}
+# @trace.status: draft
+# @trace.author: AI-generated
+# @trace.created_at: {YYYY-MM-DD}
+# @trace.prd: {TICKET-ID}
+# @trace.prd_version: {đọc từ metadata PRD "| **Version** |"}
+# @trace.bdd_version: {cấp FILE — 1.0 nếu gen mới; tăng 0.1 khi gen lại. Khác @trace.sc_version (cấp từng SC) bên dưới}
+# @trace.business_rules: {TICKET-ID}-UC{N}-BR{m}, {TICKET-ID}-UC{N}-BR{m+1}   ← {m} lấy NGUYÊN từ PRD §3: BR đánh số LIÊN TỤC toàn PRD, KHÔNG reset theo UC
+# @trace.dataset: {domain}.testdata.yaml
+# ============================================================
+
+# === CONTEXT ===
+# Actor:     <vai trò thực hiện hành động, vd: Consumer, Staff, System>
+# Screens:   <các màn liên quan, vd: Cart → Confirm Order → Order Detail>
+# Entities:  <business entity, vd: Order, OrderItem, Consumer>
+# Pre-state: <state dùng chung trước khi vào các scenario>
+
+# === SCOPE ===
+# In:  <UC này phủ gì>
+# Out: <cái gì KHÔNG thuộc UC này — link tới UC/feature khác (R10)>
+
+# === BUSINESS DEFINITION ===
+# Tham chiếu nhanh các term dùng trong feature này. Chi tiết SoT: business-dictionary.md
+# <Term 1>: <định nghĩa ngắn>
+# <Term 2>: <định nghĩa ngắn>
+#
+# --- Popup/Modal Lifecycle (tùy chọn — BẮT BUỘC nếu feature là popup/modal; Pre-merge yêu cầu) ---
+# - Open trigger:   <khi nào popup hiển thị, vd: click menu sidebar>
+# - Close trigger:  <khi nào popup đóng, vd: F5 / click X / ESC / navigate away>
+# - Refresh model:  <data refresh khi nào, vd: mỗi lần open (NO CACHE) / persisted / polling>
+# - State reset:    <state nào reset khi đóng/mở lại, vd: pagination, expand, dropdown selection>
+#
+# --- Display Logic Matrix (tùy chọn — BẮT BUỘC nếu display logic phụ thuộc ≥2 chiều; Pre-merge yêu cầu) ---
+# Liệt kê đủ ma trận N×M case + map mỗi case → SC. Tên SC theo pattern `<cấu trúc>: <outcome>` (KHÔNG dùng "(Case X)").
+# | # | Dim1 | Dim2 | Format hiển thị        | SC   |
+# |---|------|------|------------------------|------|
+# | 1 | 0    | 0    | `Tên hàng`             | SC{} |
+# | 2 | 0    | 1    | `Tên hàng (đơn vị)`    | SC{} |
+# | ... | ...  | ...  | ...                    | ...  |
+
+Feature: <Feature name>
+  As a <role>
+  I want to <action>
+  So that <business value>
+
+  Background:
+    Given <precondition dùng chung — dùng alias từ dataset, không phải ID kỹ thuật>
+
+  # ==========================================================
+  # NHÓM 1: <Business theme> (<BR refs>)
+  # ==========================================================
+
+  # Side-effects: <liệt kê ngắn các Then side-effect cần verify>
+  # @trace.scenario: {TICKET-ID}-UC{N}-SC1
+  # @trace.sc_version: 1.0   ← cấp SCENARIO. Sửa thân SC này (tên/step/table/side-effect) thì +0.1, nếu không code cũ mãi hiện OK
+  # @trace.business_rules: {TICKET-ID}-UC{N}-BR{m}
+  @happy
+  Scenario: <mô tả business outcome — dùng động từ chính xác: create/receive/assign/block>
+    Given <input state — alias từ dataset>
+    When <single action>
+    Then <main observable outcome>
+      And <side-effect 1 khai báo trong header>
+
+  # Side-effects: <...>
+  # @trace.scenario: {TICKET-ID}-UC{N}-SC2
+  # @trace.sc_version: 1.0
+  # @trace.business_rules: {TICKET-ID}-UC{N}-BR{m}
+  @happy @alternative
+  Scenario: <cùng theme NHÓM 1 nhưng path khác — vd: giá trị enum khác>
+    Given <state>
+    When <action>
+    Then <outcome>
+
+  # ==========================================================
+  # NHÓM 2: <Business theme 2> (<BR refs>)
+  # ==========================================================
+
+  # Side-effects: <...>
+  # @trace.scenario: {TICKET-ID}-UC{N}-SC3
+  # @trace.sc_version: 1.0
+  # @trace.business_rules: {TICKET-ID}-UC{N}-BR{m+2}
+  @edge
+  Scenario: <scenario boundary / error>
+    Given <state>
+    When <action>
+    Then <expected error handling>
+
+# === PRD COVERAGE (C.1 + C.2) ===
+# AC mapping:
+#   AC1 (...) → SC1, SC2
+#   AC2 (...) → SC3
+# BR mapping (mỗi bullet PHẢI có ≥1 SC — C.2):
+#   {TICKET-ID}-UC{N}-BR{m}   (...) → SC1, SC2
+#   {TICKET-ID}-UC{N}-BR{m+2} (...) → SC3
+# Wireframe mapping (mỗi component/action ≥1 SC — C.1):
+#   Screen "<screen name>":
+#     [x] <action 1>  → SC1
+#     [x] <action 2>  → SC2
+#     [ ] <action 3>  → MISSING ← BLOCK MERGE
+# Design Spec coverage (chỉ FE/App — C.1 mở rộng; bỏ khối này nếu không nạp design-spec):
+#   Screen "<screen>": loading → SC?, error → SC?, empty → SC?
+#   AC-UI behavioral: AC-UI3 (lỗi+khôi phục) → SC?, AC-UI4 (empty CTA) → SC?
+#     (bỏ AC-UI visual thuần: AC-UI1 khớp Figma, AC-UI5 WCAG — Designer/QA review riêng)
+
+# === PRE-MERGE CHECKLIST ===
+# - [ ] Mỗi SC có Side-effects + @trace.scenario + @trace.sc_version + @trace.business_rules
+# - [ ] SỬA nội dung một SC (tên / step / data table / side-effect) → đã bump @trace.sc_version của
+#       CHÍNH SC đó (+0.1). Quên bump = code sinh từ SC cũ vẫn hiện OK, không ai biết phải regen.
+#       (Đổi @trace.business_rules / tag / comment → KHÔNG bump: không đổi hành vi cần implement.)
+# - [ ] Coverage Matrix: 0 dòng MISSING (C.1)
+# - [ ] FE/App: mỗi Screen State (≠default) + AC-UI behavioral của design-spec có ≥1 SC (C.1 mở rộng)
+# - [ ] Mỗi AC/BR map tới ≥1 SC (C.2)
+# - [ ] 0 banned term (C.4) — grep file trước khi merge
+# - [ ] Feature ≥3 SC có NHÓM grouping theo business theme (C.5)
+# - [ ] Nếu popup/modal: khai báo Popup/Modal Lifecycle trong BUSINESS DEFINITION
+# - [ ] Nếu display logic ≥2 chiều: Display Logic Matrix trong BUSINESS DEFINITION

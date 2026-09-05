@@ -1,0 +1,28 @@
+build:
+  compile: "mvn clean install -DskipTests"
+  test: "mvn test"
+  run: "mvn spring-boot:run"
+
+architecture:
+  style: "Layered (Controller → Facade → Service → Repository)"
+  key_rules:
+    - "Controllers must not contain business logic"
+    - "Services own transaction boundaries (@Transactional)"
+    - "Repositories use Spring Data JPA"
+    - "Facades orchestrate multiple services (optional layer)"
+
+coding_standards:
+  naming:
+    classes: "PascalCase"
+    methods: "camelCase"
+    packages: "lowercase.snake_case"
+  patterns:
+    response_wrapper: "ApiResponse<T>"
+    mapping: "MapStruct"
+    exception_base: "ResourceNotFoundException"
+
+trace_tags:
+  implements: "@trace.implements={UC-ID}-SC{N}"
+  source: "@trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "@trace.verifies={UC-ID}"
+  test_type: "@trace.test_type=unit|integration"

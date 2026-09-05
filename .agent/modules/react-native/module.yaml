@@ -1,0 +1,14 @@
+name: "React Native"
+version: "1.0.0"
+description: "Cross-platform mobile (iOS + Android) with React Native / Expo"
+language: "TypeScript"
+framework: "React Native"
+stack_type: "mobile"
+default_layer_order:
+  - Types / interfaces
+  - API client (React Query hooks)
+  - State store (Zustand)
+  - Custom hooks (business logic)
+  - UI components (presentational)
+  - Screen / feature components (container)
+test_framework: "Jest + React Native Testing Library"

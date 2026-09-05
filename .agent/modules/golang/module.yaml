@@ -1,0 +1,6 @@
+name: "Go"
+version: "1.0.0"
+description: "Go with domain-driven layout"
+language: "Go"
+framework: "Standard library / Gin / Echo"
+stack_type: "backend"

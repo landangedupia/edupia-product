@@ -1,0 +1,13 @@
+name: "Android (Jetpack Compose)"
+version: "1.0.0"
+description: "Native Android development with Jetpack Compose + Kotlin"
+language: "Kotlin"
+framework: "Jetpack Compose"
+stack_type: "mobile"
+default_layer_order:
+  - Domain models
+  - Repository (data layer)
+  - UseCase (domain logic)
+  - ViewModel (StateFlow<UiState>)
+  - Composable screens (presentation)
+test_framework: "JUnit5 + MockK + Turbine"

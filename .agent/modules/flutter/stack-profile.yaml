@@ -1,0 +1,59 @@
+build:
+  compile: "flutter build apk / flutter build ios"
+  test: "flutter test"
+  run: "flutter run"
+  lint: "flutter analyze"
+
+architecture:
+  style: "Feature-based (presentation → domain → data)"
+  key_rules:
+    - "Widget tree is pure UI — business logic lives in BLoC/Cubit or Riverpod providers"
+    - "Repositories abstract data sources; services contain domain logic"
+    - "State management: BLoC (complex flows) or Riverpod (simple/medium)"
+    - "Never call API directly inside a Widget build() method"
+    - "Shared UI widgets in lib/shared/widgets/, feature widgets in lib/features/{name}/presentation/"
+    - "Use const constructors wherever possible for performance"
+  folder_structure: |
+    lib/
+    ├── core/
+    │   ├── theme/        ← AppTheme, colors, text styles
+    │   ├── router/       ← GoRouter or auto_route
+    │   └── utils/
+    ├── shared/
+    │   └── widgets/      ← reusable UI widgets (AppButton, AppInput...)
+    ├── features/
+    │   └── {domain}/
+    │       ├── data/         ← repositories, data sources, models
+    │       ├── domain/       ← entities, use cases, repo interfaces
+    │       └── presentation/ ← pages, widgets, BLoC/Cubit
+    └── main.dart
+
+coding_standards:
+  naming:
+    widgets: "PascalCase (e.g., OrderListPage, CreateOrderForm)"
+    blocs: "PascalCase + Bloc/Cubit suffix (e.g., OrderListCubit)"
+    repositories: "PascalCase + Repository suffix (e.g., OrderRepository)"
+    files:
+      page: "{feature}_page.dart"
+      widget: "{feature}_widget.dart"
+      cubit: "{feature}_cubit.dart"
+      repository: "{feature}_repository.dart"
+      model: "{feature}_model.dart"
+  patterns:
+    state_management: "BLoC / Cubit (flutter_bloc) or Riverpod"
+    navigation: "GoRouter or auto_route"
+    networking: "Dio with interceptors"
+    serialization: "json_serializable / freezed"
+
+testing:
+  unit: "flutter_test + mocktail"
+  widget: "flutter_test WidgetTester"
+  integration: "integration_test package"
+  patterns:
+    - "Test BLoC/Cubit in isolation with fake repositories"
+    - "Widget tests pump the widget tree and find by key or semantics label"
+    - "Use goldenFileComparator for snapshot tests of complex widgets"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"

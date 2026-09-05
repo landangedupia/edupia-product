@@ -1,0 +1,56 @@
+build:
+  compile: "npx expo export / npx react-native build-android"
+  test: "jest"
+  run: "npx expo start / npx react-native run-ios"
+  lint: "eslint . && tsc --noEmit"
+
+architecture:
+  style: "Feature-based (screens → hooks → queries → store)"
+  key_rules:
+    - "Business logic lives in custom hooks, not in screen components"
+    - "Server state managed by React Query (TanStack Query)"
+    - "Navigation state managed by React Navigation"
+    - "Native modules wrapped in a service layer — never called directly in components"
+    - "Shared UI primitives in src/components/ui/, feature screens in src/features/{name}/"
+  folder_structure: |
+    src/
+    ├── api/              ← axios instance, interceptors
+    ├── components/
+    │   └── ui/           ← reusable primitives (AppButton, AppInput...)
+    ├── features/
+    │   └── {domain}/
+    │       ├── components/
+    │       ├── hooks/
+    │       ├── queries/
+    │       └── screens/
+    ├── navigation/       ← React Navigation stacks/tabs
+    ├── store/            ← Zustand slices
+    └── lib/              ← utils, formatters, constants
+
+coding_standards:
+  naming:
+    components: "PascalCase (e.g., OrderListScreen, CreateOrderForm)"
+    hooks: "camelCase with 'use' prefix (e.g., useOrderList)"
+    screens: "PascalCase + Screen suffix (e.g., OrderDetailScreen)"
+    files:
+      screen: "{Feature}Screen.tsx"
+      component: "{Feature}.tsx"
+      hook: "use{Feature}.ts"
+  patterns:
+    state_management: "Zustand + React Query"
+    navigation: "React Navigation v6 (Stack + Tab + Drawer)"
+    networking: "Axios"
+    forms: "React Hook Form + Zod"
+    storage: "MMKV or AsyncStorage"
+
+testing:
+  unit: "Jest + React Native Testing Library"
+  e2e: "Detox or Maestro"
+  patterns:
+    - "Test by accessibility label or testID — never by style/className"
+    - "Mock native modules in jest setup"
+    - "Use renderWithProviders() with NavigationContainer + QueryClient"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"

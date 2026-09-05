@@ -1,0 +1,50 @@
+build:
+  compile: "dotnet build"
+  test: "dotnet test"
+  run: "dotnet run --project src/{ProjectName}.Api"
+
+architecture:
+  style: "Clean Architecture"
+  layers:
+    - name: "Domain"
+      contains: "Entities, Value Objects, Domain Events, Interfaces"
+      rules:
+        - "No dependencies on outer layers"
+        - "Pure business logic only"
+    - name: "Application"
+      contains: "Commands, Queries, Handlers (MediatR), DTOs, Validators"
+      rules:
+        - "Depends only on Domain"
+        - "All use cases are Commands or Queries"
+        - "Validation via FluentValidation"
+    - name: "Infrastructure"
+      contains: "EF Core DbContext, Repository implementations, External service adapters"
+      rules:
+        - "Implements interfaces from Application and Domain"
+        - "No business logic"
+    - name: "Presentation"
+      contains: "Controllers (or Minimal API endpoints), Middleware"
+      rules:
+        - "Dispatches to MediatR only"
+        - "No direct service injection (only IMediator)"
+
+coding_standards:
+  naming:
+    classes: "PascalCase"
+    methods: "PascalCase"
+    interfaces: "IPascalCase (with I prefix)"
+    async_methods: "PascalCase + Async suffix (e.g., GetOrderAsync)"
+  patterns:
+    cqrs: "MediatR — IRequest<T> for commands/queries, IRequestHandler<T,R> for handlers"
+    validation: "FluentValidation — one AbstractValidator<T> per command/query"
+    error_handling: "Result pattern or domain exceptions, caught by global middleware"
+    response_type: "IActionResult with ProblemDetails for errors (RFC 7807)"
+
+testing:
+  unit: "xUnit + Moq + FluentAssertions"
+  integration: "WebApplicationFactory<Program> + Testcontainers"
+  patterns:
+    - "Arrange / Act / Assert structure"
+    - "Method names: MethodName_WhenCondition_ShouldExpectation"
+    - "Use FluentAssertions for readable assertions"
+    - "Mock only the direct dependencies of the unit under test"

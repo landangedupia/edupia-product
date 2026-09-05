@@ -1,0 +1,14 @@
+name: "Vue"
+version: "1.0.0"
+description: "Vue 3 SPA with Composition API, Pinia, and Vue Query"
+language: "TypeScript"
+framework: "Vue 3"
+stack_type: "frontend"
+default_layer_order:
+  - Types / interfaces
+  - API client (Vue Query / composables)
+  - State store (Pinia)
+  - Composables (business logic)
+  - UI components (presentational)
+  - Page / feature components (container)
+test_framework: "Vitest + Vue Test Utils"

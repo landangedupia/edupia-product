@@ -1,0 +1,175 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SDD Framework — Trace Gate (GitLab CI)
+#
+# COPY nội dung này vào `.gitlab-ci.yml` ở gốc repo. Nó KHÔNG tự chạy từ
+# `.agent/templates/` — mọi thứ trong `.agent/` là bản sinh ra, bị ghi đè mỗi lần
+# `/update-framework`.
+#
+# ⚠️ Repo chưa có `.gitlab-ci.yml`? Thêm file này = mọi push/MR từ nay sẽ kích hoạt
+#    pipeline. Đó là mục đích — nhưng hãy biết trước.
+#
+# GIỚI HẠN — đọc trước khi tin:
+#   Job này chứng minh "report khớp SỔ, và sổ không có cờ 🔴".
+#   Nó KHÔNG chứng minh "sổ khớp CODE" — việc đó cần quét tag trong source, đọc
+#   .feature, so version, tức cần `/validate-traces` (một lệnh LLM, không chạy được
+#   trong CI thường). Nên nó bắt ca phổ biến "quên chạy lại /validate-traces",
+#   nhưng KHÔNG bắt ca "sửa code mà không đụng sổ".
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# BỐN BẪY KHI DỊCH TỪ GITHUB ACTIONS — file này đã vá cả bốn.
+#
+# Bản GitHub (`trace-gate.yml`) dựa vào ba thứ `ubuntu-latest` cho sẵn mà GitLab
+# KHÔNG có. Hai bẫy đầu ỒN (job đỏ, thấy ngay). Hai bẫy sau IM LẶNG — job XANH
+# trên một phép kiểm chưa bao giờ chạy, tức đúng thứ cổng này tồn tại để chống.
+#
+#   1. ỒN     thiếu `tags:`        → job stuck "no active runners that can run this job",
+#                                    dù runner Online. Group/shared runner thường có
+#                                    `run_untagged = false`, nên job KHÔNG tag sẽ không
+#                                    bao giờ được nhận. Điền đúng tag của runner bạn.
+#   2. ỒN     thiếu Node           → `npx: not found`. GitHub có bước
+#                                    `actions/setup-node@v4`; GitLab không có tương
+#                                    đương, và bước đó là chỗ cấp `npx`.
+#   3. IM LẶNG thiếu `GIT_DEPTH: 0` → GitLab clone SHALLOW (mặc định 20). `git diff
+#                                    BASE...HEAD` không có merge-base ⇒ ra RỖNG ⇒ job
+#                                    `require-fresh-audit` in "MR không chạm tag nào"
+#                                    và PASS, trong khi bạn vừa đổi tag. XANH GIẢ.
+#   4. IM LẶNG image không có git   → `node:20-alpine` và `node:20-slim` đều KHÔNG có
+#                                    git. Mà lint-trace cần git cho T10 (luật merge) và
+#                                    T11 (bị gitignore) — hai điều kiện `gate-trace` G0
+#                                    NÂNG thành chặn. Không hỏi được git thì (trước T13)
+#                                    G0 in "✅ sổ được bảo vệ — 2/2 điều kiện": một lời
+#                                    KHẲNG ĐỊNH trên bằng chứng chưa bao giờ được thu.
+#                                    Từ v0.7.2 lint phát **T13** và gate FAIL đúng ca đó
+#                                    — nhưng cách sửa vẫn là dùng image CÓ git.
+#
+# `before_script` dưới đây in `node -v` và `git --version` để bẫy 2 và 4 lộ ra ở
+# dòng log đầu tiên, thay vì lộ ra dưới dạng một dấu xanh sai.
+# ─────────────────────────────────────────────────────────────────────────────
+
+stages:
+  - trace
+
+variables:
+  # ── BẪY 3 ── BẮT BUỘC. Không có dòng này thì `require-fresh-audit` XANH GIẢ.
+  GIT_DEPTH: 0
+
+  # PIN VERSION, đừng `@latest`. Cổng này quyết định PR nào được merge — một bản
+  # release framework đổi hành vi cổng giữa sprint là thứ bạn muốn tự chọn thời điểm.
+  SDD_VERSION: "0.7.2"
+
+  # Sổ/spec nằm trong submodule (umbrella + spec_source)? Bỏ comment dòng dưới.
+  # Không có nó, lint thấy 0 sổ → gate FAIL ở G2 ("chưa audit ≠ sạch"). Ồn, không im.
+  # GIT_SUBMODULE_STRATEGY: recursive
+
+.sdd:
+  # ── BẪY 2 + 4 ── `node:20` là bản Debian: có SẴN cả node lẫn git.
+  # KHÔNG dùng `node:20-alpine` / `node:20-slim` — chúng thiếu git (xem bẫy 4).
+  # Buộc phải dùng alpine? Thêm: `- apk add --no-cache git`
+  image: node:20
+
+  # ── BẪY 1 ── ĐỔI thành đúng tag của runner bạn. Kiểm ở Settings → CI/CD → Runners.
+  # Runner Online mà job vẫn stuck ⇒ hoặc lệch tag, hoặc runner không bật
+  # "Run untagged jobs", hoặc runner chỉ nhận protected ref (MR pipeline chạy trên
+  # `refs/merge-requests/N/head` — KHÔNG phải protected ref, kể cả khi đích là main).
+  tags:
+    - CHANGE_ME
+
+  before_script:
+    # Ba dòng này tồn tại để bẫy 2, 4 và "npx lấy bản cache" lộ ra NGAY ở đầu log, chứ không
+    # lộ ra dưới dạng một dấu xanh sai.
+    - node -v
+    - git --version
+    # CHỨNG MINH version đã pin. `npx` cache theo version, và một biến CI rỗng làm
+    # `pkg@${SDD_VERSION}` thành `pkg@` ⇒ npm resolve về latest mà log không nói gì.
+    # Dòng này in ra version THẬT sẽ chạy — nếu nó khác SDD_VERSION thì bạn thấy ngay.
+    - echo "SDD_VERSION=${SDD_VERSION}"
+    - npx -y @educa-corp/sdd-framework@${SDD_VERSION} --version
+
+# ── 1+2. Cấu trúc sổ + cổng chặn cờ 🔴 ───────────────────────────────────────
+# Sổ trace 24 cột do LLM ghi tay: một dấu tab thiếu dồn mọi ô sang trái, ô `status`
+# nhận một ngày tháng, và không cờ nào bật. lint bắt việc đó (T1/T2/T3), bắt marker
+# conflict git lọt vào sổ (T7), sổ thiếu luật merge (T10), sổ bị gitignore (T11),
+# row vừa DRIFT vừa mang `pass` (T12), và ca không hỏi được git (T13).
+#
+# `--gate-trace` tự chạy lại lint ở tầng G1, nên bước lint riêng ở trên là để có log
+# dễ đọc khi đỏ. Muốn gọn thì bỏ nó và chỉ giữ `--gate-trace`.
+trace-gate:
+  extends: .sdd
+  stage: trace
+  script:
+    - npx -y @educa-corp/sdd-framework@${SDD_VERSION} --lint-trace
+    - npx -y @educa-corp/sdd-framework@${SDD_VERSION} --gate-trace
+  artifacts:
+    when: always
+    paths:
+      - .trace/trace-report.json
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# ── 3. Ép audit phải TƯƠI khi thứ report đang KHẲNG ĐỊNH bị đổi ──────────────
+# ĐO BẰNG TAG, KHÔNG BẰNG `src/**`: framework có luật boundary-only tagging, nên
+# "MR có sửa src/ không?" chặn oan cả MR chỉ thêm một field vào DTO — một file không
+# mang lời khẳng định trace nào. Cái gì báo oan thì bị tắt, rồi mất luôn phần cần chặn.
+# Câu hỏi đúng: "MR có chạm dòng nào mang tag mà report đang khẳng định không?"
+#   sửa log trong Controller  → cho qua
+#   thêm field vào DTO        → cho qua
+#   thêm method + @implements → CHẶN
+#   lấp một @trace.stub       → CHẶN
+#
+# 7 tag dưới đây khai ở `bin/trace-schema.json` → `gate.audit_invalidating_tags`;
+# `self-check` R10 canh danh sách này khớp schema. Tag đổi tên mà file CI không biết
+# ⇒ grep không khớp gì ⇒ job LUÔN XANH ⇒ cổng mù trong im lặng.
+#
+# GIỚI HẠN ĐÃ BIẾT: đổi tên class (AuthService → AuthenticationService) không chạm
+# dòng tag ⇒ job này bỏ lọt, dù cột `implemented_by` giờ trỏ vào tên không còn. Chấp
+# nhận có chủ ý: ca đó ít gặp và KHÔNG im lặng (lần `/validate-traces` sau báo ngay),
+# còn báo oan thì xảy ra mỗi ngày và hậu quả là CỔNG BỊ TẮT.
+require-fresh-audit:
+  extends: .sdd
+  stage: trace
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  script:
+    - |
+      # ── BẪY 3, phần thứ hai ── GitHub có `github.base_ref` sẵn trong checkout.
+      # GitLab phải FETCH branch đích TRƯỚC — nếu không thì "$BASE" không tồn tại,
+      # `git diff` ra rỗng, và job PASS sai. Refspec tường minh để chắc chắn
+      # `refs/remotes/origin/<branch>` được cập nhật.
+      BR="$CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+      git fetch --no-tags origin "+refs/heads/${BR}:refs/remotes/origin/${BR}"
+      BASE="origin/${BR}"
+
+      # Fail-fast: chứng minh merge-base tồn tại. Không có nó, mọi kết luận bên dưới
+      # dựa trên một diff rỗng — và "rỗng" ở đây nghĩa là "không biết", không phải "sạch".
+      if ! git merge-base "$BASE" HEAD >/dev/null 2>&1; then
+        echo "🔴 Không tìm được merge-base giữa $BASE và HEAD."
+        echo "   Gần như chắc chắn là clone SHALLOW — kiểm biến GIT_DEPTH: 0 ở đầu file."
+        echo "   Không có merge-base thì git diff ra rỗng và job này sẽ PASS SAI."
+        exit 1
+      fi
+
+      TAGS='@trace\.(implements|verifies|seam_port|seam_pending|stub|stub_owner|stub_for)'
+      touched=$(git diff -U0 "$BASE"...HEAD | grep -E "^[+-].*${TAGS}" | head -5 || true)
+      audit=$(git diff --name-only "$BASE"...HEAD | grep -E 'trace-report\.json$' | head -1 || true)
+
+      if [ -n "$touched" ] && [ -z "$audit" ]; then
+        echo "🔴 MR đổi tag trace nhưng không kèm trace-report.json được sinh lại."
+        echo ""
+        echo "Những dòng này đã đổi:"
+        echo "$touched" | sed 's/^/    /'
+        echo ""
+        echo "Trace gate chỉ chứng minh 'report khớp SỔ'. Tag vừa đổi mà chưa audit lại"
+        echo "thì mọi cờ 🔴 trong report nói về trạng thái TRƯỚC khi bạn sửa."
+        echo ""
+        echo "Chạy trong Claude Code:  /validate-traces"
+        echo "Rồi commit:              .trace/trace-report.json + *.tsv"
+        exit 1
+      fi
+
+      if [ -n "$touched" ]; then
+        echo "✅ Tag trace có đổi, và audit đã được sinh lại cùng MR."
+      else
+        echo "✅ MR không chạm tag nào mà report đang khẳng định — audit vẫn còn đúng."
+      fi

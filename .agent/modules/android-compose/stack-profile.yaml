@@ -1,0 +1,57 @@
+build:
+  compile: "./gradlew assembleRelease"
+  test: "./gradlew test"
+  run: "./gradlew installDebug / Open in Android Studio → Run"
+  lint: "./gradlew lint"
+
+architecture:
+  style: "MVVM + Clean Architecture (Composable → ViewModel → UseCase → Repository)"
+  key_rules:
+    - "Composables are pure UI functions — no business logic, no direct suspend calls"
+    - "ViewModels expose StateFlow<UiState>; Composables collect via collectAsStateWithLifecycle()"
+    - "UseCases are single-responsibility classes injected into ViewModels"
+    - "Repositories are interfaces; implementations live in the data layer"
+    - "Dependency injection via Hilt"
+    - "Never launch coroutines from a Composable directly — use LaunchedEffect or ViewModel"
+  folder_structure: |
+    src/main/java/{package}/
+    ├── core/
+    │   ├── network/      ← Retrofit instance, interceptors
+    │   ├── theme/        ← MaterialTheme, Color, Type, Shape
+    │   └── utils/
+    ├── shared/
+    │   └── components/   ← reusable Composables (AppButton, AppTextField...)
+    ├── features/
+    │   └── {domain}/
+    │       ├── ui/           ← Composable screens + components
+    │       ├── viewmodel/    ← ViewModel + UiState
+    │       ├── domain/       ← UseCases, domain models
+    │       └── data/         ← Repository impl, data sources
+
+coding_standards:
+  naming:
+    composables: "PascalCase (e.g., OrderListScreen, CreateOrderForm)"
+    viewmodels: "PascalCase + ViewModel suffix (e.g., OrderListViewModel)"
+    usecases: "PascalCase + UseCase suffix (e.g., CreateOrderUseCase)"
+    files:
+      screen: "{Feature}Screen.kt"
+      viewmodel: "{Feature}ViewModel.kt"
+      usecase: "{Feature}UseCase.kt"
+  patterns:
+    state_management: "StateFlow<UiState> in ViewModel"
+    navigation: "Jetpack Navigation Compose"
+    networking: "Retrofit + OkHttp"
+    serialization: "Kotlinx Serialization or Gson"
+    di: "Hilt"
+    async: "Kotlin Coroutines + Flow"
+
+testing:
+  unit: "JUnit5 + MockK + Turbine (Flow testing)"
+  ui: "Compose UI Test (composeTestRule)"
+  patterns:
+    - "Test ViewModel with fake repositories and TestCoroutineDispatcher"
+    - "UI tests use semantics matchers — set Modifier.testTag() on Composables"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"

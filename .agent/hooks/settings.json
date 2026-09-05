@@ -1,0 +1,19 @@
+{
+  "_comment": "Claude Code hook registration template. Copy this content into your project's .claude/settings.json",
+  "_matcher_note": "Grep BẮT BUỘC có trong matcher: Grep với output_mode:content ĐỌC ĐƯỢC nội dung file, nên thiếu nó thì việc chặn Read chỉ là cửa trước (GAPS-v3 G42a).",
+  "_docs": "https://docs.anthropic.com/claude/claude-code/hooks",
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Write|Edit|Grep|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/data-guard.js"
+          }
+        ]
+      }
+    ]
+  }
+}

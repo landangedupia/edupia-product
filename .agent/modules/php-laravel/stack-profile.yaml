@@ -1,0 +1,56 @@
+build:
+  compile: "composer install"
+  test: "php artisan test"
+  run: "php artisan serve"
+  migrate: "php artisan migrate"
+  seed: "php artisan db:seed"
+
+architecture:
+  style: "Service-Repository (Controller → Service → Repository → Model)"
+  key_rules:
+    - "Controllers must not contain business logic — delegate to Services"
+    - "Services own business logic and transaction boundaries"
+    - "Repositories abstract all Eloquent/DB queries"
+    - "Form Requests handle all input validation (never validate in controller)"
+    - "API Resources transform Model output (never return raw Model/array)"
+    - "Use dependency injection via constructor, not Facades in classes"
+
+coding_standards:
+  naming:
+    controllers: "PascalCase + Controller suffix — Resource style (e.g., OrderController)"
+    services: "PascalCase + Service suffix (e.g., OrderService)"
+    repositories:
+      interface: "PascalCase + RepositoryInterface (e.g., OrderRepositoryInterface)"
+      impl: "PascalCase + Repository (e.g., EloquentOrderRepository)"
+    models: "PascalCase singular (e.g., Order)"
+    form_requests: "PascalCase + Request suffix (e.g., CreateOrderRequest)"
+    resources: "PascalCase + Resource suffix (e.g., OrderResource)"
+    files:
+      controller: "app/Http/Controllers/{Domain}/{Name}Controller.php"
+      service: "app/Services/{Domain}/{Name}Service.php"
+      repository_interface: "app/Repositories/{Name}RepositoryInterface.php"
+      repository_impl: "app/Repositories/Eloquent/{Name}Repository.php"
+      model: "app/Models/{Name}.php"
+      form_request: "app/Http/Requests/{Domain}/{Action}{Name}Request.php"
+      resource: "app/Http/Resources/{Domain}/{Name}Resource.php"
+  patterns:
+    response_wrapper: "JsonResponse with status/data/message structure"
+    pagination: "Laravel paginate() — returns LengthAwarePaginator"
+    exception_base: "App\\Exceptions\\BusinessException"
+    transactions: "DB::transaction(fn () => ...) in Service layer"
+    events: "Laravel Events + Listeners for domain events"
+
+testing:
+  unit: "PHPUnit or Pest"
+  feature: "Laravel Feature Tests (HTTP layer with database)"
+  patterns:
+    - "Use RefreshDatabase or DatabaseTransactions trait"
+    - "Fake external services with Http::fake() or mock()"
+    - "Use actingAs(\$user) for auth context"
+    - "Assert JSON structure with assertJson() / assertJsonStructure()"
+
+trace_tags:
+  implements: "// @trace.implements={UC-ID}-SC{N}"
+  source: "// @trace.source=specs/{domain}/{prd-slug}/bdd/{platform}/{UC-ID}-{slug}.feature"
+  verifies: "// @trace.verifies={UC-ID}"
+  test_type: "// @trace.test_type=unit|feature"

@@ -1,0 +1,214 @@
+# =============================================================
+# Project Context — SDD Framework
+# =============================================================
+# This is the SINGLE SOURCE OF TRUTH for project-specific
+# paths, tools, and routing used by all workflows.
+#
+# Workflows reference this file for WHERE to find things.
+# Workflow steps define WHAT to do (universal best practices).
+# =============================================================
+#
+# HOW AI AGENTS USE THIS FILE:
+# 1. Open this file at the start of any workflow
+# 2. Parse the YAML structure
+# 3. When a workflow says "→ key.subkey", look up that key
+#    and use the resolved value as the actual path
+# 4. All paths are RELATIVE to workspace root
+# 5. For "{domain}", substitute the feature's domain (PRD: row `Domain` in Metadata / folder path; .feature: @trace.domain)
+# =============================================================
+
+project:
+  name: "{{PROJECT_NAME}}"
+  description: "{{PROJECT_DESCRIPTION}}"
+
+# ----- File Paths -----
+# All paths are relative to workspace root.
+paths:
+  # Feature-Package Layout:
+  #   specs/{domain}/{prd-slug}/{TICKET-ID}-{prd-slug}.md      — PRD document
+  #   specs/{domain}/{prd-slug}/bdd/{platform}/                — BDD .feature  ({platform} = web | app | system | webview)
+  #   specs/{domain}/{prd-slug}/tech-docs/                     — Technical design (ONE merged doc per PRD: {TICKET-ID}-tech-design.md)
+  #   specs/{domain}/{prd-slug}/design-spec/                   — Design specs (FE/App only)
+  #   specs/{domain}/{prd-slug}/changelog/                     — PRD changelog overflow (created once history exceeds 5 versions)
+  #   .trace/{domain}/{prd-slug}/{UC-ID}-{platform}.tsv        — Trace state (ONE book per UC × platform)
+  #
+  # The {platform} segment is NOT optional — in any mode, including umbrella.
+  # A UC's `web` and `system` features are two different files; without the segment they
+  # collide on one filename and overwrite each other. Trace is split the same way, so the
+  # spec layout has to match it. Every .feature also carries `@trace.platform` matching
+  # its own {platform} segment. (Projects still on the old flat bdd/ layout:
+  # run `npx @educa-corp/sdd-framework --migrate-bdd-platform` — dry-run by default.)
+  #
+  # specs_dir is the unified root for all spec artifact types (PRD, BDD, tech-docs, design-spec).
+  # prd-slug is derived from the PRD folder path — not a separate config variable.
+  specs_dir: "specs"
+
+  # Source code root — gốc mã nguồn của service/app này (nơi generate-code đặt & quét code).
+  # BE thường suy vị trí từ CLAUDE.md §2 (code_base_package + layer); src_dir là gốc chung,
+  # và là NGUỒN CHÍNH cho FE (component/hook/service/adapter) + phạm vi quét reuse (DS5).
+  # Ví dụ: "src" (mono FE), "app/src", "src/main/java" (BE). Chỉnh theo layout thật của repo.
+  src_dir: "src"
+
+  # ── Template artifact — KHÔNG cấu hình được ──
+  # Đã bỏ 6 key chết (không lệnh nào đọc): feature_template · prd_template ·
+  # templates_dir · bdd_writing_guide · product_definition_template · trace_report.
+  # Các skeleton được {{include}} NƯỚNG CỨNG vào file lệnh lúc `npm run build`,
+  # nên lệnh không bao giờ đọc một path template lúc chạy.
+  # (trace_report còn trỏ sai hẳn: report thật là {trace_dir}/trace-report.json.)
+  #
+  # Đổi cấu trúc .feature / PRD sinh ra = sửa templates/*.template* TRONG REPO
+  # FRAMEWORK rồi build lại. Sửa .agent/templates/* trong project KHÔNG có tác
+  # dụng, và sẽ bị GHI ĐÈ IM LẶNG ở lần /update-framework kế tiếp (--init copy
+  # core/ → .agent/ vô điều kiện; file duy nhất được giữ là .agent/project-context.yaml).
+  refinement_dir: ".agent/review"
+
+  # QC's OWN analysis/design working docs (qc-analyze/plan/design-test outputs:
+  # REQUIREMENT_ANALYSIS.md, DOC_GAP.md, TEST_PLAN.md, test-cases/*.Test.md).
+  # Grouped by PRD: {qc_dir}/{TICKET-ID}/{platform}/ — ONE DOC_GAP.md / TEST_PLAN.md /
+  # REQUIREMENT_ANALYSIS.md per (PRD x platform), with the UCs as rows/sections inside
+  # (see steps/qc-scope.md). Default "docs" (the QC team's own
+  # convention), VISIBLE — not hidden under .agent/. NOTE: specs (PRD / .feature /
+  # design-spec) are NOT here — they come from the PO spec submodule (spec_source).
+  qc_dir: "docs"
+
+  # WHERE the qc-* commands LOAD their skills from (qa-analyst / qa-designer / qa-planner
+  # / qa-reviewer / qa-runner + DOC_GAP.template.md). Default = the framework-bundled
+  # copy at .agent/skills/qc (works standalone). The QC team OWNS these skills in their
+  # canonical repo (ai-automation-qc-base) — point this at that repo/submodule (e.g.
+  # "qc-base/.claude/skills") so the skills evolve INDEPENDENTLY and are NOT overwritten
+  # by framework upgrade (--init / upgrade.sh rewrite only .agent/, never this path).
+  qc_skills_dir: ".agent/skills/qc"
+
+  # Product Definitions
+  product_definitions_dir: "specs/product-definition"
+
+  # Domain Knowledge
+  domain_knowledge_dir: "specs/domain-knowledge"
+  business_dictionary: "specs/domain-knowledge/business-dictionary.md"
+  core_entities: "specs/domain-knowledge/core-entities.md"
+
+  # Project Lessons (guardrails accumulated via /learn — loaded by context-loader Step 6.7)
+  # Single-service default below. In umbrella/service mode, set this in each service's
+  # .agent/project-context.yaml to ".agent/project-lessons.md" (resolved per service_root).
+  lessons_file: "specs/domain-knowledge/lessons-learned.md"
+
+  # Tech Docs (BE-authored API contract).
+  # Merged into specs_dir in the feature-package layout:
+  # tech-docs live at specs/{domain}/{prd-slug}/tech-docs/.
+  # In umbrella mode with spec_source set, context-loader auto-routes this to
+  # {spec_source}/specs so FE/App read the contract via the spec submodule.
+  tech_docs_dir: "specs"
+
+  # Design Specs (client platforms only — every platform except `system`: web, app, webview).
+  # In the feature-package layout, design-specs live at specs/{domain}/{prd-slug}/design-spec/.
+  # This variable is no longer needed as a separate path — derived from specs_dir.
+  # design_spec_dir: "specs/design-spec"   ← removed; use specs_dir instead
+
+  # Trace (internal structure: .trace/{domain}/{prd-slug}/{UC-ID}-{platform}.tsv — one book per UC × platform)
+  trace_dir: ".trace"
+
+  # Tester / QC feedback (written by /report-bug and /propose-scenario).
+  # These live in the SHARED spec repo so PO/Dev see them on their next /sync.
+  # In umbrella mode, context-loader auto-resolves them under {spec_source}/feedback/.
+  bug_reports_dir: "feedback/bug-reports"
+  bdd_proposals_dir: "feedback/bdd-proposals"
+  # PRD change requests (new requirement found in test, not covered by any AC) —
+  # written by /propose-scenario Case B so the PO can add/extend an AC then re-/generate-bdd.
+  prd_change_requests_dir: "feedback/prd-change-requests"
+
+tech_stack:
+  language: "{{LANGUAGE}}"              # e.g., Java 17 / TypeScript / C# / Go
+  framework: "{{FRAMEWORK}}"           # e.g., Spring Boot 3.2 / Angular 17 / .NET 8
+  build_tool: "{{BUILD_TOOL}}"         # e.g., Maven / npm / dotnet / go
+  test_framework: "{{TEST_FRAMEWORK}}" # e.g., JUnit 5 + Mockito / Jest / xUnit
+  database: "{{DATABASE}}"             # e.g., PostgreSQL / MySQL / MongoDB
+  module: "{{MODULE}}"                 # e.g., java-spring / angular / dotnet / golang / context-engineering
+
+conventions:
+  build_command: "{{BUILD_COMMAND}}"   # e.g., mvn clean install -DskipTests
+  test_command: "{{TEST_COMMAND}}"     # e.g., mvn test
+  service_run: "{{RUN_COMMAND}}"       # e.g., mvn spring-boot:run
+  ticket_prefix: "{{TICKET_PREFIX}}"  # e.g., PROJ / FEAT / UC
+
+domains:
+  - "{{DOMAIN_1}}"
+  # - "{{DOMAIN_2}}"
+
+# ----- Multi-Service / Umbrella Setup -----
+# Fill this section ONLY if this is an UMBRELLA repo that contains multiple
+# service submodules. Leave commented out for single-service projects.
+#
+# setup:
+#   mode: umbrella                            # "umbrella" | "single" (default: single)
+#   spec_source: "{{SPEC_SUBMODULE_PATH}}"   # path to PO spec submodule, e.g. "free-trial-specs"
+#
+# When spec_source is set, context-loader auto-derives (ALL specs live in the spec repo
+# using the feature-package layout; service submodules hold only code):
+#   specs_dir            → {spec_source}/specs                # unified root — PRD/BDD/tech-docs/design-spec
+#   tech_docs_dir        → {spec_source}/specs                # merged into specs_dir
+#   domain_knowledge_dir → {spec_source}/specs/domain-knowledge
+#   trace_dir            → {spec_source}/.trace               # structure: .trace/{domain}/{prd-slug}/{UC-ID}-{platform}.tsv
+# (You can still override these manually in paths: section below.)
+# With spec_source set, only ONE override is needed instead of four separate dir vars.
+#
+# services:                                   # domain → service submodule routing
+#   # Each domain key MUST match the PRD's `Domain` (Metadata row) / folder path segment.
+#   # A domain value has THREE forms — context-loader (Step 1.5) auto-detects in this order:
+#   #   has `path`          → FORM A (resolved)
+#   #   has `by_prd_slug`   → FORM C (look up one more level)
+#   #   otherwise           → FORM B (per-platform map)
+#   #
+#   # FORM A — FLAT (one domain ↔ one submodule, all platforms):
+#   {{DOMAIN_1}}:
+#     path: "{{SERVICE_SUBMODULE_DIR}}"       # relative path to service submodule (code + .trace/)
+#     module: "{{STACK_MODULE}}"              # e.g., java-spring, nextjs, flutter
+#   #
+#   # FORM B — PER-PLATFORM MAP (one business-domain implemented on several platforms /
+#   #          submodules — a merged monorepo/workspace). No direct `path`; instead one
+#   #          sub-key per platform (system | web | app | webview). context-loader routes by the
+#   #          target .feature's @trace.platform → picks {path, module} for that platform.
+#   #          The PRD keeps a SINGLE business @trace.domain (do NOT invent onboarding-web).
+#   {{DOMAIN_2}}:
+#     system: { path: "{{BE_SUBMODULE_DIR}}",  module: "java-spring" }
+#     web:    { path: "{{WEB_SUBMODULE_DIR}}", module: "nextjs" }
+#     app:    { path: "{{APP_SUBMODULE_DIR}}", module: "flutter" }
+#   #
+#   # FORM C — PER-PRD_SLUG MAP (one routing cell ↔ MANY submodules, one per feature-package).
+#   #          Use when a platform — or a whole domain — is split into one repo per feature,
+#   #          e.g. each webview mini-game lives in its own repo. No `path`; instead a
+#   #          `by_prd_slug` table keyed by the feature-package folder name. context-loader
+#   #          already extracted prd_slug in Step 1, so no extra detection is needed.
+#   #          Valid at BOTH levels: directly under the domain, or nested under a platform.
+#   {{DOMAIN_3}}:
+#     system: { path: "{{BE_SUBMODULE_DIR}}", module: "java-spring" }   # normal entry
+#     webview:                                                          # this cell → many repos
+#       by_prd_slug:
+#         {{PRD_SLUG_1}}: { path: "games/{{GAME_1}}", module: "phaser-game" }
+#         {{PRD_SLUG_2}}: { path: "games/{{GAME_2}}", module: "phaser-game" }
+#   #  A prd_slug with no entry → active_service = unresolved (the command STOPS rather than
+#   #  guessing a lookalike repo). An entry with BOTH `path` and `by_prd_slug` is a config
+#   #  error, as is nesting `by_prd_slug` inside `by_prd_slug`.
+#   #
+#   # NOTE: with spec_source set, BDD + tech-docs are cross-team and live in the spec repo —
+#   # do NOT pin per-service specs_dir / tech_docs_dir here (they would be ignored).
+#   # Per-service specs_dir / tech_docs_dir apply ONLY when there is no spec_source.
+#
+# IMPORTANT — per-service CLAUDE.md:
+#   Each service submodule should have its OWN CLAUDE.md ({path}/CLAUDE.md) defining its
+#   architecture + coding standards for ITS stack. context-loader loads CLAUDE.md in two
+#   layers: root CLAUDE.md (umbrella-wide shared rules) + {service}/CLAUDE.md (overlay,
+#   wins on conflict for architecture/coding-standards). The agent sits at the umbrella
+#   root, so without a service CLAUDE.md, code generation falls back to umbrella defaults
+#   + the module stack-profile (a ⚠️ is flagged in the context recap). Generate one per
+#   service via /setup-ai-first inside each. For FORM B, add one CLAUDE.md per platform
+#   submodule ({system|web|app}.path/CLAUDE.md). For FORM C, one per feature repo
+#   (by_prd_slug.{slug}.path/CLAUDE.md) — these repos usually share a stack, so the fastest
+#   route is to write one and copy it, adjusting the parts that actually differ.
+
+# ----- Architecture -----
+architecture:
+  style: "{{ARCH_STYLE}}"              # e.g., Layered / Clean / Hexagonal
+  layers: "{{LAYER_STACK}}"            # e.g., Controller → Facade → Service → Repository
+  key_rules:
+    - "{{ARCH_RULE_1}}"
+    - "{{ARCH_RULE_2}}"
