@@ -1,0 +1,486 @@
+source_file: >-
+  c:\Users\landa\(Personal) Dự án AI Class
+  new\04_delivery\specs\ai-class-core\big-class-plus\AICNew-01-big-class-plus.md
+source_version: '1.0'
+applied_to_version: '1.1'
+generated_at: '2026-09-05T00:00:00Z'
+review_type: prd
+status: reviewed
+findings:
+  - id: F001
+    check_id: P2
+    severity: critical
+    section: §2 Acceptance Criteria (AC5)
+    uc_id: AICNew-01-UC1
+    quote: AI Voice gọi tên và khích lệ ngay lập tức
+    finding: >-
+      "Ngay lập tức" không có giá trị định lượng cụ thể (bao nhiêu giây) — banner đầu tài liệu cũng ghi nhận độ trễ AI
+      Voice là điểm chưa rà soát kỹ thuật.
+    suggestion: >-
+      Bổ sung ngưỡng thời gian cụ thể vào Business Logic của BR5 sau khi xác nhận kỹ thuật; AC5 chỉ giữ kết quả quan sát
+      được + ref BR5.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F002
+    check_id: P2
+    severity: critical
+    section: §2 Acceptance Criteria (AC6)
+    uc_id: AICNew-01-UC1
+    quote: AI Voice động viên ngay lập tức
+    finding: Tương tự AC5, "ngay lập tức" không có mốc thời gian cụ thể cho phản hồi khi học sinh trả lời sai.
+    suggestion: Bổ sung ngưỡng thời gian cụ thể vào Business Logic của BR6 (thống nhất với BR5).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F003
+    check_id: P2
+    severity: critical
+    section: §3 UC1 Business Rule (BR4 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: phát ngay khi học sinh vào lớp
+    finding: '"Phát ngay" không có ngưỡng độ trễ cụ thể cho việc ghép tên vào đoạn âm thanh chào mừng.'
+    suggestion: Định nghĩa ngưỡng thời gian cụ thể sau khi có xác nhận kỹ thuật về cơ chế AI Voice/ghép giọng.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F004
+    check_id: P2
+    severity: critical
+    section: §3 UC1 Business Rule (BR5 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: 'kích hoạt tức thời đoạn AI Voice: gọi tên + khích lệ'
+    finding: '"Tức thời" không có giá trị định lượng — đây là cột lẽ ra phải chứa ngưỡng cụ thể thay vì tính từ mơ hồ.'
+    suggestion: >-
+      Thay "kích hoạt tức thời" bằng ngưỡng thời gian cụ thể (vd ≤1-2 giây) khi đội kỹ thuật xác nhận khả năng ghép
+      giọng AI Voice thời gian thực.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F005
+    check_id: P2
+    severity: critical
+    section: §3 UC1 Business Rule (BR6 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: 'kích hoạt tức thời đoạn AI Voice: động viên'
+    finding: 'Cùng vấn đề với BR5: "tức thời" không có giá trị định lượng.'
+    suggestion: Bổ sung ngưỡng thời gian cụ thể, thống nhất với BR5, sau khi xác nhận kỹ thuật.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F006
+    check_id: P2
+    severity: critical
+    section: §3 UC1 Business Rule (BR3, BR11 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: Học sinh đã thoát hẳn trước khi kết thúc → không ghi điểm danh cuối buổi
+    finding: >-
+      BR3 dùng "rời kết nối tạm thời" (vẫn tính điểm danh) còn BR11 dùng "thoát hẳn" (không tính) nhưng không có
+      ngưỡng/tiêu chí cụ thể phân biệt hai trạng thái này.
+    suggestion: >-
+      Định nghĩa ngưỡng cụ thể phân biệt "tạm thời" và "thoát hẳn" (vd mất kết nối liên tục > X phút hoặc không quay lại
+      trước khi buổi kết thúc = thoát hẳn).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F007
+    check_id: P1
+    severity: major
+    section: §1b Phạm vi (Out of Scope)
+    uc_id: ''
+    quote: Cấu trúc Mastery Profile (schema, lưu trữ xuyên suốt các thành phần) — thuộc nền tảng chung
+    finding: >-
+      Dùng từ kỹ thuật cơ sở dữ liệu "schema" trong một tài liệu yêu cầu nghiệp vụ (WHAT), không phù hợp vì PRD này
+      không có mục kỹ thuật nào khác để chứa từ này.
+    suggestion: >-
+      Diễn đạt lại, ví dụ: "Cấu trúc chi tiết và cách lưu trữ Mastery Profile xuyên suốt các thành phần — thuộc nền tảng
+      chung", bỏ từ "schema".
+    auto_fixable: true
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F008
+    check_id: P1
+    severity: major
+    section: §3 UC1 Business Rule (BR8 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: map mỗi câu sang NLO tương ứng → gán kết quả NLO (đạt/chưa đạt) cho học sinh
+    finding: Dùng động từ lập trình "map" — cách diễn đạt kỹ thuật (HOW) thay vì logic nghiệp vụ thuần Việt.
+    suggestion: Đổi "map mỗi câu sang NLO tương ứng" thành "đối chiếu/quy mỗi câu về đúng NLO tương ứng".
+    auto_fixable: true
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F009
+    check_id: P1
+    severity: major
+    section: §1b Phạm vi (Out of Scope) / §3 Actor
+    uc_id: AICNew-01-UC1
+    quote: AI Tutor 30 phút, AI Speak, Edupia Club, GVCN & Parent Mode — mỗi thành phần một PRD riêng
+    finding: >-
+      "AI trợ giảng" (actor nhận xét cuối buổi Big Class Plus) và "AI Tutor" (thuật ngữ chuẩn trong glossary, cũng là
+      tên thành phần 30 phút riêng ở Out of Scope) có tên gần giống nhau, rủi ro gây nhầm lẫn giữa hai vai trò/tính năng
+      khác nhau.
+    suggestion: >-
+      Làm rõ trong tài liệu hoặc từ điển nghiệp vụ mối quan hệ giữa "AI trợ giảng" và "AI Tutor" — là hai tên gọi khác
+      nhau cho hai vai trò tách biệt, không nhầm lẫn.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F010
+    check_id: P2
+    severity: major
+    section: §2 AC10 / §3 BR10
+    uc_id: AICNew-01-UC1
+    quote: gợi ý BTVN Adaptive tương ứng, trước khi điểm danh cuối buổi
+    finding: >-
+      AC10 chứa ràng buộc trình tự nghiệp vụ (nhận xét AI trợ giảng phải diễn ra TRƯỚC điểm danh cuối buổi) nhưng ràng
+      buộc này không xuất hiện trong Business Logic của BR10 (hay được BR11 tham chiếu) — chi tiết cơ chế đang lạc tầng,
+      nằm ở AC thay vì BR.
+    suggestion: >-
+      Chuyển ràng buộc trình tự (nhận xét AI trợ giảng → rồi mới điểm danh cuối buổi) vào Business Logic của BR10
+      (và/hoặc tham chiếu chéo ở BR11); AC10 chỉ giữ kết quả quan sát được + ref BR10.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F011
+    check_id: P2
+    severity: major
+    section: §3 BR7
+    uc_id: AICNew-01-UC1
+    quote: PHẢI đánh dấu vào report buổi học
+    finding: >-
+      "Report buổi học" được dùng nhiều lần (AC7, BR2, BR7, Screen 3) như một thực thể có sẵn nhưng chưa được định nghĩa
+      trong tài liệu này hay glossary — không rõ gồm những trường dữ liệu nào, ai/hệ thống nào tiêu thụ nó ngoài Parent
+      Mode; tên gọi cũng đang pha tiếng Anh.
+    suggestion: >-
+      Thống nhất tên gọi tiếng Việt (vd "báo cáo buổi học") và bổ sung định nghĩa "report buổi học" vào glossary hoặc
+      một mục riêng trong PRD (các trường thông tin ở mức nghiệp vụ, nơi lưu, ai đọc) trước khi handoff dev.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F012
+    check_id: P2
+    severity: major
+    section: §1b Phạm vi (In Scope) / §2 AC10
+    uc_id: ''
+    quote: AI trợ giảng nhận xét kết quả học tập cụ thể cuối buổi + nhắc BTVN Adaptive tương ứng
+    finding: >-
+      "BTVN Adaptive" được nhắc như một thực thể đã biết (Scope, AC10, BR10) nhưng chưa được định nghĩa trong tài liệu
+      này lẫn glossary — không rõ là bài tập cụ thể hay tính năng riêng (đã ghi là PRD khác ở Out of Scope).
+    suggestion: Bổ sung định nghĩa ngắn gọn "BTVN Adaptive" vào glossary, hoặc dẫn chiếu rõ ràng tới PRD của thành phần đó.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F013
+    check_id: critic
+    severity: major
+    section: §3 UC1 Pre-condition
+    uc_id: AICNew-01-UC1
+    quote: Mastery Profile của học sinh đã tồn tại (nền tảng chung)
+    finding: >-
+      Tài liệu giả định Mastery Profile luôn đã tồn tại, không có Business Rule/AC nào xử lý trường hợp học sinh mới
+      chưa có Mastery Profile — bất cân xứng so với BR12 vốn có hẳn rule xử lý khi LMS không sẵn sàng.
+    suggestion: >-
+      Bổ sung Business Rule/AC mô tả hành vi khi Mastery Profile của học sinh chưa tồn tại hoặc không ghi được tín hiệu
+      Gap Detection.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F014
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR8)
+    uc_id: AICNew-01-UC1
+    quote: map mỗi câu sang NLO tương ứng → gán kết quả NLO (đạt/chưa đạt)
+    finding: >-
+      Chưa nêu quy tắc khi một câu hỏi liên quan nhiều NLO, hoặc một NLO được kiểm qua nhiều câu — không rõ ngưỡng để
+      kết luận một NLO là "đạt" hay "chưa đạt".
+    suggestion: Bổ sung quy tắc nghiệp vụ xác định ngưỡng đạt/chưa đạt cho một NLO khi có nhiều câu hỏi liên quan.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F015
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR9) / Post-condition
+    uc_id: AICNew-01-UC1
+    quote: Với các NLO được gán "chưa đạt" ở BR8 → ghi thành tín hiệu Gap Detection
+    finding: >-
+      BR9 và Post-condition chỉ mô tả việc ghi tín hiệu cho NLO "chưa đạt"; không rõ kết quả NLO "đạt" có được lưu ở đâu
+      không — nếu không, dữ liệu kiến thức đã nắm vững trong buổi có thể bị mất, ảnh hưởng cá nhân hoá phía sau.
+    suggestion: >-
+      Làm rõ NLO "đạt" có cần ghi vào Mastery Profile không; nếu không, nêu rõ đây là quyết định có chủ đích (chỉ theo
+      dõi lỗ hổng).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F016
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR7 vs BR10)
+    uc_id: AICNew-01-UC1
+    quote: AI trợ giảng PHẢI nhận xét kết quả học tập cụ thể của từng học sinh
+    finding: >-
+      BR10 yêu cầu nhận xét cụ thể cho TỪNG học sinh, nhưng BR7 mô tả trường hợp học sinh không trả lời câu nào (không
+      có dữ liệu NLO) — tài liệu không nêu AI trợ giảng nói gì với nhóm này, mâu thuẫn giữa "nhận xét cụ thể" và "không
+      đủ dữ liệu".
+    suggestion: >-
+      Bổ sung mô tả nội dung nhận xét dành riêng cho học sinh không có dữ liệu trả lời (vd nhắc tham gia tích cực hơn
+      thay vì nhận xét theo NLO).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F017
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR1, BR11)
+    uc_id: AICNew-01-UC1
+    quote: lưu ảnh chụp học sinh
+    finding: >-
+      Không có Business Rule nào cho trường hợp không chụp được ảnh học sinh lúc điểm danh (không bật camera, thiết bị
+      không có camera, lỗi chụp) — không rõ điểm danh vẫn được tính hay bị chặn.
+    suggestion: >-
+      Bổ sung quy tắc xử lý khi không lấy được ảnh chụp học sinh lúc điểm danh (vd vẫn tính điểm danh nhưng đánh dấu
+      thiếu ảnh).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F018
+    check_id: critic
+    severity: major
+    section: §1c Phụ thuộc liên service
+    uc_id: ''
+    quote: Cần Mastery Profile / Adaptive Learning (nền tảng chung) đã tồn tại để ghi tín hiệu NLO vào
+    finding: >-
+      Danh sách phụ thuộc liên service không nhắc tới dịch vụ AI Voice (ghép giọng GV Star) hay hệ thống phát video bài
+      giảng GV Star — cả hai là thành phần cốt lõi của tính năng, và banner đầu tài liệu cũng nêu đây là rủi ro cần rà
+      soát kỹ thuật.
+    suggestion: >-
+      Bổ sung AI Voice/dịch vụ ghép giọng và hệ thống phát video GV Star vào danh sách phụ thuộc liên service ở mức
+      nghiệp vụ.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F019
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR1, BR11 — ảnh chụp học sinh)
+    uc_id: AICNew-01-UC1
+    quote: lưu ảnh chụp học sinh
+    finding: >-
+      Yêu cầu chụp và lưu ảnh học sinh (trẻ em) hai lần mỗi buổi nhưng không đề cập chính sách lưu trữ, thời hạn giữ
+      ảnh, việc xin đồng ý phụ huynh, hay ai được quyền truy cập — rủi ro tuân thủ/quyền riêng tư với dữ liệu trẻ em.
+    suggestion: >-
+      Bổ sung ghi chú/tham chiếu chính sách bảo mật dữ liệu ảnh học sinh (thời hạn lưu, phạm vi truy cập, có cần đồng ý
+      phụ huynh hay không).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F020
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR5, BR6)
+    uc_id: AICNew-01-UC1
+    quote: 'Mỗi lần học sinh chọn đáp án đúng → kích hoạt tức thời đoạn AI Voice: gọi tên + khích lệ'
+    finding: >-
+      Buổi học là lớp nhóm nhiều học sinh — tài liệu không nêu AI Voice xử lý ra sao khi nhiều học sinh trả lời gần như
+      cùng lúc (phát tuần tự, chồng lên nhau, hay chỉ chọn một số).
+    suggestion: Bổ sung quy tắc nghiệp vụ về cách xử lý khi nhiều học sinh cùng cần AI Voice phản hồi gần như đồng thời.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F021
+    check_id: critic
+    severity: major
+    section: §3 UC1 Business Rule (BR11) / User Flow
+    uc_id: AICNew-01-UC1
+    quote: Tại thời điểm kết thúc buổi, nếu học sinh vẫn còn trong lớp
+    finding: >-
+      "Kết thúc buổi" là mốc quan trọng cho BR11 và luồng "Hết buổi" nhưng chưa được định nghĩa ở đâu (hết video, theo
+      lịch, hay do hệ thống/GV Star chủ động kết thúc).
+    suggestion: Bổ sung định nghĩa rõ thời điểm "kết thúc buổi học" được xác định như thế nào.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F022
+    check_id: P1
+    severity: minor
+    section: Feature / §1b Phạm vi (In Scope)
+    uc_id: ''
+    quote: vừa tăng cảm giác tương tác cá nhân qua AI Voice (chào tên, khích lệ/động viên)
+    finding: >-
+      "AI Voice" được dùng xuyên suốt như một actor/tính năng chính nhưng chưa có trong từ điển nghiệp vụ chuẩn của dự
+      án.
+    suggestion: Cân nhắc bổ sung định nghĩa chính thức "AI Voice" vào 00_context/glossary.md.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F023
+    check_id: P1
+    severity: minor
+    section: §1b Phạm vi (Out of Scope)
+    uc_id: ''
+    quote: Xây dựng cơ chế Adaptive Learning / Routing Engine (thuật toán chọn NLO ưu tiên)
+    finding: >-
+      "Routing Engine" xuất hiện như tên riêng nhưng không có trong từ điển nghiệp vụ chuẩn — không rõ là tên chính thức
+      hay cách gọi mô tả tạm thời.
+    suggestion: >-
+      Xác nhận đây có phải tên chính thức của thành phần Adaptive Learning hay không; nếu có, bổ sung vào từ điển nghiệp
+      vụ. (Đã ghi nhận hoãn định nghĩa sang PRD liên quan trong Product Definition.)
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F024
+    check_id: P1
+    severity: minor
+    section: Feature
+    uc_id: ''
+    quote: Big Class Plus nâng cấp buổi học nhóm hiện tại của Edupia AI Class Plus (Concept 1.2)
+    finding: >-
+      Reviewer tự động ban đầu gắn cờ major cho cặp tên "Big Class Plus" / "Edupia AI Class Plus" vì nghi trùng tên sản
+      phẩm. Đối chiếu lại `00_context/glossary.md` (mục "Edupia Class", cập nhật 2026-08-18): câu hỏi bí danh sản phẩm
+      mẹ ("Edupia AI Class"/"AI Class Plus" = Edupia Class) đã được xác nhận từ trước — không phải xung đột. "Big Class
+      Plus" chỉ là tên thành phần con (buổi học) của sản phẩm mẹ đó, không phải tên cạnh tranh. Hạ mức xuống minor vì
+      PRD hiện chưa dẫn chiếu rõ tới xác nhận đã có sẵn này, dễ gây hiểu lầm cho người đọc mới.
+    suggestion: >-
+      Thêm một dòng dẫn chiếu ngắn tới glossary (mục "Edupia Class") để người đọc PRD biết quan hệ tên gọi "Big Class
+      Plus" (thành phần) vs "Edupia AI Class Plus" (sản phẩm mẹ) đã rõ ràng, không phải trùng lặp.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F025
+    check_id: P2
+    severity: minor
+    section: §3 UC1 Post-condition
+    uc_id: AICNew-01-UC1
+    quote: Điểm danh đầu/cuối buổi được ghi nhận (trừ ngoại lệ ở BR2/BR11)
+    finding: >-
+      Các gạch đầu dòng dùng thể bị động không nêu rõ chủ thể (hệ thống), trong khi Business Rule tương ứng ở §3 đều nêu
+      rõ chủ thể là "hệ thống".
+    suggestion: Viết lại post-condition ở thể chủ động, nêu rõ chủ thể (vd "Hệ thống đã ghi nhận điểm danh...").
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F026
+    check_id: P2
+    severity: minor
+    section: §1a User Story
+    uc_id: ''
+    quote: con được học buổi học tương tác cá nhân hơn
+    finding: So sánh mơ hồ "cá nhân hơn" không nêu mốc so sánh (so với Big Class hiện tại như thế nào).
+    suggestion: >-
+      Làm rõ mốc so sánh, vd "tương tác cá nhân hơn so với buổi Big Class hiện tại (không có AI Voice gọi tên/khích
+      lệ)".
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F027
+    check_id: P2
+    severity: minor
+    section: §2 AC8
+    uc_id: AICNew-01-UC1
+    quote: NLO được gán đúng theo đúng/sai của các câu đã trả lời
+    finding: >-
+      Thể bị động không nêu chủ thể (hệ thống), trong khi BR8 tương ứng nêu rõ "hệ thống PHẢI tổng hợp...và gán NLO".
+      Cùng mẫu hình ở AC9.
+    suggestion: Viết lại AC8 (và AC9) ở thể chủ động, nêu rõ "hệ thống" là chủ thể.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F028
+    check_id: critic
+    severity: minor
+    section: §3 UC1 Business Rule (BR10)
+    uc_id: AICNew-01-UC1
+    quote: AI trợ giảng đưa nhận xét đúng theo kết quả học tập của từng học sinh + gợi ý BTVN Adaptive
+    finding: >-
+      Ngược lại F016: nếu học sinh trả lời đúng hết (không có NLO nào "chưa đạt"), tài liệu không nêu AI trợ giảng nhắc
+      BTVN Adaptive gì, vì BR10 gắn gợi ý bài tập với "NLO còn yếu".
+    suggestion: >-
+      Bổ sung hướng dẫn cho trường hợp học sinh không có NLO yếu nào (vd khen ngợi + gợi ý bài nâng cao, hoặc không nhắc
+      BTVN Adaptive).
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F029
+    check_id: critic
+    severity: minor
+    section: §3 UC1 Business Rule (BR2 vs BR4)
+    uc_id: AICNew-01-UC1
+    quote: Khi điểm danh đầu buổi = Có cho một học sinh → ghép tên học sinh vào đoạn âm thanh chào mừng
+    finding: >-
+      BR4 chỉ chào tên học sinh có điểm danh đầu buổi = Có; học sinh vào trễ (BR2) sẽ không được AI Voice chào tên khi
+      vào lớp — không rõ đây có chủ đích hay là khoảng trống trải nghiệm.
+    suggestion: >-
+      Xác nhận rõ học sinh vào trễ có được AI Voice chào tên khi vào lớp hay không, ghi rõ quyết định trong Business
+      Rule.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F030
+    check_id: critic
+    severity: minor
+    section: §3 UC1 Business Rule (BR12 Business Logic)
+    uc_id: AICNew-01-UC1
+    quote: Không thể vào lớp học lúc này, vui lòng thử lại sau
+    finding: >-
+      Nội dung câu thông báo lỗi hiển thị cho học sinh (nguyên văn) được viết cứng trong cột Business Logic — lạc tầng,
+      nên thuộc UI/UX hoặc content design chứ không phải Business Logic.
+    suggestion: >-
+      Chuyển câu thông báo cụ thể xuống phần UI/UX Guidelines (ghi chú là ví dụ minh hoạ); Business Logic chỉ mô tả yêu
+      cầu "hiển thị thông báo lỗi phù hợp" ở mức nghiệp vụ.
+    auto_fixable: true
+    status: applied
+    applied_via: resume
+    note: ''
+  - id: F031
+    check_id: critic
+    severity: minor
+    section: §4b Wireframe (Screen 3)
+    uc_id: AICNew-01-UC1
+    quote: Hiển thị trước khi điểm danh cuối buổi
+    finding: >-
+      Wireframe Screen 3 chỉ mô tả trường hợp có kết quả NLO để hiển thị (BR8), không đề cập hiển thị gì cho trường hợp
+      BR7 (học sinh không trả lời câu nào, không có NLO).
+    suggestion: Bổ sung mô tả Screen 3 hiển thị gì cho học sinh thuộc trường hợp BR7.
+    auto_fixable: false
+    status: applied
+    applied_via: resume
+    note: ''
+summary:
+  total_findings: 31
+  by_severity:
+    critical: 6
+    major: 15
+    minor: 10
+  auto_fixable: 3
+  requires_human_decision: 28
+  recommendation: NEEDS_REVISION

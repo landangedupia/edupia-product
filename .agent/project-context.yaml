@@ -71,7 +71,7 @@ conventions:
   build_command: "N/A"
   test_command: "N/A"
   service_run: "N/A"
-  ticket_prefix: "{{TICKET_PREFIX}}"   # TODO: chốt prefix ticket (vd AICN, FT...) trước khi chạy /generate-prd đầu tiên
+  ticket_prefix: "AICNew"
 
 domains:
   - "ai-class-core"        # Concept 1/1.2, Big Class, curriculum, giá 390k (Edupia Class / AI Class Plus)
