@@ -343,11 +343,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .chart-card .chart-sub{font-size:11px;color:var(--n500);margin-bottom:8px;}
 .chart-card-full{margin-top:20px;}
 .grid-line{stroke:var(--n100);stroke-width:1;}
-.axis-label{font-size:9px;fill:var(--n500);}
-.cat-label{font-size:9.5px;fill:var(--n500);}
+.axis-label{font-size:12px;fill:var(--n500);}
+.cat-label{font-size:13px;fill:var(--n500);font-weight:500;}
 .bar-prev{fill:var(--n200);}
 .bar-now{fill:var(--primary);}
-.line-a{stroke:var(--primary);stroke-width:2;}
+.bar-val{font-size:14px;fill:var(--n900);font-weight:700;}
+.line-a{stroke:var(--primary);stroke-width:2.5;}
 .area-a{fill:var(--primary-50);opacity:.7;}
 .dot-a{fill:var(--primary);}
 .legend-row{display:flex;gap:16px;margin-top:12px;}
@@ -2173,13 +2174,13 @@ const PROGRESS_DATA = {
   strandNow: [76,52,60,65],
 };
 function buildSingleBar(containerId, categories, series, maxVal){
-  const w=280,h=150,padL=26,padB=20,padT=8,padR=4;
+  const w=360,h=260,padL=38,padB=32,padT=26,padR=10;
   const plotW=w-padL-padR, plotH=h-padT-padB;
   const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
   for(let i=0;i<=3;i++){
     const y = padT + plotH - (plotH*i/3);
     svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-4,y:y+3,class:'axis-label','text-anchor':'end'});
+    const lbl = svgEl('text',{x:padL-6,y:y+4,class:'axis-label','text-anchor':'end'});
     lbl.textContent = Math.round(maxVal*i/3);
     svg.appendChild(lbl);
   }
@@ -2188,8 +2189,11 @@ function buildSingleBar(containerId, categories, series, maxVal){
     const gx = padL + groupW*i;
     const bw = groupW*0.5;
     const bh = (series[i]/maxVal)*plotH;
-    svg.appendChild(svgEl('rect',{x:gx+(groupW-bw)/2,y:padT+plotH-bh,width:bw,height:bh,rx:3,class:'bar-now'}));
-    const lbl = svgEl('text',{x:gx+groupW/2,y:h-5,class:'cat-label','text-anchor':'middle'});
+    svg.appendChild(svgEl('rect',{x:gx+(groupW-bw)/2,y:padT+plotH-bh,width:bw,height:bh,rx:4,class:'bar-now'}));
+    const valLbl = svgEl('text',{x:gx+groupW/2,y:padT+plotH-bh-8,class:'bar-val','text-anchor':'middle'});
+    valLbl.textContent = series[i];
+    svg.appendChild(valLbl);
+    const lbl = svgEl('text',{x:gx+groupW/2,y:h-8,class:'cat-label','text-anchor':'middle'});
     lbl.textContent = cat;
     svg.appendChild(lbl);
   });
@@ -2197,14 +2201,14 @@ function buildSingleBar(containerId, categories, series, maxVal){
   container.innerHTML=''; container.appendChild(svg);
 }
 function buildGroupedBar(containerId, categories, seriesPrev, seriesNow, maxVal){
-  const w=560,h=180,padL=30,padB=24,padT=10,padR=6;
+  const w=700,h=280,padL=42,padB=34,padT=26,padR=10;
   const plotW=w-padL-padR, plotH=h-padT-padB;
   if(!maxVal) maxVal = Math.max(...seriesPrev, ...seriesNow) * 1.15;
   const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
   for(let i=0;i<=2;i++){
     const y = padT + plotH - (plotH*i/2);
     svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-6,y:y+3,class:'axis-label','text-anchor':'end'});
+    const lbl = svgEl('text',{x:padL-8,y:y+4,class:'axis-label','text-anchor':'end'});
     lbl.textContent = Math.round(maxVal*i/2)+'%';
     svg.appendChild(lbl);
   }
@@ -2213,9 +2217,16 @@ function buildGroupedBar(containerId, categories, seriesPrev, seriesNow, maxVal)
     const gx = padL + groupW*i;
     const bw = groupW*0.26;
     const prevH = (seriesPrev[i]/maxVal)*plotH, nowH = (seriesNow[i]/maxVal)*plotH;
-    svg.appendChild(svgEl('rect',{x:gx+groupW*0.2,y:padT+plotH-prevH,width:bw,height:prevH,rx:3,class:'bar-prev'}));
-    svg.appendChild(svgEl('rect',{x:gx+groupW*0.54,y:padT+plotH-nowH,width:bw,height:nowH,rx:3,class:'bar-now'}));
-    const lbl = svgEl('text',{x:gx+groupW/2,y:h-6,class:'cat-label','text-anchor':'middle'});
+    const prevX = gx+groupW*0.2, nowX = gx+groupW*0.54;
+    svg.appendChild(svgEl('rect',{x:prevX,y:padT+plotH-prevH,width:bw,height:prevH,rx:4,class:'bar-prev'}));
+    svg.appendChild(svgEl('rect',{x:nowX,y:padT+plotH-nowH,width:bw,height:nowH,rx:4,class:'bar-now'}));
+    const prevLbl = svgEl('text',{x:prevX+bw/2,y:padT+plotH-prevH-8,class:'bar-val','text-anchor':'middle'});
+    prevLbl.textContent = seriesPrev[i]+'%';
+    svg.appendChild(prevLbl);
+    const nowLbl = svgEl('text',{x:nowX+bw/2,y:padT+plotH-nowH-8,class:'bar-val','text-anchor':'middle'});
+    nowLbl.textContent = seriesNow[i]+'%';
+    svg.appendChild(nowLbl);
+    const lbl = svgEl('text',{x:gx+groupW/2,y:h-8,class:'cat-label','text-anchor':'middle'});
     lbl.textContent = cat;
     svg.appendChild(lbl);
   });
@@ -2223,14 +2234,14 @@ function buildGroupedBar(containerId, categories, seriesPrev, seriesNow, maxVal)
   container.innerHTML=''; container.appendChild(svg);
 }
 function buildLineChart(containerId, categories, series){
-  const w=280,h=150,padL=26,padB=20,padT=8,padR=4;
-  const plotW=w-padL-padR, plotH=h-padT-padB, maxVal=10;
+  const w=360,h=260,padL=38,padB=32,padT=26,padR=10, maxVal=10;
+  const plotW=w-padL-padR, plotH=h-padT-padB;
   const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
   for(let i=0;i<=2;i++){
     const val = i*5;
     const y = padT+plotH-(plotH*val/maxVal);
     svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-4,y:y+3,class:'axis-label','text-anchor':'end'});
+    const lbl = svgEl('text',{x:padL-6,y:y+4,class:'axis-label','text-anchor':'end'});
     lbl.textContent = val;
     svg.appendChild(lbl);
   }
@@ -2241,12 +2252,12 @@ function buildLineChart(containerId, categories, series){
   svg.appendChild(svgEl('path',{d:areaD,class:'area-a'}));
   svg.appendChild(svgEl('path',{d:pathD,class:'line-a',fill:'none'}));
   pts.forEach((p,i)=>{
-    svg.appendChild(svgEl('circle',{cx:p[0],cy:p[1],r:3.2,class:'dot-a'}));
-    const lbl = svgEl('text',{x:p[0],y:h-5,class:'cat-label','text-anchor':'middle'});
+    svg.appendChild(svgEl('circle',{cx:p[0],cy:p[1],r:4,class:'dot-a'}));
+    const lbl = svgEl('text',{x:p[0],y:h-8,class:'cat-label','text-anchor':'middle'});
     lbl.textContent = categories[i];
     svg.appendChild(lbl);
   });
-  const lastLbl = svgEl('text',{x:pts[pts.length-1][0],y:pts[pts.length-1][1]-8,class:'bar-val','text-anchor':'middle','font-weight':'700'});
+  const lastLbl = svgEl('text',{x:pts[pts.length-1][0],y:pts[pts.length-1][1]-10,class:'bar-val','text-anchor':'middle'});
   lastLbl.textContent = series[series.length-1];
   svg.appendChild(lastLbl);
   const container = document.getElementById(containerId);
