@@ -413,15 +413,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .attend-final-badge{margin-top:6px;align-self:flex-start;}
 .tutor-cta-wrap{margin-top:18px;text-align:right;}
 
-/* ================= MÀN 3: AI TUTOR ================= */
-.tutor-screen{min-height:956px;background:#0b1220;position:relative;}
-.tutor-topbar{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:center;z-index:4;}
-.track-badge{background:#12233f;color:#fff;padding:8px 18px;border-radius:12px;font-weight:600;font-size:14px;}
-.tutor-chat-wrap{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow-m);}
+/* ================= AICNew-02: AI BỔ TRỢ 30 PHÚT ================= */
+/* 3 màn theo PRD AICNew-02 §4: Mở đầu (aic2-intro) → Tương tác (aic2-interact) → Tổng kết (aic2-summary).
+   Đặt tên "AI Bổ trợ 30 phút" xuyên suốt UI — KHÔNG dùng "AI Tutor"/"Gia sư AI"
+   (2 tên gọi khác nhau, xem 00_context/glossary.md entry "AI Tutor"). */
+
+/* ---- Màn 1 (Mở đầu) & Màn 3 (Tổng kết) dùng chung layout căn giữa kiểu summary-screen ---- */
+.aic2-intro-screen,.aic2-summary-screen{min-height:956px;background:var(--n50);display:flex;align-items:center;justify-content:center;padding:40px;}
+.aic2-card{background:#fff;border-radius:24px;padding:36px 40px;box-shadow:var(--shadow-m);width:640px;display:flex;flex-direction:column;gap:20px;}
+.aic2-card h2{margin:0;}
+.track-badge{background:#12233f;color:#fff;padding:8px 18px;border-radius:12px;font-weight:600;font-size:14px;display:inline-flex;align-self:flex-start;}
+.aic2-recap{background:var(--n50);border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:8px;}
+.aic2-recap .row{display:flex;justify-content:space-between;font-size:14px;color:var(--n700);}
+.aic2-recap .row b{color:var(--n900);}
+.aic2-goal{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:16px 18px;}
+.aic2-goal .label{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;}
+.aic2-goal .text{font-size:15px;color:var(--n900);font-weight:500;}
+
+/* ---- Màn 2 (Tương tác) — nền tối kiểu classroom, tái dùng chat-panel ---- */
+.aic2-interact-screen{min-height:956px;background:#0b1220;position:relative;}
+.aic2-topbar{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;z-index:4;}
+.aic2-exit-btn{position:absolute;top:20px;right:24px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#e5e7eb;font-size:16px;z-index:5;}
+.aic2-exit-btn:hover{background:rgba(255,255,255,.2);}
+.duration-pill{display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
+.duration-bar-bg{width:80px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
+.duration-bar-fill{height:100%;background:var(--primary);border-radius:6px;transition:width .4s ease;}
+.nlo-pill{display:flex;align-items:center;gap:6px;background:#12233f;color:#fff;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
+.aic2-chat-wrap{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow-m);}
 .homework-card{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:14px;}
 .homework-card .ic{font-size:26px;}
 .homework-card .t{font-weight:600;color:var(--n900);font-size:13px;}
 .homework-card .s{font-size:12px;color:var(--n500);}
+
+/* ---- Màn 3 (Tổng kết) — danh sách NLO đã xử lý ---- */
+.nlo-result-card{background:var(--n50);border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.nlo-result-card .name{font-size:14px;font-weight:500;color:var(--n900);}
+.aic2-comment{background:#fff;border:1px solid var(--n100);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--n700);line-height:22px;display:flex;gap:12px;align-items:flex-start;}
+.aic2-comment .face{font-size:32px;flex-shrink:0;}
 
 /* ---------- THANKS ---------- */
 .thanks-screen{min-height:956px;background:var(--n900);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
@@ -818,27 +846,75 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div id="skillCards"></div>
         <span class="badge badge-primary attend-final-badge">✓ Đã điểm danh đủ buổi học</span>
         <div class="tutor-cta-wrap">
-          <button class="btn-primary" onclick="goto('tutor')">Bắt đầu 30 phút cùng Gia sư AI →</button>
+          <button class="btn-primary" onclick="goto('aic2-intro')">Bắt đầu buổi AI Bổ trợ 30 phút →</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== MÀN 3: AI TUTOR ===================== -->
-  <section class="screen" id="screen-tutor">
-    <div class="tutor-screen">
-      <div class="tutor-topbar"><span class="track-badge" id="tutorTrackBadge">🌟 Đang chuẩn bị...</span></div>
-      <div class="tutor-chat-wrap">
-        <div class="chat-scroll" id="tutorChatScroll"></div>
-        <div class="chat-input-row" id="tutorInputRow">
-          <button class="mic-mini" onclick="tutorSend('🎤 (đã nói câu trả lời)')">🎤</button>
-          <input id="tutorTextInput" placeholder="Nhập câu trả lời...">
-          <button class="chip-btn" onclick="tutorShowHint()">💡 Gợi ý</button>
-          <button class="send-btn" onclick="tutorSendFromInput()">➤</button>
+  <!-- ===================== AICNew-02 MÀN 1: MỞ ĐẦU BUỔI BỔ TRỢ ===================== -->
+  <!-- AC1,AC2,AC3,AC4,AC5 / BR1-BR5 — tóm tắt BCP + thông báo nhánh + MỤC TIÊU BUỔI (component
+       riêng, tách khỏi thông báo nhánh — xem finding F016) trước khi vào tương tác. -->
+  <section class="screen" id="screen-aic2-intro">
+    <div class="aic2-intro-screen">
+      <div class="aic2-card">
+        <span class="track-badge" id="aic2IntroTrackBadge">🌟 Đang chuẩn bị...</span>
+        <h2>Chào mừng quay lại!</h2>
+        <div class="aic2-recap">
+          <div class="row"><span>Tóm tắt buổi Big Class Plus vừa học</span></div>
+          <div id="aic2RecapRows"></div>
+        </div>
+        <div class="aic2-goal">
+          <div class="label">Mục tiêu buổi bổ trợ</div>
+          <div class="text" id="aic2GoalText">—</div>
+        </div>
+        <button class="btn-primary" onclick="goto('aic2-interact')">Bắt đầu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AICNew-02 MÀN 2: TƯƠNG TÁC NỘI DUNG ===================== -->
+  <!-- AC6-AC10 / BR6-BR10 — nội dung theo NLO ưu tiên (Củng cố) hoặc mở rộng (Nâng cao),
+       thanh tiến trình thời lượng còn lại, nút gợi ý, nút thoát (mô phỏng BR9 — xem finding F024). -->
+  <section class="screen" id="screen-aic2-interact">
+    <div class="aic2-interact-screen">
+      <button class="aic2-exit-btn" onclick="aic2Exit()" title="Thoát buổi">✕</button>
+      <div class="aic2-topbar">
+        <span class="nlo-pill" id="aic2NloPill">📍 NLO 1/2</span>
+        <span class="duration-pill">⏱ <span id="aic2DurationLabel">30:00</span> <span class="duration-bar-bg"><span class="duration-bar-fill" id="aic2DurationFill" style="width:100%;"></span></span></span>
+      </div>
+      <div class="aic2-chat-wrap">
+        <div class="chat-scroll" id="aic2ChatScroll"></div>
+        <div class="chat-input-row" id="aic2InputRow">
+          <button class="mic-mini" onclick="aic2Send('🎤 (đã nói câu trả lời)')">🎤</button>
+          <input id="aic2TextInput" placeholder="Nhập câu trả lời...">
+          <button class="chip-btn" onclick="aic2ShowHint()">💡 Gợi ý</button>
+          <button class="send-btn" onclick="aic2SendFromInput()">➤</button>
         </div>
       </div>
-      <div class="center-cta" id="tutorCta" style="display:none;">
-        <button class="btn-primary" onclick="goto('thanks')">Kết thúc phiên Gia sư AI</button>
+      <div class="center-cta" id="aic2Cta" style="display:none;">
+        <button class="btn-primary" onclick="goto('aic2-summary')">Xem tổng kết buổi bổ trợ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AICNew-02 MÀN 3: TỔNG KẾT CUỐI BUỔI ===================== -->
+  <!-- AC11,AC12,AC13 / BR11-BR13 — danh sách NLO đã xử lý (cải thiện/còn gap), nhận xét AI trợ
+       giảng, giao BTVN Adaptive. Không có bước điểm danh/đánh dấu hoàn thành (BR11). -->
+  <section class="screen" id="screen-aic2-summary">
+    <div class="aic2-summary-screen">
+      <div class="aic2-card">
+        <h2>Tổng kết buổi bổ trợ</h2>
+        <div id="aic2NloResults" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div class="aic2-comment"><span class="face">🧑‍🏫</span><div><b>AI trợ giảng:</b> <span id="aic2Comment"></span></div></div>
+        <div class="homework-card" id="aic2HomeworkCard" style="display:none;">
+          <div class="ic">📚</div>
+          <div><div class="t" id="aic2HwTitle"></div><div class="s">BTVN Adaptive — giao đúng NLO đã xử lý trong buổi</div></div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;">
+          <button class="btn-secondary" onclick="aic2ShowHomework()">Xem BTVN Adaptive</button>
+          <button class="btn-primary" onclick="goto('thanks')">Kết thúc buổi</button>
+        </div>
       </div>
     </div>
   </section>
@@ -846,7 +922,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   <!-- ===================== CẢM ƠN ===================== -->
   <section class="screen thanks-screen" id="screen-thanks">
     <div class="face">🎉</div>
-    <h2 style="color:#fff;">Cảm ơn bạn đã trải nghiệm demo Big Class Plus!</h2>
+    <h2 style="color:#fff;">Cảm ơn bạn đã trải nghiệm demo Big Class Plus + AI Bổ trợ 30 phút!</h2>
     <button class="btn-primary" onclick="resetDemo()">Quay lại Lịch học</button>
   </section>
 
@@ -863,8 +939,7 @@ const state = {
   mcqSubmitted: false,
   recording: false,
   classroomStep: 0,
-  tutorTurn: 0,
-  tutorTrack: null,
+  aic2: { track: null, nloList: [], stage: 0, messages: [], improved: [] },
   gateCode: '',
   gateFailedOnce: false,
   pendingTimer: null,
@@ -889,7 +964,8 @@ const SCREEN_DISPLAY = {
   schedule:'flex', account:'flex',
   loading:'flex', 'permission-intro':'flex', 'permission-grant':'flex', checkin:'flex', checkout:'flex',
   summary:'flex', thanks:'flex',
-  gate:'block', parent:'block', classroom:'block', tutor:'block',
+  gate:'block', parent:'block', classroom:'block',
+  'aic2-intro':'flex', 'aic2-interact':'block', 'aic2-summary':'flex',
 };
 function goto(id){
   document.querySelectorAll('.screen').forEach(s=>{
@@ -904,7 +980,7 @@ function goto(id){
 
 function showSkip(show){ document.getElementById('skipBtn').hidden = !show; }
 function updateSkipVisibility(screenId){
-  showSkip(['loading','permission-grant','checkin','checkout','classroom','tutor'].includes(screenId));
+  showSkip(['loading','permission-grant','checkin','checkout','classroom','aic2-interact'].includes(screenId));
 }
 
 function autoAdvance(fn, ms){
@@ -994,8 +1070,8 @@ function skip(){
     forceAdvanceClassroom();
     return;
   }
-  if(active === 'screen-tutor'){
-    forceAdvanceTutor();
+  if(active === 'screen-aic2-interact'){
+    forceAdvanceAic2();
     return;
   }
 }
@@ -1315,72 +1391,137 @@ function renderSummary(){
     </div>`).join('');
 }
 
-/* ============ MÀN 3: AI TUTOR ============ */
-const tutorChat = { adv: [], reinforce: [] };
-function computeTutorTrack(){
+/* ============ AICNew-02: AI BỔ TRỢ 30 PHÚT ============ */
+/* NLO ưu tiên xử lý mỗi buổi Củng cố/Nâng cao — 2 NLO/buổi, khớp glossary Routing Engine
+   ("1-2 NLO ưu tiên cao nhất"). Chân dung suy ra từ điểm Big Class Plus vừa học (proxy demo
+   cho Mastery Profile — PRD Adaptive Learning nền tảng thật chưa tồn tại). */
+const AIC2_NLO = {
+  reinforce: [
+    { name:'Từ vựng: Nhạc cụ (Musical Instruments)',
+      ask:'Buổi vừa rồi có vài chỗ mình cần ôn lại thêm, cùng làm cho chắc nhé. Con hãy gọi tên 3 loại nhạc cụ con vừa học nhé?',
+      ok:'Tốt lắm, con nhớ đúng rồi!' },
+    { name:'Ngữ pháp: Thì hiện tại đơn (Present Simple)',
+      ask:'Giờ mình ôn thêm thì hiện tại đơn nhé — con hãy đặt 1 câu ví dụ xem sao?',
+      ok:'Con đã nắm chắc hơn nhiều rồi, tiếp tục cố gắng nhé!' },
+  ],
+  advance: [
+    { name:'Mở rộng: Nhạc cụ nâng cao (Advanced Instruments)',
+      ask:'Con làm rất tốt buổi vừa rồi! Giờ mình học thêm phần nâng cao nhé. Con hãy đặt câu với từ "musical instrument" ở thì tương lai xem sao?',
+      ok:'Câu rất hay!' },
+    { name:'Ngữ pháp: Thì tương lai đơn (Future Simple)',
+      ask:'Giờ thử thêm một câu nữa với "will" nhé.',
+      ok:'Xuất sắc! Con đã sẵn sàng cho phần nâng cao rồi đó.' },
+  ],
+};
+
+/* ---- Màn 1: Mở đầu — BR3/BR4 xác định chân dung + nhánh, BR5 tóm tắt + mục tiêu ---- */
+function computeAic2Track(){
   const s = state.scores;
   const avg = (s.mcq+s.ispeak+s.group+s.aispeak)/4;
   return avg >= 7 ? 'advance' : 'reinforce';
 }
-let tutorMessages = [];
-let tutorStage = 0; // 0: intro, 1: turn1 sent, 2: turn2 sent, 3: done
-function startTutor(){
-  state.tutorTrack = computeTutorTrack();
-  tutorMessages = [];
-  tutorStage = 0;
-  document.getElementById('tutorCta').style.display='none';
-  document.getElementById('tutorTrackBadge').textContent = state.tutorTrack==='advance' ? '🌟 Nâng cao & Mở rộng' : '🔧 Củng cố kiến thức';
-  const greet = state.tutorTrack==='advance'
-    ? 'Con làm rất tốt buổi vừa rồi! Giờ mình học thêm phần nâng cao nhé. Con hãy đặt câu với từ "musical instrument" ở thì tương lai xem sao?'
-    : 'Buổi vừa rồi có vài chỗ mình cần ôn lại thêm, cùng làm cho chắc nhé. Con hãy gọi tên 3 loại nhạc cụ con vừa học nhé?';
-  tutorMessages.push({who:'ai', text: greet});
-  renderTutorChat();
+function initAic2Intro(){
+  state.aic2.track = computeAic2Track();
+  state.aic2.nloList = AIC2_NLO[state.aic2.track];
+  state.aic2.stage = 0;
+  state.aic2.messages = [];
+  state.aic2.improved = [];
+
+  document.getElementById('aic2IntroTrackBadge').textContent =
+    state.aic2.track==='advance' ? '🌟 Nâng cao & Mở rộng' : '🔧 Củng cố kiến thức';
+
+  const s = state.scores;
+  const rows = [['TRẮC NGHIỆM',s.mcq],['PHÁT ÂM',s.ispeak],['BÀI TẬP NHÓM',s.group],['HỘI THOẠI',s.aispeak]];
+  document.getElementById('aic2RecapRows').innerHTML = rows.map(([n,v])=>
+    `<div class="row"><span>${n}</span><b>${v}/10</b></div>`).join('');
+
+  const names = state.aic2.nloList.map(n=>n.name);
+  document.getElementById('aic2GoalText').textContent = state.aic2.track==='advance'
+    ? `Mở rộng thêm ${names.length} chủ đề nâng cao: ${names.join(' · ')}.`
+    : `Vá ${names.length} lỗ hổng ưu tiên nhất vừa phát hiện ở buổi Big Class Plus: ${names.join(' · ')}.`;
 }
-function renderTutorChat(waiting){
-  const scroll = document.getElementById('tutorChatScroll');
-  scroll.innerHTML = tutorMessages.map(m=>`<div class="chat-msg ${m.who}">${m.text}</div>`).join('')
+
+/* ---- Màn 2: Tương tác — BR6/BR7 xử lý NLO ưu tiên, BR8 tự chuyển khi xong sớm ---- */
+function startAic2Interact(){
+  document.getElementById('aic2Cta').style.display='none';
+  document.getElementById('aic2InputRow').style.display='flex';
+  updateAic2Progress();
+  state.aic2.messages = [{who:'ai', text: state.aic2.nloList[0].ask}];
+  renderAic2Chat();
+}
+function updateAic2Progress(){
+  const total = state.aic2.nloList.length;
+  const idx = Math.min(state.aic2.stage, total-1);
+  document.getElementById('aic2NloPill').textContent = `📍 NLO ${idx+1}/${total}`;
+  const pct = Math.max(10, 100 - Math.round((state.aic2.stage/total)*70));
+  const remain = Math.max(3, 30 - Math.round((state.aic2.stage/total)*27));
+  document.getElementById('aic2DurationFill').style.width = pct+'%';
+  document.getElementById('aic2DurationLabel').textContent = `${String(remain).padStart(2,'0')}:00`;
+}
+function renderAic2Chat(waiting){
+  const scroll = document.getElementById('aic2ChatScroll');
+  scroll.innerHTML = state.aic2.messages.map(m=>`<div class="chat-msg ${m.who}">${m.text}</div>`).join('')
     + (waiting? `<div class="typing-dots">•••</div>` : '');
   scroll.scrollTop = scroll.scrollHeight;
-  document.getElementById('tutorInputRow').classList.toggle('locked-controls', !!waiting);
+  document.getElementById('aic2InputRow').classList.toggle('locked-controls', !!waiting);
 }
-function tutorShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
-function tutorSendFromInput(){
-  const input = document.getElementById('tutorTextInput');
+function aic2ShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
+function aic2SendFromInput(){
+  const input = document.getElementById('aic2TextInput');
   const val = input.value.trim() || '(câu trả lời của con)';
   input.value='';
-  tutorSend(val);
+  aic2Send(val);
 }
-function tutorSend(text){
-  if(tutorStage>=2) return;
-  tutorMessages.push({who:'me', text});
-  renderTutorChat(true);
-  tutorStage++;
+function aic2Send(text){
+  const total = state.aic2.nloList.length;
+  if(state.aic2.stage>=total) return;
+  state.aic2.messages.push({who:'me', text});
+  renderAic2Chat(true);
+  const nlo = state.aic2.nloList[state.aic2.stage];
   autoAdvance(()=>{
-    if(tutorStage===1){
-      const reply = state.tutorTrack==='advance'
-        ? 'Câu rất hay! Giờ thử thêm một câu nữa với "will" nhé.'
-        : 'Tốt lắm, con nhớ đúng rồi! Giờ hãy dùng 1 từ đó để đặt câu đơn giản nhé.';
-      tutorMessages.push({who:'ai', text: reply});
-      renderTutorChat();
+    state.aic2.messages.push({who:'ai', text: nlo.ok});
+    state.aic2.improved.push(nlo.name);
+    state.aic2.stage++;
+    renderAic2Chat();
+    if(state.aic2.stage < total){
+      updateAic2Progress();
+      const next = state.aic2.nloList[state.aic2.stage];
+      setTimeout(()=>{ state.aic2.messages.push({who:'ai', text: next.ask}); renderAic2Chat(); }, 500);
     } else {
-      const closing = state.tutorTrack==='advance'
-        ? 'Xuất sắc! Con đã sẵn sàng cho phần nâng cao rồi đó.'
-        : 'Con đã nắm chắc hơn nhiều rồi, tiếp tục cố gắng nhé!';
-      tutorMessages.push({who:'ai', text: closing});
-      renderTutorChat();
-      const hwTitle = state.tutorTrack==='advance' ? 'BTVN mở rộng: Unit 7 – Nâng cao' : 'BTVN củng cố: Unit 7 – Vá lỗ hổng';
-      tutorMessages.push({who:'ai', text: `📚 Bài tập về nhà được giao: <b>${hwTitle}</b>`});
-      renderTutorChat();
-      document.getElementById('tutorInputRow').style.display='none';
-      document.getElementById('tutorCta').style.display='flex';
+      // BR8: xử lý hết NLO ưu tiên trước khi hết giờ → chuyển sang xem tổng kết (demo rút gọn
+      // luồng "tự động hiển thị Nâng cao cho thời gian còn lại" thành CTA sang Màn 3 ngay).
+      updateAic2Progress();
+      document.getElementById('aic2InputRow').style.display='none';
+      document.getElementById('aic2Cta').style.display='flex';
     }
   }, 1400);
 }
-function forceAdvanceTutor(){
+function forceAdvanceAic2(){
   clearTimeout(state.pendingTimer);
-  if(document.getElementById('tutorCta').style.display==='flex') return;
-  if(tutorStage===0){ tutorSend('(bỏ qua – câu trả lời mẫu)'); }
-  else if(state.pendingSkipFn){ state.pendingSkipFn(); }
+  if(document.getElementById('aic2Cta').style.display==='flex') return;
+  aic2Send('(bỏ qua – câu trả lời mẫu)');
+}
+function aic2Exit(){
+  // Mô phỏng BR9 (thoát giữa chừng → lưu vị trí, tạm dừng thời lượng). Demo không triển khai
+  // resume thật (xem finding F011/F026 — cửa sổ hợp lệ để resume còn là open question ở PRD).
+  toast('⏸ Đã lưu vị trí, tạm dừng thời lượng — mô phỏng BR9');
+  setTimeout(()=>goto('schedule'), 900);
+}
+
+/* ---- Màn 3: Tổng kết — BR11 (không điểm danh), BR12 (đã ghi Mastery Profile theo từng NLO),
+   BR13 (nhận xét AI trợ giảng + giao BTVN Adaptive đúng NLO đã xử lý) ---- */
+function renderAic2Summary(){
+  document.getElementById('aic2NloResults').innerHTML = state.aic2.improved.map(name=>`
+    <div class="nlo-result-card"><span class="name">${name}</span><span class="badge badge-primary">✓ Đã cải thiện</span></div>`).join('');
+  document.getElementById('aic2Comment').textContent = state.aic2.track==='advance'
+    ? 'Con đã hoàn thành tốt cả 2 chủ đề nâng cao hôm nay, tiếp tục phát huy nhé!'
+    : 'Con đã vá xong 2 lỗ hổng ưu tiên hôm nay, nắm chắc hơn nhiều rồi đó!';
+  document.getElementById('aic2HomeworkCard').style.display='none';
+}
+function aic2ShowHomework(){
+  const prefix = state.aic2.track==='advance' ? 'BTVN Adaptive — Mở rộng: ' : 'BTVN Adaptive — Củng cố: ';
+  document.getElementById('aic2HwTitle').textContent = prefix + state.aic2.improved.join(', ');
+  document.getElementById('aic2HomeworkCard').style.display='flex';
 }
 
 /* ============ PARENTAL GATE ============ */
@@ -1436,7 +1577,8 @@ function renderParentMode(){
 function resetDemo(){
   state.scores = { mcq:null, ispeak:null, group:null, aispeak:null };
   state.mcqAnswer=null; state.mcqSubmitted=false; state.recording=false;
-  state.classroomStep=0; tutorStage=0; tutorMessages=[];
+  state.classroomStep=0;
+  state.aic2 = { track:null, nloList:[], stage:0, messages:[], improved:[] };
   state.permissions = { mic:false, cam:false };
   ['grantMicBtn','grantCamBtn'].forEach(id=>{
     const btn = document.getElementById(id);
@@ -1451,11 +1593,13 @@ function resetDemo(){
   goto('schedule');
 }
 
-/* Hook: entering tutor screen triggers startTutor */
+/* Hook: entering each AICNew-02 screen triggers its init/render function */
 const origGoto = goto;
 goto = function(id){
   origGoto(id);
-  if(id==='tutor') startTutor();
+  if(id==='aic2-intro') initAic2Intro();
+  if(id==='aic2-interact') startAic2Interact();
+  if(id==='aic2-summary') renderAic2Summary();
 };
 
 /* Establish correct initial inline-style state on load (avoids any flash of multiple

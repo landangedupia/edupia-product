@@ -1,0 +1,678 @@
+prd_source: "04_delivery/specs/ai-class-core/ai-bo-tro-30-phut/AICNew-02-ai-bo-tro-30-phut.md"
+prd_version: "1.1"
+applied_to_version: ""
+generated_at: "2026-09-08T00:00:00+07:00"
+status: "pending_review"
+
+findings:
+  # ===================== CRITICAL =====================
+
+  - id: "F001"
+    lens: "SA"
+    severity: "critical"
+    section: "Feature (giới thiệu) vs §2 AC4 / §3 UC1-BR4"
+    uc_id: "AICNew-02-UC1"
+    quote: "dành cho học sinh trung bình/yếu hoặc chưa đủ dữ liệu"
+    finding: "Đoạn giới thiệu Feature khẳng định nhánh Củng cố dành cho học sinh 'trung bình/yếu HOẶC chưa đủ dữ liệu', nhưng AC4/BR4 lại quy định ngược lại: học sinh 'chưa đủ dữ liệu' (Mastery Profile chưa khởi tạo/không có NLO gap) thì chạy thẳng nhánh Nâng cao, không qua bước phân chân dung."
+    suggestion: "Xác nhận với PO nhánh đúng cho học sinh 'chưa đủ dữ liệu' là Nâng cao (theo BR4) hay Củng cố (theo mô tả Feature), rồi sửa đoạn còn lại cho khớp."
+    resolution_edge_cases:
+      - "Nếu sửa theo BR4 (giữ Nâng cao), cần rà lại toàn bộ đoạn giới thiệu Feature và mọi chỗ diễn giải tương tự để tránh gây hiểu nhầm khi PO/Dev đọc lướt."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F002"
+    lens: "DEV"
+    severity: "critical"
+    section: "§2 AC2 / §3 UC1-BR2"
+    uc_id: "AICNew-02-UC1"
+    quote: "Học sinh không có buổi Big Class Plus vừa hoàn thành trong ngày thì không được đưa vào luồng"
+    finding: "AC2 thêm điều kiện 'trong ngày' (same-day) mà BR2/Business Logic không hề định nghĩa — BR2 chỉ kiểm tra có/không có bản ghi 'buổi Big Class Plus vừa kết thúc'. Không rõ ranh giới 'vừa kết thúc' có đồng nghĩa 'trong ngày' hay không, gây mơ hồ ở ca biên: buổi học kết thúc gần nửa đêm, hoặc học sinh có 2 buổi Big Class Plus cùng ngày."
+    suggestion: "Định nghĩa rõ trong BR2 khoảng thời gian/mốc coi là 'vừa kết thúc' (theo ngày lịch, theo cửa sổ giờ, hay ngay-lập-tức-nối-tiếp), rồi để AC2 tham chiếu đúng định nghĩa đó thay vì tự đặt tiêu chí 'trong ngày' riêng."
+    resolution_edge_cases:
+      - "Cần đồng thời trả lời trường hợp một học sinh có nhiều buổi Big Class Plus cùng ngày (xem F010) để định nghĩa không mâu thuẫn với quy tắc trigger lặp."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F003"
+    lens: "SA"
+    severity: "critical"
+    section: "§3 UC1-BR3/BR4 / User Flow"
+    uc_id: "AICNew-02-UC1"
+    quote: "C -->|Có, chân dung Khá giỏi| D"
+    finding: "Khi buổi Big Class Plus liền trước phát hiện NLO 'chưa đạt' (có tín hiệu Gap Detection) NHƯNG chân dung tổng hợp (đa buổi) của học sinh vẫn là 'Khá giỏi', hệ thống rẽ thẳng Nâng cao — bỏ qua đúng NLO gap vừa phát hiện. PRD không nói rõ NLO gap đó có được bảo lưu/bàn giao cho buổi sau hay BTVN Adaptive, hay bị bỏ qua vĩnh viễn."
+    suggestion: "Bổ sung quy tắc: khi chân dung 'Khá giỏi' nhưng vẫn có NLO gap vừa phát hiện, NLO đó có tiếp tục được bàn giao cho BTVN Adaptive/buổi sau (giống cơ chế BR7 xử lý phần dư) hay bị loại bỏ hẳn."
+    resolution_edge_cases:
+      - "Nếu chọn bảo lưu NLO gap này, cần đối chiếu với cơ chế carry-over đang có lỗ hổng riêng ở BR6/BR7 (xem F009) để tránh chồng chéo hai luồng carry-over."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F004"
+    lens: "SA"
+    severity: "critical"
+    section: "§3 UC2-BR6 vs BR7/BR8/AC7/AC8/AC10 + 00_context/glossary.md (Routing Engine)"
+    uc_id: "AICNew-02-UC2"
+    quote: "Chọn NLO ưu tiên cao nhất làm nội dung Củng cố."
+    finding: "Mâu thuẫn cốt lõi về số lượng NLO xử lý mỗi buổi Củng cố: BR6/AC6 dùng số ít ('NLO ưu tiên cao nhất' — đúng 1 NLO), nhưng BR7 ('số NLO ưu tiên cần xử lý', 'NLO còn lại'), AC7, AC8 ('toàn bộ NLO ưu tiên') và AC10 ('Nhiều NLO... cùng mức priority') đều mô tả một DANH SÁCH nhiều NLO xử lý tuần tự tới hết giờ. Ngay cả khi chọn một trong hai cách đọc, glossary định nghĩa Routing Engine chỉ chọn '1-2 NLO ưu tiên' — không khớp hoàn toàn với cách đọc 'chỉ 1' lẫn cách đọc 'danh sách dài'."
+    suggestion: "Chốt một mô hình duy nhất cho nội dung Củng cố (đề xuất: theo đúng glossary — 1-2 NLO ưu tiên mỗi buổi, xử lý theo thứ tự Routing Engine trả về tới hết giờ hoặc hết danh sách), rồi đồng bộ lại toàn bộ BR6, BR7, AC6, AC7, AC8, AC10 theo đúng số ít/số nhiều của mô hình đã chọn."
+    resolution_edge_cases:
+      - "Chốt mô hình 1-2 NLO/buổi sẽ đòi hỏi viết lại điều kiện 'vượt quá thời lượng' của BR7 theo số NLO cụ thể (1-2), ảnh hưởng luôn tới cách tính ở F008/F013 (mốc bắt đầu 30 phút, trạng thái xử lý dở dang)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F005"
+    lens: "PO"
+    severity: "critical"
+    section: "§3 UC2-BR6 (Business Logic) vs §1.b Out of Scope"
+    uc_id: "AICNew-02-UC2"
+    quote: "priority = ppct_weight × (1−mastery) × prereq_boost"
+    finding: "§1.b Out of Scope tuyên bố 'Cơ chế/thuật toán Routing Engine — thuộc PRD Adaptive Learning', nhưng BR6 lại nhúng thẳng công thức tính priority cụ thể vào PRD này — vi phạm ranh giới sở hữu nghiệp vụ chính PRD tự đặt ra. Ngoài ra hai biến trong công thức (`ppct_weight`, `prereq_boost`) chưa được định nghĩa ở bất kỳ đâu (cả PRD lẫn glossary), khiến AC6/AC10 không thể verify được dù bỏ qua vấn đề phạm vi."
+    suggestion: "Bỏ công thức cụ thể khỏi BR6, chỉ nói 'giao hoàn toàn cho Routing Engine quyết định' như cách BR10 đang làm; nếu cần giữ để minh hoạ cho prototype, gắn nhãn rõ '[Minh hoạ — chờ PRD Adaptive Learning xác nhận]' và không dùng làm căn cứ nghiệm thu AC6/AC10."
+    resolution_edge_cases:
+      - "Khi PRD Adaptive Learning được viết sau và đổi công thức, mọi AC/test case đang neo vào công thức cũ trong BR6 sẽ cần rà soát lại — nên tách rõ ngay từ bây giờ để tránh nợ kỹ thuật tài liệu."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F006"
+    lens: "QA"
+    severity: "critical"
+    section: "§3 UC3 (Description) / BR13 / Wireframe Screen 3"
+    uc_id: "AICNew-02-UC3"
+    quote: "Khi buổi kết thúc (hết thời lượng hoặc hết nội dung), hệ thống tổng hợp kết quả"
+    finding: "UC3 chỉ định nghĩa 2 điều kiện kết thúc buổi (hết thời lượng / hết nội dung). Nhưng BR11 xác nhận buổi 'được coi là đã diễn ra... kể cả khi mất kết nối giữa buổi', và BR9 (UC2) cho phép thoát-và-không-bao-giờ-quay-lại — cả hai đều là cách buổi có thể 'kết thúc' trên thực tế nhưng KHÔNG khớp 2 trigger đã liệt kê. Vì vậy không rõ AC13 (nhận xét + giao BTVN Adaptive cuối buổi — cam kết cốt lõi của feature) có được kích hoạt trong các trường hợp này không, và nếu có thì hiển thị bằng cách nào khi học sinh không còn ở Screen 3 để xem."
+    suggestion: "Bổ sung điều kiện kết thúc buổi thứ ba (mất kết nối / bỏ dở không quay lại sau một mốc thời gian xác định) vào Description của UC3, và làm rõ trong BR13 rằng việc giao BTVN Adaptive được kích hoạt bởi sự kiện kết thúc buổi ở phía hệ thống (không phụ thuộc học sinh có xem được Screen 3 hay không)."
+    resolution_edge_cases:
+      - "Cần định nghĩa 'sau bao lâu' một buổi bị thoát coi là 'bỏ dở' để kích hoạt tổng kết — liên quan trực tiếp tới cửa sổ resume ở F011."
+      - "Nếu tổng kết được sinh mà không qua Screen 3, cần xác định học sinh xem lại nhận xét/BTVN ở đâu (màn hình khác, lần đăng nhập sau)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F007"
+    lens: "PO"
+    severity: "critical"
+    section: "Toàn bộ PRD"
+    uc_id: ""
+    quote: "để không bị bỏ lại phía sau vì \"không hiểu bài mà không ai giúp\""
+    finding: "Không có bất kỳ success metric nào (adoption, mức cải thiện mastery, tỷ lệ hoàn thành, tỷ lệ thoát giữa chừng...) được định nghĩa trong toàn bộ PRD — kể cả 'Giả định AI' cũng không ghi nhận đây là một open question cần PO chốt. Đây là mắt xích cốt lõi trong vòng lặp cá nhân hoá nối AICNew-01 → BTVN Adaptive, nên thiếu metric nghĩa là sau khảo sát/launch sẽ không có cơ sở đánh giá hiệu quả."
+    suggestion: "Bổ sung mục Success Metrics (vd: % học sinh hoàn thành ≥X phút buổi bổ trợ, mức cải thiện mastery trung bình của NLO đã xử lý sau N buổi, tỷ lệ thoát giữa chừng) hoặc tối thiểu ghi nhận việc thiếu metric như một câu hỏi cần PO chốt ở 'Giả định AI'."
+    resolution_edge_cases:
+      - "Chốt metric muộn (sau khi Dev đã build) có thể phát hiện ra dữ liệu cần đo chưa được ghi nhận đúng chỗ (vd BR12 chưa lưu đủ trường cần cho việc tính cải thiện mastery)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  # ===================== MAJOR — UC1 =====================
+
+  - id: "F008"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC1-BR3 / User Flow (node C)"
+    uc_id: "AICNew-02-UC1"
+    quote: "Đọc mastery trung bình các NLO liên quan từ Mastery Profile, so ngưỡng để phân chân dung."
+    finding: "Không Business Rule nào phát biểu tường minh việc ánh xạ chân dung sang nhánh nội dung (Khá giỏi → Nâng cao; Trung bình-yếu → Củng cố) — BR3 chỉ dừng ở bước phân loại chân dung, trong khi AC3 lại cam kết 'hệ thống chọn đúng nhánh... tương ứng chân dung', vượt quá nội dung BR3. Sơ đồ flow còn gộp quyết định 'có dữ liệu Gap Detection?' (BR4) và 'chân dung gì?' (BR3) vào chung một node, khiến khó đối chiếu đúng BR nào chạy ở bước nào."
+    suggestion: "Bổ sung một Business Rule (hoặc mở rộng BR3) phát biểu rõ quy tắc ánh xạ chân dung → nhánh nội dung; tách node quyết định trong sơ đồ flow thành 2 bước riêng (có/không dữ liệu Gap Detection, rồi mới tới phân loại chân dung) để mỗi node chỉ tham chiếu đúng 1 BR."
+    resolution_edge_cases:
+      - "Sửa sơ đồ flow có thể lộ thêm các nhánh chưa được vẽ (vd nhánh 'có dữ liệu nhưng chưa đủ để phân loại' — xem F012)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F009"
+    lens: "PO"
+    severity: "major"
+    section: "Pre-condition UC1 vs §3 UC1-BR1 (Business Logic)"
+    uc_id: "AICNew-02-UC1"
+    quote: "điểm danh cuối buổi ghi nhận thành công và AI trợ giảng đã đưa nhận xét tổng kết"
+    finding: "Pre-condition của UC1 yêu cầu CẢ HAI điều kiện (điểm danh cuối buổi VÀ AI trợ giảng đã đưa nhận xét), nhưng Business Logic của BR1 chỉ định nghĩa sự kiện kích hoạt là 'điểm danh cuối buổi ghi nhận thành công' — không nhắc điều kiện thứ hai. Việc dùng điểm danh làm đủ điều kiện chỉ đúng nếu thứ tự 'AI trợ giảng nhận xét trước, điểm danh ghi sau' trong AICNew-01 luôn đúng, nhưng ràng buộc thứ tự này không được nêu lại/tham chiếu trong PRD này."
+    suggestion: "Thống nhất một điều kiện trigger duy nhất giữa AC1, BR1 và Pre-condition; nếu giữ điểm danh làm đủ điều kiện, ghi rõ lý do (điểm danh luôn là bước ghi sau cùng trong AICNew-01, đã bao hàm việc AI trợ giảng nhận xét xong) để người đọc riêng PRD này không bị mất căn cứ."
+    resolution_edge_cases:
+      - "Nếu thứ tự ghi giữa hai sự kiện ở AICNew-01 từng thay đổi trong tương lai, quy tắc trigger của PRD này sẽ âm thầm sai mà không ai biết — nên cân nhắc chốt điều kiện kép tường minh thay vì chỉ dựa vào thứ tự ngầm định."
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F010"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC1-BR1 (Business Logic)"
+    uc_id: "AICNew-02-UC1"
+    quote: "Áp dụng cho mọi học sinh, mọi buổi Big Class Plus."
+    finding: "Không có rule nào xác định điều gì xảy ra khi một học sinh có nhiều hơn một buổi Big Class Plus kết thúc trong cùng ngày (vd học bù, học 2 môn) — buổi bổ trợ có chạy lặp lại theo từng buổi Big Class Plus, hay chỉ chạy một lần/ngày, hay buổi sau ghi đè buổi trước."
+    suggestion: "Bổ sung quy tắc xử lý khi có nhiều buổi Big Class Plus kết thúc trong cùng ngày: chạy nhiều lần theo từng buổi (nếu môn khác nhau), hay gộp/chỉ chạy 1 lần."
+    resolution_edge_cases:
+      - "Quy tắc này cần khớp với định nghĩa 'trong ngày' đang mơ hồ ở F002 — sửa một cái mà không sửa cái kia sẽ vẫn để lại khoảng trống."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F011"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC1-BR3 (Business Logic)"
+    uc_id: "AICNew-02-UC1"
+    quote: "Đọc mastery trung bình các NLO liên quan từ Mastery Profile, so ngưỡng để phân chân dung."
+    finding: "BR3 dùng cụm 'NLO liên quan' để tính mastery trung bình phân chân dung, nhưng không định nghĩa phạm vi NLO nào được tính (chỉ NLO vừa gán ở buổi Big Class Plus liền trước, NLO cùng chương, hay toàn bộ NLO của môn) — mỗi cách hiểu cho ra một chân dung khác nhau cho cùng một học sinh."
+    suggestion: "Bổ sung định nghĩa phạm vi 'NLO liên quan' dùng để tính mastery trung bình phân chân dung ở BR3."
+    resolution_edge_cases:
+      - "Phạm vi NLO càng rộng thì chân dung càng ổn định qua thời gian nhưng càng chậm phản ánh tiến bộ mới nhất — PO cần cân nhắc đánh đổi này khi chốt."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F012"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC1-BR4 (Business Logic)"
+    uc_id: "AICNew-02-UC1"
+    quote: "Điều kiện: Mastery Profile không tồn tại HOẶC danh sách NLO \"chưa đạt\" rỗng."
+    finding: "BR4 không xử lý ca biên: Mastery Profile đã tồn tại nhưng CHƯA CÓ dữ liệu cho các NLO liên quan tới buổi hôm nay (vd chủ đề hoàn toàn mới chưa từng được đánh giá). Không rõ ca này được xếp vào 'chưa khởi tạo' (→ Nâng cao theo BR4) hay hệ thống vẫn cố phân chân dung bằng dữ liệu bộ phận đang có."
+    suggestion: "Làm rõ cách phân loại dữ liệu Mastery Profile bộ phận/chưa đầy đủ so với điều kiện 'chưa khởi tạo' của BR4."
+    resolution_edge_cases:
+      - "Cách phân loại này ảnh hưởng trực tiếp tới phạm vi 'NLO liên quan' đang mơ hồ ở F011 — nên giải quyết đồng thời."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F013"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC1-BR5 (Business Logic) / Wireframe Screen 1"
+    uc_id: "AICNew-02-UC1"
+    quote: "Lấy dữ liệu buổi Big Class Plus liền trước (điểm/kỹ năng) + nhánh đã chọn ở BR3/BR4."
+    finding: "BR5 không định nghĩa các trường dữ liệu cụ thể bắt buộc phải có trong 'tóm tắt kết quả' (chỉ điểm tổng? phân tích theo kỹ năng? danh sách NLO gap?), và không nói rõ hành vi hiển thị nếu dữ liệu buổi Big Class Plus chưa kịp đồng bộ xong tại đúng thời điểm buổi bổ trợ tự động khởi chạy (một race hoàn toàn có thể xảy ra vì BR1 kích hoạt ngay sau điểm danh)."
+    suggestion: "Định nghĩa nội dung tối thiểu bắt buộc của tóm tắt Big Class Plus hiển thị ở Screen 1, và quy định hành vi fallback khi dữ liệu nguồn chưa sẵn sàng lúc màn hình cần render."
+    resolution_edge_cases:
+      - "Nếu chọn hiển thị 'đang tải/chưa có dữ liệu' làm fallback, cần xác nhận điều đó không vi phạm cam kết BR1 'không cần thao tác kích hoạt thủ công' (học sinh vẫn đang ở đúng luồng, chỉ tóm tắt bị trễ)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F014"
+    lens: "SA"
+    severity: "major"
+    section: "1.d Quy ước / §3 UC1-BR3"
+    uc_id: "AICNew-02-UC1"
+    quote: "giá trị tổng hợp toàn môn, đa buổi, có decay"
+    finding: "Thuộc tính 'có decay' (mastery suy giảm theo thời gian) được khẳng định ở Quy ước nhưng không được BR3 hay bất kỳ Business Rule nào khác nhắc lại hay vận dụng. Không rõ decay có ảnh hưởng tới việc phân chân dung ngay sau khi buổi Big Class Plus vừa kết thúc hay không — rủi ro học sinh lâu ngày ít học bị decay kéo mastery xuống, dẫn tới phân chân dung sai dù vừa thể hiện tốt ở buổi liền trước."
+    suggestion: "Làm rõ trong BR3 liệu giá trị mastery dùng để phân chân dung đã phản ánh đầy đủ kết quả buổi vừa xong hay còn chịu độ trễ do decay; nếu có rủi ro, bổ sung quy tắc ưu tiên tín hiệu buổi gần nhất, hoặc bỏ chi tiết decay khỏi Quy ước nếu không áp dụng cho luồng này."
+    resolution_edge_cases:
+      - "Nếu ưu tiên tín hiệu buổi gần nhất, cần định nghĩa cách trộn nó với mastery decay tổng hợp mà không phá vỡ định nghĩa 'tổng hợp toàn môn, đa buổi' đã có ở Quy ước."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F015"
+    lens: "SA"
+    severity: "major"
+    section: "User Flow (node C, mermaid)"
+    uc_id: "AICNew-02-UC1"
+    quote: "C{\"Có dữ liệu\\nGap Detection?\"}"
+    finding: "Node C đặt câu hỏi nhị phân kiểu BR4 ('Có dữ liệu Gap Detection?') nhưng lại có 3 nhánh ra, trong đó 2 nhánh ('chân dung Khá giỏi'/'chân dung TB-yếu') thực chất là kết quả phân loại của BR3 — trộn lẫn 2 quyết định nghiệp vụ khác nhau vào cùng một node, gây khó đối chiếu đúng BR nào chạy ở bước nào."
+    suggestion: "Tách node C thành 2 bước quyết định riêng: (1) có/không dữ liệu Gap Detection (BR4), (2) nếu có thì phân loại chân dung (BR3) — mỗi node chỉ ánh xạ đúng 1 BR."
+    resolution_edge_cases:
+      - "Đây là phần diễn giải trùng lặp với F008 (thiếu rule ánh xạ chân dung→nhánh) — nên sửa đồng thời để sơ đồ và rule khớp nhau ngay khi cập nhật."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F016"
+    lens: "SA"
+    severity: "major"
+    section: "Wireframe Screen 1 vs §2 AC5/BR5"
+    uc_id: "AICNew-02-UC1"
+    quote: "Thông báo nhánh (Nâng cao/Củng cố)"
+    finding: "AC5/BR5 yêu cầu hiển thị CẢ 'tóm tắt kết quả buổi Big Class Plus' VÀ 'mục tiêu buổi bổ trợ tương ứng nhánh đã chọn' — hai nội dung tách biệt. Nhưng bảng Components của Screen 1 chỉ liệt kê 'Tóm tắt kết quả' và 'Thông báo nhánh', không có thành phần riêng cho 'mục tiêu buổi'."
+    suggestion: "Bổ sung một component riêng trong Screen 1 thể hiện rõ 'mục tiêu buổi bổ trợ' (tách biệt khỏi 'Thông báo nhánh') để khớp đầy đủ AC5/BR5."
+    resolution_edge_cases:
+      - "Thêm component mới có thể cần rà lại bố cục màn hình để không làm Screen 1 quá tải trước khi vào 30 phút tương tác."
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  # ===================== MAJOR — UC2 =====================
+
+  - id: "F017"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR6/BR7"
+    uc_id: "AICNew-02-UC2"
+    quote: "NLO \"chưa đạt\" vừa phát hiện ở buổi Big Class Plus liền trước"
+    finding: "BR6 giới hạn phạm vi chọn NLO Củng cố chỉ trong số NLO 'vừa phát hiện' ở buổi Big Class Plus LIỀN TRƯỚC. Nhưng BR7 cam kết NLO xử lý không kịp sẽ 'chuyển sang buổi bổ trợ kế tiếp'. Nếu buổi kế tiếp áp đúng BR6 (chỉ nhìn buổi liền trước), NLO bị đẩy lại từ 2+ buổi trước có thể không bao giờ được chọn lại — mâu thuẫn với cam kết carry-over của BR7, và bản thân BR3/BR6 (mỗi buổi đều xác định lại nội dung từ đầu) không có cơ chế nào đảm bảo lời hứa đó của BR7 được thực hiện."
+    suggestion: "Làm rõ: BR6 nên đọc từ TOÀN BỘ danh sách NLO 'chưa đạt' hiện có trong Mastery Profile (bao gồm phần dư do BR7 đẩy từ các buổi trước), không chỉ giới hạn ở buổi liền trước; hoặc nếu BR7 chỉ là cam kết 'đưa vào tập đầu vào cho Routing Engine' (không đảm bảo tuyệt đối hiển thị), cần nói rõ điều đó."
+    resolution_edge_cases:
+      - "Nếu chọn mở rộng phạm vi BR6 sang toàn bộ NLO gap tồn đọng, cần tính lại cách áp dụng cùng lúc với việc chốt cardinality (số NLO/buổi) ở F004."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F018"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC2-BR8"
+    uc_id: "AICNew-02-UC2"
+    quote: "Khi học sinh xử lý hết NLO ưu tiên trước khi hết 30 phút, hệ thống PHẢI tự động chuyển sang nội dung Nâng cao"
+    finding: "BR8 chỉ định nghĩa hành vi khi học sinh xử lý xong NLO ưu tiên TRƯỚC KHI hết 30 phút. Trường hợp xử lý xong đúng vào thời điểm hết giờ (hai sự kiện đồng thời) không rõ thuộc BR8 (chuyển Nâng cao) hay BR7 (coi như hết giờ, không chuyển) — hai hướng cho kết quả khác nhau."
+    suggestion: "Quy định rõ ranh giới: học sinh hoàn tất NLO ưu tiên cuối cùng đúng lúc hết 30 phút thì tính là 'xong trước giờ' (BR8) hay 'hết giờ' (BR7)."
+    resolution_edge_cases:
+      - "Ranh giới này cần nhất quán với mốc bắt đầu tính 30 phút đang mơ hồ ở F021, nếu không quy tắc mới vẫn không thể verify chính xác."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F019"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC2-BR7"
+    uc_id: "AICNew-02-UC2"
+    quote: "Vượt quá: xếp theo priority giảm dần, xử lý tới hết giờ, phần dư đẩy sang buổi kế tiếp"
+    finding: "BR7 không quy định trạng thái của NLO đang xử lý DỞ DANG đúng lúc hết giờ (học sinh mới trả lời một phần nội dung của NLO đó khi bị cắt) — không rõ NLO này được tính là 'đã xử lý' (đưa vào tổng kết cuối buổi) hay bị coi như 'phần dư' và đẩy nguyên vẹn sang buổi sau."
+    suggestion: "Bổ sung quy tắc cho NLO đang xử lý dở dang khi hết giờ: tính là đã xử lý (ghi nhận kết quả từng phần) hay chưa xử lý (đẩy nguyên vẹn sang buổi sau)."
+    resolution_edge_cases:
+      - "Lựa chọn này ảnh hưởng trực tiếp tới định nghĩa 'NLO đã xử lý' đang thiếu ở BR13/UC3 (F029) — nên chốt đồng thời để tránh hai định nghĩa lệch nhau."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F020"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC2-BR9"
+    uc_id: "AICNew-02-UC2"
+    quote: "Khi thoát: lưu vị trí/tiến trình hiện tại, tạm dừng đếm thời lượng"
+    finding: "BR9 chỉ nói lưu 'vị trí/tiến trình' khi thoát, không nói rõ liệu NHÁNH NỘI DUNG hiện tại (Củng cố hay đã được chuyển sang Nâng cao theo BR8) có được lưu và khôi phục đúng khi quay lại. Nếu học sinh đã chuyển sang Nâng cao rồi thoát, hệ thống khi khôi phục có thể nhầm xác định lại nhánh theo chân dung gốc (Củng cố) thay vì tiếp tục đúng nhánh đã chuyển."
+    suggestion: "Xác nhận rằng trạng thái 'nhánh nội dung hiện tại' (kể cả đã chuyển từ Củng cố sang Nâng cao hay chưa) là một phần của 'vị trí/tiến trình' được BR9 lưu và khôi phục."
+    resolution_edge_cases:
+      - "Cần làm rõ đồng thời với F026 (đâu là cửa sổ hợp lệ để resume) để tránh khôi phục nhánh cũ sau một khoảng nghỉ quá dài không còn hợp lý về nghiệp vụ."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F021"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC2-BR7/BR8/BR9 / Wireframe Screen 1"
+    uc_id: "AICNew-02-UC2"
+    quote: "thời lượng 30 phút KHÔNG tính thời gian đã thoát ra"
+    finding: "Không rõ mốc bắt đầu đồng hồ 30 phút mà BR7/BR8/BR9 cùng tham chiếu là từ khi vào Screen 1 (Mở đầu, không giới hạn thời gian xem theo wireframe) hay chỉ từ khi chuyển sang Screen 2 (Tương tác, bấm 'Bắt đầu'). Nếu thời gian xem Screen 1 bị tính vào 30 phút, điều này ảnh hưởng trực tiếp 'thời lượng còn lại' mà BR7 dùng để quyết định số NLO xử lý được."
+    suggestion: "Xác nhận mốc bắt đầu tính 30 phút: từ lúc vào buổi bổ trợ (Screen 1) hay từ lúc bấm 'Bắt đầu' vào Screen 2."
+    resolution_edge_cases:
+      - "Quyết định này còn ảnh hưởng tới việc BR9 có áp dụng cho cả thời gian ở Screen 1 hay không (xem F026)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F022"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR9 vs §3 UC1-BR1"
+    uc_id: "AICNew-02-UC2"
+    quote: "Khi học sinh thoát khỏi buổi bổ trợ giữa chừng, hệ thống PHẢI cho tiếp tục đúng tại điểm đã thoát"
+    finding: "BR9 cho phép thoát và resume sau, nhưng BR1 quy định buổi bổ trợ mới được tự động kích hoạt 'ngay sau khi buổi Big Class Plus kết thúc', áp dụng cho 'mọi buổi Big Class Plus'. Nếu học sinh thoát dở buổi bổ trợ hôm nay rồi có một buổi Big Class Plus mới kết thúc trước khi quay lại buổi dang dở, BR1 sẽ tự động kích hoạt một buổi bổ trợ MỚI — không có rule nào xử lý buổi cũ (huỷ, gộp, hay tồn tại song song hai buổi)."
+    suggestion: "Bổ sung business rule xác định vòng đời buổi bổ trợ dang dở khi có buổi Big Class Plus mới xen vào trước khi học sinh quay lại — ví dụ buổi dang dở tự động hết hiệu lực khi có buổi Big Class Plus mới hoàn tất, hoặc BR1 phải chờ buổi dang dở hoàn tất trước khi kích hoạt buổi mới."
+    resolution_edge_cases:
+      - "Nếu chọn huỷ buổi dang dở, cần xác nhận NLO đã xử lý trong buổi đó (đã ghi vào Mastery Profile theo BR12) không bị mất, chỉ mất phần chưa hoàn tất."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F023"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC2-BR9"
+    uc_id: "AICNew-02-UC2"
+    quote: "Khi học sinh thoát khỏi buổi bổ trợ giữa chừng, hệ thống PHẢI cho tiếp tục đúng tại điểm đã thoát"
+    finding: "BR9 chỉ định nghĩa hành vi cho trường hợp học sinh CHỦ ĐỘNG thoát. Trường hợp mất kết nối ngoài ý muốn giữa buổi không được xác nhận là áp dụng cùng cơ chế tạm dừng đồng hồ hay không — nếu không, đồng hồ 30 phút có thể vẫn chạy trong lúc mất kết nối, làm hao hụt thời lượng còn lại một cách không công bằng."
+    suggestion: "Xác nhận: mất kết nối ngoài ý muốn giữa buổi có được xử lý giống hệt 'thoát chủ động' ở BR9 (tạm dừng đồng hồ) hay không."
+    resolution_edge_cases:
+      - "Câu trả lời cho finding này cũng quyết định luôn cách xử lý ca 'buổi bị ngắt giữa chừng' được nhắc ở BR11/BR12 (UC3) — nên chốt nhất quán giữa UC2 và UC3 (xem F027)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F024"
+    lens: "QA"
+    severity: "major"
+    section: "Wireframe Screen 2 vs §2 AC9/BR9"
+    uc_id: "AICNew-02-UC2"
+    quote: "Trả lời → ghi nhận đúng/sai theo NLO (AICNew-02-UC3-BR12), chuyển nội dung tiếp theo"
+    finding: "AC9 yêu cầu hành vi thoát-và-quay-lại quan sát được, nhưng bảng Components/Actions của Screen 2 không có bất kỳ thành phần hay hành động 'thoát' nào — cũng không rõ 'thoát' nghĩa là gì (đóng app, mất mạng, bấm nút back?). Thiếu điểm neo UI khiến AC9 không thể thực hiện như một kịch bản kiểm thử màn hình cụ thể."
+    suggestion: "Thêm một 'Nút thoát/tạm dừng' vào Components của Screen 2 với một dòng Action tham chiếu BR9 (vd 'Bấm thoát → lưu vị trí, tạm dừng đếm giờ'), đồng thời làm rõ trong BR9 các hình thức 'thoát' được công nhận."
+    resolution_edge_cases:
+      - "Thêm nút thoát tường minh có thể làm lộ câu hỏi mới: có cần xác nhận trước khi thoát hay thoát ngay lập tức?"
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F025"
+    lens: "QA"
+    severity: "major"
+    section: "§2 AC9/BR9"
+    uc_id: "AICNew-02-UC2"
+    quote: "Học sinh thoát và quay lại trong cùng buổi thấy đúng nội dung/vị trí đã dừng"
+    finding: "AC9 bounds resume trong phạm vi 'cùng buổi' nhưng không định nghĩa buổi còn hiệu lực để resume trong bao lâu (vài phút? trong ngày? vô thời hạn?) — không có mốc để QA xác định pass/fail cho một lần quay lại trễ."
+    suggestion: "Định nghĩa trong BR9 cửa sổ thời gian hợp lệ để resume một buổi đang tạm dừng (hoặc nêu rõ là không giới hạn), làm cơ sở kiểm thử cho AC9."
+    resolution_edge_cases:
+      - "Cửa sổ resume cần khớp với F022 (vòng đời buổi dang dở khi có buổi Big Class Plus mới) để không mâu thuẫn."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F026"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR9 vs Wireframe Screen 1"
+    uc_id: "AICNew-02-UC2"
+    quote: "Khi thoát: lưu vị trí/tiến trình hiện tại, tạm dừng đếm thời lượng."
+    finding: "Không rõ BR9 (thoát/resume) áp dụng ngay từ khi vào Screen 1 (trước khi bấm 'Bắt đầu') hay chỉ từ Screen 2 trở đi, vì Screen 1 chưa có nội dung tương tác nào để lưu vị trí, và bản thân Screen 1 không định nghĩa hành động thoát nào."
+    suggestion: "Nêu rõ BR9 áp dụng từ thời điểm nào (vào buổi hay từ lúc bắt đầu tương tác), và hành vi khi resume nếu học sinh thoát lúc đang ở Screen 1."
+    resolution_edge_cases:
+      - "Câu trả lời liên quan trực tiếp tới mốc bắt đầu 30 phút đang mơ hồ ở F021 — nên chốt cùng lúc."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F027"
+    lens: "PO"
+    severity: "major"
+    section: "Wireframe Screen 2 vs §3 UC2-BR8"
+    uc_id: "AICNew-02-UC2"
+    quote: "hệ thống tự động hiển thị nội dung Nâng cao cho thời gian còn lại, không kết thúc buổi sớm"
+    finding: "UC1 quy định rõ học sinh phải được thông báo nhánh (Nâng cao/Củng cố) ở Screen 1 trước khi vào tương tác (BR5), nhưng khi BR8 kích hoạt chuyển nhánh giữa buổi (Củng cố → Nâng cao), Screen 2 không mô tả có thông báo/chuyển tiếp UI nào cho học sinh biết nội dung vừa đổi nhánh — thiếu nhất quán về mức độ minh bạch giữa lúc bắt đầu buổi và lúc đổi nhánh giữa buổi."
+    suggestion: "Làm rõ trong Screen 2 hoặc BR8: khi chuyển nhánh giữa buổi có cần một thông báo/chuyển cảnh ngắn hay chuyển liền mạch không cần báo."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F028"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR8 vs §3 UC1-BR3"
+    uc_id: "AICNew-02-UC2"
+    quote: "Chuyển sang cùng kho nội dung Nâng cao dùng cho chân dung Khá giỏi."
+    finding: "BR8 không làm rõ việc chuyển học sinh nhánh Củng cố sang dùng 'kho nội dung Nâng cao dùng cho chân dung Khá giỏi' là (i) chỉ dùng chung kho nội dung để lấp thời gian trống, hay (ii) một sự kiện ngầm định tái phân loại chân dung học sinh thành Khá giỏi. Nếu là (ii), điều này mâu thuẫn với BR3 (chân dung phải dựa trên mastery đa buổi, không phải hoàn thành nhiệm vụ tức thời)."
+    suggestion: "Làm rõ trong BR8 rằng đây chỉ là dùng chung KHO NỘI DUNG (không tái phân loại chân dung); xác nhận chân dung/nhánh ở buổi bổ trợ KẾ TIẾP vẫn do BR3 xác định lại từ Mastery Profile mới nhất, không bị ảnh hưởng bởi việc từng 'được xem' nội dung Nâng cao ở buổi trước."
+    resolution_edge_cases:
+      - "Nếu vô tình để hiểu là tái phân loại, có thể tạo hiệu ứng phụ: học sinh Trung bình-yếu xử lý xong 1 buổi liên tục được xếp Khá giỏi ở các báo cáo khác dùng chung khái niệm chân dung."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F029"
+    lens: "QA"
+    severity: "major"
+    section: "§2 AC7/BR7, liên quan Giả định AI Q2"
+    uc_id: "AICNew-02-UC2"
+    quote: "Số NLO gap vượt quá thời lượng còn lại thì hệ thống chỉ xử lý NLO ưu tiên cao nhất"
+    finding: "AC7 là tiêu chí nghiệm thu chính của UC2 nhưng phụ thuộc hoàn toàn vào 'thời lượng ước tính mỗi NLO' — con số này chưa được chốt (đã tự ghi nhận ở Giả định AI Q2). Nếu không có con số này, không thể viết test case cho AC7, và tài liệu chưa nêu đây là điều kiện chặn khả năng bàn giao Dev/QA (chỉ để dạng ghi chú tham khảo)."
+    suggestion: "Chốt số liệu ở Giả định AI Q2 (hoặc định nghĩa tạm một quy tắc suy ra từ dữ liệu thực tế) trước khi coi AC7/BR7 là sẵn sàng cho Dev/QA, và đánh dấu rõ ràng đây là điều kiện chặn handoff chứ không chỉ là ghi chú tham khảo."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F030"
+    lens: "PO"
+    severity: "major"
+    section: "Wireframe Screen 2 (Components)"
+    uc_id: "AICNew-02-UC2"
+    quote: "Nút gợi ý"
+    finding: "Screen 2 liệt kê 'Nút gợi ý' như một component nhưng không có Business Rule nào trong BR6-BR10 mô tả hành vi của nó — dùng gợi ý có tính là 'sai' khi ghi nhận vào Mastery Profile theo BR12 không, có ảnh hưởng gì đến việc xác định NLO 'đã xử lý xong' (điều kiện chuyển nhánh của BR8) hay không, có giới hạn số lần dùng không."
+    suggestion: "Bổ sung một Business Rule (hoặc mở rộng BR6/BR12) định nghĩa: dùng gợi ý ảnh hưởng thế nào đến kết quả đúng/sai ghi nhận Mastery Profile và đến việc xác định NLO đã xử lý xong."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F031"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR6/BR8 / User Flow (node G)"
+    uc_id: "AICNew-02-UC2"
+    quote: "Chuyển sang cùng kho nội dung Nâng cao dùng cho chân dung Khá giỏi."
+    finding: "Chỉ nhánh Củng cố có quy tắc chọn nội dung tường minh (BR6: Routing Engine chọn NLO theo priority). Không có Business Rule nào định nghĩa cách chọn/sắp xếp nội dung cho nhánh Nâng cao, dù có 3 luồng khác nhau dẫn vào nó (BR4: chưa đủ dữ liệu, BR3: chân dung Khá giỏi, BR8: xử lý xong Củng cố sớm). Node G của sơ đồ flow ('Tương tác nội dung theo NLO ưu tiên') còn bị dùng chung nhãn cho cả hai nhánh dù Nâng cao không phải luồng dựa trên NLO gap."
+    suggestion: "Bổ sung Business Rule (hoặc ghi nhận là phụ thuộc đội nội dung/Adaptive Learning) mô tả cách chọn/sắp xếp nội dung Nâng cao cho từng học sinh, tương tự cách BR6 xử lý Củng cố; sửa nhãn node G trong sơ đồ cho đúng với từng nhánh."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  # ===================== MAJOR — UC3 =====================
+
+  - id: "F032"
+    lens: "DEV"
+    severity: "major"
+    section: "§2 AC12/BR12"
+    uc_id: "AICNew-02-UC3"
+    quote: "Ngay sau mỗi tương tác, Mastery Profile của NLO tương ứng được cập nhật, kể cả khi buổi bị ngắt giữa chừng"
+    finding: "BR12/AC12 khẳng định ghi nhận 'PHẢI' xảy ra kể cả khi buổi bị ngắt giữa chừng như một cam kết luôn-thành-công, nhưng không định nghĩa hành vi nghiệp vụ khi việc ghi nhận thực sự KHÔNG thể hoàn tất đúng lúc mất kết nối (khác Q3 — vốn nói về lỗi khởi chạy buổi ở UC1, không phải lỗi ghi giữa buổi). Ngoài ra, 'ngay sau' không có mốc thời gian đo được, nên bất kỳ độ trễ nào cũng có thể được biện minh là 'ngay'."
+    suggestion: "Bổ sung quy tắc nghiệp vụ cho trường hợp ghi nhận thất bại thật sự do mất kết nối (NLO đó có được coi là 'đã ghi nhận' hay 'chưa xử lý', có được thử ghi nhận lại khi có mạng trở lại hay không); đồng thời gắn một mốc thời gian cụ thể cho 'ngay sau' để có thể kiểm chứng được."
+    resolution_edge_cases:
+      - "Kết quả này ảnh hưởng trực tiếp tới định nghĩa 'NLO đã xử lý' còn thiếu ở BR13 (F029/F033) — nên chốt đồng thời."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F033"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 UC3-BR13"
+    uc_id: "AICNew-02-UC3"
+    quote: "Tổng hợp danh sách NLO đã xử lý + trạng thái (cải thiện/còn gap)."
+    finding: "Cụm 'NLO đã xử lý' trong BR13/AC13 chưa được định nghĩa rõ là NLO học sinh đã BẮT ĐẦU tương tác hay đã HOÀN TẤT tương tác. Trường hợp học sinh mới bắt đầu một NLO rồi hết giờ/thoát giữa chừng (không hoàn tất), NLO đó có được tính vào danh sách tổng kết/giao BTVN ở BR13 hay không chưa rõ, và còn phụ thuộc vào cách xử lý ghi nhận thất bại ở BR12 (F032)."
+    suggestion: "Định nghĩa rõ 'đã xử lý' trong BR13 = 'đã hoàn tất tương tác và đã ghi nhận vào Mastery Profile theo BR12' (loại trừ tương tác dang dở), tránh giao BTVN cho NLO chưa thực sự được đánh giá."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F034"
+    lens: "QA"
+    severity: "major"
+    section: "Wireframe Screen 3"
+    uc_id: "AICNew-02-UC3"
+    quote: "Bấm xem BTVN → chuyển sang BTVN Adaptive; kết thúc buổi"
+    finding: "Screen 3 gắn 'kết thúc buổi' vào hành động bấm 'Bấm xem BTVN' của học sinh. Nhưng BR11 nói rõ buổi không gate theo bất kỳ hành động hoàn thành nào, và AC13 yêu cầu BTVN Adaptive được giao 'cuối buổi' vô điều kiện — không rõ việc giao BTVN diễn ra ở phía hệ thống ngay khi buổi kết thúc (độc lập với việc học sinh có bấm qua Screen 3 hay không), hay phụ thuộc vào thao tác này."
+    suggestion: "Làm rõ trong BR13 rằng việc giao BTVN Adaptive được kích hoạt bởi sự kiện kết thúc buổi (phía hệ thống), độc lập với việc học sinh có xem/bấm qua Screen 3 hay không; sửa dòng Action của Screen 3 để 'kết thúc buổi' đọc như một thao tác thoát của học sinh, không phải điều kiện kích hoạt."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F035"
+    lens: "SA"
+    severity: "major"
+    section: "1.c Phụ thuộc liên service (mục 4)"
+    uc_id: ""
+    quote: "Cần **khả năng nhận bàn giao NLO ưu tiên** từ BTVN Adaptive/Edupia Practice"
+    finding: "Chiều phụ thuộc ở đây ngược với BR7/BR13: BR7 và BR13 quy định feature này (qua Routing Engine) xác định NLO ưu tiên rồi GIAO NLO đó SANG BTVN Adaptive (feature là bên gửi, BTVN Adaptive là bên nhận). Nhưng dòng phụ thuộc này lại viết feature 'cần khả năng NHẬN bàn giao NLO ưu tiên TỪ BTVN Adaptive' — ngược chiều gửi/nhận so với phần Feature giới thiệu và BR7/BR13."
+    suggestion: "Sửa lại chiều phụ thuộc cho khớp BR7/BR13, ví dụ: 'Cần khả năng BTVN Adaptive/Edupia Practice tiếp nhận NLO ưu tiên do feature này bàn giao — để giao đúng bài tập tương ứng cuối buổi'."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F036"
+    lens: "QA"
+    severity: "major"
+    section: "1.c Phụ thuộc liên service (mục 5)"
+    uc_id: ""
+    quote: "để tổng kết cuối buổi, có thể cần mở rộng logic cho ngữ cảnh buổi bổ trợ"
+    finding: "Dòng phụ thuộc này thừa nhận sự không chắc chắn ('có thể cần mở rộng logic') về việc AI trợ giảng hiện có (định hình ở AICNew-01) đã đủ khả năng tổng kết cho buổi bổ trợ hay chưa. BR13 (nhận xét tổng kết cuối buổi) hoàn toàn phụ thuộc vào năng lực này nhưng open question này chưa được ghi nhận trong 'Giả định AI' (chỉ có Q1-Q3), dễ bị bỏ sót trước khi bàn giao Dev."
+    suggestion: "Thêm một câu hỏi mới (Q4) vào 'Giả định AI' xác nhận với PO/chủ sở hữu AICNew-01: logic tổng kết của AI trợ giảng đã bao phủ ngữ cảnh buổi bổ trợ hay cần xây mới, thay vì để ở dạng 'có thể cần'."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F037"
+    lens: "SA"
+    severity: "major"
+    section: "1.c Phụ thuộc liên service (mục 1)"
+    uc_id: ""
+    quote: "Cần **đọc Mastery Profile** (mastery tổng hợp toàn môn, đa buổi) từ nền tảng Adaptive Learning"
+    finding: "§1.c chỉ liệt kê phụ thuộc GHI ĐỌC (read) Mastery Profile, không liệt kê phụ thuộc GHI (write) — trong khi BR12 (UC3) yêu cầu hệ thống ghi nhận kết quả vào Mastery Profile ngay sau mỗi tương tác, tức phụ thuộc vào khả năng cập nhật/ghi dữ liệu real-time từ nền tảng Adaptive Learning. Danh sách 5 phụ thuộc hiện tại không phản ánh đầy đủ mọi phụ thuộc liên service thực sự được dùng xuyên suốt UC1-UC3."
+    suggestion: "Thêm một dòng phụ thuộc riêng: 'Cần khả năng GHI/cập nhật Mastery Profile theo thời gian thực (real-time, theo từng NLO) từ nền tảng Adaptive Learning — phục vụ BR12', và cập nhật số đếm phụ thuộc chưa có PRD chính thức ở Note tương ứng."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  # ===================== MAJOR — GLOBAL =====================
+
+  - id: "F038"
+    lens: "SA"
+    severity: "major"
+    section: "§3 UC2-BR7 vs §3 UC3-BR13"
+    uc_id: ""
+    quote: "NLO còn lại PHẢI chuyển sang buổi bổ trợ kế tiếp và giao vào BTVN Adaptive"
+    finding: "BR7 (UC2) và BR13 (UC3) cùng mô tả việc giao dữ liệu cho BTVN Adaptive vào cuối buổi, nhưng với hai tập NLO khác nhau: BR7 giao NLO CÒN DƯ/chưa xử lý (vượt thời lượng), còn BR13 giao đúng NLO ĐÃ XỬ LÝ trong buổi. Tài liệu không làm rõ đây có phải một lần bàn giao gộp cả hai tập, hay hai lần bàn giao riêng biệt."
+    suggestion: "Làm rõ trong BR13 (hoặc thêm ghi chú liên kết BR7↔BR13) rằng gói BTVN Adaptive cuối buổi bao gồm CẢ hai tập NLO (đã xử lý + còn dư), hoặc nếu là hai gói tách biệt, nêu rõ tiêu chí phân biệt."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F039"
+    lens: "SA"
+    severity: "major"
+    section: "§2 AC13/BR13 vs 00_context/glossary.md (BTVN Adaptive)"
+    uc_id: "AICNew-02-UC3"
+    quote: "BTVN Adaptive tương ứng đúng các NLO đã xử lý trong buổi"
+    finding: "AC13/BR13 khẳng định BTVN Adaptive giao 'đúng các NLO đã xử lý trong buổi' (ngụ ý chỉ gồm đúng các NLO vừa xử lý), nhưng định nghĩa canonical của BTVN Adaptive trong glossary mô tả cơ chế trộn NLO theo tỷ lệ cố định 40% yếu/40% mới/20% ôn chống quên — nghĩa là BTVN không chỉ gồm NLO vừa xử lý mà còn trộn thêm NLO mới và NLO ôn tập."
+    suggestion: "Làm rõ trong BR13: NLO đã xử lý trong buổi được ưu tiên đưa vào tỷ lệ '40% yếu' của công thức trộn BTVN Adaptive, chứ không phải BTVN chỉ chứa duy nhất các NLO đó; xác nhận lại với đội BTVN Adaptive nếu cần sửa AC13."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F040"
+    lens: "PO"
+    severity: "major"
+    section: "Metadata"
+    uc_id: ""
+    quote: "| **Ticket**    | AICNew-02                                 |"
+    finding: "Bảng Metadata không có trường Priority. Với 2 PRD đang chạy song song (AICNew-01, AICNew-02) cộng nền tảng Adaptive Learning chưa có PRD, việc không công bố priority khiến BOD/team không có căn cứ rõ ràng để sắp thứ tự triển khai sau khảo sát."
+    suggestion: "Thêm trường Priority vào Metadata (có thể để '◆ Pending BOD' như cách PRD đã dùng cho các mục chưa chốt khác), thay vì để trống hoàn toàn."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F041"
+    lens: "SA"
+    severity: "major"
+    section: "00_context/glossary.md (Mastery Profile / Mastery Map) vs §1.b/§1.c/§1.d"
+    uc_id: ""
+    quote: "giá trị tổng hợp toàn môn, đa buổi, có decay (không phải chỉ dữ liệu của một buổi riêng lẻ)"
+    finding: "Glossary hiện coi 'Mastery Profile' và 'Mastery Map' là MỘT entry gộp chung (bản đồ năng lực hiển thị cho phụ huynh). PRD này lại tách Mastery Profile thành một đối tượng dữ liệu backend riêng (đọc/ghi để định tuyến nội dung — §1.c, §1.d) và loại trừ Mastery Map như một hiển thị khác cho phụ huynh (Out of Scope) — ngụ ý đây là 2 artifact khác nhau, chưa được đối chiếu lại với cách glossary định nghĩa gộp chung."
+    suggestion: "Làm rõ (trong glossary hoặc trong PRD này) liệu Mastery Profile (được feature này đọc/ghi) và Mastery Map (hiển thị Parent Mode) có cùng một đối tượng dữ liệu gốc hay là hai thứ khác nhau thực sự, rồi cập nhật tài liệu đang lệch cho khớp."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  # ===================== MINOR =====================
+
+  - id: "F042"
+    lens: "QA"
+    severity: "minor"
+    section: "§2 AC4"
+    uc_id: "AICNew-02-UC1"
+    quote: "hệ thống hiển thị thẳng nội dung Nâng cao, không qua bước phân chân dung."
+    finding: "Vế 'không qua bước phân chân dung' trong AC4 mô tả một chi tiết vận hành nội bộ chứ không phải kết quả học sinh quan sát được, và lặp lại cơ chế đã có ở BR4."
+    suggestion: "Rút gọn AC4 về đúng phần quan sát được (học sinh thấy ngay nội dung Nâng cao); giữ cơ chế 'bỏ qua bước xác định chân dung' trong Business Logic của BR4 như hiện tại."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F043"
+    lens: "QA"
+    severity: "minor"
+    section: "§2 AC5"
+    uc_id: "AICNew-02-UC1"
+    quote: "học sinh thấy tóm tắt kết quả buổi Big Class Plus vừa học và mục tiêu buổi bổ trợ tương ứng nhánh đã chọn."
+    finding: "AC5 gần như lặp lại nguyên văn BR5, chỉ đổi chủ ngữ, không bổ sung giá trị nghiệm thu nào khác."
+    suggestion: "Thu gọn AC5 thành một checkpoint quan sát được duy nhất (màn mở đầu hiển thị tóm tắt + mục tiêu trước khi vào tương tác); để BR5 giữ vai trò mô tả đầy đủ yêu cầu nghiệp vụ."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F044"
+    lens: "QA"
+    severity: "minor"
+    section: "§2 AC6"
+    uc_id: "AICNew-02-UC2"
+    quote: "nội dung Củng cố tập trung đúng NLO có priority cao nhất theo Routing Engine"
+    finding: "AC6 dùng nguyên từ tiếng Anh 'priority' trong khi AC7/AC8/AC9/AC10 cùng UC đều dùng tiếng Việt 'ưu tiên' — không nhất quán thuật ngữ trong cùng khối AC."
+    suggestion: "Đổi AC6 thành 'NLO có độ ưu tiên cao nhất' cho khớp AC7/AC8/AC9/AC10; giữ từ gốc 'priority' chỉ ở dòng Business Logic của BR6 khi trích công thức Routing Engine."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F045"
+    lens: "QA"
+    severity: "minor"
+    section: "§2 AC9/BR9, AC10/BR10"
+    uc_id: "AICNew-02-UC2"
+    quote: "nội dung buổi theo đúng thứ tự Routing Engine trả về, không có luật ưu tiên kỹ năng riêng"
+    finding: "AC9 và AC10 đều gần như lặp lại nguyên văn Business Rule tương ứng của chúng (BR9, BR10), không thêm điều kiện nghiệm thu độc lập nào khác."
+    suggestion: "Viết lại AC9/AC10 thành các checkpoint quan sát được cụ thể trên màn hình (vd một ví dụ thứ tự nội dung cụ thể cho AC10), thay vì lặp lại câu chữ của BR9/BR10."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F046"
+    lens: "QA"
+    severity: "minor"
+    section: "§2 AC11/BR11, AC12/BR12, AC13/BR13"
+    uc_id: "AICNew-02-UC3"
+    quote: "Buổi bổ trợ không hiển thị bất kỳ yêu cầu điểm danh hay trạng thái \"phải hoàn thành\" nào."
+    finding: "AC11, AC12, AC13 đều gần như lặp lại nguyên văn Business Rule tương ứng (BR11, BR12, BR13), không thêm tiêu chí nghiệm thu độc lập, có thể kiểm chứng riêng trên màn hình."
+    suggestion: "Viết lại từng AC thành checkpoint quan sát được cụ thể (vd AC11: không có component điểm danh/đánh dấu hoàn thành ở cả 3 màn hình, kể cả khi thoát ngang chừng), giữ nguyên rationale/cơ chế ở BR tương ứng."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F047"
+    lens: "QA"
+    severity: "minor"
+    section: "Wireframe Screen 3"
+    uc_id: "AICNew-02-UC3"
+    quote: "Danh sách NLO đã xử lý (đã cải thiện/còn gap)"
+    finding: "Screen 3 hiển thị trạng thái 'đã cải thiện' hay 'còn gap' cho từng NLO, nhưng không có Business Rule nào định nghĩa tiêu chí phân loại 2 trạng thái này (khác với ngưỡng phân chân dung ở Q1, vốn là ngưỡng đầu buổi chứ không phải ngưỡng đánh giá cải thiện cuối buổi)."
+    suggestion: "Bổ sung Business Rule/Logic xác định tiêu chí 'cải thiện' vs 'còn gap' cho từng NLO ở cuối buổi, hoặc bổ sung câu hỏi tương ứng vào 'Giả định AI' nếu PO chưa chốt được ngưỡng."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F048"
+    lens: "SA"
+    severity: "minor"
+    section: "§4.a User Flow (mermaid) vs §3 UC3-BR12"
+    uc_id: "AICNew-02-UC3"
+    quote: "Hệ thống PHẢI ghi nhận kết quả (đúng/sai theo NLO) vào Mastery Profile ngay sau mỗi tương tác"
+    finding: "Sơ đồ User Flow mô tả toàn bộ luồng UC1→UC2→UC3 nhưng không có bước nào thể hiện việc ghi nhận Mastery Profile real-time sau mỗi tương tác (BR12), dù Screen 2 đã trích dẫn rõ BR12 gắn với hành động 'Trả lời'."
+    suggestion: "Bổ sung một ghi chú/nhánh trong sơ đồ Mermaid tại node 'Tương tác nội dung' thể hiện việc ghi Mastery Profile diễn ra song song với mỗi tương tác, thay vì chỉ ngụ ý ở bước tổng kết cuối."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+summary:
+  total_findings: 48
+  by_severity: { critical: 7, major: 34, minor: 7 }
+  by_lens: { QA: 12, DEV: 12, SA: 18, PO: 6 }
+  recommendation: "BLOCKED"
+  convergence_rounds: 3
