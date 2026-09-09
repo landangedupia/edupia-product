@@ -2061,7 +2061,7 @@ function aic2FinishLesson(){
   state.aic2.messages.push({who:'ai', text: greet});
   renderAic2Chat();
   updateAic2Progress();
-  setTimeout(aic2RenderExercise, 500);
+  autoAdvance(aic2RenderExercise, 500);
 }
 function aic2RenderExercise(){
   const nlo = state.aic2.nloList[state.aic2.stage];
@@ -2213,18 +2213,20 @@ function forceAdvanceAic2(){
   if(!nlo) return;
   const ex = nlo.exercises[state.aic2.exerciseIndex];
   if(!ex) return;
+  // Nếu đang giữa 2 bài tập (exerciseIndex đã tăng nhưng UI bài tiếp theo chưa kịp render vì
+  // autoAdvance vừa bị huỷ ở dòng trên) thì render ngay bây giờ thay vì bỏ qua im lặng — tránh
+  // kẹt màn hình trống vĩnh viễn khi bấm Bỏ qua đúng lúc đang chuyển tiếp.
+  if(document.getElementById('aic2ExerciseArea').children.length===0){
+    aic2RenderExercise();
+  }
   if(ex.type==='mcq'){
-    if(!document.getElementById('aic2Opt'+ex.answerIndex)) return;
     aic2PickMcq(ex.answerIndex); aic2SubmitMcq();
   } else if(ex.type==='gapfill'){
-    if(!document.getElementById('aic2GapWord'+ex.answerIndex)) return;
     aic2PickGap(ex.answerIndex); aic2SubmitGap();
   } else if(ex.type==='speak'){
-    if(!document.getElementById('aic2SpeakMic')) return;
     aic2ToggleSpeak();
     setTimeout(()=>{ if(document.getElementById('aic2SpeakMic')) aic2ToggleSpeak(); }, 150);
   } else {
-    if(!document.getElementById('aic2TextInput')) return;
     aic2Send('(bỏ qua – câu trả lời mẫu)');
   }
 }
