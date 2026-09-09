@@ -617,12 +617,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* ---- Màn 2 (Tương tác) — nền tối kiểu classroom, tái dùng chat-panel ---- */
 .aic2-interact-screen{min-height:956px;background:#0b1220;position:relative;}
 .aic2-topbar{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;z-index:4;}
-.aic2-exit-btn{position:absolute;top:20px;right:24px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#e5e7eb;font-size:16px;z-index:5;}
-.aic2-exit-btn:hover{background:rgba(255,255,255,.2);}
 .duration-pill{display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
 .duration-bar-bg{width:80px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
 .duration-bar-fill{height:100%;background:var(--primary);border-radius:6px;transition:width .4s ease;}
-.nlo-pill{display:flex;align-items:center;gap:6px;background:#12233f;color:#fff;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
+.nlo-pill{display:flex;align-items:center;gap:6px;background:#12233f;color:#fff;padding:6px 14px;border-radius:10px;
+  font-size:13px;font-weight:600;max-width:600px;white-space:normal;text-align:center;line-height:1.4;}
 .aic2-chat-wrap{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow-m);}
 .aic2-mcq-opts{display:flex;gap:10px;flex-wrap:wrap;padding:14px 0 4px;}
 .aic2-opt-btn{background:var(--n100);color:var(--n700);padding:10px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:background .15s,color .15s;}
@@ -636,7 +635,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô — tái dùng đúng khung "frame
    chiếu bài giảng" của buổi chính khóa (khớp node 17561:14450: viền tối, pill hướng dẫn góc
    trái, khung giáo viên góc phải, label chủ đề giữa khung). ---- */
-.aic2-lesson-stage{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;
+.aic2-lesson-stage{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:960px;
   display:flex;flex-direction:column;align-items:center;gap:14px;}
 .aic2-lesson-duration{flex-shrink:0;display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;
   padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
@@ -644,17 +643,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-lesson-duration-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .5s linear;}
 .aic2-lesson-frame{position:relative;width:100%;flex:1;min-height:0;border-radius:16px;overflow:hidden;
   background:#374151;box-shadow:var(--shadow-m);}
-.aic2-lesson-frame img{width:100%;height:100%;object-fit:contain;display:block;}
-.aic2-lesson-instr-pill{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:8px;
-  background:#12233f;color:#fff;padding:8px 16px;border-radius:12px;font-weight:600;font-size:13px;z-index:2;}
-.aic2-lesson-instr-pill .dot{width:20px;height:20px;border-radius:50%;background:#fff;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.aic2-lesson-instr-pill .dot img{width:14px;height:14px;}
+.aic2-lesson-frame img{width:100%;height:100%;object-fit:cover;display:block;}
 .aic2-lesson-title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;
   padding:14px 26px;border-radius:14px;font-size:20px;font-weight:700;text-align:center;max-width:70%;z-index:2;}
-.aic2-lesson-teacher-inset{position:absolute;top:16px;right:16px;width:130px;height:76px;border-radius:12px;
-  overflow:hidden;border:2px solid rgba(255,255,255,.5);z-index:2;}
-.aic2-lesson-teacher-inset img{width:100%;height:100%;object-fit:cover;display:block;}
 .aic2-lesson-caption{flex-shrink:0;background:#fff;color:var(--n900);padding:14px 20px;border-radius:14px;
   font-size:14px;line-height:1.6;width:100%;text-align:center;box-shadow:var(--shadow-s);}
 .aic2-lesson-skip{flex-shrink:0;background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;
@@ -1186,9 +1177,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
        thanh tiến trình thời lượng còn lại, nút gợi ý, nút thoát (mô phỏng BR9 — xem finding F024). -->
   <section class="screen" id="screen-aic2-interact">
     <div class="aic2-interact-screen">
-      <button class="aic2-exit-btn" onclick="aic2Exit()" title="Thoát buổi">✕</button>
       <div class="aic2-topbar">
-        <span class="nlo-pill" id="aic2NloPill">📍 NLO 1/2</span>
+        <span class="nlo-pill" id="aic2NloPill">Kiến thức bổ trợ 1/2</span>
         <span class="duration-pill">⏱ <span id="aic2DurationLabel">30:00</span> <span class="duration-bar-bg"><span class="duration-bar-fill" id="aic2DurationFill" style="width:100%;"></span></span></span>
       </div>
       <div class="aic2-chat-wrap">
@@ -1199,9 +1189,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div class="aic2-lesson-duration">🎬 Bài giảng ngắn <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span> <span id="aic2LessonTimer">3:00</span></div>
         <div class="aic2-lesson-frame">
           <img src="assets/classroom-bg.png" alt="">
-          <span class="aic2-lesson-instr-pill"><span class="dot"><img src="assets/logo-mark.svg" alt=""></span> Đang giảng bài</span>
           <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
-          <div class="aic2-lesson-teacher-inset"><img src="assets/avatar-teacher1.png" alt=""></div>
         </div>
         <div class="aic2-lesson-caption" id="aic2LessonCaption"></div>
         <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
@@ -2018,9 +2006,10 @@ function startAic2Interact(){
 function updateAic2Progress(){
   const total = state.aic2.nloList.length;
   const idx = Math.min(state.aic2.stage, total-1);
+  const nloName = state.aic2.nloList[idx] ? state.aic2.nloList[idx].name : '';
   document.getElementById('aic2NloPill').textContent = state.aic2.phase==='lesson'
-    ? `📍 NLO ${idx+1}/${total} · Bài giảng`
-    : `📍 NLO ${idx+1}/${total} · Bài ${state.aic2.exerciseIndex+1}/5`;
+    ? `Kiến thức bổ trợ ${idx+1}/${total}: ${nloName}`
+    : `Kiến thức bổ trợ ${idx+1}/${total}: ${nloName} · Bài ${state.aic2.exerciseIndex+1}/5`;
   const totalSteps = total*6;
   const doneSteps = state.aic2.stage*6 + (state.aic2.phase==='lesson' ? 0 : 1+state.aic2.exerciseIndex);
   const pct = Math.max(8, 100 - Math.round((doneSteps/totalSteps)*85));
