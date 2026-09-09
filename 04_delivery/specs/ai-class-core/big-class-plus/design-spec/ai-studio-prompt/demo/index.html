@@ -632,6 +632,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-speak{padding:14px 0 4px;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .aic2-speak-prompt{font-size:14px;color:var(--n900);font-weight:500;text-align:center;background:var(--n50);border-radius:12px;padding:12px 16px;}
 .aic2-speak-hint{font-size:12px;color:var(--n500);}
+
+/* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô, giao diện kiểu buổi chính khóa ---- */
+.aic2-lesson-stage{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;
+  border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#0f2942,#123a5c 55%,#0b2338);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px;box-shadow:var(--shadow-m);}
+.aic2-lesson-duration{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;
+  background:#111827;color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;z-index:2;}
+.aic2-lesson-duration-bar{width:64px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
+.aic2-lesson-duration-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .5s linear;}
+.aic2-lesson-topic{background:#12233f;color:#fff;padding:18px 32px;border-radius:16px;font-size:24px;font-weight:700;
+  text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:600px;}
+.aic2-lesson-caption{background:#fff;color:var(--n900);padding:16px 22px;border-radius:16px;font-size:15px;line-height:1.6;
+  max-width:600px;text-align:center;box-shadow:var(--shadow-m);}
+.aic2-lesson-mascot{position:absolute;left:24px;bottom:24px;font-size:48px;}
+.aic2-lesson-skip{background:rgba(255,255,255,.12);color:#e5e7eb;padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;}
 .homework-card{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:14px;}
 .homework-card .ic{font-size:26px;}
 .homework-card .t{font-weight:600;color:var(--n900);font-size:13px;}
@@ -1168,6 +1183,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div class="chat-scroll" id="aic2ChatScroll"></div>
         <div id="aic2ExerciseArea"></div>
       </div>
+      <div class="aic2-lesson-stage" id="aic2LessonStage" style="display:none;">
+        <div class="aic2-lesson-duration">🎬 Bài giảng ngắn <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span> <span id="aic2LessonTimer">3:00</span></div>
+        <div class="aic2-lesson-topic" id="aic2LessonTopic"></div>
+        <div class="aic2-lesson-caption" id="aic2LessonCaption"></div>
+        <span class="aic2-lesson-mascot">🧑‍🏫</span>
+        <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Đã hiểu, làm bài tập →</button>
+      </div>
       <div class="center-cta" id="aic2Cta" style="display:none;">
         <button class="btn-primary" onclick="goto('aic2-summary')">Xem tổng kết buổi bổ trợ</button>
       </div>
@@ -1216,7 +1238,7 @@ const state = {
   recording: false,
   classroomStep: 0,
   fb: null,
-  aic2: { track: null, nloList: [], stage: 0, messages: [], improved: [] },
+  aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, messages: [], improved: [] },
   gateCode: '',
   gateFailedOnce: false,
   pendingTimer: null,
@@ -1860,28 +1882,73 @@ function renderMasteryZone(containerId, prevOverall){
 /* NLO ưu tiên xử lý mỗi buổi Củng cố/Nâng cao — 2 NLO/buổi, khớp glossary Routing Engine
    ("1-2 NLO ưu tiên cao nhất"). Chân dung suy ra từ điểm Big Class Plus vừa học (proxy demo
    cho Mastery Profile — PRD Adaptive Learning nền tảng thật chưa tồn tại).
-   Mỗi NLO gắn 1 dạng bài khác nhau (mcq / gapfill / speak / chat) để đa dạng hoá tương tác. */
+   Thay vì bắt học lại cả Unit, mỗi NLO là 1 Micro-lesson: bài giảng ngắn 3 phút (giao diện
+   kiểu buổi chính khóa) rồi mở khóa đúng 5 bài tập vi mô trộn dạng (mcq/gapfill/speak/chat)
+   để giải quyết triệt để đúng NLO đang hổng — áp dụng cho cả nhánh Củng cố và Nâng cao. */
 const AIC2_NLO = {
   reinforce: [
-    { name:'Từ vựng: Nhạc cụ (Musical Instruments)', type:'mcq',
-      greet:'buổi trước chúng ta đã học các loại nhạc cụ như guitar, piano, violin — hãy cùng ôn lại nhé!',
-      question:'Nhạc cụ nào có 6 dây và chơi bằng cách gảy?',
-      options:['Piano','Guitar','Trống','Sáo'], answerIndex:1,
-      ok:'Chính xác! Con nhớ rất tốt.', wrong:'Chưa đúng, đáp án là Guitar — nhạc cụ có dây gảy.' },
-    { name:'Ngữ pháp: Thì hiện tại đơn (Present Simple)', type:'gapfill',
+    { name:'Từ vựng: Tên các loại nhạc cụ (Musical Instruments)',
+      greet:'buổi trước chúng ta đã học các loại nhạc cụ như guitar, piano, violin — hãy cùng ôn lại thật chắc nhé!',
+      lesson:{ title:'Musical Instruments', explain:'Guitar (đàn ghi-ta), Piano (đàn dương cầm), Violin (đàn vi-ô-lông) đều là nhạc cụ. Với nhạc cụ có dây (guitar, violin) ta dùng động từ "play the + tên nhạc cụ", ví dụ: "play the guitar".' },
+      exercises:[
+        { type:'mcq', question:'Nhạc cụ nào có 6 dây và chơi bằng cách gảy?', options:['Piano','Guitar','Trống','Sáo'], answerIndex:1,
+          ok:'Chính xác! Guitar có dây và được gảy.', wrong:'Chưa đúng, đáp án là Guitar — nhạc cụ có dây gảy.' },
+        { type:'gapfill', pre:'She can play the', post:'very well.', options:['guitar','book','chair','shoe'], answerIndex:0,
+          ok:'Đúng rồi, "guitar" là nhạc cụ có dây.', wrong:'Chưa đúng, đáp án là "guitar".' },
+        { type:'mcq', question:'"Piano" trong tiếng Việt nghĩa là gì?', options:['Đàn ghi-ta','Đàn dương cầm','Trống','Sáo'], answerIndex:1,
+          ok:'Chính xác, con nhớ rất tốt!', wrong:'Chưa đúng, "Piano" nghĩa là đàn dương cầm.' },
+        { type:'gapfill', pre:'My brother plays the', post:'every morning.', options:['violin','table','pencil','door'], answerIndex:0,
+          ok:'Tốt lắm, "violin" là từ hợp nghĩa nhất.', wrong:'Chưa đúng, đáp án là "violin".' },
+        { type:'chat', ask:'Con hãy kể tên 1 nhạc cụ con thích và giải thích ngắn gọn vì sao nhé?',
+          ok:'Câu trả lời rất hay, con dùng từ vựng chính xác!' },
+      ] },
+    { name:'Ngữ pháp: Thì hiện tại đơn (Present Simple)',
       greet:'giờ mình ôn lại thì hiện tại đơn nhé, đây là kiến thức rất quan trọng cho giao tiếp hàng ngày.',
-      pre:'She', post:'to school every day.', options:['go','goes','going','went'], answerIndex:1,
-      ok:'Chuẩn rồi, dùng "goes" vì chủ ngữ "She" là ngôi số ít.', wrong:'Chưa đúng, đáp án đúng là "goes".' },
+      lesson:{ title:'Present Simple', explain:'Với chủ ngữ số ít (He/She/It), động từ thêm "-s/-es": "She goes to school." Với I/You/We/They, giữ nguyên động từ: "They go to school."' },
+      exercises:[
+        { type:'gapfill', pre:'She', post:'to school every day.', options:['go','goes','going','went'], answerIndex:1,
+          ok:'Chuẩn rồi, dùng "goes" vì chủ ngữ "She" là ngôi số ít.', wrong:'Chưa đúng, đáp án đúng là "goes".' },
+        { type:'mcq', question:'Câu nào đúng ngữ pháp thì hiện tại đơn?', options:['He play football.','He plays football.','He playing football.','He played football.'], answerIndex:1,
+          ok:'Chính xác! "He plays" mới đúng ngôi số ít.', wrong:'Chưa đúng, đáp án đúng là "He plays football."' },
+        { type:'gapfill', pre:'They', post:'to the park on Sundays.', options:['go','goes','going','went'], answerIndex:0,
+          ok:'Đúng rồi, "They" giữ nguyên động từ "go".', wrong:'Chưa đúng, đáp án là "go".' },
+        { type:'mcq', question:'Từ nào KHÔNG cần thêm "-s/-es" ở thì hiện tại đơn?', options:['She (watch)','He (do)','I (like)','It (fly)'], answerIndex:2,
+          ok:'Chính xác, "I" không chia động từ thêm -s.', wrong:'Chưa đúng, đáp án là "I (like)".' },
+        { type:'chat', ask:'Con hãy đặt 1 câu ở thì hiện tại đơn nói về việc con làm mỗi sáng?',
+          ok:'Câu rất hay, con chia đúng ngôi rồi!' },
+      ] },
   ],
   advance: [
-    { name:'Mở rộng: Nhạc cụ nâng cao (Advanced Instruments)', type:'speak',
-      greet:'con làm rất tốt buổi vừa rồi! Giờ mình thử nói một câu mở rộng về nhạc cụ yêu thích nhé.',
-      prompt:'My favorite instrument is the violin because it sounds beautiful.',
-      ok:'Phát âm rất tốt, tiếp tục phát huy nhé!' },
-    { name:'Ngữ pháp: Thì tương lai đơn (Future Simple)', type:'chat',
-      greet:'giờ mình thử hội thoại với thì tương lai đơn nhé.',
-      ask:'Con hãy đặt 1 câu với "will" nói về việc con sẽ làm cuối tuần này?',
-      ok:'Câu rất hay, con dùng "will" chính xác!' },
+    { name:'Mở rộng: Nhạc cụ nâng cao (Advanced Instruments)',
+      greet:'con làm rất tốt buổi vừa rồi! Giờ mình mở rộng thêm cách miêu tả nhạc cụ mình yêu thích nhé.',
+      lesson:{ title:'Describing Instruments', explain:'Để miêu tả nhạc cụ yêu thích, dùng mẫu câu: "My favorite instrument is the + [tên nhạc cụ] because + [lý do]." Ví dụ: "...because it sounds beautiful."' },
+      exercises:[
+        { type:'speak', prompt:'My favorite instrument is the violin because it sounds beautiful.',
+          ok:'Phát âm rất tốt, ngữ điệu tự nhiên!' },
+        { type:'mcq', question:'Từ nào diễn tả ÂM THANH hay của nhạc cụ?', options:['Heavy','Beautiful','Slow','Square'], answerIndex:1,
+          ok:'Chính xác, "beautiful" phù hợp để khen âm thanh.', wrong:'Chưa đúng, đáp án là "Beautiful".' },
+        { type:'speak', prompt:'I want to learn how to play the piano next year.',
+          ok:'Con nói rất trôi chảy, tiếp tục phát huy nhé!' },
+        { type:'chat', ask:'Con hãy đặt 1 câu miêu tả nhạc cụ con muốn học thêm, dùng mẫu "I want to learn..."?',
+          ok:'Câu rất hay và đúng mẫu câu!' },
+        { type:'speak', prompt:'Playing an instrument every day helps me relax.',
+          ok:'Xuất sắc, con đã sẵn sàng cho phần nâng cao hơn rồi đó!' },
+      ] },
+    { name:'Ngữ pháp: Thì tương lai đơn (Future Simple)',
+      greet:'giờ mình thử mở rộng thêm với thì tương lai đơn nhé.',
+      lesson:{ title:'Future Simple ("will")', explain:'Dùng "will + động từ nguyên mẫu" để nói về dự định/dự đoán trong tương lai: "I will visit my grandma this weekend." Thể phủ định: "will not / won\'t".' },
+      exercises:[
+        { type:'gapfill', pre:'I', post:'visit my grandma this weekend.', options:['will','am','was','did'], answerIndex:0,
+          ok:'Chính xác, "will" dùng cho thì tương lai đơn.', wrong:'Chưa đúng, đáp án là "will".' },
+        { type:'chat', ask:'Con hãy đặt 1 câu với "will" nói về việc con sẽ làm cuối tuần này?',
+          ok:'Câu rất hay, con dùng "will" chính xác!' },
+        { type:'mcq', question:'Thể phủ định của "will" là gì?', options:['won\'t','not will','willn\'t','no will'], answerIndex:0,
+          ok:'Chính xác! "won\'t" = "will not".', wrong:'Chưa đúng, đáp án là "won\'t".' },
+        { type:'gapfill', pre:'She', post:'be happy to see you.', options:['will','wills','willing','will to'], answerIndex:0,
+          ok:'Đúng rồi, "will" giữ nguyên với mọi chủ ngữ.', wrong:'Chưa đúng, đáp án là "will".' },
+        { type:'chat', ask:'Con hãy đoán xem thời tiết ngày mai thế nào, dùng câu với "will"?',
+          ok:'Câu dự đoán rất tự nhiên, con dùng đúng cấu trúc rồi!' },
+      ] },
   ],
 };
 
@@ -1895,6 +1962,8 @@ function initAic2Intro(){
   state.aic2.track = computeAic2Track();
   state.aic2.nloList = AIC2_NLO[state.aic2.track];
   state.aic2.stage = 0;
+  state.aic2.phase = 'lesson';
+  state.aic2.exerciseIndex = 0;
   state.aic2.messages = [];
   state.aic2.improved = [];
   state.aic2._mcqPick = null;
@@ -1915,24 +1984,31 @@ function initAic2Intro(){
 
   const names = state.aic2.nloList.map(n=>n.name);
   document.getElementById('aic2GoalText').textContent = state.aic2.track==='advance'
-    ? `Mở rộng thêm ${names.length} chủ đề nâng cao: ${names.join(' · ')}.`
-    : `Vá ${names.length} lỗ hổng ưu tiên nhất vừa phát hiện ở buổi Big Class Plus: ${names.join(' · ')}.`;
+    ? `Mở rộng ${names.length} chủ đề qua các bài giảng ngắn 3 phút + bài tập vi mô: ${names.join(' · ')}.`
+    : `Vá triệt để ${names.length} lỗ hổng ưu tiên nhất qua các bài giảng ngắn 3 phút + bài tập vi mô — không phải học lại cả Unit: ${names.join(' · ')}.`;
 }
 
-/* ---- Màn 2: Tương tác — BR6/BR7 xử lý NLO ưu tiên, BR8 tự chuyển khi xong sớm ---- */
+/* ---- Màn 2: Tương tác — mỗi NLO = 1 Micro-lesson (bài giảng ngắn 3 phút) rồi mở khóa đúng
+   5 bài tập vi mô trộn dạng. BR6/BR7 xử lý NLO ưu tiên, BR8 tự chuyển khi xong sớm. ---- */
 function startAic2Interact(){
   document.getElementById('aic2Cta').style.display='none';
+  state.aic2.phase = 'lesson';
+  state.aic2.exerciseIndex = 0;
   state.aic2.messages = [];
   updateAic2Progress();
   renderAic2Chat();
-  aic2GreetAndAsk();
+  aic2StartLesson();
 }
 function updateAic2Progress(){
   const total = state.aic2.nloList.length;
   const idx = Math.min(state.aic2.stage, total-1);
-  document.getElementById('aic2NloPill').textContent = `📍 NLO ${idx+1}/${total}`;
-  const pct = Math.max(10, 100 - Math.round((state.aic2.stage/total)*70));
-  const remain = Math.max(3, 30 - Math.round((state.aic2.stage/total)*27));
+  document.getElementById('aic2NloPill').textContent = state.aic2.phase==='lesson'
+    ? `📍 NLO ${idx+1}/${total} · Bài giảng`
+    : `📍 NLO ${idx+1}/${total} · Bài ${state.aic2.exerciseIndex+1}/5`;
+  const totalSteps = total*6;
+  const doneSteps = state.aic2.stage*6 + (state.aic2.phase==='lesson' ? 0 : 1+state.aic2.exerciseIndex);
+  const pct = Math.max(8, 100 - Math.round((doneSteps/totalSteps)*85));
+  const remain = Math.max(2, 30 - Math.round((doneSteps/totalSteps)*27));
   document.getElementById('aic2DurationFill').style.width = pct+'%';
   document.getElementById('aic2DurationLabel').textContent = `${String(remain).padStart(2,'0')}:00`;
 }
@@ -1946,45 +2022,71 @@ function renderAic2Chat(waiting){
 }
 function aic2ShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
 
-/* Chào theo kịch bản "Chào Vân Anh, buổi trước chúng ta đã học ..., hãy cùng ôn lại/mở rộng
-   kiến thức ... nhé" — chỉ chào đầy đủ ở NLO đầu tiên, các NLO sau nói tiếp tự nhiên. */
-function aic2GreetAndAsk(){
+/* ---- Micro-lesson: bài giảng ngắn 3 phút, giao diện kiểu buổi chính khóa, trước khi mở
+   khóa 5 bài tập vi mô của NLO hiện tại. Đồng hồ nén 3 phút thật thành ~3s demo. ---- */
+function aic2StartLesson(){
   const nlo = state.aic2.nloList[state.aic2.stage];
   if(!nlo) return;
+  document.getElementById('aic2LessonTopic').textContent = nlo.lesson.title;
+  document.getElementById('aic2LessonCaption').textContent = nlo.lesson.explain;
+  document.getElementById('aic2LessonTimer').textContent = '3:00';
+  document.getElementById('aic2LessonBarFill').style.width = '100%';
+  document.getElementById('aic2LessonStage').style.display = 'flex';
+  document.querySelector('.aic2-chat-wrap').style.display = 'none';
+  clearInterval(state.aic2._lessonTick);
+  let remain = 180;
+  state.aic2._lessonTick = setInterval(()=>{
+    remain -= 30;
+    if(remain<=0){ aic2FinishLesson(); return; }
+    document.getElementById('aic2LessonTimer').textContent = `${Math.floor(remain/60)}:${String(remain%60).padStart(2,'0')}`;
+    document.getElementById('aic2LessonBarFill').style.width = Math.round(remain/180*100)+'%';
+  }, 500);
+}
+function aic2FinishLesson(){
+  clearInterval(state.aic2._lessonTick);
+  document.getElementById('aic2LessonStage').style.display = 'none';
+  document.querySelector('.aic2-chat-wrap').style.display = 'flex';
+  state.aic2.phase = 'exercise';
+  state.aic2.exerciseIndex = 0;
+  state.aic2.messages = [];
+  const nlo = state.aic2.nloList[state.aic2.stage];
   const greet = state.aic2.stage===0
     ? `Chào Vân Anh, buổi trước chúng ta đã học phần "${nlo.name}". ${nlo.greet}`
     : nlo.greet;
   state.aic2.messages.push({who:'ai', text: greet});
   renderAic2Chat();
-  setTimeout(()=>renderAic2Exercise(nlo), 500);
+  updateAic2Progress();
+  setTimeout(aic2RenderExercise, 500);
 }
-function renderAic2Exercise(nlo){
+function aic2RenderExercise(){
+  const nlo = state.aic2.nloList[state.aic2.stage];
+  const ex = nlo.exercises[state.aic2.exerciseIndex];
   const area = document.getElementById('aic2ExerciseArea');
-  if(nlo.type==='mcq'){
-    state.aic2.messages.push({who:'ai', text: nlo.question});
+  if(ex.type==='mcq'){
+    state.aic2.messages.push({who:'ai', text: ex.question});
     renderAic2Chat();
-    area.innerHTML = `<div class="aic2-mcq-opts">${nlo.options.map((opt,i)=>
+    area.innerHTML = `<div class="aic2-mcq-opts">${ex.options.map((opt,i)=>
         `<button class="aic2-opt-btn" onclick="aic2PickMcq(${i})" id="aic2Opt${i}">${opt}</button>`).join('')}</div>
       <button class="submit-btn" id="aic2McqSubmitBtn" disabled onclick="aic2SubmitMcq()">Nộp bài</button>`;
-  } else if(nlo.type==='gapfill'){
+  } else if(ex.type==='gapfill'){
     state.aic2.messages.push({who:'ai', text:'Con điền từ còn thiếu vào chỗ trống nhé:'});
     renderAic2Chat();
     area.innerHTML = `<div class="aic2-gapfill">
-        <div class="fb-sentence">${nlo.pre} <span class="fb-blank" id="aic2GapBlank">____</span> ${nlo.post}</div>
-        <div class="fb-wordbank">${nlo.options.map((w,i)=>
+        <div class="fb-sentence">${ex.pre} <span class="fb-blank" id="aic2GapBlank">____</span> ${ex.post}</div>
+        <div class="fb-wordbank">${ex.options.map((w,i)=>
           `<button class="fb-word" onclick="aic2PickGap(${i})" id="aic2GapWord${i}">${w}</button>`).join('')}</div>
         <button class="submit-btn" id="aic2GapSubmitBtn" disabled onclick="aic2SubmitGap()">Nộp bài</button>
       </div>`;
-  } else if(nlo.type==='speak'){
+  } else if(ex.type==='speak'){
     state.aic2.messages.push({who:'ai', text:'Con hãy nói câu sau nhé:'});
     renderAic2Chat();
     area.innerHTML = `<div class="aic2-speak">
-        <div class="aic2-speak-prompt">🗣️ "${nlo.prompt}"</div>
+        <div class="aic2-speak-prompt">🗣️ "${ex.prompt}"</div>
         <button class="mic-btn" id="aic2SpeakMic" onclick="aic2ToggleSpeak()">🎤</button>
         <div class="aic2-speak-hint" id="aic2SpeakHint">Bấm mic để nói câu trên</div>
       </div>`;
   } else {
-    state.aic2.messages.push({who:'ai', text: nlo.ask});
+    state.aic2.messages.push({who:'ai', text: ex.ask});
     renderAic2Chat();
     area.innerHTML = `<div class="chat-input-row" id="aic2InputRow">
         <button class="mic-mini" onclick="aic2ToggleChatMic()">🎤</button>
@@ -2003,11 +2105,11 @@ function aic2PickMcq(i){
   document.getElementById('aic2McqSubmitBtn').disabled = false;
 }
 function aic2SubmitMcq(){
-  const nlo = state.aic2.nloList[state.aic2.stage];
+  const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
   if(state.aic2._mcqPick===null || state.aic2._mcqPick===undefined) return;
-  const correct = state.aic2._mcqPick === nlo.answerIndex;
+  const correct = state.aic2._mcqPick === ex.answerIndex;
   document.getElementById('aic2ExerciseArea').innerHTML='';
-  aic2Feedback(correct, nlo);
+  aic2Feedback(correct, ex);
 }
 function aic2PickGap(i){
   const blank = document.getElementById('aic2GapBlank');
@@ -2017,11 +2119,11 @@ function aic2PickGap(i){
   document.getElementById('aic2GapSubmitBtn').disabled = false;
 }
 function aic2SubmitGap(){
-  const nlo = state.aic2.nloList[state.aic2.stage];
+  const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
   if(state.aic2._gapPick===null || state.aic2._gapPick===undefined) return;
-  const correct = state.aic2._gapPick === nlo.answerIndex;
+  const correct = state.aic2._gapPick === ex.answerIndex;
   document.getElementById('aic2ExerciseArea').innerHTML='';
-  aic2Feedback(correct, nlo);
+  aic2Feedback(correct, ex);
 }
 function aic2ToggleSpeak(){
   const btn = document.getElementById('aic2SpeakMic');
@@ -2035,28 +2137,40 @@ function aic2ToggleSpeak(){
     state.aic2._recording = false;
     btn.classList.remove('recording');
     hint.textContent = 'Đang chấm điểm phát âm...';
-    const nlo = state.aic2.nloList[state.aic2.stage];
+    const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
     setTimeout(()=>{
       if(!document.getElementById('aic2SpeakMic')) return;
       document.getElementById('aic2ExerciseArea').innerHTML='';
-      aic2Feedback(true, nlo);
+      aic2Feedback(true, ex);
     }, 700);
   }
 }
-function aic2Feedback(correct, nlo){
-  state.aic2.messages.push({who:'me', text: correct===true && nlo.type==='speak' ? '🎤 (đã nói câu trên)' : '(đã trả lời)'});
-  state.aic2.messages.push({who:'ai', text: (correct || !nlo.wrong) ? nlo.ok : nlo.wrong});
+/* Chấm 1 bài tập vi mô xong → sang bài tiếp theo trong CÙNG NLO; hết 5 bài mới coi là đã xử
+   lý xong NLO đó (mới ghi vào improved) rồi chuyển sang Micro-lesson của NLO kế tiếp. */
+function aic2Feedback(correct, ex){
+  state.aic2.messages.push({who:'me', text: correct===true && ex.type==='speak' ? '🎤 (đã nói câu trên)' : '(đã trả lời)'});
+  state.aic2.messages.push({who:'ai', text: (correct || !ex.wrong) ? ex.ok : ex.wrong});
   renderAic2Chat();
-  state.aic2.improved.push(nlo.name);
-  state.aic2.stage++;
+  aic2AdvanceExercise();
+}
+function aic2AdvanceExercise(){
+  const nlo = state.aic2.nloList[state.aic2.stage];
+  state.aic2.exerciseIndex++;
   autoAdvance(()=>{
-    if(state.aic2.stage < state.aic2.nloList.length){
+    if(state.aic2.exerciseIndex < nlo.exercises.length){
       updateAic2Progress();
-      aic2GreetAndAsk();
+      aic2RenderExercise();
     } else {
-      updateAic2Progress();
-      document.getElementById('aic2ExerciseArea').innerHTML='';
-      document.getElementById('aic2Cta').style.display='flex';
+      state.aic2.improved.push(nlo.name);
+      state.aic2.stage++;
+      if(state.aic2.stage < state.aic2.nloList.length){
+        updateAic2Progress();
+        aic2StartLesson();
+      } else {
+        updateAic2Progress();
+        document.getElementById('aic2ExerciseArea').innerHTML='';
+        document.getElementById('aic2Cta').style.display='flex';
+      }
     }
   }, 1200);
 }
@@ -2071,40 +2185,36 @@ function aic2SendFromInput(){
   aic2Send(val);
 }
 function aic2Send(text){
-  const total = state.aic2.nloList.length;
-  if(state.aic2.stage>=total) return;
+  const nlo = state.aic2.nloList[state.aic2.stage];
+  if(!nlo || state.aic2.exerciseIndex>=nlo.exercises.length) return;
+  const ex = nlo.exercises[state.aic2.exerciseIndex];
   state.aic2.messages.push({who:'me', text});
   renderAic2Chat(true);
-  const nlo = state.aic2.nloList[state.aic2.stage];
   autoAdvance(()=>{
-    state.aic2.messages.push({who:'ai', text: nlo.ok});
-    state.aic2.improved.push(nlo.name);
-    state.aic2.stage++;
+    state.aic2.messages.push({who:'ai', text: ex.ok});
     renderAic2Chat();
     document.getElementById('aic2ExerciseArea').innerHTML='';
-    if(state.aic2.stage < total){
-      updateAic2Progress();
-      setTimeout(aic2GreetAndAsk, 400);
-    } else {
-      // BR8: xử lý hết NLO ưu tiên trước khi hết giờ → chuyển sang xem tổng kết (demo rút gọn
-      // luồng "tự động hiển thị Nâng cao cho thời gian còn lại" thành CTA sang Màn 3 ngay).
-      updateAic2Progress();
-      document.getElementById('aic2Cta').style.display='flex';
-    }
+    aic2AdvanceExercise();
   }, 1400);
 }
 function forceAdvanceAic2(){
   clearTimeout(state.pendingTimer);
   if(document.getElementById('aic2Cta').style.display==='flex'){ goto('aic2-summary'); return; }
+  if(state.aic2.phase==='lesson'){
+    if(document.getElementById('aic2LessonStage').style.display!=='none') aic2FinishLesson();
+    return;
+  }
   const nlo = state.aic2.nloList[state.aic2.stage];
   if(!nlo) return;
-  if(nlo.type==='mcq'){
-    if(!document.getElementById('aic2Opt'+nlo.answerIndex)) return;
-    aic2PickMcq(nlo.answerIndex); aic2SubmitMcq();
-  } else if(nlo.type==='gapfill'){
-    if(!document.getElementById('aic2GapWord'+nlo.answerIndex)) return;
-    aic2PickGap(nlo.answerIndex); aic2SubmitGap();
-  } else if(nlo.type==='speak'){
+  const ex = nlo.exercises[state.aic2.exerciseIndex];
+  if(!ex) return;
+  if(ex.type==='mcq'){
+    if(!document.getElementById('aic2Opt'+ex.answerIndex)) return;
+    aic2PickMcq(ex.answerIndex); aic2SubmitMcq();
+  } else if(ex.type==='gapfill'){
+    if(!document.getElementById('aic2GapWord'+ex.answerIndex)) return;
+    aic2PickGap(ex.answerIndex); aic2SubmitGap();
+  } else if(ex.type==='speak'){
     if(!document.getElementById('aic2SpeakMic')) return;
     aic2ToggleSpeak();
     setTimeout(()=>{ if(document.getElementById('aic2SpeakMic')) aic2ToggleSpeak(); }, 150);
@@ -2116,6 +2226,7 @@ function forceAdvanceAic2(){
 function aic2Exit(){
   // Mô phỏng BR9 (thoát giữa chừng → lưu vị trí, tạm dừng thời lượng). Demo không triển khai
   // resume thật (xem finding F011/F026 — cửa sổ hợp lệ để resume còn là open question ở PRD).
+  clearInterval(state.aic2._lessonTick);
   toast('⏸ Đã lưu vị trí, tạm dừng thời lượng — mô phỏng BR9');
   setTimeout(()=>goto('schedule'), 900);
 }
@@ -2334,7 +2445,8 @@ function resetDemo(){
   state.mcqAnswer=null; state.mcqSubmitted=false; state.recording=false;
   state.classroomStep=0;
   state.fb = null;
-  state.aic2 = { track:null, nloList:[], stage:0, messages:[], improved:[] };
+  clearInterval(state.aic2._lessonTick);
+  state.aic2 = { track:null, nloList:[], stage:0, phase:'lesson', exerciseIndex:0, messages:[], improved:[] };
   state.permissions = { mic:false, cam:false };
   ['grantMicBtn','grantCamBtn'].forEach(id=>{
     const btn = document.getElementById(id);
