@@ -208,12 +208,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .mz-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
 .mz-head h2{font-size:20px;}
 .mz-head p{margin:4px 0 0;font-size:12.5px;color:var(--n500);}
-.mz-overall{display:flex;align-items:center;gap:12px;flex-shrink:0;}
-.mz-ring{width:56px;height:56px;flex-shrink:0;}
-.mz-ring circle{transition:stroke-dashoffset .6s ease;}
-.mz-ring-wrap{position:relative;width:56px;height:56px;}
-.mz-ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--primary);}
-.mz-trend{font-size:11.5px;color:var(--n500);font-weight:500;}
+.mz-overall{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.mz-pct-text{display:flex;flex-direction:column;gap:2px;}
+.mz-pct-num{font-size:22px;font-weight:700;color:var(--primary);line-height:1.2;}
+.mz-pct-lbl{font-size:11px;color:var(--n500);text-transform:uppercase;letter-spacing:.4px;}
+.mz-bar{width:120px;height:6px;border-radius:6px;background:var(--n200);overflow:hidden;}
+.mz-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .6s ease;}
+.mz-trend{font-size:11.5px;font-weight:600;margin-top:2px;}
 .mz-trend.up{color:#2f7a0f;}
 .mz-trend.down{color:var(--destructive);}
 .mz-legend{display:flex;gap:16px;margin-bottom:14px;flex-wrap:wrap;}
@@ -323,7 +324,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .zone-head p{font-size:12.5px;color:var(--n500);margin-top:2px;}
 .chart-row{display:flex;gap:20px;flex-wrap:wrap;}
 .chart-card{flex:1;min-width:200px;}
-.chart-card h4{font-size:12.5px;font-weight:600;color:var(--n700);margin-bottom:6px;}
+.chart-card h4{font-size:12.5px;font-weight:600;color:var(--n700);margin-bottom:2px;}
+.chart-card .chart-sub{font-size:11px;color:var(--n500);margin-bottom:8px;}
+.chart-card-full{margin-top:20px;}
 .grid-line{stroke:var(--n100);stroke-width:1;}
 .axis-label{font-size:9px;fill:var(--n500);}
 .cat-label{font-size:9.5px;fill:var(--n500);}
@@ -337,13 +340,22 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .legend-row i{width:11px;height:11px;border-radius:3px;display:inline-block;}
 .leg-prev{background:var(--n200);}
 .leg-now{background:var(--primary);}
-.plan-grid{display:flex;flex-direction:column;gap:12px;}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .plan-card{background:var(--n50);border-radius:14px;padding:16px 18px;}
-.plan-label{font-size:11.5px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;}
-.next-session{font-size:14px;font-weight:600;color:var(--n900);margin-bottom:6px;}
-.topic-list{font-size:13px;color:var(--n700);line-height:1.6;margin-bottom:8px;}
-.gap-tags{display:flex;gap:8px;flex-wrap:wrap;}
-.gap-tag{background:var(--warning-100);color:#8a5a00;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:8px;}
+.plan-label{font-size:11px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;}
+.next-session-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.next-session-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--primary-100);
+  display:flex;align-items:center;justify-content:center;font-size:18px;}
+.next-session-avatar img{width:100%;height:100%;object-fit:cover;}
+.next-session-title{font-weight:600;font-size:14px;color:var(--n900);}
+.next-session-time{font-size:12px;color:var(--n500);}
+.next-session-unit{font-size:13px;font-weight:600;color:var(--n900);margin-bottom:10px;}
+.topic-list{list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--n700);}
+.topic-list li{display:flex;align-items:flex-start;gap:8px;}
+.topic-list .sq{width:6px;height:6px;border-radius:2px;background:var(--primary);margin-top:6px;flex-shrink:0;}
+.gap-tags{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.gap-tag{background:var(--warning-100);color:#8a5a00;font-size:12px;font-weight:600;padding:8px 10px;border-radius:8px;text-align:center;}
+.plan-note{font-size:12px;color:var(--n500);line-height:1.5;}
 
 /* ---------- LOADING ---------- */
 .center-screen{min-height:956px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--n900);color:#fff;}
@@ -543,15 +555,20 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .tutor-cta-wrap{margin-top:18px;text-align:right;}
 
 /* ---- Tóm tắt NLO đã đạt / còn gap (dẫn sang buổi bổ trợ) ---- */
-.mastery-tiles{display:flex;gap:14px;margin-bottom:16px;}
-.mastery-tile{flex:1;background:#fff;border-radius:16px;padding:14px 10px;display:flex;flex-direction:column;
-  align-items:center;gap:6px;box-shadow:var(--shadow-s);}
-.mastery-ring{width:58px;height:58px;}
-.mastery-ring circle{transition:stroke-dashoffset .6s ease;}
-.mastery-tile .name{font-size:11.5px;font-weight:600;color:var(--n900);text-align:center;line-height:1.3;}
-.mastery-tile .tag{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:8px;}
-.mastery-tile .tag.done{background:#EFFBEA;color:#2f7a0f;}
-.mastery-tile .tag.gap{background:var(--warning-100);color:#8a5a00;}
+.lesson-subtitle{font-size:13px;color:var(--n500);margin:-6px 0 8px;display:flex;align-items:center;gap:6px;}
+.lesson-subtitle .sq{color:var(--primary);font-size:10px;}
+.mastery-headline{display:flex;justify-content:center;margin-bottom:4px;}
+.mastery-ring-big{width:96px;height:96px;}
+.mastery-ring-big circle{transition:stroke-dashoffset .6s ease;}
+.mastery-tiles-row{display:flex;gap:14px;margin-bottom:16px;}
+.mastery-tile{flex:1;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;}
+.mastery-tile.warn{background:var(--warning-100);border:1px solid #F0CC70;}
+.mastery-tile.done{background:#EFFBEA;border:1px solid #B8E6A1;}
+.mastery-tile .tile-icon{font-size:16px;}
+.mastery-tile .tile-name{font-size:13px;font-weight:600;color:var(--n900);line-height:1.35;}
+.mastery-tile .tile-tag{font-size:11.5px;font-weight:700;letter-spacing:.3px;}
+.mastery-tile.warn .tile-tag{color:#8a5a00;}
+.mastery-tile.done .tile-tag{color:#2f7a0f;}
 
 /* ================= AICNew-02: AI BỔ TRỢ 30 PHÚT ================= */
 /* 3 màn theo PRD AICNew-02 §4: Mở đầu (aic2-intro) → Tương tác (aic2-interact) → Tổng kết (aic2-summary).
@@ -898,13 +915,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="content-scroll">
         <div id="parentTabReportPanel">
           <div class="report-zone">
-            <div class="zone-head"><h2>Biểu đồ tiến bộ</h2><p>So sánh kỳ học trước và kỳ học này</p></div>
+            <div class="zone-head"><h2>Biểu đồ tiến bộ</h2><p>So sánh 6 buổi học gần nhất — Buổi 33 đến Buổi 38</p></div>
             <div class="chart-row">
-              <div class="chart-card"><h4>Thời lượng học (phút/buổi)</h4><div id="chartDuration"></div></div>
-              <div class="chart-card"><h4>Điểm trung bình theo buổi</h4><div id="chartScore"></div></div>
-              <div class="chart-card"><h4>% thành thạo theo mảng kỹ năng</h4><div id="chartStrand"></div></div>
+              <div class="chart-card">
+                <h4>Thời lượng học tập</h4><p class="chart-sub">Số phút tương tác thực tế mỗi buổi</p>
+                <div id="chartDuration"></div>
+              </div>
+              <div class="chart-card">
+                <h4>Điểm số trung bình</h4><p class="chart-sub">Điểm trung bình các cấu phần mỗi buổi (thang 10)</p>
+                <div id="chartScore"></div>
+              </div>
             </div>
-            <div class="legend-row"><span><i class="leg-prev"></i>Kỳ trước</span><span><i class="leg-now"></i>Kỳ này</span></div>
+            <div class="chart-card chart-card-full">
+              <h4>Tiến bộ theo từng năng lực (NLO)</h4>
+              <p class="chart-sub">% thành thạo trung bình mỗi mảng kỹ năng — buổi trước so với buổi này</p>
+              <div id="chartStrand"></div>
+              <div class="legend-row"><span><i class="leg-prev"></i>Buổi trước (Buổi 37)</span><span><i class="leg-now"></i>Buổi này (Buổi 38)</span></div>
+            </div>
           </div>
           <div class="report-zone">
             <div class="zone-head"><h2>Bản đồ năng lực</h2><p>Tiến bộ so với buổi học gần nhất</p></div>
@@ -1061,7 +1088,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="summary-illustration">🎉🐥</div>
       <div class="summary-results">
         <h2>Tổng kết buổi học</h2>
-        <div id="masteryTiles" class="mastery-tiles"></div>
+        <div class="lesson-subtitle"><span class="sq">▪</span> Unit 7: Friends vacation with Minh · Chủ đề: Musical Instruments</div>
+        <div id="masteryTiles"></div>
         <div id="skillCards"></div>
         <span class="badge badge-primary attend-final-badge">✓ Đã điểm danh đủ buổi học</span>
         <div class="tutor-cta-wrap">
@@ -1654,25 +1682,15 @@ function scoreComment(score){
   if(score>=5) return 'Tớ thấy cậu có tố chất, đừng dừng lại nhé!';
   return 'Cố gắng lần sau nhé, tớ tin cậu làm được!';
 }
-/* NLO của buổi Big Class Plus vừa học, ghép từ điểm các cấu phần — cho học sinh thấy đã đạt
-   được kiến thức nào, còn gap kiến thức nào, trước khi dẫn sang buổi bổ trợ 30 phút. */
+/* NLO của buổi Big Class Plus vừa học — % lấy từ chân dung Mastery Profile của học sinh cho
+   đúng chủ đề (không suy ra từ điểm mini-game hôm nay), cho thấy đã đạt/còn gap kiến thức nào
+   trước khi dẫn sang buổi bổ trợ 30 phút. */
 const LESSON_NLO = [
-  { key:'vocab', name:'Từ vựng & Ngữ pháp: Nhạc cụ, Thì hiện tại đơn', skills:['mcq','group'] },
-  { key:'speak', name:'Phát âm & Hội thoại: Nhạc cụ', skills:['ispeak','aispeak'] },
+  { key:'vocab', name:'Từ vựng: Tên các loại nhạc cụ (Musical Instruments)', pct:50 },
+  { key:'speak', name:'Phát âm & Giao tiếp: Tình huống mua sắm', pct:85 },
 ];
 function computeNloGaps(){
-  return LESSON_NLO.map(nlo=>{
-    const vals = nlo.skills.map(k=>state.scores[k]||0);
-    const pct = Math.round((vals.reduce((a,b)=>a+b,0)/(vals.length*10))*100);
-    return { ...nlo, pct, gap: pct<70 };
-  });
-}
-function setMasteryRing(fillId, pctId, pct){
-  const circ = 2*Math.PI*28;
-  const fillEl = document.getElementById(fillId);
-  const pctEl = document.getElementById(pctId);
-  if(fillEl) fillEl.style.strokeDashoffset = circ*(1-pct/100);
-  if(pctEl) pctEl.textContent = pct+'%';
+  return LESSON_NLO.map(nlo=>({ ...nlo, gap: nlo.pct<70 }));
 }
 function renderSummary(){
   const s = state.scores;
@@ -1689,20 +1707,31 @@ function renderSummary(){
     </div>`).join('');
 
   const gaps = computeNloGaps();
-  const circ = 2*Math.PI*28;
-  document.getElementById('masteryTiles').innerHTML = gaps.map(nlo=>`
-    <div class="mastery-tile">
-      <svg class="mastery-ring" viewBox="0 0 64 64">
-        <circle cx="32" cy="32" r="28" fill="none" stroke="#E5E7EB" stroke-width="6"/>
-        <circle id="ring-fill-${nlo.key}" cx="32" cy="32" r="28" fill="none"
-          stroke="${nlo.gap?'#F5B30B':'#0876B1'}" stroke-width="6" stroke-linecap="round"
-          stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 32 32)"/>
-        <text id="ring-pct-${nlo.key}" x="32" y="37" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">0%</text>
+  const ringPct = Math.min(...gaps.map(g=>g.pct));
+  const ringColor = ringPct<70 ? '#F5B30B' : '#0876B1';
+  const circ = 2*Math.PI*40;
+  document.getElementById('masteryTiles').innerHTML = `
+    <div class="mastery-headline">
+      <svg class="mastery-ring-big" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+        <circle id="ringFillMain" cx="48" cy="48" r="40" fill="none" stroke="${ringColor}" stroke-width="8"
+          stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 48 48)"/>
+        <text x="48" y="46" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">${ringPct}%</text>
+        <text x="48" y="62" text-anchor="middle" font-size="9" fill="#6B7280" letter-spacing="1">MASTERY</text>
       </svg>
-      <div class="name">${nlo.name}</div>
-      <span class="tag ${nlo.gap?'gap':'done'}">${nlo.gap?'Còn gap':'Đã đạt'}</span>
-    </div>`).join('');
-  gaps.forEach(nlo=>setTimeout(()=>setMasteryRing('ring-fill-'+nlo.key,'ring-pct-'+nlo.key,nlo.pct), 50));
+    </div>
+    <div class="mastery-tiles-row">
+      ${gaps.map(g=>`
+        <div class="mastery-tile ${g.gap?'warn':'done'}">
+          <span class="tile-icon">${g.gap?'⚠':'✓'}</span>
+          <div class="tile-name">${g.name}</div>
+          <div class="tile-tag">${g.gap?'CẦN CỦNG CỐ':'ĐÃ ĐẠT'} (${g.pct}%)</div>
+        </div>`).join('')}
+    </div>`;
+  setTimeout(()=>{
+    const fillEl = document.getElementById('ringFillMain');
+    if(fillEl) fillEl.style.strokeDashoffset = circ*(1-ringPct/100);
+  }, 50);
 }
 
 /* ============ MASTERY MAP (Bản đồ năng lực toàn môn) ============ */
@@ -1765,27 +1794,22 @@ function renderMasteryZone(containerId, prevOverall){
   const el = document.getElementById(containerId);
   if(!el) return;
   const overall = masteryOverallPct();
-  const circ = 2*Math.PI*24;
-  const ringId = containerId+'Ring', pctId = containerId+'Pct';
   const trendHtml = prevOverall!=null
-    ? `<div class="mz-trend ${overall>=prevOverall?'up':'down'}">${overall>=prevOverall?'▲':'▼'} ${Math.abs(overall-prevOverall)}% so với buổi gần nhất</div>`
+    ? `<div class="mz-trend ${overall>=prevOverall?'up':'down'}">${overall>=prevOverall?'▲':'▼'} ${overall-prevOverall>=0?'+':''}${overall-prevOverall}% so với buổi học gần nhất</div>`
     : '';
   el.innerHTML = `<div class="mastery-zone">
     <div class="mz-head">
       <div>
-        <h2>Bản đồ năng lực — Tiếng Anh</h2>
-        <p>Mỗi ô vuông là một đơn vị kiến thức (NLO). Di chuột để xem tên và % thành thạo.</p>
+        <h2>Bản đồ năng lực — Tiếng Anh Lớp 4</h2>
+        <p>Mỗi ô vuông là một đơn vị kiến thức (NLO). Di chuột hoặc bấm vào ô để xem tên và % thành thạo.</p>
       </div>
       <div class="mz-overall">
-        <div class="mz-ring-wrap">
-          <svg class="mz-ring" viewBox="0 0 56 56">
-            <circle cx="28" cy="28" r="24" fill="none" stroke="#E5E7EB" stroke-width="5"/>
-            <circle id="${ringId}" cx="28" cy="28" r="24" fill="none" stroke="var(--primary)" stroke-width="5"
-              stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 28 28)"/>
-          </svg>
-          <span class="mz-ring-pct" id="${pctId}">0%</span>
+        <div class="mz-pct-text">
+          <span class="mz-pct-num">${overall}%</span>
+          <span class="mz-pct-lbl">Tổng thể</span>
+          ${trendHtml}
         </div>
-        ${trendHtml}
+        <div class="mz-bar"><i style="width:${overall}%;"></i></div>
       </div>
     </div>
     <div class="mz-legend">
@@ -1798,11 +1822,6 @@ function renderMasteryZone(containerId, prevOverall){
       <div class="mz-col">${MASTERY_STRANDS.slice(2,4).map(strandRowHtml).join('')}</div>
     </div>
   </div>`;
-  setTimeout(()=>{
-    const fillEl = document.getElementById(ringId), pctEl = document.getElementById(pctId);
-    if(fillEl) fillEl.style.strokeDashoffset = circ*(1-overall/100);
-    if(pctEl) pctEl.textContent = overall+'%';
-  }, 50);
 }
 
 /* ============ AICNew-02: AI BỔ TRỢ 30 PHÚT ============ */
@@ -2120,17 +2139,16 @@ function svgEl(tag, attrs){
   return el;
 }
 const PROGRESS_DATA = {
-  sessions: ['Buổi 35','Buổi 36','Buổi 37','Buổi 38'],
-  durationPrev: [26,28,25,27],
-  durationNow: [30,29,30,30],
-  scoreNow: [7.0,7.4,7.8,8.1],
-  strandLabels: MASTERY_STRANDS.map(s=>s.label),
-  strandPrev: [58,42,38,52],
+  sessions: ['B33','B34','B35','B36','B37','B38'],
+  duration: [42,38,45,50,48,55],
+  score: [6.5,6.8,7.0,7.4,7.8,8.2],
+  strandLabels: ['Từ vựng','Ngữ pháp','Phát âm','Nghe – Nói'],
+  strandPrev: [70,45,55,60],
+  strandNow: [76,52,60,65],
 };
-function buildGroupedBar(containerId, categories, seriesPrev, seriesNow){
+function buildSingleBar(containerId, categories, series, maxVal){
   const w=280,h=150,padL=26,padB=20,padT=8,padR=4;
   const plotW=w-padL-padR, plotH=h-padT-padB;
-  const maxVal = Math.max(...seriesPrev, ...seriesNow) * 1.15;
   const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
   for(let i=0;i<=3;i++){
     const y = padT + plotH - (plotH*i/3);
@@ -2142,11 +2160,36 @@ function buildGroupedBar(containerId, categories, seriesPrev, seriesNow){
   const groupW = plotW/categories.length;
   categories.forEach((cat,i)=>{
     const gx = padL + groupW*i;
-    const bw = groupW*0.28;
-    const prevH = (seriesPrev[i]/maxVal)*plotH, nowH = (seriesNow[i]/maxVal)*plotH;
-    svg.appendChild(svgEl('rect',{x:gx+groupW*0.18,y:padT+plotH-prevH,width:bw,height:prevH,rx:2.5,class:'bar-prev'}));
-    svg.appendChild(svgEl('rect',{x:gx+groupW*0.54,y:padT+plotH-nowH,width:bw,height:nowH,rx:2.5,class:'bar-now'}));
+    const bw = groupW*0.5;
+    const bh = (series[i]/maxVal)*plotH;
+    svg.appendChild(svgEl('rect',{x:gx+(groupW-bw)/2,y:padT+plotH-bh,width:bw,height:bh,rx:3,class:'bar-now'}));
     const lbl = svgEl('text',{x:gx+groupW/2,y:h-5,class:'cat-label','text-anchor':'middle'});
+    lbl.textContent = cat;
+    svg.appendChild(lbl);
+  });
+  const container = document.getElementById(containerId);
+  container.innerHTML=''; container.appendChild(svg);
+}
+function buildGroupedBar(containerId, categories, seriesPrev, seriesNow, maxVal){
+  const w=560,h=180,padL=30,padB=24,padT=10,padR=6;
+  const plotW=w-padL-padR, plotH=h-padT-padB;
+  if(!maxVal) maxVal = Math.max(...seriesPrev, ...seriesNow) * 1.15;
+  const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
+  for(let i=0;i<=2;i++){
+    const y = padT + plotH - (plotH*i/2);
+    svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
+    const lbl = svgEl('text',{x:padL-6,y:y+3,class:'axis-label','text-anchor':'end'});
+    lbl.textContent = Math.round(maxVal*i/2)+'%';
+    svg.appendChild(lbl);
+  }
+  const groupW = plotW/categories.length;
+  categories.forEach((cat,i)=>{
+    const gx = padL + groupW*i;
+    const bw = groupW*0.26;
+    const prevH = (seriesPrev[i]/maxVal)*plotH, nowH = (seriesNow[i]/maxVal)*plotH;
+    svg.appendChild(svgEl('rect',{x:gx+groupW*0.2,y:padT+plotH-prevH,width:bw,height:prevH,rx:3,class:'bar-prev'}));
+    svg.appendChild(svgEl('rect',{x:gx+groupW*0.54,y:padT+plotH-nowH,width:bw,height:nowH,rx:3,class:'bar-now'}));
+    const lbl = svgEl('text',{x:gx+groupW/2,y:h-6,class:'cat-label','text-anchor':'middle'});
     lbl.textContent = cat;
     svg.appendChild(lbl);
   });
@@ -2177,32 +2220,57 @@ function buildLineChart(containerId, categories, series){
     lbl.textContent = categories[i];
     svg.appendChild(lbl);
   });
+  const lastLbl = svgEl('text',{x:pts[pts.length-1][0],y:pts[pts.length-1][1]-8,class:'bar-val','text-anchor':'middle','font-weight':'700'});
+  lastLbl.textContent = series[series.length-1];
+  svg.appendChild(lastLbl);
   const container = document.getElementById(containerId);
   container.innerHTML=''; container.appendChild(svg);
 }
 function renderProgressCharts(){
-  buildGroupedBar('chartDuration', PROGRESS_DATA.sessions, PROGRESS_DATA.durationPrev, PROGRESS_DATA.durationNow);
-  buildLineChart('chartScore', PROGRESS_DATA.sessions, PROGRESS_DATA.scoreNow);
-  const strandNow = MASTERY_STRANDS.map(s=>Math.round(s.los.reduce((a,l)=>a+l[1],0)/s.los.length));
-  buildGroupedBar('chartStrand', PROGRESS_DATA.strandLabels, PROGRESS_DATA.strandPrev, strandNow);
+  buildSingleBar('chartDuration', PROGRESS_DATA.sessions, PROGRESS_DATA.duration, 60);
+  buildLineChart('chartScore', PROGRESS_DATA.sessions, PROGRESS_DATA.score);
+  buildGroupedBar('chartStrand', PROGRESS_DATA.strandLabels, PROGRESS_DATA.strandPrev, PROGRESS_DATA.strandNow, 100);
 }
 
-/* ---- Zone 3: Kế hoạch học tập tiếp theo — ưu tiên vá các NLO đang <70% ---- */
+/* ---- Zone 3: Kế hoạch học tập tiếp theo — lịch buổi kế tiếp + NLO cần củng cố từ buổi trước ---- */
+const NEXT_SESSION = {
+  label:'Buổi 39 · Thứ 4, 3/7', time:'19:25 – 20:25 · Thầy Peter Rus', unit:'Unit 8: My Future Job',
+  topics:[
+    'Từ vựng: Tên các nghề nghiệp (Occupations)',
+    'Ngữ pháp: Thì tương lai đơn (Future Simple) với "will"',
+    'Luyện nói: Giới thiệu ước mơ nghề nghiệp',
+  ],
+};
+const NEXT_GAPS = [
+  ['Thì tương lai đơn', 34],
+  ['Nguyên âm dài /i:/', 34],
+  ['Nghề nghiệp', 45],
+  ['Giới từ chỉ nơi chốn', 40],
+];
 function renderNextPlan(){
-  const gapNlos = MASTERY_STRANDS.flatMap(s=>s.los.filter(l=>l[1]<70).map(l=>l[0]));
-  const topGaps = gapNlos.slice(0,3);
   document.getElementById('nextPlanPanel').innerHTML = `
     <div class="plan-card">
-      <div class="plan-label">Buổi học tiếp theo</div>
-      <div class="next-session">Buổi 39 · Unit 8: At the Zoo</div>
-      <div class="topic-list">Trong buổi học bổ trợ 30 phút với AI sau buổi chính khóa, hệ thống sẽ ưu tiên vá các lỗ hổng kiến thức sau:</div>
-      <div class="gap-tags">${topGaps.map(g=>`<span class="gap-tag">${g}</span>`).join('')}</div>
+      <div class="next-session-head">
+        <div class="next-session-avatar">🧑‍🏫</div>
+        <div>
+          <div class="next-session-title">${NEXT_SESSION.label}</div>
+          <div class="next-session-time">${NEXT_SESSION.time}</div>
+        </div>
+      </div>
+      <div class="next-session-unit">${NEXT_SESSION.unit}</div>
+      <div class="plan-label">Nội dung sẽ học</div>
+      <ul class="topic-list">${NEXT_SESSION.topics.map(t=>`<li><span class="sq"></span>${t}</li>`).join('')}</ul>
+    </div>
+    <div class="plan-card">
+      <div class="plan-label">Cần củng cố thêm (từ buổi trước)</div>
+      <div class="gap-tags">${NEXT_GAPS.map(([name,pct])=>`<span class="gap-tag">${name} · ${pct}%</span>`).join('')}</div>
+      <div class="plan-note">Các NLO này sẽ được AI Bổ trợ 30 phút ưu tiên vá ngay sau buổi 39, dựa trên tín hiệu Gap Detection của buổi học chính khóa.</div>
     </div>`;
 }
 
 function renderParentMode(){
   renderProgressCharts();
-  renderMasteryZone('parentMasteryZone', masteryOverallPct()-6);
+  renderMasteryZone('parentMasteryZone', 52);
   renderNextPlan();
 
   const sessions = [
