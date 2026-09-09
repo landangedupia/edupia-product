@@ -633,20 +633,32 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-speak-prompt{font-size:14px;color:var(--n900);font-weight:500;text-align:center;background:var(--n50);border-radius:12px;padding:12px 16px;}
 .aic2-speak-hint{font-size:12px;color:var(--n500);}
 
-/* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô, giao diện kiểu buổi chính khóa ---- */
+/* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô — tái dùng đúng khung "frame
+   chiếu bài giảng" của buổi chính khóa (khớp node 17561:14450: viền tối, pill hướng dẫn góc
+   trái, khung giáo viên góc phải, label chủ đề giữa khung). ---- */
 .aic2-lesson-stage{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;
-  border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#0f2942,#123a5c 55%,#0b2338);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:32px;box-shadow:var(--shadow-m);}
-.aic2-lesson-duration{position:absolute;top:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;
-  background:#111827;color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;z-index:2;}
+  display:flex;flex-direction:column;align-items:center;gap:14px;}
+.aic2-lesson-duration{flex-shrink:0;display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;
+  padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
 .aic2-lesson-duration-bar{width:64px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
 .aic2-lesson-duration-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .5s linear;}
-.aic2-lesson-topic{background:#12233f;color:#fff;padding:18px 32px;border-radius:16px;font-size:24px;font-weight:700;
-  text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:600px;}
-.aic2-lesson-caption{background:#fff;color:var(--n900);padding:16px 22px;border-radius:16px;font-size:15px;line-height:1.6;
-  max-width:600px;text-align:center;box-shadow:var(--shadow-m);}
-.aic2-lesson-mascot{position:absolute;left:24px;bottom:24px;font-size:48px;}
-.aic2-lesson-skip{background:rgba(255,255,255,.12);color:#e5e7eb;padding:8px 16px;border-radius:10px;font-size:13px;font-weight:600;}
+.aic2-lesson-frame{position:relative;width:100%;flex:1;min-height:0;border-radius:16px;overflow:hidden;
+  background:#374151;box-shadow:var(--shadow-m);}
+.aic2-lesson-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.aic2-lesson-instr-pill{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:8px;
+  background:#12233f;color:#fff;padding:8px 16px;border-radius:12px;font-weight:600;font-size:13px;z-index:2;}
+.aic2-lesson-instr-pill .dot{width:20px;height:20px;border-radius:50%;background:#fff;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.aic2-lesson-instr-pill .dot img{width:14px;height:14px;}
+.aic2-lesson-title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;
+  padding:14px 26px;border-radius:14px;font-size:20px;font-weight:700;text-align:center;max-width:70%;z-index:2;}
+.aic2-lesson-teacher-inset{position:absolute;top:16px;right:16px;width:130px;height:76px;border-radius:12px;
+  overflow:hidden;border:2px solid rgba(255,255,255,.5);z-index:2;}
+.aic2-lesson-teacher-inset img{width:100%;height:100%;object-fit:cover;display:block;}
+.aic2-lesson-caption{flex-shrink:0;background:#fff;color:var(--n900);padding:14px 20px;border-radius:14px;
+  font-size:14px;line-height:1.6;width:100%;text-align:center;box-shadow:var(--shadow-s);}
+.aic2-lesson-skip{flex-shrink:0;background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;
+  font-size:14px;font-weight:600;}
 .homework-card{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:14px;}
 .homework-card .ic{font-size:26px;}
 .homework-card .t{font-weight:600;color:var(--n900);font-size:13px;}
@@ -1185,9 +1197,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       </div>
       <div class="aic2-lesson-stage" id="aic2LessonStage" style="display:none;">
         <div class="aic2-lesson-duration">🎬 Bài giảng ngắn <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span> <span id="aic2LessonTimer">3:00</span></div>
-        <div class="aic2-lesson-topic" id="aic2LessonTopic"></div>
+        <div class="aic2-lesson-frame">
+          <img src="assets/classroom-bg.png" alt="">
+          <span class="aic2-lesson-instr-pill"><span class="dot"><img src="assets/logo-mark.svg" alt=""></span> Đang giảng bài</span>
+          <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
+          <div class="aic2-lesson-teacher-inset"><img src="assets/avatar-teacher1.png" alt=""></div>
+        </div>
         <div class="aic2-lesson-caption" id="aic2LessonCaption"></div>
-        <span class="aic2-lesson-mascot">🧑‍🏫</span>
         <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
       </div>
       <div class="center-cta" id="aic2Cta" style="display:none;">
