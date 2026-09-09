@@ -443,10 +443,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .class-main{flex:1;position:relative;background:#000;overflow:hidden;}
 .class-video-bg{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;}
 .class-video-bg img{width:100%;height:100%;object-fit:contain;display:block;}
-.instruction-pill{position:absolute;top:24px;left:24px;display:flex;align-items:center;gap:8px;background:#12233f;color:#fff;padding:8px 16px;border-radius:12px;font-weight:600;font-size:14px;z-index:3;}
-.instruction-pill .dot{width:22px;height:22px;border-radius:50%;background:#fff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:12px;}
-.label-card{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:#12233f;color:#fff;padding:16px 28px;border-radius:16px;font-size:22px;font-weight:700;text-align:center;z-index:3;}
-.gv-inset{position:absolute;top:20px;right:20px;width:170px;height:100px;border-radius:14px;background:linear-gradient(135deg,#38bdf8,#0ea5e9);display:flex;align-items:center;justify-content:center;font-size:44px;z-index:3;border:2px solid rgba(255,255,255,.5);}
 .live-toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);background:#fff;color:var(--n900);padding:12px 22px;border-radius:14px;font-weight:600;box-shadow:var(--shadow-m);z-index:5;font-size:14px;}
 
 /* Khớp get_design_context (panel phải nền #374151, card đội mình #ECFBFF/#1890C7, đội khác nền trắng) */
@@ -454,18 +450,27 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .live-pill{align-self:flex-start;background:#dc2626;color:#fff;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;}
 .self-cam{height:182px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
 .self-cam img{width:100%;height:100%;object-fit:cover;display:block;}
-.self-cam .trophy{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.5);backdrop-filter:blur(4px);color:#1f2937;padding:3px 8px;border-radius:30px;font-size:12px;font-weight:700;}
+.self-cam .trophy{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.5);backdrop-filter:blur(4px);color:#1f2937;padding:2px 8px;border-radius:30px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.self-cam .trophy img{width:20px;height:20px;flex-shrink:0;}
 .team-card{background:#fff;border-radius:16px;padding:8px 16px;box-shadow:0 -2px 4px rgba(102,102,102,.2);}
 .team-card.me{background:var(--primary-50);border:1px solid #1890C7;box-shadow:0 8px 12px rgba(16,24,40,.08);}
-.team-card .t-head{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:8px;color:#374151;}
+.team-card .t-head{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600;margin-bottom:8px;color:#374151;}
 .team-card.me .t-head{color:var(--primary);}
+.t-head .reward-pill{background:rgba(255,255,255,.3);}
+.reward-pill{display:inline-flex;align-items:center;gap:4px;border-radius:30px;padding:2px 6px;font-size:14px;font-weight:600;color:#1f2937;}
+.reward-pill img{width:16px;height:16px;flex-shrink:0;}
 .t-members{display:flex;gap:8px;}
 .t-mem{flex:1;text-align:center;font-size:12px;color:#1f2937;font-weight:500;}
-.t-mem .circ{width:42px;height:42px;border-radius:50%;background:#9B2227;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:14px;font-weight:600;overflow:hidden;}
+.t-mem .circ{width:42px;height:42px;border-radius:50%;background:#9B2227;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 4px;font-size:14px;font-weight:600;overflow:hidden;position:relative;z-index:1;}
 .t-mem .circ img{width:100%;height:100%;object-fit:cover;display:block;}
 .team-card.me .t-mem .circ{background:var(--primary-100);color:#1f2937;}
+.t-mem .reward-pill{background:rgba(255,255,255,.5);backdrop-filter:blur(4px);font-size:10px;padding:1px 5px;margin-top:-8px;position:relative;z-index:2;}
+.t-mem .reward-pill img{width:11px;height:11px;}
+.t-mem.me-mem .reward-pill{background:rgba(8,118,177,.5);color:#fff;}
 .panel-tabs{margin-top:auto;display:flex;gap:8px;}
-.panel-tabs button{flex:1;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);color:#374151;padding:10px;border-radius:9px;font-size:13px;font-weight:600;}
+.panel-tabs button{flex:1;background:var(--primary-50);backdrop-filter:blur(4px);color:#374151;padding:12px 8px;
+  border-radius:9px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;}
+.panel-tabs button img{width:16px;height:16px;}
 
 /* Thông báo đầu lớp (khớp node 18910:91104) */
 .announce-modal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9;
@@ -484,7 +489,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .bottom-bar{position:absolute;left:0;bottom:0;width:100%;background:#111827;padding:14px 26px;display:flex;align-items:center;gap:18px;z-index:6;}
 .bottom-bar .reaction-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;}
 .reaction-btn{width:42px;height:42px;border-radius:50%;background:#dc2626;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;}
-.assist-tag{font-size:10px;color:#cbd5e1;}
+.assist-tag{display:inline-flex;align-items:center;background:rgba(255,255,255,.5);backdrop-filter:blur(4px);
+  color:#1f2937;font-size:10px;font-weight:500;padding:2px 6px;border-radius:30px;margin-top:2px;}
 .control-center{flex:1;background:#1f2937;border-radius:16px;padding:8px 16px;display:flex;align-items:center;gap:14px;justify-content:center;min-height:52px;}
 .timer-pill{display:flex;align-items:center;gap:6px;color:#e5e7eb;font-size:14px;font-weight:600;background:#111827;padding:6px 12px;border-radius:10px;}
 .hint-text{color:#e5e7eb;font-size:13px;}
@@ -1075,30 +1081,27 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <div class="classroom-screen">
       <div class="class-main" id="classMain">
         <div class="class-video-bg"><img src="assets/classroom-bg.png" alt=""></div>
-        <div class="instruction-pill"><span class="dot">▶</span> Listen and repeat</div>
-        <div class="label-card">musical instrument</div>
-        <div class="gv-inset">🧑‍🏫</div>
         <div id="classOverlayLayer"></div>
         <div class="bottom-bar" id="bottomBar"></div>
       </div>
       <div class="right-panel" id="rightPanel">
         <div class="live-pill">● Trực tiếp · 20:25</div>
-        <div class="self-cam"><img src="assets/classroom-self-cam.png" alt=""><div class="trophy">🏆 <span id="selfTrophy">45</span></div></div>
+        <div class="self-cam"><img src="assets/classroom-self-cam.png" alt=""><div class="trophy"><img src="assets/trophy.png" alt=""> <span id="selfTrophy">45</span></div></div>
         <div class="team-card me">
-          <div class="t-head"><span>Team Cáo</span><span>🏆 31</span></div>
+          <div class="t-head"><span>Team Cáo</span><span class="reward-pill"><img src="assets/trophy.png" alt="">31</span></div>
           <div class="t-members">
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate1.png" alt=""></div>34</div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate2.png" alt=""></div>12</div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate3.png" alt=""></div>23</div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-me.png" alt=""></div>Tôi</div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">34</span></div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">12</span></div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">54</span></div>
+            <div class="t-mem me-mem"><div class="circ"><img src="assets/classroom-avatar-me.png" alt=""></div><span class="reward-pill">Tôi</span></div>
           </div>
         </div>
-        <div class="team-card"><div class="t-head"><span>Team Trâu</span><span>🏆 220</span></div>
+        <div class="team-card"><div class="t-head"><span>Team Trâu</span><span class="reward-pill"><img src="assets/trophy.png" alt="">220</span></div>
           <div class="t-members">
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div>23</div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div>11</div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div>22</div>
-            <div class="t-mem"><div class="circ">😎</div>53</div>
+            <div class="t-mem"><div class="circ" style="background:#9B2227;color:#fff;">GH</div><span class="reward-pill"><img src="assets/trophy.png" alt="">23</span></div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">11</span></div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">22</span></div>
+            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">53</span></div>
           </div>
         </div>
         <div class="panel-tabs" id="panelTabs">
