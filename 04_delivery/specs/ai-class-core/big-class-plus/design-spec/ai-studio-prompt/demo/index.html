@@ -1188,7 +1188,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div class="aic2-lesson-topic" id="aic2LessonTopic"></div>
         <div class="aic2-lesson-caption" id="aic2LessonCaption"></div>
         <span class="aic2-lesson-mascot">🧑‍🏫</span>
-        <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Đã hiểu, làm bài tập →</button>
+        <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
       </div>
       <div class="center-cta" id="aic2Cta" style="display:none;">
         <button class="btn-primary" onclick="goto('aic2-summary')">Xem tổng kết buổi bổ trợ</button>
@@ -2036,11 +2036,11 @@ function aic2StartLesson(){
   clearInterval(state.aic2._lessonTick);
   let remain = 180;
   state.aic2._lessonTick = setInterval(()=>{
-    remain -= 30;
+    remain -= 1;
     if(remain<=0){ aic2FinishLesson(); return; }
     document.getElementById('aic2LessonTimer').textContent = `${Math.floor(remain/60)}:${String(remain%60).padStart(2,'0')}`;
     document.getElementById('aic2LessonBarFill').style.width = Math.round(remain/180*100)+'%';
-  }, 500);
+  }, 1000);
 }
 function aic2FinishLesson(){
   clearInterval(state.aic2._lessonTick);
