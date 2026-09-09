@@ -115,26 +115,41 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .hi-user .av{width:42px;height:42px;border-radius:50%;overflow:hidden;}
 .hi-user .av img{width:100%;height:100%;object-fit:cover;}
 
-.content-scroll{padding:32px 56px 40px 96px;}
+.content-scroll{padding:32px 104px 40px 96px;}
 .promo-banner{width:100%;height:200px;border-radius:20px;overflow:hidden;margin-bottom:32px;}
 .promo-banner img{width:100%;height:100%;object-fit:cover;display:block;}
 
-.content-row{display:flex;gap:24px;align-items:flex-start;}
+.content-row{display:flex;gap:32px;align-items:flex-start;}
 .content-col-main{flex:0 0 613px;max-width:613px;display:flex;flex-direction:column;gap:32px;}
-.content-col-side{flex:0 0 250px;max-width:250px;}
-.content-col-third{flex:0 0 190px;max-width:190px;display:flex;flex-direction:column;gap:16px;}
+.content-col-side{flex:1;max-width:355px;display:flex;flex-direction:column;gap:16px;}
 
-/* ---- Cột 3: chiến dịch thi cử (khớp node 36875:357474) ---- */
-.exam-campaign{border-radius:16px;overflow:hidden;box-shadow:var(--shadow-s);}
-.exam-campaign .banner-img{width:100%;height:84px;object-fit:cover;display:block;}
-.exam-campaign .body{background:#fff;padding:14px 14px 16px;}
-.exam-campaign .body .t{font-weight:600;font-size:13px;color:var(--n900);margin-bottom:4px;line-height:1.35;}
-.exam-campaign .body .s{font-size:11.5px;color:var(--n500);}
-.examprep-card{display:flex;flex-direction:column;gap:10px;}
-.examprep-card h3{font-size:14px;font-weight:600;color:var(--n900);margin-bottom:2px;}
-.task-card{background:#fff;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow-s);}
-.task-card img{width:28px;height:28px;flex-shrink:0;}
-.task-card .t{font-size:12.5px;font-weight:500;color:var(--n700);flex:1;line-height:1.3;}
+/* ---- Cột phải: chiến dịch thi cử (khớp node 41552:99097) ---- */
+.exam-campaign{border-radius:20px;overflow:hidden;box-shadow:0 4px 4px rgba(0,0,0,.08);position:relative;}
+.exam-campaign .banner-img{width:100%;height:88px;object-fit:cover;display:block;background:var(--primary-100);}
+.exam-campaign .banner-tag{position:absolute;top:10px;right:10px;background:#f3354a;color:#fff;font-size:11px;font-weight:700;
+  padding:4px 10px 4px 8px;border-radius:12px;display:flex;align-items:center;gap:4px;}
+.exam-campaign .banner-caption{background:rgba(0,0,0,.4);backdrop-filter:blur(3px);color:#fff;font-size:12px;font-weight:500;
+  text-align:center;padding:6px 8px;}
+.examprep-card{display:flex;flex-direction:column;gap:12px;background:#fff;box-shadow:0 4px 4px rgba(0,0,0,.08);
+  border-radius:0 0 20px 20px;padding:16px 16px 16px;margin-top:-8px;}
+.task-card{border-radius:12px;padding:12px;display:flex;align-items:center;gap:16px;}
+.task-card.done{background:#F3FDF0;border:1px solid #C0F7BB;}
+.task-card.todo{background:var(--n50);border:1px solid var(--n200);}
+.task-card img{width:48px;height:48px;flex-shrink:0;}
+.task-card .body{flex:1;min-width:0;}
+.task-card .row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.task-card .status{font-size:14px;font-weight:500;border-radius:10px;padding:4px 8px;display:flex;align-items:center;gap:6px;}
+.task-card.done .status{background:#DEFCDC;color:#26A316;}
+.task-card.todo .status{background:var(--n200);color:var(--n500);}
+.task-card .status .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.task-card .score{font-size:12px;color:var(--n500);}
+.task-card .score b{font-size:16px;color:#000;font-weight:600;}
+.task-card .name{font-size:18px;font-weight:600;color:var(--n700);}
+.examprep-promo{background:linear-gradient(135deg,#a7f3d0,#60a5fa);border-radius:12px;padding:14px;display:flex;
+  align-items:center;gap:12px;}
+.examprep-promo .badge-tag{background:#fff;color:var(--primary);font-size:11px;font-weight:700;padding:3px 8px;
+  border-radius:8px;align-self:flex-start;margin-bottom:6px;}
+.examprep-promo .t{font-size:13px;font-weight:500;color:#0f2942;}
 
 .exam-promo{background:#00203D;border-radius:20px;padding:16px 16px 16px 136px;position:relative;
   min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:9px;overflow:visible;}
@@ -225,10 +240,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .leg-none{background:var(--n100);border:1.5px solid var(--n200);}
 .mz-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .mz-col{display:flex;flex-direction:column;gap:10px;}
-.strand-row{display:flex;align-items:center;gap:12px;}
+.strand-row{display:flex;align-items:center;gap:10px;}
 .strand-label{width:64px;flex-shrink:0;font-size:11.5px;font-weight:600;color:var(--n700);}
-.lo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;flex:1;}
-.lo-tile{position:relative;aspect-ratio:1/1;border-radius:7px;cursor:pointer;border:1.5px solid transparent;transition:transform .12s ease;}
+.lo-grid{display:grid;grid-template-columns:repeat(6,26px);gap:6px;}
+.lo-tile{position:relative;width:26px;aspect-ratio:1/1;border-radius:6px;cursor:pointer;border:1.5px solid transparent;transition:transform .12s ease;}
 .lo-tile:hover,.lo-tile:focus-visible{transform:translateY(-2px) scale(1.1);outline:none;z-index:5;}
 .lo-tile.done{background:#EFFBEA;border-color:#B8E6A1;}
 .lo-tile.warn{background:var(--warning-100);border-color:#F0CC70;}
@@ -749,26 +764,37 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
           </div>
 
           <div class="content-col-side">
+            <div>
+              <div class="exam-campaign" onclick="toast('🔧 Ngoài phạm vi demo')">
+                <img class="banner-img" src="assets/exam-banner-bg.png" alt="">
+                <span class="banner-tag">🔥 Bắt buộc</span>
+                <div class="banner-caption">Diễn ra từ: 21/1 - 31/1</div>
+              </div>
+              <div class="examprep-card">
+                <div class="task-card done">
+                  <img src="assets/icon-doc-done.png" alt="">
+                  <div class="body">
+                    <div class="row"><span class="status"><span class="dot"></span>Đã làm</span><span class="score"><b>85</b>/100</span></div>
+                    <div class="name">Bài thi lý thuyết</div>
+                  </div>
+                </div>
+                <div class="task-card todo">
+                  <img src="assets/icon-doc-todo.png" alt="">
+                  <div class="body">
+                    <div class="row"><span class="status"><span class="dot"></span>Chưa làm</span><span class="score">--</span></div>
+                    <div class="name">Bài thi nói</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="examprep-promo" onclick="toast('🔧 Ngoài phạm vi demo')">
+              <div><span class="badge-tag">Phòng luyện thi</span><div class="t">Luyện thi Học kỳ II — Sẵn sàng "tăng level" kiến thức để chinh phục bài thi trên lớp sắp tới! 💎 50</div></div>
+            </div>
             <div class="exam-promo">
               <div class="mascot-circle"><img src="assets/mascot-robot.png" alt=""></div>
               <div class="title">Nhiệm vụ bắt buộc <img src="assets/icon-star2.svg" alt=""></div>
               <div class="desc">Con phải hoàn thành <b>Bài tập thực hành Tuần 38</b></div>
               <button onclick="toast('🔧 Ngoài phạm vi demo')">Làm bài ngay</button>
-            </div>
-          </div>
-
-          <div class="content-col-third">
-            <div class="exam-campaign" onclick="toast('🔧 Ngoài phạm vi demo')">
-              <img class="banner-img" src="assets/exam-banner-bg.png" alt="">
-              <div class="body">
-                <div class="t">Chiến dịch luyện thi cuối kỳ</div>
-                <div class="s">Ôn tập theo lộ trình để đạt điểm cao nhất</div>
-              </div>
-            </div>
-            <div class="examprep-card">
-              <h3>Việc cần làm</h3>
-              <div class="task-card"><img src="assets/icon-doc-done.png" alt=""><span class="t">Bài luyện tập Unit 6 — đã hoàn thành</span></div>
-              <div class="task-card"><img src="assets/icon-doc-todo.png" alt=""><span class="t">Bài luyện tập Unit 7 — chưa làm</span></div>
             </div>
           </div>
         </div>
