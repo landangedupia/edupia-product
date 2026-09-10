@@ -445,6 +445,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .class-main{flex:1;position:relative;background:#000;overflow:hidden;}
 .class-video-bg{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;}
 .class-video-bg img{width:100%;height:100%;object-fit:contain;display:block;}
+.lecture-video{width:100%;height:100%;object-fit:contain;display:block;background:#000;}
+.lecture-unmute-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;
+  background:rgba(17,24,39,.85);color:#fff;padding:12px 22px;border-radius:14px;font-weight:600;font-size:14px;}
 .live-toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);background:#fff;color:var(--n900);padding:12px 22px;border-radius:14px;font-weight:600;box-shadow:var(--shadow-m);z-index:5;font-size:14px;}
 
 /* Khớp get_design_context (panel phải nền #374151, card đội mình #ECFBFF/#1890C7, đội khác nền trắng) */
@@ -1100,7 +1103,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   <section class="screen" id="screen-classroom">
     <div class="classroom-screen">
       <div class="class-main" id="classMain">
-        <div class="class-video-bg"><img src="assets/classroom-bg.png" alt=""></div>
+        <div class="class-video-bg">
+          <video id="lectureVideo" class="lecture-video" playsinline webkit-playsinline="true" poster="assets/classroom-bg.png"></video>
+          <button id="lectureUnmuteBtn" class="lecture-unmute-btn" hidden onclick="unmuteLectureVideo()">🔇 Bấm để bật tiếng</button>
+        </div>
         <div id="classOverlayLayer"></div>
         <div class="bottom-bar" id="bottomBar"></div>
       </div>
@@ -1233,6 +1239,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 <button id="skipBtn" hidden onclick="skip()">⏭ Bỏ qua / Tiếp theo</button>
 <div class="toast-mini" id="toastMini"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
 <script>
 /* ============ GLOBAL STATE ============ */
 const state = {
@@ -1330,10 +1337,45 @@ const FLOW = ['team-announce','lecture1','mcq','mcq-result','lecture2','ispeak',
   'lecture3','group-mascot','group-discuss','group-answer','group-result',
   'lecture4','aispeak-intro','aispeak-t1','aispeak-wait1','aispeak-t2','aispeak-wait2','aispeak-result','end-cta'];
 
+const LECTURE_VIDEO_SRC = 'https://vod-mass.edupia.vn/a_12628_mass/_definst_/mass/videos/video_lectures/2025/09/10/bc2-g5-u3.mp4/playlist.m3u8';
+
+function initLectureVideo(){
+  const video = document.getElementById('lectureVideo');
+  if(!video || video.dataset.inited) return;
+  video.dataset.inited = '1';
+  if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src = LECTURE_VIDEO_SRC;
+  } else if(window.Hls && Hls.isSupported()){
+    const hls = new Hls();
+    hls.loadSource(LECTURE_VIDEO_SRC);
+    hls.attachMedia(video);
+  } else {
+    console.warn('Trình duyệt không hỗ trợ phát HLS (m3u8).');
+    return;
+  }
+  playLectureVideo();
+}
+
+function playLectureVideo(){
+  const video = document.getElementById('lectureVideo');
+  video.play().catch(()=>{
+    video.muted = true;
+    document.getElementById('lectureUnmuteBtn').hidden = false;
+    video.play().catch(()=>{});
+  });
+}
+
+function unmuteLectureVideo(){
+  const video = document.getElementById('lectureVideo');
+  video.muted = false;
+  document.getElementById('lectureUnmuteBtn').hidden = true;
+}
+
 function enterClassroom(){
   goto('classroom');
   state.classroomStep = 0;
   renderClassroomStep();
+  initLectureVideo();
 }
 
 function nextClassStep(){
