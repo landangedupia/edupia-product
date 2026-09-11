@@ -1344,16 +1344,17 @@ function initLectureVideo(){
   if(!video || video.dataset.inited) return;
   video.dataset.inited = '1';
   if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.addEventListener('loadedmetadata', playLectureVideo, {once:true});
     video.src = LECTURE_VIDEO_SRC;
   } else if(window.Hls && Hls.isSupported()){
     const hls = new Hls();
+    hls.on(Hls.Events.MANIFEST_PARSED, playLectureVideo);
+    hls.on(Hls.Events.ERROR, (_, data)=>console.error('Lỗi phát video bài giảng (hls.js):', data));
     hls.loadSource(LECTURE_VIDEO_SRC);
     hls.attachMedia(video);
   } else {
     console.warn('Trình duyệt không hỗ trợ phát HLS (m3u8).');
-    return;
   }
-  playLectureVideo();
 }
 
 function playLectureVideo(){
