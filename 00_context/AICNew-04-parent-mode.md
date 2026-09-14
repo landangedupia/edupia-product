@@ -3,6 +3,8 @@
 > ⚠️ **Ghi chú phạm vi (PO xác nhận 2026-09-14):** tài liệu này phục vụ **PRD cho bản demo** của Concept 1.2 — sẽ được phân tích bổ sung lại khi concept được chốt chính thức. Một số mục (đánh dấu ❓/`[AI DRAFT]`) được PO chủ động để ngỏ, xử lý sau ở `/refine-prd` khi có quyết định chính thức, không phải bỏ sót.
 >
 > Khác với AICNew-03 (tổng hợp từ tài liệu, chưa qua phiên hỏi-đáp trực tiếp), tài liệu này **có phiên khám phá trực tiếp với PO** (giống AICNew-01/02) — mọi mục "PO xác nhận" là câu trả lời thật đã ghi nhận qua hội thoại 2026-09-14.
+>
+> ✏️ **Tu chỉnh sau khi dựng Figma (2026-09-14, cùng ngày):** PO đổi cơ chế cổng xác thực ở Phase 2/4/5 — thay thử thách "đọc số — viết chữ" bằng 2 phương thức: mật khẩu phụ huynh (riêng, khác mật khẩu học sinh) hoặc OTP qua SĐT/Zalo. Thay đổi này **mâu thuẫn với câu trả lời đã chốt ở Phase 3, Vòng 1, #3** ("dùng chung cổng xác thực với học sinh, không có luồng thiết lập riêng") vì mật khẩu phụ huynh cần một luồng thiết lập lần đầu — xem câu hỏi mới trong Phase 7. PRD (`04_delivery/specs/parent-mode/parent-mode/AICNew-04-parent-mode.md`) đã cập nhật lên v1.1 phản ánh thay đổi này.
 
 ---
 
@@ -158,8 +160,9 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | Rule ID | Hành động/Trigger | Quy tắc | Điều kiện |
 |---------|---------------------|---------------------|------------------------|
 | BR-1 | Phụ huynh bấm lối vào Parent Mode (từ "Tài khoản" hoặc liên kết Zalo) | Hệ thống PHẢI yêu cầu qua cổng xác thực phụ huynh trước khi hiển thị bất kỳ nội dung Parent Mode nào | Áp dụng cho cả hai kênh vào |
-| BR-2 | Qua cổng xác thực | Dùng chung phiên đăng nhập của tài khoản học sinh (không có tài khoản/đăng nhập riêng cho phụ huynh); PHẢI thêm một bước thử thách xác thực phụ (đọc số — viết chữ) | |
-| BR-3 | Nhập sai thử thách xác thực | Hệ thống PHẢI cho thử lại, KHÔNG giới hạn số lần | |
+| BR-2 | Qua cổng xác thực | PHẢI cho phụ huynh chọn 1 trong 2 phương thức: nhập mật khẩu phụ huynh (riêng, khác mật khẩu học sinh), hoặc nhận mã OTP qua SĐT/Zalo đã đăng ký. Vẫn dùng chung phiên đăng nhập của tài khoản học sinh để vào Parent Mode sau khi qua cổng (✏️ đổi 2026-09-14, thay cho thử thách "đọc số — viết chữ" ở bản gốc) | |
+| BR-3 | Nhập sai mật khẩu phụ huynh | Hệ thống PHẢI cho thử lại, KHÔNG giới hạn số lần | |
+| BR-11 | Chọn nhận mã OTP | PHẢI gửi mã tới đúng SĐT/Zalo đã đăng ký, cho phụ huynh nhập mã để xác thực (✏️ mới 2026-09-14) | ⚠️ Giới hạn/thời hạn mã, số lần thử sai, cơ chế gửi lại — chưa chốt, xem Phase 7 |
 | BR-4 | Qua cổng xác thực thành công | Chuyển vào Parent Mode; PHẢI KHÔNG yêu cầu xác thực lại nếu phụ huynh thoát rồi vào lại trong cùng phiên đăng nhập | |
 | BR-5 | Buổi học chưa diễn ra hoặc report buổi học lỗi ghi nhận | Parent Mode PHẢI hiển thị "chưa có báo cáo" | Thay vì báo cáo trống/gây hiểu lầm |
 | BR-6 | Report buổi học có cờ "thiếu ảnh điểm danh" | Parent Mode PHẢI hiển thị "con chưa điểm danh" tại đúng vị trí (đầu hoặc cuối buổi) | |
@@ -167,8 +170,13 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | BR-8 | Hiển thị mỗi chỉ số trong báo cáo tiến bộ | PHẢI đi kèm một gợi ý hành động (CTA); CTA là lời nhắc để phụ huynh nhắc con, KHÔNG phải hành động phụ huynh tự làm thay con | |
 | BR-9 | Có sự kiện cần thông báo (vào trễ, thiếu ảnh điểm danh, không đủ dữ liệu gán NLO, kết thúc buổi bổ trợ AI Tutor 30') | Hệ thống PHẢI gửi thông báo chủ động tới phụ huynh | Không yêu cầu phụ huynh tự mở Parent Mode mới biết |
 | BR-10 | Hiển thị Kế hoạch học tập tiếp theo | PHẢI ở dạng tóm tắt mục tiêu + lộ trình gói học | KHÔNG liệt kê mã đơn vị kiến thức (NLO) chi tiết |
+| BR-12 | Hiển thị màn Tổng quan (✏️ mới 2026-09-14) | PHẢI tổ chức thành 3 zone (Điểm danh / Tóm tắt tiến bộ / Gợi ý lộ trình học tập), mỗi zone có 1 CTA dẫn tới trang chi tiết tương ứng | |
+| BR-13 | Phụ huynh bấm CTA "Xem lịch sử điểm danh" (✏️ mới 2026-09-14) | Màn Lịch sử điểm danh PHẢI liệt kê các buổi học gần đây kèm trạng thái điểm danh đầu/cuối buổi mỗi buổi | |
+| BR-14 | Hiển thị zone Tóm tắt tiến bộ (✏️ mới 2026-09-14) | PHẢI so sánh kết quả hiện tại với buổi học gần nhất cho từng kỹ năng (tăng/giảm/không đổi) | ⚠️ Phụ thuộc dữ liệu snapshot theo từng buổi — chưa xác nhận, xem Phase 7 |
 
 > **Note BR-9:** hành vi khi gửi thông báo **thất bại** (thử lại / bỏ qua / chỉ hiển thị lại khi phụ huynh tự mở Parent Mode) **chưa được PO chốt** — PO quyết định xử lý sau ở `/refine-prd` vì tài liệu này phục vụ bản demo, sẽ được phân tích bổ sung khi concept chính thức được chốt (xem Phase 7).
+>
+> **Note BR-2 (✏️ 2026-09-14):** Mật khẩu phụ huynh là thông tin xác thực riêng, cần một luồng **thiết lập lần đầu** — điều này **mâu thuẫn với câu trả lời đã chốt ở Phase 3, Vòng 1, #3** ("dùng chung cổng xác thực với học sinh, không có luồng thiết lập riêng"). Chưa giải quyết, xem Phase 7.
 
 ---
 
@@ -179,8 +187,9 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | Rule ID | Logic nghiệp vụ (rẽ nhánh / công thức / điều kiện) | Thông báo/kết quả nghiệp vụ khi lỗi |
 |---------|---------------------------------------------------|-------------------------------------|
 | BR-1 | Dù vào từ kênh nào (menu "Tài khoản" hay liên kết Zalo), luôn chuyển hướng qua cổng xác thực trước, không có đường tắt bỏ qua | — |
-| BR-2 | Không thu thập thông tin đăng nhập riêng cho phụ huynh; hiển thị một thử thách xác thực mỗi lần vào, không lưu để tái sử dụng | Chưa đăng nhập tài khoản học sinh → không cho vào Parent Mode, quay về màn đăng nhập học sinh trước |
-| BR-3 | Nhập sai → sinh/lặp lại thử thách và cho nhập lại ngay, không đếm số lần, không khoá | "Chưa đúng, thử lại" |
+| BR-2 | Hiển thị 2 tab chọn phương thức (Mật khẩu / OTP); vẫn dùng chung phiên đăng nhập của tài khoản học sinh để vào Parent Mode sau khi qua cổng | Chưa đăng nhập tài khoản học sinh → không cho vào Parent Mode, quay về màn đăng nhập học sinh trước |
+| BR-3 | Nhập sai mật khẩu → cho nhập lại ngay, không đếm số lần, không khoá | "Mật khẩu chưa đúng, thử lại" |
+| BR-11 | Chọn tab OTP → hiển thị 2 lựa chọn nơi nhận (SĐT/Zalo, che một phần số) → gửi mã tới nơi được chọn → cho nhập mã để xác thực | ❓ **[AI DRAFT]** thời hạn mã, số lần thử sai, cơ chế gửi lại mã — chưa có nguồn, xem Phase 7 |
 | BR-4 | Giữ trạng thái "đã qua xác thực" trong suốt phiên đăng nhập của tài khoản học sinh | — |
 | BR-5 | Report buổi học của buổi tương ứng không tồn tại hoặc bị đánh dấu lỗi ghi nhận → hiển thị trạng thái riêng cho đúng buổi đó, các buổi khác không bị ảnh hưởng | "Buổi học này chưa có báo cáo" |
 | BR-6 | Report buổi học mang cờ "thiếu ảnh điểm danh" (đầu hoặc cuối buổi, theo `AICNew-01`) → thay vị trí ảnh bằng thông điệp, không chặn phần còn lại của báo cáo | "Con chưa điểm danh {đầu buổi/cuối buổi}" |
@@ -188,6 +197,9 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | BR-8 | Với mỗi chỉ số đã có dữ liệu trong Mastery Map, xác định gợi ý hành động theo kỹ năng yếu nhất và gắn kèm ngay dưới chỉ số đó | Không xác định được gợi ý phù hợp → ẩn CTA cho chỉ số đó, không hiển thị CTA rỗng |
 | BR-9 | Report buổi học/kết quả buổi bổ trợ ghi nhận một cờ sự kiện, hoặc buổi bổ trợ AI Tutor 30' kết thúc → kích hoạt gửi thông báo tới phụ huynh của học sinh đó | ❓ **[AI DRAFT] Q1 — chưa giải quyết:** nếu thông báo không gửi được — hệ thống thử gửi lại, bỏ qua, hay chỉ hiển thị lại khi phụ huynh tự mở Parent Mode lần sau? PO quyết định xử lý sau (xem Phase 7). |
 | BR-10 | Kế hoạch học tập tiếp theo tổng hợp từ mục tiêu hiện tại + gói học đang theo, diễn đạt thành câu tóm tắt nghiệp vụ, không tham chiếu mã NLO | — |
+| BR-12 | Với mỗi zone, gắn CTA dẫn đúng màn: Điểm danh → Lịch sử điểm danh; Tóm tắt tiến bộ → Báo cáo chi tiết; Gợi ý lộ trình → Kế hoạch học tập tiếp theo | — |
+| BR-13 | Truy vấn danh sách report buổi học gần đây (nguồn `AICNew-01`) theo thứ tự buổi gần nhất trước, hiển thị trạng thái điểm danh mỗi buổi | Buổi thiếu ảnh điểm danh → áp dụng lại thông điệp của BR-6 |
+| BR-14 | So sánh điểm/Mastery của buổi hiện tại với snapshot của buổi gần nhất trước đó cho từng kỹ năng, suy ra chiều hướng (tăng/giảm/không đổi) | ❓ **[AI DRAFT] Q8 — chưa giải quyết:** hệ thống có lưu snapshot điểm/Mastery theo từng buổi không, hay chỉ có trạng thái Mastery hiện tại (cộng dồn)? Cần xác nhận với `AICNew-01`/`AICNew-02`/nền tảng Adaptive Learning. |
 
 ---
 
@@ -198,8 +210,9 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | AC ID | Mô tả | Hành vi kỳ vọng | Bắt nguồn từ |
 |-------|------------------------|---------------------------|--------------|
 | AC-1 | Vào Parent Mode luôn qua cổng xác thực | Từ menu "Tài khoản" hoặc liên kết Zalo, hệ thống luôn hiển thị cổng xác thực trước khi cho xem nội dung Parent Mode | BR-1 |
-| AC-2 | Cổng xác thực dùng chung phiên đăng nhập học sinh | Phụ huynh không cần tài khoản riêng; chỉ cần vượt qua thử thách xác thực để vào | BR-2 |
-| AC-3 | Nhập sai được thử lại không giới hạn | Nhập sai → hiển thị "Chưa đúng, thử lại" và cho nhập lại ngay, không khoá | BR-3 |
+| AC-2 | Cổng xác thực có 2 phương thức | Phụ huynh chọn nhập mật khẩu phụ huynh hoặc nhận OTP qua SĐT/Zalo | BR-2 |
+| AC-3 | Nhập sai mật khẩu được thử lại không giới hạn | Nhập sai → hiển thị thông báo lỗi và cho nhập lại ngay, không khoá | BR-3 |
+| AC-12 | Chọn OTP → gửi đúng nơi đã chọn | Hiển thị 2 lựa chọn SĐT/Zalo (che một phần số), gửi mã, cho nhập mã để xác thực | BR-11 |
 | AC-4 | Không yêu cầu xác thực lại trong cùng phiên | Thoát rồi vào lại Parent Mode trong cùng phiên đăng nhập → không hiện lại cổng xác thực | BR-4 |
 | AC-5 | Buổi học chưa có report → hiển thị đúng trạng thái | Buổi chưa diễn ra/lỗi ghi nhận → hiển thị "Buổi học này chưa có báo cáo" thay vì trống/sai | BR-5 |
 | AC-6 | Thiếu ảnh điểm danh → hiển thị đúng thông điệp | Vị trí ảnh thiếu hiển thị "Con chưa điểm danh {đầu buổi/cuối buổi}"; phần còn lại của báo cáo vẫn hiển thị bình thường | BR-6 |
@@ -208,6 +221,9 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | AC-9 | Sự kiện quan trọng kích hoạt thông báo chủ động | Có cờ vào trễ/thiếu ảnh điểm danh/không đủ dữ liệu gán NLO, hoặc kết thúc buổi bổ trợ AI Tutor 30' → phụ huynh nhận thông báo mà không cần tự mở Parent Mode | BR-9 |
 | AC-10 | Kế hoạch học tập tiếp theo ở dạng tóm tắt nghiệp vụ | Màn hiển thị tóm tắt mục tiêu + lộ trình, không hiện mã NLO | BR-10 |
 | AC-11 | Trải nghiệm tổng thể đúng User Story | Qua cổng xác thực → phụ huynh thấy điểm danh, tóm tắt tiến bộ, CTA, kế hoạch tiếp theo trong một luồng liền mạch, không cần tự đánh giá | BR-1…BR-10 |
+| AC-13 | Màn Tổng quan có đúng 3 zone + CTA | Mỗi zone (Điểm danh/Tóm tắt tiến bộ/Gợi ý lộ trình) có 1 CTA dẫn đúng màn chi tiết tương ứng | BR-12 |
+| AC-14 | Lịch sử điểm danh liệt kê đúng | Danh sách buổi gần đây, mỗi dòng có trạng thái điểm danh đầu/cuối buổi | BR-13 |
+| AC-15 | Zone Tóm tắt tiến bộ có so sánh | Mỗi kỹ năng hiển thị chiều hướng thay đổi so với buổi gần nhất | BR-14 |
 
 ---
 
@@ -217,19 +233,26 @@ Phụ huynh thoát Parent Mode, quay lại màn học của con; không cần x�
 | Hành động Flow | Có Rule? | Có Logic? | Có AC? | Status |
 |---|---|---|---|---|
 | 1. Mở lối vào Parent Mode | ✅ BR-1 | ✅ | ✅ AC-1 | OK |
-| 2. Qua cổng xác thực | ✅ BR-2,3,4 | ✅ | ✅ AC-2,3,4 | OK |
+| 2. Qua cổng xác thực (Mật khẩu) | ✅ BR-2,3,4 | ✅ | ✅ AC-2,3,4 | OK |
+| 2b. Qua cổng xác thực (OTP) | ✅ BR-11 | ⚠️ một phần | ✅ AC-12 | GAP — thời hạn/số lần/gửi lại mã chưa chốt |
 | 3. Xem tổng quan điểm danh | ✅ BR-5,6 | ✅ | ✅ AC-5,6 | OK |
 | 4. Xem báo cáo tiến bộ chi tiết | ✅ BR-7 | ✅ | ✅ AC-7 | OK |
 | 5. Bấm CTA hành động | ✅ BR-8 | ✅ | ✅ AC-8 | OK |
 | 6. Xem kế hoạch học tập tiếp theo | ✅ BR-10 | ✅ | ✅ AC-10 | OK |
 | 7. Nhận thông báo chủ động | ✅ BR-9 | ⚠️ một phần | ✅ AC-9 | GAP — nhánh lỗi gửi thất bại chưa chốt |
 | 8. Thoát Parent Mode | ✅ BR-4 | ✅ | ✅ AC-4 | OK |
+| 9. Zone + CTA trên Tổng quan (✏️ mới) | ✅ BR-12 | ✅ | ✅ AC-13 | OK |
+| 10. Xem lịch sử điểm danh (✏️ mới) | ✅ BR-13 | ✅ | ✅ AC-14 | OK |
+| 11. So sánh tiến bộ với buổi gần nhất (✏️ mới) | ✅ BR-14 | ⚠️ một phần | ✅ AC-15 | GAP — phụ thuộc dữ liệu snapshot theo buổi chưa xác nhận |
 
 ### Xung đột phát hiện
 - Xung đột "tách giao diện riêng" vs "cổng xác thực trong tài khoản con" (Phase 3, Vòng 1, #1) — **đã giải quyết**: PO chốt giữ nguyên phương án nhúng trong tài khoản học sinh; "tách riêng" là định hướng tương lai, không áp dụng cho ticket này.
 
 ### Mục còn thiếu
 - **BR-9 (GAP)**: hành vi khi gửi thông báo thất bại — PO quyết định xử lý sau (`Q1 — [AI DRAFT]`), vì tài liệu này phục vụ bản demo, sẽ được phân tích bổ sung khi concept chính thức được chốt.
+- **BR-2 (GAP mới, ✏️ 2026-09-14)**: mật khẩu phụ huynh cần luồng thiết lập lần đầu, mâu thuẫn với quyết định trước đó (Phase 3, Vòng 1, #3) rằng không có luồng thiết lập riêng — PO cần chốt luồng thiết lập ở đâu/khi nào, và có bắt buộc hay có thể chỉ dùng OTP.
+- **BR-11 (GAP mới, ✏️ 2026-09-14)**: thời hạn hiệu lực mã OTP, số lần nhập sai tối đa, cơ chế/thời gian chờ gửi lại mã — chưa có nguồn, chưa chốt.
+- **BR-14 (GAP mới, ✏️ 2026-09-14, Q8)**: so sánh tiến bộ với buổi gần nhất cần dữ liệu snapshot điểm/Mastery theo từng buổi — chưa xác nhận `AICNew-01`/`AICNew-02`/nền tảng Adaptive Learning có lưu dữ liệu này không.
 - Chính sách lưu trữ/bảo mật ảnh học sinh (check-in/out) — chưa có, phụ thuộc Pháp lý (§1c).
 - Phụ huynh nhiều con dùng chung tài khoản — PO tạm hoãn (Out of Scope).
 - Phụ huynh không dùng Zalo/không có smartphone — PO để ngỏ (Out of Scope).
