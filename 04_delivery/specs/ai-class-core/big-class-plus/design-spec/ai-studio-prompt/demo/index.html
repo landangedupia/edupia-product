@@ -12,7 +12,7 @@
   --primary:#0876B1; --primary-50:#ECFBFF; --primary-100:#C6EDFB;
   --warning:#F5B30B; --warning-100:#FEF2C7;
   --n900:#111827; --n700:#374151; --n500:#6B7280; --n200:#E5E7EB; --n100:#F3F4F6; --n50:#F9FAFB;
-  --text-800:#51545F; --destructive:#EF444A;
+  --text-800:#51545F; --destructive:#EF444A; --success:#40C522;
   --brand-navy:#004671; --brand-lime:#A5BE00;
   --white:#FFFFFF;
   --shadow-s:0 2px 6px rgba(16,24,40,0.06);
@@ -716,6 +716,127 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-comment{background:#fff;border:1px solid var(--n100);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--n700);line-height:22px;display:flex;gap:12px;align-items:flex-start;}
 .aic2-comment .face{font-size:32px;flex-shrink:0;}
 
+/* ================= AI PRACTICE (menu trái > AI Practice > Luyện tập mỗi ngày) ================= */
+/* DRAFT REVIEW: khớp get_design_context thật, node 16401:55172 (Figma "Edupia Design System
+   2025"), 3 màn: landing (2 thẻ) -> Luyện tập mỗi ngày (danh sách) -> chi tiết bài tập. Màn
+   "Thử Thách Đề Thi" và việc thực sự làm bài (câu hỏi thật) NGOÀI phạm vi — dùng toast mock,
+   không tự vẽ thêm giao diện chưa có thiết kế. */
+.page-title-bar{border-bottom:1px solid var(--n200);padding:10px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:32px;}
+.page-title-bar span{font-size:18px;font-weight:500;color:var(--n700);letter-spacing:-.36px;}
+.aip-main{max-width:1000px;}
+
+.aip-launch-card{background:#fff;border-radius:20px;box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);
+  padding:24px 20px;display:flex;gap:20px;align-items:center;margin-bottom:20px;}
+.aip-launch-card img.icon{width:100px;height:100px;flex-shrink:0;}
+.aip-launch-card .info{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0;}
+.aip-launch-card .info h3{font-size:20px;font-weight:500;color:var(--n700);letter-spacing:-.4px;}
+.aip-launch-card .info .desc{font-size:16px;color:#4B5563;}
+.aip-launch-card .info hr{border:none;border-top:1px solid var(--n200);margin:2px 0;}
+.aip-launch-card .info .meta-row{display:flex;gap:20px;align-items:center;}
+.aip-launch-card .info .meta-row .item{display:flex;gap:4px;align-items:center;font-size:14px;color:var(--n700);}
+.aip-launch-card .info .meta-row .item img{width:20px;height:20px;}
+.aip-launch-card .info .meta-row .item.done{color:var(--success);}
+
+.aip-promo{background:#3d003b;border-radius:20px;padding:20px 20px 20px 136px;position:relative;
+  overflow:visible;margin-bottom:20px;}
+.aip-promo .mascot-circle{position:absolute;left:0;top:-18px;width:132px;height:132px;
+  filter:drop-shadow(0 25px 31px rgba(143,228,255,.33));}
+.aip-promo .mascot-circle img{width:100%;height:100%;object-fit:contain;}
+.aip-promo .title{color:#fff;font-weight:500;font-size:20px;letter-spacing:-.4px;display:flex;align-items:center;gap:8px;}
+.aip-promo .title img{width:24px;height:24px;}
+.aip-promo .desc{color:#F3F4F6;font-size:14px;line-height:20px;margin-top:4px;}
+
+.aip-search{position:relative;margin-bottom:20px;}
+.aip-search input{width:100%;height:40px;border:1px solid var(--n700);border-radius:8px;padding:8px 44px 8px 16px;
+  font-size:14px;color:var(--n900);font-family:'Poppins',system-ui,sans-serif;}
+.aip-search img{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;pointer-events:none;}
+
+.aip-item{background:#fff;border:1px solid var(--n100);border-radius:20px;box-shadow:0 1px 1px rgba(16,24,40,.04);
+  padding:20px;display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
+.aip-item .title{font-weight:500;font-size:16px;color:#000;}
+.aip-item hr{border:none;border-top:1px solid var(--n200);margin:0;}
+.aip-item .meta-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+.aip-item .meta-row .item{display:flex;gap:4px;align-items:center;font-size:14px;color:#023047;}
+.aip-item .meta-row .item img{width:20px;height:20px;}
+.aip-item .meta-row .item b{font-weight:600;}
+.aip-item .meta-row .item.score-done b{color:var(--success);}
+.aip-item .meta-row .item.score-mid b{color:var(--warning);}
+.aip-item .meta-row .item.score-low b{color:var(--destructive);}
+.aip-item .progress-row{display:flex;gap:20px;align-items:flex-end;}
+.aip-item .progress-info{flex:1;display:flex;flex-direction:column;gap:8px;}
+.aip-item .progress-info .label{font-size:14px;color:#0A5C8F;}
+.aip-item .progress-info .label b{font-weight:600;}
+.aip-item .progress-track{height:8px;background:var(--n200);border-radius:9px;overflow:hidden;}
+.aip-item .progress-fill{height:100%;border-radius:9px;}
+.aip-btn{padding:10px 16px;border-radius:10px;font-weight:500;font-size:14px;box-shadow:0 1px 2px rgba(16,24,40,.04);flex-shrink:0;}
+.aip-btn.do{background:var(--primary-50);border:1px solid var(--primary-100);color:var(--primary);}
+.aip-btn.retry{background:#FFFCEB;border:1px solid var(--warning-100);color:#B47209;}
+
+.aip-pagination{display:flex;align-items:center;justify-content:center;gap:20px;border-top:1px solid var(--n100);
+  padding:12px 0 4px;margin-top:4px;}
+.aip-pagination .side{flex:1;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--n500);font-weight:500;}
+.aip-pagination .side.right{justify-content:flex-end;}
+.aip-pagination .nums{display:flex;gap:2px;}
+.aip-pagination .num{width:40px;height:40px;border-radius:99px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:500;color:var(--n500);}
+.aip-pagination .num.active{background:var(--n100);color:var(--n900);}
+
+.aip-stats-bar{background:var(--primary);border-radius:20px 20px 0 0;padding:20px;display:flex;color:#fff;}
+.aip-stats-bar .col{flex:1;text-align:center;}
+.aip-stats-bar .col .label{font-size:13px;opacity:.85;margin-bottom:4px;}
+.aip-stats-bar .col .value{font-size:18px;font-weight:700;}
+.aip-detail-card{background:#fff;border:1px solid var(--n200);border-top:none;border-radius:0 0 20px 20px;
+  padding:24px 32px 32px;display:flex;flex-direction:column;align-items:center;gap:4px;
+  box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);}
+.aip-detail-card h3{font-size:18px;font-weight:700;color:var(--n900);text-align:center;}
+.aip-detail-card .sub{font-size:14px;color:var(--n500);text-align:center;margin-bottom:20px;}
+.aip-history-card{width:100%;border:1px solid var(--n200);border-radius:14px;padding:16px;display:flex;
+  align-items:center;gap:16px;margin-bottom:16px;}
+.aip-history-card img{width:56px;height:56px;flex-shrink:0;}
+.aip-history-card .t{font-weight:600;color:var(--n900);font-size:15px;}
+.aip-history-card .s{font-size:13px;color:var(--n500);margin-top:2px;}
+.aip-history-card .s b{color:var(--success);}
+.aip-note-card{width:100%;border:1px solid var(--n200);border-radius:14px;padding:16px 20px;margin-bottom:24px;}
+.aip-note-card .t{font-weight:700;color:var(--n900);margin-bottom:8px;}
+.aip-note-card ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.aip-note-card li{font-size:14px;color:var(--n700);line-height:1.5;}
+.aip-note-card li b{font-weight:600;}
+.aip-detail-card .btn-primary{width:100%;padding:14px;}
+
+/* ---- Màn "Thử Thách Đề Thi" — khớp get_design_context thật node 16517:15698 (cùng file). Item
+   đơn giản hơn Luyện tập mỗi ngày (không có thanh tiến trình/điểm — đúng theo thiết kế thật,
+   không tự suy diễn thêm). ---- */
+.aip-promo.exam{background:#3d3d00;}
+.aip-search-row{display:flex;gap:20px;align-items:flex-end;margin-bottom:20px;}
+.aip-search-row .aip-search{flex:1;margin-bottom:0;}
+.aip-filter-btn{border:1px solid var(--primary);color:var(--primary);background:#fff;padding:10px 24px;
+  border-radius:10px;font-weight:500;font-size:16px;flex-shrink:0;box-shadow:0 1px 1px rgba(16,24,40,.04);}
+.aip-exam-item{background:#fff;border:1px solid var(--n100);border-radius:20px;box-shadow:0 1px 1px rgba(16,24,40,.04);
+  padding:20px;display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
+.aip-exam-item .title{font-weight:500;font-size:16px;color:#000;}
+.aip-exam-item hr{border:none;border-top:1px solid var(--n200);margin:0;}
+.aip-exam-item .meta-row{display:flex;align-items:center;justify-content:space-between;}
+.aip-exam-item .meta-left{display:flex;gap:24px;align-items:center;}
+.aip-exam-item .meta-left .item{display:flex;gap:4px;align-items:center;font-size:14px;color:#023047;}
+.aip-exam-item .meta-left .item img{width:20px;height:20px;}
+
+.aip-filter-panel{background:#fff;border:1px solid var(--n200);border-radius:20px;box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);
+  padding:24px;margin-bottom:20px;display:none;}
+.aip-filter-panel.show{display:block;}
+.aip-filter-panel .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.aip-filter-panel .head .t{font-weight:700;font-size:16px;color:var(--n900);letter-spacing:.3px;text-transform:uppercase;}
+.aip-filter-panel .head .clear{font-size:14px;color:var(--n500);cursor:pointer;}
+.aip-filter-panel .group-label{font-weight:700;font-size:13px;color:var(--primary);text-transform:uppercase;
+  letter-spacing:.4px;margin-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block;padding-bottom:4px;}
+.aip-filter-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.aip-filter-pill{border:1px solid var(--n200);border-radius:99px;padding:10px 16px;text-align:center;
+  font-size:14px;color:var(--n700);font-weight:500;}
+.aip-filter-pill.selected{border-color:var(--primary);background:var(--primary-50);color:var(--primary);font-weight:600;}
+.aip-filter-panel .apply-btn{width:100%;background:var(--n200);color:#fff;padding:14px;border-radius:99px;
+  font-weight:600;font-size:16px;}
+.aip-filter-panel .apply-btn.active{background:var(--primary);}
+
 /* ---------- THANKS ---------- */
 .thanks-screen{min-height:956px;background:var(--n900);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
 .thanks-screen .face{font-size:90px;}
@@ -748,7 +869,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <nav class="menu-list">
         <div class="menu-item active"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
         <div class="menu-item" id="accountMenuItem" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
       </nav>
@@ -903,7 +1024,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <nav class="menu-list">
         <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
         <div class="menu-item active"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
       </nav>
@@ -985,6 +1106,272 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div class="gate-error" id="gateErrorEl"></div>
         <button class="btn-primary" style="width:100%;" onclick="checkGate()">Xác nhận</button>
         <div style="margin-top:14px;"><button class="btn-secondary" onclick="goto('account')">Huỷ</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 1: LANDING ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 17732:71075 (Figma "Edupia Design System
+       2025"). "Thử Thách Đề Thi" dẫn sang màn ai-practice-exam (xem bên dưới). -->
+  <section class="screen schedule-screen" id="screen-ai-practice">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span>AI Practice</span></div>
+          <div class="aip-launch-card" onclick="goto('ai-practice-daily')">
+            <img class="icon" src="assets/aip-icon-doc3d.png" alt="">
+            <div class="info">
+              <h3>Luyện tập mỗi ngày</h3>
+              <div class="desc">Làm bài mỗi ngày để nhớ từ, hiểu ngữ pháp và dùng đúng!</div>
+              <hr>
+              <div class="meta-row">
+                <span class="item"><img src="assets/icon-file-05.svg" alt=""> 4 nội dung</span>
+                <span class="item done"><img src="assets/icon-check-file.svg" alt=""> Đã làm: 3</span>
+              </div>
+            </div>
+          </div>
+          <div class="aip-launch-card" onclick="goto('ai-practice-exam')">
+            <img class="icon" src="assets/aip-icon-exam3d.png" alt="">
+            <div class="info">
+              <h3>Thử Thách Đề Thi</h3>
+              <div class="desc">Làm đề thi giống như thật để con sẵn sàng vào phòng thi.</div>
+              <hr>
+              <div class="meta-row">
+                <span class="item"><img src="assets/icon-book-open.svg" alt=""> 400 đề thi</span>
+                <span class="item done"><img src="assets/icon-check-file.svg" alt=""> Đã làm: 3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 2: LUYỆN TẬP MỖI NGÀY ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 17384:61109. Dữ liệu 4 bài mẫu lấy đúng
+       theo thiết kế (kể cả tên bài lặp lại — Figma dùng chung 1 tên minh hoạ cho cả 4 trạng
+       thái: chưa làm / chưa làm có mục tiêu / đã làm khá / đã làm thấp). Phân trang chỉ mang
+       tính hiển thị (demo chỉ có 1 trang dữ liệu thật). -->
+  <section class="screen schedule-screen" id="screen-ai-practice-daily">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span>Luyện tập mỗi ngày</span></div>
+          <div class="aip-promo">
+            <div class="mascot-circle"><img src="assets/mascot-robot.png" alt=""></div>
+            <div class="title">Chinh phục bài tập <img src="assets/icon-banner-star.svg" alt=""></div>
+            <div class="desc">Mỗi bài tập bạn sẽ nhận được số cup tương ứng để đổi vật phẩm giá trị trong cửa hàng nhé!</div>
+          </div>
+          <div class="aip-search">
+            <input placeholder="Hỏi..." onkeydown="if(event.key==='Enter') toast('🔧 Tìm kiếm ngoài phạm vi demo')">
+            <img src="assets/icon-search.svg" alt="">
+          </div>
+          <div id="aipDailyList"></div>
+          <div class="aip-pagination">
+            <div class="side"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">← Previous</span></div>
+            <div class="nums">
+              <span class="num active">1</span><span class="num">2</span><span class="num">3</span>
+              <span class="num">…</span><span class="num">8</span><span class="num">9</span><span class="num">10</span>
+            </div>
+            <div class="side right"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">Next →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 2b: THỬ THÁCH ĐỀ THI ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 16517:15698. Item đơn giản hơn (không có
+       thanh tiến trình/điểm — đúng thiết kế thật). Bộ lọc (Khối lớp / Loại đề) chỉ mang tính
+       tương tác trực quan (chọn/bỏ chọn pill) — KHÔNG lọc dữ liệu thật vì demo chỉ có 1 bộ đề
+       mẫu, tránh bịa thêm nội dung theo từng khối lớp/loại đề thật. Dùng chung màn chi tiết bài
+       tập (ai-practice-detail) với Luyện tập mỗi ngày vì Figma tái dùng đúng 1 template. -->
+  <section class="screen schedule-screen" id="screen-ai-practice-exam">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span>Thử Thách Đề Thi</span></div>
+          <div class="aip-promo exam">
+            <div class="mascot-circle"><img src="assets/mascot-robot.png" alt=""></div>
+            <div class="title">Chinh phục bài tập <img src="assets/icon-banner-star.svg" alt=""></div>
+            <div class="desc">Mỗi bài tập bạn sẽ nhận được số cup tương ứng để đổi vật phẩm giá trị trong cửa hàng nhé!</div>
+          </div>
+          <div class="aip-search-row">
+            <div class="aip-search">
+              <input placeholder="Tìm kiếm" onkeydown="if(event.key==='Enter') toast('🔧 Tìm kiếm ngoài phạm vi demo')">
+              <img src="assets/icon-search.svg" alt="">
+            </div>
+            <button class="aip-filter-btn" onclick="toggleAipFilterPanel()">Lọc ⚙</button>
+          </div>
+          <div class="aip-filter-panel" id="aipFilterPanel">
+            <div class="head"><span class="t">Bộ lọc tìm kiếm</span><span class="clear" onclick="aipClearFilter()">Xoá bộ lọc</span></div>
+            <div class="group-label">Khối lớp</div>
+            <div class="aip-filter-pills" id="aipGradePills"></div>
+            <div class="group-label">Loại đề</div>
+            <div class="aip-filter-pills" style="grid-template-columns:repeat(2,1fr);" id="aipTypePills"></div>
+            <button class="apply-btn" id="aipApplyBtn" onclick="aipApplyFilter()">Áp dụng</button>
+          </div>
+          <div id="aipExamList"></div>
+          <div class="aip-pagination">
+            <div class="side"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">← Previous</span></div>
+            <div class="nums">
+              <span class="num active">1</span><span class="num">2</span><span class="num">3</span>
+              <span class="num">…</span><span class="num">8</span><span class="num">9</span><span class="num">10</span>
+            </div>
+            <div class="side right"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">Next →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 3: CHI TIẾT BÀI TẬP ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context/screenshot node 17384:68735 ("Màn thông tin chi tiết
+       bài tập - layout 2 cột"). Nút "Làm bài ngay" ngoài phạm vi demo (chưa có thiết kế câu hỏi
+       thật) — chỉ hiện toast, không tự bịa giao diện làm bài. -->
+  <section class="screen schedule-screen" id="screen-ai-practice-detail">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span id="aipDetailTitle">—</span></div>
+          <div class="aip-stats-bar">
+            <div class="col"><div class="label">Thời lượng</div><div class="value" id="aipDetailDuration">—</div></div>
+            <div class="col"><div class="label">Số câu hỏi</div><div class="value" id="aipDetailCount">—</div></div>
+            <div class="col"><div class="label">Số lần thi</div><div class="value">Không giới hạn</div></div>
+          </div>
+          <div class="aip-detail-card">
+            <h3 id="aipDetailHeadline">—</h3>
+            <div class="sub" id="aipDetailSub">—</div>
+            <div class="aip-history-card">
+              <img src="assets/icon-file-05.svg" alt="">
+              <div>
+                <div class="t">Lịch sử làm bài</div>
+                <div class="s" id="aipDetailHistory">Chưa làm bài lần nào</div>
+              </div>
+            </div>
+            <div class="aip-note-card">
+              <div class="t">Lưu ý</div>
+              <ul>
+                <li>Học sinh có thể <b>sửa lại đáp án</b> đã chọn trong thời gian làm bài tập.</li>
+                <li>Học sinh sẽ được thông báo điểm ngay sau khi nộp bài.</li>
+                <li>Học sinh có thể làm bài tập nhiều lần và không giới hạn số lần làm.</li>
+              </ul>
+            </div>
+            <button class="btn-primary" onclick="toast('🔧 Ngoài phạm vi demo — chưa có thiết kế màn làm bài thật')">Làm bài ngay</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1345,6 +1732,7 @@ const SCREEN_DISPLAY = {
   summary:'flex', thanks:'flex',
   gate:'block', parent:'flex', classroom:'block',
   'aic2-interact':'block', 'aic2-summary':'flex',
+  'ai-practice':'flex', 'ai-practice-daily':'flex', 'ai-practice-exam':'flex', 'ai-practice-detail':'flex',
 };
 function goto(id){
   document.querySelectorAll('.screen').forEach(s=>{
@@ -2704,6 +3092,105 @@ function resetDemo(){
 }
 
 /* Hook: entering each AICNew-02 screen triggers its init/render function */
+/* ============ AI PRACTICE > LUYỆN TẬP MỖI NGÀY ============ */
+/* DRAFT REVIEW: 4 bài mẫu khớp đúng theo get_design_context thật (node 17384:61109) — cùng 1 tên
+   bài minh hoạ, khác trạng thái (chưa làm / chưa làm có mục tiêu / đã làm khá / đã làm thấp). */
+const AIP_DAILY_ITEMS = [
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:false, target:null, correct:0, pct:0 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:false, target:100, correct:0, pct:100 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:true, target:60, correct:12, pct:60 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:true, target:10, correct:2, pct:10 },
+];
+function aipScoreClass(pct){ return pct>=70 ? 'score-done' : pct>=40 ? 'score-mid' : 'score-low'; }
+function aipBarColor(pct){ return pct>=70 ? 'var(--success)' : pct>=40 ? 'var(--warning)' : 'var(--destructive)'; }
+function renderAipDailyList(){
+  document.getElementById('aipDailyList').innerHTML = AIP_DAILY_ITEMS.map((it,i)=>`
+    <div class="aip-item">
+      <div class="title">${it.title}</div>
+      <hr>
+      <div class="meta-row">
+        <span class="item"><img src="assets/icon-file-05.svg" alt=""> ${it.count} câu</span>
+        <span class="item"><img src="assets/icon-clock-check.svg" alt=""> ${it.minutes} phút</span>
+        ${it.target!=null ? `<span class="item ${aipScoreClass(it.target)}"><img src="assets/icon-trophy-01.svg" alt=""> Đạt <b>${it.target}</b> điểm</span>` : ''}
+      </div>
+      <div class="progress-row">
+        <div class="progress-info">
+          <div class="label">${it.attempted ? `Số câu đúng: <b>${it.correct}/${it.count}</b> câu` : `${it.correct}/${it.count} câu`}</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${it.pct}%;background:${aipBarColor(it.pct)};"></div></div>
+        </div>
+        <button class="aip-btn ${it.attempted?'retry':'do'}" onclick="goToAipDetail(${i})">${it.attempted?'Làm lại':'Làm bài'} 📖</button>
+      </div>
+    </div>`).join('');
+}
+/* Dùng chung cho cả Luyện tập mỗi ngày và Thử Thách Đề Thi — Figma tái dùng đúng 1 template
+   "Màn thông tin chi tiết bài tập - layout 2 cột" cho cả 2 luồng. */
+function openAipDetail(it){
+  document.getElementById('aipDetailTitle').textContent = it.title;
+  document.getElementById('aipDetailDuration').textContent = it.minutes+' phút';
+  document.getElementById('aipDetailCount').textContent = it.count;
+  document.getElementById('aipDetailHeadline').textContent = it.attempted ? 'Luyện tiếp đi nào!' : 'Đến giờ làm bài rồi!';
+  document.getElementById('aipDetailSub').textContent = it.attempted
+    ? 'Không giới hạn số lần, cứ luyện tới khi tự tin nhé!'
+    : 'Vẫn chưa làm bài à, em định để trống hoài sao?';
+  document.getElementById('aipDetailHistory').innerHTML = it.attempted
+    ? `Bài làm gần nhất: <b>${it.target} điểm</b>` : 'Chưa làm bài lần nào';
+  goto('ai-practice-detail');
+}
+function goToAipDetail(i){ openAipDetail(AIP_DAILY_ITEMS[i]); }
+function goToAipExamDetail(i){ openAipDetail(AIP_EXAM_ITEMS[i]); }
+
+/* ============ AI PRACTICE > THỬ THÁCH ĐỀ THI ============ */
+/* DRAFT REVIEW: 4 đề mẫu khớp get_design_context thật (node 16517:15698) — item không có
+   thanh tiến trình/điểm (đúng thiết kế thật, khác Luyện tập mỗi ngày). */
+const AIP_EXAM_ITEMS = [
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+];
+function renderAipExamList(){
+  document.getElementById('aipExamList').innerHTML = AIP_EXAM_ITEMS.map((it,i)=>`
+    <div class="aip-exam-item">
+      <div class="title">${it.title}</div>
+      <hr>
+      <div class="meta-row">
+        <div class="meta-left">
+          <span class="item"><img src="assets/icon-file-05.svg" alt=""> ${it.count} câu</span>
+          <span class="item"><img src="assets/icon-clock-check.svg" alt=""> ${it.minutes} phút</span>
+        </div>
+        <button class="aip-btn do" onclick="goToAipExamDetail(${i})">Làm bài 📖</button>
+      </div>
+    </div>`).join('');
+}
+/* Bộ lọc chỉ mang tính tương tác trực quan (chọn pill, Xoá bộ lọc, Áp dụng) — KHÔNG lọc dữ liệu
+   thật, vì demo chỉ có 1 bộ đề mẫu duy nhất và không có nội dung thật theo từng khối lớp/loại đề. */
+const AIP_GRADE_OPTIONS = ['Lớp 1','Lớp 2','Lớp 3','Lớp 4','Lớp 5','Lớp 6','Lớp 7','Lớp 8','Lớp 9'];
+const AIP_TYPE_OPTIONS = ['Giữa kỳ','Cuối kỳ','15 phút','30 phút'];
+function renderAipFilterPills(){
+  document.getElementById('aipGradePills').innerHTML = AIP_GRADE_OPTIONS.map(g=>
+    `<div class="aip-filter-pill" onclick="aipToggleFilterPill(this)">${g}</div>`).join('');
+  document.getElementById('aipTypePills').innerHTML = AIP_TYPE_OPTIONS.map(t=>
+    `<div class="aip-filter-pill" onclick="aipToggleFilterPill(this)">${t}</div>`).join('');
+}
+function toggleAipFilterPanel(){ document.getElementById('aipFilterPanel').classList.toggle('show'); }
+function aipToggleFilterPill(el){
+  el.classList.toggle('selected');
+  const any = document.querySelectorAll('.aip-filter-pill.selected').length > 0;
+  document.getElementById('aipApplyBtn').classList.toggle('active', any);
+}
+function aipClearFilter(){
+  document.querySelectorAll('.aip-filter-pill.selected').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('aipApplyBtn').classList.remove('active');
+}
+function aipApplyFilter(){
+  toast('🔧 Bộ lọc chỉ mang tính minh hoạ — demo chưa có dữ liệu đề thi thật theo từng khối lớp/loại đề');
+  document.getElementById('aipFilterPanel').classList.remove('show');
+}
+
 const origGoto = goto;
 goto = function(id){
   origGoto(id);
@@ -2711,6 +3198,8 @@ goto = function(id){
   if(id==='parent') renderParentMode();
   if(id==='aic2-interact') startAic2Interact();
   if(id==='aic2-summary') renderAic2Summary();
+  if(id==='ai-practice-daily') renderAipDailyList();
+  if(id==='ai-practice-exam'){ renderAipExamList(); renderAipFilterPills(); document.getElementById('aipFilterPanel').classList.remove('show'); }
 };
 
 /* Establish correct initial inline-style state on load (avoids any flash of multiple
