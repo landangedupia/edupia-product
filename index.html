@@ -12,7 +12,7 @@
   --primary:#0876B1; --primary-50:#ECFBFF; --primary-100:#C6EDFB;
   --warning:#F5B30B; --warning-100:#FEF2C7;
   --n900:#111827; --n700:#374151; --n500:#6B7280; --n200:#E5E7EB; --n100:#F3F4F6; --n50:#F9FAFB;
-  --text-800:#51545F; --destructive:#EF444A;
+  --text-800:#51545F; --destructive:#EF444A; --success:#40C522;
   --brand-navy:#004671; --brand-lime:#A5BE00;
   --white:#FFFFFF;
   --shadow-s:0 2px 6px rgba(16,24,40,0.06);
@@ -64,13 +64,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .badge-primary{background:var(--primary-50);color:var(--primary);}
 .badge-warning{background:var(--warning-100);color:#8a5a00;}
 
-/* ---------- SKIP BUTTON ---------- */
+/* ---------- SKIP BUTTON + THANH TUA VIDEO ---------- */
+#topRightControls{position:fixed;top:14px;right:14px;z-index:999;display:flex;align-items:center;gap:10px;}
 #skipBtn{
-  position:fixed;top:14px;right:14px;z-index:999;
   background:rgba(17,24,39,.85);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;
-  box-shadow:var(--shadow-m);
+  box-shadow:var(--shadow-m);flex-shrink:0;
 }
 #skipBtn[hidden]{display:none;}
+.video-seek-wrap{display:flex;align-items:center;gap:8px;background:rgba(17,24,39,.85);color:#fff;
+  padding:6px 14px;border-radius:20px;box-shadow:var(--shadow-m);}
+.video-seek-wrap[hidden]{display:none;}
+.video-seek-time{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;}
+#videoSeekRange{width:220px;accent-color:var(--primary);cursor:pointer;}
 
 /* ================= MÀN 0: LỊCH HỌC ================= */
 /* Khớp theo get_design_context thật (node 16375:44013, file Edupia Design System 2025) —
@@ -304,24 +309,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
 .logout-btn{background:#fff;padding:14px 20px;border-radius:12px;width:100%;font-size:16px;font-weight:500;color:#1F2937;}
 
-.gate-wrap{max-width:420px;margin:100px auto;text-align:center;}
-.gate-card{background:var(--n50);border-radius:20px;padding:36px 28px;box-shadow:var(--shadow-s);}
-.gate-words{font-size:26px;font-weight:700;color:var(--primary);letter-spacing:2px;margin:18px 0;background:#fff;border-radius:14px;padding:16px;}
-.gate-input{width:100%;padding:14px;border-radius:12px;border:2px solid var(--n100);text-align:center;font-size:20px;font-weight:600;letter-spacing:4px;margin-bottom:14px;}
-.gate-input:focus{outline:none;border-color:var(--primary);}
-.gate-error{color:#dc2626;font-size:13px;margin-bottom:10px;min-height:16px;font-weight:500;}
-.shake{animation:shake .35s;}
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
-
-.parent-badge{background:var(--n900);color:#fff;padding:6px 14px;border-radius:10px;font-size:12px;font-weight:600;margin-right:auto;}
 .mastery-card{background:#fff;border:1px solid var(--n100);border-radius:16px;padding:18px 22px;margin-bottom:12px;box-shadow:var(--shadow-s);}
 .mastery-card .top{display:flex;justify-content:space-between;margin-bottom:8px;font-weight:600;color:var(--n900);font-size:14px;}
 .mastery-bar-bg{height:8px;background:var(--n100);border-radius:6px;overflow:hidden;}
 .mastery-bar-fill{height:100%;border-radius:6px;}
 .mastery-lvl{font-size:12px;color:var(--n500);margin-top:6px;}
-.attend-table{width:100%;border-collapse:collapse;margin-top:8px;}
-.attend-table th{text-align:left;font-size:12px;color:var(--n500);padding:8px 10px;border-bottom:1px solid var(--n100);}
-.attend-table td{padding:10px;font-size:13px;border-bottom:1px solid var(--n100);color:var(--n700);}
 
 /* ---------- Nút "Mở chế độ dành cho phụ huynh" (khớp node 4136:103509) ---------- */
 .btn-parent-mode{background:var(--primary-50);border:1px solid var(--primary-100);color:var(--primary);
@@ -330,50 +322,132 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .btn-parent-mode .chev{width:16px;height:16px;margin-left:2px;}
 .btn-parent-mode:hover{background:var(--primary-100);}
 
-/* ---------- Chế độ phụ huynh: menu con 2 chức năng (text-only, không icon) ---------- */
-.menu-item.sub-item{font-size:14px;padding-left:12px;}
+/* ---------- CỔNG XÁC THỰC PHỤ HUYNH v2 (khớp get_design_context, node 72:20018 + 87:20220) ---------- */
+.gate2-wrap{min-height:956px;display:flex;align-items:center;justify-content:center;background:var(--n50);}
+.gate2-card{width:480px;background:#fff;border-radius:32px;box-shadow:0 6px 24px rgba(15,23,41,.08);
+  padding:48px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
+.gate2-icon{width:56px;height:56px;border-radius:50%;}
+.gate2-title{font-size:22px;font-weight:600;color:var(--n900);}
+.gate2-sub{font-size:14px;color:var(--n500);margin-top:-12px;}
+.gate2-tabs{display:flex;gap:4px;background:var(--n100);border-radius:10px;padding:4px;width:100%;}
+.gate2-tab{flex:1;padding:10px;border-radius:8px;font-size:14px;font-weight:600;color:var(--n500);cursor:pointer;text-align:center;}
+.gate2-tab.active{background:#fff;color:var(--primary);}
+.gate2-panel{width:100%;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.gate2-input{width:100%;padding:14px 16px;border-radius:10px;border:1px solid var(--n100);font-size:16px;font-weight:600;
+  color:var(--n700);text-align:center;letter-spacing:3px;box-sizing:border-box;}
+.gate2-input:focus{outline:none;border-color:var(--primary);}
+.gate2-forgot{font-size:13px;font-weight:500;color:var(--primary);cursor:pointer;}
+.gate2-primary{width:100%;padding:14px;border-radius:10px;background:var(--primary);color:#fff;font-size:16px;font-weight:600;
+  border:none;cursor:pointer;font-family:inherit;}
+.gate2-primary:hover{opacity:.92;}
+.gate2-back{font-size:14px;font-weight:500;color:var(--n500);cursor:pointer;}
+.gate2-error{color:#dc2626;font-size:13px;font-weight:500;min-height:16px;}
+.gate2-channel{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--n100);
+  border-radius:10px;cursor:pointer;text-align:left;background:#fff;font-family:inherit;}
+.gate2-channel:hover{border-color:var(--primary-100);background:var(--primary-50);}
+.gate2-channel .ic{font-size:18px;flex-shrink:0;}
+.gate2-channel .txt{flex:1;display:flex;flex-direction:column;gap:2px;}
+.gate2-channel .txt b{font-size:15px;font-weight:600;color:var(--n900);}
+.gate2-channel .txt span{font-size:12px;color:var(--n500);}
+.gate2-channel .chev{font-size:18px;color:var(--n500);flex-shrink:0;}
+.gate2-hint{font-size:13px;color:var(--n500);}
+.shake{animation:shake .35s;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 
-/* ---------- Báo cáo học tập: 3 zone (biểu đồ tiến bộ / bản đồ năng lực / kế hoạch tiếp theo) ---------- */
-.report-zone{background:#fff;border-radius:20px;padding:22px 24px;margin-bottom:24px;
-  box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);}
-.zone-head{margin-bottom:16px;}
-.zone-head h2{font-size:18px;}
-.zone-head p{font-size:12.5px;color:var(--n500);margin-top:2px;}
-.chart-row{display:flex;gap:20px;flex-wrap:wrap;}
-.chart-card{flex:1;min-width:200px;}
-.chart-card h4{font-size:12.5px;font-weight:600;color:var(--n700);margin-bottom:2px;}
-.chart-card .chart-sub{font-size:11px;color:var(--n500);margin-bottom:8px;}
-.chart-card-full{margin-top:20px;}
-.grid-line{stroke:var(--n100);stroke-width:1;}
-.axis-label{font-size:12px;fill:var(--n500);}
-.cat-label{font-size:13px;fill:var(--n500);font-weight:500;}
-.bar-prev{fill:var(--n200);}
-.bar-now{fill:var(--primary);}
-.bar-val{font-size:14px;fill:var(--n900);font-weight:700;}
-.line-a{stroke:var(--primary);stroke-width:2.5;}
-.area-a{fill:var(--primary-50);opacity:.7;}
-.dot-a{fill:var(--primary);}
-.legend-row{display:flex;gap:16px;margin-top:12px;}
-.legend-row span{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--n700);}
-.legend-row i{width:11px;height:11px;border-radius:3px;display:inline-block;}
-.leg-prev{background:var(--n200);}
-.leg-now{background:var(--primary);}
-.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.plan-card{background:var(--n50);border-radius:14px;padding:16px 18px;}
-.plan-label{font-size:11px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;}
-.next-session-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.next-session-avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--primary-100);
-  display:flex;align-items:center;justify-content:center;font-size:18px;}
-.next-session-avatar img{width:100%;height:100%;object-fit:cover;}
-.next-session-title{font-weight:600;font-size:14px;color:var(--n900);}
-.next-session-time{font-size:12px;color:var(--n500);}
-.next-session-unit{font-size:13px;font-weight:600;color:var(--n900);margin-bottom:10px;}
-.topic-list{list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--n700);}
-.topic-list li{display:flex;align-items:flex-start;gap:8px;}
-.topic-list .sq{width:6px;height:6px;border-radius:2px;background:var(--primary);margin-top:6px;flex-shrink:0;}
-.gap-tags{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-.gap-tag{background:var(--warning-100);color:#8a5a00;font-size:12px;font-weight:600;padding:8px 10px;border-radius:8px;text-align:center;}
-.plan-note{font-size:12px;color:var(--n500);line-height:1.5;}
+/* ---------- PARENT MODE v2 (khớp get_design_context, node 72:20133 + màn liên quan) ---------- */
+.sidebar.pm-wide{width:298px;}
+.menu-item img.pm-ic-28{width:28px;height:28px;}
+.menu-item img.pm-ic-32{width:32px;height:32px;}
+.menu-item.pm-exit{margin-top:auto;box-shadow:0 1px 1px rgba(16,24,40,.04);}
+.menu-item.pm-exit .exit-circle{width:32px;height:32px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu-item.pm-exit .exit-circle img{width:24px;height:24px;}
+.pm-panel{padding:32px 0 40px;}
+.pm-h1{font-size:24px;font-weight:600;color:var(--n900);margin-bottom:24px;}
+.pm-crumb{display:flex;align-items:center;justify-content:space-between;background:var(--n100);border-radius:10px;
+  padding:10px 16px;font-size:13px;margin-bottom:24px;}
+.pm-crumb b{color:var(--n700);font-weight:600;}
+.pm-crumb span{color:var(--n500);font-weight:500;cursor:pointer;}
+.pm-card{background:#fff;border:1px solid var(--n100);border-radius:16px;padding:24px;margin-bottom:20px;}
+.pm-card h3{font-size:16px;font-weight:600;color:var(--n900);margin-bottom:16px;}
+.pm-card-tint{background:var(--primary-50);border-radius:16px;padding:20px;margin-bottom:20px;}
+.pm-card-tint h3{font-size:16px;font-weight:600;color:var(--n900);margin-bottom:8px;}
+.pm-card-tint p{font-size:14px;color:var(--n700);line-height:1.5;}
+.pm-link{color:var(--primary);font-size:14px;font-weight:600;cursor:pointer;display:inline-block;margin-top:4px;}
+.pm-attend-row{display:flex;gap:16px;}
+.pm-attend-col{flex:1;display:flex;flex-direction:column;gap:8px;}
+.pm-attend-thumb{width:100%;height:140px;border-radius:12px;background:var(--n200);overflow:hidden;}
+.pm-attend-thumb img{width:100%;height:100%;object-fit:cover;}
+.pm-badge-green{background:#E5F7EB;color:#218C54;font-size:12px;font-weight:500;padding:4px 10px;border-radius:8px;display:inline-block;}
+.pm-badge-amber{background:#FFF7E0;color:#996B00;font-size:12px;font-weight:500;padding:4px 10px;border-radius:8px;display:inline-block;}
+.pm-attend-time{font-size:13px;color:var(--n500);}
+.pm-compare-box{background:#fff;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.pm-compare-box .cap{font-size:12px;font-weight:500;color:var(--n500);}
+.pm-compare-row{display:flex;align-items:center;justify-content:space-between;font-size:14px;}
+.pm-compare-row .lbl{font-weight:500;color:var(--n700);}
+.pm-compare-row .val{font-weight:600;}
+.pm-compare-row .val.up{color:#218C54;}
+.pm-compare-row .val.flat{color:#996B00;}
+.pm-skill-row{width:100%;margin-bottom:16px;}
+.pm-skill-row:last-child{margin-bottom:0;}
+.pm-skill-head{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px;}
+.pm-skill-head .name{font-weight:500;color:var(--n700);}
+.pm-skill-head .score{font-weight:600;color:var(--primary);}
+.pm-skill-head .score.warn{color:var(--warning);}
+.pm-skill-bar-bg{height:10px;background:var(--n100);border-radius:6px;overflow:hidden;}
+.pm-skill-bar-fill{height:100%;border-radius:6px;background:var(--primary);}
+.pm-skill-bar-fill.warn{background:var(--warning);}
+.pm-skill-tip{background:#FFF7E0;color:var(--warning);font-size:13px;font-weight:500;padding:8px 14px;border-radius:8px;
+  margin-top:10px;display:inline-block;}
+.pm-history-list{background:#fff;border:1px solid var(--n100);border-radius:16px;padding:8px;}
+.pm-history-row{display:flex;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--n100);}
+.pm-history-row:last-child{border-bottom:none;}
+.pm-history-row .txt{flex:1;display:flex;flex-direction:column;gap:2px;}
+.pm-history-row .txt b{font-size:15px;font-weight:600;color:var(--n900);}
+.pm-history-row .txt span{font-size:13px;color:var(--n500);}
+.pm-history-row .photo-btn{display:flex;align-items:center;gap:6px;background:var(--primary-50);color:var(--primary);
+  font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;border:1px solid var(--primary-100);white-space:nowrap;}
+.pm-history-row .photo-btn:hover{background:var(--primary-100);}
+.pm-history-row .photo-btn img{width:16px;height:16px;}
+.pm-photo-modal{position:fixed;inset:0;background:rgba(17,24,39,.55);display:flex;align-items:center;justify-content:center;z-index:50;}
+.pm-photo-card{background:#fff;border-radius:20px;padding:24px;width:520px;max-width:92vw;box-shadow:0 20px 50px rgba(0,0,0,.25);}
+.pm-photo-card .head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.pm-photo-card h3{font-size:18px;font-weight:600;color:var(--n900);margin:0 0 4px;}
+.pm-photo-card .sub{font-size:13px;color:var(--n500);}
+.pm-photo-card .x-close{width:28px;height:28px;border-radius:14px;background:var(--n100);color:var(--n500);
+  font-size:16px;line-height:28px;text-align:center;cursor:pointer;flex-shrink:0;}
+.pm-photo-card .x-close:hover{background:var(--n200);}
+.pm-photo-grid{display:flex;gap:16px;}
+.pm-photo-col{flex:1;display:flex;flex-direction:column;gap:8px;}
+.pm-photo-thumb{width:100%;height:150px;border-radius:12px;overflow:hidden;background:var(--n100);
+  display:flex;align-items:center;justify-content:center;}
+.pm-photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.pm-photo-thumb.empty{color:var(--n500);font-size:12px;text-align:center;padding:0 12px;}
+.pm-plan-step{display:flex;gap:16px;margin-bottom:16px;}
+.pm-plan-step:last-child{margin-bottom:0;}
+.pm-plan-step .num{width:28px;height:28px;border-radius:14px;background:var(--primary);color:#fff;font-size:13px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pm-plan-step .body .when{font-size:12px;font-weight:500;color:var(--primary);margin-bottom:4px;}
+.pm-plan-step .body .desc{font-size:15px;color:var(--n700);}
+.pm-lesson-row{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.pm-lesson-row:last-child{margin-bottom:0;}
+.pm-lesson-tag{background:#F2F2F5;color:#737885;font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;flex-shrink:0;}
+.pm-lesson-name{flex:1;font-size:14px;font-weight:500;color:var(--n900);}
+.pm-lesson-est{background:var(--primary-50);color:var(--primary);font-size:12px;font-weight:500;padding:6px 12px;border-radius:999px;flex-shrink:0;}
+.pm-lesson-note{font-size:12px;color:#737885;}
+.pm-chip-group{margin-bottom:20px;}
+.pm-chip-group:last-of-type{margin-bottom:0;}
+.pm-chip-label{font-size:13px;font-weight:500;color:var(--n900);margin-bottom:10px;}
+.pm-chips{display:flex;gap:10px;flex-wrap:wrap;}
+.pm-chip{border:1px solid #CCCCD4;color:var(--n900);font-size:13px;font-weight:500;padding:8px 16px;border-radius:999px;
+  cursor:pointer;background:#fff;font-family:inherit;}
+.pm-chip.selected{background:var(--primary);border-color:var(--primary);color:#fff;}
+.pm-btn-row{display:flex;gap:12px;margin-top:4px;}
+.pm-btn-primary-sm{background:var(--primary);color:#fff;font-size:14px;font-weight:600;padding:12px 20px;border-radius:10px;
+  border:none;cursor:pointer;font-family:inherit;}
+.pm-btn-secondary-sm{background:#fff;border:1px solid var(--primary);color:var(--primary);font-size:14px;font-weight:500;
+  padding:12px 16px;border-radius:10px;cursor:pointer;font-family:inherit;}
+.pm-goal-note{font-size:13px;color:#737885;margin-top:4px;}
 
 /* ---------- LOADING ---------- */
 .center-screen{min-height:956px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--n900);color:#fff;}
@@ -448,6 +522,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .lecture-video{width:100%;height:100%;object-fit:contain;display:block;background:#000;}
 .lecture-unmute-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;
   background:rgba(17,24,39,.85);color:#fff;padding:12px 22px;border-radius:14px;font-weight:600;font-size:14px;}
+.class-chat-feed{position:absolute;left:20px;bottom:150px;display:flex;flex-direction:column-reverse;gap:6px;
+  max-width:280px;z-index:7;}
+.class-chat-bubble{background:rgba(17,24,39,.88);color:#fff;padding:8px 14px;border-radius:12px;
+  font-size:13px;box-shadow:var(--shadow-s);animation:chatFadeIn .25s ease;}
+.class-chat-bubble .who{font-weight:700;opacity:.8;margin-right:4px;}
+@keyframes chatFadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 .live-toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);background:#fff;color:var(--n900);padding:12px 22px;border-radius:14px;font-weight:600;box-shadow:var(--shadow-m);z-index:5;font-size:14px;}
 
 /* Khớp get_design_context (panel phải nền #374151, card đội mình #ECFBFF/#1890C7, đội khác nền trắng) */
@@ -569,53 +649,53 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .center-cta{position:absolute;left:0;right:0;bottom:190px;display:flex;justify-content:center;z-index:9;}
 .locked-controls{opacity:.35;pointer-events:none;}
 
-/* ================= MÀN 2: TỔNG KẾT ================= */
-.summary-screen{min-height:956px;background:var(--n50);display:flex;align-items:center;justify-content:center;padding:40px;}
-.summary-inner{display:flex;gap:60px;align-items:center;max-width:1100px;}
-.summary-illustration{font-size:180px;flex-shrink:0;}
-.summary-results{display:flex;flex-direction:column;gap:16px;min-width:520px;}
-.skill-card{background:#fff;border-radius:18px;padding:20px 24px;display:flex;align-items:center;gap:20px;box-shadow:var(--shadow-s);}
-.skill-card .score-box{font-size:28px;font-weight:700;color:var(--primary);min-width:70px;}
-.skill-card .info .name{font-weight:600;color:var(--n900);font-size:13px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
-.skill-card .info .comment{font-size:14px;color:var(--n700);}
-.attend-final-badge{margin-top:6px;align-self:flex-start;}
-.tutor-cta-wrap{margin-top:18px;text-align:right;}
+/* ================= MÀN 2: TỔNG KẾT (gộp cả mở đầu buổi bổ trợ) ================= */
+/* DRAFT REVIEW: khớp thiết kế bạn gửi 2026-09-12 — kích thước dùng gần đúng px gốc vì #app
+   cũng 1440px giống khung Figma. Gộp luôn phần "mục tiêu buổi bổ trợ" (trước ở màn
+   aic2-intro riêng) vào cuối màn này qua #summaryPlanText. */
+.summary-screen{min-height:956px;background:var(--n50);display:flex;justify-content:center;padding:32px 96px 40px;overflow-y:auto;}
+.summary-inner{display:flex;flex-direction:column;align-items:center;gap:32px;width:1270px;max-width:100%;}
+.summary-inner>h2{font-size:24px;font-weight:700;color:var(--n900);letter-spacing:-.48px;align-self:flex-start;}
+.summary-body{display:flex;flex-direction:column;align-items:flex-start;gap:32px;width:100%;}
+.lesson-subtitle{font-size:24px;font-weight:500;color:var(--n900);letter-spacing:-.48px;}
 
-/* ---- Tóm tắt NLO đã đạt / còn gap (dẫn sang buổi bổ trợ) ---- */
-.lesson-subtitle{font-size:13px;color:var(--n500);margin:-6px 0 8px;display:flex;align-items:center;gap:6px;}
-.lesson-subtitle .sq{color:var(--primary);font-size:10px;}
-.mastery-headline{display:flex;justify-content:center;margin-bottom:4px;}
-.mastery-ring-big{width:96px;height:96px;}
-.mastery-ring-big circle{transition:stroke-dashoffset .6s ease;}
-.mastery-tiles-row{display:flex;gap:14px;margin-bottom:16px;}
-.mastery-tile{flex:1;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;}
-.mastery-tile.warn{background:var(--warning-100);border:1px solid #F0CC70;}
-.mastery-tile.done{background:#EFFBEA;border:1px solid #B8E6A1;}
-.mastery-tile .tile-icon{font-size:16px;}
-.mastery-tile .tile-name{font-size:13px;font-weight:600;color:var(--n900);line-height:1.35;}
-.mastery-tile .tile-tag{font-size:11.5px;font-weight:700;letter-spacing:.3px;}
-.mastery-tile.warn .tile-tag{color:#8a5a00;}
-.mastery-tile.done .tile-tag{color:#2f7a0f;}
+.summary-skill-row{display:flex;flex-wrap:wrap;gap:26px;width:100%;}
+.summary-skill-card{background:#fff;border-radius:20px;box-shadow:var(--shadow-card);
+  padding:0 20px;display:flex;align-items:center;gap:12px;width:298px;height:127px;flex-shrink:0;}
+.summary-skill-card .score{font-size:24px;font-weight:700;color:var(--primary);letter-spacing:-.48px;flex-shrink:0;}
+.summary-skill-card .info{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.summary-skill-card .name{font-size:16px;font-weight:600;color:var(--n700);}
+.summary-skill-card .comment{font-size:16px;color:var(--n900);line-height:1.4;}
+
+.summary-gaps{display:flex;flex-direction:column;gap:12px;width:100%;}
+.summary-section-title{font-size:24px;font-weight:500;color:var(--n900);letter-spacing:-.48px;}
+.summary-gap-row{display:flex;flex-wrap:wrap;gap:36px;width:100%;}
+.summary-gap-card{background:#fff;border-radius:20px;box-shadow:var(--shadow-card);
+  padding:0 20px;display:flex;flex-direction:column;justify-content:center;gap:12px;width:400px;height:142px;flex-shrink:0;}
+.summary-gap-pill{display:inline-flex;align-items:center;gap:6px;padding:9px 12px;border-radius:99px;font-weight:700;font-size:16px;align-self:flex-start;}
+.summary-gap-pill .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.summary-gap-card.warn .summary-gap-pill{background:var(--warning-100);color:#FBBE24;}
+.summary-gap-card.warn .summary-gap-pill .dot{background:#FBBE24;border:1.2px solid #FFFCEB;}
+.summary-gap-card.done .summary-gap-pill{background:#C0F7BB;color:#26A316;}
+.summary-gap-card.done .summary-gap-pill .dot{background:#26A316;border:1.2px solid #FFFCEB;}
+.summary-gap-card .row{display:flex;align-items:center;gap:8px;}
+.summary-gap-card .name{font-size:16px;font-weight:600;color:var(--n700);}
+.summary-gap-card .desc{font-size:16px;color:var(--n900);}
+
+.summary-plan-text{font-size:16px;font-weight:500;color:var(--n900);line-height:1.5;width:100%;}
+.tutor-cta-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;flex-wrap:wrap;}
+.attend-final-badge{flex-shrink:0;}
 
 /* ================= AICNew-02: AI BỔ TRỢ 30 PHÚT ================= */
-/* 3 màn theo PRD AICNew-02 §4: Mở đầu (aic2-intro) → Tương tác (aic2-interact) → Tổng kết (aic2-summary).
+/* 2 màn còn lại theo PRD AICNew-02 §4: Tương tác (aic2-interact) → Tổng kết (aic2-summary).
+   Màn "Mở đầu" (aic2-intro) đã gộp vào screen-summary ở trên (xem draft review 2026-09-12).
    Đặt tên "AI Bổ trợ 30 phút" xuyên suốt UI — KHÔNG dùng "AI Tutor"/"Gia sư AI"
    (2 tên gọi khác nhau, xem 00_context/glossary.md entry "AI Tutor"). */
 
-/* ---- Màn 1 (Mở đầu) & Màn 3 (Tổng kết) dùng chung layout căn giữa kiểu summary-screen ---- */
-.aic2-intro-screen,.aic2-summary-screen{width:100%;min-height:956px;background:var(--n50);display:flex;align-items:center;justify-content:center;padding:40px;}
+/* ---- Màn 3 (Tổng kết buổi bổ trợ) dùng layout căn giữa kiểu summary-screen ---- */
+.aic2-summary-screen{width:100%;min-height:956px;background:var(--n50);display:flex;align-items:center;justify-content:center;padding:40px;}
 .aic2-card{background:#fff;border-radius:24px;padding:36px 40px;box-shadow:var(--shadow-m);width:640px;display:flex;flex-direction:column;gap:20px;}
 .aic2-card h2{margin:0;text-align:center;}
-.track-badge{background:#12233f;color:#fff;padding:8px 18px;border-radius:12px;font-weight:600;font-size:14px;display:inline-flex;align-self:center;}
-.aic2-recap{background:var(--n50);border-radius:14px;padding:14px 18px;display:flex;flex-direction:column;gap:12px;}
-.aic2-recap .zone-label{font-size:12px;font-weight:700;color:var(--n500);text-transform:uppercase;letter-spacing:.4px;}
-.aic2-recap .rows-group{display:flex;flex-direction:column;gap:6px;}
-.aic2-recap .row{display:flex;justify-content:space-between;font-size:14px;color:var(--n700);}
-.aic2-recap .row b{color:var(--n900);}
-.aic2-recap hr{border:none;border-top:1px solid var(--n100);margin:2px 0;}
-.aic2-goal{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:16px 18px;}
-.aic2-goal .label{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;}
-.aic2-goal .text{font-size:15px;color:var(--n900);font-weight:500;}
 
 /* ---- Màn 2 (Tương tác) — nền tối kiểu classroom, tái dùng chat-panel ---- */
 .aic2-interact-screen{min-height:956px;background:#0b1220;position:relative;}
@@ -626,14 +706,55 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .nlo-pill{display:flex;align-items:center;gap:6px;background:#12233f;color:#fff;padding:6px 14px;border-radius:10px;
   font-size:13px;font-weight:600;max-width:600px;white-space:normal;text-align:center;line-height:1.4;}
 .aic2-chat-wrap{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow-m);}
-.aic2-mcq-opts{display:flex;gap:10px;flex-wrap:wrap;padding:14px 0 4px;}
-.aic2-opt-btn{background:var(--n100);color:var(--n700);padding:10px 18px;border-radius:12px;font-weight:600;font-size:14px;transition:background .15s,color .15s;}
-.aic2-opt-btn.selected{background:var(--primary);color:#fff;}
-.aic2-gapfill{padding:14px 0 4px;display:flex;flex-direction:column;gap:12px;}
+
+/* ---- DRAFT REVIEW: "phần luyện tập" — khớp Figma node 17578:66078 ("Connady - Bài tập nhóm"),
+   bỏ cột team bên phải (buổi bổ trợ 1-1, không cần bảng xếp hạng nhóm). ---- */
+.aic2-exercise-stage{position:absolute;left:50%;top:76px;bottom:100px;transform:translateX(-50%);width:1180px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;}
+.aic2-progress-row{display:flex;align-items:center;gap:12px;width:100%;max-width:900px;
+  background:#fff;border-radius:30px;padding:8px 18px;box-shadow:var(--shadow-s);flex-shrink:0;}
+.aic2-progress-count{font-weight:600;font-size:16px;color:var(--n900);flex-shrink:0;}
+.aic2-progress-track{flex:1;height:16px;background:var(--n200);border-radius:30px;overflow:hidden;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.06);}
+.aic2-progress-fill{display:block;height:100%;background:#3fc2ca;border-radius:30px;transition:width .3s ease;}
+.aic2-question-card{background:#fff;border-radius:30px;box-shadow:var(--shadow-card);
+  width:100%;max-width:900px;padding:20px;display:flex;flex-direction:column;gap:12px;
+  flex:1;min-height:0;overflow:auto;}
+.aic2-q-tags{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.aic2-q-tag{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:16px;
+  font-weight:600;font-size:16px;color:var(--n700);border:3px solid transparent;}
+.aic2-q-tag img{width:20px;height:20px;flex-shrink:0;}
+.aic2-q-tag.q-num{background:var(--primary-50);border-color:#3cb4e7;}
+.aic2-q-tag.q-timer{background:var(--n50);border-color:var(--n200);}
+.aic2-q-tag.q-points{background:#fffceb;border-color:var(--warning);color:#124e78;}
+.aic2-q-text{font-size:18px;line-height:28px;color:var(--n900);flex-shrink:0;}
+.aic2-mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:4px 0;}
+.aic2-opt-btn{display:flex;align-items:center;gap:10px;background:var(--n50);
+  border:3px solid var(--n200);border-radius:30px;padding:6px 16px 6px 6px;font-size:16px;font-weight:500;
+  color:var(--n700);height:48px;text-align:left;transition:background .15s,border-color .15s,color .15s;}
+.aic2-opt-btn .letter{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;
+  border-radius:30px;background:#fff;font-weight:600;box-shadow:inset 0 2px 8px rgba(0,0,0,.06);}
+.aic2-opt-btn.selected{background:var(--primary);border-color:var(--primary);color:#fff;}
+.aic2-opt-btn.selected .letter{background:rgba(255,255,255,.25);color:#fff;}
+.aic2-gapfill{padding:4px 0;display:flex;flex-direction:column;gap:12px;}
 .aic2-gapfill .fb-sentence{font-size:15px;color:var(--n700);}
-.aic2-speak{padding:14px 0 4px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.aic2-speak{padding:4px 0;display:flex;flex-direction:column;align-items:center;gap:10px;}
 .aic2-speak-prompt{font-size:14px;color:var(--n900);font-weight:500;text-align:center;background:var(--n50);border-radius:12px;padding:12px 16px;}
 .aic2-speak-hint{font-size:12px;color:var(--n500);}
+.aic2-feedback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  flex:1;text-align:center;padding:20px;}
+.aic2-feedback .face{font-size:48px;}
+.aic2-feedback .msg{font-size:16px;font-weight:600;color:var(--n900);}
+.aic2-feedback.wrong .msg{color:var(--destructive);}
+.aic2-bottom-bar{position:absolute;left:0;right:0;bottom:0;background:#1f2937;height:80px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:4;}
+.aic2-bottom-bar .tutor-tag{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);
+  padding:4px 14px 4px 4px;border-radius:30px;}
+.aic2-bottom-bar .tutor-tag img{width:40px;height:40px;border-radius:50%;object-fit:cover;}
+.aic2-bottom-bar .tutor-tag span{font-size:13px;font-weight:600;color:#fff;}
+.aic2-bottom-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.4);display:flex;
+  align-items:center;justify-content:center;}
+.aic2-bottom-icon img{width:20px;height:20px;filter:brightness(0) invert(1);}
 
 /* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô — tái dùng đúng khung "frame
    chiếu bài giảng" của buổi chính khóa (khớp node 17561:14450: viền tối, pill hướng dẫn góc
@@ -664,12 +785,278 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-comment{background:#fff;border:1px solid var(--n100);border-radius:14px;padding:16px 18px;font-size:14px;color:var(--n700);line-height:22px;display:flex;gap:12px;align-items:flex-start;}
 .aic2-comment .face{font-size:32px;flex-shrink:0;}
 
+/* ================= AI PRACTICE (menu trái > AI Practice > Luyện tập mỗi ngày) ================= */
+/* DRAFT REVIEW: khớp get_design_context thật, node 16401:55172 (Figma "Edupia Design System
+   2025"), 3 màn: landing (2 thẻ) -> Luyện tập mỗi ngày (danh sách) -> chi tiết bài tập. Màn
+   "Thử Thách Đề Thi" và việc thực sự làm bài (câu hỏi thật) NGOÀI phạm vi — dùng toast mock,
+   không tự vẽ thêm giao diện chưa có thiết kế. */
+.page-title-bar{border-bottom:1px solid var(--n200);padding:10px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:32px;}
+.page-title-bar span{font-size:18px;font-weight:500;color:var(--n700);letter-spacing:-.36px;}
+.aip-main{max-width:1000px;}
+
+.aip-launch-card{background:#fff;border-radius:20px;box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);
+  padding:24px 20px;display:flex;gap:20px;align-items:center;margin-bottom:20px;}
+.aip-launch-card img.icon{width:100px;height:100px;flex-shrink:0;}
+.aip-launch-card .info{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0;}
+.aip-launch-card .info h3{font-size:20px;font-weight:500;color:var(--n700);letter-spacing:-.4px;}
+.aip-launch-card .info .desc{font-size:16px;color:#4B5563;}
+.aip-launch-card .info hr{border:none;border-top:1px solid var(--n200);margin:2px 0;}
+.aip-launch-card .info .meta-row{display:flex;gap:20px;align-items:center;}
+.aip-launch-card .info .meta-row .item{display:flex;gap:4px;align-items:center;font-size:14px;color:var(--n700);}
+.aip-launch-card .info .meta-row .item img{width:20px;height:20px;}
+.aip-launch-card .info .meta-row .item.done{color:var(--success);}
+
+.aip-promo{background:#3d003b;border-radius:20px;padding:20px 20px 20px 136px;position:relative;
+  overflow:visible;margin-bottom:20px;}
+.aip-promo .mascot-circle{position:absolute;left:0;top:-18px;width:132px;height:132px;
+  filter:drop-shadow(0 25px 31px rgba(143,228,255,.33));}
+.aip-promo .mascot-circle img{width:100%;height:100%;object-fit:contain;}
+.aip-promo .title{color:#fff;font-weight:500;font-size:20px;letter-spacing:-.4px;display:flex;align-items:center;gap:8px;}
+.aip-promo .title img{width:24px;height:24px;}
+.aip-promo .desc{color:#F3F4F6;font-size:14px;line-height:20px;margin-top:4px;}
+
+.aip-search{position:relative;margin-bottom:20px;}
+.aip-search input{width:100%;height:40px;border:1px solid var(--n700);border-radius:8px;padding:8px 44px 8px 16px;
+  font-size:14px;color:var(--n900);font-family:'Poppins',system-ui,sans-serif;}
+.aip-search img{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;pointer-events:none;}
+
+.aip-item{background:#fff;border:1px solid var(--n100);border-radius:20px;box-shadow:0 1px 1px rgba(16,24,40,.04);
+  padding:20px;display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
+.aip-item .title{font-weight:500;font-size:16px;color:#000;}
+.aip-item hr{border:none;border-top:1px solid var(--n200);margin:0;}
+.aip-item .meta-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+.aip-item .meta-row .item{display:flex;gap:4px;align-items:center;font-size:14px;color:#023047;}
+.aip-item .meta-row .item img{width:20px;height:20px;}
+.aip-item .meta-row .item b{font-weight:600;}
+.aip-item .meta-row .item.score-done b{color:var(--success);}
+.aip-item .meta-row .item.score-mid b{color:var(--warning);}
+.aip-item .meta-row .item.score-low b{color:var(--destructive);}
+.aip-item .progress-row{display:flex;gap:20px;align-items:flex-end;}
+.aip-item .progress-info{flex:1;display:flex;flex-direction:column;gap:8px;}
+.aip-item .progress-info .label{font-size:14px;color:#0A5C8F;}
+.aip-item .progress-info .label b{font-weight:600;}
+.aip-item .progress-track{height:8px;background:var(--n200);border-radius:9px;overflow:hidden;}
+.aip-item .progress-fill{height:100%;border-radius:9px;}
+.aip-btn{padding:10px 16px;border-radius:10px;font-weight:500;font-size:14px;box-shadow:0 1px 2px rgba(16,24,40,.04);flex-shrink:0;}
+.aip-btn.do{background:var(--primary-50);border:1px solid var(--primary-100);color:var(--primary);}
+.aip-btn.retry{background:#FFFCEB;border:1px solid var(--warning-100);color:#B47209;}
+
+.aip-pagination{display:flex;align-items:center;justify-content:center;gap:20px;border-top:1px solid var(--n100);
+  padding:12px 0 4px;margin-top:4px;}
+.aip-pagination .side{flex:1;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--n500);font-weight:500;}
+.aip-pagination .side.right{justify-content:flex-end;}
+.aip-pagination .nums{display:flex;gap:2px;}
+.aip-pagination .num{width:40px;height:40px;border-radius:99px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:500;color:var(--n500);}
+.aip-pagination .num.active{background:var(--n100);color:var(--n900);}
+
+.aip-stats-bar{background:var(--primary);border-radius:20px 20px 0 0;padding:20px;display:flex;color:#fff;}
+.aip-stats-bar .col{flex:1;text-align:center;}
+.aip-stats-bar .col .label{font-size:13px;opacity:.85;margin-bottom:4px;}
+.aip-stats-bar .col .value{font-size:18px;font-weight:700;}
+.aip-detail-card{background:#fff;border:1px solid var(--n200);border-top:none;border-radius:0 0 20px 20px;
+  padding:24px 32px 32px;display:flex;flex-direction:column;align-items:center;gap:4px;
+  box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);}
+.aip-detail-card h3{font-size:18px;font-weight:700;color:var(--n900);text-align:center;}
+.aip-detail-card .sub{font-size:14px;color:var(--n500);text-align:center;margin-bottom:20px;}
+.aip-history-card{width:100%;border:1px solid var(--n200);border-radius:14px;padding:16px;display:flex;
+  align-items:center;gap:16px;margin-bottom:16px;}
+.aip-history-card img{width:56px;height:56px;flex-shrink:0;}
+.aip-history-card .t{font-weight:600;color:var(--n900);font-size:15px;}
+.aip-history-card .s{font-size:13px;color:var(--n500);margin-top:2px;}
+.aip-history-card .s b{color:var(--success);}
+.aip-note-card{width:100%;border:1px solid var(--n200);border-radius:14px;padding:16px 20px;margin-bottom:24px;}
+.aip-note-card .t{font-weight:700;color:var(--n900);margin-bottom:8px;}
+.aip-note-card ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;}
+.aip-note-card li{font-size:14px;color:var(--n700);line-height:1.5;}
+.aip-note-card li b{font-weight:600;}
+.aip-detail-card .btn-primary{width:100%;padding:14px;}
+
+/* ---- Màn "Thử Thách Đề Thi" — khớp get_design_context thật node 16517:15698 (cùng file). Item
+   đơn giản hơn Luyện tập mỗi ngày (không có thanh tiến trình/điểm — đúng theo thiết kế thật,
+   không tự suy diễn thêm). ---- */
+.aip-promo.exam{background:#3d3d00;}
+.aip-search-row{display:flex;gap:20px;align-items:flex-end;margin-bottom:20px;}
+.aip-search-row .aip-search{flex:1;margin-bottom:0;}
+.aip-filter-btn{border:1px solid var(--primary);color:var(--primary);background:#fff;padding:10px 24px;
+  border-radius:10px;font-weight:500;font-size:16px;flex-shrink:0;box-shadow:0 1px 1px rgba(16,24,40,.04);}
+.aip-exam-item{background:#fff;border:1px solid var(--n100);border-radius:20px;box-shadow:0 1px 1px rgba(16,24,40,.04);
+  padding:20px;display:flex;flex-direction:column;gap:16px;margin-bottom:20px;}
+.aip-exam-item .title{font-weight:500;font-size:16px;color:#000;}
+.aip-exam-item hr{border:none;border-top:1px solid var(--n200);margin:0;}
+.aip-exam-item .meta-row{display:flex;align-items:center;justify-content:space-between;}
+.aip-exam-item .meta-left{display:flex;gap:24px;align-items:center;}
+.aip-exam-item .meta-left .item{display:flex;gap:4px;align-items:center;font-size:14px;color:#023047;}
+.aip-exam-item .meta-left .item img{width:20px;height:20px;}
+
+.aip-filter-panel{background:#fff;border:1px solid var(--n200);border-radius:20px;box-shadow:0 3px 7.5px rgba(16,24,40,.08),0 6px 7.5px rgba(16,24,40,.08);
+  padding:24px;margin-bottom:20px;display:none;}
+.aip-filter-panel.show{display:block;}
+.aip-filter-panel .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.aip-filter-panel .head .t{font-weight:700;font-size:16px;color:var(--n900);letter-spacing:.3px;text-transform:uppercase;}
+.aip-filter-panel .head .clear{font-size:14px;color:var(--n500);cursor:pointer;}
+.aip-filter-panel .group-label{font-weight:700;font-size:13px;color:var(--primary);text-transform:uppercase;
+  letter-spacing:.4px;margin-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block;padding-bottom:4px;}
+.aip-filter-pills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.aip-filter-pill{border:1px solid var(--n200);border-radius:99px;padding:10px 16px;text-align:center;
+  font-size:14px;color:var(--n700);font-weight:500;}
+.aip-filter-pill.selected{border-color:var(--primary);background:var(--primary-50);color:var(--primary);font-weight:600;}
+.aip-filter-panel .apply-btn{width:100%;background:var(--n200);color:#fff;padding:14px;border-radius:99px;
+  font-weight:600;font-size:16px;}
+.aip-filter-panel .apply-btn.active{background:var(--primary);}
+
 /* ---------- THANKS ---------- */
 .thanks-screen{min-height:956px;background:var(--n900);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
 .thanks-screen .face{font-size:90px;}
 
 .toast-mini{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--n900);color:#fff;padding:10px 18px;border-radius:12px;font-size:13px;z-index:1000;opacity:0;transition:opacity .2s;}
 .toast-mini.show{opacity:1;}
+
+/* ---------- AI SPEAK (khớp get_design_context, Figma "WEB_SPEAK" 121:24252) ---------- */
+.asp-header{border-bottom:1px solid var(--n200);padding:10px 0;text-align:center;font-size:18px;font-weight:500;
+  color:var(--n700);letter-spacing:-0.36px;margin-bottom:24px;}
+.asp-row{margin-bottom:32px;max-width:1000px;}
+.asp-row-head{display:flex;align-items:flex-end;gap:10px;margin-bottom:16px;}
+.asp-row-head h2{font-size:24px;font-weight:600;letter-spacing:-0.48px;color:#000;margin:0;}
+.asp-row-head .sub{font-style:italic;font-size:16px;color:var(--n700);}
+.asp-row-head .more{margin-left:auto;color:var(--primary);font-weight:500;font-size:16px;cursor:pointer;flex-shrink:0;}
+.asp-cards{display:flex;gap:32px;}
+.asp-card{position:relative;width:290px;height:290px;border-radius:20px;overflow:hidden;cursor:pointer;
+  flex-shrink:0;background:var(--n100);}
+.asp-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.asp-card .cap{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.34);backdrop-filter:blur(8px);
+  color:#fff;font-size:16px;font-weight:500;padding:10px 16px;}
+.asp-hub-main{display:flex;gap:32px;align-items:flex-start;max-width:1000px;}
+.asp-hub-left{flex:1;min-width:0;}
+.asp-hub-right{width:355px;flex-shrink:0;display:flex;flex-direction:column;gap:24px;}
+.asp-unlock-card{background:#fff;border:1px solid var(--n200);border-radius:20px;padding:24px;
+  display:flex;flex-direction:column;gap:20px;}
+.asp-unlock-card h3{font-size:20px;font-weight:600;letter-spacing:-0.4px;color:#1F2937;margin:0;}
+.asp-unlock-card .row{display:flex;align-items:center;gap:16px;}
+.asp-unlock-card .lock{font-size:40px;flex-shrink:0;}
+.asp-unlock-card p{font-size:14px;color:#4B5563;margin:0;line-height:1.4;}
+.asp-suggest-card{background:#81D6FA;border-radius:20px;padding:24px;text-align:center;font-size:14px;
+  color:#000;cursor:pointer;min-height:120px;display:flex;align-items:center;justify-content:center;font-weight:500;}
+
+.asp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:1000px;}
+.asp-grid .asp-card{width:100%;height:312px;}
+
+/* Gen AI loading */
+.asp-gen-main{background:#00203d;padding:0 !important;min-height:calc(956px - 66px);
+  display:flex;align-items:center;justify-content:center;}
+.asp-gen-wrap{display:flex;flex-direction:column;align-items:center;gap:32px;}
+.asp-gen-ring{position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center;}
+.asp-gen-ring::before{content:'';position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,#fc00ff,#00b6de,#fc00ff);filter:blur(3px);opacity:.55;
+  animation:asp-spin 3s linear infinite;}
+.asp-gen-ring .core{position:relative;width:210px;height:210px;border-radius:50%;background:#fff;
+  border:10px solid #00456f;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 25px 45px rgba(143,228,255,.4);overflow:hidden;}
+.asp-gen-ring .core img{width:150px;height:150px;object-fit:contain;}
+@keyframes asp-spin{to{transform:rotate(360deg);}}
+.asp-gen-bars{background:rgba(0,79,123,.35);border-radius:12px;padding:30px;width:484px;
+  display:flex;flex-direction:column;gap:24px;}
+.asp-gen-bar-row .top{display:flex;justify-content:space-between;align-items:baseline;color:#fff;
+  font-size:16px;margin-bottom:8px;}
+.asp-gen-bar-row .top b{font-size:18px;font-weight:600;letter-spacing:-0.4px;}
+.asp-gen-bar-bg{height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden;}
+.asp-gen-bar-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#fc00ff,#00b6de);
+  transition:width .35s ease;width:0%;}
+
+/* Hội thoại */
+.asp-convo-wrap{max-width:1000px;}
+.asp-convo-banner{position:relative;background:#00203d;border-radius:20px;padding:16px 16px 16px 150px;
+  margin-bottom:32px;min-height:70px;display:flex;flex-direction:column;gap:9px;justify-content:center;}
+.asp-convo-banner .title{display:flex;align-items:center;gap:8px;color:#fff;font-size:18px;font-weight:600;
+  letter-spacing:-0.36px;}
+.asp-convo-banner .situation{color:#F3F4F6;font-size:14px;line-height:20px;}
+.asp-convo-banner .robot{position:absolute;left:0;top:-23px;width:130px;height:130px;border-radius:50%;
+  overflow:hidden;box-shadow:0 25px 31px rgba(143,228,255,.33);}
+.asp-convo-banner .robot img{width:100%;height:100%;object-fit:cover;}
+.asp-chat-list{display:flex;flex-direction:column;gap:20px;margin-bottom:24px;}
+.asp-msg{display:flex;gap:4px;align-items:flex-start;}
+.asp-msg.me{justify-content:flex-end;}
+.asp-msg .av{width:48px;height:48px;border-radius:30px;overflow:hidden;flex-shrink:0;}
+.asp-msg .av img{width:100%;height:100%;object-fit:cover;}
+.asp-bubble{background:#fff;border:1px solid var(--n100);border-radius:12px;padding:10px 16px 16px;
+  max-width:515px;box-shadow:0 1px 1px rgba(16,24,40,.04);}
+.asp-bubble .txt{font-size:16px;color:#111827;line-height:24px;margin-bottom:8px;}
+.asp-bubble .acts{display:flex;gap:16px;}
+.asp-bubble .acts span{background:#fff;display:flex;align-items:center;gap:4px;padding:4px 8px;
+  border-radius:9px;font-size:14px;cursor:pointer;color:#4B5563;}
+.asp-bubble .acts span.tr{color:#0C6496;}
+.asp-bubble .vi{background:var(--primary-50);color:#374151;font-size:14px;padding:8px;border-radius:4px;
+  margin-top:8px;display:none;}
+.asp-bubble .vi.show{display:block;}
+.asp-msg.me .asp-bubble{background:#F3F4F6;border:none;padding:10px 16px;}
+.asp-input-bar{flex-shrink:0;background:#fff;border-top:1px solid var(--n200);
+  padding:16px 104px 16px 96px;display:flex;align-items:center;gap:16px;}
+.asp-input-bar .round-btn{background:#fff;box-shadow:0 2px 3px rgba(16,24,40,.06);border-radius:60px;
+  width:60px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;}
+.asp-input-bar .round-btn.mic{border:1px solid var(--n100);}
+.asp-input-bar .round-btn.mic img{filter:invert(1);}
+.asp-input-bar .field{flex:1;background:var(--n100);border:1px solid var(--n200);border-radius:12px;
+  padding:20px 16px;color:#4B5563;font-size:16px;font-family:inherit;}
+.asp-hint-chip{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:12px;
+  padding:12px 16px;margin-bottom:16px;font-size:14px;color:var(--n700);cursor:pointer;max-width:1000px;}
+.asp-hint-chip b{color:var(--primary);}
+
+/* Ăn mừng */
+.asp-celebrate-main{padding:0 !important;min-height:calc(956px - 66px);position:relative;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,#c62b2f 0%,#7a1418 60%,#4a0d10 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
+.asp-cup-badge{background:#991B1F;border:2px solid rgba(255,255,255,.5);border-radius:20px;
+  padding:8px 32px 16px;color:#fff;font-size:64px;font-weight:600;letter-spacing:-1.6px;text-align:center;}
+.asp-cup-img{width:280px;height:280px;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.4));}
+.asp-exit-btn{background:#fff;box-shadow:0 2px 3px rgba(16,24,40,.06);border-radius:12px;padding:14px 32px;
+  font-size:18px;font-weight:600;color:#1F2937;cursor:pointer;}
+
+/* Nhận xét */
+.asp-result-left{width:355px;flex-shrink:0;display:flex;flex-direction:column;gap:16px;}
+.asp-result-photo{width:100%;height:200px;border-radius:20px;overflow:hidden;border:1px solid var(--n100);}
+.asp-result-photo img{width:100%;height:100%;object-fit:cover;}
+.asp-result-situation{background:#00203d;border-radius:20px;padding:16px;color:#F3F4F6;font-size:14px;line-height:20px;}
+.asp-result-right{width:613px;flex-shrink:0;}
+.asp-reward-card{background:#F8EDEB;border-radius:20px;padding:30px 30px 20px;display:flex;flex-direction:column;
+  align-items:center;gap:42px;box-shadow:0 -7px 5px rgba(102,102,102,.15);margin-bottom:24px;}
+.asp-reward-card .cup{width:110px;height:110px;object-fit:contain;}
+.asp-reward-wrap{position:relative;width:346px;display:flex;flex-direction:column;align-items:center;}
+.asp-reward-topic{position:absolute;top:-42px;left:50%;transform:translateX(-50%);background:#FEC89A;
+  border-radius:9px;padding:6px 16px;text-align:center;white-space:nowrap;}
+.asp-reward-topic .cap{font-size:14px;color:#374151;display:block;}
+.asp-reward-topic .val{font-size:18px;font-weight:600;color:#374151;letter-spacing:-0.36px;}
+.asp-reward-cup{background:#FFF9F9;border:2px dashed #A9978B;border-radius:20px;padding:20px 10px;
+  width:100%;text-align:center;}
+.asp-reward-cup .n{font-size:52px;font-weight:600;color:#971400;letter-spacing:-1.04px;}
+.asp-radar-card{background:var(--primary-50);border-radius:36px;padding:40px 30px 36px;position:relative;
+  box-shadow:0 -7px 5px rgba(102,102,102,.15);margin-bottom:24px;}
+.asp-radar-img-wrap{position:relative;width:178px;height:178px;margin:0 auto;}
+.asp-radar-img-wrap img{width:150px;height:150px;object-fit:contain;position:absolute;left:14px;top:14px;}
+.asp-radar-label{position:absolute;text-align:center;white-space:nowrap;}
+.asp-radar-label .n{font-size:16px;font-weight:600;color:#111827;line-height:26px;}
+.asp-radar-label .l{font-size:14px;color:#374151;}
+.asp-radar-label.range{left:50%;top:0;transform:translateX(-50%);}
+.asp-radar-label.accuracy{left:0;bottom:0;}
+.asp-radar-label.fluency{right:0;bottom:0;}
+.asp-radar-divider{height:1px;background:var(--n200);border:none;margin:24px 0;}
+.asp-skill-detail{margin-bottom:0;}
+.asp-skill-detail .top{display:flex;justify-content:space-between;font-size:14px;color:#111827;margin-bottom:8px;}
+.asp-skill-detail .top b{font-weight:600;}
+.asp-skill-detail .bar-bg{height:8px;background:#D1D5DB;border-radius:100px;overflow:hidden;}
+.asp-skill-detail .bar-fill{height:100%;background:var(--primary);border-radius:8px;}
+.asp-skill-detail .note{font-size:14px;color:#374151;line-height:20px;margin-top:8px;white-space:pre-line;}
+.asp-ai-note{background:#FFFCEB;border-radius:20px;padding:26px;display:flex;flex-direction:column;
+  gap:26px;margin-bottom:24px;}
+.asp-ai-note .head{display:flex;gap:16px;align-items:flex-start;}
+.asp-ai-note .head .av{width:56px;height:56px;border-radius:40px;overflow:hidden;flex-shrink:0;}
+.asp-ai-note .head .av img{width:100%;height:100%;object-fit:cover;}
+.asp-ai-note .head b{font-size:16px;color:#374151;display:block;}
+.asp-ai-note .head i{font-size:14px;color:#4B5563;font-style:italic;}
+.asp-ai-note p{font-size:14px;color:#51545F;line-height:20px;margin:0;}
+.asp-result-cta{background:var(--primary);color:#fff;border-radius:99px;padding:16px 20px;text-align:center;
+  font-size:20px;font-weight:600;letter-spacing:-0.4px;cursor:pointer;width:100%;}
 </style>
 </head>
 <body>
@@ -696,8 +1083,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <nav class="menu-list">
         <div class="menu-item active"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
         <div class="menu-item" id="accountMenuItem" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
       </nav>
     </aside>
@@ -851,8 +1238,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <nav class="menu-list">
         <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
         <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
-        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
         <div class="menu-item active"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
       </nav>
     </aside>
@@ -921,24 +1308,59 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     </div>
   </section>
 
-  <!-- ===================== CỔNG XÁC THỰC PHỤ HUYNH ===================== -->
+  <!-- ===================== CỔNG XÁC THỰC PHỤ HUYNH (khớp get_design_context, node 72:20018 + 87:20220) ===================== -->
   <section class="screen" id="screen-gate">
-    <div class="gate-wrap">
-      <div style="font-size:44px;">🔒</div>
-      <h2 style="margin-top:10px;">Cổng xác thực phụ huynh</h2>
-      <div class="gate-card">
-        <div style="font-size:13px;color:var(--n500);">Bố/mẹ đọc dãy chữ dưới đây và gõ lại đúng dãy số tương ứng:</div>
-        <div class="gate-words" id="gateWordsDisplay">— — —</div>
-        <input class="gate-input" id="gateInputEl" maxlength="3" placeholder="•••" inputmode="numeric">
-        <div class="gate-error" id="gateErrorEl"></div>
-        <button class="btn-primary" style="width:100%;" onclick="checkGate()">Xác nhận</button>
-        <div style="margin-top:14px;"><button class="btn-secondary" onclick="goto('account')">Huỷ</button></div>
+    <div class="gate2-wrap">
+      <div class="gate2-card">
+        <img class="gate2-icon" src="assets/icon-parent-gate-ellipse.svg" alt="">
+        <div class="gate2-title">Xác thực phụ huynh</div>
+        <div class="gate2-sub" id="gateSubtitle">Chọn nơi nhận mã xác thực</div>
+        <div class="gate2-tabs">
+          <div class="gate2-tab" id="gateTabPassword" onclick="switchGateTab('password')">Mật khẩu</div>
+          <div class="gate2-tab" id="gateTabOtp" onclick="switchGateTab('otp')">Nhận mã OTP</div>
+        </div>
+
+        <!-- Tab: Mật khẩu -->
+        <div class="gate2-panel" id="gatePasswordPanel">
+          <input class="gate2-input" id="gatePasswordInput" type="password" placeholder="••••••••">
+          <div class="gate2-error" id="gatePasswordError"></div>
+          <div class="gate2-forgot" onclick="toast('🔧 Ngoài phạm vi demo')">Quên mật khẩu?</div>
+          <button class="gate2-primary" onclick="confirmGatePassword()">Xác nhận</button>
+          <div class="gate2-back" onclick="goto('account')">Quay lại</div>
+        </div>
+
+        <!-- Tab: Nhận mã OTP — bước 1: chọn kênh nhận -->
+        <div class="gate2-panel" id="gateOtpChannelPanel">
+          <button class="gate2-channel" onclick="selectOtpChannel('phone')">
+            <span class="ic">📱</span>
+            <span class="txt"><b>Nhận mã qua số điện thoại</b><span>•••• •••• 456</span></span>
+            <span class="chev">›</span>
+          </button>
+          <button class="gate2-channel" onclick="selectOtpChannel('zalo')">
+            <span class="ic">💬</span>
+            <span class="txt"><b>Nhận mã qua Zalo</b><span>•••• •••• 456</span></span>
+            <span class="chev">›</span>
+          </button>
+          <div class="gate2-back" onclick="goto('account')">Quay lại</div>
+        </div>
+
+        <!-- Tab: Nhận mã OTP — bước 2: nhập mã -->
+        <div class="gate2-panel" id="gateOtpCodePanel" style="display:none;">
+          <div class="gate2-hint" id="gateOtpCodeHint">Mã xác thực đã được gửi tới bạn</div>
+          <input class="gate2-input" id="gateOtpCodeInput" maxlength="4" placeholder="••••" inputmode="numeric">
+          <div class="gate2-error" id="gateOtpCodeError"></div>
+          <div class="gate2-forgot" onclick="toast('📩 Đã gửi lại mã (mock demo)')">Gửi lại mã</div>
+          <button class="gate2-primary" onclick="confirmGateOtp()">Xác nhận</button>
+          <div class="gate2-back" onclick="backToOtpChannel()">‹ Quay lại</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== PARENT MODE (2 cột giống layout trang Lịch học) ===================== -->
-  <section class="screen schedule-screen" id="screen-parent">
+  <!-- ===================== AI PRACTICE MÀN 1: LANDING ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 17732:71075 (Figma "Edupia Design System
+       2025"). "Thử Thách Đề Thi" dẫn sang màn ai-practice-exam (xem bên dưới). -->
+  <section class="screen schedule-screen" id="screen-ai-practice">
     <aside class="sidebar">
       <div class="logo">
         <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
@@ -954,59 +1376,405 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         </div>
       </div>
       <nav class="menu-list">
-        <div class="menu-item sub-item active" id="parentTabReportMenu" onclick="showParentTab('report')">Báo cáo học tập</div>
-        <div class="menu-item sub-item" id="parentTabAttendMenu" onclick="showParentTab('attend')">Báo cáo điểm danh</div>
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
       </nav>
-      <div style="margin-top:auto;">
-        <button class="btn-secondary" style="width:100%;" onclick="goto('account')">← Thoát chế độ phụ huynh</button>
-      </div>
     </aside>
     <div class="main-area">
       <div class="topbar">
-        <span class="parent-badge">Chế độ phụ huynh</span>
         <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
         <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
         <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
       </div>
       <div class="content-scroll">
-        <div id="parentTabReportPanel">
-          <div class="report-zone">
-            <div class="zone-head"><h2>Biểu đồ tiến bộ</h2><p>So sánh 6 buổi học gần nhất — Buổi 33 đến Buổi 38</p></div>
-            <div class="chart-row">
-              <div class="chart-card">
-                <h4>Thời lượng học tập</h4><p class="chart-sub">Số phút tương tác thực tế mỗi buổi</p>
-                <div id="chartDuration"></div>
-              </div>
-              <div class="chart-card">
-                <h4>Điểm số trung bình</h4><p class="chart-sub">Điểm trung bình các cấu phần mỗi buổi (thang 10)</p>
-                <div id="chartScore"></div>
+        <div class="aip-main">
+          <div class="page-title-bar"><span>AI Practice</span></div>
+          <div class="aip-launch-card" onclick="goto('ai-practice-daily')">
+            <img class="icon" src="assets/aip-icon-doc3d.png" alt="">
+            <div class="info">
+              <h3>Luyện tập mỗi ngày</h3>
+              <div class="desc">Làm bài mỗi ngày để nhớ từ, hiểu ngữ pháp và dùng đúng!</div>
+              <hr>
+              <div class="meta-row">
+                <span class="item"><img src="assets/icon-file-05.svg" alt=""> 4 nội dung</span>
+                <span class="item done"><img src="assets/icon-check-file.svg" alt=""> Đã làm: 3</span>
               </div>
             </div>
-            <div class="chart-card chart-card-full">
-              <h4>Tiến bộ theo từng năng lực (NLO)</h4>
-              <p class="chart-sub">% thành thạo trung bình mỗi mảng kỹ năng — buổi trước so với buổi này</p>
-              <div id="chartStrand"></div>
-              <div class="legend-row"><span><i class="leg-prev"></i>Buổi trước (Buổi 37)</span><span><i class="leg-now"></i>Buổi này (Buổi 38)</span></div>
+          </div>
+          <div class="aip-launch-card" onclick="goto('ai-practice-exam')">
+            <img class="icon" src="assets/aip-icon-exam3d.png" alt="">
+            <div class="info">
+              <h3>Thử Thách Đề Thi</h3>
+              <div class="desc">Làm đề thi giống như thật để con sẵn sàng vào phòng thi.</div>
+              <hr>
+              <div class="meta-row">
+                <span class="item"><img src="assets/icon-book-open.svg" alt=""> 400 đề thi</span>
+                <span class="item done"><img src="assets/icon-check-file.svg" alt=""> Đã làm: 3</span>
+              </div>
             </div>
           </div>
-          <div class="report-zone">
-            <div class="zone-head"><h2>Bản đồ năng lực</h2><p>Tiến bộ so với buổi học gần nhất</p></div>
-            <div id="parentMasteryZone"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 2: LUYỆN TẬP MỖI NGÀY ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 17384:61109. Dữ liệu 4 bài mẫu lấy đúng
+       theo thiết kế (kể cả tên bài lặp lại — Figma dùng chung 1 tên minh hoạ cho cả 4 trạng
+       thái: chưa làm / chưa làm có mục tiêu / đã làm khá / đã làm thấp). Phân trang chỉ mang
+       tính hiển thị (demo chỉ có 1 trang dữ liệu thật). -->
+  <section class="screen schedule-screen" id="screen-ai-practice-daily">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span>Luyện tập mỗi ngày</span></div>
+          <div class="aip-promo">
+            <div class="mascot-circle"><img src="assets/mascot-robot.png" alt=""></div>
+            <div class="title">Chinh phục bài tập <img src="assets/icon-banner-star.svg" alt=""></div>
+            <div class="desc">Mỗi bài tập bạn sẽ nhận được số cup tương ứng để đổi vật phẩm giá trị trong cửa hàng nhé!</div>
           </div>
-          <div class="report-zone">
-            <div class="zone-head"><h2>Kế hoạch học tập tiếp theo</h2></div>
-            <div id="nextPlanPanel" class="plan-grid"></div>
+          <div class="aip-search">
+            <input placeholder="Hỏi..." onkeydown="if(event.key==='Enter') toast('🔧 Tìm kiếm ngoài phạm vi demo')">
+            <img src="assets/icon-search.svg" alt="">
+          </div>
+          <div id="aipDailyList"></div>
+          <div class="aip-pagination">
+            <div class="side"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">← Previous</span></div>
+            <div class="nums">
+              <span class="num active">1</span><span class="num">2</span><span class="num">3</span>
+              <span class="num">…</span><span class="num">8</span><span class="num">9</span><span class="num">10</span>
+            </div>
+            <div class="side right"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">Next →</span></div>
           </div>
         </div>
-        <div id="parentTabAttendPanel" style="display:none;">
-          <div class="report-zone">
-            <div class="zone-head"><h2>Lịch sử điểm danh</h2></div>
-            <table class="attend-table">
-              <thead><tr><th>Buổi học</th><th>Ngày</th><th>Điểm danh đầu buổi</th><th>Điểm danh cuối buổi</th></tr></thead>
-              <tbody id="attendBody"></tbody>
-            </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 2b: THỬ THÁCH ĐỀ THI ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context thật, node 16517:15698. Item đơn giản hơn (không có
+       thanh tiến trình/điểm — đúng thiết kế thật). Bộ lọc (Khối lớp / Loại đề) chỉ mang tính
+       tương tác trực quan (chọn/bỏ chọn pill) — KHÔNG lọc dữ liệu thật vì demo chỉ có 1 bộ đề
+       mẫu, tránh bịa thêm nội dung theo từng khối lớp/loại đề thật. Dùng chung màn chi tiết bài
+       tập (ai-practice-detail) với Luyện tập mỗi ngày vì Figma tái dùng đúng 1 template. -->
+  <section class="screen schedule-screen" id="screen-ai-practice-exam">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span>Thử Thách Đề Thi</span></div>
+          <div class="aip-promo exam">
+            <div class="mascot-circle"><img src="assets/mascot-robot.png" alt=""></div>
+            <div class="title">Chinh phục bài tập <img src="assets/icon-banner-star.svg" alt=""></div>
+            <div class="desc">Mỗi bài tập bạn sẽ nhận được số cup tương ứng để đổi vật phẩm giá trị trong cửa hàng nhé!</div>
+          </div>
+          <div class="aip-search-row">
+            <div class="aip-search">
+              <input placeholder="Tìm kiếm" onkeydown="if(event.key==='Enter') toast('🔧 Tìm kiếm ngoài phạm vi demo')">
+              <img src="assets/icon-search.svg" alt="">
+            </div>
+            <button class="aip-filter-btn" onclick="toggleAipFilterPanel()">Lọc ⚙</button>
+          </div>
+          <div class="aip-filter-panel" id="aipFilterPanel">
+            <div class="head"><span class="t">Bộ lọc tìm kiếm</span><span class="clear" onclick="aipClearFilter()">Xoá bộ lọc</span></div>
+            <div class="group-label">Khối lớp</div>
+            <div class="aip-filter-pills" id="aipGradePills"></div>
+            <div class="group-label">Loại đề</div>
+            <div class="aip-filter-pills" style="grid-template-columns:repeat(2,1fr);" id="aipTypePills"></div>
+            <button class="apply-btn" id="aipApplyBtn" onclick="aipApplyFilter()">Áp dụng</button>
+          </div>
+          <div id="aipExamList"></div>
+          <div class="aip-pagination">
+            <div class="side"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">← Previous</span></div>
+            <div class="nums">
+              <span class="num active">1</span><span class="num">2</span><span class="num">3</span>
+              <span class="num">…</span><span class="num">8</span><span class="num">9</span><span class="num">10</span>
+            </div>
+            <div class="side right"><span onclick="toast('🔧 Demo chỉ có 1 trang dữ liệu mẫu')" style="cursor:pointer;">Next →</span></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI PRACTICE MÀN 3: CHI TIẾT BÀI TẬP ===================== -->
+  <!-- DRAFT REVIEW: khớp get_design_context/screenshot node 17384:68735 ("Màn thông tin chi tiết
+       bài tập - layout 2 cột"). Nút "Làm bài ngay" ngoài phạm vi demo (chưa có thiết kế câu hỏi
+       thật) — chỉ hiện toast, không tự bịa giao diện làm bài. -->
+  <section class="screen schedule-screen" id="screen-ai-practice-detail">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item" onclick="openAspHub()"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="aip-main">
+          <div class="page-title-bar"><span id="aipDetailTitle">—</span></div>
+          <div class="aip-stats-bar">
+            <div class="col"><div class="label">Thời lượng</div><div class="value" id="aipDetailDuration">—</div></div>
+            <div class="col"><div class="label">Số câu hỏi</div><div class="value" id="aipDetailCount">—</div></div>
+            <div class="col"><div class="label">Số lần thi</div><div class="value">Không giới hạn</div></div>
+          </div>
+          <div class="aip-detail-card">
+            <h3 id="aipDetailHeadline">—</h3>
+            <div class="sub" id="aipDetailSub">—</div>
+            <div class="aip-history-card">
+              <img src="assets/icon-file-05.svg" alt="">
+              <div>
+                <div class="t">Lịch sử làm bài</div>
+                <div class="s" id="aipDetailHistory">Chưa làm bài lần nào</div>
+              </div>
+            </div>
+            <div class="aip-note-card">
+              <div class="t">Lưu ý</div>
+              <ul>
+                <li>Học sinh có thể <b>sửa lại đáp án</b> đã chọn trong thời gian làm bài tập.</li>
+                <li>Học sinh sẽ được thông báo điểm ngay sau khi nộp bài.</li>
+                <li>Học sinh có thể làm bài tập nhiều lần và không giới hạn số lần làm.</li>
+              </ul>
+            </div>
+            <button class="btn-primary" onclick="toast('🔧 Ngoài phạm vi demo — chưa có thiết kế màn làm bài thật')">Làm bài ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARENT MODE v2 (khớp get_design_context, node 72:20133 / 72:20248 / 91:20206 / 72:20363 / 94:20271) ===================== -->
+  <section class="screen schedule-screen" id="screen-parent">
+    <aside class="sidebar pm-wide">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item active" id="pmMenuOverview" onclick="showParentPanel('overview')"><img class="pm-ic-28" src="assets/icon-parent-overview.svg" alt=""> Tổng quan</div>
+        <div class="menu-item" id="pmMenuProgress" onclick="showParentPanel('progress')"><img class="pm-ic-32" src="assets/icon-parent-progress.svg" alt=""> Báo cáo tiến bộ</div>
+        <div class="menu-item" id="pmMenuHistory" onclick="showParentPanel('history')"><img class="pm-ic-32" src="assets/icon-parent-history.svg" alt=""> Lịch sử điểm danh</div>
+        <div class="menu-item" id="pmMenuPlan" onclick="showParentPanel('plan')"><img class="pm-ic-32" src="assets/icon-parent-plan.svg" alt=""> Kế hoạch học tập</div>
+        <div class="menu-item pm-exit" onclick="goto('account')"><span class="exit-circle"><img src="assets/icon-parent-exit.svg" alt=""></span> Thoát chế độ phụ huynh</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+
+        <!-- Panel: Tổng quan (node 72:20133) -->
+        <div class="pm-panel" id="pmPanelOverview">
+          <h2 class="pm-h1">Tổng quan hôm nay</h2>
+          <div class="pm-card">
+            <h3>Điểm danh — Buổi 1, Thứ 4 (16/09/2026)</h3>
+            <div class="pm-attend-row">
+              <div class="pm-attend-col">
+                <div class="pm-attend-thumb"><img src="assets/classroom-self-cam.png" alt=""></div>
+                <span class="pm-badge-green">✓ Điểm danh đầu buổi</span>
+                <span class="pm-attend-time">Đầu buổi · 19:24</span>
+              </div>
+              <div class="pm-attend-col">
+                <div class="pm-attend-thumb"><img src="assets/classroom-self-cam.png" alt=""></div>
+                <span class="pm-badge-green">✓ Điểm danh cuối buổi</span>
+                <span class="pm-attend-time">Cuối buổi · 20:26</span>
+              </div>
+            </div>
+            <span class="pm-link" onclick="showParentPanel('history')">Xem lịch sử điểm danh →</span>
+          </div>
+          <div class="pm-card-tint">
+            <h3>Tóm tắt tiến bộ</h3>
+            <p>Con đang tiến bộ tốt ở Từ vựng và Ngữ pháp. Phát âm cần luyện thêm — đã có gợi ý bài luyện phù hợp bên dưới.</p>
+            <div class="pm-compare-box">
+              <div class="cap">So với buổi học gần nhất (Buổi 8, Thứ 2)</div>
+              <div class="pm-compare-row"><span class="lbl">Từ vựng</span><span class="val up">▲ +1 điểm</span></div>
+              <div class="pm-compare-row"><span class="lbl">Ngữ pháp</span><span class="val up">▲ +2 điểm</span></div>
+              <div class="pm-compare-row"><span class="lbl">Phát âm</span><span class="val flat">● Không đổi</span></div>
+            </div>
+            <span class="pm-link" onclick="showParentPanel('progress')">Xem báo cáo chi tiết →</span>
+          </div>
+          <div class="pm-card">
+            <h3>Gợi ý lộ trình học tập</h3>
+            <p style="font-size:14px;color:var(--n700);margin-bottom:0;">Mục tiêu tiếp theo: giúp con tự tin giao tiếp hơn trong tình huống thực tế.</p>
+            <span class="pm-link" onclick="showParentPanel('plan')">Xem lộ trình đầy đủ →</span>
+          </div>
+        </div>
+
+        <!-- Panel: Báo cáo tiến bộ chi tiết (node 72:20248) -->
+        <div class="pm-panel" id="pmPanelProgress" style="display:none;">
+          <h2 class="pm-h1">Báo cáo tiến bộ chi tiết</h2>
+          <div class="pm-card-tint">
+            <p style="margin:0;">Con đang ở mức HIỂU, chưa tới VẬN DỤNG ở kỹ năng Phát âm. Từ vựng và Ngữ pháp đã tiến bộ rõ rệt so với 2 tuần trước.</p>
+          </div>
+          <div class="pm-card">
+            <h3>Tổng quan kỹ năng</h3>
+            <div id="pmSkillList"></div>
+          </div>
+        </div>
+
+        <!-- Panel: Lịch sử điểm danh (node 91:20206) -->
+        <div class="pm-panel" id="pmPanelHistory" style="display:none;">
+          <h2 class="pm-h1">Lịch sử điểm danh</h2>
+          <div class="pm-history-list" id="pmHistoryList"></div>
+        </div>
+
+        <div class="pm-photo-modal" id="pmPhotoModal" style="display:none;" onclick="if(event.target===this) closePmPhoto();">
+          <div class="pm-photo-card">
+            <div class="head">
+              <div>
+                <h3 id="pmPhotoTitle"></h3>
+                <div class="sub" id="pmPhotoSub"></div>
+              </div>
+              <span class="x-close" onclick="closePmPhoto()">✕</span>
+            </div>
+            <div class="pm-photo-grid" id="pmPhotoGrid"></div>
+          </div>
+        </div>
+
+        <!-- Panel: Kế hoạch học tập (node 72:20363 + 94:20271) -->
+        <div class="pm-panel" id="pmPanelPlan" style="display:none;">
+          <div id="pmPlanNextView">
+            <h2 class="pm-h1">Kế hoạch học tập tiếp theo</h2>
+            <div class="pm-card-tint">
+              <h3 style="font-size:13px;color:var(--primary);margin-bottom:4px;">Mục tiêu tiếp theo</h3>
+              <p style="font-size:18px;font-weight:600;color:var(--n900);margin:0;">Giúp con tự tin giao tiếp hơn trong tình huống thực tế</p>
+            </div>
+            <div class="pm-card">
+              <h3>Lộ trình</h3>
+              <div class="pm-plan-step"><div class="num">1</div><div class="body"><div class="when">Tuần này</div><div class="desc">Củng cố phát âm nguyên âm dài qua bài luyện AI Speak hằng ngày</div></div></div>
+              <div class="pm-plan-step"><div class="num">2</div><div class="body"><div class="when">2 tuần tới</div><div class="desc">Luyện phản xạ hội thoại ngắn với AI Tutor sau mỗi buổi học chính khoá</div></div></div>
+              <div class="pm-plan-step"><div class="num">3</div><div class="body"><div class="when">Tháng tới</div><div class="desc">Đánh giá lại năng lực và điều chỉnh mục tiêu học tập tiếp theo</div></div></div>
+            </div>
+            <div class="pm-card">
+              <h3>Gợi ý bài học đề xuất cho con</h3>
+              <div class="pm-lesson-row"><span class="pm-lesson-tag">AI Speak</span><span class="pm-lesson-name">Luyện phát âm nguyên âm dài — Bài 3</span><span class="pm-lesson-est">Dự kiến 2 buổi</span></div>
+              <div class="pm-lesson-row"><span class="pm-lesson-tag">AI Speak</span><span class="pm-lesson-name">Phản xạ hội thoại tình huống thực tế</span><span class="pm-lesson-est">Dự kiến 3 buổi</span></div>
+              <div class="pm-lesson-row"><span class="pm-lesson-tag">AI Practice</span><span class="pm-lesson-name">Ngữ pháp: câu hỏi trong giao tiếp hằng ngày</span><span class="pm-lesson-est">Dự kiến 1 buổi</span></div>
+              <p class="pm-lesson-note">Số buổi ước tính dựa trên năng lực hiện tại của con — sẽ được cập nhật sau mỗi buổi học.</p>
+            </div>
+            <span class="pm-link" onclick="showGoalSetter()">Đặt mục tiêu mới →</span>
+          </div>
+
+          <!-- Sub-view: Đặt mục tiêu học tập (node 94:20271) -->
+          <div id="pmPlanGoalView" style="display:none;">
+            <div class="pm-crumb"><b>Chế độ phụ huynh</b><span onclick="backToNextPlan()">‹ Quay lại</span></div>
+            <h2 class="pm-h1">Đặt mục tiêu học tập</h2>
+            <div class="pm-card-tint">
+              <h3 style="font-size:13px;color:var(--primary);margin-bottom:4px;">Gợi ý mục tiêu từ hệ thống</h3>
+              <p style="font-size:18px;font-weight:600;color:var(--n900);">Nâng Phát âm lên mức tự tin giao tiếp — dự kiến trong 10 tuần</p>
+              <div class="pm-btn-row">
+                <button class="pm-btn-primary-sm" onclick="confirmGoal()">Xác nhận mục tiêu này</button>
+                <button class="pm-btn-secondary-sm" onclick="toast('👇 Chọn mục tiêu khác bên dưới')">Chọn mục tiêu khác</button>
+              </div>
+            </div>
+            <div class="pm-card">
+              <h3>Chọn mục tiêu khác</h3>
+              <div class="pm-chip-group">
+                <div class="pm-chip-label">Kỹ năng ưu tiên</div>
+                <div class="pm-chips" id="pmGoalSkillChips"></div>
+              </div>
+              <div class="pm-chip-group">
+                <div class="pm-chip-label">Mốc thời gian mong muốn</div>
+                <div class="pm-chips" id="pmGoalWeekChips"></div>
+              </div>
+              <p class="pm-goal-note">Chọn kỹ năng và mốc thời gian phù hợp — hệ thống sẽ cập nhật lại lộ trình và bài học đề xuất tương ứng.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1139,41 +1907,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   </section>
 
   <!-- ===================== MÀN 2: TỔNG KẾT ===================== -->
+  <!-- DRAFT REVIEW: gộp "Tổng kết buổi học chính khóa" + "Chào mừng quay lại" (mở đầu buổi bổ
+       trợ) thành 1 màn duy nhất, khớp theo thiết kế bạn gửi 2026-09-12 (bỏ hẳn màn
+       screen-aic2-intro riêng — CTA giờ đi thẳng vào aic2-interact). -->
   <section class="screen summary-screen" id="screen-summary">
     <div class="summary-inner">
-      <div class="summary-illustration">🎉🐥</div>
-      <div class="summary-results">
-        <h2>Tổng kết buổi học</h2>
-        <div class="lesson-subtitle"><span class="sq">▪</span> Unit 7: Friends vacation with Minh · Chủ đề: Musical Instruments</div>
-        <div id="masteryTiles"></div>
-        <div id="skillCards"></div>
-        <span class="badge badge-primary attend-final-badge">✓ Đã điểm danh đủ buổi học</span>
+      <h2>Tổng kết buổi học</h2>
+      <div class="summary-body">
+        <div class="lesson-subtitle">Unit 7: Friends vacation with Minh · Chủ đề: Musical Instruments</div>
+        <div class="summary-skill-row" id="skillCards"></div>
+        <div class="summary-gaps">
+          <div class="summary-section-title">Kiến thức cần đạt</div>
+          <div class="summary-gap-row" id="masteryTiles"></div>
+        </div>
+        <div class="summary-plan-text" id="summaryPlanText"></div>
         <div class="tutor-cta-wrap">
-          <button class="btn-primary" onclick="goto('aic2-intro')">Bắt đầu buổi học bổ trợ 30 phút với AI →</button>
+          <span class="badge badge-primary attend-final-badge">✓ Đã điểm danh đủ buổi học</span>
+          <button class="btn-primary" onclick="goto('aic2-interact')">Bắt đầu buổi học bổ trợ 30 phút với AI →</button>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== AICNew-02 MÀN 1: MỞ ĐẦU BUỔI BỔ TRỢ ===================== -->
-  <!-- AC1,AC2,AC3,AC4,AC5 / BR1-BR5 — tóm tắt BCP + thông báo nhánh + MỤC TIÊU BUỔI (component
-       riêng, tách khỏi thông báo nhánh — xem finding F016) trước khi vào tương tác. -->
-  <section class="screen" id="screen-aic2-intro">
-    <div class="aic2-intro-screen">
-      <div class="aic2-card">
-        <span class="track-badge" id="aic2IntroTrackBadge">Đang chuẩn bị...</span>
-        <h2>Chào mừng quay lại!</h2>
-        <div class="aic2-recap">
-          <div class="zone-label">Tóm tắt buổi Big Class Plus vừa học</div>
-          <div class="rows-group" id="aic2RecapRows"></div>
-          <hr>
-          <div class="rows-group" id="aic2RecapNlo"></div>
-        </div>
-        <div class="aic2-goal">
-          <div class="label">Mục tiêu buổi bổ trợ</div>
-          <div class="text" id="aic2GoalText">—</div>
-        </div>
-        <button class="btn-primary" onclick="goto('aic2-interact')">Bắt đầu</button>
       </div>
     </div>
   </section>
@@ -1189,7 +1940,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       </div>
       <div class="aic2-chat-wrap">
         <div class="chat-scroll" id="aic2ChatScroll"></div>
-        <div id="aic2ExerciseArea"></div>
+      </div>
+      <!-- DRAFT REVIEW: khung "phần luyện tập" khớp theo Figma node 17578:66078 ("Connady - Bài
+           tập nhóm"), bỏ cột team bên phải vì buổi bổ trợ là 1-1. Áp dụng chung cho cả 4 dạng bài
+           (mcq/gapfill/speak/chat) — phần nội dung động (#aic2ExerciseArea) nằm trong thẻ trắng
+           thay vì trong khung chat như trước. Bỏ số lượt chọn trên mỗi đáp án (không có ý nghĩa
+           với 1 học sinh). 2 nút góc dưới thanh điều khiển chỉ mang tính trang trí (chưa gắn hành
+           vi thật) — chờ xác nhận có cần chức năng thoát/thu nhỏ hay không. -->
+      <div class="aic2-exercise-stage" id="aic2ExerciseStage" style="display:none;">
+        <div class="aic2-progress-row">
+          <span class="aic2-progress-count" id="aic2ProgressCount">1/5</span>
+          <span class="aic2-progress-track"><span class="aic2-progress-fill" id="aic2ProgressFill" style="width:20%;"></span></span>
+        </div>
+        <div class="aic2-question-card">
+          <div class="aic2-q-tags">
+            <span class="aic2-q-tag q-num"><img src="assets/icon-clipboard-check.svg" alt=""><span id="aic2QNum">Câu 1</span></span>
+            <span class="aic2-q-tag q-timer"><span>00:30</span><img src="assets/icon-clock-check.svg" alt=""></span>
+            <span class="aic2-q-tag q-points"><img src="assets/trophy.png" alt=""><span>10</span></span>
+          </div>
+          <div class="aic2-q-text" id="aic2QText"></div>
+          <div id="aic2ExerciseArea"></div>
+        </div>
+      </div>
+      <div class="aic2-bottom-bar" id="aic2BottomBar" style="display:none;">
+        <div class="tutor-tag"><img src="assets/avatar-teacher1.png" alt=""><span>AI trợ giảng</span></div>
+        <button class="aic2-bottom-icon" aria-label="Thu nhỏ"><img src="assets/icon-expand.svg" alt=""></button>
       </div>
       <div class="aic2-lesson-stage" id="aic2LessonStage" style="display:none;">
         <div class="aic2-lesson-duration">🎬 Bài giảng ngắn <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span> <span id="aic2LessonTimer">3:00</span></div>
@@ -1233,10 +2008,324 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <button class="btn-primary" onclick="resetDemo()">Quay lại Lịch học</button>
   </section>
 
+  <!-- ===================== AI SPEAK — Hub (node 121:24294) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-hub">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="asp-header">AI Speak</div>
+        <div class="asp-hub-main">
+          <div class="asp-hub-left">
+            <div class="asp-row">
+              <div class="asp-row-head"><h2>AI Avatar</h2><span class="sub">(Luyện nói cùng nhân vật sinh động)</span><span class="more" onclick="openAspList('AI Avatar')">Xem thêm</span></div>
+              <div class="asp-cards">
+                <div class="asp-card" onclick="openAspGen('Mua quần áo')"><img src="assets/aispeak-thumb-1.png" alt=""><span class="cap">Mua quần áo</span></div>
+                <div class="asp-card" onclick="openAspGen('Đồ dùng học tập')"><img src="assets/aispeak-thumb-2.png" alt=""><span class="cap">Đồ dùng học tập</span></div>
+              </div>
+            </div>
+            <div class="asp-row">
+              <div class="asp-row-head"><h2>AI Luyện Nói Cơ Bản</h2><span class="more" onclick="openAspList('AI Luyện Nói Cơ Bản')">Xem thêm</span></div>
+              <div class="asp-cards">
+                <div class="asp-card" onclick="openAspGen('Đi cắm trại')"><img src="assets/aispeak-thumb-4.png" alt=""><span class="cap">Đi cắm trại</span></div>
+                <div class="asp-card" onclick="openAspGen('Kỳ nghỉ hè của con')"><img src="assets/aispeak-thumb-5.png" alt=""><span class="cap">Kỳ nghỉ hè của con</span></div>
+              </div>
+            </div>
+            <div class="asp-row">
+              <div class="asp-row-head"><h2>AI Story</h2><span class="more" onclick="openAspList('AI Story')">Xem thêm</span></div>
+              <div class="asp-cards">
+                <div class="asp-card" onclick="openAspGen('Hoạt động hằng ngày')"><img src="assets/aispeak-thumb-7.png" alt=""><span class="cap">Hoạt động hằng ngày</span></div>
+                <div class="asp-card" onclick="openAspGen('Làm việc nhà')"><img src="assets/aispeak-thumb-8.png" alt=""><span class="cap">Làm việc nhà</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="asp-hub-right">
+            <div class="asp-unlock-card">
+              <h3>🗝️ Mở khóa bài học riêng dành cho con!</h3>
+              <div class="row"><span class="lock">🔒</span><p>Hoàn thành bài hiện tại, con sẽ nhận được bài tiếp theo được chọn riêng theo năng lực – nhờ AI đó!</p></div>
+            </div>
+            <div class="asp-suggest-card" onclick="openAspGen('Đến cửa hàng sách')">Gợi ý bài học hôm nay</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI SPEAK — Xem thêm (node 121:24495) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-list">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="asp-header" id="aspListHeader">AI Avatar</div>
+        <div class="asp-grid" id="aspListGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI SPEAK — Gen AI (node 121:24926 / 121:24253) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-gen">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll asp-gen-main">
+        <div class="asp-gen-wrap">
+          <div class="asp-gen-ring"><div class="core"><img src="assets/icon-aispeak-robot-hero.png" alt=""></div></div>
+          <div class="asp-gen-bars">
+            <div class="asp-gen-bar-row"><div class="top"><span>Phân tích năng lực học sinh</span><b id="aspGenPct1">0%</b></div><div class="asp-gen-bar-bg"><div class="asp-gen-bar-fill" id="aspGenBar1"></div></div></div>
+            <div class="asp-gen-bar-row"><div class="top"><span>Chuẩn bị nội dung học cá nhân hoá</span><b id="aspGenPct2">0%</b></div><div class="asp-gen-bar-bg"><div class="asp-gen-bar-fill" id="aspGenBar2"></div></div></div>
+            <div class="asp-gen-bar-row"><div class="top"><span>Kết nối với AI thông minh</span><b id="aspGenPct3">0%</b></div><div class="asp-gen-bar-bg"><div class="asp-gen-bar-fill" id="aspGenBar3"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI SPEAK — Hội thoại (node 121:24588 / 121:24810) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-convo">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="asp-convo-wrap">
+          <div class="asp-convo-banner">
+            <div class="robot"><img src="assets/icon-aispeak-robot-avatar.png" alt=""></div>
+            <div class="title">Edu AI Speak <span>⭐</span></div>
+            <div class="situation" id="aspSituationText"></div>
+          </div>
+          <div class="asp-chat-list" id="aspChatList"></div>
+          <div class="asp-hint-chip" id="aspHintChip" style="display:none;" onclick="aspUseHint()"></div>
+        </div>
+      </div>
+      <div class="asp-input-bar">
+        <div class="round-btn" onclick="aspHint()" title="Gợi ý">💡</div>
+        <input type="text" class="field" id="aspInputField" placeholder="Nhập nội dung" onkeydown="if(event.key==='Enter') aspSend();">
+        <div class="round-btn mic" onclick="aspSend()" title="Gửi câu trả lời"><img src="assets/icon-mic-solid.svg" alt="" style="width:24px;height:24px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI SPEAK — Ăn mừng (node 121:25091) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-celebrate">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll asp-celebrate-main">
+        <div class="asp-cup-badge">+<span id="aspCupAmount">21</span> Cup</div>
+        <img class="asp-cup-img" src="assets/trophy.png" alt="">
+        <div class="asp-exit-btn" onclick="goto('aispeak-result')">Thoát hội thoại</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AI SPEAK — Nhận xét (node 121:24416) ===================== -->
+  <section class="screen schedule-screen" id="screen-aispeak-result">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
+        <div class="txt">
+          <span class="wordmark">
+            <img class="edupia-text" src="assets/logo-union.svg" alt="Edupia">
+            <img class="accent-dot" src="assets/logo-vector.svg" alt="">
+          </span>
+          <span class="sub-row">
+            <span class="caption"><img src="assets/logo-caption.svg" alt="TIẾNG ANH ONLINE"></span>
+            <span class="badge-pill"><img src="assets/logo-aiclass-text.svg" alt="AI Class"></span>
+          </span>
+        </div>
+      </div>
+      <nav class="menu-list">
+        <div class="menu-item" onclick="goto('schedule')"><span class="ic"><img src="assets/icon-account.svg" alt=""></span> AI Class</div>
+        <div class="menu-item" onclick="toast('🔧 Ngoài phạm vi demo')"><span class="ic"><img src="assets/icon-school.svg" alt=""></span> Nhà trường</div>
+        <div class="menu-item" onclick="goto('ai-practice')"><span class="ic"><img src="assets/icon-practise.svg" alt=""></span> AI Practise</div>
+        <div class="menu-item active"><span class="ic"><img src="assets/icon-speak.svg" alt=""></span> AI Speak</div>
+        <div class="menu-item" onclick="goto('account')"><span class="ic"><img src="assets/icon-account-inner.svg" alt=""></span> Tài khoản</div>
+      </nav>
+    </aside>
+    <div class="main-area">
+      <div class="topbar">
+        <div class="stat">130 <img src="assets/trophy.png" alt=""></div>
+        <div class="stat">202 <img src="assets/diamond.png" alt=""></div>
+        <div class="bell"><img src="assets/icon-bell.svg" alt=""></div>
+        <div class="hi-user"><div class="av"><img src="assets/avatar-header.png" alt=""></div><span class="name">Hi, Vanh</span></div>
+      </div>
+      <div class="content-scroll">
+        <div class="content-row" style="align-items:flex-start;">
+          <div class="asp-result-left">
+            <div class="asp-result-photo"><img src="assets/icon-aispeak-teacher.png" alt=""></div>
+            <div class="asp-result-situation" id="aspResultSituation"></div>
+          </div>
+          <div class="asp-result-right">
+            <div class="asp-header">Nhận xét</div>
+            <div class="asp-reward-card">
+              <img class="cup" src="assets/trophy.png" alt="">
+              <div class="asp-reward-wrap">
+                <div class="asp-reward-cup"><span class="n">+<span id="aspRewardCup">21</span> cúp</span></div>
+                <div class="asp-reward-topic"><span class="cap">Chủ đề</span><span class="val">Đến cửa hàng sách</span></div>
+              </div>
+            </div>
+            <div class="asp-radar-card">
+              <div class="asp-radar-img-wrap">
+                <img src="assets/icon-aispeak-radar-bg.png" alt="">
+                <div class="asp-radar-label range"><div class="n">6</div><div class="l">Range</div></div>
+                <div class="asp-radar-label accuracy"><div class="n">7</div><div class="l">Accuracy</div></div>
+                <div class="asp-radar-label fluency"><div class="n">8</div><div class="l">Fluency</div></div>
+              </div>
+              <hr class="asp-radar-divider">
+              <div id="aspSkillDetails"></div>
+            </div>
+            <div class="asp-ai-note">
+              <div class="head"><div class="av"><img src="assets/icon-aispeak-robot-avatar.png" alt=""></div><div><b>AI nhận xét</b><i>Trợ lý học tập</i></div></div>
+              <p id="aspAiNoteText"></p>
+            </div>
+            <div class="asp-result-cta" onclick="goto('aispeak-hub')">Tiếp tục học bài khác</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 </div>
 
-<button id="skipBtn" hidden onclick="skip()">⏭ Bỏ qua / Tiếp theo</button>
+<div id="topRightControls">
+  <div class="video-seek-wrap" id="videoSeekWrap" hidden>
+    <span class="video-seek-time" id="videoSeekTime">00:00</span>
+    <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1">
+    <span class="video-seek-time" id="videoSeekDuration">00:00</span>
+  </div>
+  <button id="skipBtn" hidden onclick="skip()">⏭ Bỏ qua / Tiếp theo</button>
+</div>
 <div class="toast-mini" id="toastMini"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
@@ -1248,12 +2337,16 @@ const state = {
   mcqSubmitted: false,
   recording: false,
   classroomStep: 0,
+  pendingVideoAdvance: null,
+  chatQueue: [],
+  seekDragging: false,
   fb: null,
   aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, messages: [], improved: [] },
   gateCode: '',
   gateFailedOnce: false,
   pendingTimer: null,
   permissions: { mic: false, cam: false },
+  asp: { lessonTitle: '', turn: 0, hintShown: false },
 };
 
 const NUM_WORDS = ['Không','Một','Hai','Ba','Bốn','Năm','Sáu','Bảy','Tám','Chín'];
@@ -1275,7 +2368,10 @@ const SCREEN_DISPLAY = {
   loading:'flex', 'permission-intro':'flex', 'permission-grant':'flex', checkin:'flex', checkout:'flex',
   summary:'flex', thanks:'flex',
   gate:'block', parent:'flex', classroom:'block',
-  'aic2-intro':'flex', 'aic2-interact':'block', 'aic2-summary':'flex',
+  'aic2-interact':'block', 'aic2-summary':'flex',
+  'ai-practice':'flex', 'ai-practice-daily':'flex', 'ai-practice-exam':'flex', 'ai-practice-detail':'flex',
+  'aispeak-hub':'flex', 'aispeak-list':'flex', 'aispeak-gen':'flex', 'aispeak-convo':'flex',
+  'aispeak-celebrate':'flex', 'aispeak-result':'flex',
 };
 function goto(id){
   document.querySelectorAll('.screen').forEach(s=>{
@@ -1291,6 +2387,42 @@ function goto(id){
 function showSkip(show){ document.getElementById('skipBtn').hidden = !show; }
 function updateSkipVisibility(screenId){
   showSkip(['loading','permission-grant','checkin','checkout','classroom','aic2-interact'].includes(screenId));
+  showSeekBar(screenId === 'classroom');
+}
+
+/* DRAFT REVIEW: thanh tua video bài giảng — đặt cạnh nút "Bỏ qua/Tiếp theo", ngoài khung màn hình
+   buổi học, chỉ hiện khi đang ở màn lớp học live. Tua tay sẽ tự kích hoạt các mốc iSpeak/chat/…
+   tương ứng nhờ dùng chung listener `checkVideoTimeAdvance` (timeupdate). */
+function showSeekBar(show){ document.getElementById('videoSeekWrap').hidden = !show; }
+
+function formatMmSs(sec){
+  sec = Math.max(0, Math.floor(sec||0));
+  const m = Math.floor(sec/60), s = sec%60;
+  return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+
+function attachVideoSeekBar(){
+  const video = document.getElementById('lectureVideo');
+  const range = document.getElementById('videoSeekRange');
+  if(!video || !range || video.dataset.seekBarAttached) return;
+  video.dataset.seekBarAttached = '1';
+  video.addEventListener('loadedmetadata', ()=>{
+    range.max = Math.floor(video.duration || 0);
+    document.getElementById('videoSeekDuration').textContent = formatMmSs(video.duration);
+  });
+  video.addEventListener('timeupdate', ()=>{
+    if(state.seekDragging) return;
+    range.value = Math.floor(video.currentTime);
+    document.getElementById('videoSeekTime').textContent = formatMmSs(video.currentTime);
+  });
+  range.addEventListener('input', ()=>{
+    state.seekDragging = true;
+    document.getElementById('videoSeekTime').textContent = formatMmSs(range.value);
+  });
+  range.addEventListener('change', ()=>{
+    video.currentTime = Number(range.value);
+    state.seekDragging = false;
+  });
 }
 
 function autoAdvance(fn, ms){
@@ -1333,9 +2465,65 @@ function doCheckin(kind){
 }
 
 /* ============ MÀN 1: CLASSROOM STATE MACHINE ============ */
-const FLOW = ['team-announce','lecture1','mcq','mcq-result','lecture2','ispeak','ispeak-result',
+/* DRAFT REVIEW (đồng bộ theo kịch bản thật của video bc2-g5-u3.mp4, đoạn 7:41-20:32 — xem
+   memory/tin nhắn ngày 2026-09-12): team-announce (7:41) -> lecture1 (khoảng trống, chưa có mốc
+   chi tiết) -> 7 câu ispeak liên tiếp (10:54-17:50) -> chat-recap (18:36-20:32). Các bước
+   mcq/mcq-result/lecture2 CHƯA có timestamp thật nên tạm dời ra sau chat-recap, giữ nguyên logic
+   mock cũ (autoAdvance theo ms) — chờ bạn cung cấp thêm phần kịch bản để định vị lại đúng chỗ. */
+const FLOW = ['team-announce','lecture1',
+  'ispeak1','ispeak2','ispeak3','ispeak4','ispeak5','ispeak6','ispeak7','chat-recap',
+  'mcq','mcq-result','lecture2',
   'lecture3','group-mascot','group-discuss','group-answer','group-result',
   'lecture4','aispeak-intro','aispeak-t1','aispeak-wait1','aispeak-t2','aispeak-wait2','aispeak-result','end-cta'];
+
+/* Mốc thời gian thật trong video (giây) — nguồn: kịch bản buổi học bạn cung cấp 2026-09-12. */
+const TEAM_CHAT_T = 7*60+41;      // 461 — HS nhắn tên nhóm vào chat (mốc tham chiếu, không dùng để đóng popup team-announce — xem case 'team-announce')
+const ISPEAK_WORDS = ['apple pie','fish and chips','dumpling','ramen','rice ball','gelato','pizza'];
+const ISPEAK_START_T = [10*60+54, 11*60+51, 12*60+53, 14*60+52, 15*60+55, 16*60+52, 17*60+50];
+const CHAT_RECAP_T = 18*60+36;    // 1116 — bắt đầu đoạn HS chat đánh vần
+const CHAT_MESSAGES = [
+  {t:18*60+36, text:'pie/ apple pie/ e'},
+  {t:19*60+13, text:'s/fish'},
+  {t:19*60+54, text:'p/q'},
+  {t:20*60+32, text:'f/ tofu'},
+];
+const CHAT_RECAP_END_T = 20*60+32; // 1232 — hết đoạn chat, chuyển tiếp (tạm) sang mcq
+
+function waitForVideoTime(seconds){
+  state.pendingVideoAdvance = seconds;
+  const video = document.getElementById('lectureVideo');
+  if(video && video.currentTime >= seconds) checkVideoTimeAdvance();
+}
+
+function attachVideoTimeWatcher(){
+  const video = document.getElementById('lectureVideo');
+  if(!video || video.dataset.timelineWatcherAttached) return;
+  video.dataset.timelineWatcherAttached = '1';
+  video.addEventListener('timeupdate', checkVideoTimeAdvance);
+}
+
+function checkVideoTimeAdvance(){
+  const video = document.getElementById('lectureVideo');
+  if(!video) return;
+  const t = video.currentTime;
+  if(state.chatQueue.length && t >= state.chatQueue[0].t){
+    appendClassChatBubble(state.chatQueue.shift().text);
+  }
+  if(state.pendingVideoAdvance != null && t >= state.pendingVideoAdvance){
+    state.pendingVideoAdvance = null;
+    nextClassStep();
+  }
+}
+
+function appendClassChatBubble(text){
+  const layer = document.getElementById('classChatFeed');
+  if(!layer) return;
+  const el = document.createElement('div');
+  el.className = 'class-chat-bubble';
+  el.innerHTML = `<span class="who">Bạn học 💬</span> ${text}`;
+  layer.appendChild(el);
+  setTimeout(()=>el.remove(), 4000);
+}
 
 const LECTURE_VIDEO_SRC = 'https://vod-mass.edupia.vn/a_12628_mass/_definst_/mass/videos/video_lectures/2025/09/10/bc2-g5-u3.mp4/playlist.m3u8';
 
@@ -1375,8 +2563,12 @@ function unmuteLectureVideo(){
 function enterClassroom(){
   goto('classroom');
   state.classroomStep = 0;
+  state.pendingVideoAdvance = null;
+  state.chatQueue = [];
   renderClassroomStep();
   initLectureVideo();
+  attachVideoTimeWatcher();
+  attachVideoSeekBar();
 }
 
 function nextClassStep(){
@@ -1429,10 +2621,8 @@ function forceAdvanceClassroom(){
     selectMcq('B'); submitMcq();
     return;
   }
-  if(step === 'ispeak' && !state.recording){
+  if(step && step.indexOf('ispeak') === 0 && !state.recording){
     toggleMic();
-    setTimeout(toggleMic, 150);
-    return;
   }
   if(step === 'group-mascot'){
     groupReady(); return;
@@ -1445,6 +2635,13 @@ function forceAdvanceClassroom(){
   }
   if(step === 'end-cta'){
     goto('checkout'); return;
+  }
+  /* DRAFT REVIEW: các bước đang chờ theo mốc thời gian thật của video (waitForVideoTime) —
+     "Bỏ qua" sẽ tua video tới đúng mốc đó thay vì nhảy bước ngay, để nội dung video luôn khớp. */
+  if(state.pendingVideoAdvance != null){
+    const video = document.getElementById('lectureVideo');
+    if(video) video.currentTime = state.pendingVideoAdvance;
+    return;
   }
   nextClassStep();
 }
@@ -1480,10 +2677,12 @@ function renderClassroomStep(){
           <div class="member"><span class="av">👦</span> Khương Khương</div>
           <div class="member"><span class="av">🧒</span> Hoàng thượng</div>
         </div>
-        <button id="announceBtn">Sẵn sàng sau 10s</button>
+        <button id="announceBtn">Sẵn sàng sau 3s</button>
       </div>`;
+      /* Popup giới thiệu nhóm chỉ là overlay mở đầu, tự tắt sau vài giây — KHÔNG chờ theo mốc
+         thời gian thật của video (mốc 7:41 "HS nhắn tên nhóm vào chat" là một khoảnh khắc khác,
+         nằm trong chính video, không cần popup riêng của demo che lên). */
       { let n = 3;
-        document.getElementById('announceBtn').textContent = `Sẵn sàng sau ${n}s`;
         const iv = setInterval(()=>{
           n--;
           const btn = document.getElementById('announceBtn');
@@ -1495,8 +2694,11 @@ function renderClassroomStep(){
       break;
 
     case 'lecture1':
-      overlay.innerHTML = `<div class="live-toast">👋 Chào Vanh! Chúc con buổi học vui vẻ</div>`;
-      autoAdvance(nextClassStep, 2200);
+      overlay.innerHTML = `<div class="live-toast" id="lectureGreetToast">👋 Chào Vanh! Chúc con buổi học vui vẻ</div>`;
+      setTimeout(()=>{ const el = document.getElementById('lectureGreetToast'); if(el) el.remove(); }, 3000);
+      /* DRAFT REVIEW: chưa có timestamp thật cho điểm kết thúc lecture1 — tạm coi là toàn bộ
+         khoảng trống 7:41 -> 10:54 (đầu câu iSpeak 1), chờ bạn xác nhận có nội dung gì ở giữa. */
+      waitForVideoTime(ISPEAK_START_T[0]);
       break;
 
     case 'mcq':
@@ -1529,22 +2731,30 @@ function renderClassroomStep(){
       autoAdvance(nextClassStep, 1600);
       break;
 
-    case 'ispeak':
+    case 'ispeak1': case 'ispeak2': case 'ispeak3': case 'ispeak4':
+    case 'ispeak5': case 'ispeak6': case 'ispeak7': {
+      /* DRAFT REVIEW: 7 câu iSpeak liên tiếp khớp đúng theo kịch bản thật (10:54-17:50), đáp án
+         hiển thị nhỏ để bạn đối chiếu khi review — bỏ màn "kết quả chấm điểm" giả lập cũ vì
+         không có dữ liệu chấm thật đi kèm video (tránh tự bịa điểm số). */
+      const n = Number(step.slice(6));
       state.recording = false;
       bottomBar.innerHTML = `
         <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
         <div class="control-center">
           <span class="timer-pill">⏱ 00:20</span>
-          <span class="hint-text" id="micHint">Con bấm vào mic để nói</span>
+          <span class="hint-text" id="micHint">🎤 iSpeak ${n}/7 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
           <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
         </div>
         <button class="cc-btn">CC</button>`;
+      const nextT = n < 7 ? ISPEAK_START_T[n] : CHAT_RECAP_T;
+      waitForVideoTime(nextT);
       break;
+    }
 
-    case 'ispeak-result':
-      state.scores.ispeak = 8;
-      overlay.innerHTML = mascotBubble('PHÁT ÂM: 8/10', 'Phát âm tốt lắm! (Đạt 75%)', '⭐');
-      autoAdvance(nextClassStep, 2400);
+    case 'chat-recap':
+      state.chatQueue = CHAT_MESSAGES.slice();
+      overlay.innerHTML = `<div class="class-chat-feed" id="classChatFeed"></div>`;
+      waitForVideoTime(CHAT_RECAP_END_T);
       break;
 
     case 'lecture3':
@@ -1675,8 +2885,9 @@ function toggleMic(){
     hint.textContent = 'Đang ghi âm... bấm để dừng';
   } else {
     btn.classList.remove('recording');
-    hint.textContent = 'Đang chấm điểm...';
-    setTimeout(nextClassStep, 600);
+    /* DRAFT REVIEW: không còn tự nextClassStep() ở đây — 7 bước iSpeak giờ chuyển bước theo
+       đúng mốc thời gian thật của video (waitForVideoTime), không theo thao tác bấm mic nữa. */
+    hint.textContent = 'Đã gửi câu trả lời';
   }
 }
 
@@ -1778,10 +2989,34 @@ function aispeakSend(text){
 }
 
 /* ============ MÀN 2: TỔNG KẾT ============ */
-function scoreComment(score){
-  if(score>=8) return ['Đỉnh cao trí tuệ luôn!','Sắp thành siêu sao rồi!'][score%2];
-  if(score>=5) return 'Tớ thấy cậu có tố chất, đừng dừng lại nhé!';
-  return 'Cố gắng lần sau nhé, tớ tin cậu làm được!';
+/* DRAFT REVIEW: nhận xét theo từng kỹ năng (thay cho scoreComment() chung chung cũ), khớp văn
+   phong ví dụ trong thiết kế bạn gửi 2026-09-12 — nội dung minh hoạ cho demo, chưa phải feedback
+   AI thật (xem [[feedback-prototype-content-marking]]). */
+function skillComment(key, score){
+  const band = score>=8 ? 'high' : score>=5 ? 'mid' : 'low';
+  const table = {
+    mcq: {
+      high:'Rất tốt! Bạn đã trả lời đúng hầu hết câu hỏi trắc nghiệm',
+      mid:'Khá ổn, một vài câu trắc nghiệm con cần xem lại',
+      low:'Cần ôn lại phần trắc nghiệm nhiều hơn nhé',
+    },
+    group: {
+      high:'Làm việc nhóm rất ăn ý, tiếp tục phát huy nhé!',
+      mid:'Cần cố gắng hơn trong bài tập làm việc nhóm',
+      low:'Con cần tham gia tích cực hơn khi làm bài tập nhóm',
+    },
+    aispeak: {
+      high:'Có khả năng hội thoại tự tin trong ngữ cảnh',
+      mid:'Hội thoại khá ổn, cần luyện thêm phản xạ',
+      low:'Cần luyện tập hội thoại nhiều hơn để tự tin hơn',
+    },
+    ispeak: {
+      high:'Có tiến bộ! Phát âm đã được cải thiện rõ rệt so với buổi học gần nhất',
+      mid:'Phát âm khá ổn, một số từ cần luyện thêm',
+      low:'Cần luyện phát âm nhiều hơn ở buổi tới',
+    },
+  };
+  return table[key][band];
 }
 /* NLO của buổi Big Class Plus vừa học — % lấy từ chân dung Mastery Profile của học sinh cho
    đúng chủ đề (không suy ra từ điểm mini-game hôm nay), cho thấy đã đạt/còn gap kiến thức nào
@@ -1795,44 +3030,36 @@ function computeNloGaps(){
 }
 function renderSummary(){
   const s = state.scores;
-  const rows = [
-    ['TRẮC NGHIỆM', s.mcq],
-    ['PHÁT ÂM', s.ispeak],
-    ['BÀI TẬP NHÓM', s.group],
-    ['HỘI THOẠI', s.aispeak],
-  ];
-  document.getElementById('skillCards').innerHTML = rows.map(([name,score])=>`
-    <div class="skill-card">
-      <div class="score-box">${score}/10</div>
-      <div class="info"><div class="name">${name}</div><div class="comment">${scoreComment(score)}</div></div>
+  document.getElementById('skillCards').innerHTML = [
+    ['mcq','Trắc nghiệm', s.mcq],
+    ['group','Bài tập nhóm', s.group],
+    ['aispeak','Hội thoại', s.aispeak],
+    ['ispeak','Phát âm', s.ispeak],
+  ].map(([key,name,score])=>`
+    <div class="summary-skill-card">
+      <div class="score">${score}/10</div>
+      <div class="info"><div class="name">${name}</div><div class="comment">${skillComment(key,score)}</div></div>
     </div>`).join('');
 
   const gaps = computeNloGaps();
-  const ringPct = Math.min(...gaps.map(g=>g.pct));
-  const ringColor = ringPct<70 ? '#F5B30B' : '#0876B1';
-  const circ = 2*Math.PI*40;
-  document.getElementById('masteryTiles').innerHTML = `
-    <div class="mastery-headline">
-      <svg class="mastery-ring-big" viewBox="0 0 96 96">
-        <circle cx="48" cy="48" r="40" fill="none" stroke="#E5E7EB" stroke-width="8"/>
-        <circle id="ringFillMain" cx="48" cy="48" r="40" fill="none" stroke="${ringColor}" stroke-width="8"
-          stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" transform="rotate(-90 48 48)"/>
-        <text x="48" y="46" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">${ringPct}%</text>
-        <text x="48" y="62" text-anchor="middle" font-size="9" fill="#6B7280" letter-spacing="1">MASTERY</text>
-      </svg>
-    </div>
-    <div class="mastery-tiles-row">
-      ${gaps.map(g=>`
-        <div class="mastery-tile ${g.gap?'warn':'done'}">
-          <span class="tile-icon">${g.gap?'⚠':'✓'}</span>
-          <div class="tile-name">${g.name}</div>
-          <div class="tile-tag">${g.gap?'CẦN CỦNG CỐ':'ĐÃ ĐẠT'} (${g.pct}%)</div>
-        </div>`).join('')}
+  document.getElementById('masteryTiles').innerHTML = gaps.map(g=>{
+    const sep = g.name.indexOf(': ');
+    const label = sep>=0 ? g.name.slice(0,sep) : g.name;
+    const desc = sep>=0 ? g.name.slice(sep+2) : g.name;
+    return `<div class="summary-gap-card ${g.gap?'warn':'done'}">
+      <span class="summary-gap-pill"><i class="dot"></i>${g.gap?'Cần củng cố':'Đã đạt'} (${g.pct}%)</span>
+      <div class="row"><div class="name">${label}</div></div>
+      <div class="desc">${desc}</div>
     </div>`;
-  setTimeout(()=>{
-    const fillEl = document.getElementById('ringFillMain');
-    if(fillEl) fillEl.style.strokeDashoffset = circ*(1-ringPct/100);
-  }, 50);
+  }).join('');
+
+  /* DRAFT REVIEW: gộp phần "mục tiêu buổi bổ trợ" (trước ở màn aic2-intro riêng, hàm
+     initAic2Intro() cũ) vào ngay đây — chốt track/nloList sớm hơn 1 bước trong luồng, không đổi
+     kết quả vì vẫn tính từ state.scores đã có tại thời điểm này. */
+  state.aic2.track = computeAic2Track();
+  state.aic2.nloList = AIC2_NLO[state.aic2.track];
+  document.getElementById('summaryPlanText').textContent = 'Buổi học bổ trợ: ' +
+    gaps.map(g => (g.gap ? 'Củng cố lại kiến thức chưa thành thạo ' : 'Mở rộng kiến thức ') + g.name).join('. ') + '.';
 }
 
 /* ============ MASTERY MAP (Bản đồ năng lực toàn môn) ============ */
@@ -1999,15 +3226,21 @@ const AIC2_NLO = {
   ],
 };
 
-/* ---- Màn 1: Mở đầu — BR3/BR4 xác định chân dung + nhánh, BR5 tóm tắt + mục tiêu ---- */
+/* ---- BR3/BR4 xác định chân dung + nhánh (tính ở renderSummary(), xem draft review) ---- */
 function computeAic2Track(){
   const s = state.scores;
   const avg = (s.mcq+s.ispeak+s.group+s.aispeak)/4;
   return avg >= 7 ? 'advance' : 'reinforce';
 }
-function initAic2Intro(){
-  state.aic2.track = computeAic2Track();
-  state.aic2.nloList = AIC2_NLO[state.aic2.track];
+
+/* ---- Màn 2: Tương tác — mỗi NLO = 1 Micro-lesson (bài giảng ngắn 3 phút) rồi mở khóa đúng
+   5 bài tập vi mô trộn dạng. BR6/BR7 xử lý NLO ưu tiên, BR8 tự chuyển khi xong sớm.
+   DRAFT REVIEW: các dòng reset stage/improved/_mcqPick/_gapPick/_recording chuyển từ
+   initAic2Intro() cũ (màn Mở đầu riêng, nay đã gộp vào screen-summary) sang đây — đây giờ là
+   điểm bắt đầu thật sự của phiên bổ trợ, cần đảm bảo mỗi lần bắt đầu lại (kể cả không qua
+   resetDemo) không bị dính state cũ từ lượt chạy trước. ---- */
+function startAic2Interact(){
+  document.getElementById('aic2Cta').style.display='none';
   state.aic2.stage = 0;
   state.aic2.phase = 'lesson';
   state.aic2.exerciseIndex = 0;
@@ -2016,32 +3249,6 @@ function initAic2Intro(){
   state.aic2._mcqPick = null;
   state.aic2._gapPick = null;
   state.aic2._recording = false;
-
-  document.getElementById('aic2IntroTrackBadge').textContent =
-    state.aic2.track==='advance' ? 'Nâng cao & Mở rộng' : 'Buổi học bổ trợ';
-
-  const s = state.scores;
-  const rows = [['TRẮC NGHIỆM',s.mcq],['PHÁT ÂM',s.ispeak],['BÀI TẬP NHÓM',s.group],['HỘI THOẠI',s.aispeak]];
-  document.getElementById('aic2RecapRows').innerHTML = rows.map(([n,v])=>
-    `<div class="row"><span>${n}</span><b>${v}/10</b></div>`).join('');
-
-  const gaps = computeNloGaps();
-  document.getElementById('aic2RecapNlo').innerHTML = gaps.map(g=>
-    `<div class="row"><span>${g.name}</span><b style="color:${g.gap?'#F5B30B':'#0876B1'}">${g.gap?'Còn gap':'Đã đạt'} (${g.pct}%)</b></div>`).join('');
-
-  const names = state.aic2.nloList.map(n=>n.name);
-  document.getElementById('aic2GoalText').textContent = state.aic2.track==='advance'
-    ? `Mở rộng ${names.length} chủ đề qua các bài giảng ngắn 3 phút + bài tập vi mô: ${names.join(' · ')}.`
-    : `Vá triệt để ${names.length} lỗ hổng ưu tiên nhất qua các bài giảng ngắn 3 phút + bài tập vi mô — không phải học lại cả Unit: ${names.join(' · ')}.`;
-}
-
-/* ---- Màn 2: Tương tác — mỗi NLO = 1 Micro-lesson (bài giảng ngắn 3 phút) rồi mở khóa đúng
-   5 bài tập vi mô trộn dạng. BR6/BR7 xử lý NLO ưu tiên, BR8 tự chuyển khi xong sớm. ---- */
-function startAic2Interact(){
-  document.getElementById('aic2Cta').style.display='none';
-  state.aic2.phase = 'lesson';
-  state.aic2.exerciseIndex = 0;
-  state.aic2.messages = [];
   updateAic2Progress();
   renderAic2Chat();
   aic2StartLesson();
@@ -2081,6 +3288,8 @@ function aic2StartLesson(){
   document.getElementById('aic2LessonBarFill').style.width = '100%';
   document.getElementById('aic2LessonStage').style.display = 'flex';
   document.querySelector('.aic2-chat-wrap').style.display = 'none';
+  document.getElementById('aic2ExerciseStage').style.display = 'none';
+  document.getElementById('aic2BottomBar').style.display = 'none';
   clearInterval(state.aic2._lessonTick);
   let remain = 180;
   state.aic2._lessonTick = setInterval(()=>{
@@ -2109,16 +3318,21 @@ function aic2FinishLesson(){
 function aic2RenderExercise(){
   const nlo = state.aic2.nloList[state.aic2.stage];
   const ex = nlo.exercises[state.aic2.exerciseIndex];
+  document.querySelector('.aic2-chat-wrap').style.display = 'none';
+  document.getElementById('aic2ExerciseStage').style.display = 'flex';
+  document.getElementById('aic2BottomBar').style.display = 'flex';
+  document.getElementById('aic2ProgressCount').textContent = `${state.aic2.exerciseIndex+1}/${nlo.exercises.length}`;
+  document.getElementById('aic2ProgressFill').style.width = Math.round((state.aic2.exerciseIndex+1)/nlo.exercises.length*100)+'%';
+  document.getElementById('aic2QNum').textContent = `Câu ${state.aic2.exerciseIndex+1}`;
+  const qText = document.getElementById('aic2QText');
   const area = document.getElementById('aic2ExerciseArea');
   if(ex.type==='mcq'){
-    state.aic2.messages.push({who:'ai', text: ex.question});
-    renderAic2Chat();
+    qText.textContent = ex.question;
     area.innerHTML = `<div class="aic2-mcq-opts">${ex.options.map((opt,i)=>
-        `<button class="aic2-opt-btn" onclick="aic2PickMcq(${i})" id="aic2Opt${i}">${opt}</button>`).join('')}</div>
+        `<button class="aic2-opt-btn" onclick="aic2PickMcq(${i})" id="aic2Opt${i}"><span class="letter">${String.fromCharCode(65+i)}</span>${opt}</button>`).join('')}</div>
       <button class="submit-btn" id="aic2McqSubmitBtn" disabled onclick="aic2SubmitMcq()">Nộp bài</button>`;
   } else if(ex.type==='gapfill'){
-    state.aic2.messages.push({who:'ai', text:'Con điền từ còn thiếu vào chỗ trống nhé:'});
-    renderAic2Chat();
+    qText.textContent = 'Con điền từ còn thiếu vào chỗ trống nhé:';
     area.innerHTML = `<div class="aic2-gapfill">
         <div class="fb-sentence">${ex.pre} <span class="fb-blank" id="aic2GapBlank">____</span> ${ex.post}</div>
         <div class="fb-wordbank">${ex.options.map((w,i)=>
@@ -2126,16 +3340,14 @@ function aic2RenderExercise(){
         <button class="submit-btn" id="aic2GapSubmitBtn" disabled onclick="aic2SubmitGap()">Nộp bài</button>
       </div>`;
   } else if(ex.type==='speak'){
-    state.aic2.messages.push({who:'ai', text:'Con hãy nói câu sau nhé:'});
-    renderAic2Chat();
+    qText.textContent = 'Con hãy nói câu sau nhé:';
     area.innerHTML = `<div class="aic2-speak">
         <div class="aic2-speak-prompt">🗣️ "${ex.prompt}"</div>
         <button class="mic-btn" id="aic2SpeakMic" onclick="aic2ToggleSpeak()">🎤</button>
         <div class="aic2-speak-hint" id="aic2SpeakHint">Bấm mic để nói câu trên</div>
       </div>`;
   } else {
-    state.aic2.messages.push({who:'ai', text: ex.ask});
-    renderAic2Chat();
+    qText.textContent = ex.ask;
     area.innerHTML = `<div class="chat-input-row" id="aic2InputRow">
         <button class="mic-mini" onclick="aic2ToggleChatMic()">🎤</button>
         <input id="aic2TextInput" placeholder="Nhập câu trả lời...">
@@ -2196,9 +3408,11 @@ function aic2ToggleSpeak(){
 /* Chấm 1 bài tập vi mô xong → sang bài tiếp theo trong CÙNG NLO; hết 5 bài mới coi là đã xử
    lý xong NLO đó (mới ghi vào improved) rồi chuyển sang Micro-lesson của NLO kế tiếp. */
 function aic2Feedback(correct, ex){
-  state.aic2.messages.push({who:'me', text: correct===true && ex.type==='speak' ? '🎤 (đã nói câu trên)' : '(đã trả lời)'});
-  state.aic2.messages.push({who:'ai', text: (correct || !ex.wrong) ? ex.ok : ex.wrong});
-  renderAic2Chat();
+  const area = document.getElementById('aic2ExerciseArea');
+  area.innerHTML = `<div class="aic2-feedback ${correct?'ok':'wrong'}">
+      <div class="face">${correct?'🥳':'🙂'}</div>
+      <div class="msg">${(correct || !ex.wrong) ? ex.ok : ex.wrong}</div>
+    </div>`;
   aic2AdvanceExercise();
 }
 function aic2AdvanceExercise(){
@@ -2217,6 +3431,8 @@ function aic2AdvanceExercise(){
       } else {
         updateAic2Progress();
         document.getElementById('aic2ExerciseArea').innerHTML='';
+        document.getElementById('aic2ExerciseStage').style.display='none';
+        document.getElementById('aic2BottomBar').style.display='none';
         document.getElementById('aic2Cta').style.display='flex';
       }
     }
@@ -2236,13 +3452,10 @@ function aic2Send(text){
   const nlo = state.aic2.nloList[state.aic2.stage];
   if(!nlo || state.aic2.exerciseIndex>=nlo.exercises.length) return;
   const ex = nlo.exercises[state.aic2.exerciseIndex];
-  state.aic2.messages.push({who:'me', text});
-  renderAic2Chat(true);
+  document.getElementById('aic2ExerciseArea').innerHTML =
+    `<div class="aic2-speak-prompt">Con: "${text}"</div><div class="aic2-speak-hint">Đang chấm điểm câu trả lời...</div>`;
   autoAdvance(()=>{
-    state.aic2.messages.push({who:'ai', text: ex.ok});
-    renderAic2Chat();
-    document.getElementById('aic2ExerciseArea').innerHTML='';
-    aic2AdvanceExercise();
+    aic2Feedback(true, ex);
   }, 1400);
 }
 function forceAdvanceAic2(){
@@ -2293,200 +3506,159 @@ function renderAic2Summary(){
   document.getElementById('aic2HwSub').textContent = 'Giao đúng nội dung con vừa học trong buổi bổ trợ hôm nay';
 }
 
-/* ============ PARENTAL GATE ============ */
+/* ============ PARENTAL GATE v2 (Mật khẩu / Nhận mã OTP — khớp node 72:20018 + 87:20220) ============ */
 function openGate(){
-  const code = String(Math.floor(100+Math.random()*899));
-  state.gateCode = code;
+  state.gateTab = 'otp';
+  state.gateOtpStep = 'channel';
+  state.gateOtpChannel = null;
+  state.gateCode = String(Math.floor(1000+Math.random()*8999));
   state.gateFailedOnce = false;
-  document.getElementById('gateWordsDisplay').textContent = code.split('').map(d=>NUM_WORDS[+d]).join(' — ');
-  document.getElementById('gateInputEl').value='';
-  document.getElementById('gateErrorEl').textContent='';
+  document.getElementById('gatePasswordInput').value = '';
+  document.getElementById('gatePasswordError').textContent = '';
+  document.getElementById('gateOtpCodeInput').value = '';
+  document.getElementById('gateOtpCodeError').textContent = '';
+  renderGateTab();
   goto('gate');
 }
-function checkGate(){
-  const val = document.getElementById('gateInputEl').value.trim();
+function switchGateTab(tab){
+  state.gateTab = tab;
+  state.gateOtpStep = 'channel';
+  renderGateTab();
+}
+function renderGateTab(){
+  const isOtp = state.gateTab === 'otp';
+  document.getElementById('gateTabPassword').classList.toggle('active', !isOtp);
+  document.getElementById('gateTabOtp').classList.toggle('active', isOtp);
+  document.getElementById('gatePasswordPanel').style.display = isOtp ? 'none' : 'flex';
+  document.getElementById('gateOtpChannelPanel').style.display = isOtp && state.gateOtpStep==='channel' ? 'flex' : 'none';
+  document.getElementById('gateOtpCodePanel').style.display = isOtp && state.gateOtpStep==='code' ? 'flex' : 'none';
+  document.getElementById('gateSubtitle').textContent = isOtp ? 'Chọn nơi nhận mã xác thực' : 'Nhập mật khẩu phụ huynh để tiếp tục';
+}
+function selectOtpChannel(channel){
+  state.gateOtpChannel = channel;
+  state.gateOtpStep = 'code';
+  document.getElementById('gateOtpCodeHint').textContent = channel === 'phone'
+    ? 'Mã xác thực đã được gửi qua SMS tới số •••• •••• 456'
+    : 'Mã xác thực đã được gửi qua Zalo tới số •••• •••• 456';
+  document.getElementById('gateOtpCodeInput').value = '';
+  document.getElementById('gateOtpCodeError').textContent = '';
+  renderGateTab();
+}
+function backToOtpChannel(){
+  state.gateOtpStep = 'channel';
+  renderGateTab();
+}
+function confirmGatePassword(){
+  const val = document.getElementById('gatePasswordInput').value.trim();
+  if(!val){
+    document.getElementById('gatePasswordError').textContent = 'Vui lòng nhập mật khẩu';
+    const card = document.querySelector('.gate2-card');
+    card.classList.add('shake');
+    setTimeout(()=>card.classList.remove('shake'), 400);
+    return;
+  }
+  goto('parent');
+}
+function confirmGateOtp(){
+  const val = document.getElementById('gateOtpCodeInput').value.trim();
   if(val === state.gateCode || state.gateFailedOnce){
     goto('parent');
     return;
   }
   state.gateFailedOnce = true;
-  const card = document.querySelector('.gate-card');
+  const card = document.querySelector('.gate2-card');
   card.classList.add('shake');
   setTimeout(()=>card.classList.remove('shake'), 400);
-  document.getElementById('gateErrorEl').textContent = 'Chưa đúng, thử lại (lần nhập tiếp theo sẽ tự qua để demo nhanh)';
+  document.getElementById('gateOtpCodeError').textContent = 'Mã chưa đúng, thử lại (lần nhập tiếp theo sẽ tự qua để demo nhanh)';
 }
 
-/* ---- Chế độ phụ huynh: 2 tab (Báo cáo học tập / Báo cáo điểm danh) ---- */
-function showParentTab(tab){
-  document.getElementById('parentTabReportPanel').style.display = tab==='report' ? 'block' : 'none';
-  document.getElementById('parentTabAttendPanel').style.display = tab==='attend' ? 'block' : 'none';
-  document.getElementById('parentTabReportMenu').classList.toggle('active', tab==='report');
-  document.getElementById('parentTabAttendMenu').classList.toggle('active', tab==='attend');
-}
-
-/* ---- Zone 1: Biểu đồ tiến bộ — vẽ SVG thuần (bar/line/grouped-bar), so sánh kỳ trước/kỳ này ---- */
-const SVG_NS = 'http://www.w3.org/2000/svg';
-function svgEl(tag, attrs){
-  const el = document.createElementNS(SVG_NS, tag);
-  for(const k in attrs) el.setAttribute(k, attrs[k]);
-  return el;
-}
-const PROGRESS_DATA = {
-  sessions: ['B33','B34','B35','B36','B37','B38'],
-  duration: [42,38,45,50,48,55],
-  score: [6.5,6.8,7.0,7.4,7.8,8.2],
-  strandLabels: ['Từ vựng','Ngữ pháp','Phát âm','Nghe – Nói'],
-  strandPrev: [70,45,55,60],
-  strandNow: [76,52,60,65],
-};
-function buildSingleBar(containerId, categories, series, maxVal){
-  const w=360,h=260,padL=38,padB=32,padT=26,padR=10;
-  const plotW=w-padL-padR, plotH=h-padT-padB;
-  const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
-  for(let i=0;i<=3;i++){
-    const y = padT + plotH - (plotH*i/3);
-    svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-6,y:y+4,class:'axis-label','text-anchor':'end'});
-    lbl.textContent = Math.round(maxVal*i/3);
-    svg.appendChild(lbl);
-  }
-  const groupW = plotW/categories.length;
-  categories.forEach((cat,i)=>{
-    const gx = padL + groupW*i;
-    const bw = groupW*0.5;
-    const bh = (series[i]/maxVal)*plotH;
-    svg.appendChild(svgEl('rect',{x:gx+(groupW-bw)/2,y:padT+plotH-bh,width:bw,height:bh,rx:4,class:'bar-now'}));
-    const valLbl = svgEl('text',{x:gx+groupW/2,y:padT+plotH-bh-8,class:'bar-val','text-anchor':'middle'});
-    valLbl.textContent = series[i];
-    svg.appendChild(valLbl);
-    const lbl = svgEl('text',{x:gx+groupW/2,y:h-8,class:'cat-label','text-anchor':'middle'});
-    lbl.textContent = cat;
-    svg.appendChild(lbl);
-  });
-  const container = document.getElementById(containerId);
-  container.innerHTML=''; container.appendChild(svg);
-}
-function buildGroupedBar(containerId, categories, seriesPrev, seriesNow, maxVal){
-  const w=700,h=280,padL=42,padB=34,padT=26,padR=10;
-  const plotW=w-padL-padR, plotH=h-padT-padB;
-  if(!maxVal) maxVal = Math.max(...seriesPrev, ...seriesNow) * 1.15;
-  const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
-  for(let i=0;i<=2;i++){
-    const y = padT + plotH - (plotH*i/2);
-    svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-8,y:y+4,class:'axis-label','text-anchor':'end'});
-    lbl.textContent = Math.round(maxVal*i/2)+'%';
-    svg.appendChild(lbl);
-  }
-  const groupW = plotW/categories.length;
-  categories.forEach((cat,i)=>{
-    const gx = padL + groupW*i;
-    const bw = groupW*0.26;
-    const prevH = (seriesPrev[i]/maxVal)*plotH, nowH = (seriesNow[i]/maxVal)*plotH;
-    const prevX = gx+groupW*0.2, nowX = gx+groupW*0.54;
-    svg.appendChild(svgEl('rect',{x:prevX,y:padT+plotH-prevH,width:bw,height:prevH,rx:4,class:'bar-prev'}));
-    svg.appendChild(svgEl('rect',{x:nowX,y:padT+plotH-nowH,width:bw,height:nowH,rx:4,class:'bar-now'}));
-    const prevLbl = svgEl('text',{x:prevX+bw/2,y:padT+plotH-prevH-8,class:'bar-val','text-anchor':'middle'});
-    prevLbl.textContent = seriesPrev[i]+'%';
-    svg.appendChild(prevLbl);
-    const nowLbl = svgEl('text',{x:nowX+bw/2,y:padT+plotH-nowH-8,class:'bar-val','text-anchor':'middle'});
-    nowLbl.textContent = seriesNow[i]+'%';
-    svg.appendChild(nowLbl);
-    const lbl = svgEl('text',{x:gx+groupW/2,y:h-8,class:'cat-label','text-anchor':'middle'});
-    lbl.textContent = cat;
-    svg.appendChild(lbl);
-  });
-  const container = document.getElementById(containerId);
-  container.innerHTML=''; container.appendChild(svg);
-}
-function buildLineChart(containerId, categories, series){
-  const w=360,h=260,padL=38,padB=32,padT=26,padR=10, maxVal=10;
-  const plotW=w-padL-padR, plotH=h-padT-padB;
-  const svg = svgEl('svg',{viewBox:`0 0 ${w} ${h}`,width:'100%',height:h});
-  for(let i=0;i<=2;i++){
-    const val = i*5;
-    const y = padT+plotH-(plotH*val/maxVal);
-    svg.appendChild(svgEl('line',{x1:padL,x2:w-padR,y1:y,y2:y,class:'grid-line'}));
-    const lbl = svgEl('text',{x:padL-6,y:y+4,class:'axis-label','text-anchor':'end'});
-    lbl.textContent = val;
-    svg.appendChild(lbl);
-  }
-  const stepX = plotW/(categories.length-1);
-  const pts = series.map((v,i)=>[padL+stepX*i, padT+plotH-(plotH*v/maxVal)]);
-  const pathD = pts.map((p,i)=>(i===0?'M':'L')+p[0]+','+p[1]).join(' ');
-  const areaD = pathD + ` L${pts[pts.length-1][0]},${padT+plotH} L${pts[0][0]},${padT+plotH} Z`;
-  svg.appendChild(svgEl('path',{d:areaD,class:'area-a'}));
-  svg.appendChild(svgEl('path',{d:pathD,class:'line-a',fill:'none'}));
-  pts.forEach((p,i)=>{
-    svg.appendChild(svgEl('circle',{cx:p[0],cy:p[1],r:4,class:'dot-a'}));
-    const lbl = svgEl('text',{x:p[0],y:h-8,class:'cat-label','text-anchor':'middle'});
-    lbl.textContent = categories[i];
-    svg.appendChild(lbl);
-  });
-  const lastLbl = svgEl('text',{x:pts[pts.length-1][0],y:pts[pts.length-1][1]-10,class:'bar-val','text-anchor':'middle'});
-  lastLbl.textContent = series[series.length-1];
-  svg.appendChild(lastLbl);
-  const container = document.getElementById(containerId);
-  container.innerHTML=''; container.appendChild(svg);
-}
-function renderProgressCharts(){
-  buildSingleBar('chartDuration', PROGRESS_DATA.sessions, PROGRESS_DATA.duration, 60);
-  buildLineChart('chartScore', PROGRESS_DATA.sessions, PROGRESS_DATA.score);
-  buildGroupedBar('chartStrand', PROGRESS_DATA.strandLabels, PROGRESS_DATA.strandPrev, PROGRESS_DATA.strandNow, 100);
-}
-
-/* ---- Zone 3: Kế hoạch học tập tiếp theo — lịch buổi kế tiếp + NLO cần củng cố từ buổi trước ---- */
-const NEXT_SESSION = {
-  label:'Buổi 39 · Thứ 4, 3/7', time:'19:25 – 20:25 · Thầy Peter Rus', unit:'Unit 8: My Future Job',
-  topics:[
-    'Từ vựng: Tên các nghề nghiệp (Occupations)',
-    'Ngữ pháp: Thì tương lai đơn (Future Simple) với "will"',
-    'Luyện nói: Giới thiệu ước mơ nghề nghiệp',
-  ],
-};
-const NEXT_GAPS = [
-  ['Thì tương lai đơn', 34],
-  ['Nguyên âm dài /i:/', 34],
-  ['Nghề nghiệp', 45],
-  ['Giới từ chỉ nơi chốn', 40],
+/* ============ PARENT MODE v2 — mock data + render (khớp node 72:20133 / 72:20248 / 91:20206 / 72:20363 / 94:20271) ============ */
+const PM_SKILLS = [
+  { name:'Từ vựng', score:8 },
+  { name:'Ngữ pháp', score:7 },
+  { name:'Phát âm', score:4, tip:'💡 Nhắc con luyện phát âm cùng AI Speak →' },
+  { name:'Nói', score:6 },
 ];
-function renderNextPlan(){
-  document.getElementById('nextPlanPanel').innerHTML = `
-    <div class="plan-card">
-      <div class="next-session-head">
-        <div class="next-session-avatar">🧑‍🏫</div>
-        <div>
-          <div class="next-session-title">${NEXT_SESSION.label}</div>
-          <div class="next-session-time">${NEXT_SESSION.time}</div>
-        </div>
-      </div>
-      <div class="next-session-unit">${NEXT_SESSION.unit}</div>
-      <div class="plan-label">Nội dung sẽ học</div>
-      <ul class="topic-list">${NEXT_SESSION.topics.map(t=>`<li><span class="sq"></span>${t}</li>`).join('')}</ul>
-    </div>
-    <div class="plan-card">
-      <div class="plan-label">Cần củng cố thêm (từ buổi trước)</div>
-      <div class="gap-tags">${NEXT_GAPS.map(([name,pct])=>`<span class="gap-tag">${name} · ${pct}%</span>`).join('')}</div>
-      <div class="plan-note">Các NLO này sẽ được AI Bổ trợ 30 phút ưu tiên vá ngay sau buổi 39, dựa trên tín hiệu Gap Detection của buổi học chính khóa.</div>
+const PM_HISTORY = [
+  { session:'Buổi 9 · Thứ 4', unit:'Unit 7: Friends vacation with Minh · 23/6', start:true, end:true, startTime:'19:20', endTime:'20:22' },
+  { session:'Buổi 8 · Thứ 2', unit:'Unit 6: My weekend · 21/6', start:true, end:true, startTime:'19:25', endTime:'20:24' },
+  { session:'Buổi 7 · Thứ 6', unit:'Unit 6: My weekend · 18/6', start:false, end:true, startTime:null, endTime:'20:19' },
+  { session:'Buổi 6 · Thứ 4', unit:'Unit 5: At school · 16/6', start:true, end:true, startTime:'19:18', endTime:'20:20' },
+  { session:'Buổi 5 · Thứ 2', unit:'Unit 5: At school · 14/6', start:true, end:false, startTime:'19:30', endTime:null },
+];
+const PM_GOAL_SKILLS = ['Từ vựng','Ngữ pháp','Phát âm'];
+const PM_GOAL_WEEKS = ['4 tuần','8 tuần','10 tuần','12 tuần'];
+
+function renderPmSkillList(){
+  document.getElementById('pmSkillList').innerHTML = PM_SKILLS.map(s=>`
+    <div class="pm-skill-row">
+      <div class="pm-skill-head"><span class="name">${s.name}</span><span class="score${s.tip?' warn':''}">${s.score}/10</span></div>
+      <div class="pm-skill-bar-bg"><div class="pm-skill-bar-fill${s.tip?' warn':''}" style="width:${s.score*10}%;"></div></div>
+      ${s.tip ? `<span class="pm-skill-tip">${s.tip}</span>` : ''}
+    </div>`).join('');
+}
+function renderPmHistory(){
+  document.getElementById('pmHistoryList').innerHTML = PM_HISTORY.map((h,i)=>`
+    <div class="pm-history-row">
+      <div class="txt"><b>${h.session}</b><span>${h.unit}</span></div>
+      <span class="${h.start?'pm-badge-green':'pm-badge-amber'}">${h.start?'✓':'—'} Đầu buổi</span>
+      <span class="${h.end?'pm-badge-green':'pm-badge-amber'}">${h.end?'✓':'—'} Cuối buổi</span>
+      <span class="photo-btn" onclick="openPmPhoto(${i})"><img src="assets/icon-camera-solid.svg" alt=""> Xem ảnh điểm danh</span>
+    </div>`).join('');
+}
+function openPmPhoto(i){
+  const h = PM_HISTORY[i];
+  document.getElementById('pmPhotoTitle').textContent = 'Ảnh điểm danh — ' + h.session;
+  document.getElementById('pmPhotoSub').textContent = h.unit;
+  const col = (label, has, time) => `
+    <div class="pm-photo-col">
+      <div class="pm-photo-thumb${has?'':' empty'}">${has ? `<img src="assets/classroom-self-cam.png" alt="">` : 'Không có ảnh'}</div>
+      <span class="${has?'pm-badge-green':'pm-badge-amber'}">${has?'✓':'—'} ${label}${has&&time?' · '+time:''}</span>
     </div>`;
+  document.getElementById('pmPhotoGrid').innerHTML =
+    col('Đầu buổi', h.start, h.startTime) + col('Cuối buổi', h.end, h.endTime);
+  document.getElementById('pmPhotoModal').style.display = 'flex';
+}
+function closePmPhoto(){
+  document.getElementById('pmPhotoModal').style.display = 'none';
+}
+function renderPmGoalChips(){
+  document.getElementById('pmGoalSkillChips').innerHTML = PM_GOAL_SKILLS.map(s=>
+    `<button class="pm-chip${s===state.parentGoal.skill?' selected':''}" onclick="setGoalSkill('${s}')">${s}</button>`).join('');
+  document.getElementById('pmGoalWeekChips').innerHTML = PM_GOAL_WEEKS.map(w=>
+    `<button class="pm-chip${w===state.parentGoal.weeks?' selected':''}" onclick="setGoalWeeks('${w}')">${w}</button>`).join('');
+}
+function setGoalSkill(s){ state.parentGoal.skill = s; renderPmGoalChips(); }
+function setGoalWeeks(w){ state.parentGoal.weeks = w; renderPmGoalChips(); }
+function confirmGoal(){
+  toast(`🎯 Đã đặt mục tiêu: ${state.parentGoal.skill} trong ${state.parentGoal.weeks}`);
+  backToNextPlan();
+}
+
+function showParentPanel(panel){
+  state.parentPanel = panel;
+  ['overview','progress','history','plan'].forEach(p=>{
+    const cap = p.charAt(0).toUpperCase()+p.slice(1);
+    document.getElementById('pmPanel'+cap).style.display = p===panel ? 'block' : 'none';
+    document.getElementById('pmMenu'+cap).classList.toggle('active', p===panel);
+  });
+  if(panel==='plan') backToNextPlan();
+}
+function showGoalSetter(){
+  document.getElementById('pmPlanNextView').style.display = 'none';
+  document.getElementById('pmPlanGoalView').style.display = 'block';
+  renderPmGoalChips();
+}
+function backToNextPlan(){
+  document.getElementById('pmPlanNextView').style.display = 'block';
+  document.getElementById('pmPlanGoalView').style.display = 'none';
 }
 
 function renderParentMode(){
-  renderProgressCharts();
-  renderMasteryZone('parentMasteryZone', 52);
-  renderNextPlan();
-
-  const sessions = [
-    ['Buổi 38 - Unit 7', '23/06/2026'],
-    ['Buổi 37 - Unit 6', '18/06/2026'],
-    ['Buổi 36 - Unit 6', '16/06/2026'],
-  ];
-  document.getElementById('attendBody').innerHTML = sessions.map(([n,d])=>`
-    <tr><td>${n}</td><td>${d}</td>
-    <td><span class="badge badge-primary">✓ Đã điểm danh</span></td>
-    <td><span class="badge badge-primary">✓ Đã điểm danh</span></td></tr>`).join('');
-
-  showParentTab('report');
+  state.parentGoal = { skill:'Phát âm', weeks:'10 tuần' };
+  renderPmSkillList();
+  renderPmHistory();
+  showParentPanel('overview');
 }
 
 /* ============ RESET ============ */
@@ -2494,6 +3666,12 @@ function resetDemo(){
   state.scores = { mcq:null, ispeak:null, group:null, aispeak:null };
   state.mcqAnswer=null; state.mcqSubmitted=false; state.recording=false;
   state.classroomStep=0;
+  state.pendingVideoAdvance=null;
+  state.chatQueue=[];
+  { const video = document.getElementById('lectureVideo');
+    if(video){ video.pause(); video.currentTime = 0; }
+    document.getElementById('videoSeekRange').value = 0;
+    document.getElementById('videoSeekTime').textContent = '00:00'; }
   state.fb = null;
   clearInterval(state.aic2._lessonTick);
   state.aic2 = { track:null, nloList:[], stage:0, phase:'lesson', exerciseIndex:0, messages:[], improved:[] };
@@ -2511,15 +3689,276 @@ function resetDemo(){
   goto('schedule');
 }
 
+/* ============ AI SPEAK — luồng độc lập (node 121:24252 "WEB_SPEAK") ============
+   Vào từ menu trái "AI Speak" ở bất kỳ màn nào (openAspHub). Khác với đoạn AI Speak rút gọn
+   nhúng trong buổi học live (renderAispeakChat/aispeakSend/aispeakHint phía trên — giữ nguyên,
+   không đụng vào), đây là trang riêng đầy đủ: Hub -> Xem thêm -> Gen AI -> Hội thoại (nhiều
+   lượt, có Nghe lại/Dịch/Gợi ý) -> Ăn mừng -> Nhận xét. Kịch bản hội thoại + điểm số dùng lại
+   đúng tình huống "Đến cửa hàng sách" đã có, mở rộng thêm 1 lượt để khớp số lượt trong Figma. */
+const ASP_LESSONS = [
+  { cat:'AI Avatar', title:'Mua quần áo', img:'aispeak-thumb-1.png' },
+  { cat:'AI Avatar', title:'Đồ dùng học tập', img:'aispeak-thumb-2.png' },
+  { cat:'AI Avatar', title:'Đi sở thú', img:'aispeak-thumb-3.png' },
+  { cat:'AI Luyện Nói Cơ Bản', title:'Đi cắm trại', img:'aispeak-thumb-4.png' },
+  { cat:'AI Luyện Nói Cơ Bản', title:'Kỳ nghỉ hè của con', img:'aispeak-thumb-5.png' },
+  { cat:'AI Luyện Nói Cơ Bản', title:'Tìm cửa hàng tạp hoá gần đây', img:'aispeak-thumb-6.png' },
+  { cat:'AI Story', title:'Hoạt động hằng ngày', img:'aispeak-thumb-7.png' },
+  { cat:'AI Story', title:'Làm việc nhà', img:'aispeak-thumb-8.png' },
+  { cat:'AI Story', title:'Đi tắm biển cùng người iu', img:'aispeak-thumb-9.png' },
+];
+const ASP_SITUATION = 'Tình huống: Bạn là Tuấn, một học sinh lớp 3. Bạn đang nói chuyện với Edu AI Speak để mua một cuốn sách. Hãy trả lời câu hỏi của AI nhé.';
+const ASP_SCRIPT = [
+  { ai:'Hello! Welcome to our bookstore. What are you looking for today?',
+    aiVi:'Xin chào! Chào mừng đến cửa hàng sách. Bạn muốn tìm gì hôm nay?',
+    hint:'I would like to buy an English book, please.' },
+  { ai:'Great choice! This book costs 50,000 VND. Would you like to buy it?',
+    aiVi:'Tuyệt vời! Đây là cuốn sách phù hợp cho bạn. Giá là 50,000đ, bạn có muốn mua không?',
+    hint:'Yes, I would like to buy it. Thank you!' },
+  { ai:'Would you like me to gift-wrap this book for you?',
+    aiVi:'Bạn có muốn cô gói quà cuốn sách này không?',
+    hint:'Yes, please. Thank you so much!' },
+];
+const ASP_SKILLS = [
+  { key:'Range', score:6, note:'Lỗi: Sử dụng từ vựng cơ bản, thiếu mở rộng câu trả lời.\n\nGợi ý: Dùng từ mô tả chi tiết hơn. Ví dụ: "The walls are red." → "The walls are bright red."' },
+  { key:'Accuracy', score:7, note:'Lỗi:\n"two window" → nên dùng "windows".\n"Yes, I do" → dùng "Yes, I can" cho câu hỏi "Can you see...?"\n\nGợi ý:\nLuyện phát âm "windows" và "walls".\nSử dụng đúng động từ cho câu trả lời Yes/No.' },
+  { key:'Fluency', score:8, note:'Lỗi: Không có lỗi nghiêm trọng, nhưng câu trả lời có thể mượt mà hơn.\n\nGợi ý:\nThêm từ nối vào câu để làm câu trôi chảy hơn. Ví dụ: "Yes, I can see two windows. They are big."' },
+];
+
+function openAspHub(){ goto('aispeak-hub'); }
+
+function openAspList(cat){
+  document.getElementById('aspListHeader').textContent = cat;
+  document.getElementById('aspListGrid').innerHTML = ASP_LESSONS.map(l=>
+    `<div class="asp-card" onclick="openAspGen('${l.title.replace(/'/g,"\\'")}')"><img src="assets/${l.img}" alt=""><span class="cap">${l.title}</span></div>`
+  ).join('');
+  goto('aispeak-list');
+}
+
+function openAspGen(title){
+  state.asp.lessonTitle = title;
+  goto('aispeak-gen');
+  const bars = [
+    { pct:'aspGenPct1', bar:'aspGenBar1' },
+    { pct:'aspGenPct2', bar:'aspGenBar2' },
+    { pct:'aspGenPct3', bar:'aspGenBar3' },
+  ];
+  bars.forEach(b=>{ document.getElementById(b.pct).textContent = '0%'; document.getElementById(b.bar).style.width = '0%'; });
+  let pct = 0;
+  clearInterval(state.asp._genTick);
+  state.asp._genTick = setInterval(()=>{
+    pct = Math.min(100, pct + 8);
+    bars.forEach(b=>{ document.getElementById(b.pct).textContent = pct+'%'; document.getElementById(b.bar).style.width = pct+'%'; });
+    if(pct >= 100){
+      clearInterval(state.asp._genTick);
+      autoAdvance(openAspConvo, 500);
+    }
+  }, 180);
+}
+
+function openAspConvo(){
+  state.asp.turn = 0;
+  state.asp._answered = false;
+  document.getElementById('aspSituationText').textContent = ASP_SITUATION;
+  document.getElementById('aspHintChip').style.display = 'none';
+  renderAspChat();
+  goto('aispeak-convo');
+}
+
+function renderAspChat(){
+  const list = document.getElementById('aspChatList');
+  let html = '';
+  for(let i=0; i<=state.asp.turn && i<ASP_SCRIPT.length; i++){
+    const t = ASP_SCRIPT[i];
+    html += `<div class="asp-msg ai">
+      <div class="av"><img src="assets/icon-aispeak-robot-avatar.png" alt=""></div>
+      <div class="asp-bubble">
+        <div class="txt">${t.ai}</div>
+        <div class="acts">
+          <span onclick="toast('🔊 Đang phát lại...')">🔊 Nghe lại</span>
+          <span class="tr" onclick="aspToggleTranslate(this)">🔤 Dịch</span>
+        </div>
+        <div class="vi">${t.aiVi}</div>
+      </div>
+    </div>`;
+    if(i < state.asp.turn || (i === state.asp.turn && state.asp._answered)){
+      html += `<div class="asp-msg me">
+        <div class="asp-bubble"><div class="txt" style="margin-bottom:0;">${t.myAnswer || t.hint}</div></div>
+        <div class="av"><img src="assets/classroom-avatar-me.png" alt=""></div>
+      </div>`;
+    }
+  }
+  list.innerHTML = html;
+  list.scrollTop = list.scrollHeight;
+}
+
+function aspToggleTranslate(el){
+  el.closest('.asp-bubble').querySelector('.vi').classList.toggle('show');
+}
+
+function aspHint(){
+  const t = ASP_SCRIPT[state.asp.turn];
+  if(!t) return;
+  const chip = document.getElementById('aspHintChip');
+  chip.innerHTML = `💡 <b>Gợi ý:</b> ${t.hint}`;
+  chip.style.display = 'block';
+}
+
+function aspUseHint(){
+  const t = ASP_SCRIPT[state.asp.turn];
+  if(!t) return;
+  document.getElementById('aspInputField').value = t.hint;
+  document.getElementById('aspInputField').focus();
+}
+
+function aspSend(){
+  const t = ASP_SCRIPT[state.asp.turn];
+  if(!t) return;
+  const field = document.getElementById('aspInputField');
+  t.myAnswer = field.value.trim() || t.hint;
+  field.value = '';
+  state.asp._answered = true;
+  document.getElementById('aspHintChip').style.display = 'none';
+  renderAspChat();
+  autoAdvance(()=>{
+    state.asp.turn++;
+    state.asp._answered = false;
+    if(state.asp.turn >= ASP_SCRIPT.length){
+      openAspCelebrate();
+    } else {
+      renderAspChat();
+    }
+  }, 900);
+}
+
+function openAspCelebrate(){
+  document.getElementById('aspCupAmount').textContent = '21';
+  goto('aispeak-celebrate');
+  autoAdvance(renderAspResult, 2200);
+}
+
+function renderAspResult(){
+  document.getElementById('aspResultSituation').textContent = ASP_SITUATION;
+  document.getElementById('aspRewardCup').textContent = '21';
+  document.getElementById('aspSkillDetails').innerHTML = ASP_SKILLS.map((s,i)=>`
+    ${i>0 ? '<hr class="asp-radar-divider">' : ''}
+    <div class="asp-skill-detail">
+      <div class="top"><b>Nhận xét chi tiết về ${s.key}</b><span>${s.score}/10</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${s.score*10}%;"></div></div>
+      <div class="note">${s.note}</div>
+    </div>`).join('');
+  document.getElementById('aspAiNoteText').textContent = 'Học sinh có thể duy trì hội thoại cơ bản với từ vựng và cấu trúc đơn giản. Tuy nhiên, cần cải thiện ngữ pháp và phát âm ở một số câu. Câu trả lời nên được mở rộng hơn và trôi chảy hơn để tạo ra một hội thoại mượt mà. Để cải thiện, học sinh có thể luyện tập câu trả lời dài hơn, dùng từ mô tả chi tiết và tránh lặp lại từ vựng quá nhiều. Hãy nhớ chú ý đến phát âm các từ như "window" và "walls" để dễ hiểu hơn trong giao tiếp.';
+  goto('aispeak-result');
+}
+
 /* Hook: entering each AICNew-02 screen triggers its init/render function */
+/* ============ AI PRACTICE > LUYỆN TẬP MỖI NGÀY ============ */
+/* DRAFT REVIEW: 4 bài mẫu khớp đúng theo get_design_context thật (node 17384:61109) — cùng 1 tên
+   bài minh hoạ, khác trạng thái (chưa làm / chưa làm có mục tiêu / đã làm khá / đã làm thấp). */
+const AIP_DAILY_ITEMS = [
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:false, target:null, correct:0, pct:0 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:false, target:100, correct:0, pct:100 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:true, target:60, correct:12, pct:60 },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30,
+    attempted:true, target:10, correct:2, pct:10 },
+];
+function aipScoreClass(pct){ return pct>=70 ? 'score-done' : pct>=40 ? 'score-mid' : 'score-low'; }
+function aipBarColor(pct){ return pct>=70 ? 'var(--success)' : pct>=40 ? 'var(--warning)' : 'var(--destructive)'; }
+function renderAipDailyList(){
+  document.getElementById('aipDailyList').innerHTML = AIP_DAILY_ITEMS.map((it,i)=>`
+    <div class="aip-item">
+      <div class="title">${it.title}</div>
+      <hr>
+      <div class="meta-row">
+        <span class="item"><img src="assets/icon-file-05.svg" alt=""> ${it.count} câu</span>
+        <span class="item"><img src="assets/icon-clock-check.svg" alt=""> ${it.minutes} phút</span>
+        ${it.target!=null ? `<span class="item ${aipScoreClass(it.target)}"><img src="assets/icon-trophy-01.svg" alt=""> Đạt <b>${it.target}</b> điểm</span>` : ''}
+      </div>
+      <div class="progress-row">
+        <div class="progress-info">
+          <div class="label">${it.attempted ? `Số câu đúng: <b>${it.correct}/${it.count}</b> câu` : `${it.correct}/${it.count} câu`}</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${it.pct}%;background:${aipBarColor(it.pct)};"></div></div>
+        </div>
+        <button class="aip-btn ${it.attempted?'retry':'do'}" onclick="goToAipDetail(${i})">${it.attempted?'Làm lại':'Làm bài'} 📖</button>
+      </div>
+    </div>`).join('');
+}
+/* Dùng chung cho cả Luyện tập mỗi ngày và Thử Thách Đề Thi — Figma tái dùng đúng 1 template
+   "Màn thông tin chi tiết bài tập - layout 2 cột" cho cả 2 luồng. */
+function openAipDetail(it){
+  document.getElementById('aipDetailTitle').textContent = it.title;
+  document.getElementById('aipDetailDuration').textContent = it.minutes+' phút';
+  document.getElementById('aipDetailCount').textContent = it.count;
+  document.getElementById('aipDetailHeadline').textContent = it.attempted ? 'Luyện tiếp đi nào!' : 'Đến giờ làm bài rồi!';
+  document.getElementById('aipDetailSub').textContent = it.attempted
+    ? 'Không giới hạn số lần, cứ luyện tới khi tự tin nhé!'
+    : 'Vẫn chưa làm bài à, em định để trống hoài sao?';
+  document.getElementById('aipDetailHistory').innerHTML = it.attempted
+    ? `Bài làm gần nhất: <b>${it.target} điểm</b>` : 'Chưa làm bài lần nào';
+  goto('ai-practice-detail');
+}
+function goToAipDetail(i){ openAipDetail(AIP_DAILY_ITEMS[i]); }
+function goToAipExamDetail(i){ openAipDetail(AIP_EXAM_ITEMS[i]); }
+
+/* ============ AI PRACTICE > THỬ THÁCH ĐỀ THI ============ */
+/* DRAFT REVIEW: 4 đề mẫu khớp get_design_context thật (node 16517:15698) — item không có
+   thanh tiến trình/điểm (đúng thiết kế thật, khác Luyện tập mỗi ngày). */
+const AIP_EXAM_ITEMS = [
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+  { title:'Các tháng trong năm, hỏi và trả lời về chủ đề sinh nhật', count:20, minutes:30, attempted:false },
+];
+function renderAipExamList(){
+  document.getElementById('aipExamList').innerHTML = AIP_EXAM_ITEMS.map((it,i)=>`
+    <div class="aip-exam-item">
+      <div class="title">${it.title}</div>
+      <hr>
+      <div class="meta-row">
+        <div class="meta-left">
+          <span class="item"><img src="assets/icon-file-05.svg" alt=""> ${it.count} câu</span>
+          <span class="item"><img src="assets/icon-clock-check.svg" alt=""> ${it.minutes} phút</span>
+        </div>
+        <button class="aip-btn do" onclick="goToAipExamDetail(${i})">Làm bài 📖</button>
+      </div>
+    </div>`).join('');
+}
+/* Bộ lọc chỉ mang tính tương tác trực quan (chọn pill, Xoá bộ lọc, Áp dụng) — KHÔNG lọc dữ liệu
+   thật, vì demo chỉ có 1 bộ đề mẫu duy nhất và không có nội dung thật theo từng khối lớp/loại đề. */
+const AIP_GRADE_OPTIONS = ['Lớp 1','Lớp 2','Lớp 3','Lớp 4','Lớp 5','Lớp 6','Lớp 7','Lớp 8','Lớp 9'];
+const AIP_TYPE_OPTIONS = ['Giữa kỳ','Cuối kỳ','15 phút','30 phút'];
+function renderAipFilterPills(){
+  document.getElementById('aipGradePills').innerHTML = AIP_GRADE_OPTIONS.map(g=>
+    `<div class="aip-filter-pill" onclick="aipToggleFilterPill(this)">${g}</div>`).join('');
+  document.getElementById('aipTypePills').innerHTML = AIP_TYPE_OPTIONS.map(t=>
+    `<div class="aip-filter-pill" onclick="aipToggleFilterPill(this)">${t}</div>`).join('');
+}
+function toggleAipFilterPanel(){ document.getElementById('aipFilterPanel').classList.toggle('show'); }
+function aipToggleFilterPill(el){
+  el.classList.toggle('selected');
+  const any = document.querySelectorAll('.aip-filter-pill.selected').length > 0;
+  document.getElementById('aipApplyBtn').classList.toggle('active', any);
+}
+function aipClearFilter(){
+  document.querySelectorAll('.aip-filter-pill.selected').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('aipApplyBtn').classList.remove('active');
+}
+function aipApplyFilter(){
+  toast('🔧 Bộ lọc chỉ mang tính minh hoạ — demo chưa có dữ liệu đề thi thật theo từng khối lớp/loại đề');
+  document.getElementById('aipFilterPanel').classList.remove('show');
+}
+
 const origGoto = goto;
 goto = function(id){
   origGoto(id);
   if(id==='schedule') renderMasteryZone('masteryZone');
   if(id==='parent') renderParentMode();
-  if(id==='aic2-intro') initAic2Intro();
   if(id==='aic2-interact') startAic2Interact();
   if(id==='aic2-summary') renderAic2Summary();
+  if(id==='ai-practice-daily') renderAipDailyList();
+  if(id==='ai-practice-exam'){ renderAipExamList(); renderAipFilterPills(); document.getElementById('aipFilterPanel').classList.remove('show'); }
 };
 
 /* Establish correct initial inline-style state on load (avoids any flash of multiple
