@@ -10,13 +10,15 @@
   để giữ nhất quán design system, nhưng dựng layout 1-1 (2 camera) riêng — xem
   design-spec/AICNew-03-design-spec-web-ai-tutor-1-1-buoi-hoc.md.
 
-  ÁNH XẠ LEVEL (PO chốt trực tiếp 2026-09-10 — xem Giả định AI Q1 của PRD):
-  Level A = trình độ yếu/trung bình (giáo viên AI người Việt); Level B = trình độ
-  khá/giỏi (1 buổi giáo viên AI người Việt + 1 buổi giáo viên AI bản xứ Anh/Mỹ).
-  Demo dưới đây mô phỏng học sinh Level B (khá/giỏi). Giao diện ưu tiên hiển thị
-  mô tả trình độ trực tiếp ("Trình độ: Khá – Giỏi") thay vì chỉ hiện nhãn kỹ thuật
-  "Level A/B" — quyết định thiết kế cho dễ hiểu với phụ huynh/học sinh, không phải
-  vì còn xung đột (xem Design Spec, Giả định AI #2).
+  ÁNH XẠ NHÓM (PO chốt DỨT ĐIỂM 2026-09-15, sửa lại câu trả lời tạm 09-10 —
+  xem Giả định AI Q1 của PRD v1.2): "Level A/B" cũ đã bị bỏ hẳn vì gây nhầm lẫn
+  (2 lần chốt ngược nhau). Tên chính thức từ nay:
+  - "Nhóm A - Củng cố" = trình độ yếu/trung bình (giáo viên AI người Việt)
+  - "Nhóm B - Nâng cao" = trình độ khá/giỏi (1 buổi giáo viên AI người Việt +
+    1 buổi giáo viên AI bản xứ Anh/Mỹ)
+  Demo dưới đây mô phỏng học sinh Nhóm B - Nâng cao (khá/giỏi). Giao diện ưu
+  tiên hiển thị tên nhóm tự giải thích thay vì chữ cái kỹ thuật, đúng tinh thần
+  quyết định đổi tên của PO (xem Design Spec, Giả định AI #2).
   Toàn bộ dữ liệu là MOCK cố định, không có backend/AI thật.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -179,7 +181,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <div class="seg" id="seg2-p1"><div class="dot">2</div>Phần 2 · Luyện nói<div class="line"></div></div>
     <div class="seg" id="seg3-p1"><div class="dot">3</div>Phần 3 · Tổng kết</div>
   </div>
-  <div class="teacher-badge"><div class="avatar">👩‍🏫</div><div><div style="font-size:12px;font-weight:600;color:var(--n900);">Cô Minh · Giáo viên AI</div><div style="font-size:11px;color:var(--n500);">Trình độ: Khá – Giỏi</div></div></div>
+  <div class="teacher-badge"><div class="avatar">👩‍🏫</div><div><div style="font-size:12px;font-weight:600;color:var(--n900);">Cô Minh · Giáo viên AI</div><div style="font-size:11px;color:var(--n500);">Nhóm B - Nâng cao</div></div></div>
   <div class="p1-video">
     <div class="content-card fade-in" id="p1-content">
       <div class="emoji">📖</div>

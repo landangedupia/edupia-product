@@ -7,14 +7,14 @@
 | Field              | Value                                                         |
 |--------------------|-----------------------------------------------------------------|
 | **Spec ID**        | AICNew-03-DS-web                                                |
-| **Version**        | 1.1                                                              |
+| **Version**        | 1.2                                                              |
 | **Status**         | draft                                                            |
 | **Platform**       | web                                                              |
 | **Module**         | N/A (PO Spec repo — không có code)                               |
 | **Service**        | single-service                                                   |
 | **Domain**         | ai-tutor                                                         |
 | **Business PRD**   | [AICNew-03](../AICNew-03-ai-tutor-1-1-buoi-hoc.md)               |
-| **Built from PRD** | v1.1                                                             |
+| **Built from PRD** | v1.2                                                             |
 | **Figma**          | **KHÔNG có** — Concept 3.1 chưa có Figma frame thật (khác AICNew-01). Toàn bộ layout dưới đây **suy diễn** từ design system đã xác nhận ở [AICNew-01-design-spec-web-big-class-plus.md](../../../ai-class-core/big-class-plus/design-spec/AICNew-01-design-spec-web-big-class-plus.md) (cùng token màu/font/component) — xem Giả định AI |
 | **Author**         | AI-assisted                                                      |
 | **Created**        | 2026-09-10                                                       |
@@ -38,7 +38,7 @@
 
 ### Layout
 
-Layout toàn màn (fullscreen), không sidebar. Khác Big Class Plus (nhiều camera nhóm quanh giáo viên chính), ở đây chỉ có **2 camera**: Giáo viên AI (khung lớn, trung tâm hoặc góc trên) và học sinh (khung nhỏ, góc dưới — kiểu "picture-in-picture" học 1-1 thật). Vùng nội dung chính hiển thị video bài giảng (hoạt hình từ vựng / hội thoại ngữ pháp). Thanh tiến trình buổi học ở đầu màn (dạng 3 đoạn: Phần 1 / Phần 2 / Phần 3, đoạn đang diễn ra tô đậm). Góc trên hiển thị badge Giáo viên AI đang dạy, mô tả trình độ trực tiếp thay vì nhãn "Level A/B" (vd "Trình độ: Yếu – Trung bình · Giáo viên AI người Việt" cho Level A, hoặc "Trình độ: Khá – Giỏi · Giáo viên AI người Việt/bản xứ" cho Level B) — PO đã chốt ánh xạ Level A = yếu/trung bình, Level B = khá/giỏi (2026-09-10), nhưng badge ưu tiên hiển thị mô tả trình độ để phụ huynh/học sinh không cần hiểu quy ước nội bộ "Level A/B".
+Layout toàn màn (fullscreen), không sidebar. Khác Big Class Plus (nhiều camera nhóm quanh giáo viên chính), ở đây chỉ có **2 camera**: Giáo viên AI (khung lớn, trung tâm hoặc góc trên) và học sinh (khung nhỏ, góc dưới — kiểu "picture-in-picture" học 1-1 thật). Vùng nội dung chính hiển thị video bài giảng (hoạt hình từ vựng / hội thoại ngữ pháp). Thanh tiến trình buổi học ở đầu màn (dạng 3 đoạn: Phần 1 / Phần 2 / Phần 3, đoạn đang diễn ra tô đậm). Góc trên hiển thị badge Giáo viên AI đang dạy, ưu tiên mô tả trình độ trực tiếp thay vì tên nội bộ (vd "Nhóm A - Củng cố · Giáo viên AI người Việt", hoặc "Nhóm B - Nâng cao · Giáo viên AI người Việt/bản xứ") — PO đã chốt dứt điểm 2026-09-15: Nhóm A - Củng cố = yếu/trung bình, Nhóm B - Nâng cao = khá/giỏi (thay thế hẳn "Level A/B" cũ đã gây nhầm lẫn 2 lần).
 
 ### Component Inventory
 
@@ -47,7 +47,7 @@ Layout toàn màn (fullscreen), không sidebar. Khác Big Class Plus (nhiều ca
 | Video bài giảng (nội dung Phần 1) | [NEW] | N/A | đang phát, đang tải | |
 | Khung 2 camera (Giáo viên AI + học sinh) | [NEW] | N/A | mặc định, camera học sinh tắt/bật | Khác Big Class Plus: chỉ 2 khung, không phải nhóm |
 | Thanh tiến trình 3 phần | [NEW] | N/A | Phần 1 active / Phần 2 active / Phần 3 active | |
-| Badge Giáo viên AI (tên + Level) | [NEW] | N/A | theo Level đã ghép (xem Giả định AI §1) | |
+| Badge Giáo viên AI (tên + nhóm) | [NEW] | N/A | theo Nhóm A/B đã ghép (xem Giả định AI §2) | |
 
 ### Screen States
 
@@ -61,7 +61,7 @@ Layout toàn màn (fullscreen), không sidebar. Khác Big Class Plus (nhiều ca
 
 | Action | Trigger | Kết quả |
 |---|---|---|
-| Vào buổi học | Học sinh bấm vào buổi học đã lên lịch | Ghép Giáo viên AI theo Level (BR1), bắt đầu Phần 1 |
+| Vào buổi học | Học sinh bấm vào buổi học đã lên lịch | Ghép Giáo viên AI theo Nhóm A/B (BR1), bắt đầu Phần 1 |
 | Hết 20 phút Phần 1 | Hệ thống tự chuyển | Chuyển sang Màn hình 2 (BR2) |
 
 ---
@@ -80,6 +80,7 @@ Giữ khung 2 camera như Màn hình 1 nhưng thu nhỏ, nhường chỗ cho kh�
 | Icon mic (luyện nói) | [NEW] | N/A | mặc định, đang ghi (sóng âm lan) | Tái dùng tinh thần icon mic ở Big Class Plus (state iSpeak) |
 | Bảng điểm theo âm vị | [NEW] | N/A | theo dải điểm mỗi âm (cao/khá/thấp) | Thang 0-100/âm theo BR5 |
 | Chỉ báo cập nhật Mastery Profile | [NEW] | N/A | đang cập nhật, đã cập nhật | Hình ảnh hoá BR6 (real-time) — ví dụ thanh tiến trình nhỏ nhích lên ngay sau khi chấm, để phụ huynh/học sinh "thấy" cá nhân hoá đang diễn ra |
+| Gamification (huy hiệu/thử thách, có thể gồm mini-game) | [NEW — cơ chế chưa định nghĩa] | N/A | TBD | PO xác nhận 2026-09-15 gamification thuộc scope, nhưng luật chơi cụ thể chưa có — Design Spec tạm để placeholder, xem Giả định AI §5 |
 
 ### Screen States
 
@@ -200,9 +201,11 @@ Tương tự tinh thần Màn 2 của Big Class Plus (khối nội dung căn gi�
 > Khác với AICNew-01 (có Figma thật để đối chiếu), **toàn bộ Design Spec này là suy diễn** — chưa có bất kỳ frame Figma nào cho AI Tutor 1-1. Mức độ chắc chắn thấp hơn hẳn AICNew-01.
 
 1. **Không có Figma cho AI Tutor 1-1**: mọi layout ở §2 chỉ tái dùng token màu/font/shadow đã xác nhận từ Big Class Plus, còn bố cục cụ thể (vị trí 2 camera, khối câu hỏi luyện nói, bảng điểm âm vị) là suy diễn hợp lý theo tinh thần chung. **Cần Designer thiết kế thật trước khi coi đây là spec chính thức.**
-2. **Badge Level của Giáo viên AI**: PO đã chốt ánh xạ Level→Giáo viên 2026-09-10 (xem PRD Giả định AI Q1: Level A = yếu/trung bình, Level B = khá/giỏi). Design Spec chọn hiển thị mô tả trình độ trực tiếp thay vì nhãn "Level A/B" trên UI (quyết định thiết kế, không phải vì còn xung đột) — cần Designer xác nhận có nên hiển thị thêm nhãn "Level A/B" cho mục đích nội bộ (báo cáo GVCN) hay không.
+2. **Badge nhóm của Giáo viên AI**: PO đã chốt dứt điểm ánh xạ nhóm→Giáo viên 2026-09-15 (xem PRD Giả định AI Q1: Nhóm A - Củng cố = yếu/trung bình, Nhóm B - Nâng cao = khá/giỏi — thay thế hẳn "Level A/B" cũ). Design Spec chọn hiển thị mô tả trình độ trực tiếp trên UI (quyết định thiết kế) — cần Designer xác nhận có nên hiển thị thêm cho mục đích nội bộ (báo cáo GVCN) hay không.
 3. **Chỉ báo cập nhật Mastery Profile real-time**: đây là một đề xuất UI hoàn toàn mới của AI để "hình ảnh hoá" BR6 (một yêu cầu nghiệp vụ không hiển nhiên có UI tương ứng) — cần PO/Designer xác nhận có nên hiển thị trực tiếp cho học sinh thấy hay chỉ nên là log nội bộ.
 4. **State "không nói được / mic lỗi"**: cố ý bỏ trống vì PRD chưa có Business Rule cho case này (Giả định AI Q5 của PRD).
+5. **Gamification**: PO xác nhận 2026-09-15 gamification (huy hiệu, thử thách, có thể gồm mini-game như Bắn cung/Đào vàng/Chém hoa quả/Đua xe theo meeting note 28/08) thuộc phạm vi, nhưng luật chơi cụ thể của từng mini-game **chưa được định nghĩa** — Design Spec này chỉ đặt placeholder component, chưa dựng chi tiết layout/state. Cần bổ sung khi có Business Rule cụ thể.
+6. **Giao diện 2 camera**: PO xác nhận 2026-09-15 đúng theo mô tả ở §2 (Giáo viên AI có camera riêng, không chỉ 1 cam học sinh như một mô tả cũ trong meeting note 28/08) — không còn là giả định, đã chốt.
 
 ---
 
@@ -210,5 +213,6 @@ Tương tự tinh thần Màn 2 của Big Class Plus (khối nội dung căn gi�
 
 | Version | Date | Changes |
 |---|---|---|
-| 1.1 | 2026-09-10 | Cập nhật badge Level theo ánh xạ PO đã chốt (Level A = yếu/trung bình, Level B = khá/giỏi) — UI hiển thị mô tả trình độ, không hiển thị nhãn "Level A/B". |
+| 1.2 | 2026-09-15 | Sửa lại ánh xạ nhóm sau khi PO chốt dứt điểm (đảo ngược v1.1 — xem PRD v1.2 Q1): đổi tên "Level A/B" → "Nhóm A - Củng cố"/"Nhóm B - Nâng cao" trong badge/component. Xác nhận giao diện 2 camera đúng (không còn giả định). Thêm placeholder component Gamification (scope đã xác nhận, cơ chế chưa định nghĩa). |
+| 1.1 | 2026-09-10 | Cập nhật badge Level theo ánh xạ PO đã chốt (Level A = yếu/trung bình, Level B = khá/giỏi) — **sau đó phát hiện sai, xem v1.2**. |
 | 1.0 | 2026-09-10 | Initial version — suy diễn từ design system Big Class Plus, chưa có Figma thật cho AI Tutor 1-1. |

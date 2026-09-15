@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>Demo — Kịch bản 60 phút Adaptive Learning (bản đóng)</title>
+<!--
+  Prototype demo cho "Kịch bản 60 phút — Adaptive Learning x Mastery Profile (bản ĐÓNG)".
+  Xem tài liệu: ../kich-ban-60-phut-adaptive-ban-dong-v1.md
+  Toàn bộ dữ liệu là MOCK cố định, không có backend/AI thật. Các placeholder ảnh/video
+  (assets/*.jpg) CHƯA có file thật — xem prompt tạo ảnh/video bằng GPT ở
+  ../prompts-tao-anh-video.md. Nếu file ảnh chưa tồn tại, nền màu/gradient CSS sẽ tự thay thế.
+  Token màu/font tái dùng từ demo AICNew-01/03 (Poppins, Primary #0876B1) để giữ nhất quán.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0876B1; --primary-50:#ECFBFF; --primary-100:#C6EDFB;
+  --warning:#F5B30B; --warning-100:#FEF2C7;
+  --success:#1AAE6F; --success-100:#E4F7EE;
+  --destructive:#EF444A; --destructive-100:#FEF2F4;
+  --n900:#111827; --n700:#374151; --n500:#6B7280; --n200:#E5E7EB; --n100:#F3F4F6; --n50:#F9FAFB;
+  --white:#FFFFFF;
+  --shadow-s:0 2px 6px rgba(16,24,40,0.06);
+  --shadow-m:0 6px 15px rgba(16,24,40,0.08);
+  --shadow-card:0 3px 15px -2px rgba(16,24,40,0.08),0 6px 15px -2px rgba(16,24,40,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:'Poppins',system-ui,sans-serif;background:#e7eaee;color:var(--n700);overflow:hidden;}
+#appScaleWrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;}
+#app{width:1440px;height:956px;background:var(--white);position:relative;overflow:hidden;box-shadow:var(--shadow-m);border-radius:8px;flex-shrink:0;transform-origin:center center;}
+h1,h2,h3{color:var(--n900);font-weight:500;letter-spacing:-0.2px;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.screen{display:none;width:100%;height:956px;}
+.fade-in{animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+
+.btn-primary{background:var(--primary);color:#fff;padding:13px 28px;border-radius:12px;font-weight:600;font-size:15px;box-shadow:var(--shadow-s);transition:opacity .15s;}
+.btn-primary:hover{opacity:.9;}
+.btn-primary:disabled{background:var(--n200);color:var(--n500);cursor:not-allowed;}
+.btn-secondary{background:var(--n100);color:var(--n700);padding:11px 22px;border-radius:12px;font-weight:500;font-size:14px;}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:10px;font-size:13px;font-weight:600;}
+.badge-primary{background:var(--primary-50);color:var(--primary);}
+.badge-warning{background:var(--warning-100);color:#8a5a00;}
+.badge-success{background:var(--success-100);color:var(--success);}
+
+#skipBtn{position:fixed;top:14px;right:14px;z-index:999;background:rgba(17,24,39,.85);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;box-shadow:var(--shadow-m);}
+#skipBtn[hidden]{display:none;}
+
+/* ===== Top bar dùng chung mọi màn học ===== */
+.topbar{position:absolute;top:0;left:0;right:0;height:60px;background:var(--n900);display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:5;}
+.topbar .lesson-name{color:#fff;font-size:14px;font-weight:600;}
+.topbar .lesson-name span{color:#9CA3AF;font-weight:400;margin-left:8px;}
+.topbar .stage-badge{background:var(--primary);color:#fff;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;}
+.stage-body{position:absolute;top:60px;left:0;right:0;bottom:0;overflow:auto;display:flex;flex-direction:column;align-items:center;padding:28px 40px 40px;}
+
+/* ===== Entry ===== */
+.entry-screen{display:flex;align-items:center;justify-content:center;height:956px;background:radial-gradient(circle at 15% 15%,#F0F9FF 0,transparent 45%),radial-gradient(circle at 88% 85%,#FEF9E7 0,transparent 40%),var(--n50);}
+.entry-card{width:680px;background:#fff;border-radius:24px;box-shadow:var(--shadow-m);padding:40px;}
+.entry-card h1{font-size:24px;margin-bottom:6px;}
+.entry-card .sub{color:var(--n500);font-size:14px;margin-bottom:22px;}
+.mastery-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.mastery-row .label{width:190px;font-size:13px;font-weight:600;color:var(--n700);flex-shrink:0;}
+.mastery-row .bar-bg{flex:1;height:10px;border-radius:6px;background:var(--n100);overflow:hidden;}
+.mastery-row .bar-fill{height:100%;border-radius:6px;}
+.mastery-row .pct{width:42px;text-align:right;font-size:13px;font-weight:700;color:var(--n700);}
+.priority-box{margin-top:18px;background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--n700);}
+
+/* ===== Question card dùng chung (retrieval / quick check / interaction / challenge / exit) ===== */
+.q-card{width:900px;background:#fff;border-radius:20px;box-shadow:var(--shadow-card);padding:26px 30px;}
+.q-tags{display:flex;gap:10px;margin-bottom:14px;}
+.q-tag{padding:6px 14px;border-radius:12px;font-size:12px;font-weight:600;}
+.q-passage{background:var(--n50);border-radius:14px;padding:16px 18px;margin-bottom:16px;font-size:14px;line-height:1.9;color:var(--n700);}
+.q-passage .sent{padding:2px 3px;border-radius:4px;cursor:pointer;transition:background .15s;}
+.q-passage .sent:hover{background:var(--primary-50);}
+.q-passage .sent.picked{background:var(--primary);color:#fff;}
+.q-passage .sent.correct-reveal{background:var(--success-100);color:#0f6b45;font-weight:600;}
+.q-passage .sent.wrong-reveal{background:var(--destructive-100);color:#8a1620;text-decoration:line-through;}
+.q-text{font-size:17px;font-weight:600;color:var(--n900);margin-bottom:14px;}
+.q-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.q-opt{display:flex;align-items:center;gap:12px;background:var(--n50);border:2px solid var(--n200);border-radius:14px;padding:12px 16px;font-size:14px;font-weight:500;color:var(--n700);text-align:left;transition:all .15s;}
+.q-opt .letter{width:28px;height:28px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;box-shadow:inset 0 0 0 1px var(--n200);}
+.q-opt.selected{background:var(--primary-50);border-color:var(--primary);}
+.q-opt.correct{background:var(--success-100);border-color:var(--success);}
+.q-opt.wrong{background:var(--destructive-100);border-color:var(--destructive);}
+.feedback-line{margin-top:6px;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:500;}
+.feedback-line.ok{background:var(--success-100);color:#0f6b45;}
+.feedback-line.warn{background:var(--warning-100);color:#8a5a00;}
+
+/* ===== Video lesson stage (Adaptive Video Lesson #1/#2) ===== */
+.video-frame{width:900px;height:340px;border-radius:16px;overflow:hidden;position:relative;background:linear-gradient(135deg,#374151,#1f2937);box-shadow:var(--shadow-m);margin-bottom:14px;background-size:cover;background-position:center;}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-frame .branch-badge{position:absolute;top:14px;left:14px;background:rgba(17,24,39,.75);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:10px;}
+.video-frame .title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;padding:14px 24px;border-radius:14px;font-size:19px;font-weight:700;text-align:center;max-width:70%;}
+.video-caption{width:900px;background:#fff;border-radius:14px;padding:14px 20px;font-size:14px;color:var(--n900);text-align:center;box-shadow:var(--shadow-s);margin-bottom:16px;}
+
+/* ===== AI Teacher hint ladder ===== */
+.ladder-card{width:900px;background:#fff;border-radius:20px;box-shadow:var(--shadow-card);padding:26px 30px;}
+.ladder-steps{display:flex;gap:8px;margin-bottom:18px;}
+.ladder-step{flex:1;height:6px;border-radius:6px;background:var(--n200);}
+.ladder-step.done{background:var(--primary);}
+.ladder-rung{display:none;}
+.ladder-rung.active{display:block;}
+.teacher-line{display:flex;gap:12px;align-items:flex-start;background:var(--primary-50);border-radius:14px;padding:16px 18px;margin-bottom:16px;}
+.teacher-line .avatar{width:40px;height:40px;border-radius:50%;background:var(--primary-100);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.teacher-line .txt{font-size:14px;color:var(--n900);line-height:1.6;}
+
+/* ===== iSpeak ===== */
+.ispeak-card{width:900px;background:#fff;border-radius:20px;box-shadow:var(--shadow-card);padding:26px 30px;text-align:center;}
+.habit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+.habit-btn{background:var(--n50);border:2px solid var(--n200);border-radius:14px;padding:16px 10px;font-size:13px;font-weight:600;color:var(--n700);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.habit-btn .ic{font-size:26px;}
+.habit-btn.selected{background:var(--primary-50);border-color:var(--primary);color:var(--primary);}
+.sentence-frame{background:var(--n50);border-radius:14px;padding:16px 18px;font-size:16px;color:var(--n900);margin-bottom:18px;line-height:1.8;}
+.sentence-frame b{color:var(--primary);}
+.mic-btn{width:84px;height:84px;border-radius:50%;background:var(--primary);color:#fff;font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 8px 20px rgba(8,118,177,.35);}
+.mic-btn.recording{animation:pulse 1s ease-in-out infinite;background:var(--destructive);}
+.score-row{display:flex;align-items:center;gap:10px;margin:6px 0;text-align:left;}
+.score-row .lbl{width:100px;font-size:13px;font-weight:600;color:var(--n700);}
+.score-row .bar-bg{flex:1;height:9px;border-radius:6px;background:var(--n100);overflow:hidden;}
+.score-row .bar-fill{height:100%;border-radius:6px;}
+.score-row .val{width:34px;text-align:right;font-size:12px;font-weight:700;color:var(--n500);}
+
+/* ===== Summary ===== */
+.summary-screen{position:relative;height:956px;background:var(--n50);}
+.summary-body{position:absolute;inset:60px 0 0 0;display:flex;gap:40px;padding:36px 60px;overflow:auto;}
+.summary-col{flex:1;background:#fff;border-radius:20px;box-shadow:var(--shadow-card);padding:24px 26px;}
+.mastery-compare-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.mastery-compare-row .name{width:150px;font-size:13px;font-weight:600;color:var(--n700);}
+.mastery-compare-row .before,.mastery-compare-row .after{font-size:12px;font-weight:700;padding:3px 8px;border-radius:8px;}
+.mastery-compare-row .before{background:var(--n100);color:var(--n500);}
+.mastery-compare-row .after{background:var(--success-100);color:var(--success);}
+.mastery-compare-row .arrow{color:var(--n500);font-size:13px;}
+.summary-line{font-size:14px;color:var(--n700);margin-bottom:8px;line-height:1.6;}
+.nbl-item{display:flex;gap:10px;align-items:flex-start;background:var(--primary-50);border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:13px;color:var(--n900);font-weight:500;}
+
+/* ===== Dashboard (Lịch học — màn khởi đầu, theo thiết kế Figma Concept 3.1 node 159:22897) ===== */
+.dash-screen{display:flex;height:956px;background:var(--n50);}
+.dash-aside{width:240px;flex-shrink:0;background:#fff;border-right:1px solid var(--n200);box-shadow:0 2px 3px rgba(16,24,40,.06);padding:20px;display:flex;flex-direction:column;gap:32px;}
+.dash-logo-row{display:flex;gap:14px;align-items:center;}
+.dash-logo-row img{width:45px;height:45px;flex-shrink:0;}
+.dash-logo-txt img:first-child{height:21px;display:block;}
+.dash-logo-caption{display:flex;gap:8px;align-items:center;margin-top:8px;}
+.dash-logo-caption img{height:7px;}
+.dash-aiclass-badge{background:linear-gradient(90deg,#004671,#A5BE00);padding:3px 9px;border-radius:11px;display:flex;align-items:center;}
+.dash-aiclass-badge img{height:6px;}
+.dash-nav{display:flex;flex-direction:column;gap:12px;}
+.dash-nav-item{display:flex;align-items:center;gap:12px;height:48px;padding:0 12px;border-radius:9px;font-size:16px;font-weight:600;color:var(--n500);background:rgba(255,255,255,.5);}
+.dash-nav-item img{width:24px;height:24px;}
+.dash-nav-item.active{background:var(--primary-50);border:2px solid var(--primary-100);color:#1F2937;box-shadow:0 1px 1px rgba(16,24,40,.04);height:44px;}
+.dash-main{flex:1;display:flex;flex-direction:column;min-width:0;}
+.dash-header{height:66px;background:#fff;box-shadow:0 2px 3px rgba(16,24,40,.06);display:flex;align-items:center;justify-content:flex-end;gap:24px;padding:0 40px;flex-shrink:0;}
+.dash-header .stat{display:flex;align-items:center;gap:4px;font-size:16px;font-weight:500;color:#1F2937;}
+.dash-header .stat img{width:24px;height:24px;}
+.dash-bell{width:40px;height:40px;border-radius:20px;background:var(--n100);display:flex;align-items:center;justify-content:center;}
+.dash-bell img{width:24px;height:24px;}
+.dash-user{display:flex;align-items:center;gap:8px;}
+.dash-user img{width:42px;height:42px;border-radius:21px;object-fit:cover;}
+.dash-user span{font-size:20px;font-weight:600;color:var(--n700);}
+.dash-body{flex:1;overflow:auto;padding:32px 104px 40px 96px;display:flex;flex-direction:column;gap:32px;}
+.dash-banner{height:200px;border-radius:20px;overflow:hidden;}
+.dash-banner img{width:100%;height:100%;object-fit:cover;}
+.dash-cols{display:flex;gap:32px;align-items:flex-start;}
+.dash-left{width:613px;flex-shrink:0;}
+.dash-lich-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.dash-lich-head h2{font-size:24px;font-weight:500;color:var(--n900);}
+.dash-week-pill{background:var(--n100);display:flex;align-items:center;gap:4px;padding:9px 8px;border-radius:12px;font-size:20px;font-weight:500;color:var(--n900);}
+.dash-week-pill img{width:20px;height:20px;transform:rotate(-90deg);}
+.buoi-card{border-radius:20px;padding:14px 20px 20px;margin-bottom:16px;box-shadow:0 3px 3.75px rgba(16,24,40,.08),0 6px 3.75px rgba(16,24,40,.08);}
+.buoi-card.primary{background:var(--primary);color:#fff;}
+.buoi-card.idle{background:#fff;}
+.buoi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.buoi-teacher{display:flex;gap:10px;align-items:center;}
+.buoi-teacher img{width:48px;height:48px;border-radius:24px;border:1px solid var(--n50);object-fit:cover;}
+.buoi-teacher .nm{font-size:16px;font-weight:600;}
+.buoi-teacher .sub{font-size:16px;}
+.buoi-card.idle .buoi-teacher .sub{color:#1F2937;}
+.buoi-card.idle .buoi-teacher img{width:42px;height:42px;border-radius:21px;}
+.btn-vaohoc{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:15px 20px;border-radius:100px;font-weight:500;font-size:16px;}
+.badge-sapdienra{background:var(--warning-100);display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:99px;font-size:16px;font-weight:500;color:var(--n700);}
+.badge-sapdienra .dot{width:6px;height:6px;border-radius:3px;background:#8a5a00;}
+.buoi-title{font-size:18px;font-weight:600;margin-bottom:12px;}
+.buoi-card.idle .buoi-title{color:var(--n900);}
+.buoi-card.idle .buoi-title span:last-child{color:var(--n700);font-weight:400;}
+.buoi-icons{display:flex;}
+.buoi-icons .ic-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.buoi-icons .ic-col img{width:48px;height:48px;}
+.buoi-icons .ic-col.dim{opacity:.3;}
+.buoi-icons .ic-col span{font-size:14px;font-weight:500;}
+.dash-right{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px;}
+.exam-card{border-radius:18px;overflow:hidden;box-shadow:0 4px 4px rgba(0,0,0,.08);}
+.exam-banner{height:115px;position:relative;background:var(--primary-100);}
+.exam-banner img{width:100%;height:100%;object-fit:cover;}
+.exam-tag{position:absolute;top:10px;right:-5px;background:#F3354A;color:#fff;font-size:14px;font-weight:600;padding:5px 12px 6px 10px;border-radius:12px 0 0 12px;}
+.exam-caption{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);backdrop-filter:blur(1.5px);color:#fff;font-size:13px;font-weight:500;text-align:center;padding:7px 8px 8px;}
+.exam-body{background:#fff;padding:16px;display:flex;flex-direction:column;gap:12px;}
+.exam-row{display:flex;gap:16px;align-items:center;padding:12px;border-radius:12px;}
+.exam-row.done{background:#F3FDF0;border:1px solid #C0F7BB;}
+.exam-row.todo{background:var(--primary-50);border:1px solid #81D6FA;}
+.exam-row img{width:48px;height:48px;flex-shrink:0;}
+.exam-row .info{flex:1;min-width:0;}
+.exam-row .toprow{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.exam-row .pill{display:flex;align-items:center;gap:6px;padding:4px 8px 5px;border-radius:10px;font-size:14px;font-weight:500;}
+.exam-row.done .pill{background:#DEFCDC;color:#26A316;}
+.exam-row.done .pill .dot{width:6px;height:6px;border-radius:3px;background:#26A316;}
+.exam-row.todo .pill{background:var(--primary-100);color:var(--primary);}
+.exam-row.todo .pill .dot{width:6px;height:6px;border-radius:3px;background:var(--primary);}
+.exam-row .score{font-size:16px;}
+.exam-row .score b{color:#000;}
+.exam-row .score .max{color:var(--n500);font-size:12px;}
+.exam-row .name{font-size:18px;font-weight:600;color:var(--n700);}
+.luyenthi-card{border-radius:12px;padding:14px;background:linear-gradient(134deg,#A7F3D0,#60A5FA);}
+.luyenthi-card .tag{display:inline-block;background:#fff;color:var(--primary);font-size:11px;font-weight:700;padding:3px 8px;border-radius:8px;margin-bottom:4px;}
+.luyenthi-card .desc{font-size:13px;font-weight:500;color:#0F2942;}
+.dash-adbox{background:#00203D;border-radius:20px;height:160px;}
+</style>
+</head>
+<body>
+<div id="appScaleWrap"><div id="app">
+
+<button id="skipBtn" hidden onclick="skipCurrent()">Bỏ qua / Tiếp theo ⏭</button>
+
+<!-- MÀN -1: DASHBOARD (Lịch học) — điểm vào buổi học, theo thiết kế Figma Concept 3.1 node 159:22897 -->
+<div class="screen dash-screen" id="scr-dashboard" style="display:flex;">
+  <aside class="dash-aside fade-in">
+    <div class="dash-logo-row">
+      <img src="assets/dashboard/logo-mark.svg" alt="">
+      <div class="dash-logo-txt">
+        <img src="assets/dashboard/logo-union.svg" alt="Edupia">
+        <div class="dash-logo-caption">
+          <img src="assets/dashboard/logo-caption.svg" alt="TIẾNG ANH ONLINE">
+          <div class="dash-aiclass-badge"><img src="assets/dashboard/logo-aiclass-text.svg" alt="AI Class"></div>
+        </div>
+      </div>
+    </div>
+    <nav class="dash-nav">
+      <div class="dash-nav-item active"><img src="assets/dashboard/icon-account.svg" alt="">AI Class</div>
+      <div class="dash-nav-item"><img src="assets/dashboard/icon-school.svg" alt="">Nhà trường</div>
+      <div class="dash-nav-item"><img src="assets/dashboard/icon-practise.svg" alt="">AI Practise</div>
+      <div class="dash-nav-item"><img src="assets/dashboard/icon-speak.svg" alt="">AI Speak</div>
+      <div class="dash-nav-item"><img src="assets/dashboard/icon-account-inner.svg" alt="">Tài khoản</div>
+    </nav>
+  </aside>
+  <div class="dash-main">
+    <header class="dash-header fade-in">
+      <div class="stat">130 <img src="assets/dashboard/trophy.png" alt=""></div>
+      <div class="stat">202 <img src="assets/dashboard/diamond.png" alt=""></div>
+      <div class="dash-bell"><img src="assets/dashboard/icon-bell.svg" alt=""></div>
+      <div class="dash-user"><img src="assets/dashboard/avatar-header.png" alt=""><span>Hi, Vanh</span></div>
+    </header>
+    <div class="dash-body">
+      <div class="dash-banner fade-in"><img src="assets/dashboard/banner-khuyenmai.png" alt="Banner khuyến mãi"></div>
+      <div class="dash-cols">
+        <div class="dash-left fade-in">
+          <div class="dash-lich-head">
+            <h2>Lịch học</h2>
+            <div class="dash-week-pill">Tuần học 38 (23/6 - 29/6) <img src="assets/dashboard/icon-chevron.svg" alt=""></div>
+          </div>
+          <div class="buoi-card primary">
+            <div class="buoi-top">
+              <div class="buoi-teacher">
+                <img src="assets/dashboard/avatar-teacher1.png" alt="">
+                <div><div class="nm">Buổi 1 - Thứ 4 <span style="font-weight:600;">| 19:25 - 20:25</span></div><div class="sub">Cô Tina Banker</div></div>
+              </div>
+              <button class="btn-vaohoc" onclick="startLessonFromDashboard()">Vào học</button>
+            </div>
+            <div class="buoi-title">[Buổi 1] Unit 7: Friends vaction with Minh</div>
+            <div class="buoi-icons">
+              <div class="ic-col"><img src="assets/dashboard/icon-doc.png" alt="">Tài liệu</div>
+              <div class="ic-col dim"><img src="assets/dashboard/icon-feedback.png" alt="">Nhận xét</div>
+              <div class="ic-col dim"><img src="assets/dashboard/icon-feedback.png" alt="">Video</div>
+            </div>
+          </div>
+          <div class="buoi-card idle">
+            <div class="buoi-top">
+              <div class="buoi-teacher">
+                <img src="assets/dashboard/avatar-teacher2.png" alt="">
+                <div><div class="nm">Buổi 2 - Thứ 6 <span style="font-weight:600;">| 19:25 - 20:25</span></div><div class="sub">Thầy Peter Rus</div></div>
+              </div>
+              <div class="badge-sapdienra"><span class="dot"></span>Sắp diễn ra</div>
+            </div>
+            <div class="buoi-title"><span>[Buổi 2]</span> <span>Unit 7: Friends vaction with Minh</span></div>
+          </div>
+        </div>
+        <div class="dash-right fade-in">
+          <div class="exam-card">
+            <div class="exam-banner"><img src="assets/dashboard/exam-banner-bg.png" alt=""><div class="exam-tag">🔥 Bắt buộc</div><div class="exam-caption">Diễn ra từ: 21/1 - 31/1</div></div>
+            <div class="exam-body">
+              <div class="exam-row done">
+                <img src="assets/dashboard/icon-doc-done.png" alt="">
+                <div class="info"><div class="toprow"><span class="pill"><span class="dot"></span>Đã làm</span><span class="score"><b>85</b><span class="max">/100</span></span></div><div class="name">Bài thi lý thuyết</div></div>
+              </div>
+              <div class="exam-row todo">
+                <img src="assets/dashboard/icon-doc-todo.png" alt="">
+                <div class="info"><div class="toprow"><span class="pill"><span class="dot"></span>Chờ chấm</span><span class="score" style="color:#9CA3AF;">--</span></div><div class="name">Bài thi nói</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="luyenthi-card"><div class="tag">Phòng luyện thi</div><div class="desc">Luyện thi Học kỳ II — Sẵn sàng "tăng level" kiến thức</div></div>
+          <div class="dash-adbox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MÀN 0: ENTRY -->
+<div class="screen entry-screen" id="scr-entry">
+  <div class="entry-card fade-in">
+    <h1>📘 Buổi học Reading — Healthy Habits</h1>
+    <div class="sub">60 phút · Adaptive Learning × Mastery Profile · Học sinh: An</div>
+    <div id="entry-mastery"></div>
+    <div class="priority-box" id="entry-priority"></div>
+    <button class="btn-primary" style="width:100%;margin-top:20px;font-size:16px;padding:16px;" onclick="goStage(0)">Bắt đầu buổi học</button>
+  </div>
+</div>
+
+<!-- Khung dùng chung cho các stage học (topbar + stage-body được render động) -->
+<div class="screen" id="scr-lesson">
+  <div class="topbar">
+    <div class="lesson-name">Reading — Healthy Habits <span id="tb-time">00:00</span></div>
+    <div class="stage-badge" id="tb-stage">Bước 1/10</div>
+  </div>
+  <div class="stage-body" id="stage-body"></div>
+</div>
+
+<!-- MÀN CUỐI: SUMMARY -->
+<div class="screen summary-screen" id="scr-summary">
+  <div class="topbar"><div class="lesson-name">Reading — Healthy Habits <span>Tổng kết buổi học</span></div></div>
+  <div class="summary-body">
+    <div class="summary-col fade-in">
+      <h3 style="margin-bottom:16px;">📊 Mastery Profile — Before / After</h3>
+      <div id="summary-mastery"></div>
+      <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--n100);">
+        <h3 style="font-size:15px;margin-bottom:10px;">AI Learning Summary</h3>
+        <div id="summary-ai-text"></div>
+      </div>
+    </div>
+    <div class="summary-col fade-in">
+      <h3 style="margin-bottom:16px;">🎯 Next Best Learning</h3>
+      <div id="summary-nbl"></div>
+      <button class="btn-primary" style="width:100%;margin-top:18px;" onclick="goto('scr-dashboard')">Quay lại Lịch học</button>
+    </div>
+  </div>
+</div>
+
+</div></div>
+
+<script>
+/* ================= Scale-to-fit ================= */
+function fitScale(){
+  const app=document.getElementById('app');
+  const s=Math.min(window.innerWidth/1440, window.innerHeight/956, 1);
+  app.style.transform='scale('+s+')';
+}
+window.addEventListener('resize',fitScale); fitScale();
+
+function goto(id){
+  ['scr-dashboard','scr-entry','scr-lesson','scr-summary'].forEach(s=>document.getElementById(s).style.display='none');
+  const el=document.getElementById(id);
+  el.style.display = (id==='scr-entry' || id==='scr-dashboard') ? 'flex' : 'block';
+  el.classList.add('fade-in');
+  document.getElementById('skipBtn').hidden = (id==='scr-entry' || id==='scr-dashboard');
+}
+let skipHandler=null;
+function skipCurrent(){ if(skipHandler) skipHandler(); }
+function startLessonFromDashboard(){ goto('scr-entry'); }
+
+/* ================= Mock data ================= */
+const MASTERY_BEFORE = { vocab:82, mainidea:55, detail:81, inference:38 };
+const MASTERY_AFTER  = { vocab:86, mainidea:68, detail:84, inference:45 };
+const MASTERY_LABEL = { vocab:'Vocabulary in Context', mainidea:'Identify Main Idea', detail:'Identify Supporting Details', inference:'Make Logical Inference' };
+function masteryColor(pct){ return pct>=70?'var(--success)': pct>=45?'var(--warning)':'var(--destructive)'; }
+
+function renderMasteryRows(container, data){
+  container.innerHTML='';
+  Object.keys(data).forEach(k=>{
+    const pct = data[k];
+    container.innerHTML += `<div class="mastery-row">
+      <div class="label">${MASTERY_LABEL[k]}</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:${masteryColor(pct)};"></div></div>
+      <div class="pct">${pct}%</div>
+    </div>`;
+  });
+}
+renderMasteryRows(document.getElementById('entry-mastery'), MASTERY_BEFORE);
+document.getElementById('entry-priority').innerHTML =
+  '<b>Chẩn đoán AI:</b> Mạnh — Vocabulary, Supporting Details. Yếu — Main Idea, Logical Inference.<br>' +
+  '<b>Ưu tiên buổi này:</b> 1. Main Idea &nbsp; 2. Logical Inference';
+
+/* Đoạn văn 1 — dùng cho Interaction 1 (từ vựng "exhausted") */
+const PASSAGE_1 = [
+  "Minh loves to play football with his friends every afternoon.",
+  "Yesterday, he played for two hours under the hot sun.",
+  "After the game, Minh felt exhausted and sat down to rest.",
+  "He drank a lot of water and ate a banana to get his energy back.",
+  "Doctors say that drinking water after exercise helps the body recover quickly."
+];
+const PASSAGE_1_EVIDENCE = 3; // index — "He drank a lot of water..."
+
+/* Đoạn văn 2 — dùng cho Interaction 2 (Main Idea / Supporting Detail) */
+const PASSAGE_2 = [
+  "Sleeping early is an important habit for children's health.",
+  "When children sleep at least nine hours a night, their brains can rest and grow.",
+  "Lack of sleep can make children feel tired and unable to concentrate at school.",
+  "Parents should turn off screens at least thirty minutes before bedtime.",
+  "Good sleep habits help children learn better and feel happier every day."
+];
+
+/* Đoạn văn 3 — Adaptive Challenge (độc lập, không giải thích trước) */
+const PASSAGE_3 = [
+  "Drinking enough water every day keeps the body healthy and full of energy.",
+  "Water helps carry nutrients to every cell and keeps the brain focused.",
+  "Children who forget to drink water often feel tired or get headaches.",
+  "Doctors recommend that children drink about six to eight glasses of water a day."
+];
+
+/* ================= State ================= */
+const state = { stage:0, misconceptionShown:false, habitPick:null, reasonPick:null };
+const STAGE_TIME = ['00:00','05:00','07:00','12:00','17:00','25:00','32:00','40:00','48:00','55:00'];
+const STAGE_TOTAL = 10;
+
+function setTopbar(){
+  document.getElementById('tb-time').textContent = STAGE_TIME[state.stage] || '';
+  document.getElementById('tb-stage').textContent = `Bước ${state.stage+1}/${STAGE_TOTAL}`;
+}
+
+function goStage(n){
+  state.stage = n;
+  goto('scr-lesson');
+  setTopbar();
+  RENDERERS[n]();
+}
+function nextStage(){ goStage(state.stage+1); }
+
+const body = () => document.getElementById('stage-body');
+
+/* ---------- Reusable MCQ renderer ---------- */
+function renderMcq(container, {tag, question, options, correctIndex, onDone, passage, passagePick, passageReadOnly}){
+  let html = `<div class="q-card fade-in">`;
+  if(tag) html += `<div class="q-tags"><span class="q-tag badge-primary" style="background:var(--primary-50);color:var(--primary);">${tag}</span></div>`;
+  if(passage){
+    html += `<div class="q-passage" id="qp">` + passage.map((s,i)=>
+      passageReadOnly ? `<span class="sent" style="cursor:default;">${s}</span> ` : `<span class="sent" data-i="${i}" onclick="pickSentence(${i})">${s}</span> `
+    ).join('') + `</div>`;
+  }
+  html += `<div class="q-text">${question}</div>`;
+  if(options){
+    html += `<div class="q-opts">` + options.map((o,i)=>
+      `<button class="q-opt" id="opt${i}" onclick="pickOpt(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('') + `</div>`;
+  }
+  html += `<div id="qfeedback"></div>`;
+  if(options) html += `<button class="btn-primary" id="submitBtn" disabled onclick="submitMcq()">Nộp bài</button>`;
+  html += `</div>`;
+  container.innerHTML = html;
+
+  window._mcqState = { correctIndex, onDone, picked:null, passagePick, passageCorrect: passagePick };
+}
+function pickOpt(i){
+  document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('opt'+i).classList.add('selected');
+  window._mcqState.picked = i;
+  const btn = document.getElementById('submitBtn');
+  if(btn) btn.disabled = false;
+}
+function pickSentence(i){
+  document.querySelectorAll('.q-passage .sent').forEach(s=>s.classList.remove('picked'));
+  document.querySelector(`.q-passage .sent[data-i="${i}"]`).classList.add('picked');
+  window._mcqState.picked = i;
+  submitMcq(true);
+}
+function submitMcq(isPassage){
+  const st = window._mcqState;
+  if(st.picked===null || st.picked===undefined) return;
+  const correct = isPassage ? (st.picked === st.passageCorrect) : (st.picked === st.correctIndex);
+  if(!isPassage){
+    document.getElementById('opt'+st.correctIndex).classList.add('correct');
+    if(!correct) document.getElementById('opt'+st.picked).classList.add('wrong');
+    document.getElementById('submitBtn').style.display='none';
+  } else {
+    document.querySelectorAll('.q-passage .sent').forEach((s,i)=>{
+      if(i===st.passageCorrect) s.classList.add('correct-reveal');
+      else if(i===st.picked) s.classList.add('wrong-reveal');
+    });
+  }
+  const fb = document.getElementById('qfeedback');
+  fb.innerHTML = correct
+    ? `<div class="feedback-line ok">✓ Chính xác!</div>`
+    : `<div class="feedback-line warn">Chưa đúng — đáp án đúng đã được tô sáng.</div>`;
+  skipHandler = () => st.onDone(correct);
+  setTimeout(()=>st.onDone(correct), 1800);
+}
+
+/* ================= 10 stage renderers ================= */
+const RENDERERS = [
+  renderRetrieval,      // 0
+  renderVideo1,         // 1
+  renderInteraction1,   // 2
+  renderVideo2,         // 3
+  renderInteraction2,   // 4
+  renderAiTeacher,      // 5 (chỉ hiện nếu Interaction2 sai Main Idea)
+  renderChallenge,      // 6
+  renderIspeak,         // 7
+  renderExitTicket,     // 8
+  renderFinish          // 9 -> chuyển sang scr-summary
+];
+
+/* ---- 0. Adaptive Retrieval (00:00-05:00) ---- */
+const RETRIEVAL_Q = [
+  { q:"What is the main idea of this short paragraph?", opts:["A detail from the paragraph","The overall point of the paragraph","The last sentence only","A random fact"], correct:1 },
+  { q:"Which sentence best summarizes the paragraph?", opts:["The one with the most words","The one repeating the title","The one describing the general idea","The first sentence, always"], correct:2 },
+  { q:"Which information is a supporting detail?", opts:["A specific example or fact","The whole paragraph's message","The title of the passage","An unrelated idea"], correct:0 },
+];
+let retrievalIdx = 0, retrievalResults = [];
+function renderRetrieval(){
+  retrievalIdx = 0; retrievalResults = [];
+  renderRetrievalQ();
+}
+function renderRetrievalQ(){
+  const item = RETRIEVAL_Q[retrievalIdx];
+  renderMcq(body(), {
+    tag: `Adaptive Retrieval · Câu ${retrievalIdx+1}/3`,
+    question: item.q, options: item.opts, correctIndex: item.correct,
+    onDone: (correct)=>{
+      retrievalResults.push(correct);
+      retrievalIdx++;
+      if(retrievalIdx < RETRIEVAL_Q.length) renderRetrievalQ();
+      else nextStage();
+    }
+  });
+}
+
+/* ---- 1. Adaptive Video Lesson #1 — Vocabulary in Context (mastery 82% -> nhánh rút gọn) ---- */
+function renderVideo1(){
+  body().innerHTML = `
+    <div class="video-frame fade-in">
+      <video id="video1El" poster="assets/video-vocab-in-context.png" controls playsinline
+        onplay="document.getElementById('video1Badge').style.display='none'; document.getElementById('video1Title').style.display='none';">
+        <source src="assets/video-vocab-in-context.mp4" type="video/mp4">
+        Trình duyệt không hỗ trợ phát video.
+      </video>
+      <div class="branch-badge" id="video1Badge">🎯 Nhánh: Short recap + harder example (mastery 82%)</div>
+      <div class="title-card" id="video1Title">Vocabulary in Context</div>
+    </div>
+    <div class="video-caption">🔊 "Con đã khá vững phần từ vựng rồi — mình ôn nhanh rồi thử một ví dụ khó hơn nhé!"</div>
+    <button class="btn-primary" onclick="renderVideo1Check()">Xem xong, làm Quick Check →</button>`;
+  skipHandler = renderVideo1Check;
+}
+function renderVideo1Check(){
+  renderMcq(body(), {
+    tag: "Quick Check", question: 'The word "recover" in the passage is closest in meaning to:',
+    options: ["get worse","become strong/normal again","stay the same","fall asleep"], correctIndex: 1,
+    onDone: ()=> nextStage()
+  });
+}
+
+/* ---- 2. Interaction 1: Check Understanding (đóng — chạm chọn câu bằng chứng) ---- */
+function renderInteraction1(){
+  renderMcq(body(), {
+    tag: "Interaction 1 · Check Understanding",
+    question: 'The word "exhausted" is closest in meaning to:',
+    options: ["excited","very tired","angry","hungry"], correctIndex: 1,
+    onDone: ()=> renderInteraction1Evidence()
+  });
+}
+function renderInteraction1Evidence(){
+  body().innerHTML = `<div class="q-card fade-in">
+    <div class="q-tags"><span class="q-tag" style="background:var(--primary-50);color:var(--primary);">Interaction 1 · Chỉ ra bằng chứng</span></div>
+    <div class="q-text">Chạm vào câu trong đoạn văn giúp con hiểu nghĩa từ "exhausted":</div>
+    <div class="q-passage" id="qp">${PASSAGE_1.map((s,i)=>`<span class="sent" data-i="${i}" onclick="pickEvidence1(${i})">${s}</span> `).join('')}</div>
+    <div id="qfeedback"></div>
+  </div>`;
+  skipHandler = ()=> pickEvidence1(PASSAGE_1_EVIDENCE);
+}
+function pickEvidence1(i){
+  document.querySelectorAll('#qp .sent').forEach((s,idx)=>{
+    if(idx===PASSAGE_1_EVIDENCE) s.classList.add('correct-reveal');
+    else if(idx===i && i!==PASSAGE_1_EVIDENCE) s.classList.add('wrong-reveal');
+  });
+  const correct = i===PASSAGE_1_EVIDENCE;
+  document.getElementById('qfeedback').innerHTML = correct
+    ? `<div class="feedback-line ok">✓ Đúng rồi — câu này cho biết Minh cần nước và năng lượng, tức là đang rất mệt.</div>`
+    : `<div class="feedback-line warn">Câu đúng đã được tô sáng — không cần AI hiểu câu trả lời tự do, hệ thống so khớp trực tiếp với đáp án đã gắn sẵn.</div>`;
+  skipHandler = nextStage;
+  setTimeout(nextStage, 1800);
+}
+
+/* ---- 3. Adaptive Video Lesson #2 — Main Idea (mastery 55% -> nhánh chi tiết) ---- */
+function renderVideo2(){
+  body().innerHTML = `
+    <div class="video-frame fade-in" style="background-image:url('assets/video-main-idea.png');">
+      <div class="branch-badge">🎯 Nhánh: Nhiều worked example (mastery 55%)</div>
+      <div class="title-card">Identify Main Idea</div>
+    </div>
+    <div class="video-caption">🔊 "Main Idea là ý bao trùm CẢ đoạn văn — khác với Supporting Detail chỉ là 1 ví dụ nhỏ. Mình xem thêm vài ví dụ nhé."</div>
+    <button class="btn-primary" onclick="nextStage()">Xem xong, sang phần Luyện tập →</button>`;
+  skipHandler = nextStage;
+}
+
+/* ---- 4. Interaction 2: Guided Practice (đóng) ---- */
+function renderInteraction2(){
+  body().innerHTML = `<div class="q-card fade-in">
+    <div class="q-tags"><span class="q-tag" style="background:var(--primary-50);color:var(--primary);">Interaction 2 · Guided Practice</span></div>
+    <div class="q-passage">${PASSAGE_2.map((s,i)=>`<span class="sent" data-i="${i}">${s}</span> `).join('')}</div>
+    <div class="q-text">What is the main idea of the passage?</div>
+    <div class="q-opts">
+      <button class="q-opt" onclick="pickMainIdea(0)"><span class="letter">A</span>Children should sleep at least nine hours.</button>
+      <button class="q-opt" onclick="pickMainIdea(1)"><span class="letter">B</span>Sleeping early and enough is important for children's health and learning.</button>
+      <button class="q-opt" onclick="pickMainIdea(2)"><span class="letter">C</span>Parents should turn off screens before bedtime.</button>
+      <button class="q-opt" onclick="pickMainIdea(3)"><span class="letter">D</span>Lack of sleep makes children tired.</button>
+    </div>
+    <div id="qfeedback"></div>
+  </div>`;
+  skipHandler = ()=> pickMainIdea(0); // mock: mặc định đi theo nhánh trả lời sai để minh hoạ AI Teacher
+}
+function pickMainIdea(i){
+  document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('.q-opt')[i].classList.add('selected');
+  const correct = i===1;
+  document.querySelectorAll('.q-opt').forEach((b,idx)=>{ if(idx===1) b.classList.add('correct'); });
+  if(!correct) document.querySelectorAll('.q-opt')[i].classList.add('wrong');
+  state.misconceptionShown = !correct; // gắn nhãn "detail_as_main_idea" khi chọn A/C/D
+  document.getElementById('qfeedback').innerHTML = correct
+    ? `<div class="feedback-line ok">✓ Chính xác! Con phân biệt tốt Main Idea và Supporting Detail.</div>`
+    : `<div class="feedback-line warn">Đây là 1 Supporting Detail, chưa phải Main Idea — misconception_tag: "detail_as_main_idea" đã được gắn, hệ thống sẽ mở thang gợi ý.</div>`;
+  skipHandler = ()=> nextStage();
+  setTimeout(nextStage, 2000);
+}
+
+/* ---- 5. AI Teacher Intervention — Hint Ladder 4 bậc (đóng, chỉ hiện nếu sai) ---- */
+function renderAiTeacher(){
+  if(!state.misconceptionShown){ nextStage(); return; }
+  window._ladderStep = 0;
+  renderLadderStep();
+}
+const LADDER = [
+  { label:"Bậc 1 · Hint", txt:'"Con thử đọc lại câu đầu tiên và câu cuối cùng của đoạn văn xem chúng đang nói về ý gì chung nhé."' , type:"info"},
+  { label:"Bậc 2 · Guided question", txt:'Câu con chọn có nhắc tới TOÀN BỘ đoạn văn, hay chỉ MỘT phần nhỏ?', type:"choice",
+    opts:["Toàn bộ đoạn văn","Chỉ một phần nhỏ"], correct:1 },
+  { label:"Bậc 3 · Worked example", txt:'So sánh: "Trời hôm nay nắng." (chi tiết nhỏ) vs. "Hôm nay là một ngày đẹp trời để đi chơi." (ý bao trùm, có thể coi là Main Idea của cả đoạn nói về một ngày đẹp trời).', type:"info"},
+  { label:"Bậc 4 · Explanation", txt:'Main Idea phải bao trùm được CẢ đoạn văn. Supporting Detail chỉ là 1 ví dụ/bằng chứng nhỏ cho Main Idea đó. Con thử chọn lại câu hỏi ban đầu nhé.', type:"retry"},
+];
+function renderLadderStep(){
+  const i = window._ladderStep;
+  const rung = LADDER[i];
+  let stepsHtml = LADDER.map((_,idx)=>`<div class="ladder-step ${idx<=i?'done':''}"></div>`).join('');
+  let inner = `<div class="teacher-line"><div class="avatar">👩‍🏫</div><div class="txt"><b>${rung.label}</b><br>${rung.txt}</div></div>`;
+  if(rung.type==="choice"){
+    inner += `<div class="q-opts">` + rung.opts.map((o,oi)=>`<button class="q-opt" onclick="ladderPick(${oi})"><span class="letter">${String.fromCharCode(65+oi)}</span>${o}</button>`).join('') + `</div><div id="qfeedback"></div>`;
+  } else if(rung.type==="retry"){
+    inner += `<button class="btn-primary" onclick="ladderRetryMainIdea()">Chọn lại câu hỏi ban đầu</button>`;
+  } else {
+    inner += `<button class="btn-primary" onclick="ladderNext()">Tiếp tục</button>`;
+  }
+  body().innerHTML = `<div class="ladder-card fade-in"><div class="ladder-steps">${stepsHtml}</div>${inner}</div>`;
+  skipHandler = rung.type==="retry" ? ladderRetryMainIdea : (rung.type==="choice" ? ()=>ladderPick(rung.correct) : ladderNext);
+}
+function ladderNext(){ window._ladderStep++; renderLadderStep(); }
+function ladderPick(i){
+  const rung = LADDER[window._ladderStep];
+  const correct = i===rung.correct;
+  document.querySelectorAll('.q-opt').forEach((b,idx)=>{ if(idx===rung.correct) b.classList.add('correct'); });
+  document.getElementById('qfeedback').innerHTML = correct
+    ? `<div class="feedback-line ok">✓ Đúng — câu đó chỉ nói một phần nhỏ, chưa phải ý bao trùm.</div>`
+    : `<div class="feedback-line warn">Chưa đúng — đáp án đúng đã tô sáng.</div>`;
+  skipHandler = ladderNext;
+  setTimeout(ladderNext, 1600);
+}
+function ladderRetryMainIdea(){
+  // Học sinh chọn lại câu hỏi Main Idea gốc — mock luôn chọn đúng ở lần thử lại
+  body().innerHTML = `<div class="q-card fade-in">
+    <div class="q-tags"><span class="q-tag" style="background:var(--success-100);color:var(--success);">Thử lại</span></div>
+    <div class="q-text">What is the main idea of the passage?</div>
+    <div class="q-opts">
+      <button class="q-opt correct" disabled><span class="letter">B</span>Sleeping early and enough is important for children's health and learning. ✓</button>
+    </div>
+    <div class="feedback-line ok">✓ Chính xác! Lần này con đã chọn đúng Main Idea.</div>
+  </div>`;
+  skipHandler = nextStage;
+  setTimeout(nextStage, 1800);
+}
+
+/* ---- 6. Adaptive Challenge (đóng, độc lập) ---- */
+function renderChallenge(){
+  renderMcq(body(), {
+    tag: "Adaptive Challenge · Độ khó: Trung bình (Main Idea 68%)",
+    question: "What is the main idea of the passage?",
+    options: ["Water carries nutrients to cells.","Drinking enough water keeps children healthy and energetic.","Children forget to drink water.","Doctors recommend six glasses a day."],
+    correctIndex: 1,
+    passage: PASSAGE_3, passageReadOnly: true, // đoạn văn chỉ để đọc, không tương tác chạm ở bước này
+    onDone: ()=> nextStage()
+  });
+}
+
+/* ---- 7. iSpeak (đóng — chọn nội dung + khung câu + chấm âm vị) ---- */
+const HABITS = [
+  {ic:'🏃', label:'Exercise'}, {ic:'😴', label:'Sleep early'}, {ic:'🥦', label:'Eating vegetables'}, {ic:'💧', label:'Drinking water'}
+];
+const REASONS = ['stay healthy','have more energy','sleep better','concentrate at school'];
+function renderIspeak(){
+  state.habitPick = null; state.reasonPick = null;
+  body().innerHTML = `<div class="ispeak-card fade-in">
+    <div class="q-tags" style="justify-content:center;"><span class="q-tag" style="background:var(--primary-50);color:var(--primary);">iSpeak · Bước 1: Chọn nội dung</span></div>
+    <div class="q-text" style="text-align:center;">Chọn 1 thói quen lành mạnh con muốn nói tới:</div>
+    <div class="habit-grid" id="habitGrid">${HABITS.map((h,i)=>`<button class="habit-btn" id="habit${i}" onclick="pickHabit(${i})"><span class="ic">${h.ic}</span>${h.label}</button>`).join('')}</div>
+  </div>`;
+  skipHandler = ()=> pickHabit(0);
+}
+function pickHabit(i){
+  state.habitPick = i;
+  document.querySelectorAll('.habit-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('habit'+i).classList.add('selected');
+  setTimeout(renderIspeakReason, 400);
+}
+function renderIspeakReason(){
+  body().innerHTML = `<div class="ispeak-card fade-in">
+    <div class="q-tags" style="justify-content:center;"><span class="q-tag" style="background:var(--primary-50);color:var(--primary);">iSpeak · Bước 2: Chọn lý do</span></div>
+    <div class="q-text" style="text-align:center;">Vì sao thói quen này quan trọng?</div>
+    <div class="q-opts">${REASONS.map((r,i)=>`<button class="q-opt" onclick="pickReason(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>It helps you ${r}.</button>`).join('')}</div>
+  </div>`;
+  skipHandler = ()=> pickReason(0);
+}
+function pickReason(i){
+  state.reasonPick = i;
+  renderIspeakRecord();
+}
+function renderIspeakRecord(){
+  const habit = HABITS[state.habitPick].label;
+  const reason = REASONS[state.reasonPick];
+  body().innerHTML = `<div class="ispeak-card fade-in">
+    <div class="q-tags" style="justify-content:center;"><span class="q-tag" style="background:var(--primary-50);color:var(--primary);">iSpeak · Bước 3: Nói theo khung câu</span></div>
+    <div class="sentence-frame">"I think <b>${habit}</b> is a healthy habit because it helps you <b>${reason}</b>."</div>
+    <button class="mic-btn" id="micBtn" onclick="toggleRecord()">🎤</button>
+    <div id="micHint" style="font-size:13px;color:var(--n500);">Bấm để giả lập nói câu trên</div>
+    <div id="ispeakResult" style="margin-top:16px;"></div>
+  </div>`;
+  skipHandler = toggleRecord;
+}
+function toggleRecord(){
+  const btn = document.getElementById('micBtn');
+  btn.classList.add('recording'); btn.onclick=null;
+  document.getElementById('micHint').textContent = 'Đang nghe...';
+  setTimeout(()=>{
+    btn.classList.remove('recording');
+    document.getElementById('micHint').textContent = 'Đã ghi âm xong';
+    showIspeakScore();
+  }, 900);
+}
+function showIspeakScore(){
+  const scores = [ ['I / think', 88], [HABITS[state.habitPick].label, 74], ['is a healthy habit', 65], ['because it helps you', 80], [REASONS[state.reasonPick], 90] ];
+  let html = `<div style="text-align:left;"><b style="font-size:13px;">Chấm phát âm theo âm vị:</b>`;
+  scores.forEach(([lbl,sc])=>{
+    const color = sc>=75?'var(--success)': sc>=50?'var(--warning)':'var(--destructive)';
+    html += `<div class="score-row"><div class="lbl">${lbl}</div><div class="bar-bg"><div class="bar-fill" style="width:${sc}%;background:${color};"></div></div><div class="val">${sc}</div></div>`;
+  });
+  html += `<div class="feedback-line ok" style="margin-top:10px;">✓ Nội dung khớp đúng lựa chọn đã chọn ở Bước 1-2 (content match). Phát âm khá tốt, chú ý âm "healthy"!</div></div>`;
+  document.getElementById('ispeakResult').innerHTML = html;
+  skipHandler = nextStage;
+  setTimeout(nextStage, 2400);
+}
+
+/* ---- 8. Exit Ticket (3 câu ngắn) ---- */
+const EXIT_Q = [
+  { q:'Vocabulary — "recover" is closest to:', opts:['get worse','become normal again','fall asleep','get angry'], correct:1 },
+  { q:'Main Idea — which sentence states the overall point?', opts:['A supporting example','A random detail','The sentence covering the whole passage','The shortest sentence'], correct:2 },
+  { q:'Inference — if a character is shivering, we can infer that:', opts:['They are hot','They are cold','They are hungry','They are happy'], correct:1 },
+];
+let exitIdx=0;
+function renderExitTicket(){
+  exitIdx=0; renderExitQ();
+}
+function renderExitQ(){
+  const item = EXIT_Q[exitIdx];
+  renderMcq(body(), {
+    tag: `Exit Ticket · Câu ${exitIdx+1}/3`, question:item.q, options:item.opts, correctIndex:item.correct,
+    onDone: ()=>{ exitIdx++; if(exitIdx<EXIT_Q.length) renderExitQ(); else nextStage(); }
+  });
+}
+
+/* ---- 9. Finish -> Summary ---- */
+function renderFinish(){
+  renderMasteryCompare();
+  document.getElementById('summary-ai-text').innerHTML = `
+    <div class="summary-line">✓ <b>Vocabulary:</b> Good</div>
+    <div class="summary-line">✓ <b>Supporting Details:</b> Strong</div>
+    <div class="summary-line">↑ <b>Main Idea:</b> Improving (đã vượt qua misconception "nhầm Detail thành Main Idea" nhờ Hint Ladder)</div>
+    <div class="summary-line">→ <b>Inference:</b> Needs more practice</div>`;
+  document.getElementById('summary-nbl').innerHTML = `
+    <div class="nbl-item">1️⃣ 10 phút luyện Logical Inference</div>
+    <div class="nbl-item">2️⃣ 5 câu Main Idea (củng cố thêm)</div>
+    <div class="nbl-item">3️⃣ 1 Reading Challenge mới</div>
+    <div class="nbl-item">4️⃣ Retry iSpeak (thử thói quen khác)</div>`;
+  goto('scr-summary');
+  skipHandler=null;
+}
+function renderMasteryCompare(){
+  const el = document.getElementById('summary-mastery'); el.innerHTML='';
+  Object.keys(MASTERY_BEFORE).forEach(k=>{
+    el.innerHTML += `<div class="mastery-compare-row">
+      <div class="name">${MASTERY_LABEL[k]}</div>
+      <div class="before">${MASTERY_BEFORE[k]}%</div>
+      <div class="arrow">→</div>
+      <div class="after">${MASTERY_AFTER[k]}%</div>
+    </div>`;
+  });
+}
+</script>
+</body>
+</html>
