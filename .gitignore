@@ -41,3 +41,6 @@ temp/
 *.swp
 *.swo
 *~
+
+# Lesson recording videos (too large for git, stored externally — see README/link in referencing docs)
+02_discovery/lesson-recordings/

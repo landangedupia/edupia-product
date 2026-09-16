@@ -2465,29 +2465,30 @@ function doCheckin(kind){
 }
 
 /* ============ MÀN 1: CLASSROOM STATE MACHINE ============ */
-/* DRAFT REVIEW (đồng bộ theo kịch bản thật của video bc2-g5-u3.mp4, đoạn 7:41-20:32 — xem
-   memory/tin nhắn ngày 2026-09-12): team-announce (7:41) -> lecture1 (khoảng trống, chưa có mốc
-   chi tiết) -> 7 câu ispeak liên tiếp (10:54-17:50) -> chat-recap (18:36-20:32). Các bước
-   mcq/mcq-result/lecture2 CHƯA có timestamp thật nên tạm dời ra sau chat-recap, giữ nguyên logic
-   mock cũ (autoAdvance theo ms) — chờ bạn cung cấp thêm phần kịch bản để định vị lại đúng chỗ. */
+/* DRAFT REVIEW — cập nhật 2026-09-16, đồng bộ theo video buổi học thật "My Favourite Things"
+   (Lesson 1, concept 1.2): 02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4
+   (63 phút 32 giây). Timestamp lấy từ frame-sampling mỗi 30s (độ chính xác ±30s, KHÔNG có transcript
+   âm thanh) — xem 03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md
+   và 03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md.
+   team-announce (mock, không gắn mốc thật) -> lecture1 (00:00 — mở đầu, nội quy, chia nhóm, warm-up,
+   New words — tới trước Listen&say đầu tiên) -> 8 vòng ispeak liên tiếp (mỗi vòng = 1 từ New words,
+   khớp đúng mốc "Listen and say" quan sát được, 18:00-28:30) -> mcq (câu hỏi mẫu lấy từ vòng luyện
+   New structures, ~32:30, KHÔNG chờ theo mốc video — chỉ là overlay minh hoạ) -> group-mascot/.../
+   group-result (Group work "Read and fill in the blanks" Bài 1, thật, 47:00-51:30) -> aispeak-*
+   (AI Speak hội thoại — KHÔNG quan sát được trong video mẫu này, giữ nguyên nội dung mock cũ, xem
+   Giả định AI #9 ở design-spec — không suy diễn là bài học này có tính năng đó). */
 const FLOW = ['team-announce','lecture1',
-  'ispeak1','ispeak2','ispeak3','ispeak4','ispeak5','ispeak6','ispeak7','chat-recap',
+  'ispeak1','ispeak2','ispeak3','ispeak4','ispeak5','ispeak6','ispeak7','ispeak8',
   'mcq','mcq-result','lecture2',
   'lecture3','group-mascot','group-discuss','group-answer','group-result',
   'lecture4','aispeak-intro','aispeak-t1','aispeak-wait1','aispeak-t2','aispeak-wait2','aispeak-result','end-cta'];
 
-/* Mốc thời gian thật trong video (giây) — nguồn: kịch bản buổi học bạn cung cấp 2026-09-12. */
-const TEAM_CHAT_T = 7*60+41;      // 461 — HS nhắn tên nhóm vào chat (mốc tham chiếu, không dùng để đóng popup team-announce — xem case 'team-announce')
-const ISPEAK_WORDS = ['apple pie','fish and chips','dumpling','ramen','rice ball','gelato','pizza'];
-const ISPEAK_START_T = [10*60+54, 11*60+51, 12*60+53, 14*60+52, 15*60+55, 16*60+52, 17*60+50];
-const CHAT_RECAP_T = 18*60+36;    // 1116 — bắt đầu đoạn HS chat đánh vần
-const CHAT_MESSAGES = [
-  {t:18*60+36, text:'pie/ apple pie/ e'},
-  {t:19*60+13, text:'s/fish'},
-  {t:19*60+54, text:'p/q'},
-  {t:20*60+32, text:'f/ tofu'},
-];
-const CHAT_RECAP_END_T = 20*60+32; // 1232 — hết đoạn chat, chuyển tiếp (tạm) sang mcq
+/* Mốc thời gian thật trong video (giây) — nguồn: timeline 2026-09-16 (xem comment trên), độ chính
+   xác ±30s do lấy mẫu frame mỗi 30 giây, không phải transcript đo chính xác từng giây. */
+const TEAM_CHAT_T = 5*60+30;      // ~330 — HS nhắn tên nhóm vào chat (mốc tham chiếu, không dùng để đóng popup team-announce — xem case 'team-announce')
+const ISPEAK_WORDS = ['sandwich','black','table tennis','panda','pink','pizza','football','dolphin'];
+const ISPEAK_START_T = [18*60, 19*60+30, 20*60+30, 22*60, 24*60, 25*60+30, 27*60, 28*60+30];
+const NEW_STRUCTURES_START_T = 30*60; // 1800 — mốc slide "New structures" bắt đầu, dùng làm điểm dừng sau ispeak8
 
 function waitForVideoTime(seconds){
   state.pendingVideoAdvance = seconds;
@@ -2525,12 +2526,22 @@ function appendClassChatBubble(text){
   setTimeout(()=>el.remove(), 4000);
 }
 
-const LECTURE_VIDEO_SRC = 'https://vod-mass.edupia.vn/a_12628_mass/_definst_/mass/videos/video_lectures/2025/09/10/bc2-g5-u3.mp4/playlist.m3u8';
+/* DRAFT REVIEW: trỏ tới file local trong repo (chưa có trên CDN thật của Edupia) — chỉ chạy được
+   khi mở demo từ trong checkout của repo này (file:// hoặc server local trỏ đúng root). Trước khi
+   dùng demo này ngoài máy cá nhân (share cho stakeholder khác), cần đội vận hành/video upload video
+   lên CDN thật (dạng .m3u8 như URL cũ) rồi thay lại giá trị này. */
+const LECTURE_VIDEO_SRC = '../../../../../../../02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4';
 
 function initLectureVideo(){
   const video = document.getElementById('lectureVideo');
   if(!video || video.dataset.inited) return;
   video.dataset.inited = '1';
+  if(LECTURE_VIDEO_SRC.endsWith('.mp4')){
+    // File mp4 phát trực tiếp được, không cần qua nhánh HLS/hls.js bên dưới.
+    video.addEventListener('loadedmetadata', playLectureVideo, {once:true});
+    video.src = LECTURE_VIDEO_SRC;
+    return;
+  }
   if(video.canPlayType('application/vnd.apple.mpegurl')){
     video.addEventListener('loadedmetadata', playLectureVideo, {once:true});
     video.src = LECTURE_VIDEO_SRC;
@@ -2696,17 +2707,22 @@ function renderClassroomStep(){
     case 'lecture1':
       overlay.innerHTML = `<div class="live-toast" id="lectureGreetToast">👋 Chào Vanh! Chúc con buổi học vui vẻ</div>`;
       setTimeout(()=>{ const el = document.getElementById('lectureGreetToast'); if(el) el.remove(); }, 3000);
-      /* DRAFT REVIEW: chưa có timestamp thật cho điểm kết thúc lecture1 — tạm coi là toàn bộ
-         khoảng trống 7:41 -> 10:54 (đầu câu iSpeak 1), chờ bạn xác nhận có nội dung gì ở giữa. */
+      /* DRAFT REVIEW: lecture1 gộp toàn bộ phần đầu buổi thật (00:00) — bài hát khởi động, welcome,
+         nội quy, giới thiệu bài + chia nhóm, warm-up, New words (dolphin/panda/pink/black/sandwich/
+         pizza/table tennis/football) và vòng Read&choose đầu tiên — cho tới đúng mốc Listen&say đầu
+         tiên (18:00, ISPEAK_START_T[0]). Xem timeline chi tiết ở file .md tham chiếu tại comment FLOW. */
       waitForVideoTime(ISPEAK_START_T[0]);
       break;
 
     case 'mcq':
       state.mcqAnswer = null; state.mcqSubmitted = false;
+      /* DRAFT REVIEW: câu hỏi lấy thật từ vòng luyện New structures (~32:30), overlay này KHÔNG
+         chờ theo mốc video thật (chỉ minh hoạ tương tác) — đáp án đúng vẫn là B ("What"), khớp
+         logic có sẵn ở case 'mcq-result' bên dưới. */
       bottomBar.innerHTML = `
         <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
         <div class="control-center">
-          <span class="hint-text">What is this?</span>
+          <span class="hint-text">___ is your favourite colour?</span>
           <div class="mcq-opts" id="mcqOpts">
             ${['A','B','C','D'].map(l=>`<button class="mcq-opt" onclick="selectMcq('${l}')" id="mcqOpt${l}">${l}</button>`).join('')}
           </div>
@@ -2732,30 +2748,24 @@ function renderClassroomStep(){
       break;
 
     case 'ispeak1': case 'ispeak2': case 'ispeak3': case 'ispeak4':
-    case 'ispeak5': case 'ispeak6': case 'ispeak7': {
-      /* DRAFT REVIEW: 7 câu iSpeak liên tiếp khớp đúng theo kịch bản thật (10:54-17:50), đáp án
-         hiển thị nhỏ để bạn đối chiếu khi review — bỏ màn "kết quả chấm điểm" giả lập cũ vì
-         không có dữ liệu chấm thật đi kèm video (tránh tự bịa điểm số). */
+    case 'ispeak5': case 'ispeak6': case 'ispeak7': case 'ispeak8': {
+      /* DRAFT REVIEW: 8 vòng iSpeak khớp đúng mốc "Listen and say" quan sát được trong video thật
+         (18:00-28:30, ±30s do lấy mẫu frame) — mỗi vòng là 1 từ New words. Không hiển thị màn "kết
+         quả chấm điểm" giả lập vì không có dữ liệu chấm thật đi kèm video (tránh tự bịa điểm số). */
       const n = Number(step.slice(6));
       state.recording = false;
       bottomBar.innerHTML = `
         <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
         <div class="control-center">
           <span class="timer-pill">⏱ 00:20</span>
-          <span class="hint-text" id="micHint">🎤 iSpeak ${n}/7 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
+          <span class="hint-text" id="micHint">🎤 iSpeak ${n}/8 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
           <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
         </div>
         <button class="cc-btn">CC</button>`;
-      const nextT = n < 7 ? ISPEAK_START_T[n] : CHAT_RECAP_T;
+      const nextT = n < 8 ? ISPEAK_START_T[n] : NEW_STRUCTURES_START_T;
       waitForVideoTime(nextT);
       break;
     }
-
-    case 'chat-recap':
-      state.chatQueue = CHAT_MESSAGES.slice();
-      overlay.innerHTML = `<div class="class-chat-feed" id="classChatFeed"></div>`;
-      waitForVideoTime(CHAT_RECAP_END_T);
-      break;
 
     case 'lecture3':
       autoAdvance(nextClassStep, 1600);
@@ -2905,11 +2915,13 @@ function groupReady(){
 }
 
 /* ---- Bài tập nhóm: điền chỗ trống (thay cho pickSlot(index) cũ chỉ tô màu, không chấm) ---- */
+/* DRAFT REVIEW: nội dung thật lấy từ "Read and fill in the blanks" Bài 1 (47:00-51:30, video mẫu
+   My Favourite Things) — words gợi ý thật trong video: sandwich, dolphin, food. */
 const FB_SENTENCES = [
-  { pre:'Nhạc cụ có 6 dây, gảy bằng tay hoặc miếng gảy:', post:'.', answer:'guitar' },
-  { pre:'Nhạc cụ có phím đen trắng, chơi bằng cả hai tay:', post:'.', answer:'piano' },
+  { pre:"What's your favourite food? – It's a", post:'.', answer:'sandwich' },
+  { pre:"What's your favourite animal? – It's a", post:'.', answer:'dolphin' },
 ];
-const FB_WORDS = ['guitar','harp','piano','violin'];
+const FB_WORDS = ['sandwich','pizza','dolphin','panda'];
 
 function firstEmptyFbBlank(){
   const i = state.fb.picks.findIndex(p=>p===null);
