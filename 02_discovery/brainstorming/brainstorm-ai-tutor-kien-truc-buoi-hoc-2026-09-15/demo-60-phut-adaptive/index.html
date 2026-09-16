@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1440">
-<title>Demo — Kịch bản 60 phút Adaptive Learning (bản đóng)</title>
+<title>Demo — Kịch bản 45 phút Adaptive Learning (bản đóng)</title>
 <!--
-  Prototype demo cho "Kịch bản 60 phút — Adaptive Learning x Mastery Profile (bản ĐÓNG)".
-  Xem tài liệu: ../kich-ban-60-phut-adaptive-ban-dong-v1.md
+  Prototype demo cho "Kịch bản 45 phút — Adaptive Learning x Mastery Profile (bản ĐÓNG, retimed 2026-09-16)".
+  Xem tài liệu: ../kich-ban-45-phut-adaptive-ban-dong-v1.md (bản gốc 60 phút: ../kich-ban-60-phut-adaptive-ban-dong-v1.md)
   Toàn bộ dữ liệu là MOCK cố định, không có backend/AI thật. Các placeholder ảnh/video
   (assets/*.jpg) CHƯA có file thật — xem prompt tạo ảnh/video bằng GPT ở
   ../prompts-tao-anh-video.md. Nếu file ảnh chưa tồn tại, nền màu/gradient CSS sẽ tự thay thế.
@@ -59,16 +59,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .stage-body{position:absolute;top:60px;left:0;right:0;bottom:0;overflow:auto;display:flex;flex-direction:column;align-items:center;padding:28px 40px 40px;}
 
 /* ===== Entry ===== */
-.entry-screen{display:flex;align-items:center;justify-content:center;height:956px;background:radial-gradient(circle at 15% 15%,#F0F9FF 0,transparent 45%),radial-gradient(circle at 88% 85%,#FEF9E7 0,transparent 40%),var(--n50);}
+.entry-screen{display:flex;align-items:center;justify-content:center;height:956px;background:var(--n50);}
 .entry-card{width:680px;background:#fff;border-radius:24px;box-shadow:var(--shadow-m);padding:40px;}
-.entry-card h1{font-size:24px;margin-bottom:6px;}
-.entry-card .sub{color:var(--n500);font-size:14px;margin-bottom:22px;}
-.mastery-row{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
-.mastery-row .label{width:190px;font-size:13px;font-weight:600;color:var(--n700);flex-shrink:0;}
+.entry-card h1{font-size:24px;font-weight:700;margin-bottom:6px;}
+.entry-card .sub{color:var(--n500);font-size:13px;margin-bottom:22px;}
+.mastery-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.mastery-row .label{width:210px;font-size:13px;font-weight:600;color:var(--n700);flex-shrink:0;}
 .mastery-row .bar-bg{flex:1;height:10px;border-radius:6px;background:var(--n100);overflow:hidden;}
 .mastery-row .bar-fill{height:100%;border-radius:6px;}
 .mastery-row .pct{width:42px;text-align:right;font-size:13px;font-weight:700;color:var(--n700);}
-.priority-box{margin-top:18px;background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--n700);}
+.priority-box{margin-top:18px;background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 16px;font-size:13px;font-weight:600;color:var(--primary);line-height:1.7;}
 
 /* ===== Question card dùng chung (retrieval / quick check / interaction / challenge / exit) ===== */
 .q-card{width:900px;background:#fff;border-radius:20px;box-shadow:var(--shadow-card);padding:26px 30px;}
@@ -312,7 +312,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 <div class="screen entry-screen" id="scr-entry">
   <div class="entry-card fade-in">
     <h1>📘 Buổi học Reading — Healthy Habits</h1>
-    <div class="sub">60 phút · Adaptive Learning × Mastery Profile · Học sinh: An</div>
+    <div class="sub">Tóm tắt kiến thức của con đang có</div>
     <div id="entry-mastery"></div>
     <div class="priority-box" id="entry-priority"></div>
     <button class="btn-primary" style="width:100%;margin-top:20px;font-size:16px;padding:16px;" onclick="goStage(0)">Bắt đầu buổi học</button>
@@ -389,8 +389,9 @@ function renderMasteryRows(container, data){
 }
 renderMasteryRows(document.getElementById('entry-mastery'), MASTERY_BEFORE);
 document.getElementById('entry-priority').innerHTML =
-  '<b>Chẩn đoán AI:</b> Mạnh — Vocabulary, Supporting Details. Yếu — Main Idea, Logical Inference.<br>' +
-  '<b>Ưu tiên buổi này:</b> 1. Main Idea &nbsp; 2. Logical Inference';
+  'Nội dung buổi học này sẽ dạy con: <br>' +
+  '1. Main Idea<br>' +
+  '2. Logical Inference';
 
 /* Đoạn văn 1 — dùng cho Interaction 1 (từ vựng "exhausted") */
 const PASSAGE_1 = [
@@ -421,7 +422,7 @@ const PASSAGE_3 = [
 
 /* ================= State ================= */
 const state = { stage:0, misconceptionShown:false, habitPick:null, reasonPick:null };
-const STAGE_TIME = ['00:00','05:00','07:00','12:00','17:00','25:00','32:00','40:00','48:00','55:00'];
+const STAGE_TIME = ['00:00','03:00','08:00','13:00','19:00','24:00','29:00','35:00','40:00','45:00'];
 const STAGE_TOTAL = 10;
 
 function setTopbar(){

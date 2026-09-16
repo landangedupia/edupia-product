@@ -3,6 +3,8 @@
 > Viết lại từ bản gốc PO cung cấp 2026-09-15 (kịch bản mở, AI Teacher suy luận tự do). Giữ nguyên toàn bộ khung sư phạm/vòng lặp Adaptive Learning — chỉ đổi cơ chế 3 điểm rủi ro chi phí cao (AI Teacher Intervention, 2 Interaction checkpoint, iSpeak) từ **mở** (AI hiểu/sinh nội dung tự do — về bản chất là Kịch bản 2 "AI Tutor Real-time chuẩn") sang **đóng** (chọn/chạm + thang gợi ý soạn sẵn theo từng dạng lỗi — cùng họ với Kịch bản A/C đã phân tích, xem [brainstorm-intent.md](./brainstorm-intent.md)).
 >
 > ⚠️ **Chưa giải quyết — cần chốt riêng**: thời lượng 60 phút ở đây khác với cấu trúc 45 phút đã chốt trong PRD AICNew-03 (theo Slide 15). Bản này **chưa** thay thế PRD AICNew-03 — coi là bản phân tích/đối chiếu độc lập cho tới khi có quyết định rõ ràng.
+>
+> ✅ **2026-09-16 — đã có bản retime 45 phút**: xem [kich-ban-45-phut-adaptive-ban-dong-v1.md](./kich-ban-45-phut-adaptive-ban-dong-v1.md) — cắt 15 phút, giữ nguyên toàn bộ 9 bước và cơ chế đóng, chỉ đổi mốc thời gian. Bản 60 phút này vẫn giữ lại làm tài liệu gốc/tham khảo đầy đủ ví dụ-thoại của từng bước.
 
 ---
 
