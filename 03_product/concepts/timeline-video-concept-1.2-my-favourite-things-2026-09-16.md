@@ -1,139 +1,168 @@
 # Timeline kịch bản chi tiết — Video buổi học Concept 1.2: MY FAVOURITE THINGS (Lesson 1)
 
-**Trạng thái:** 🟡 Dựng từ quan sát hình ảnh thực tế trên video (không phải từ bản ghi âm/transcript lời giảng).
-**Nguồn:** `02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4` (thời lượng thật: **63 phút 32 giây**, xác nhận qua metadata file).
-**Đối chiếu:** [`lesson-content-concept-1.2-my-favourite-things-2026-09-16.md`](lesson-content-concept-1.2-my-favourite-things-2026-09-16.md).
-**Phương pháp:** Trích xuất frame màn hình mỗi **30 giây** (ffmpeg), quan sát trực tiếp nội dung hiển thị (chữ, hình, giao diện) để xác định ranh giới các phần. **Độ chính xác mốc thời gian: ±30 giây.** Không có transcript lời nói của giáo viên/học sinh — các mốc dưới đây chỉ phản ánh **nội dung hiển thị trên màn hình**, không phải lời giảng thực tế.
+**Trạng thái:** ✅ Đã đối chiếu bằng transcript giọng nói thật (2026-09-17) — xem [`transcript-video-concept-1.2-my-favourite-things-2026-09-17.md`](transcript-video-concept-1.2-my-favourite-things-2026-09-17.md). Trước đó (2026-09-16) dựng từ quan sát hình ảnh (frame sampling), độ chính xác chỉ ±30s và có vài đoạn hiểu sai nội dung — các mốc bên dưới đã sửa lại theo lời thoại thật, độ chính xác giờ theo đúng giây transcript.
+**Nguồn:** `02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4` (thời lượng thật: **63 phút 32 giây**, xác nhận qua metadata file) — cùng 1 video với bản public trên YouTube (`BC1 G5 U2`, ID `sM8EfKMa8kA`) dùng để lấy transcript.
+**Đối chiếu:** [`lesson-content-concept-1.2-my-favourite-things-2026-09-16.md`](lesson-content-concept-1.2-my-favourite-things-2026-09-16.md) và [`transcript-video-concept-1.2-my-favourite-things-2026-09-17.md`](transcript-video-concept-1.2-my-favourite-things-2026-09-17.md).
+**Phương pháp:** Bản gốc 2026-09-16 trích xuất frame màn hình mỗi 30 giây (ffmpeg), chỉ quan sát hình ảnh hiển thị — không có lời thoại nên nhiều đoạn phải suy đoán nội dung từ hình. Bản cập nhật 2026-09-17 đối chiếu thêm phụ đề tự động (ASR) của video, cho biết đúng lời giảng thật — sửa lại mốc thời gian và một số nội dung bị hiểu sai. **Lưu ý:** phụ đề tự động vẫn có thể sai sót nhỏ (nghe nhầm vài từ), không phải transcript chuẩn 100%.
 
-**Khác biệt so với bản tóm tắt `lesson-content-concept-1.2-my-favourite-things-2026-09-16.md`:**
-- Video thật có thêm phần mở đầu bằng bài hát/luyện âm khởi động (00:00–02:30) và phần khởi động chủ đề bằng câu hỏi mở (07:30–09:30) — hai phần này **không có trong bản tóm tắt**.
+**Các điểm đã SỬA so với bản 2026-09-16 (nhờ transcript thật):**
+- **Mục 4 (07:24–09:29) bị hiểu sai bản chất** — bản cũ đoán đây là "khởi động chủ đề bằng câu hỏi mở kèm icon" (suy từ hình ảnh tĩnh). Thực tế đây là **bài hát khởi động thứ 2**, dạy trước mẫu câu "What's your favourite...? – It's..." qua lời bài hát, không phải chuỗi câu hỏi mở rời rạc.
+- **Mốc mục 6–7–8 bị lệch ~1,5–2 phút** — 8 vòng luyện từ vựng (mục 6) thực tế kết thúc lúc **~27:53** (không phải 30:00 như bản cũ đoán); phần giới thiệu cấu trúc câu (mục 7) bắt đầu ngay từ **~28:02** (không phải 30:00).
+- **Phát hiện mới, bản cũ hoàn toàn thiếu**: có 1 hoạt động gõ từ "favorite" vào ô chat (~30:31–32:06) trong phần giới thiệu cấu trúc câu — trước đây không được ghi nhận.
+- **Mục 11+12 (Quiz Time) bị hiểu sai cấu trúc** — bản cũ đoán mục 11 chỉ là "slide tiêu đề giữ lâu, không có nội dung", còn mục 12 là học sinh trả lời trực tiếp 3 câu tại các mốc 60:00/60:30/61:00. **Thực tế**: 56:55–1:00:01 là lúc học sinh làm quiz **cá nhân, im lặng** (không phải slide tĩnh); sau đó 1:00:07–1:01:45 giáo viên **chữa lại toàn bộ 6 câu liên tục** (không phải 3 câu tại 3 mốc rời rạc).
+- **Đã xác nhận nghi vấn cũ**: câu hỏi thứ 4 "sắp xếp từ — is/dolphin/a/It" mà bản cũ nghi ngờ "có thể có, cần lấy mẫu dày hơn để xác nhận" — **CÓ THẬT**, là câu số 6 trong phần chữa Quiz Time ("It is a dolphin.").
+- **Đã xác nhận đáp án Reading** (bản cũ ghi chú "có chi tiết mâu thuẫn nhẹ, cần xác minh"): Q2 "What is Ben's favourite animal?" → đáp án **A. panda**; Q3 (Đúng/Sai) → đáp án **B. Sai** (Ben CÓ thấy cá heo ở thuỷ cung).
+
+**Khác biệt còn lại so với bản tóm tắt `lesson-content-concept-1.2-my-favourite-things-2026-09-16.md`** (vẫn đúng như ghi nhận 2026-09-16, transcript không thay đổi các điểm này):
 - Mục "New words" trong bản tóm tắt chỉ liệt kê 2 từ (dolphin, panda), nhưng video thực tế dạy **đủ 8 từ**: dolphin, panda, pink, black, sandwich, pizza, table tennis, football.
-- Phần "Read & choose / Listen & say" trong bản tóm tắt gộp chung thành 1 mục, nhưng thực tế có **2 vòng riêng biệt**: một vòng luyện từ vựng (16:00–30:00, 8 từ) và một vòng luyện cấu trúc câu (32:00–41:00, 6 câu).
-- Quiz time: bản tóm tắt liệt kê 4 câu hỏi, video lấy mẫu 30s chỉ quan sát rõ được 3 câu (có thể câu thứ 4 rơi vào khoảng giữa hai mốc lấy mẫu — cần lấy mẫu dày hơn ở đoạn 61:00–61:30 nếu cần xác nhận).
+- Phần "Read & choose / Listen & say" trong bản tóm tắt gộp chung thành 1 mục, nhưng thực tế có **2 vòng riêng biệt**: một vòng luyện từ vựng (8 từ) và một vòng luyện cấu trúc câu (6 câu).
 
 ---
 
 ## Timeline chi tiết
 
-### 1. Mở đầu bằng bài hát/luyện âm khởi động — 00:00–02:30
-| Mốc | Nội dung quan sát |
+### 1. Mở đầu bằng bài hát/luyện âm khởi động — 00:00–02:20
+| Mốc | Nội dung |
 |---|---|
-| 00:00 | Hoạt hình ban nhạc biểu diễn trên sân khấu (video mở đầu lớp) |
-| 00:30 | Chữ "Yeah" xuất hiện theo nhịp |
-| 01:00–01:30 | Nhân vật đeo ba lô, biểu tượng mic, phụ đề luyện âm "Let's make the sound together" |
-| 02:00 | Hình ảnh khu vui chơi cầu trượt "Sliding" (tiếp tục bài hát/luyện từ khởi động) |
+| 00:00 | Bài hát/luyện âm khởi động (hoạt hình ban nhạc, các động từ hành động lặp lại theo nhịp) |
+| 01:44 | "Let's make the sound together. Are you ready?" |
+| 02:20 | Kết thúc bài hát khởi động |
 
-### 2. Welcome & hướng dẫn lớp học — 02:30–03:30
-| Mốc | Nội dung quan sát |
+### 2. Welcome & hướng dẫn lớp học — 02:53–04:14
+| Mốc | Nội dung |
 |---|---|
-| 02:30 | "Welcome our class" — chào mừng vào lớp |
-| 03:00 | Màn hình "CLASS RULES" |
-| 03:30 | Hướng dẫn thao tác: chọn đáp án đúng & bấm nộp bài khi hoàn thành |
+| 02:53 | Giáo viên chào mừng vào lớp ("Hello everyone and welcome to our class") |
+| 03:15 | "Let's look at some class rules" — 4 quy tắc lớp học (sit nicely / be active / listen carefully / speak loudly) |
+| 03:43 | Hướng dẫn thao tác chọn đáp án A/B/C/D và bấm nộp bài |
+| 03:53 | Hướng dẫn dùng mic khi thấy biểu tượng mic xanh |
+| 04:03 | Hướng dẫn dùng ô chat khi có câu hỏi/thảo luận |
 
-### 3. Giới thiệu bài học & chia nhóm — 04:00–07:00
-| Mốc | Nội dung quan sát |
+### 3. Giới thiệu bài học & chia nhóm — 04:14–07:16
+| Mốc | Nội dung |
 |---|---|
-| 04:00 | Slide "LESSON 1: MY FAVOURITE THINGS" |
-| 04:30 | Mục tiêu bài học: "Name some favourite things (animals, colours, food, sports)" |
-| 05:00–06:30 | Kiểm tra bảng thi đấu nhóm, nhắn tên nhóm vào chat (lặp lại ~1.5 phút) |
-| 07:00 | "ARE YOU READY?" — màn hình khởi động trò chơi |
+| 04:14 | Slide "LESSON 1: MY FAVOURITE THINGS" |
+| 04:31 | Mục tiêu bài học: gọi tên đồ vật/con vật/màu sắc/đồ ăn/môn thể thao yêu thích, hỏi & trả lời về sở thích |
+| 05:09–06:54 | Kiểm tra bảng thi đấu nhóm, nhắn tên nhóm vào chat (1 phút + chờ thêm ~10s) |
+| 07:16 | "So, are you ready? Ok, so let's get started." |
 
-### 4. Khởi động chủ đề bằng câu hỏi mở — 07:30–09:30
-| Mốc | Nội dung quan sát |
+### 4. Bài hát khởi động cấu trúc câu (Warm-up song 2) — 07:24–09:29
+*(Sửa 2026-09-17 — bản cũ ghi nhầm là "khởi động chủ đề bằng câu hỏi mở", thực tế là một bài hát.)*
+
+| Mốc | Nội dung |
 |---|---|
-| 07:30 | Tiêu đề "What's your favorite thing?" |
-| 08:00 | Câu hỏi mở về môn thể thao yêu thích (icon bóng rổ/gậy golf/bóng đá...) |
-| 08:30 | Câu hỏi mở về trò chơi yêu thích (icon game) |
-| 09:00 | Câu hỏi mở về hành tinh yêu thích ("My favorite planet is Earth") |
+| 07:24 | "Let's watch and sing with Pé" — giới thiệu bài hát khởi động |
+| 08:02–09:13 | Bài hát dạy trước mẫu câu "What's your favourite...? – My favourite... is..." qua các chủ đề: food/drink/sport/book, rồi game/song/planet/movie |
+| 09:29 | Giáo viên chốt lại: bài hát liên quan chủ đề "My Favourite Things" của buổi học |
 
-### 5. New words (Từ mới) — 10:00–15:30
+### 5. New words (Từ mới) — 10:00–16:29
 | Mốc | Từ mới |
 |---|---|
-| 10:00–11:00 | dolphin (cá heo) |
-| 11:30 | panda (gấu trúc) |
-| 12:00–12:30 | pink, black (màu hồng, màu đen) |
-| 13:00–13:30 | sandwich (bánh mì kẹp) |
-| 14:30 | pizza (bánh pizza) |
-| 15:00 | football (bóng đá) |
-| 15:30 | "Remember" — tổng hợp lại từ đã học (gồm cả table tennis) |
+| 10:00 | "Part one. Some new words." |
+| 10:13–11:14 | dolphin (cá heo) |
+| 11:14–12:00 | panda (gấu trúc) |
+| 12:08–12:39 | pink (màu hồng) |
+| 12:39–13:06 | black (màu đen) |
+| 13:17–14:05 | sandwich (bánh mì kẹp) |
+| 14:14–14:44 | pizza (bánh pizza) |
+| 14:48–15:07 | table tennis (bóng bàn) |
+| 15:07–15:28 | football (bóng đá) |
+| 15:28–16:25 | Tổng hợp lại 8 từ đã học |
+| 16:29 | "Let's feed the animals" — chuyển sang phần 2 |
 
-### 6. Read & choose / Listen & say — luyện từ vựng (8 vòng) — 16:00–30:00
-| Vòng | Mốc | Từ luyện |
+### 6. Read & choose / Listen & say — luyện từ vựng (8 vòng) — 16:44–27:53
+*(Thứ tự 8 từ đã xác nhận đúng khớp bản 2026-09-16; chỉ sửa lại mốc thời gian chính xác hơn theo transcript.)*
+
+| Vòng | Từ | Read & choose | Listen & say |
+|---|---|---|---|
+| 1 | sandwich | 17:00–17:34 | 17:48–18:20 |
+| 2 | black | 18:27–19:05 | 19:17–19:43 |
+| 3 | table tennis | 19:54–20:30 | 20:41–21:09 |
+| 4 | panda | 21:24–21:58 | 22:10–22:38 |
+| 5 | pink | 22:53–23:22 | 23:28–23:53 |
+| 6 | pizza | 24:04–24:32 | 24:43–25:08 |
+| 7 | football | 25:20–25:49 | 25:57–26:26 |
+| 8 | dolphin | 26:37–27:05 | 27:11–27:37 |
+
+27:53: "Chúc mừng các con đã hoàn thành phần hai" — chuyển sang phần 3.
+
+### 7. New structures — giới thiệu cấu trúc — 28:02–32:13
+*(Sửa 2026-09-17 — bản cũ ghi mốc 30:00–31:30, thực tế bắt đầu sớm hơn ~2 phút và có thêm 1 hoạt động chưa từng ghi nhận.)*
+
+| Mốc | Nội dung |
+|---|---|
+| 28:02 | Giới thiệu "New Structures" |
+| 28:15–28:47 | Listen and read — ví dụ mẫu: "What's your favourite sport? — It's football.", "What's your favourite colour? — It's pink." |
+| 28:47–30:22 | Giải thích công thức: What's your favourite + animal/colour/food/sport? → It's... |
+| 30:31–32:06 | **(Mới phát hiện)** Hoạt động gõ từ "favorite" vào ô chat, giáo viên kiểm tra chính tả |
+| 32:13 | Chuyển sang phần luyện tập cấu trúc |
+
+### 8. Read & choose / Listen & say — luyện cấu trúc (6 vòng, game "That Deliver") — 32:20–41:42
+| Vòng | Mốc | Nội dung | Đáp án |
+|---|---|---|---|
+| 1 | 32:29–33:56 | "___ is your favourite colour?" | What |
+| 2 | 34:05–35:27 | "Ben: What's your favourite sport? Mia: ___ football." | It's |
+| 3 | 35:38–36:56 | "What's ___ favourite food?" | your |
+| 4 | 37:07–38:27 | Kiểm tra câu đúng/sai: "It is a dolphins." | Sai — sửa: *It is a dolphin.* |
+| 5 | 38:38–39:51 | Sắp xếp từ: "sandwich / It / is / a / ." | It is a sandwich. |
+| 6 | 40:01–41:16 | Sắp xếp từ: "your / animal / What's / favourite / ?" | What's your favourite animal? |
+
+41:30–41:42: nhận xét "your English is so amazing" — chuyển sang Reading.
+
+### 9. Reading (Đọc hiểu) — 41:42–46:58
+Đoạn hội thoại giữa Anna & Ben về đồ ăn/con vật yêu thích, có nhắc đến chuyến đi thuỷ cung.
+
+| Mốc | Nội dung | Đáp án |
 |---|---|---|
-| 1 | 16:00–18:00 | sandwich |
-| 2 | 18:30–20:00 | black |
-| 3 | 20:00–20:30 | table tennis |
-| 4 | 21:30–22:30 | panda |
-| 5 | 23:00–24:30 | pink |
-| 6 | 25:00–26:00 | pizza |
-| 7 | 26:30–27:30 | football |
-| 8 | 28:00–29:00 | dolphin |
+| 41:42–42:54 | Hiển thị đoạn hội thoại | — |
+| 42:59–43:58 | Câu hỏi 1: "What is Anna's favourite food?" (A. Salad / B. a sandwich / C. pizza) | **C. pizza** |
+| 44:05–45:05 | Câu hỏi 2: "What is Ben's favourite animal?" (A. panda / B. dolphin / C. rabbit) | **A. panda** *(đã xác nhận — bản cũ ghi chú cần đối chiếu)* |
+| 45:08–46:11 | Câu hỏi 3 (Đúng/Sai): "Ben went to the aquarium and didn't see any dolphins." | **B. Sai** *(đã xác nhận — Ben CÓ thấy cá heo)* |
+| 46:19–46:58 | Giáo viên hỏi cả lớp làm đúng mấy câu, thả tim/mặt cười | — |
 
-- 29:30: hình minh hoạ bổ sung (khỉ trên cây) — có thể là chuyển cảnh.
-- 30:00: chuyển sang **New structures**, mở đầu bằng "What's your favourite sport?" (hội thoại 2 nhân vật ở sân trường).
-
-### 7. New structures — giới thiệu cấu trúc — 30:00–31:30
+### 10. Group work (Bài tập nhóm điền từ) — 47:03–55:55
 | Mốc | Nội dung |
 |---|---|
-| 30:00 | Slide mở đầu cấu trúc câu, minh hoạ hội thoại mẫu |
-| 30:30–31:30 | "Remember" — xây dựng dần công thức: *What's your favourite + animal/colour/food/sport? → It's...* |
+| 47:03–47:56 | Giới thiệu Bài 1 — 3 chỗ trống, bộ từ: sandwich, dolphin, food |
+| 47:56–50:58 | Học sinh thảo luận nhóm & điền từ (đếm ngược, im lặng ~3 phút) |
+| 51:05–51:44 | Chữa đáp án Bài 1 — đúng theo thứ tự chỗ trống: (1) food, (2) sandwich, (3) dolphin |
+| 51:54–52:25 | Giới thiệu Bài 2 — 3 chỗ trống, bộ từ: sport, favourite, black |
+| 52:25–55:17 | Học sinh thảo luận nhóm & điền từ (đếm ngược, im lặng ~2 phút 50s) |
+| 55:17–55:55 | Chữa đáp án Bài 2 — nhắc rõ "favorite" (What's your favorite colour?) và "table tennis" (What's your favorite sport?); từ "black" khớp bộ từ gốc nhưng không được đọc to riêng trong đoạn chữa |
 
-### 8. Read & choose / Listen & say — luyện cấu trúc (6 vòng) — 32:00–41:00
-| Vòng | Mốc | Nội dung |
-|---|---|---|
-| — | 32:00 | Bản đồ lộ trình (roadmap) hiện lại, đánh dấu bước "New structures" |
-| 1 | 32:30–33:00 | Chọn từ để hỏi: "___ is your favourite colour?" → **What** |
-| 2 | 34:00–35:00 | "Ben: What's your favourite sport? Mia: ___ football." → **It's** |
-| 3 | 35:30–36:00 | "What's ___ favourite food?" → **your** |
-| 4 | 36:30–37:30 | Kiểm tra câu đúng/sai: "It is a dolphins." → **Incorrect** (sửa: *It is a dolphin.*) |
-| 5 | 38:00–39:00 | Sắp xếp từ: "sandwich / It / is / a / ." → **It is a sandwich.** |
-| 6 | 39:30–40:30 | Sắp xếp từ: "your / animal / What's / favourite / ?" → **What's your favourite animal?** |
-| — | 41:00 | Bản đồ lộ trình hiện lại, chuẩn bị chuyển sang Reading |
-
-### 9. Reading (Đọc hiểu) — 42:00–46:00
-Đoạn hội thoại giữa hai nhân vật (Anna & Ben) về đồ ăn/con vật yêu thích, có nhắc đến chuyến đi thuỷ cung.
+### 11. Học sinh làm Quiz Time (cá nhân, im lặng) — 56:02–1:00:01
+*(Sửa 2026-09-17 — bản cũ đoán đây chỉ là "slide tiêu đề giữ lâu". Thực tế học sinh đang làm bài cá nhân trong khoảng này, không phải màn hình tĩnh.)*
 
 | Mốc | Nội dung |
 |---|---|
-| 42:00–43:30 | Hiển thị đoạn hội thoại + Câu hỏi 1: "What is Anna's favourite food?" (3 đáp án) |
-| 44:00–45:00 | Câu hỏi 2: "What is Ben's favourite animal?" (3 đáp án) |
-| 45:30–46:00 | Câu hỏi 3 (Đúng/Sai): "Ben went to the aquarium and didn't see any dolphins." |
-| 46:30 | Slide ăn mừng "How many points do you have?" |
+| 56:02–56:48 | Giới thiệu Quiz Time — chuyển sang làm việc **cá nhân** (không còn theo nhóm) |
+| 56:48–56:55 | "Start in three, two, one. Let's go." |
+| 56:55–1:00:01 | Học sinh làm quiz cá nhân (im lặng, không có lời thoại) |
 
-*(Ghi chú: nội dung chi tiết từng câu hỏi/đáp án đúng cần đối chiếu thêm vì đoạn hội thoại có chi tiết mâu thuẫn nhẹ giữa lời thoại hiển thị và đáp án — nên xác minh lại bằng cách xem trực tiếp đoạn 42:00–46:00 nếu cần dùng làm tài liệu chính thức.)*
+### 12. Giáo viên chữa đáp án Quiz Time (6 câu) — 1:00:07–1:01:45
+*(Sửa 2026-09-17 — bản cũ chỉ quan sát được 3/4 câu nghi vấn tại 3 mốc rời rạc 60:00/60:30/61:00. Transcript xác nhận đây thực chất là 1 khối chữa bài liên tục gồm ĐỦ 6 câu.)*
 
-### 10. Group work (Bài tập nhóm điền từ) — 47:00–55:30
+| Câu | Mốc | Nội dung | Đáp án |
+|---|---|---|---|
+| 1 | 1:00:21–1:00:34 | "Anna: What's your favourite food? Ben: It's a sandwich." | B |
+| 2 | 1:00:34–1:00:47 | "Lily: It's black." → suy ra câu hỏi "What's your favourite colour?" | *(không đọc rõ ký tự đáp án)* |
+| 3 | 1:00:47–1:01:00 | "What's your favourite sport?" → football | C |
+| 4 | 1:01:00–1:01:12 | "What's your favourite animal?" → panda | D |
+| 5 | 1:01:12–1:01:23 | Tìm lỗi sai: "foods" thừa chữ "s" | sửa thành "food" |
+| 6 | 1:01:23–1:01:33 | Sắp xếp câu | **It is a dolphin.** *(đã xác nhận — bản cũ nghi vấn "có thể có câu này") |
+
+### 13. Tổng kết & kết thúc buổi học — 1:01:45–1:03:18
 | Mốc | Nội dung |
 |---|---|
-| 47:00–51:30 | Bài 1 — điền từ (sandwich, dolphin, food): "What's your favourite food? – It's a sandwich. What's your favourite animal? – It's a dolphin." |
-| 52:00–55:30 | Bài 2 — điền từ (sport, favourite, black): "What's your favourite colour? – It's black. What's your favourite sport? – It's table tennis." |
-
-### 11. Chuyển tiếp vào Quiz Time — 56:00–59:30
-Slide tiêu đề "QUIZ TIME" hiển thị kéo dài (~3–4 phút) — có thể là nhạc đếm giờ/giới thiệu luật chơi trước khi vào câu hỏi.
-
-### 12. Quiz time (câu hỏi trắc nghiệm) — 60:00–61:30
-| Mốc | Câu hỏi | Đáp án |
-|---|---|---|
-| 60:00 | "Anna: What's your favourite food? Ben: It's ___ sandwich." | B. a |
-| 60:30 | "Minh: What's your favourite ___? Lily: It's black." | C. colour |
-| 61:00 | Find a mistake: "A: What's your favourite foods? B: It's pizza." | Lỗi ở "foods" → sửa "food" |
-
-*(Câu hỏi thứ 4 trong bản tóm tắt — sắp xếp từ "is / dolphin / a / It" — không quan sát được rõ trong các mẫu 30s đã lấy; có thể nằm giữa 61:00–61:30, cần lấy mẫu dày hơn nếu cần xác nhận.)*
-
-### 13. Tổng kết & kết thúc buổi học — 61:30–63:32
-| Mốc | Nội dung |
-|---|---|
-| 61:30 | Bản đồ lộ trình hiển thị đầy đủ 7 bước đã hoàn thành |
-| 62:00 | "Chúng ta đã... What did we do?" — tổng kết từ vựng theo 4 chủ đề (animal, colour, food, sport) |
-| 62:30 | "DID YOU LIKE THE LESSON?" — đánh giá buổi học (5 sao) |
-| 63:00 | Chuyển sang giao diện nền tảng học tập (dashboard) — kết thúc lớp |
-| 63:32 | Kết thúc video |
+| 1:01:45–1:02:01 | Lời khen hoàn thành 7 vòng thi đấu |
+| 1:02:01–1:02:18 | Tổng kết 8 từ vựng đã học |
+| 1:02:18–1:02:40 | Tổng kết cấu trúc câu "What's your favourite...?" |
+| 1:02:40–1:03:01 | "Did you like the lesson today?" — đánh giá buổi học (5 sao) |
+| 1:03:01–1:03:18 | Dặn làm bài tập về nhà, chào tạm biệt ("Goodbye everyone") |
 
 ---
 
 ## Ghi chú phương pháp & giới hạn
 
-- Timeline dựng từ **quan sát hình ảnh** (frame sampling mỗi 30s), không phải từ transcript âm thanh — do đó **không phản ánh lời giảng, tương tác thoại của giáo viên/học sinh**, chỉ phản ánh nội dung/slide đang hiển thị tại thời điểm đó.
-- Độ chính xác mốc thời gian: **±30 giây** (do khoảng lấy mẫu).
-- Một số đoạn chuyển tiếp ngắn (dưới 30s) có thể không được ghi nhận đầy đủ.
-- Nếu cần độ chính xác cao hơn (ví dụ để làm kịch bản edit video hoặc voice-over), nên lấy mẫu dày hơn (5–10s) ở các đoạn nghi ngờ, hoặc bổ sung transcript âm thanh (speech-to-text).
+- Timeline đã đối chiếu bằng transcript giọng nói thật (phụ đề tự động YouTube, xem file transcript liên kết ở đầu tài liệu) — độ chính xác mốc thời gian giờ theo đúng giây transcript cho các đoạn có lời thoại rõ ràng.
+- Phụ đề tự động (ASR) vẫn có thể sai sót nhỏ (nghe nhầm từ, ví dụ "panda" → "tender" ở một chỗ) — không coi là transcript chuẩn 100% nếu cần dùng làm tài liệu chính thức.
+- Các đoạn học sinh làm bài im lặng (group work, quiz time) không có lời thoại nên mốc bắt đầu/kết thúc lấy theo câu nói ngay trước/sau đoạn im lặng đó (độ chính xác vẫn cao vì đây là lời nói thật, không phải suy đoán từ hình ảnh).
