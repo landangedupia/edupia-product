@@ -2395,8 +2395,13 @@ const state = {
   classroomStep: 0,
   pendingVideoAdvance: null,
   chatQueue: [],
-  ispeakResults: [],
+  ispeakRoundResults: [null,null,null,null,null,null,null,null],
   ispeakCurrentWord: null,
+  ispeakCurrentRound: null,
+  ispeakPhase: 'choose',
+  ispeakChoice: null,
+  ispeakSubmitted: false,
+  ispeakTimerIv: null,
   seekDragging: false,
   fb: null,
   aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, improved: [] },
@@ -2696,6 +2701,17 @@ const ISPEAK_WORDS = ['sandwich','black','table tennis','panda','pink','pizza','
 /* Mốc bắt đầu "Read & choose" của từng vòng (mục 6 timeline) — dùng làm điểm chuyển UI sang vòng đó. */
 const ISPEAK_START_T = [17*60, 18*60+27, 19*60+54, 21*60+24, 22*60+53, 24*60+4, 25*60+20, 26*60+37];
 const NEW_STRUCTURES_START_T = 28*60+2; // 28:02 — mốc "New structures" bắt đầu (mục 7 timeline), dùng làm điểm dừng sau ispeak8
+/* Đáp án đúng (A/B/C) của phần "Read & choose" từng vòng, theo transcript giọng nói thật (mục 6
+   timeline). Vòng 1/2/3/4/8 lấy đúng chữ cái cô giáo đọc trong transcript (sandwich=B, black=A,
+   table tennis=A, panda=C, dolphin=A). Vòng 5/6/7 (pink/pizza/football) transcript KHÔNG đọc rõ chữ
+   cái đáp án (chỉ xác nhận đúng từ, không nói "đáp án A/B/C") — 3 giá trị này là ◆ gán tạm cho đủ UI,
+   không suy ra được từ nguồn thật; không ảnh hưởng điểm số (điểm Phát âm vẫn tính từ ASR ở phần
+   Listen & say, xem toggleMic()), chỉ ảnh hưởng vị trí nút được tô đúng khi chữa đáp án minh hoạ. */
+const ISPEAK_ANSWERS = ['B','A','A','C','B','A','C','A'];
+/* Mốc video thật lúc cô giáo nói "Now listen and say [từ]" từng vòng (mục 6 timeline, transcript) —
+   dùng để chuyển bottomBar từ pha "Read & choose" sang pha "Listen & say" (mic) ĐÚNG lúc video thật
+   nói câu đó, không phải sau 1 khoảng thời gian cố định tách rời video. */
+const ISPEAK_SPEAK_T = [17*60+48, 19*60+17, 20*60+41, 22*60+10, 23*60+28, 24*60+43, 25*60+57, 27*60+11];
 
 /* Các mốc tiết học hiển thị trên thanh tua video (chấm tròn, bấm để tua nhanh) — lấy từ 13 mục của
    03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md, bản đã sửa
@@ -2736,9 +2752,81 @@ function checkVideoTimeAdvance(){
   if(state.chatQueue.length && t >= state.chatQueue[0].t){
     appendClassChatBubble(state.chatQueue.shift().text);
   }
+  syncIspeakFlow(t);
   if(state.pendingVideoAdvance != null && t >= state.pendingVideoAdvance){
     state.pendingVideoAdvance = null;
     nextClassStep();
+  }
+}
+
+/* ============ ĐỒNG BỘ 2 CHIỀU LECTURE1 -> ISPEAK8 THEO MỐC VIDEO THẬT (2026-09-17) ============
+   Theo đúng yêu cầu: "mỗi hoạt động chỉ chạy đúng theo mốc thật của timeline — tua qua thì coi là
+   bỏ qua (điểm 0), tua lùi lại thì cho làm lại bình thường". Thay hẳn cơ chế cũ (chỉ tiến 1 chiều,
+   dùng waitForVideoTime/pendingVideoAdvance đơn lẻ) bằng 1 hàm chạy MỖI TICK video, tự suy ra đúng
+   vòng + pha hiện tại từ video.currentTime — tua tới hay tua lùi đều tự khớp lại, không cần chờ
+   "đến lượt". Chỉ áp dụng cho đúng phần thật sự gắn với mốc video (lecture1..ispeak8) — các bước
+   sau đó (mcq, group work, quiz...) vẫn là hoạt động tự nhịp độ (autoAdvance) như cũ, không đổi. */
+function ispeakStateForTime(t){
+  if(t < ISPEAK_START_T[0]) return {round:0};
+  if(t >= NEW_STRUCTURES_START_T) return {round:9};
+  for(let i=1;i<=8;i++){
+    const start = ISPEAK_START_T[i-1];
+    const end = i<8 ? ISPEAK_START_T[i] : NEW_STRUCTURES_START_T;
+    if(t>=start && t<end) return {round:i, phase: t>=ISPEAK_SPEAK_T[i-1] ? 'speak' : 'choose'};
+  }
+  return {round:0};
+}
+function ispeakRoundOfStep(step){
+  return (step && step.indexOf('ispeak')===0) ? Number(step.slice(6)) : 1;
+}
+function finalizeSkippedIspeakRounds(){
+  for(let i=0;i<8;i++){
+    if(state.ispeakRoundResults[i] == null) state.ispeakRoundResults[i] = false;
+  }
+}
+function syncIspeakFlow(t){
+  const step = FLOW[state.classroomStep];
+  const inRange = step === 'lecture1' || (step && step.indexOf('ispeak')===0);
+  if(!inRange) return;
+  const target = ispeakStateForTime(t);
+
+  if(target.round === 9){
+    finalizeSkippedIspeakRounds();
+    state.classroomStep = FLOW.indexOf('mcq');
+    renderClassroomStep();
+    return;
+  }
+  if(target.round === 0){
+    if(step !== 'lecture1'){
+      state.classroomStep = FLOW.indexOf('lecture1');
+      renderClassroomStep();
+    }
+    return;
+  }
+
+  const targetIdx = FLOW.indexOf('ispeak'+target.round);
+  if(state.classroomStep === targetIdx && state.ispeakPhase === target.phase) return; // không đổi gì, khỏi vẽ lại
+
+  if(state.classroomStep < targetIdx){
+    // Đang tua TỚI, bỏ qua 1 hay nhiều vòng chưa có kết quả — tính là bỏ qua (điểm 0).
+    for(let i=ispeakRoundOfStep(step); i<target.round; i++){
+      if(state.ispeakRoundResults[i-1] == null) state.ispeakRoundResults[i-1] = false;
+    }
+  }
+  state.classroomStep = targetIdx;
+  state.recording = false;
+  state.ispeakCurrentRound = target.round;
+  state.ispeakCurrentWord = ISPEAK_WORDS[target.round-1];
+  state.ispeakPhase = target.phase;
+  if(target.phase === 'choose'){
+    // Vào (hoặc quay lại) đúng cửa sổ chọn A/B/C — reset để làm lại bình thường, kể cả khi trước đó
+    // đã có kết quả (đúng/sai/bỏ qua) do tua qua rồi tua lùi lại.
+    state.ispeakChoice = null;
+    state.ispeakSubmitted = false;
+    state.ispeakRoundResults[target.round-1] = null;
+    renderIspeakChoosePhase(target.round);
+  } else {
+    renderIspeakSpeakPhase(target.round);
   }
 }
 
@@ -2807,7 +2895,7 @@ function enterClassroom(){
   state.classroomStep = 0;
   state.pendingVideoAdvance = null;
   state.chatQueue = [];
-  state.ispeakResults = [];
+  state.ispeakRoundResults = [null,null,null,null,null,null,null,null];
   renderClassroomStep();
   initLectureVideo();
   attachVideoTimeWatcher();
@@ -2864,8 +2952,14 @@ function forceAdvanceClassroom(){
     selectMcq('B'); submitMcq();
     return;
   }
-  if(step && step.indexOf('ispeak') === 0 && !state.recording){
-    toggleMic();
+  if(step && step.indexOf('ispeak') === 0){
+    if(state.ispeakPhase === 'choose' && !state.ispeakSubmitted){
+      const n = Number(step.slice(6));
+      selectIspeakOption(ISPEAK_ANSWERS[n-1]);
+      submitIspeakChoice();
+    } else if(state.ispeakPhase === 'speak' && !state.recording){
+      toggleMic();
+    }
   }
   if(step === 'group-mascot'){
     groupReady(); return;
@@ -2942,22 +3036,22 @@ function renderClassroomStep(){
       /* Cập nhật 2026-09-17: lecture1 gộp toàn bộ phần đầu buổi thật (00:00) — 2 bài hát khởi động,
          welcome, nội quy, giới thiệu bài + chia nhóm, New words (dolphin/panda/pink/black/sandwich/
          pizza/table tennis/football) — cho tới đúng mốc bắt đầu Read&choose vòng 1 (17:00,
-         ISPEAK_START_T[0]). Xem timeline chi tiết ở file .md tham chiếu tại comment FLOW. */
-      waitForVideoTime(ISPEAK_START_T[0]);
+         ISPEAK_START_T[0]). KHÔNG còn gọi waitForVideoTime() ở đây nữa — syncIspeakFlow() (chạy mỗi
+         tick video, xem checkVideoTimeAdvance) tự chuyển sang ispeak1 đúng lúc, đồng bộ 2 chiều cả
+         khi tua tới lẫn tua lùi. Xem timeline chi tiết ở file .md tham chiếu tại comment FLOW. */
       break;
 
     case 'mcq':
       state.mcqAnswer = null; state.mcqSubmitted = false;
-      /* BUGFIX 2026-09-17, cập nhật cùng ngày khi thêm ASR: 8 vòng iSpeak vừa xong (ispeak1-8) giờ
-         đã chấm thật từng từ bằng Web Speech API (state.ispeakResults, xem toggleMic()) — tính điểm
-         /10 theo tỉ lệ số từ nói đúng. Nếu trình duyệt không hỗ trợ nhận diện giọng nói hoặc học sinh
-         chưa bấm mic lần nào (state.ispeakResults rỗng), fallback về điểm demo cố định như cũ để màn
-         Tổng kết luôn có đủ 4 chỉ số, không hiện "null/10". */
-      if(state.ispeakResults.length){
-        const correctCount = state.ispeakResults.filter(Boolean).length;
-        state.scores.ispeak = round1(correctCount / state.ispeakResults.length * 10);
-      } else if(state.scores.ispeak == null){
-        state.scores.ispeak = 7;
+      /* Cập nhật 2026-09-17: 8 vòng iSpeak (ispeak1-8) giờ LUÔN có đủ 8 kết quả trong
+         state.ispeakRoundResults trước khi tới đây — true/false nếu đã làm (ASR thật, xem
+         toggleMic()), false nếu bị bỏ qua do tua qua mốc thật mà chưa làm (xem
+         finalizeSkippedIspeakRounds() trong syncIspeakFlow()). Không còn tính theo "số vòng đã thử"
+         nữa (trước đây bỏ qua vòng nào thì vòng đó không tính vào mẫu số, làm điểm bị lệch cao hơn
+         thực tế) — giờ luôn chia đều /8. */
+      {
+        const correctCount = state.ispeakRoundResults.filter(Boolean).length;
+        state.scores.ispeak = round1(correctCount / 8 * 10);
       }
       /* Cập nhật 2026-09-17: câu hỏi lấy thật từ vòng 1 luyện New structures (32:29-33:56, đối chiếu
          transcript), overlay này KHÔNG chờ theo mốc video thật (chỉ minh hoạ tương tác) — đáp án
@@ -2991,28 +3085,10 @@ function renderClassroomStep(){
       autoAdvance(nextClassStep, 1600);
       break;
 
-    case 'ispeak1': case 'ispeak2': case 'ispeak3': case 'ispeak4':
-    case 'ispeak5': case 'ispeak6': case 'ispeak7': case 'ispeak8': {
-      /* Cập nhật 2026-09-17: 8 vòng iSpeak khớp đúng mốc bắt đầu "Read & choose" từng vòng, đối
-         chiếu transcript giọng nói thật (17:00-27:53, không còn ±30s ước lượng) — mỗi vòng là 1 từ
-         New words. Cũng từ 2026-09-17 CÓ chấm thật bằng Web Speech API (xem toggleMic()) — mỗi vòng
-         lưu 1 kết quả đúng/sai thật vào state.ispeakResults, dùng để tính state.scores.ispeak ở case
-         'mcq' (không còn bịa số). */
-      const n = Number(step.slice(6));
-      state.recording = false;
-      state.ispeakCurrentWord = ISPEAK_WORDS[n-1];
-      bottomBar.innerHTML = `
-        <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
-        <div class="control-center">
-          <span class="timer-pill">⏱ 00:20</span>
-          <span class="hint-text" id="micHint">🎤 iSpeak ${n}/8 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
-          <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
-        </div>
-        <button class="cc-btn">CC</button>`;
-      const nextT = n < 8 ? ISPEAK_START_T[n] : NEW_STRUCTURES_START_T;
-      waitForVideoTime(nextT);
-      break;
-    }
+    /* ispeak1..ispeak8: KHÔNG còn xử lý ở đây — từ 2026-09-17, syncIspeakFlow() (chạy mỗi tick
+       video, xem checkVideoTimeAdvance) tự vẽ đúng pha (renderIspeakChoosePhase/renderIspeakSpeakPhase)
+       khi classroomStep trỏ vào các bước này, đồng bộ 2 chiều theo mốc video thật thay vì đi qua
+       switch này. Không xoá case khỏi FLOW — chỉ không cần xử lý riêng trong switch nữa. */
 
     case 'lecture3':
       autoAdvance(nextClassStep, 1600);
@@ -3170,7 +3246,7 @@ function toggleMic(){
     handled = true;
     state.recording = false;
     btn.classList.remove('recording');
-    state.ispeakResults.push(correct);
+    state.ispeakRoundResults[state.ispeakCurrentRound-1] = correct;
     hint.textContent = correct
       ? `✅ Chính xác! Con vừa nói "${heard}"`
       : `❌ Chưa đúng — con nói "${heard || '(không nghe rõ)'}", đáp án: ${target}`;
@@ -3184,6 +3260,90 @@ function toggleMic(){
   recognizer.onerror = ()=> finish(false, '');
   recognizer.onend = ()=>{ if(!handled) finish(false, ''); };
   try { recognizer.start(); } catch(err){ finish(false, ''); }
+}
+
+/* ============ ISPEAK — PHA "READ & CHOOSE" (2026-09-17, khớp Figma node 3:37908) ============
+   20 giây đếm ngược (đồng hồ trên màn hình, cosmetic — khớp "20 giây bắt đầu" cô giáo nói trong
+   video) + 3 nút tròn A/B/C (chỉ chữ cái, không có tên từ — đúng bản thiết kế thật). Chọn xong bấm
+   "Nộp bài" (hoặc hết 20s tự nộp) → hiện đáp án đúng, GIỮ NGUYÊN. Việc chuyển pha sang "Listen &
+   say" (hiện mic) HOÀN TOÀN do syncIspeakFlow() (chạy mỗi tick video) quyết định — đúng theo mốc
+   video thật (ISPEAK_SPEAK_T), kể cả khi tua tới hay tua lùi (xem comment syncIspeakFlow). Hàm này
+   chỉ vẽ UI + đếm cosmetic, KHÔNG tự chuyển pha. Pha Read & choose KHÔNG tính vào điểm Phát âm —
+   điểm vẫn tính từ kết quả ASR ở pha nói (state.ispeakRoundResults), tránh gộp 2 kỹ năng khác nhau
+   (chọn đúng tranh vs nói đúng) vào chung 1 con số. */
+function renderIspeakChoosePhase(n){
+  const bottomBar = document.getElementById('bottomBar');
+  bottomBar.innerHTML = `
+    <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
+    <div class="control-center">
+      <span class="timer-pill" id="ispeakTimerPill">⏱ 00:20</span>
+      <div class="mcq-opts" id="ispeakOpts">
+        ${['A','B','C'].map(l=>`<button class="mcq-opt" onclick="selectIspeakOption('${l}')" id="ispeakOpt${l}">${l}</button>`).join('')}
+      </div>
+      <button class="submit-btn" id="ispeakSubmitBtn" disabled onclick="submitIspeakChoice()">Nộp bài</button>
+    </div>
+    <button class="cc-btn">CC</button>`;
+  startIspeakCountdown();
+}
+
+function startIspeakCountdown(){
+  clearInterval(state.ispeakTimerIv);
+  let left = 20;
+  state.ispeakTimerIv = setInterval(()=>{
+    left--;
+    const el = document.getElementById('ispeakTimerPill');
+    if(!el){ clearInterval(state.ispeakTimerIv); return; }
+    el.textContent = `⏱ 00:${String(Math.max(0,left)).padStart(2,'0')}`;
+    if(left<=0){
+      clearInterval(state.ispeakTimerIv);
+      if(!state.ispeakSubmitted) submitIspeakChoice();
+    }
+  }, 1000);
+}
+
+function selectIspeakOption(letter){
+  if(state.ispeakSubmitted) return;
+  state.ispeakChoice = letter;
+  ['A','B','C'].forEach(l=>{
+    const el = document.getElementById('ispeakOpt'+l);
+    if(!el) return;
+    el.classList.remove('selected','muted');
+    if(l===letter) el.classList.add('selected'); else el.classList.add('muted');
+  });
+  const btn = document.getElementById('ispeakSubmitBtn');
+  if(btn) btn.disabled = false;
+}
+
+function submitIspeakChoice(){
+  if(state.ispeakSubmitted) return;
+  state.ispeakSubmitted = true;
+  clearInterval(state.ispeakTimerIv);
+  const n = state.ispeakCurrentRound;
+  const correctLetter = ISPEAK_ANSWERS[n-1];
+  const correct = state.ispeakChoice === correctLetter;
+  const overlay = document.getElementById('classOverlayLayer');
+  overlay.innerHTML = mascotBubble(
+    correct ? 'CHÍNH XÁC!' : `Đáp án đúng là ${correctLetter}`,
+    ISPEAK_WORDS[n-1],
+    correct ? '🥳' : '🙂'
+  );
+  /* KHÔNG tự chuyển pha ở đây — chỉ hiện đáp án rồi GIỮ NGUYÊN cho tới khi syncIspeakFlow() (chạy
+     mỗi tick video) chuyển sang pha nói đúng lúc video thật nói "listen and say". Nếu người dùng
+     nộp bài xong rồi lập tức tua qua khỏi mốc đó, syncIspeakFlow() vẫn xử lý bình thường (round đã
+     có kết quả nên không bị tính là bỏ qua). */
+}
+
+function renderIspeakSpeakPhase(n){
+  const bottomBar = document.getElementById('bottomBar');
+  bottomBar.classList.remove('locked-controls');
+  bottomBar.innerHTML = `
+    <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
+    <div class="control-center">
+      <span class="timer-pill">⏱ 00:20</span>
+      <span class="hint-text" id="micHint">🎤 iSpeak ${n}/8 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
+      <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
+    </div>
+    <button class="cc-btn">CC</button>`;
 }
 
 function groupReady(){
