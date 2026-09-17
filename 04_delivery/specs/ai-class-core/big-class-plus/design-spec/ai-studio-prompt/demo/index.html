@@ -84,8 +84,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .video-seek-playbtn{width:24px;height:24px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,.16);
   color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;}
 .video-seek-playbtn:hover{background:rgba(255,255,255,.3);}
-.video-seek-track-wrap{position:relative;width:220px;display:flex;align-items:center;}
-#videoSeekRange{width:220px;accent-color:var(--primary);cursor:pointer;}
+.video-seek-track-wrap{position:relative;width:480px;display:flex;align-items:center;}
+#videoSeekRange{width:480px;accent-color:var(--primary);cursor:pointer;}
+#videoSeekRange:disabled{opacity:.4;cursor:not-allowed;}
 .video-seek-markers{position:absolute;left:0;right:0;top:50%;height:0;pointer-events:none;}
 .video-seek-marker{position:absolute;top:0;width:6px;height:6px;border-radius:50%;background:#ffc94d;
   border:1px solid rgba(0,0,0,.35);transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;}
@@ -677,36 +678,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
    aic2-intro riêng) vào cuối màn này qua #summaryPlanText. */
 .summary-screen{min-height:956px;background:var(--n50);display:flex;justify-content:center;padding:32px 96px 40px;overflow-y:auto;}
 .summary-inner{display:flex;flex-direction:column;align-items:center;gap:32px;width:1270px;max-width:100%;}
-.summary-inner>h2{font-size:24px;font-weight:700;color:var(--n900);letter-spacing:-.48px;align-self:flex-start;}
-.summary-body{display:flex;flex-direction:column;align-items:flex-start;gap:32px;width:100%;}
-.lesson-subtitle{font-size:24px;font-weight:500;color:var(--n900);letter-spacing:-.48px;}
+.summary-title{font-size:45px;line-height:52px;font-weight:700;color:var(--n900);text-align:center;}
+.summary-body{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%;}
+.lesson-subtitle{font-size:24px;font-weight:500;color:var(--n900);letter-spacing:-.48px;text-align:center;width:100%;}
 
-.summary-skill-row{display:flex;flex-wrap:wrap;gap:26px;width:100%;}
-.summary-skill-card{background:#fff;border-radius:20px;box-shadow:var(--shadow-card);
-  padding:0 20px;display:flex;align-items:center;gap:12px;width:298px;height:127px;flex-shrink:0;}
-.summary-skill-card .score{font-size:24px;font-weight:700;color:var(--primary);letter-spacing:-.48px;flex-shrink:0;}
-.summary-skill-card .info{display:flex;flex-direction:column;gap:2px;min-width:0;}
-.summary-skill-card .name{font-size:16px;font-weight:600;color:var(--n700);}
-.summary-skill-card .comment{font-size:16px;color:var(--n900);line-height:1.4;}
+.summary-skill-bars{display:flex;flex-direction:column;gap:16px;width:100%;}
+.summary-skill-bar .row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:14px;margin-bottom:6px;}
+.summary-skill-bar .row .name{font-weight:500;color:#374151;}
+.summary-skill-bar .row .score{font-weight:600;white-space:nowrap;}
+.summary-skill-bar .track{height:10px;border-radius:6px;background:#F3F4F6;overflow:hidden;}
+.summary-skill-bar .track .fill{height:100%;border-radius:6px;}
 
-.summary-gaps{display:flex;flex-direction:column;gap:12px;width:100%;}
-.summary-section-title{font-size:24px;font-weight:500;color:var(--n900);letter-spacing:-.48px;}
-.summary-gap-row{display:flex;flex-wrap:wrap;gap:36px;width:100%;}
-.summary-gap-card{background:#fff;border-radius:20px;box-shadow:var(--shadow-card);
-  padding:0 20px;display:flex;flex-direction:column;justify-content:center;gap:12px;width:400px;height:142px;flex-shrink:0;}
-.summary-gap-pill{display:inline-flex;align-items:center;gap:6px;padding:9px 12px;border-radius:99px;font-weight:700;font-size:16px;align-self:flex-start;}
-.summary-gap-pill .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.summary-gap-card.warn .summary-gap-pill{background:var(--warning-100);color:#FBBE24;}
-.summary-gap-card.warn .summary-gap-pill .dot{background:#FBBE24;border:1.2px solid #FFFCEB;}
-.summary-gap-card.done .summary-gap-pill{background:#C0F7BB;color:#26A316;}
-.summary-gap-card.done .summary-gap-pill .dot{background:#26A316;border:1.2px solid #FFFCEB;}
-.summary-gap-card .row{display:flex;align-items:center;gap:8px;}
-.summary-gap-card .name{font-size:16px;font-weight:600;color:var(--n700);}
-.summary-gap-card .desc{font-size:16px;color:var(--n900);}
+.summary-goals{display:flex;flex-direction:column;gap:12px;width:100%;}
+.summary-goals-title{font-size:16px;font-weight:700;color:var(--n900);}
+.summary-goals-list{list-style:disc;padding-left:22px;display:flex;flex-direction:column;gap:4px;}
+.summary-goals-list li{font-size:16px;color:var(--n900);line-height:1.5;}
+.summary-goals-list b{font-weight:700;}
 
-.summary-plan-text{font-size:16px;font-weight:500;color:var(--n900);line-height:1.5;width:100%;}
-.tutor-cta-wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;flex-wrap:wrap;}
-.attend-final-badge{flex-shrink:0;}
+.summary-cta{width:308px;}
 
 /* ================= AICNew-02: AI BỔ TRỢ 30 PHÚT ================= */
 /* 2 màn còn lại theo PRD AICNew-02 §4: Tương tác (aic2-interact) → Tổng kết (aic2-summary).
@@ -1140,7 +1129,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="content-scroll">
         <div class="promo-banner"><img src="assets/banner.png" alt="Banner khuyến mãi"></div>
 
-        <div id="masteryZone"></div>
+        <!-- Tạm ẩn 2026-09-17 theo yêu cầu (đang có lệch khối lớp Lớp 4/Lớp 5 chưa chốt — xem
+             mục 3 của 03_product/concepts/nlo-framework-concept-1.2-grade5-unit2-2026-09-17.md).
+             Giữ nguyên hidden thay vì xoá hẳn để bật lại dễ dàng khi đã chốt xong khối lớp. -->
+        <div id="masteryZone" hidden></div>
 
         <div class="content-row">
           <div class="content-col-main">
@@ -1903,7 +1895,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     <div class="classroom-screen">
       <div class="class-main" id="classMain">
         <div class="class-video-bg">
-          <video id="lectureVideo" class="lecture-video" playsinline webkit-playsinline="true" poster="assets/classroom-bg.png"></video>
+          <video id="lectureVideo" class="lecture-video" playsinline webkit-playsinline="true" poster="assets/classroom-bg.png" preload="auto"></video>
           <button id="lectureUnmuteBtn" class="lecture-unmute-btn" hidden onclick="unmuteLectureVideo()">🔇 Bấm để bật tiếng</button>
         </div>
         <div id="classOverlayLayer"></div>
@@ -1945,22 +1937,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   <!-- DRAFT REVIEW: gộp "Tổng kết buổi học chính khóa" + "Chào mừng quay lại" (mở đầu buổi bổ
        trợ) thành 1 màn duy nhất, khớp theo thiết kế bạn gửi 2026-09-12 (bỏ hẳn màn
        screen-aic2-intro riêng — CTA giờ đi thẳng vào aic2-interact). -->
+  <!-- Khớp Figma "Edupia AI Class Plus" node 38:29259 (Tổng kết buổi học, cập nhật 2026-09-17). -->
   <section class="screen summary-screen" id="screen-summary">
     <div class="summary-inner">
-      <h2>Tổng kết buổi học</h2>
+      <h1 class="summary-title">Tổng kết buổi học</h1>
       <div class="summary-body">
-        <div class="lesson-subtitle">Unit 7: Friends vacation with Minh · Chủ đề: Musical Instruments</div>
-        <div class="summary-skill-row" id="skillCards"></div>
-        <div class="summary-gaps">
-          <div class="summary-section-title">Kiến thức cần đạt</div>
-          <div class="summary-gap-row" id="masteryTiles"></div>
-        </div>
-        <div class="summary-plan-text" id="summaryPlanText"></div>
-        <div class="tutor-cta-wrap">
-          <span class="badge badge-primary attend-final-badge">✓ Đã điểm danh đủ buổi học</span>
-          <button class="btn-primary" onclick="goto('aic2-interact')">Bắt đầu buổi học bổ trợ 30 phút với AI →</button>
-        </div>
+        <div class="lesson-subtitle">[Buổi 1] Lesson 1: My favourite things</div>
+        <div class="summary-skill-bars" id="skillCards"></div>
       </div>
+      <div class="summary-goals">
+        <div class="summary-goals-title">Mục tiêu buổi học bổ trợ:</div>
+        <ul class="summary-goals-list" id="summaryPlanText"></ul>
+      </div>
+      <button class="btn-primary summary-cta" id="summaryCtaBtn" onclick="stopSummaryCountdown(); goto('aic2-interact');">Bắt đầu học bổ trợ ngay <span id="summaryCtaCountdown"></span></button>
     </div>
   </section>
 
@@ -2382,7 +2371,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <button class="video-seek-playbtn" id="videoSeekPlayBtn" onclick="toggleLectureVideoPlay()" title="Phát/Dừng video">⏸</button>
       <span class="video-seek-time" id="videoSeekTime">00:00</span>
       <div class="video-seek-track-wrap">
-        <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1">
+        <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1" disabled>
         <div class="video-seek-markers" id="videoSeekMarkers"></div>
       </div>
       <span class="video-seek-time" id="videoSeekDuration">00:00</span>
@@ -2406,6 +2395,8 @@ const state = {
   classroomStep: 0,
   pendingVideoAdvance: null,
   chatQueue: [],
+  ispeakResults: [],
+  ispeakCurrentWord: null,
   seekDragging: false,
   fb: null,
   aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, improved: [] },
@@ -2444,6 +2435,7 @@ const SCREEN_DISPLAY = {
 function goto(id){
   const prevActive = document.querySelector('.screen.active');
   const leavingClassroom = !!prevActive && prevActive.id === 'screen-classroom' && id !== 'classroom';
+  const leavingSummary = !!prevActive && prevActive.id === 'screen-summary' && id !== 'summary';
   document.querySelectorAll('.screen').forEach(s=>{
     s.classList.remove('active');
     s.style.display = 'none';
@@ -2458,6 +2450,7 @@ function goto(id){
   else if(id==='aic2-interact') attachAic2Cam();
   else if(id!=='summary') stopCamStream();
   if(leavingClassroom) stopLectureVideo();
+  if(leavingSummary) stopSummaryCountdown();
 }
 
 /* Dừng hẳn video + âm thanh bài giảng chính khoá khi rời màn lớp học (chuyển màn khác hoặc bấm
@@ -2584,8 +2577,15 @@ function attachVideoSeekBar(){
   const playBtn = document.getElementById('videoSeekPlayBtn');
   if(!video || !range || video.dataset.seekBarAttached) return;
   video.dataset.seekBarAttached = '1';
+  /* Set sẵn thang đo + mở khoá ngay bằng thời lượng đã biết trước — xem giải thích ở
+     LECTURE_VIDEO_DURATION_SEC — không chờ 'loadedmetadata' mới cho phép kéo. */
+  range.max = LECTURE_VIDEO_DURATION_SEC;
+  range.disabled = false;
+  document.getElementById('videoSeekDuration').textContent = formatMmSs(LECTURE_VIDEO_DURATION_SEC);
+  renderVideoSeekMarkers(LECTURE_VIDEO_DURATION_SEC);
   video.addEventListener('loadedmetadata', ()=>{
-    range.max = Math.floor(video.duration || 0);
+    // Cập nhật lại đúng theo browser báo về (phòng khi lệch vài giây so với số đã biết trước).
+    range.max = Math.floor(video.duration || LECTURE_VIDEO_DURATION_SEC);
     document.getElementById('videoSeekDuration').textContent = formatMmSs(video.duration);
     renderVideoSeekMarkers(video.duration);
   });
@@ -2751,11 +2751,16 @@ function appendClassChatBubble(text){
   setTimeout(()=>el.remove(), 4000);
 }
 
-/* DRAFT REVIEW: trỏ tới file local trong repo (chưa có trên CDN thật của Edupia) — chỉ chạy được
-   khi mở demo từ trong checkout của repo này (file:// hoặc server local trỏ đúng root). Trước khi
-   dùng demo này ngoài máy cá nhân (share cho stakeholder khác), cần đội vận hành/video upload video
-   lên CDN thật (dạng .m3u8 như URL cũ) rồi thay lại giá trị này. */
-const LECTURE_VIDEO_SRC = '../../../../../../../02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4';
+/* Video bài giảng thật, lưu trên Cloudflare R2 (public bucket) — thay cho đường dẫn file local cũ,
+   nên demo chạy được khi mở trực tiếp từ trình duyệt mà không cần checkout repo hay server local. */
+const LECTURE_VIDEO_SRC = 'https://pub-9cb3aa8ef36040168d311068734377de.r2.dev/video%20lesson%20demo/YTSave_YouTube_BC1-G5-U2_Media_sM8EfKMa8kA_001_720p%20(1).mp4';
+/* Thời lượng thật đã biết trước (63 phút 32 giây, xem comment ở FLOW phía trên) — dùng để set sẵn
+   thang đo thanh tua NGAY khi vào lớp học, không chờ browser tải xong "moov atom" (~3.2MB đầu file)
+   rồi mới bắn 'loadedmetadata'. Nếu chờ 'loadedmetadata' mới set range.max, trong lúc chờ thanh tua
+   vẫn ở thang mặc định max=100 (100 giây) nên kéo tới các đoạn xa (vd Group work ~47:00) sẽ như
+   "không ăn" (chỉ kéo được tối đa 1:40). Đặt currentTime trước khi metadata sẵn sàng vẫn hợp lệ theo
+   spec HTMLMediaElement — trình duyệt sẽ tự áp dụng ngay khi đủ dữ liệu. */
+const LECTURE_VIDEO_DURATION_SEC = 63*60+32;
 
 function initLectureVideo(){
   const video = document.getElementById('lectureVideo');
@@ -2801,6 +2806,7 @@ function enterClassroom(){
   state.classroomStep = 0;
   state.pendingVideoAdvance = null;
   state.chatQueue = [];
+  state.ispeakResults = [];
   renderClassroomStep();
   initLectureVideo();
   attachVideoTimeWatcher();
@@ -2941,6 +2947,17 @@ function renderClassroomStep(){
 
     case 'mcq':
       state.mcqAnswer = null; state.mcqSubmitted = false;
+      /* BUGFIX 2026-09-17, cập nhật cùng ngày khi thêm ASR: 8 vòng iSpeak vừa xong (ispeak1-8) giờ
+         đã chấm thật từng từ bằng Web Speech API (state.ispeakResults, xem toggleMic()) — tính điểm
+         /10 theo tỉ lệ số từ nói đúng. Nếu trình duyệt không hỗ trợ nhận diện giọng nói hoặc học sinh
+         chưa bấm mic lần nào (state.ispeakResults rỗng), fallback về điểm demo cố định như cũ để màn
+         Tổng kết luôn có đủ 4 chỉ số, không hiện "null/10". */
+      if(state.ispeakResults.length){
+        const correctCount = state.ispeakResults.filter(Boolean).length;
+        state.scores.ispeak = round1(correctCount / state.ispeakResults.length * 10);
+      } else if(state.scores.ispeak == null){
+        state.scores.ispeak = 7;
+      }
       /* DRAFT REVIEW: câu hỏi lấy thật từ vòng luyện New structures (~32:30), overlay này KHÔNG
          chờ theo mốc video thật (chỉ minh hoạ tương tác) — đáp án đúng vẫn là B ("What"), khớp
          logic có sẵn ở case 'mcq-result' bên dưới. */
@@ -2975,10 +2992,12 @@ function renderClassroomStep(){
     case 'ispeak1': case 'ispeak2': case 'ispeak3': case 'ispeak4':
     case 'ispeak5': case 'ispeak6': case 'ispeak7': case 'ispeak8': {
       /* DRAFT REVIEW: 8 vòng iSpeak khớp đúng mốc "Listen and say" quan sát được trong video thật
-         (18:00-28:30, ±30s do lấy mẫu frame) — mỗi vòng là 1 từ New words. Không hiển thị màn "kết
-         quả chấm điểm" giả lập vì không có dữ liệu chấm thật đi kèm video (tránh tự bịa điểm số). */
+         (18:00-28:30, ±30s do lấy mẫu frame) — mỗi vòng là 1 từ New words. Từ 2026-09-17 CÓ chấm
+         thật bằng Web Speech API (xem toggleMic()) — mỗi vòng lưu 1 kết quả đúng/sai thật vào
+         state.ispeakResults, dùng để tính state.scores.ispeak ở case 'mcq' (không còn bịa số). */
       const n = Number(step.slice(6));
       state.recording = false;
+      state.ispeakCurrentWord = ISPEAK_WORDS[n-1];
       bottomBar.innerHTML = `
         <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
         <div class="control-center">
@@ -3110,20 +3129,58 @@ function submitMcq(){
   nextClassStep();
 }
 
+/* ============ ISPEAK — CHẤM PHÁT ÂM BẰNG WEB SPEECH API (2026-09-17) ============
+   Dùng SpeechRecognition/webkitSpeechRecognition có sẵn trên trình duyệt (Chrome/Edge) để nhận diện
+   từ học sinh nói ra rồi so khớp với từ mục tiêu (ISPEAK_WORDS) — MIỄN PHÍ, không cần backend/API
+   key. Đây là chấm "nói đúng TỪ hay không" (so khớp văn bản nhận diện được), CHƯA phải chấm chất
+   lượng phát âm (ngữ điệu, âm chuẩn từng âm...) vì Web Speech API không trả điểm phát âm — chỉ trả
+   về transcript. Trình duyệt không hỗ trợ (Firefox/Safari cũ...) → không chấm được, fallback điểm
+   demo cố định ở case 'mcq' (xem BUGFIX 2026-09-17), không chặn luồng học. */
+const ISPEAK_SR_CTOR = window.SpeechRecognition || window.webkitSpeechRecognition;
+function normalizeIspeakWord(s){
+  return (s || '').toLowerCase().replace(/[^a-z ]/g,'').trim();
+}
+
 function toggleMic(){
-  state.recording = !state.recording;
+  if(state.recording) return; // đang nghe rồi, chờ kết quả — bấm lại không có tác dụng
   const btn = document.getElementById('micBtn');
   const hint = document.getElementById('micHint');
-  if(!btn) return;
-  if(state.recording){
-    btn.classList.add('recording');
-    hint.textContent = 'Đang ghi âm... bấm để dừng';
-  } else {
-    btn.classList.remove('recording');
-    /* DRAFT REVIEW: không còn tự nextClassStep() ở đây — 7 bước iSpeak giờ chuyển bước theo
-       đúng mốc thời gian thật của video (waitForVideoTime), không theo thao tác bấm mic nữa. */
-    hint.textContent = 'Đã gửi câu trả lời';
+  if(!btn || !hint) return;
+  if(!ISPEAK_SR_CTOR){
+    hint.textContent = 'Trình duyệt không hỗ trợ nhận diện giọng nói — bỏ qua chấm phát âm';
+    return;
   }
+  const target = state.ispeakCurrentWord;
+  const recognizer = new ISPEAK_SR_CTOR();
+  recognizer.lang = 'en-US';
+  recognizer.continuous = false;
+  recognizer.interimResults = false;
+  recognizer.maxAlternatives = 3;
+
+  state.recording = true;
+  btn.classList.add('recording');
+  hint.textContent = '🔴 Đang nghe... hãy nói to, rõ';
+
+  let handled = false;
+  const finish = (correct, heard)=>{
+    if(handled) return;
+    handled = true;
+    state.recording = false;
+    btn.classList.remove('recording');
+    state.ispeakResults.push(correct);
+    hint.textContent = correct
+      ? `✅ Chính xác! Con vừa nói "${heard}"`
+      : `❌ Chưa đúng — con nói "${heard || '(không nghe rõ)'}", đáp án: ${target}`;
+  };
+  recognizer.onresult = (e)=>{
+    const alts = Array.from(e.results[0]).map(a=>normalizeIspeakWord(a.transcript));
+    const targetNorm = normalizeIspeakWord(target);
+    const correct = !!targetNorm && alts.some(a => a===targetNorm || a.includes(targetNorm));
+    finish(correct, alts[0]);
+  };
+  recognizer.onerror = ()=> finish(false, '');
+  recognizer.onend = ()=>{ if(!handled) finish(false, ''); };
+  try { recognizer.start(); } catch(err){ finish(false, ''); }
 }
 
 function groupReady(){
@@ -3229,74 +3286,110 @@ function aispeakSend(text){
 /* DRAFT REVIEW: nhận xét theo từng kỹ năng (thay cho scoreComment() chung chung cũ), khớp văn
    phong ví dụ trong thiết kế bạn gửi 2026-09-12 — nội dung minh hoạ cho demo, chưa phải feedback
    AI thật (xem [[feedback-prototype-content-marking]]). */
-function skillComment(key, score){
-  const band = score>=8 ? 'high' : score>=5 ? 'mid' : 'low';
-  const table = {
-    mcq: {
-      high:'Rất tốt! Bạn đã trả lời đúng hầu hết câu hỏi trắc nghiệm',
-      mid:'Khá ổn, một vài câu trắc nghiệm con cần xem lại',
-      low:'Cần ôn lại phần trắc nghiệm nhiều hơn nhé',
-    },
-    group: {
-      high:'Làm việc nhóm rất ăn ý, tiếp tục phát huy nhé!',
-      mid:'Cần cố gắng hơn trong bài tập làm việc nhóm',
-      low:'Con cần tham gia tích cực hơn khi làm bài tập nhóm',
-    },
-    aispeak: {
-      high:'Có khả năng hội thoại tự tin trong ngữ cảnh',
-      mid:'Hội thoại khá ổn, cần luyện thêm phản xạ',
-      low:'Cần luyện tập hội thoại nhiều hơn để tự tin hơn',
-    },
-    ispeak: {
-      high:'Có tiến bộ! Phát âm đã được cải thiện rõ rệt so với buổi học gần nhất',
-      mid:'Phát âm khá ổn, một số từ cần luyện thêm',
-      low:'Cần luyện phát âm nhiều hơn ở buổi tới',
-    },
-  };
-  return table[key][band];
+/* Màu thanh điểm theo mốc % (2026-09-17, theo file thiết kế) — thang điểm là /10 nên quy đổi
+   %: >=80% (>=8/10) xanh lá, >=60% (>=6/10) xanh dương, còn lại (<60%) vàng. */
+function summarySkillColor(score){
+  if(score>=8) return '#218C54';
+  if(score>=6) return '#0876B1';
+  return '#F5B20A';
 }
-/* NLO của buổi Big Class Plus vừa học — % lấy từ chân dung Mastery Profile của học sinh cho
-   đúng chủ đề (không suy ra từ điểm mini-game hôm nay), cho thấy đã đạt/còn gap kiến thức nào
-   trước khi dẫn sang buổi bổ trợ 30 phút. */
-const LESSON_NLO = [
-  { key:'vocab', name:'Từ vựng: Tên các loại nhạc cụ (Musical Instruments)', pct:50 },
-  { key:'speak', name:'Phát âm & Giao tiếp: Tình huống mua sắm', pct:85 },
-];
-function computeNloGaps(){
-  return LESSON_NLO.map(nlo=>({ ...nlo, gap: nlo.pct<70 }));
-}
-function renderSummary(){
-  const s = state.scores;
-  document.getElementById('skillCards').innerHTML = [
-    ['mcq','Trắc nghiệm', s.mcq],
-    ['group','Bài tập nhóm', s.group],
-    ['aispeak','Hội thoại', s.aispeak],
-    ['ispeak','Phát âm', s.ispeak],
-  ].map(([key,name,score])=>`
-    <div class="summary-skill-card">
-      <div class="score">${score}/10</div>
-      <div class="info"><div class="name">${name}</div><div class="comment">${skillComment(key,score)}</div></div>
-    </div>`).join('');
+/* ============ MASTERY PROFILE MVP (2026-09-17, theo mô tả cơ chế bạn xác nhận) ============
+   1. Mỗi NLO có mastery % RIÊNG — bản MVP chỉ tính theo 1 chiều: kết quả các hoạt động của ĐÚNG
+      buổi học hôm nay (chưa có dữ liệu tích luỹ nhiều buổi/lịch sử).
+   2. 1 hoạt động CÓ THỂ ảnh hưởng nhiều NLO cùng lúc — ví dụ 8 vòng iSpeak (nói đúng 8 từ, mỗi từ
+      thuộc 1 trong 4 NLO Từ vựng) vừa test từ vựng vừa test phát âm (trọng âm) cùng lúc.
+   3. Ngưỡng "hổng": <60% (<6/10).
+   4. Khi nhiều NLO cùng hổng: ưu tiên theo mức độ hổng NẶNG NHẤT trước, hoà thì mới xét theo thứ
+      tự kiến thức trước–sau (đúng thứ tự liệt kê trong UNIT2_NLO, khớp mục 2.2 file NLO framework).
 
-  const gaps = computeNloGaps();
-  document.getElementById('masteryTiles').innerHTML = gaps.map(g=>{
-    const sep = g.name.indexOf(': ');
-    const label = sep>=0 ? g.name.slice(0,sep) : g.name;
-    const desc = sep>=0 ? g.name.slice(sep+2) : g.name;
-    return `<div class="summary-gap-card ${g.gap?'warn':'done'}">
-      <span class="summary-gap-pill"><i class="dot"></i>${g.gap?'Cần củng cố':'Đã đạt'} (${g.pct}%)</span>
-      <div class="row"><div class="name">${label}</div></div>
-      <div class="desc">${desc}</div>
+   Tên/strand từng NLO lấy nguyên văn từ 03_product/concepts/nlo-framework-concept-1.2-grade5-unit2-
+   2026-09-17.md mục 2.2 (nguồn ✅ Fact). Mỗi NLO gắn với hoạt động thật đo được nó trong buổi:
+   - 4 NLO Từ vựng   ← 8 vòng iSpeak (nói đúng từ mới — mỗi NLO ứng 2/8 từ, nhưng MVP 1 chiều nên
+                        tạm dùng chung 1 điểm iSpeak cho cả 4, chưa tách được đúng/sai theo từng từ)
+   - 2 NLO Ngữ pháp  ← câu hỏi trắc nghiệm (rút gọn "What's your favourite...?")
+   - "Hỏi & đáp sở thích cá nhân" (Nghe–Nói) ← AI Speak hội thoại
+   - "Đọc hiểu hội thoại ngắn" (Nghe–Nói)    ← Bài tập nhóm "Read and fill in the blanks"
+   - Phát âm (trọng âm 2 âm tiết)            ← 8 vòng iSpeak (dolphin/sandwich nằm trong 8 từ)
+   LƯU Ý quan trọng: vì Từ vựng và Phát âm cùng chỉ có 1 tín hiệu duy nhất (iSpeak) trong MVP 1
+   chiều này, 2 thanh "Từ vựng" và "Phát âm" ở màn Tổng kết sẽ LUÔN bằng nhau — đây là giới hạn thật
+   của dữ liệu hiện có (không phải bug), không phải do 2 kỹ năng đó thực sự giống nhau. Khi có tín
+   hiệu chấm phát âm riêng (ASR thật), tách activities của Phát âm ra khỏi Từ vựng tại đây. */
+const UNIT2_NLO = [
+  { strand:'Từ vựng', name:'Con vật (Animals)', activities:['ispeak'] },
+  { strand:'Từ vựng', name:'Màu sắc (Colours)', activities:['ispeak'] },
+  { strand:'Từ vựng', name:'Đồ ăn & thức uống (Food & Drinks)', activities:['ispeak'] },
+  { strand:'Từ vựng', name:'Môn thể thao (Sports)', activities:['ispeak'] },
+  { strand:'Ngữ pháp', name:`Câu hỏi "What's your favourite...?"`, activities:['mcq'] },
+  { strand:'Ngữ pháp', name:`Rút gọn What's/It's + mạo từ a/an`, activities:['mcq'] },
+  { strand:'Nghe – Nói', name:'Hỏi & đáp về sở thích cá nhân', activities:['aispeak'] },
+  { strand:'Nghe – Nói', name:'Đọc hiểu hội thoại ngắn', activities:['group'] },
+  { strand:'Phát âm', name:'Trọng âm từ 2 âm tiết (dolphin, sandwich)', activities:['ispeak'] },
+];
+const NLO_STRANDS = ['Từ vựng','Ngữ pháp','Nghe – Nói','Phát âm'];
+/* NLO buổi kế tiếp (Unit 3 "My Free Time") dùng cho dòng "Mở rộng" — cố định, không phụ thuộc
+   mastery buổi này vì Unit 3 là học MỚI chứ không phải củng cố. Nguồn: file NLO framework mục 2.3
+   (◆ Assumption — chưa có tài liệu bài giảng thật để đối chiếu như Unit 2). */
+const NEXT_LESSON_NLO = { strand:'Từ vựng', name:'Hoạt động giải trí (Free-time activities)' };
+
+function round1(n){ return Math.round(n*10)/10; }
+
+function computeNloMastery(){
+  const s = state.scores;
+  return UNIT2_NLO.map((nlo, order) => ({
+    ...nlo, order,
+    score: round1(nlo.activities.reduce((sum,a)=>sum+s[a], 0) / nlo.activities.length),
+  }));
+}
+
+function renderSummary(){
+  const nloMastery = computeNloMastery();
+  const strandScores = NLO_STRANDS.map(strand=>{
+    const items = nloMastery.filter(n=>n.strand===strand);
+    return { strand, score: round1(items.reduce((a,b)=>a+b.score,0)/items.length) };
+  });
+  document.getElementById('skillCards').innerHTML = strandScores.map(({strand,score})=>{
+    const color = summarySkillColor(score);
+    return `<div class="summary-skill-bar">
+      <div class="row"><span class="name">${strand}</span><span class="score" style="color:${color};">${score}/10</span></div>
+      <div class="track"><div class="fill" style="width:${score*10}%;background:${color};"></div></div>
     </div>`;
   }).join('');
+
+  /* Mục tiêu buổi bổ trợ — Củng cố: NLO hổng nặng nhất (điểm 3.), hoà thì theo thứ tự trước-sau
+     (điểm 4.). Mở rộng: 1 NLO cố định của buổi kế tiếp. */
+  const gapped = nloMastery.filter(n=>n.score<6).sort((a,b)=>a.score-b.score || a.order-b.order);
+  const goalLines = [];
+  if(gapped[0]){
+    goalLines.push(`<li>Củng cố lại kiến thức chưa thành thạo <b>${gapped[0].strand} - ${gapped[0].name}</b></li>`);
+  }
+  goalLines.push(`<li>Mở rộng kiến thức <b>${NEXT_LESSON_NLO.strand} - ${NEXT_LESSON_NLO.name}</b></li>`);
+  document.getElementById('summaryPlanText').innerHTML = goalLines.join('');
 
   /* DRAFT REVIEW: gộp phần "mục tiêu buổi bổ trợ" (trước ở màn aic2-intro riêng, hàm
      initAic2Intro() cũ) vào ngay đây — chốt track/nloList sớm hơn 1 bước trong luồng, không đổi
      kết quả vì vẫn tính từ state.scores đã có tại thời điểm này. */
   state.aic2.track = computeAic2Track();
   state.aic2.nloList = AIC2_NLO[state.aic2.track];
-  document.getElementById('summaryPlanText').textContent = 'Buổi học bổ trợ: ' +
-    gaps.map(g => (g.gap ? 'Củng cố lại kiến thức chưa thành thạo ' : 'Mở rộng kiến thức ') + g.name).join('. ') + '.';
+
+  startSummaryCountdown();
+}
+
+/* Đếm ngược 15s trên CTA rồi tự chuyển sang buổi bổ trợ (khớp text "(15s)" ở Figma node
+   38:29259) — dừng lại nếu người dùng bấm nút tay hoặc rời màn tổng kết trước đó
+   (xem stopSummaryCountdown() gọi từ goto()). */
+function startSummaryCountdown(){
+  clearInterval(state.summaryCountdownIv);
+  let n = 15;
+  const el = document.getElementById('summaryCtaCountdown');
+  el.textContent = `(${n}s)`;
+  state.summaryCountdownIv = setInterval(()=>{
+    n--;
+    if(n<=0){ stopSummaryCountdown(); goto('aic2-interact'); return; }
+    el.textContent = `(${n}s)`;
+  }, 1000);
+}
+function stopSummaryCountdown(){
+  clearInterval(state.summaryCountdownIv);
 }
 
 /* ============ MASTERY MAP (Bản đồ năng lực toàn môn) ============ */
