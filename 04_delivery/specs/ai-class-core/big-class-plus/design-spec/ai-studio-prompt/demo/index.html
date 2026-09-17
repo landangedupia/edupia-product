@@ -555,7 +555,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 /* Khớp get_design_context (panel phải nền #374151, card đội mình #ECFBFF/#1890C7, đội khác nền trắng) */
 .right-panel{width:324px;background:#374151;padding:16px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;overflow:hidden;}
 /* Khớp Figma node 3:37908 — danh sách 4 đội cuộn riêng, self-cam/tabs phía dưới luôn cố định. */
-.team-list{display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;min-height:0;}
+.team-slot{position:relative;flex:1;min-height:0;}
+.team-list{display:flex;flex-direction:column;gap:10px;overflow-y:auto;height:100%;}
 .live-pill{align-self:flex-start;background:#dc2626;color:#fff;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;}
 .self-cam{height:182px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
 .self-cam img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -581,6 +582,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .panel-tabs button{flex:1;background:var(--primary-50);backdrop-filter:blur(4px);color:#374151;padding:12px 8px;
   border-radius:9px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;}
 .panel-tabs button img{width:16px;height:16px;}
+
+/* Khớp Figma "Thảo luận lớp" (node 223:27458, file Edupia AI Class Plus) — khung chat che lên
+   .team-list (cùng .team-slot) khi bấm "💬 Thảo luận", hiệu ứng collapse: cao dần từ 0 xuống 100%
+   khi mở, thu lại về 0 khi đóng. Nội dung tin nhắn mẫu ở đây là mock tĩnh; kịch bản giả lập bot các
+   bạn trong lớp trả lời sẽ nối vào discussSend() sau (xem TODO trong JS). */
+.discuss-panel{position:absolute;left:0;right:0;top:0;height:0;background:var(--n50);border-radius:16px;
+  display:flex;flex-direction:column;overflow:hidden;transition:height .32s cubic-bezier(.4,0,.2,1);}
+.discuss-panel.open{height:100%;}
+.discuss-msg-list{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+  padding:12px 12px 82px;}
+.discuss-msg-row{display:flex;gap:4px;align-items:flex-start;}
+.discuss-msg-row.mine{flex-direction:row-reverse;justify-content:flex-end;}
+.discuss-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;object-fit:cover;
+  box-shadow:0 6px 7.5px rgba(16,24,40,.08),0 3px 7.5px rgba(16,24,40,.08);}
+.discuss-bubble{display:flex;align-items:flex-start;max-width:237px;}
+.discuss-bubble.mine{flex-direction:row-reverse;max-width:80%;}
+.discuss-bubble-tail{width:4px;height:10px;margin-top:17px;flex-shrink:0;background:url(assets/icon-chat-tail.svg) no-repeat center/contain;}
+.discuss-bubble.mine .discuss-bubble-tail{transform:scaleX(-1);}
+.discuss-bubble-content{background:#fff;border-radius:12px;padding:4px 8px;display:flex;flex-direction:column;
+  gap:2px;box-shadow:0 1px 1px rgba(16,24,40,.04);min-width:0;}
+.discuss-bubble-name{font-size:10px;font-weight:600;color:#9ca3af;white-space:nowrap;}
+.discuss-bubble-text{font-size:14px;line-height:20px;color:var(--n700);word-break:break-word;}
+.discuss-bubble.teacher .discuss-bubble-content{background:var(--primary);}
+.discuss-bubble.teacher .discuss-bubble-name,.discuss-bubble.teacher .discuss-bubble-text{color:#fff;}
+.discuss-bubble.mine .discuss-bubble-content{background:var(--primary-50);align-items:flex-end;text-align:right;}
+.discuss-input-bar{position:absolute;left:0;bottom:0;width:100%;height:70px;background:#d1d5db;
+  backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;
+  padding:8px 8px 8px 16px;box-sizing:border-box;}
+.discuss-input-bar.active{background:#1f2937;}
+.discuss-input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#9ca3af;
+  font-size:14px;font-weight:500;font-family:inherit;}
+.discuss-input-bar.active .discuss-input{color:#fff;}
+.discuss-input::placeholder{color:#9ca3af;}
+.discuss-input-btn{width:54px;height:54px;border-radius:60px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;}
+.discuss-input-btn img{width:24px;height:24px;}
+.discuss-input-bar.active .discuss-input-btn img{width:28px;height:28px;}
 
 /* Thông báo đầu lớp (khớp node 18910:91104) */
 .announce-modal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9;
@@ -1910,7 +1948,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
           <img id="classroomSelfPhoto" src="assets/classroom-self-cam.png" alt="">
           <div class="trophy"><img src="assets/trophy.png" alt=""> <span id="selfTrophy">45</span></div>
         </div>
-        <div class="team-list">
+        <div class="team-slot">
+          <div class="team-list" id="teamList">
           <div class="team-card me">
             <div class="t-head"><span>Team Cáo</span><span class="reward-pill"><img src="assets/trophy.png" alt="">31</span></div>
             <div class="t-members">
@@ -1945,8 +1984,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
             </div>
           </div>
         </div>
+        <div class="discuss-panel" id="discussPanel">
+          <div class="discuss-msg-list" id="discussMsgList"></div>
+          <div class="discuss-input-bar" id="discussInputBar">
+            <input type="text" id="discussInput" class="discuss-input" placeholder="Soạn tin nhắn"
+              oninput="discussOnInput()" onkeydown="discussOnKeydown(event)">
+            <button class="discuss-input-btn" id="discussInputBtn" onclick="discussInputBtnClick()">
+              <img id="discussInputBtnIcon" src="assets/icon-chat-mic-idle.svg" alt="">
+            </button>
+          </div>
+        </div>
+        </div>
         <div class="panel-tabs" id="panelTabs">
-          <button onclick="toast('💬 Thảo luận lớp (mock)')">💬 Thảo luận</button>
+          <button onclick="toggleDiscussPanel()">💬 Thảo luận</button>
           <button onclick="toast('🎓 Chat với trợ giảng (mock)')">🎓 Trợ giảng</button>
         </div>
       </div>
@@ -3045,8 +3095,101 @@ function bottomBarDefault(hint){
   <div class="control-center"><span class="hint-text">${hint || 'Đang xem bài giảng...'}</span></div>
   <button class="cc-btn">CC</button>`;
 }
-const PANEL_TABS_DEFAULT = `<button onclick="toast('💬 Thảo luận lớp (mock)')">💬 Thảo luận</button>
+const PANEL_TABS_DEFAULT = `<button onclick="toggleDiscussPanel()">💬 Thảo luận</button>
   <button onclick="toast('🎓 Chat với trợ giảng (mock)')">🎓 Trợ giảng</button>`;
+
+/* ============ THẢO LUẬN LỚP (khớp Figma node 223:27458, file "Edupia AI Class Plus") ============
+   Bấm "💬 Thảo luận" thay thế #teamList bằng #discussPanel (danh sách tin nhắn + thanh soạn tin).
+   Tin nhắn mẫu bên dưới là mock tĩnh — kịch bản giả lập bot các bạn trong lớp trả lời sẽ nối vào
+   discussSend() sau (chỗ đánh dấu TODO), chưa nối STT/bot thật. */
+const DISCUSS_SEED_MESSAGES = [
+  { who: 'Nguyễn Hoàng Nam', text: 'Con chào cô', kind: 'other', avatar: 'assets/discuss-avatar-1.png' },
+  { who: 'Nguyễn Trọng Trung', text: 'Chào các bạn', kind: 'mine', avatar: 'assets/discuss-avatar-2.png' },
+  { who: 'Giáo viên: Toán Nguyễn', text: 'Cô chào cả lớp', kind: 'teacher', avatar: 'assets/discuss-avatar-teacher.png' },
+  { who: 'Lê Tuấn Anh', text: 'Cô Không chào riêng em à? cô kỳ vậy', kind: 'other', avatar: 'assets/discuss-avatar-3.png' },
+];
+state.discuss = { open: false, mode: 'idle', seeded: false };
+
+function renderDiscussMessage(m){
+  return `<div class="discuss-msg-row ${m.kind === 'mine' ? 'mine' : ''}">
+    <img class="discuss-avatar" src="${m.avatar}" alt="">
+    <div class="discuss-bubble ${m.kind}">
+      <span class="discuss-bubble-tail"></span>
+      <div class="discuss-bubble-content">
+        <div class="discuss-bubble-name">${m.who}</div>
+        <div class="discuss-bubble-text">${m.text}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleDiscussPanel(){
+  if(state.discuss.open) closeDiscussPanel(); else openDiscussPanel();
+}
+
+function openDiscussPanel(){
+  state.discuss.open = true;
+  document.getElementById('discussPanel').classList.add('open');
+  if(!state.discuss.seeded){
+    state.discuss.seeded = true;
+    document.getElementById('discussMsgList').innerHTML = DISCUSS_SEED_MESSAGES.map(renderDiscussMessage).join('');
+  }
+  const list = document.getElementById('discussMsgList');
+  list.scrollTop = list.scrollHeight;
+}
+
+function closeDiscussPanel(){
+  state.discuss.open = false;
+  const panel = document.getElementById('discussPanel');
+  if(panel) panel.classList.remove('open');
+}
+
+function setDiscussInputMode(mode){
+  state.discuss.mode = mode;
+  const bar = document.getElementById('discussInputBar');
+  const icon = document.getElementById('discussInputBtnIcon');
+  const input = document.getElementById('discussInput');
+  bar.classList.toggle('active', mode !== 'idle');
+  if(mode === 'idle'){ icon.src = 'assets/icon-chat-mic-idle.svg'; input.placeholder = 'Soạn tin nhắn'; }
+  else if(mode === 'typing'){ icon.src = 'assets/icon-chat-send.svg'; }
+  else if(mode === 'recording'){ icon.src = 'assets/icon-chat-mic-stop.svg'; input.placeholder = 'Học sinh đang nói|'; }
+}
+
+function discussOnInput(){
+  if(state.discuss.mode === 'recording') return;
+  const input = document.getElementById('discussInput');
+  setDiscussInputMode(input.value.trim() ? 'typing' : 'idle');
+}
+
+function discussOnKeydown(e){
+  if(e.key === 'Enter'){ e.preventDefault(); discussSend(); }
+}
+
+function discussInputBtnClick(){
+  const input = document.getElementById('discussInput');
+  if(state.discuss.mode === 'typing'){ discussSend(); return; }
+  if(state.discuss.mode === 'recording'){
+    /* Bấm stop: dừng nhận âm thanh, chuyển về dạng typing với nội dung đã "nhận diện" — demo này
+       chưa nối speech-to-text thật nên chỉ điền sẵn một câu mẫu. */
+    input.value = 'Con muốn hỏi thêm về bài học ạ';
+    input.focus();
+    setDiscussInputMode('typing');
+    return;
+  }
+  setDiscussInputMode('recording');
+}
+
+function discussSend(){
+  const input = document.getElementById('discussInput');
+  const text = input.value.trim();
+  if(!text) return;
+  const list = document.getElementById('discussMsgList');
+  list.insertAdjacentHTML('beforeend', renderDiscussMessage({ who: 'Tôi', text, kind: 'mine', avatar: 'assets/classroom-avatar-me.png' }));
+  list.scrollTop = list.scrollHeight;
+  input.value = '';
+  setDiscussInputMode('idle');
+  /* TODO: kịch bản giả lập bot các bạn trong lớp trả lời sẽ nối vào đây. */
+}
 
 function renderClassroomStep(){
   const step = FLOW[state.classroomStep];
@@ -3166,6 +3309,7 @@ function renderClassroomStep(){
       break;
 
     case 'group-discuss':
+      closeDiscussPanel();
       document.getElementById('panelTabs').innerHTML = `<button class="locked" style="width:100%;">🔒 Thảo luận nhóm (5s)</button>`;
       overlay.innerHTML = `<div class="live-toast">🗣️ Cả nhóm đang thảo luận...</div>`;
       autoAdvance(nextClassStep, 2200);
