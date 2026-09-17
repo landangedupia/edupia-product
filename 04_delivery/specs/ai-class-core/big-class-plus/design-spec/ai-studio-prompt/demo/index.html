@@ -65,7 +65,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .badge-warning{background:var(--warning-100);color:#8a5a00;}
 
 /* ---------- SKIP BUTTON + THANH TUA VIDEO ---------- */
-#topRightControls{position:fixed;top:14px;right:14px;z-index:999;display:flex;align-items:center;gap:10px;}
+/* Nằm BÊN TRONG #app (xem vị trí thẻ ở cuối #app trong HTML) và dùng position:absolute (không phải
+   fixed) để luôn nổi ĐÚNG trong khung màn hình 1440x956 đã thiết kế — kể cả khi #app được scale/căn
+   giữa theo kích thước cửa sổ trình duyệt (fitApp()). Trước đây dùng position:fixed theo viewport
+   thật nên có lúc trôi ra ngoài hẳn khung đã thiết kế. */
+#topRightControls{position:absolute;right:14px;bottom:14px;z-index:999;display:flex;align-items:center;gap:10px;}
+/* Màn lớp học có sidebar phải rộng 324px (.right-panel) — lùi vào thêm để không đè lên sidebar đó. */
+#topRightControls.in-classroom{right:338px;}
 #skipBtn{
   background:rgba(17,24,39,.85);color:#fff;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;
   box-shadow:var(--shadow-m);flex-shrink:0;
@@ -75,7 +81,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   padding:6px 14px;border-radius:20px;box-shadow:var(--shadow-m);}
 .video-seek-wrap[hidden]{display:none;}
 .video-seek-time{font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.video-seek-playbtn{width:24px;height:24px;flex-shrink:0;border-radius:50%;background:rgba(255,255,255,.16);
+  color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;}
+.video-seek-playbtn:hover{background:rgba(255,255,255,.3);}
+.video-seek-track-wrap{position:relative;width:220px;display:flex;align-items:center;}
 #videoSeekRange{width:220px;accent-color:var(--primary);cursor:pointer;}
+.video-seek-markers{position:absolute;left:0;right:0;top:50%;height:0;pointer-events:none;}
+.video-seek-marker{position:absolute;top:0;width:6px;height:6px;border-radius:50%;background:#ffc94d;
+  border:1px solid rgba(0,0,0,.35);transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;}
+.video-seek-marker:hover{background:#fff;}
 
 /* ================= MÀN 0: LỊCH HỌC ================= */
 /* Khớp theo get_design_context thật (node 16375:44013, file Edupia Design System 2025) —
@@ -212,10 +226,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   color:#fff;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;}
 .hw-card.hw-green .tab span{background:#518E0D;}
 .hw-card.hw-teal .tab span{background:#005A7D;}
+.hw-card.hw-locked .tab span{background:#6B7280;}
 .hw-card .body{background:#fff;flex:1;border-radius:0 16px 16px 0;padding:16px 16px 16px 0;display:flex;align-items:center;gap:16px;position:relative;}
 .hw-card .icon60{width:60px;height:60px;flex-shrink:0;}
 .hw-card .icon60 img{width:100%;height:100%;object-fit:contain;}
 .hw-card .t{font-weight:500;color:var(--n700);font-size:16px;line-height:24px;flex:1;}
+.hw-card .sub{font-weight:400;color:var(--n500);font-size:14px;line-height:20px;margin-top:4px;}
 .hw-card .star-badge{position:absolute;top:-10px;right:-10px;width:24px;height:24px;}
 .hw-card .progress-bar{position:relative;width:100%;height:16px;margin-top:12px;}
 .hw-card .progress-bar .bg{position:absolute;inset:0;background:var(--n200);border-radius:999px;}
@@ -505,6 +521,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .cam-frame .cam-corner.br{bottom:10px;right:10px;border-bottom:2px solid;border-right:2px solid;border-radius:0 0 6px 0;}
 .cam-frame .cam-face{width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.08);
   border:2px dashed rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.cam-frame .cam-video,.cam-frame .cam-photo{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:none;transform:scaleX(-1);}
 .cam-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
 .cam-flash.flash{animation:flashAnim .35s ease;}
 @keyframes flashAnim{0%{opacity:0;}30%{opacity:.9;}100%{opacity:0;}}
@@ -515,7 +533,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .checkin-confirm .grant-btn.granted{width:100%;justify-content:center;padding:14px;}
 
 /* ================= MÀN 1: LỚP HỌC LIVE ================= */
-.classroom-screen{min-height:956px;background:#0b1220;position:relative;display:flex;}
+/* height (không phải min-height) thấp hơn khung #app (956px) một khoảng — chừa hẳn một dải trống
+   bên dưới .classroom-screen (vẫn nằm trong #screen-classroom/#app, chỉ là ngoài khung này) để
+   #topRightControls (nổi bottom:14px trong #app) đứng ở đó, không đè lên khung buổi học nữa. */
+.classroom-screen{height:880px;background:#0b1220;position:relative;display:flex;}
 .class-main{flex:1;position:relative;background:#000;overflow:hidden;}
 .class-video-bg{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;}
 .class-video-bg img{width:100%;height:100%;object-fit:contain;display:block;}
@@ -535,6 +556,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .live-pill{align-self:flex-start;background:#dc2626;color:#fff;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;}
 .self-cam{height:182px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
 .self-cam img{width:100%;height:100%;object-fit:cover;display:block;}
+.self-cam .self-cam-video{width:100%;height:100%;object-fit:cover;display:none;transform:scaleX(-1);}
 .self-cam .trophy{position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.5);backdrop-filter:blur(4px);color:#1f2937;padding:2px 8px;border-radius:30px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:4px;}
 .self-cam .trophy img{width:20px;height:20px;flex-shrink:0;}
 .team-card{background:#fff;border-radius:16px;padding:8px 16px;box-shadow:0 -2px 4px rgba(102,102,102,.2);}
@@ -697,83 +719,102 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-card{background:#fff;border-radius:24px;padding:36px 40px;box-shadow:var(--shadow-m);width:640px;display:flex;flex-direction:column;gap:20px;}
 .aic2-card h2{margin:0;text-align:center;}
 
-/* ---- Màn 2 (Tương tác) — nền tối kiểu classroom, tái dùng chat-panel ---- */
-.aic2-interact-screen{min-height:956px;background:#0b1220;position:relative;}
-.aic2-topbar{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px;z-index:4;}
-.duration-pill{display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
-.duration-bar-bg{width:80px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
-.duration-bar-fill{height:100%;background:var(--primary);border-radius:6px;transition:width .4s ease;}
-.nlo-pill{display:flex;align-items:center;gap:6px;background:#12233f;color:#fff;padding:6px 14px;border-radius:10px;
-  font-size:13px;font-weight:600;max-width:600px;white-space:normal;text-align:center;line-height:1.4;}
-.aic2-chat-wrap{position:absolute;left:50%;top:90px;bottom:150px;transform:translateX(-50%);width:760px;background:#fff;border-radius:20px;padding:22px;display:flex;flex-direction:column;box-shadow:var(--shadow-m);}
+/* ---- Màn 2 (Tương tác) — layout 2 cột khớp Figma node 192:27387 (6 trạng thái: Nội dung bổ
+   trợ / Bài giảng ngắn / Câu hỏi ôn tập chưa trả lời / trả lời sai / trả lời đúng / Ăn mừng
+   hoàn thành NLO). Cột phải tái dùng đúng cặp camera giáo viên + camera học sinh (camera thật,
+   xem attachAic2Cam/state.camStream) như buổi chính khoá để nhất quán xuyên suốt buổi học. ---- */
+.aic2-interact-screen{width:100%;min-height:956px;display:flex;position:relative;
+  background:linear-gradient(135deg,var(--primary) 0%,var(--brand-navy) 100%);}
+.aic2-content-pane{width:1068px;flex-shrink:0;box-sizing:border-box;padding:15px 24px 24px;
+  display:flex;flex-direction:column;gap:20px;}
+.aic2-header-text{color:#fff;font-size:16px;line-height:24px;flex-shrink:0;}
+.aic2-header-text b{font-weight:700;}
+.aic2-main-card{background:#fff;border-radius:30px;box-shadow:var(--shadow-card);flex:1;min-height:0;
+  overflow:hidden;position:relative;}
+.aic2-view{display:none;width:100%;height:100%;box-sizing:border-box;}
+.aic2-view.active{display:flex;flex-direction:column;}
 
-/* ---- DRAFT REVIEW: "phần luyện tập" — khớp Figma node 17578:66078 ("Connady - Bài tập nhóm"),
-   bỏ cột team bên phải (buổi bổ trợ 1-1, không cần bảng xếp hạng nhóm). ---- */
-.aic2-exercise-stage{position:absolute;left:50%;top:76px;bottom:100px;transform:translateX(-50%);width:1180px;
-  display:flex;flex-direction:column;align-items:center;gap:16px;}
-.aic2-progress-row{display:flex;align-items:center;gap:12px;width:100%;max-width:900px;
-  background:#fff;border-radius:30px;padding:8px 18px;box-shadow:var(--shadow-s);flex-shrink:0;}
-.aic2-progress-count{font-weight:600;font-size:16px;color:var(--n900);flex-shrink:0;}
-.aic2-progress-track{flex:1;height:16px;background:var(--n200);border-radius:30px;overflow:hidden;
-  box-shadow:inset 0 2px 8px rgba(0,0,0,.06);}
-.aic2-progress-fill{display:block;height:100%;background:#3fc2ca;border-radius:30px;transition:width .3s ease;}
-.aic2-question-card{background:#fff;border-radius:30px;box-shadow:var(--shadow-card);
-  width:100%;max-width:900px;padding:20px;display:flex;flex-direction:column;gap:12px;
-  flex:1;min-height:0;overflow:auto;}
-.aic2-q-tags{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;flex-shrink:0;}
-.aic2-q-tag{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:16px;
-  font-weight:600;font-size:16px;color:var(--n700);border:3px solid transparent;}
-.aic2-q-tag img{width:20px;height:20px;flex-shrink:0;}
-.aic2-q-tag.q-num{background:var(--primary-50);border-color:#3cb4e7;}
-.aic2-q-tag.q-timer{background:var(--n50);border-color:var(--n200);}
-.aic2-q-tag.q-points{background:#fffceb;border-color:var(--warning);color:#124e78;}
-.aic2-q-text{font-size:18px;line-height:28px;color:var(--n900);flex-shrink:0;}
-.aic2-mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:4px 0;}
-.aic2-opt-btn{display:flex;align-items:center;gap:10px;background:var(--n50);
-  border:3px solid var(--n200);border-radius:30px;padding:6px 16px 6px 6px;font-size:16px;font-weight:500;
-  color:var(--n700);height:48px;text-align:left;transition:background .15s,border-color .15s,color .15s;}
-.aic2-opt-btn .letter{display:flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;
-  border-radius:30px;background:#fff;font-weight:600;box-shadow:inset 0 2px 8px rgba(0,0,0,.06);}
-.aic2-opt-btn.selected{background:var(--primary);border-color:var(--primary);color:#fff;}
-.aic2-opt-btn.selected .letter{background:rgba(255,255,255,.25);color:#fff;}
-.aic2-gapfill{padding:4px 0;display:flex;flex-direction:column;gap:12px;}
-.aic2-gapfill .fb-sentence{font-size:15px;color:var(--n700);}
-.aic2-speak{padding:4px 0;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.aic2-speak-prompt{font-size:14px;color:var(--n900);font-weight:500;text-align:center;background:var(--n50);border-radius:12px;padding:12px 16px;}
-.aic2-speak-hint{font-size:12px;color:var(--n500);}
-.aic2-feedback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  flex:1;text-align:center;padding:20px;}
-.aic2-feedback .face{font-size:48px;}
-.aic2-feedback .msg{font-size:16px;font-weight:600;color:var(--n900);}
-.aic2-feedback.wrong .msg{color:var(--destructive);}
-.aic2-bottom-bar{position:absolute;left:0;right:0;bottom:0;background:#1f2937;height:80px;
-  display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:4;}
-.aic2-bottom-bar .tutor-tag{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);
-  padding:4px 14px 4px 4px;border-radius:30px;}
-.aic2-bottom-bar .tutor-tag img{width:40px;height:40px;border-radius:50%;object-fit:cover;}
-.aic2-bottom-bar .tutor-tag span{font-size:13px;font-weight:600;color:#fff;}
-.aic2-bottom-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.4);display:flex;
-  align-items:center;justify-content:center;}
-.aic2-bottom-icon img{width:20px;height:20px;filter:brightness(0) invert(1);}
+/* Nội dung bổ trợ (giới thiệu đầu buổi) */
+#aic2View_intro{padding:32px 40px;justify-content:center;gap:24px;}
+.aic2-intro-title{font-size:28px;font-weight:600;color:var(--n900);text-align:center;}
+.aic2-intro-cards{display:flex;gap:24px;}
+.aic2-intro-item{flex:1;background:var(--n50);border-radius:14px;padding:20px;box-shadow:var(--shadow-s);}
+.aic2-intro-tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+  padding:4px 12px;border-radius:16px;margin-bottom:14px;}
+.aic2-intro-tag.now{background:var(--warning-100);color:#946200;}
+.aic2-intro-tag.next{background:var(--primary-100);color:var(--primary);}
+.aic2-intro-cat{font-size:16px;font-weight:600;color:var(--n900);}
+.aic2-intro-detail{font-size:14px;color:var(--n700);margin-top:2px;}
 
-/* ---- Micro-lesson: bài giảng ngắn 3 phút trước 5 bài tập vi mô — tái dùng đúng khung "frame
-   chiếu bài giảng" của buổi chính khóa (khớp node 17561:14450: viền tối, pill hướng dẫn góc
-   trái, khung giáo viên góc phải, label chủ đề giữa khung). ---- */
-.aic2-lesson-stage{position:absolute;left:50%;top:76px;bottom:100px;transform:translateX(-50%);width:1180px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;}
-.aic2-lesson-duration{flex-shrink:0;display:flex;align-items:center;gap:8px;background:#111827;color:#e5e7eb;
-  padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
-.aic2-lesson-duration-bar{width:64px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
-.aic2-lesson-duration-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .5s linear;}
-.aic2-lesson-frame{position:relative;width:100%;flex:1;min-height:0;border-radius:16px;overflow:hidden;
-  background:#374151;box-shadow:var(--shadow-m);}
+/* Bài giảng ngắn (micro-lesson, 3 phút) */
+#aic2View_lesson{padding:0;}
+.aic2-lesson-frame{position:relative;width:100%;height:100%;overflow:hidden;}
 .aic2-lesson-frame img{width:100%;height:100%;object-fit:cover;display:block;}
 .aic2-lesson-title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;
   padding:14px 26px;border-radius:14px;font-size:20px;font-weight:700;text-align:center;max-width:70%;z-index:2;}
-.aic2-lesson-caption{flex-shrink:0;background:#fff;color:var(--n900);padding:14px 20px;border-radius:14px;
-  font-size:14px;line-height:1.6;width:100%;text-align:center;box-shadow:var(--shadow-s);}
-.aic2-lesson-skip{flex-shrink:0;background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;
-  font-size:14px;font-weight:600;}
+.aic2-lesson-duration{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:8px;
+  background:rgba(17,24,39,.75);color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
+.aic2-lesson-duration-bar{width:64px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
+.aic2-lesson-duration-bar i{display:block;height:100%;background:var(--primary);border-radius:6px;transition:width .5s linear;}
+.aic2-lesson-skip{position:absolute;right:16px;bottom:16px;z-index:2;background:var(--primary);color:#fff;
+  padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;}
+
+/* Câu hỏi ôn tập (adaptive question) — chọn 1 đáp án, tô màu theo đúng/sai khi nộp bài */
+#aic2View_exercise{padding:24px 30px;gap:16px;}
+.aic2-progress-row{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.aic2-progress-count{font-weight:600;font-size:14px;color:var(--n700);flex-shrink:0;}
+.aic2-progress-track{flex:1;height:10px;background:var(--n200);border-radius:30px;overflow:hidden;}
+.aic2-progress-fill{display:block;height:100%;background:#3fc2ca;border-radius:30px;transition:width .3s ease;}
+.aic2-q-label{font-size:13px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;}
+.aic2-q-text{font-size:18px;font-weight:600;line-height:26px;color:var(--n900);flex-shrink:0;}
+.aic2-mcq-opts{display:flex;flex-direction:column;gap:12px;}
+.aic2-opt-btn{display:flex;align-items:center;gap:14px;background:var(--n100);border:none;border-radius:10px;
+  padding:14px 16px;font-size:16px;font-weight:500;color:var(--n900);text-align:left;width:100%;}
+.aic2-opt-btn .letter{display:flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;
+  border-radius:50%;background:var(--n700);color:#fff;font-size:13px;font-weight:700;}
+.aic2-opt-btn.correct{background:#e3f7df;}
+.aic2-opt-btn.correct .letter{background:var(--success);}
+.aic2-opt-btn.wrong{background:#fde3e2;}
+.aic2-opt-btn.wrong .letter{background:var(--destructive);}
+.aic2-gapfill{display:flex;flex-direction:column;gap:12px;}
+.aic2-gapfill .fb-sentence{font-size:16px;color:var(--n900);}
+.fb-blank.correct{color:var(--success);font-weight:700;}
+.fb-blank.wrong{color:var(--destructive);font-weight:700;}
+.aic2-speak{display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:12px;}
+.aic2-speak-prompt{font-size:15px;color:var(--n900);font-weight:500;text-align:center;background:var(--n50);border-radius:12px;padding:12px 16px;}
+.aic2-speak-hint{font-size:12px;color:var(--n500);}
+
+/* Ăn mừng hoàn thành 1 NLO */
+#aic2View_celebrate{align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;}
+.aic2-celebrate-msg{font-size:20px;font-weight:600;color:var(--n900);max-width:640px;}
+.aic2-celebrate-stars{display:flex;gap:10px;}
+.aic2-celebrate-stars img{width:56px;height:56px;}
+
+/* Thẻ nhận xét Teacher Jenny — luôn hiển thị dưới thẻ chính, đổi nội dung theo từng bước */
+.aic2-msg-card{background:#fff;border-radius:30px;box-shadow:var(--shadow-card);padding:24px 30px;
+  flex-shrink:0;min-height:120px;box-sizing:border-box;}
+.aic2-msg-label{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:10px;}
+.aic2-msg-body{font-size:16px;line-height:26px;color:var(--n900);}
+.aic2-msg-body b{font-weight:700;}
+
+/* Cột camera bên phải — camera giáo viên (ảnh minh hoạ) + camera học sinh (camera thật đã cấp
+   quyền từ đầu buổi, xem attachAic2Cam/state.camStream — cùng 1 stream xuyên suốt buổi học) */
+.aic2-right-panel{width:372px;flex-shrink:0;background:#374151;box-sizing:border-box;
+  padding:239px 24px 24px;display:flex;flex-direction:column;gap:12px;}
+.aic2-cam{position:relative;border-radius:12px;overflow:hidden;flex-shrink:0;}
+.aic2-cam img{width:100%;height:100%;object-fit:cover;display:block;}
+.aic2-cam .self-cam-video{width:100%;height:100%;object-fit:cover;display:none;transform:scaleX(-1);}
+.aic2-cam.teacher{height:174px;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.25);}
+.aic2-cam.student{height:182px;}
+.aic2-cam .rec-dot{position:absolute;top:8px;left:8px;width:8px;height:8px;border-radius:50%;background:#ef444a;}
+.aic2-cam .cam-badge{position:absolute;top:8px;right:8px;width:32px;height:32px;}
+.aic2-cam .cam-name{position:absolute;left:12px;bottom:10px;color:#fff;font-weight:700;font-size:16px;}
+.aic2-cam .cam-trophy{position:absolute;right:8px;bottom:8px;background:rgba(255,255,255,.5);
+  backdrop-filter:blur(4px);padding:2px 8px;border-radius:30px;font-size:14px;font-weight:500;
+  color:#1f2937;display:flex;align-items:center;gap:4px;}
+.aic2-cam .cam-trophy img{width:20px;height:20px;}
+.aic2-msg-tutor-btn{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:9px;
+  padding:16px 24px;font-weight:600;font-size:16px;color:var(--n700);width:100%;flex-shrink:0;}
 .homework-card{background:var(--primary-50);border:1px solid var(--primary-100);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:14px;}
 .homework-card .ic{font-size:26px;}
 .homework-card .t{font-weight:600;color:var(--n900);font-size:13px;}
@@ -1113,11 +1154,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
                 <div class="row1">
                   <div class="teacher">
                     <div class="av"><img src="assets/avatar-teacher1.png" alt=""></div>
-                    <div class="meta"><div><b>Buổi 1 - Thứ 4</b> | 19:25 - 20:25</div><div>Cô Tina Banker</div></div>
+                    <div class="meta"><div><b>Buổi 1 - Thứ 4</b> | 19:30 - 21:00</div><div>Cô Quỳnh</div></div>
                   </div>
                   <button class="enter-btn" onclick="startClassFlow(false)">Vào học</button>
                 </div>
-                <div class="lesson"><b>[Buổi 1]</b> Unit 7: Friends vaction with Minh</div>
+                <div class="lesson"><b>[Buổi 1]</b> Lesson 1: My favourite things</div>
                 <div class="actions-row">
                   <div class="icon-row">
                     <div class="ic-item"><img src="assets/icon-doc.png" alt="">Tài liệu</div>
@@ -1135,44 +1176,30 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
                   </div>
                   <span class="status-badge"><img src="assets/dot-warning.svg" alt=""> Sắp diễn ra</span>
                 </div>
-                <div class="lesson"><b>[Buổi 2]</b> Unit 7: Friends vaction with Minh</div>
-                <div class="actions-row">
-                  <div class="icon-row">
-                    <div class="ic-item"><img src="assets/icon-doc.png" alt="">Tài liệu</div>
-                    <div class="ic-item dim"><img src="assets/icon-feedback.png" alt="">Nhận xét</div>
-                    <div class="ic-item dim"><img src="assets/icon-video2.png" alt="">Video</div>
-                  </div>
-                </div>
+                <div class="lesson"><b>[Buổi 2]</b> Lesson 2: Friends vacation with Minh</div>
               </div>
             </div>
 
             <div>
               <div class="section-head"><h2>Bài tập phải làm</h2></div>
               <div class="homework-grid">
-                <div class="hw-card hw-green">
+                <div class="hw-card hw-locked">
                   <div class="tab"><span>Thực hành</span></div>
                   <div class="body">
-                    <div class="icon60"><img src="assets/icon-hw1.png" alt=""></div>
-                    <div style="flex:1;position:relative;">
-                      <div class="t">Grade 4 Unit 28 Lesson 1 bài tập về nhà</div>
-                      <div class="progress-bar"><div class="bg"></div><div class="fill" style="width:62%;"></div></div>
-                      <div class="star-badge"><img src="assets/icon-star.svg" alt=""></div>
+                    <div class="icon60"><img src="assets/icon-hw-locked.png" alt=""></div>
+                    <div style="flex:1;">
+                      <div class="t">Bài tập thực hành</div>
+                      <div class="sub">Mở ngay sau khi kết thúc buổi 1</div>
                     </div>
                   </div>
                 </div>
-                <div class="hw-card hw-teal">
+                <div class="hw-card hw-locked">
                   <div class="tab"><span>Kỹ năng</span></div>
                   <div class="body">
-                    <div class="icon60"><img src="assets/icon-hw2.png" alt=""></div>
-                    <div style="flex:1;position:relative;">
-                      <div class="t">Grade 4 Unit 28 Lesson 1 BTVN bài tập về nhà...</div>
-                      <div class="skill-icons">
-                        <div class="sk" style="background:#3FC2CA;"><img src="assets/icon-nghe-active.svg" alt=""></div>
-                        <div class="sk" style="background:#0A5C8F;"><img src="assets/icon-nghe.svg" alt=""></div>
-                        <div class="sk" style="background:#FFB703;"><img src="assets/icon-doc-brand.svg" alt=""></div>
-                        <div class="sk" style="background:#FB8500;"><img src="assets/icon-write-brand.svg" alt=""></div>
-                      </div>
-                      <div class="star-badge" style="right:auto;left:-10px;"><img src="assets/icon-star.svg" alt=""></div>
+                    <div class="icon60"><img src="assets/icon-hw-locked.png" alt=""></div>
+                    <div style="flex:1;">
+                      <div class="t">Bài tập kỹ năng</div>
+                      <div class="sub">Mở ngay sau khi kết thúc buổi 2</div>
                     </div>
                   </div>
                 </div>
@@ -1835,6 +1862,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="checkin-title">Điểm danh đầu buổi</div>
       <div class="checkin-sub">Con đưa khuôn mặt vào khung hình và bấm chụp ảnh nhé</div>
       <div class="cam-frame" id="checkinCam">
+        <video class="cam-video" id="checkinVideo" autoplay muted playsinline></video>
+        <img class="cam-photo" id="checkinPhoto" alt="">
         <span class="cam-rec"><span class="dot"></span>REC</span>
         <span class="cam-corner tl"></span><span class="cam-corner tr"></span>
         <span class="cam-corner bl"></span><span class="cam-corner br"></span>
@@ -1854,6 +1883,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       <div class="checkin-title">Điểm danh cuối buổi</div>
       <div class="checkin-sub">Con đưa khuôn mặt vào khung hình và bấm chụp ảnh nhé</div>
       <div class="cam-frame" id="checkoutCam">
+        <video class="cam-video" id="checkoutVideo" autoplay muted playsinline></video>
+        <img class="cam-photo" id="checkoutPhoto" alt="">
         <span class="cam-rec"><span class="dot"></span>REC</span>
         <span class="cam-corner tl"></span><span class="cam-corner tr"></span>
         <span class="cam-corner bl"></span><span class="cam-corner br"></span>
@@ -1880,7 +1911,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
       </div>
       <div class="right-panel" id="rightPanel">
         <div class="live-pill">● Trực tiếp · 20:25</div>
-        <div class="self-cam"><img src="assets/classroom-self-cam.png" alt=""><div class="trophy"><img src="assets/trophy.png" alt=""> <span id="selfTrophy">45</span></div></div>
+        <div class="self-cam">
+          <video class="self-cam-video" id="classroomSelfVideo" autoplay muted playsinline></video>
+          <img id="classroomSelfPhoto" src="assets/classroom-self-cam.png" alt="">
+          <div class="trophy"><img src="assets/trophy.png" alt=""> <span id="selfTrophy">45</span></div>
+        </div>
         <div class="team-card me">
           <div class="t-head"><span>Team Cáo</span><span class="reward-pill"><img src="assets/trophy.png" alt="">31</span></div>
           <div class="t-members">
@@ -1934,46 +1969,70 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
        thanh tiến trình thời lượng còn lại, nút gợi ý, nút thoát (mô phỏng BR9 — xem finding F024). -->
   <section class="screen" id="screen-aic2-interact">
     <div class="aic2-interact-screen">
-      <div class="aic2-topbar">
-        <span class="nlo-pill" id="aic2NloPill">Kiến thức bổ trợ 1/2</span>
-        <span class="duration-pill">⏱ <span id="aic2DurationLabel">30:00</span> <span class="duration-bar-bg"><span class="duration-bar-fill" id="aic2DurationFill" style="width:100%;"></span></span></span>
-      </div>
-      <div class="aic2-chat-wrap">
-        <div class="chat-scroll" id="aic2ChatScroll"></div>
-      </div>
-      <!-- DRAFT REVIEW: khung "phần luyện tập" khớp theo Figma node 17578:66078 ("Connady - Bài
-           tập nhóm"), bỏ cột team bên phải vì buổi bổ trợ là 1-1. Áp dụng chung cho cả 4 dạng bài
-           (mcq/gapfill/speak/chat) — phần nội dung động (#aic2ExerciseArea) nằm trong thẻ trắng
-           thay vì trong khung chat như trước. Bỏ số lượt chọn trên mỗi đáp án (không có ý nghĩa
-           với 1 học sinh). 2 nút góc dưới thanh điều khiển chỉ mang tính trang trí (chưa gắn hành
-           vi thật) — chờ xác nhận có cần chức năng thoát/thu nhỏ hay không. -->
-      <div class="aic2-exercise-stage" id="aic2ExerciseStage" style="display:none;">
-        <div class="aic2-progress-row">
-          <span class="aic2-progress-count" id="aic2ProgressCount">1/5</span>
-          <span class="aic2-progress-track"><span class="aic2-progress-fill" id="aic2ProgressFill" style="width:20%;"></span></span>
-        </div>
-        <div class="aic2-question-card">
-          <div class="aic2-q-tags">
-            <span class="aic2-q-tag q-num"><img src="assets/icon-clipboard-check.svg" alt=""><span id="aic2QNum">Câu 1</span></span>
-            <span class="aic2-q-tag q-timer"><span>00:30</span><img src="assets/icon-clock-check.svg" alt=""></span>
-            <span class="aic2-q-tag q-points"><img src="assets/trophy.png" alt=""><span>10</span></span>
+      <div class="aic2-content-pane">
+        <div class="aic2-header-text">Mục tiêu <b id="aic2GoalIdx">1/2</b>: <span id="aic2GoalVerb">Củng cố lại kiến thức chưa thành thạo</span> <b id="aic2GoalName"></b></div>
+        <div class="aic2-main-card">
+          <!-- 1) Nội dung bổ trợ (giới thiệu đầu buổi) -->
+          <div class="aic2-view" id="aic2View_intro">
+            <div class="aic2-intro-title">Nội dung bổ trợ</div>
+            <div class="aic2-intro-cards">
+              <div class="aic2-intro-item">
+                <span class="aic2-intro-tag now">• Đang học</span>
+                <div class="aic2-intro-cat" id="aic2IntroCat1"></div>
+                <div class="aic2-intro-detail" id="aic2IntroDetail1"></div>
+              </div>
+              <div class="aic2-intro-item">
+                <span class="aic2-intro-tag next">• Tiếp theo</span>
+                <div class="aic2-intro-cat" id="aic2IntroCat2"></div>
+                <div class="aic2-intro-detail" id="aic2IntroDetail2"></div>
+              </div>
+            </div>
           </div>
-          <div class="aic2-q-text" id="aic2QText"></div>
-          <div id="aic2ExerciseArea"></div>
+          <!-- 2) Bài giảng ngắn (micro-lesson, 3 phút — tái dùng khung "frame chiếu bài giảng") -->
+          <div class="aic2-view" id="aic2View_lesson">
+            <div class="aic2-lesson-frame">
+              <img src="assets/classroom-bg.png" alt="">
+              <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
+              <div class="aic2-lesson-duration">🎬 <span id="aic2LessonTimer">3:00</span> <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span></div>
+              <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
+            </div>
+          </div>
+          <!-- 3) Câu hỏi ôn tập (adaptive question) — dùng chung cho cả 4 dạng bài mcq/gapfill/
+               speak/chat, phần nội dung động nằm trong #aic2ExerciseArea -->
+          <div class="aic2-view" id="aic2View_exercise">
+            <div class="aic2-progress-row">
+              <span class="aic2-progress-count" id="aic2ProgressCount">1/5</span>
+              <span class="aic2-progress-track"><span class="aic2-progress-fill" id="aic2ProgressFill" style="width:20%;"></span></span>
+            </div>
+            <div class="aic2-q-label">ADAPTIVE Question</div>
+            <div class="aic2-q-text" id="aic2QText"></div>
+            <div id="aic2ExerciseArea"></div>
+          </div>
+          <!-- 4) Ăn mừng hoàn thành 1 NLO -->
+          <div class="aic2-view" id="aic2View_celebrate">
+            <div class="aic2-celebrate-msg" id="aic2CelebrateMsg"></div>
+            <div class="aic2-celebrate-stars" id="aic2CelebrateStars"></div>
+          </div>
+        </div>
+        <div class="aic2-msg-card">
+          <div class="aic2-msg-label" id="aic2MsgLabel">Ôn lại lý thuyết</div>
+          <div class="aic2-msg-body" id="aic2MsgBody"></div>
         </div>
       </div>
-      <div class="aic2-bottom-bar" id="aic2BottomBar" style="display:none;">
-        <div class="tutor-tag"><img src="assets/avatar-teacher1.png" alt=""><span>AI trợ giảng</span></div>
-        <button class="aic2-bottom-icon" aria-label="Thu nhỏ"><img src="assets/icon-expand.svg" alt=""></button>
-      </div>
-      <div class="aic2-lesson-stage" id="aic2LessonStage" style="display:none;">
-        <div class="aic2-lesson-duration">🎬 Bài giảng ngắn <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span> <span id="aic2LessonTimer">3:00</span></div>
-        <div class="aic2-lesson-frame">
-          <img src="assets/classroom-bg.png" alt="">
-          <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
+      <div class="aic2-right-panel">
+        <div class="aic2-cam teacher">
+          <img src="assets/avatar-teacher1.png" alt="">
+          <span class="rec-dot"></span>
+          <img class="cam-badge" src="assets/icon-cam-badge.svg" alt="">
         </div>
-        <div class="aic2-lesson-caption" id="aic2LessonCaption"></div>
-        <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
+        <div class="aic2-cam student">
+          <video class="self-cam-video" id="aic2SelfVideo" autoplay muted playsinline></video>
+          <img id="aic2SelfPhoto" src="assets/classroom-self-cam.png" alt="">
+          <img class="cam-badge" src="assets/icon-cam-badge.svg" alt="">
+          <span class="cam-name">Vanh</span>
+          <span class="cam-trophy"><img src="assets/trophy.png" alt=""><span id="aic2SelfTrophy">45</span></span>
+        </div>
+        <button class="aic2-msg-tutor-btn" onclick="toast('💬 Nhắn với Trợ giảng (mock)')">Nhắn với Trợ giảng</button>
       </div>
       <div class="center-cta" id="aic2Cta" style="display:none;">
         <button class="btn-primary" onclick="goto('aic2-summary')">Xem tổng kết buổi bổ trợ</button>
@@ -2315,17 +2374,25 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
     </div>
   </section>
 
+  <!-- Đặt bên trong #app (không phải sibling của #appScaleWrap) để position:absolute của
+       #topRightControls luôn tính theo đúng khung 1440x956 đã thiết kế, không trôi ra ngoài khi
+       trình duyệt scale/căn giữa #app (xem fitApp()). -->
+  <div id="topRightControls">
+    <div class="video-seek-wrap" id="videoSeekWrap" hidden>
+      <button class="video-seek-playbtn" id="videoSeekPlayBtn" onclick="toggleLectureVideoPlay()" title="Phát/Dừng video">⏸</button>
+      <span class="video-seek-time" id="videoSeekTime">00:00</span>
+      <div class="video-seek-track-wrap">
+        <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1">
+        <div class="video-seek-markers" id="videoSeekMarkers"></div>
+      </div>
+      <span class="video-seek-time" id="videoSeekDuration">00:00</span>
+    </div>
+    <button id="skipBtn" hidden onclick="skip()">⏭ Bỏ qua / Tiếp theo</button>
+  </div>
+
 </div>
 </div>
 
-<div id="topRightControls">
-  <div class="video-seek-wrap" id="videoSeekWrap" hidden>
-    <span class="video-seek-time" id="videoSeekTime">00:00</span>
-    <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1">
-    <span class="video-seek-time" id="videoSeekDuration">00:00</span>
-  </div>
-  <button id="skipBtn" hidden onclick="skip()">⏭ Bỏ qua / Tiếp theo</button>
-</div>
 <div class="toast-mini" id="toastMini"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
@@ -2341,12 +2408,13 @@ const state = {
   chatQueue: [],
   seekDragging: false,
   fb: null,
-  aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, messages: [], improved: [] },
+  aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, improved: [] },
   gateCode: '',
   gateFailedOnce: false,
   pendingTimer: null,
   permissions: { mic: false, cam: false },
   asp: { lessonTitle: '', turn: 0, hintShown: false },
+  camStream: null,
 };
 
 const NUM_WORDS = ['Không','Một','Hai','Ba','Bốn','Năm','Sáu','Bảy','Tám','Chín'];
@@ -2374,6 +2442,8 @@ const SCREEN_DISPLAY = {
   'aispeak-celebrate':'flex', 'aispeak-result':'flex',
 };
 function goto(id){
+  const prevActive = document.querySelector('.screen.active');
+  const leavingClassroom = !!prevActive && prevActive.id === 'screen-classroom' && id !== 'classroom';
   document.querySelectorAll('.screen').forEach(s=>{
     s.classList.remove('active');
     s.style.display = 'none';
@@ -2382,17 +2452,124 @@ function goto(id){
   el.style.display = SCREEN_DISPLAY[id] || 'block';
   el.classList.add('active','fade-in');
   updateSkipVisibility(id);
+  if(id==='checkin') initCam('in');
+  else if(id==='checkout') initCam('out');
+  else if(id==='classroom') attachClassroomCam();
+  else if(id==='aic2-interact') attachAic2Cam();
+  else if(id!=='summary') stopCamStream();
+  if(leavingClassroom) stopLectureVideo();
+}
+
+/* Dừng hẳn video + âm thanh bài giảng chính khoá khi rời màn lớp học (chuyển màn khác hoặc bấm
+   "Kết thúc buổi học") — tránh video/audio tiếp tục chạy ngầm sau khi đã rời màn hình. */
+function stopLectureVideo(){
+  const video = document.getElementById('lectureVideo');
+  if(video) video.pause();
+}
+
+/* ============ CAMERA THẬT — xuyên suốt từ điểm danh đầu buổi tới hết buổi bổ trợ ============
+   Xin quyền camera thiết bị thật (getUserMedia) khi vào màn checkin, giữ nguyên cùng 1 MediaStream
+   khi đi qua checkin -> classroom (khung self-cam buổi chính khoá) -> checkout -> summary (màn
+   tổng kết trung gian, không có khung cam riêng nhưng KHÔNG tắt stream) -> aic2-interact (khung
+   self-cam buổi bổ trợ). Chỉ thật sự tắt camera khi rời khỏi hết các màn trên (goto() sang màn
+   khác) hoặc reset demo. Nếu trình duyệt/thiết bị không hỗ trợ hoặc người dùng từ chối quyền, giữ
+   nguyên fallback ảnh/icon mặt cười như bản mock cũ. */
+function initCam(kind){
+  const video = document.getElementById(kind==='in' ? 'checkinVideo' : 'checkoutVideo');
+  const photo = document.getElementById(kind==='in' ? 'checkinPhoto' : 'checkoutPhoto');
+  const face = document.getElementById(kind==='in' ? 'checkinCamFace' : 'checkoutCamFace');
+  if(photo){ photo.style.display = 'none'; photo.removeAttribute('src'); }
+  if(video){ video.style.display = 'none'; }
+  if(face){ face.style.display = 'flex'; }
+  if(state.camStream){
+    attachCamStream(video, face);
+    return;
+  }
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    toast('⚠️ Thiết bị không hỗ trợ camera, dùng ảnh minh hoạ');
+    return;
+  }
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false })
+    .then(stream=>{
+      state.camStream = stream;
+      attachCamStream(video, face);
+    })
+    .catch(()=>{ toast('⚠️ Chưa cấp quyền camera, dùng ảnh minh hoạ'); });
+}
+
+function attachCamStream(video, face){
+  if(!video) return;
+  video.srcObject = state.camStream;
+  video.style.display = 'block';
+  if(face) face.style.display = 'none';
+}
+
+function attachClassroomCam(){
+  const video = document.getElementById('classroomSelfVideo');
+  const photo = document.getElementById('classroomSelfPhoto');
+  if(!video) return;
+  if(state.camStream){
+    video.srcObject = state.camStream;
+    video.style.display = 'block';
+    if(photo) photo.style.display = 'none';
+  } else {
+    video.style.display = 'none';
+    if(photo) photo.style.display = 'block';
+  }
+}
+
+function attachAic2Cam(){
+  const video = document.getElementById('aic2SelfVideo');
+  const photo = document.getElementById('aic2SelfPhoto');
+  if(!video) return;
+  if(state.camStream){
+    video.srcObject = state.camStream;
+    video.style.display = 'block';
+    if(photo) photo.style.display = 'none';
+  } else {
+    video.style.display = 'none';
+    if(photo) photo.style.display = 'block';
+  }
+}
+
+function stopCamStream(){
+  if(state.camStream){
+    state.camStream.getTracks().forEach(t=>t.stop());
+    state.camStream = null;
+  }
+  const classroomVideo = document.getElementById('classroomSelfVideo');
+  const classroomPhoto = document.getElementById('classroomSelfPhoto');
+  if(classroomVideo) classroomVideo.style.display = 'none';
+  if(classroomPhoto) classroomPhoto.style.display = 'block';
+  const aic2Video = document.getElementById('aic2SelfVideo');
+  const aic2Photo = document.getElementById('aic2SelfPhoto');
+  if(aic2Video) aic2Video.style.display = 'none';
+  if(aic2Photo) aic2Photo.style.display = 'block';
+}
+
+function capturePhoto(kind){
+  const video = document.getElementById(kind==='in' ? 'checkinVideo' : 'checkoutVideo');
+  const photo = document.getElementById(kind==='in' ? 'checkinPhoto' : 'checkoutPhoto');
+  if(!video || !photo || !video.srcObject || !video.videoWidth) return;
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+  photo.src = canvas.toDataURL('image/png');
+  photo.style.display = 'block';
+  video.style.display = 'none';
 }
 
 function showSkip(show){ document.getElementById('skipBtn').hidden = !show; }
 function updateSkipVisibility(screenId){
   showSkip(['loading','permission-grant','checkin','checkout','classroom','aic2-interact'].includes(screenId));
   showSeekBar(screenId === 'classroom');
+  document.getElementById('topRightControls').classList.toggle('in-classroom', screenId === 'classroom');
 }
 
-/* DRAFT REVIEW: thanh tua video bài giảng — đặt cạnh nút "Bỏ qua/Tiếp theo", ngoài khung màn hình
-   buổi học, chỉ hiện khi đang ở màn lớp học live. Tua tay sẽ tự kích hoạt các mốc iSpeak/chat/…
-   tương ứng nhờ dùng chung listener `checkVideoTimeAdvance` (timeupdate). */
+/* DRAFT REVIEW: thanh tua video bài giảng + nút "Bỏ qua/Tiếp theo" — chỉ hiện khi đang ở màn lớp
+   học live. Tua tay sẽ tự kích hoạt các mốc iSpeak/chat/… tương ứng nhờ dùng chung listener
+   `checkVideoTimeAdvance` (timeupdate). */
 function showSeekBar(show){ document.getElementById('videoSeekWrap').hidden = !show; }
 
 function formatMmSs(sec){
@@ -2404,11 +2581,13 @@ function formatMmSs(sec){
 function attachVideoSeekBar(){
   const video = document.getElementById('lectureVideo');
   const range = document.getElementById('videoSeekRange');
+  const playBtn = document.getElementById('videoSeekPlayBtn');
   if(!video || !range || video.dataset.seekBarAttached) return;
   video.dataset.seekBarAttached = '1';
   video.addEventListener('loadedmetadata', ()=>{
     range.max = Math.floor(video.duration || 0);
     document.getElementById('videoSeekDuration').textContent = formatMmSs(video.duration);
+    renderVideoSeekMarkers(video.duration);
   });
   video.addEventListener('timeupdate', ()=>{
     if(state.seekDragging) return;
@@ -2423,6 +2602,32 @@ function attachVideoSeekBar(){
     video.currentTime = Number(range.value);
     state.seekDragging = false;
   });
+  video.addEventListener('play', ()=>{ playBtn.textContent = '⏸'; });
+  video.addEventListener('pause', ()=>{ playBtn.textContent = '▶'; });
+}
+
+function toggleLectureVideoPlay(){
+  const video = document.getElementById('lectureVideo');
+  if(!video) return;
+  if(video.paused) video.play(); else video.pause();
+}
+
+function renderVideoSeekMarkers(duration){
+  const wrap = document.getElementById('videoSeekMarkers');
+  if(!wrap || !duration) return;
+  wrap.innerHTML = SECTION_MARKERS.filter(m=>m.t <= duration).map(m=>{
+    const pct = Math.min(100, m.t/duration*100);
+    return `<span class="video-seek-marker" style="left:${pct}%;" title="${m.label} · ${formatMmSs(m.t)}" onclick="seekLectureVideoTo(${m.t})"></span>`;
+  }).join('');
+}
+
+function seekLectureVideoTo(t){
+  const video = document.getElementById('lectureVideo');
+  const range = document.getElementById('videoSeekRange');
+  if(!video) return;
+  video.currentTime = t;
+  if(range) range.value = Math.floor(t);
+  document.getElementById('videoSeekTime').textContent = formatMmSs(t);
 }
 
 function autoAdvance(fn, ms){
@@ -2454,6 +2659,7 @@ function doCheckin(kind){
   const flash = document.getElementById(kind==='in'?'checkinFlash':'checkoutFlash');
   const confirm = document.getElementById(kind==='in'?'checkinConfirm':'checkoutConfirm');
   const shutter = document.getElementById(kind==='in'?'checkinShutter':'checkoutShutter');
+  capturePhoto(kind);
   flash.classList.add('flash');
   shutter.style.visibility='hidden';
   setTimeout(()=>{
@@ -2489,6 +2695,25 @@ const TEAM_CHAT_T = 5*60+30;      // ~330 — HS nhắn tên nhóm vào chat (m�
 const ISPEAK_WORDS = ['sandwich','black','table tennis','panda','pink','pizza','football','dolphin'];
 const ISPEAK_START_T = [18*60, 19*60+30, 20*60+30, 22*60, 24*60, 25*60+30, 27*60, 28*60+30];
 const NEW_STRUCTURES_START_T = 30*60; // 1800 — mốc slide "New structures" bắt đầu, dùng làm điểm dừng sau ispeak8
+
+/* Các mốc tiết học hiển thị trên thanh tua video (chấm tròn, bấm để tua nhanh) — lấy từ 13 mục của
+   03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md (độ chính xác ±30s,
+   xem ghi chú phương pháp ở đầu file .md đó). Không phải mốc tự suy diễn. */
+const SECTION_MARKERS = [
+  {t:0, label:'Mở đầu (khởi động)'},
+  {t:2*60+30, label:'Welcome & hướng dẫn lớp học'},
+  {t:4*60, label:'Giới thiệu bài & chia nhóm'},
+  {t:7*60+30, label:'Khởi động chủ đề'},
+  {t:10*60, label:'New words'},
+  {t:16*60, label:'Luyện từ vựng (Listen & say)'},
+  {t:30*60, label:'New structures'},
+  {t:32*60, label:'Luyện cấu trúc câu'},
+  {t:42*60, label:'Reading'},
+  {t:47*60, label:'Group work'},
+  {t:56*60, label:'Quiz Time (giới thiệu)'},
+  {t:60*60, label:'Quiz time (câu hỏi)'},
+  {t:61*60+30, label:'Tổng kết & kết thúc'},
+];
 
 function waitForVideoTime(seconds){
   state.pendingVideoAdvance = seconds;
@@ -3256,52 +3481,66 @@ function startAic2Interact(){
   state.aic2.stage = 0;
   state.aic2.phase = 'lesson';
   state.aic2.exerciseIndex = 0;
-  state.aic2.messages = [];
   state.aic2.improved = [];
   state.aic2._mcqPick = null;
   state.aic2._gapPick = null;
   state.aic2._recording = false;
   updateAic2Progress();
-  renderAic2Chat();
-  aic2StartLesson();
+  aic2ShowIntro();
 }
 function updateAic2Progress(){
   const total = state.aic2.nloList.length;
   const idx = Math.min(state.aic2.stage, total-1);
   const nloName = state.aic2.nloList[idx] ? state.aic2.nloList[idx].name : '';
-  document.getElementById('aic2NloPill').textContent = state.aic2.phase==='lesson'
-    ? `Kiến thức bổ trợ ${idx+1}/${total}: ${nloName}`
-    : `Kiến thức bổ trợ ${idx+1}/${total}: ${nloName} · Bài ${state.aic2.exerciseIndex+1}/5`;
-  const totalSteps = total*6;
-  const doneSteps = state.aic2.stage*6 + (state.aic2.phase==='lesson' ? 0 : 1+state.aic2.exerciseIndex);
-  const pct = Math.max(8, 100 - Math.round((doneSteps/totalSteps)*85));
-  const remain = Math.max(2, 30 - Math.round((doneSteps/totalSteps)*27));
-  document.getElementById('aic2DurationFill').style.width = pct+'%';
-  document.getElementById('aic2DurationLabel').textContent = `${String(remain).padStart(2,'0')}:00`;
+  document.getElementById('aic2GoalIdx').textContent = `${idx+1}/${total}`;
+  document.getElementById('aic2GoalVerb').textContent = state.aic2.track==='advance'
+    ? 'Mở rộng kiến thức' : 'Củng cố lại kiến thức chưa thành thạo';
+  document.getElementById('aic2GoalName').textContent = nloName;
 }
-function renderAic2Chat(waiting){
-  const scroll = document.getElementById('aic2ChatScroll');
-  scroll.innerHTML = state.aic2.messages.map(m=>`<div class="chat-msg ${m.who}">${m.text}</div>`).join('')
-    + (waiting? `<div class="typing-dots">•••</div>` : '');
-  scroll.scrollTop = scroll.scrollHeight;
-  const inputRow = document.getElementById('aic2InputRow');
-  if(inputRow) inputRow.classList.toggle('locked-controls', !!waiting);
+/* Chuyển giữa 4 trạng thái nội dung của thẻ trắng chính (khớp Figma node 192:27387). */
+function aic2SwitchView(name){
+  document.querySelectorAll('.aic2-view').forEach(v=>v.classList.remove('active'));
+  const el = document.getElementById('aic2View_'+name);
+  if(el) el.classList.add('active');
+}
+/* Thẻ nhận xét "Teacher Jenny" dưới thẻ chính — luôn hiển thị, đổi nội dung theo từng bước
+   thay vì khung chat cuộn như bản cũ (khớp đúng bố cục Figma: 1 thẻ nhận xét cố định). */
+function aic2SetMsg(label, html){
+  document.getElementById('aic2MsgLabel').textContent = label;
+  document.getElementById('aic2MsgBody').innerHTML = `<b>Teacher Jenny:</b> ${html}`;
 }
 function aic2ShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
+
+/* ---- Nội dung bổ trợ: giới thiệu 2 NLO sẽ học trong buổi (Đang học/Tiếp theo) trước khi vào
+   Micro-lesson đầu tiên — khớp Figma trạng thái 1/6. ---- */
+function aic2ShowIntro(){
+  const list = state.aic2.nloList;
+  const splitName = (name)=>{
+    const i = name.indexOf(': ');
+    return i===-1 ? {cat:name, detail:''} : {cat:name.slice(0,i), detail:name.slice(i+2)};
+  };
+  const p1 = list[0] ? splitName(list[0].name) : {cat:'',detail:''};
+  const p2 = list[1] ? splitName(list[1].name) : {cat:'',detail:''};
+  document.getElementById('aic2IntroCat1').textContent = p1.cat;
+  document.getElementById('aic2IntroDetail1').textContent = p1.detail;
+  document.getElementById('aic2IntroCat2').textContent = p2.cat;
+  document.getElementById('aic2IntroDetail2').textContent = p2.detail;
+  aic2SwitchView('intro');
+  aic2SetMsg('Ôn lại lý thuyết', 'Chào con! Cô là Jenny, cô sẽ đồng hành cùng con trong buổi học bổ trợ ngày hôm nay nhé');
+  autoAdvance(aic2StartLesson, 1800);
+}
 
 /* ---- Micro-lesson: bài giảng ngắn 3 phút, giao diện kiểu buổi chính khóa, trước khi mở
    khóa 5 bài tập vi mô của NLO hiện tại. Đồng hồ nén 3 phút thật thành ~3s demo. ---- */
 function aic2StartLesson(){
   const nlo = state.aic2.nloList[state.aic2.stage];
   if(!nlo) return;
+  state.aic2.phase = 'lesson';
   document.getElementById('aic2LessonTopic').textContent = nlo.lesson.title;
-  document.getElementById('aic2LessonCaption').textContent = nlo.lesson.explain;
   document.getElementById('aic2LessonTimer').textContent = '3:00';
   document.getElementById('aic2LessonBarFill').style.width = '100%';
-  document.getElementById('aic2LessonStage').style.display = 'flex';
-  document.querySelector('.aic2-chat-wrap').style.display = 'none';
-  document.getElementById('aic2ExerciseStage').style.display = 'none';
-  document.getElementById('aic2BottomBar').style.display = 'none';
+  aic2SwitchView('lesson');
+  aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`);
   clearInterval(state.aic2._lessonTick);
   let remain = 180;
   state.aic2._lessonTick = setInterval(()=>{
@@ -3313,29 +3552,25 @@ function aic2StartLesson(){
 }
 function aic2FinishLesson(){
   clearInterval(state.aic2._lessonTick);
-  document.getElementById('aic2LessonStage').style.display = 'none';
-  document.querySelector('.aic2-chat-wrap').style.display = 'flex';
   state.aic2.phase = 'exercise';
   state.aic2.exerciseIndex = 0;
-  state.aic2.messages = [];
   const nlo = state.aic2.nloList[state.aic2.stage];
   const greet = state.aic2.stage===0
     ? `Chào Vân Anh, buổi trước chúng ta đã học phần "${nlo.name}". ${nlo.greet}`
     : nlo.greet;
-  state.aic2.messages.push({who:'ai', text: greet});
-  renderAic2Chat();
+  aic2SetMsg('Luyện tập', greet);
   updateAic2Progress();
   autoAdvance(aic2RenderExercise, 500);
 }
 function aic2RenderExercise(){
   const nlo = state.aic2.nloList[state.aic2.stage];
   const ex = nlo.exercises[state.aic2.exerciseIndex];
-  document.querySelector('.aic2-chat-wrap').style.display = 'none';
-  document.getElementById('aic2ExerciseStage').style.display = 'flex';
-  document.getElementById('aic2BottomBar').style.display = 'flex';
+  aic2SwitchView('exercise');
   document.getElementById('aic2ProgressCount').textContent = `${state.aic2.exerciseIndex+1}/${nlo.exercises.length}`;
   document.getElementById('aic2ProgressFill').style.width = Math.round((state.aic2.exerciseIndex+1)/nlo.exercises.length*100)+'%';
-  document.getElementById('aic2QNum').textContent = `Câu ${state.aic2.exerciseIndex+1}`;
+  state.aic2._mcqPick = null;
+  state.aic2._gapPick = null;
+  state.aic2._recording = false;
   const qText = document.getElementById('aic2QText');
   const area = document.getElementById('aic2ExerciseArea');
   if(ex.type==='mcq'){
@@ -3380,7 +3615,10 @@ function aic2SubmitMcq(){
   const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
   if(state.aic2._mcqPick===null || state.aic2._mcqPick===undefined) return;
   const correct = state.aic2._mcqPick === ex.answerIndex;
-  document.getElementById('aic2ExerciseArea').innerHTML='';
+  document.querySelectorAll('.aic2-opt-btn').forEach(b=>{ b.onclick=null; b.disabled=true; });
+  const picked = document.getElementById('aic2Opt'+state.aic2._mcqPick);
+  if(picked) picked.classList.add(correct?'correct':'wrong');
+  document.getElementById('aic2McqSubmitBtn').style.display='none';
   aic2Feedback(correct, ex);
 }
 function aic2PickGap(i){
@@ -3394,7 +3632,10 @@ function aic2SubmitGap(){
   const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
   if(state.aic2._gapPick===null || state.aic2._gapPick===undefined) return;
   const correct = state.aic2._gapPick === ex.answerIndex;
-  document.getElementById('aic2ExerciseArea').innerHTML='';
+  document.querySelectorAll('.fb-word').forEach(b=>{ b.onclick=null; b.disabled=true; });
+  const blank = document.getElementById('aic2GapBlank');
+  if(blank) blank.classList.add(correct?'correct':'wrong');
+  document.getElementById('aic2GapSubmitBtn').style.display='none';
   aic2Feedback(correct, ex);
 }
 function aic2ToggleSpeak(){
@@ -3408,23 +3649,21 @@ function aic2ToggleSpeak(){
   } else {
     state.aic2._recording = false;
     btn.classList.remove('recording');
+    btn.disabled = true;
     hint.textContent = 'Đang chấm điểm phát âm...';
     const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
     setTimeout(()=>{
       if(!document.getElementById('aic2SpeakMic')) return;
-      document.getElementById('aic2ExerciseArea').innerHTML='';
       aic2Feedback(true, ex);
     }, 700);
   }
 }
 /* Chấm 1 bài tập vi mô xong → sang bài tiếp theo trong CÙNG NLO; hết 5 bài mới coi là đã xử
-   lý xong NLO đó (mới ghi vào improved) rồi chuyển sang Micro-lesson của NLO kế tiếp. */
+   lý xong NLO đó (mới ghi vào improved) rồi ăn mừng trước khi chuyển sang Micro-lesson kế tiếp.
+   Khác bản cũ: giữ nguyên câu hỏi/đáp án đã tô màu đúng-sai trên thẻ chính, chỉ đổi nội dung
+   thẻ nhận xét bên dưới — khớp đúng cách Figma tách 2 thẻ (câu hỏi ở trên, nhận xét ở dưới). */
 function aic2Feedback(correct, ex){
-  const area = document.getElementById('aic2ExerciseArea');
-  area.innerHTML = `<div class="aic2-feedback ${correct?'ok':'wrong'}">
-      <div class="face">${correct?'🥳':'🙂'}</div>
-      <div class="msg">${(correct || !ex.wrong) ? ex.ok : ex.wrong}</div>
-    </div>`;
+  aic2SetMsg('Luyện tập', (correct || !ex.wrong) ? ex.ok : ex.wrong);
   aic2AdvanceExercise();
 }
 function aic2AdvanceExercise(){
@@ -3436,19 +3675,28 @@ function aic2AdvanceExercise(){
       aic2RenderExercise();
     } else {
       state.aic2.improved.push(nlo.name);
-      state.aic2.stage++;
-      if(state.aic2.stage < state.aic2.nloList.length){
-        updateAic2Progress();
-        aic2StartLesson();
-      } else {
-        updateAic2Progress();
-        document.getElementById('aic2ExerciseArea').innerHTML='';
-        document.getElementById('aic2ExerciseStage').style.display='none';
-        document.getElementById('aic2BottomBar').style.display='none';
-        document.getElementById('aic2Cta').style.display='flex';
-      }
+      aic2ShowCelebration(nlo.name);
     }
   }, 1200);
+}
+/* ---- Ăn mừng hoàn thành 1 NLO (khớp Figma trạng thái 6/6) rồi mới chuyển sang NLO kế tiếp
+   hoặc kết thúc buổi bổ trợ nếu đã xử lý xong tất cả NLO. ---- */
+function aic2ShowCelebration(nloName){
+  aic2SwitchView('celebrate');
+  document.getElementById('aic2CelebrateMsg').textContent = `Chúc mừng! Con đã hoàn thành ${nloName}`;
+  document.getElementById('aic2CelebrateStars').innerHTML =
+    Array.from({length:5}).map(()=>'<img src="assets/icon-banner-star.svg" alt="">').join('');
+  aic2SetMsg('Luyện tập', 'Con đã hoàn thành rất tốt, giờ chúng ta sẽ chuyển sang phần tiếp theo nhé');
+  autoAdvance(()=>{
+    state.aic2.stage++;
+    if(state.aic2.stage < state.aic2.nloList.length){
+      updateAic2Progress();
+      aic2StartLesson();
+    } else {
+      updateAic2Progress();
+      document.getElementById('aic2Cta').style.display='flex';
+    }
+  }, 1800);
 }
 function aic2ToggleChatMic(){
   toast('🎤 Đang ghi âm...');
@@ -3473,8 +3721,17 @@ function aic2Send(text){
 function forceAdvanceAic2(){
   clearTimeout(state.pendingTimer);
   if(document.getElementById('aic2Cta').style.display==='flex'){ goto('aic2-summary'); return; }
+  const activeView = document.querySelector('.aic2-view.active');
+  const viewName = activeView ? activeView.id.replace('aic2View_','') : null;
+  if(viewName==='intro'){ aic2StartLesson(); return; }
+  if(viewName==='celebrate'){
+    state.aic2.stage++;
+    if(state.aic2.stage < state.aic2.nloList.length){ updateAic2Progress(); aic2StartLesson(); }
+    else { updateAic2Progress(); document.getElementById('aic2Cta').style.display='flex'; }
+    return;
+  }
   if(state.aic2.phase==='lesson'){
-    if(document.getElementById('aic2LessonStage').style.display!=='none') aic2FinishLesson();
+    if(viewName==='lesson') aic2FinishLesson();
     return;
   }
   const nlo = state.aic2.nloList[state.aic2.stage];
@@ -3686,7 +3943,7 @@ function resetDemo(){
     document.getElementById('videoSeekTime').textContent = '00:00'; }
   state.fb = null;
   clearInterval(state.aic2._lessonTick);
-  state.aic2 = { track:null, nloList:[], stage:0, phase:'lesson', exerciseIndex:0, messages:[], improved:[] };
+  state.aic2 = { track:null, nloList:[], stage:0, phase:'lesson', exerciseIndex:0, improved:[] };
   state.permissions = { mic:false, cam:false };
   ['grantMicBtn','grantCamBtn'].forEach(id=>{
     const btn = document.getElementById(id);
@@ -3698,6 +3955,7 @@ function resetDemo(){
   document.getElementById('checkoutConfirm').style.display = 'none';
   document.getElementById('checkinShutter').style.visibility = 'visible';
   document.getElementById('checkoutShutter').style.visibility = 'visible';
+  stopCamStream();
   goto('schedule');
 }
 
