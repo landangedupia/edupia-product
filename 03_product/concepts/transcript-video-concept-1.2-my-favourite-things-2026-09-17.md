@@ -9,6 +9,32 @@
 
 ---
 
+## Mốc chi tiết đã trích xuất — 8 vòng Read & choose / Listen & say (16:44–27:53)
+
+Bổ sung 2026-09-17 (sau khi đối chiếu lại với code demo) — trích từ transcript nguyên văn bên dưới,
+tổ chức lại theo từng vòng để dễ tra cứu/đồng bộ code, không phải nội dung mới. Cột "Bắt đầu" là mốc
+cô giáo thật sự nói xong câu "...20 giây. Bắt đầu." (khác với mốc câu hỏi vừa xuất hiện — chênh nhau
+4–16 giây tuỳ vòng, xem cột kế bên) — đây là mốc dùng làm `ISPEAK_START_T` trong `demo/index.html`.
+
+| Vòng | Từ | Câu hỏi xuất hiện | **Bắt đầu** (đếm giờ) | Chữa đáp án | Đáp án A/B/C | Listen & say |
+|---|---|---|---|---|---|---|
+| 1 | sandwich | 17:00 | **17:09** | 17:34 | B ✅ | 17:48 |
+| 2 | black | 18:27 | **18:43** | 19:05 | A ✅ | 19:17 |
+| 3 | table tennis | 19:54 | **19:58** | 20:30 | A ✅ | 20:41 |
+| 4 | panda | 21:24 | **21:33** | 21:58 | C ✅ | 22:10 |
+| 5 | pink | 22:53 | **22:59** | 23:22 | ◆ không rõ | 23:28 |
+| 6 | pizza | 24:04 | **24:04** *(nói liền, không nghỉ)* | 24:32 | ◆ không rõ | 24:43 |
+| 7 | football | 25:20 | **25:20** *(nói liền, không nghỉ)* | 25:49 | ◆ không rõ | 25:57 |
+| 8 | dolphin | 26:37 | **26:37** *(nói liền, không nghỉ)* | 27:05 | A ✅ | 27:11 |
+
+**✅** = cô giáo đọc rõ chữ cái đáp án trong transcript (dùng thật cho `ISPEAK_ANSWERS`).
+**◆ không rõ** = transcript chỉ xác nhận đúng từ, KHÔNG đọc chữ cái A/B/C (ASR có thể đã bỏ sót, hoặc
+cô giáo không đọc lần đó) — 3 vòng này (pink/pizza/football) đang dùng giá trị gán tạm trong code,
+xem comment `ISPEAK_ANSWERS` trong `demo/index.html`. Muốn có đáp án thật chính xác, cần mở video
+nghe trực tiếp đúng đoạn 23:22 / 24:32 / 25:49.
+
+---
+
 ## Transcript nguyên văn (giữ nguyên định dạng gốc từ YouTube)
 
 0:1717 secondsA a a A a a

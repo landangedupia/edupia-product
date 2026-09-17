@@ -553,7 +553,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .live-toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);background:#fff;color:var(--n900);padding:12px 22px;border-radius:14px;font-weight:600;box-shadow:var(--shadow-m);z-index:5;font-size:14px;}
 
 /* Khớp get_design_context (panel phải nền #374151, card đội mình #ECFBFF/#1890C7, đội khác nền trắng) */
-.right-panel{width:324px;background:#374151;padding:16px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;}
+.right-panel{width:324px;background:#374151;padding:16px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;overflow:hidden;}
+/* Khớp Figma node 3:37908 — danh sách 4 đội cuộn riêng, self-cam/tabs phía dưới luôn cố định. */
+.team-list{display:flex;flex-direction:column;gap:10px;overflow-y:auto;flex:1;min-height:0;}
 .live-pill{align-self:flex-start;background:#dc2626;color:#fff;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:700;}
 .self-cam{height:182px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
 .self-cam img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -1902,27 +1904,45 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
         <div class="bottom-bar" id="bottomBar"></div>
       </div>
       <div class="right-panel" id="rightPanel">
-        <div class="live-pill">● Trực tiếp · 20:25</div>
+        <div class="live-pill">● Trực tiếp · <span id="liveDurationTime">00:00</span></div>
         <div class="self-cam">
           <video class="self-cam-video" id="classroomSelfVideo" autoplay muted playsinline></video>
           <img id="classroomSelfPhoto" src="assets/classroom-self-cam.png" alt="">
           <div class="trophy"><img src="assets/trophy.png" alt=""> <span id="selfTrophy">45</span></div>
         </div>
-        <div class="team-card me">
-          <div class="t-head"><span>Team Cáo</span><span class="reward-pill"><img src="assets/trophy.png" alt="">31</span></div>
-          <div class="t-members">
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">34</span></div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">12</span></div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">54</span></div>
-            <div class="t-mem me-mem"><div class="circ"><img src="assets/classroom-avatar-me.png" alt=""></div><span class="reward-pill">Tôi</span></div>
+        <div class="team-list">
+          <div class="team-card me">
+            <div class="t-head"><span>Team Cáo</span><span class="reward-pill"><img src="assets/trophy.png" alt="">31</span></div>
+            <div class="t-members">
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">34</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">12</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-mate3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">54</span></div>
+              <div class="t-mem me-mem"><div class="circ"><img src="assets/classroom-avatar-me.png" alt=""></div><span class="reward-pill">Tôi</span></div>
+            </div>
           </div>
-        </div>
-        <div class="team-card"><div class="t-head"><span>Team Trâu</span><span class="reward-pill"><img src="assets/trophy.png" alt="">220</span></div>
-          <div class="t-members">
-            <div class="t-mem"><div class="circ" style="background:#9B2227;color:#fff;">GH</div><span class="reward-pill"><img src="assets/trophy.png" alt="">23</span></div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">11</span></div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">22</span></div>
-            <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">53</span></div>
+          <div class="team-card"><div class="t-head"><span>Team Trâu</span><span class="reward-pill"><img src="assets/trophy.png" alt="">220</span></div>
+            <div class="t-members">
+              <div class="t-mem"><div class="circ" style="background:#9B2227;color:#fff;">GH</div><span class="reward-pill"><img src="assets/trophy.png" alt="">23</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">11</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">22</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">53</span></div>
+            </div>
+          </div>
+          <div class="team-card"><div class="t-head"><span>Team Gấu</span><span class="reward-pill"><img src="assets/trophy.png" alt="">220</span></div>
+            <div class="t-members">
+              <div class="t-mem"><div class="circ" style="background:#9B2227;color:#fff;">GH</div><span class="reward-pill"><img src="assets/trophy.png" alt="">23</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">11</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">22</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">53</span></div>
+            </div>
+          </div>
+          <div class="team-card"><div class="t-head"><span>Team Hổ</span><span class="reward-pill"><img src="assets/trophy.png" alt="">220</span></div>
+            <div class="t-members">
+              <div class="t-mem"><div class="circ" style="background:#9B2227;color:#fff;">GH</div><span class="reward-pill"><img src="assets/trophy.png" alt="">23</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb1.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">11</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb2.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">22</span></div>
+              <div class="t-mem"><div class="circ"><img src="assets/classroom-avatar-teamb3.png" alt=""></div><span class="reward-pill"><img src="assets/trophy.png" alt="">53</span></div>
+            </div>
           </div>
         </div>
         <div class="panel-tabs" id="panelTabs">
@@ -2368,7 +2388,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
        trình duyệt scale/căn giữa #app (xem fitApp()). -->
   <div id="topRightControls">
     <div class="video-seek-wrap" id="videoSeekWrap" hidden>
+      <button class="video-seek-playbtn" id="videoSeekBackBtn" onclick="seekLectureVideoBy(-10)" title="Lùi 10 giây">⏪</button>
       <button class="video-seek-playbtn" id="videoSeekPlayBtn" onclick="toggleLectureVideoPlay()" title="Phát/Dừng video">⏸</button>
+      <button class="video-seek-playbtn" id="videoSeekFwdBtn" onclick="seekLectureVideoBy(10)" title="Tiến 10 giây">⏩</button>
       <span class="video-seek-time" id="videoSeekTime">00:00</span>
       <div class="video-seek-track-wrap">
         <input type="range" id="videoSeekRange" min="0" max="100" value="0" step="1" disabled>
@@ -2401,7 +2423,6 @@ const state = {
   ispeakPhase: 'choose',
   ispeakChoice: null,
   ispeakSubmitted: false,
-  ispeakTimerIv: null,
   seekDragging: false,
   fb: null,
   aic2: { track: null, nloList: [], stage: 0, phase: 'lesson', exerciseIndex: 0, improved: [] },
@@ -2635,6 +2656,13 @@ function seekLectureVideoTo(t){
   document.getElementById('videoSeekTime').textContent = formatMmSs(t);
 }
 
+function seekLectureVideoBy(delta){
+  const video = document.getElementById('lectureVideo');
+  if(!video) return;
+  const max = video.duration || Infinity;
+  seekLectureVideoTo(Math.min(Math.max(0, video.currentTime + delta), max));
+}
+
 function autoAdvance(fn, ms){
   clearTimeout(state.pendingTimer);
   state.pendingTimer = setTimeout(fn, ms);
@@ -2698,8 +2726,11 @@ const FLOW = ['team-announce','lecture1',
    chiếu transcript giọng nói thật, chính xác theo giây (không còn ±30s ước lượng từ hình ảnh). */
 const TEAM_CHAT_T = 5*60+9;       // 5:09 — HS bắt đầu nhắn tên nhóm vào chat (mốc tham chiếu, không dùng để đóng popup team-announce — xem case 'team-announce')
 const ISPEAK_WORDS = ['sandwich','black','table tennis','panda','pink','pizza','football','dolphin'];
-/* Mốc bắt đầu "Read & choose" của từng vòng (mục 6 timeline) — dùng làm điểm chuyển UI sang vòng đó. */
-const ISPEAK_START_T = [17*60, 18*60+27, 19*60+54, 21*60+24, 22*60+53, 24*60+4, 25*60+20, 26*60+37];
+/* BUGFIX 2026-09-17: đổi từ mốc "câu hỏi xuất hiện" sang đúng mốc cô giáo nói "...20 giây. Bắt đầu."
+   của từng vòng — trước đó dùng mốc câu hỏi vừa hiện (ví dụ vòng 1 = 17:00) khiến nút A/B/C + đếm
+   ngược hiện SỚM hơn thực tế ~9-16 giây so với lúc cô giáo thật sự nói "Bắt đầu" (vòng 1 = 17:09).
+   Xem transcript-video-concept-1.2-my-favourite-things-2026-09-17.md để đối chiếu từng vòng. */
+const ISPEAK_START_T = [17*60+9, 18*60+43, 19*60+58, 21*60+33, 22*60+59, 24*60+4, 25*60+20, 26*60+37];
 const NEW_STRUCTURES_START_T = 28*60+2; // 28:02 — mốc "New structures" bắt đầu (mục 7 timeline), dùng làm điểm dừng sau ispeak8
 /* Đáp án đúng (A/B/C) của phần "Read & choose" từng vòng, theo transcript giọng nói thật (mục 6
    timeline). Vòng 1/2/3/4/8 lấy đúng chữ cái cô giáo đọc trong transcript (sandwich=B, black=A,
@@ -2708,10 +2739,16 @@ const NEW_STRUCTURES_START_T = 28*60+2; // 28:02 — mốc "New structures" bắ
    không suy ra được từ nguồn thật; không ảnh hưởng điểm số (điểm Phát âm vẫn tính từ ASR ở phần
    Listen & say, xem toggleMic()), chỉ ảnh hưởng vị trí nút được tô đúng khi chữa đáp án minh hoạ. */
 const ISPEAK_ANSWERS = ['B','A','A','C','B','A','C','A'];
-/* Mốc video thật lúc cô giáo nói "Now listen and say [từ]" từng vòng (mục 6 timeline, transcript) —
-   dùng để chuyển bottomBar từ pha "Read & choose" sang pha "Listen & say" (mic) ĐÚNG lúc video thật
-   nói câu đó, không phải sau 1 khoảng thời gian cố định tách rời video. */
-const ISPEAK_SPEAK_T = [17*60+48, 19*60+17, 20*60+41, 22*60+10, 23*60+28, 24*60+43, 25*60+57, 27*60+11];
+/* BUGFIX 2026-09-17: đổi từ mốc "Now listen and say [từ]" (cô giáo đọc mẫu) sang đúng mốc cô giáo
+   ra lệnh "Con hãy nói to vào mic nha" (hoặc "let's go" ở vòng 2/3/8, ASR không đọc rõ chữ "mic")
+   — đây mới là lúc học sinh THẬT SỰ được yêu cầu nói vào mic, khớp đúng ý "hiện iSpeak + đếm ngược
+   20 giây" bạn xác nhận. Vòng 1=17:59, 2=19:24, 3=20:48, 4=22:18, 5=23:35, 6=24:49, 7=26:05, 8=27:19
+   — đã kiểm tra cả 8 vòng đều để dư ít nhất vài giây trước khi vòng kế tiếp bắt đầu. */
+const ISPEAK_SPEAK_T = [17*60+59, 19*60+24, 20*60+48, 22*60+18, 23*60+35, 24*60+49, 26*60+5, 27*60+19];
+/* Số giây đếm ngược của MỖI pha (chọn A/B/C lẫn nói vào mic) — đúng 20 giây như cô giáo nói trong
+   video ở cả 2 pha. Đếm theo THỜI GIAN VIDEO (xem updateIspeakTimerPill), không phải đồng hồ tay. */
+const ISPEAK_CHOOSE_SECONDS = 20;
+const ISPEAK_SPEAK_SECONDS = 20;
 
 /* Các mốc tiết học hiển thị trên thanh tua video (chấm tròn, bấm để tua nhanh) — lấy từ 13 mục của
    03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md, bản đã sửa
@@ -2749,13 +2786,51 @@ function checkVideoTimeAdvance(){
   const video = document.getElementById('lectureVideo');
   if(!video) return;
   const t = video.currentTime;
+  /* Cập nhật 2026-09-17: đồng hồ "● Trực tiếp · mm:ss" ở panel bên phải màn lớp học trước đây là
+     số tĩnh (20:25), giờ hiển thị đúng thời lượng thật của video đang phát. */
+  const liveTimeEl = document.getElementById('liveDurationTime');
+  if(liveTimeEl) liveTimeEl.textContent = formatMmSs(t);
   if(state.chatQueue.length && t >= state.chatQueue[0].t){
     appendClassChatBubble(state.chatQueue.shift().text);
   }
   syncIspeakFlow(t);
+  updateIspeakTimerPill(t);
   if(state.pendingVideoAdvance != null && t >= state.pendingVideoAdvance){
     state.pendingVideoAdvance = null;
     nextClassStep();
+  }
+}
+
+/* BUGFIX 2026-09-17: đồng hồ đếm ngược 20s của pha "Read & choose" trước đây chạy bằng setInterval
+   (đồng hồ tay của trình duyệt), TÁCH RỜI khỏi video — trái với rule "đếm ngược theo hiệu lệnh đúng
+   kịch bản": video dừng/tua thì đồng hồ tay vẫn chạy (hoặc ngược lại) nên bị lệch, nhìn như đứng im.
+   Giờ tính thẳng từ video.currentTime: còn lại = (mốc "Bắt đầu" + 20s) - thời điểm hiện tại của
+   video. Video dừng thì đồng hồ dừng, tua lùi thì đồng hồ chạy lại đúng phần còn dư — luôn khớp
+   tuyệt đối với kịch bản. Hết 20 giây (theo thời gian video) thì tự nộp bài. */
+function updateIspeakTimerPill(t){
+  const step = FLOW[state.classroomStep];
+  if(!step || step.indexOf('ispeak') !== 0) return;
+  const n = state.ispeakCurrentRound;
+  if(!n) return;
+  const el = document.getElementById('ispeakTimerPill');
+  if(state.ispeakPhase === 'choose'){
+    const left = Math.max(0, Math.ceil(ISPEAK_START_T[n-1] + ISPEAK_CHOOSE_SECONDS - t));
+    if(el) el.textContent = `⏱ ${formatMmSs(left)}`;
+    if(left <= 0 && !state.ispeakSubmitted) submitIspeakChoice();
+  } else {
+    /* BUGFIX 2026-09-17: pha nói trước đây đếm tới tận lúc vòng KẾ TIẾP bắt đầu (34-51 giây tuỳ
+       vòng — nhìn như "55 giây") thay vì đúng 20 giây thật kể từ lúc cô giáo nói "Con hãy nói to
+       vào mic nha" (ISPEAK_SPEAK_T). Sửa lại đúng 20 giây, cùng công thức với pha chọn. */
+    const left = Math.max(0, Math.ceil(ISPEAK_SPEAK_T[n-1] + ISPEAK_SPEAK_SECONDS - t));
+    if(el) el.textContent = `⏱ ${formatMmSs(left)}`;
+    // Hết 20 giây mà chưa nói (chưa có kết quả ASR) — tính là bỏ qua, không chờ tới lúc tua qua vòng.
+    if(left <= 0 && state.ispeakRoundResults[n-1] == null && !state.recording){
+      state.ispeakRoundResults[n-1] = false;
+      const hint = document.getElementById('micHint');
+      if(hint) hint.textContent = `⏰ Hết giờ — đáp án: ${ISPEAK_WORDS[n-1]}`;
+      const micBtn = document.getElementById('micBtn');
+      if(micBtn) micBtn.disabled = true;
+    }
   }
 }
 
@@ -2945,44 +3020,25 @@ function skip(){
   }
 }
 
+/* Cập nhật 2026-09-17: "Bỏ qua/Tiếp theo" ở màn buổi học chính khoá giờ chuyển THẲNG sang bước kế
+   tiếp sau buổi học (màn điểm danh cuối buổi) — không còn hiện màn "Kết thúc buổi học" (end-cta)
+   trung gian để bấm thêm 1 lần nữa, và không còn tự làm hộ từng bước nhỏ (mcq/ispeak/group/aispeak)
+   như trước. Muốn chuyển giữa các phần hoặc tua buổi học, dùng thanh điều khiển video (thanh tua kéo
+   tay hoặc 2 nút lùi/tiến 10 giây) thay cho nút này. */
 function forceAdvanceClassroom(){
   clearTimeout(state.pendingTimer);
-  const step = FLOW[state.classroomStep];
-  if(step === 'mcq' && !state.mcqSubmitted){
-    selectMcq('B'); submitMcq();
-    return;
+  // Các điểm chưa kịp tính do nhảy thẳng qua (bỏ qua mcq/group/aispeak/ispeak) — gán mặc định hợp lý
+  // để màn Tổng kết luôn có đủ 4 chỉ số, không hiện "null/10" (xem bugfix cùng vấn đề ở case 'mcq').
+  if(state.scores.mcq == null) state.scores.mcq = 5;
+  if(state.scores.group == null) state.scores.group = 5;
+  if(state.scores.aispeak == null) state.scores.aispeak = 9;
+  if(state.scores.ispeak == null){
+    finalizeSkippedIspeakRounds();
+    const correctCount = state.ispeakRoundResults.filter(Boolean).length;
+    state.scores.ispeak = round1(correctCount / 8 * 10);
   }
-  if(step && step.indexOf('ispeak') === 0){
-    if(state.ispeakPhase === 'choose' && !state.ispeakSubmitted){
-      const n = Number(step.slice(6));
-      selectIspeakOption(ISPEAK_ANSWERS[n-1]);
-      submitIspeakChoice();
-    } else if(state.ispeakPhase === 'speak' && !state.recording){
-      toggleMic();
-    }
-  }
-  if(step === 'group-mascot'){
-    groupReady(); return;
-  }
-  if(step === 'aispeak-t1' || step === 'aispeak-t2'){
-    tutorlessGroupSkip(); return;
-  }
-  if(step === 'group-answer'){
-    autoFillGroupAnswer(); return;
-  }
-  if(step === 'end-cta'){
-    goto('checkout'); return;
-  }
-  /* DRAFT REVIEW: các bước đang chờ theo mốc thời gian thật của video (waitForVideoTime) —
-     "Bỏ qua" sẽ tua video tới đúng mốc đó thay vì nhảy bước ngay, để nội dung video luôn khớp. */
-  if(state.pendingVideoAdvance != null){
-    const video = document.getElementById('lectureVideo');
-    if(video) video.currentTime = state.pendingVideoAdvance;
-    return;
-  }
-  nextClassStep();
+  goto('checkout');
 }
-function tutorlessGroupSkip(){ aispeakSend('(bỏ qua – câu trả lời mẫu)'); }
 
 function bottomBarDefault(hint){
   return `<div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
@@ -3031,8 +3087,6 @@ function renderClassroomStep(){
       break;
 
     case 'lecture1':
-      overlay.innerHTML = `<div class="live-toast" id="lectureGreetToast">👋 Chào Vanh! Chúc con buổi học vui vẻ</div>`;
-      setTimeout(()=>{ const el = document.getElementById('lectureGreetToast'); if(el) el.remove(); }, 3000);
       /* Cập nhật 2026-09-17: lecture1 gộp toàn bộ phần đầu buổi thật (00:00) — 2 bài hát khởi động,
          welcome, nội quy, giới thiệu bài + chia nhóm, New words (dolphin/panda/pink/black/sandwich/
          pizza/table tennis/football) — cho tới đúng mốc bắt đầu Read&choose vòng 1 (17:00,
@@ -3072,12 +3126,15 @@ function renderClassroomStep(){
     case 'mcq-result': {
       const correct = state.mcqAnswer === 'B';
       state.scores.mcq = correct ? 10 : 5;
-      overlay.innerHTML = mascotBubble(
-        correct ? 'CHÍNH XÁC!' : 'CHƯA CHÍNH XÁC',
-        correct ? 'Giỏi quá! Con làm tốt lắm!' : 'Không sao, cố lên câu sau nhé!',
-        correct ? '🥳' : '🙂'
-      );
-      autoAdvance(nextClassStep, 2400);
+      /* Cập nhật 2026-09-17: popup "CHÍNH XÁC!" giờ CHỈ hiện khi chọn ĐÚNG (ngược lại với popup
+         "Đáp án đúng là..." bên iSpeak, chỉ hiện khi chọn SAI) — chọn sai thì không hiện gì cả. Tự
+         tắt sau 3 giây: đổi thẳng autoAdvance từ 2400ms lên 3000ms, popup tự biến mất đúng lúc màn
+         kế tiếp render (renderClassroomStep() xoá overlay ở đầu mỗi bước), không cần thêm hẹn giờ
+         riêng cho popup như bên iSpeak (ở đây popup và bước chuyển màn vốn đã dùng chung 1 hẹn giờ). */
+      if(correct){
+        overlay.innerHTML = mascotBubble('CHÍNH XÁC!', 'Giỏi quá! Con làm tốt lắm!', '🥳');
+      }
+      autoAdvance(nextClassStep, 3000);
       break;
     }
 
@@ -3283,22 +3340,8 @@ function renderIspeakChoosePhase(n){
       <button class="submit-btn" id="ispeakSubmitBtn" disabled onclick="submitIspeakChoice()">Nộp bài</button>
     </div>
     <button class="cc-btn">CC</button>`;
-  startIspeakCountdown();
-}
-
-function startIspeakCountdown(){
-  clearInterval(state.ispeakTimerIv);
-  let left = 20;
-  state.ispeakTimerIv = setInterval(()=>{
-    left--;
-    const el = document.getElementById('ispeakTimerPill');
-    if(!el){ clearInterval(state.ispeakTimerIv); return; }
-    el.textContent = `⏱ 00:${String(Math.max(0,left)).padStart(2,'0')}`;
-    if(left<=0){
-      clearInterval(state.ispeakTimerIv);
-      if(!state.ispeakSubmitted) submitIspeakChoice();
-    }
-  }, 1000);
+  const video = document.getElementById('lectureVideo');
+  updateIspeakTimerPill(video ? video.currentTime : ISPEAK_START_T[n-1]); // vẽ ngay số đúng, khỏi nháy "00:20"
 }
 
 function selectIspeakOption(letter){
@@ -3317,33 +3360,36 @@ function selectIspeakOption(letter){
 function submitIspeakChoice(){
   if(state.ispeakSubmitted) return;
   state.ispeakSubmitted = true;
-  clearInterval(state.ispeakTimerIv);
   const n = state.ispeakCurrentRound;
   const correctLetter = ISPEAK_ANSWERS[n-1];
   const correct = state.ispeakChoice === correctLetter;
-  const overlay = document.getElementById('classOverlayLayer');
-  overlay.innerHTML = mascotBubble(
-    correct ? 'CHÍNH XÁC!' : `Đáp án đúng là ${correctLetter}`,
-    ISPEAK_WORDS[n-1],
-    correct ? '🥳' : '🙂'
-  );
-  /* KHÔNG tự chuyển pha ở đây — chỉ hiện đáp án rồi GIỮ NGUYÊN cho tới khi syncIspeakFlow() (chạy
-     mỗi tick video) chuyển sang pha nói đúng lúc video thật nói "listen and say". Nếu người dùng
-     nộp bài xong rồi lập tức tua qua khỏi mốc đó, syncIspeakFlow() vẫn xử lý bình thường (round đã
-     có kết quả nên không bị tính là bỏ qua). */
+  /* Cập nhật 2026-09-17: popup chữa đáp án CHỈ hiện khi chọn SAI (hoặc hết giờ không chọn) — chọn
+     đúng thì không hiện gì cả (khỏi làm gián đoạn), và tự tắt sau 3 giây thay vì "giữ nguyên" như
+     trước (trước đây giữ tới khi chuyển pha nói — có lúc kéo dài hơn nhiều so với 3s vì mốc "Listen
+     & say" của mỗi vòng cách lúc nộp bài xa hơn). Việc chuyển sang pha nói vẫn hoàn toàn do
+     syncIspeakFlow() quyết định theo mốc video thật — không liên quan gì đến popup này. */
+  if(!correct){
+    const overlay = document.getElementById('classOverlayLayer');
+    overlay.innerHTML = mascotBubble(`Đáp án đúng là ${correctLetter}`, ISPEAK_WORDS[n-1], '🙂');
+    setTimeout(()=>{ if(overlay.parentNode) overlay.innerHTML = ''; }, 3000);
+  }
 }
 
 function renderIspeakSpeakPhase(n){
+  const overlay = document.getElementById('classOverlayLayer');
+  if(overlay) overlay.innerHTML = ''; // phòng khi popup "Đáp án đúng là..." chưa kịp tự tắt sau 3s
   const bottomBar = document.getElementById('bottomBar');
   bottomBar.classList.remove('locked-controls');
   bottomBar.innerHTML = `
     <div class="reaction-wrap"><button class="reaction-btn">❤️</button><span class="assist-tag">Phương Phương</span></div>
     <div class="control-center">
-      <span class="timer-pill">⏱ 00:20</span>
+      <span class="timer-pill" id="ispeakTimerPill">⏱ 00:00</span>
       <span class="hint-text" id="micHint">🎤 iSpeak ${n}/8 · Con bấm vào mic để nói <i style="opacity:.65">(đáp án: ${ISPEAK_WORDS[n-1]})</i></span>
       <button class="mic-btn" id="micBtn" onclick="toggleMic()">🎤</button>
     </div>
     <button class="cc-btn">CC</button>`;
+  const video = document.getElementById('lectureVideo');
+  if(video) updateIspeakTimerPill(video.currentTime);
 }
 
 function groupReady(){
@@ -3411,11 +3457,6 @@ function submitFillBlank(){
   state.scores.group = correctCount===FB_SENTENCES.length ? 10 : (correctCount>0 ? 7 : 4);
   nextClassStep();
 }
-function autoFillGroupAnswer(){
-  FB_SENTENCES.forEach((s,i)=>{ state.fb.picks[i] = s.answer; });
-  submitFillBlank();
-}
-
 function renderAispeakChat(messages, waiting){
   const overlay = document.getElementById('classOverlayLayer');
   const bottomBar = document.getElementById('bottomBar');
