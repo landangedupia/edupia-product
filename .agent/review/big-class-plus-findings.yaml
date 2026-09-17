@@ -1,0 +1,663 @@
+prd_source: "04_delivery/specs/ai-class-core/big-class-plus/AICNew-01-big-class-plus.md"
+prd_version: "1.1"
+applied_to_version: ""
+generated_at: "2026-09-06T04:00:00Z"
+status: "pending_review"
+
+findings:
+  # ============================================================
+  # CRITICAL (9)
+  # ============================================================
+  - id: "F001"
+    lens: "SA"
+    severity: "critical"
+    section: "§1a User Story / §1b Phạm vi (so sánh với Big Class)"
+    uc_id: ""
+    quote: "điều Big Class hiện tại chưa có"
+    finding: "PRD dùng \"Big Class hiện tại\" làm nền so sánh, nhưng glossary định nghĩa \"Big Class\" (Confirmed) là buổi học có GIÁO VIÊN THẬT dẫn lớp — trong khi Big Class Plus dùng GV Star (video quay sẵn). PRD không xác nhận rõ Big Class Plus có giữ hay bỏ hẳn đặc tính \"GV thật dẫn lớp\" của Big Class gốc, hay đây là một mô hình vận hành khác hẳn."
+    suggestion: "Thêm một dòng xác nhận rõ (ở §1a hoặc §1b, tương tự các footnote quan hệ tên gọi đã có): Big Class Plus có phải là phiên bản thay giáo viên thật bằng GV Star hay không, và điều này có áp dụng cho toàn bộ Big Class (mọi buổi) hay chỉ Big Class Plus là một biến thể song song."
+    resolution_edge_cases:
+      - "Nếu xác nhận Big Class Plus thay hẳn GV thật, cần rà soát lại các tài liệu bán hàng/slide đang định vị 'giáo viên thật' như một điểm bán hàng của Big Class."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F002"
+    lens: "SA"
+    severity: "critical"
+    section: "§1c Phụ thuộc liên service"
+    uc_id: ""
+    quote: "Cần Mastery Profile / Adaptive Learning (nền tảng chung) đã tồn tại để ghi tín hiệu NLO vào"
+    finding: "PRD khẳng định Mastery Profile/Adaptive Learning là \"nền tảng chung\" (đã chốt), nhưng glossary (entry Mastery Profile/Mastery Map) ghi rõ phạm vi này còn \"◆ Pending BOD\" — chưa chốt là dùng chung toàn Edupia Class hay chỉ riêng AI Class Plus."
+    suggestion: "Bổ sung ghi chú (§1c hoặc Giả định AI) rằng phạm vi 'nền tảng chung' của Mastery Profile đang chờ BOD; PRD tạm giả định dùng chung cho mục đích prototype T9, cần xác nhận lại trước khi bàn giao dev chính thức — theo đúng cách PRD đã xử lý các mục ⛔ khác."
+    resolution_edge_cases:
+      - "Nếu BOD quyết Mastery Profile không dùng chung, toàn bộ luồng ghi Gap Detection (BR9) của Big Class Plus phải trỏ tới một phạm vi Mastery Profile hẹp hơn — ảnh hưởng thiết kế dữ liệu ở tầng nền tảng."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F003"
+    lens: "DEV"
+    severity: "critical"
+    section: "§1c Phụ thuộc liên service"
+    uc_id: ""
+    quote: "Cần NLO Taxonomy (1.473 đơn vị) đã có sẵn để hệ thống gán đúng NLO cho học sinh"
+    finding: "BR8 yêu cầu 'đối chiếu mỗi câu về đúng NLO tương ứng' — nghĩa là cần một ánh xạ câu hỏi-tương-tác → NLO, khác với 'NLO Taxonomy' (danh sách 1.473 đơn vị kiến thức) đã khai. Toàn bộ cơ chế gán NLO (chức năng lõi của PRD) phụ thuộc ánh xạ này nhưng nguồn/sự tồn tại của nó chưa được khai báo là phụ thuộc liên service."
+    suggestion: "Bổ sung ở §1c: câu hỏi tương tác trong buổi học GV Star đã được gắn thẻ NLO sẵn ở đâu (thuộc nội dung bài giảng, hay một ngân hàng câu hỏi riêng), và xác nhận đây có phải phụ thuộc cần rà soát trước khi bàn giao dev."
+    resolution_edge_cases:
+      - "Nếu ánh xạ câu hỏi↔NLO chưa tồn tại, toàn bộ BR8/BR9 (lõi tính năng) không thể triển khai đúng hạn cho prototype T9 — cần biết sớm để điều chỉnh kế hoạch."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F004"
+    lens: "SA"
+    severity: "critical"
+    section: "§1b Phạm vi vs §1d Quy ước (mốc kết thúc buổi) / BR1-BR3"
+    uc_id: "AICNew-01-UC1"
+    quote: "không phải theo đồng hồ thực nếu học sinh tạm dừng/xem lại một đoạn"
+    finding: "Mâu thuẫn mô hình vận hành: §1b mô tả 'Buổi học trực tuyến nhóm' và BR1/BR2 dùng 'giờ bắt đầu buổi' như một mốc đồng hồ CHUNG cho cả lớp (điểm danh đồng bộ), BR3 dùng khái niệm 'rời kết nối tạm thời' như một buổi học live. Nhưng §1d lại định nghĩa mốc 'kết thúc buổi học' theo tiến độ phát video CÁ NHÂN của từng học sinh (được phép tạm dừng/xem lại riêng — ngụ ý video on-demand theo từng em). Hai mô hình (lớp học nhóm đồng bộ vs. video cá nhân hoá tiến độ) chưa được thống nhất."
+    suggestion: "Bổ sung một câu ở §1d làm rõ mô hình vận hành thực tế: học sinh trong cùng lớp có xem cùng một video đồng bộ (mốc kết thúc chung cho cả lớp) hay mỗi em có tiến độ phát riêng (mốc kết thúc khác nhau theo từng em)? Đây là câu hỏi cần PO/kỹ thuật xác nhận trước, ảnh hưởng cách hiểu toàn bộ BR1/BR2/BR3/BR11."
+    resolution_edge_cases:
+      - "Nếu mỗi học sinh có mốc kết thúc riêng, khái niệm 'giờ bắt đầu buổi' dùng chung ở BR1/BR2 cũng cần xác nhận lại có phải mốc chung hay không."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F005"
+    lens: "DEV"
+    severity: "critical"
+    section: "§1d Quy ước (ngưỡng thoát hẳn) / BR3 / BR11"
+    uc_id: "AICNew-01-UC1"
+    quote: "không quay lại lớp trong vòng (TBD số phút) hoặc không quay lại trước khi video bài giảng kết thúc thì tính là thoát hẳn"
+    finding: "Logic OR giữa hai điều kiện mâu thuẫn nội tại với cách BR11 thực thi: BR11 chỉ đánh giá trạng thái 'còn trong lớp hay đã thoát hẳn' đúng MỘT LẦN, tại mốc 'kết thúc buổi học'. Tại thời điểm đó, điều kiện thứ hai ('chưa quay lại trước khi video kết thúc') luôn đúng cho bất kỳ học sinh nào chưa quay lại — khiến điều kiện thứ nhất (ngưỡng TBD phút, có tính chất 'grace period') không bao giờ có tác dụng độc lập tại mốc đánh giá duy nhất mà BR11 định nghĩa."
+    suggestion: "Làm rõ: ngưỡng TBD phút có tạo ra một quyết định 'thoát hẳn' SỚM HƠN (giữa buổi, trước khi video kết thúc) không, và nếu có thì hệ quả nghiệp vụ là gì (AI Voice có còn phản hồi không, có tính vào report không)? Nếu không, mốc kết thúc buổi học là điểm quyết định duy nhất — nên diễn đạt lại điều kiện ngưỡng phút cho khỏi vô nghĩa trong logic OR hiện tại."
+    resolution_edge_cases:
+      - "Nếu chốt ngưỡng phút tạo quyết định sớm, cần thêm một Business Rule mới xử lý hệ quả của quyết định 'thoát hẳn sớm' đó (khác BR11)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F006"
+    lens: "SA"
+    severity: "critical"
+    section: "§3 Use Case AICNew-01-UC1 - Post-condition"
+    uc_id: "AICNew-01-UC1"
+    quote: "Hệ thống đã gán NLO cho học sinh có trả lời câu hỏi trong buổi (trừ ngoại lệ ở BR7, hoặc tạm hoãn nếu rơi vào BR13)"
+    finding: "Post-condition nói bước GÁN NLO (BR8) bị 'tạm hoãn nếu rơi vào BR13' — nhưng nội dung thật của BR13 chỉ nói 'bỏ qua bước ghi tín hiệu Gap Detection (BR9)', không hề nói gán NLO (BR8) bị hoãn. AC13 cũng chỉ xác nhận 'không có tín hiệu Gap Detection nào được ghi', không nói gì về việc hoãn gán NLO — đây là mâu thuẫn nội bộ tài liệu giữa Post-condition và chính BR13/AC13 mà nó tham chiếu."
+    suggestion: "Sửa Post-condition: bỏ cụm 'hoặc tạm hoãn nếu rơi vào BR13' ra khỏi bullet gán NLO — BR13 chỉ ảnh hưởng bước ghi Gap Detection (BR9), không ảnh hưởng bước gán NLO (BR8). Giữ điều kiện BR13 đúng ở bullet Gap Detection (đã có sẵn '(nếu Mastery Profile đã tồn tại)')."
+    resolution_edge_cases:
+      - "Sau khi sửa, cần rà lại Screen 3 / report buổi học có chỗ nào đang hiển thị theo cách hiểu sai (gán NLO bị hoãn) không."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F007"
+    lens: "DEV"
+    severity: "critical"
+    section: "§3 Business Rule - BR8"
+    uc_id: "AICNew-01-UC1"
+    quote: "NLO được kiểm qua nhiều câu trong buổi → NLO đó tính \"chưa đạt\" nếu có ít nhất một câu sai"
+    finding: "BR8 chỉ định nghĩa cách tính khi học sinh đã trả lời ĐỦ các câu liên quan một NLO. Chưa nói rõ trường hợp học sinh chỉ trả lời MỘT PHẦN các câu liên quan tới một NLO (ví dụ NLO X gắn với 3 câu, học sinh chỉ trả lời 1/3, bỏ qua 2 câu còn lại) — khác với BR7 (0 câu cả buổi). Câu bị bỏ qua có tính là 'sai' cho NLO đó không, hay NLO chỉ được đánh giá dựa trên các câu đã trả lời, hay không được gán luôn nếu không đủ câu đại diện?"
+    suggestion: "Cần PO xác nhận: khi học sinh trả lời một phần (không phải tất cả) các câu liên quan một NLO trong buổi, NLO đó có được gán kết quả không, và câu bị bỏ qua có được xem như 'sai' hay bị loại khỏi việc đánh giá NLO đó?"
+    resolution_edge_cases:
+      - "Quyết định này ảnh hưởng trực tiếp độ chính xác của tín hiệu Gap Detection đầu vào cho Adaptive Learning — chọn sai có thể tạo false positive lỗ hổng kiến thức."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F008"
+    lens: "DEV"
+    severity: "critical"
+    section: "§3 Business Rule - BR9 / BR13"
+    uc_id: "AICNew-01-UC1"
+    quote: "Mastery Profile không tồn tại cho học sinh → bỏ qua bước ghi tín hiệu Gap Detection (BR9) cho học sinh đó"
+    finding: "BR13 không nói rõ THỜI ĐIỂM kiểm tra 'Mastery Profile có tồn tại hay không' — đầu buổi hay đúng lúc BR9 thực thi (cuối buổi)? Nếu Mastery Profile được khởi tạo (bởi nền tảng chung) NGAY TRONG buổi học, trước khi BR9 chạy, thì tín hiệu Gap Detection của buổi đó có được ghi bình thường hay vẫn bị bỏ qua? Nếu quyết định bỏ qua là vĩnh viễn, PRD chưa nói có cơ chế ghi bù (trễ) tín hiệu đó sau khi Mastery Profile được khởi tạo hay tín hiệu mất hẳn."
+    suggestion: "Làm rõ: (1) việc kiểm tra Mastery Profile tồn tại được thực hiện tại thời điểm nào (đầu buổi hay lúc BR9 thực thi)? (2) Nếu Mastery Profile khởi tạo giữa buổi, tín hiệu Gap Detection của buổi đó có được ghi bù sau không, hay chấp nhận mất vĩnh viễn?"
+    resolution_edge_cases:
+      - "Nếu chọn kiểm tra tại thời điểm BR9 (cuối buổi) thay vì đầu buổi, cần xác nhận điều này không mâu thuẫn với F006 (Post-condition không được nói gán NLO bị hoãn theo BR13)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F009"
+    lens: "PO"
+    severity: "critical"
+    section: "PRD-global (§2/§3 toàn bộ, Metadata, Appendix)"
+    uc_id: ""
+    quote: "Nội dung PRD này phục vụ việc dựng prototype/demo cho khảo sát phụ huynh T9/2026"
+    finding: "PRD không có mục Success Metric nào — cả ở cấp UC1 (không AC/BR nào định nghĩa 'buổi học Big Class Plus thành công' về sản phẩm) lẫn cấp mục tiêu khảo sát (không có ngưỡng nào định nghĩa 'khảo sát T9 thành công' là gì, dù đây chính là mục đích PRD tự nêu ở banner đầu tài liệu). Thiếu điều này, PO không có cơ sở khách quan để quyết định đi tiếp hay dừng sau đợt khảo sát."
+    suggestion: "Thêm một mục 'Success Metric' (cuối §1 hoặc đầu §2): (1) chỉ số vận hành cấp UC1 — vd % buổi học AI Voice phản hồi đúng ngưỡng độ trễ, % học sinh được gán ≥1 NLO hợp lệ, tỷ lệ điểm danh có ảnh hợp lệ; (2) chỉ số khảo sát — ngưỡng WTP/purchase-intent để coi là tín hiệu tích cực đủ đi tiếp, tham chiếu bảng hỏi khảo sát liên quan."
+    resolution_edge_cases:
+      - "Nếu để trống tới sau khảo sát mới định nghĩa, rủi ro là dữ liệu thu thập không đủ để trả lời đúng câu hỏi PO thực sự cần (thu sai chỉ số)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  # ============================================================
+  # MAJOR (24)
+  # ============================================================
+  - id: "F010"
+    lens: "QA"
+    severity: "major"
+    section: "§1b Phạm vi (In Scope)"
+    uc_id: ""
+    quote: "AI Voice tăng cảm giác tương tác cá nhân: chào tên đầu buổi, khích lệ khi trả lời đúng, động viên khi trả lời sai"
+    finding: "Câu này liệt kê chi tiết 3 nhánh hành vi cụ thể của AI Voice — gần như trùng nguyên văn nội dung đã có ở BR4, BR5, BR6 (§3). Ở tầng Scope chỉ cần nêu ranh giới năng lực, không cần lặp lại chi tiết từng nhánh xử lý đã thuộc về BR."
+    suggestion: "Rút gọn thành một câu nêu năng lực ở mức khái quát, ví dụ: \"AI Voice tăng tương tác cá nhân theo diễn biến buổi học (chi tiết: xem BR4-BR6)\", bỏ phần liệt kê 3 nhánh cụ thể."
+    resolution_edge_cases:
+      - "Rút gọn xong cần đảm bảo không làm mất thông tin PO cần đọc nhanh ở Scope mà không phải mở BR."
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F011"
+    lens: "SA"
+    severity: "major"
+    section: "§1b Phạm vi (Out of Scope)"
+    uc_id: ""
+    quote: "Big Class Plus chỉ ghi nhận dữ liệu (điểm danh, report buổi học"
+    finding: "Câu này (trong ngữ cảnh ranh giới với GVCN & Parent Mode) liệt kê dữ liệu Big Class Plus 'ghi nhận' chỉ gồm điểm danh + report buổi học. Nhưng In Scope và §1c xác nhận Big Class Plus còn ghi tín hiệu Gap Detection vào Mastery Profile (dùng cho Adaptive Learning, không phải Parent Mode). Câu không làm rõ đây là phạm vi hẹp 'dữ liệu phục vụ Parent Mode', dễ đọc nhầm thành tuyên bố tổng quát, gây mơ hồ ranh giới sở hữu dữ liệu giữa Parent Mode và Adaptive Learning."
+    suggestion: "Viết lại rõ phạm vi câu: \"...Big Class Plus chỉ ghi nhận dữ liệu điểm danh/report buổi học để Parent Mode đọc — dữ liệu Gap Detection vào Mastery Profile (mục đích Adaptive Learning) là luồng riêng, xem §1c\"."
+    resolution_edge_cases:
+      - "Làm rõ điều này cũng giúp trả lời một phần câu hỏi ở F002 (phạm vi Mastery Profile)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F012"
+    lens: "PO"
+    severity: "major"
+    section: "§1b Out of Scope / §1c Phụ thuộc liên service / BR10"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI trợ giảng nhận xét cá nhân hoá (số câu đúng/sai, NLO còn yếu) + gợi ý BTVN Adaptive đúng NLO đó"
+    finding: "Out of Scope tuyên bố 'PRD này chỉ nhắc tên khi AI trợ giảng nhắc bài', nhưng Business Logic BR10 mô tả một việc lớn hơn: chọn ĐÚNG bài theo NLO (3 nhánh: theo lỗ hổng / nâng cao / không theo NLO) — đây thực chất là logic chọn nội dung/độ khó BTVN, chồng lấn phạm vi PRD 'BTVN Adaptive & AI Practice'/Routing Engine mà chính PRD này tuyên bố không làm. Đồng thời §1c không liệt kê BTVN Adaptive là một phụ thuộc liên service dù BR10 cần đọc/biết bài tương ứng theo NLO."
+    suggestion: "PO xác nhận: BR10 chỉ nên dừng ở 'AI trợ giảng nhắc học sinh có BTVN Adaptive tương ứng chờ sẵn' (nhắc tồn tại), còn quy tắc chọn nội dung nào chuyển sang PRD BTVN Adaptive & AI Practice. Đồng thời bổ sung phụ thuộc liên service với BTVN Adaptive ở §1c nếu Big Class Plus vẫn cần đọc dữ liệu từ đó để biết bài tương ứng."
+    resolution_edge_cases:
+      - "Nếu không tách, hai PRD (Big Class Plus và BTVN Adaptive) có thể định nghĩa trùng/mâu thuẫn logic chọn bài tập khi PRD kia được viết."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F013"
+    lens: "DEV"
+    severity: "major"
+    section: "§1c Phụ thuộc liên service"
+    uc_id: ""
+    quote: "Điểm danh đầu buổi và cuối buổi (kèm ảnh chụp học sinh)"
+    finding: "Danh sách phụ thuộc liên service không khai báo hệ thống/hạ tầng chụp ảnh học sinh (camera capture) — dù BR1, BR3, BR11, BR14 và Note liên quan đều dựa vào cơ chế này ở mức phụ thuộc kỹ thuật lõi tương đương AI Voice/video GV Star (đã được liệt kê), nhưng năng lực chụp ảnh lại không xuất hiện trong §1c."
+    suggestion: "Bổ sung một dòng phụ thuộc ở §1c cho hệ thống chụp/lưu ảnh điểm danh, cùng cấp với dòng AI Voice/video GV Star hiện có."
+    resolution_edge_cases:
+      - "Đây cũng là dữ liệu nhạy cảm (ảnh trẻ em) — liên quan trực tiếp tới ghi chú chính sách bảo mật đã có ở Note BR1-BR3/BR11/BR14 và Giả định AI Q5."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F014"
+    lens: "DEV"
+    severity: "major"
+    section: "§1c Phụ thuộc liên service"
+    uc_id: ""
+    quote: "Cần dịch vụ AI Voice (ghép giọng GV Star) và hệ thống phát video bài giảng GV Star đã sẵn sàng"
+    finding: "Theo glossary (entry GV Star), 'AI trợ giảng' dùng hình ảnh + giọng nói AI — một dịch vụ kỹ thuật khác với AI Voice ghép giọng GV Star. §1c chỉ khai báo phụ thuộc AI Voice/GV Star, không khai báo phụ thuộc dịch vụ AI hình ảnh/giọng nói riêng cho AI trợ giảng dù BR10 dựa hoàn toàn vào dịch vụ này."
+    suggestion: "Thêm một dòng phụ thuộc riêng cho dịch vụ AI hình ảnh + giọng nói của AI trợ giảng ở §1c."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F015"
+    lens: "DEV"
+    severity: "major"
+    section: "§1c Phụ thuộc liên service"
+    uc_id: "AICNew-01-UC1"
+    quote: "hệ thống phát hiện học sinh rời kết nối tạm thời rồi quay lại trong cùng buổi"
+    finding: "Danh sách phụ thuộc không khai báo hệ thống theo dõi trạng thái kết nối/hiện diện của học sinh (presence/connection tracking) — năng lực kỹ thuật bắt buộc để phân biệt 'rời kết nối tạm thời' (BR3) và 'thoát hẳn' (BR11), nhưng không được liệt kê cùng nhóm với LMS/AI Voice/hệ thống phát video đã nêu."
+    suggestion: "Thêm ở §1c: 'Cần hệ thống/dịch vụ theo dõi trạng thái kết nối (presence) của học sinh trong lớp học trực tuyến — nền tảng để BR3/BR11 phân biệt rời tạm thời và thoát hẳn'."
+    resolution_edge_cases:
+      - "Liên quan trực tiếp tới F004/F005 — cùng một cụm vấn đề về mô hình theo dõi trạng thái kết nối chưa rõ."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F016"
+    lens: "PO"
+    severity: "major"
+    section: "Metadata / §2/§3 toàn bộ AC-BR"
+    uc_id: ""
+    quote: "| **Domain**    | ai-class-core                             |"
+    finding: "Bảng Metadata không có trường Priority, và toàn bộ 14 AC/14 BR đều dùng cùng mức khẳng định 'PHẢI'/'KHÔNG ĐƯỢC' mà không phân priority (P0/P1/P2, hoặc 'core cho prototype T9' vs 'có thể hoãn'). Prototype T9 có giới hạn thời gian/nguồn lực, nhưng PRD đọc như thể mọi nhánh (kể cả lỗi hiếm gặp BR12/BR13/BR14) có mức ưu tiên ngang với luồng lõi tạo trải nghiệm demo (BR1, BR4-BR6, BR8-BR10)."
+    suggestion: "Thêm trường Priority vào Metadata (vd P0 - phục vụ khảo sát T9), và thêm cột/nhãn Priority cho từng AC/BR — ít nhất tách nhóm 'phải có để chứng minh giá trị tương tác cá nhân' (BR1, BR4-BR10) khỏi nhóm 'xử lý lỗi/edge-case vận hành' (BR2, BR3, BR7, BR11-BR14)."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F017"
+    lens: "PO"
+    severity: "major"
+    section: "Appendix - Giả định AI Q3 (liên quan BR8)"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI đề xuất quy tắc \"một câu sai là đủ để tính NLO đó chưa đạt\" theo nguyên tắc thận trọng"
+    finding: "Q3 là quy tắc nghiệp vụ thuần (không phụ thuộc kỹ thuật/hạ tầng bên ngoài như Q2, không cần Pháp lý như Q5) — PO hoàn toàn có thể tự quyết ngay. Đây là quy tắc lõi quyết định hành vi Gap Detection hiển thị trong demo/khảo sát — để mở tới lúc duyệt PRD chính thức là muộn, đội dựng prototype sẽ phải tự đoán hoặc hard-code tạm."
+    suggestion: "PO xác nhận ngay quy tắc BR8 trước khi bắt đầu dựng prototype, cập nhật Note BR8 và Q3 từ '[AI DRAFT]' thành quyết định đã chốt."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F018"
+    lens: "PO"
+    severity: "major"
+    section: "Appendix - Giả định AI Q4 (liên quan BR13)"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI đề xuất vẫn cho học sinh học bình thường, chỉ tạm hoãn ghi Gap Detection"
+    finding: "Tương tự Q3, Q4 (xử lý khi Mastery Profile chưa tồn tại) là quyết định nghiệp vụ PO có thể tự chốt ngay. Vì học sinh trong prototype/demo nhiều khả năng chưa có Mastery Profile khởi tạo sẵn, nhánh này sẽ xuất hiện thường xuyên trong demo — để mở tới sau khảo sát là muộn."
+    suggestion: "PO xác nhận ngay hướng xử lý BR13 trước khi dựng prototype, cập nhật Q4 từ trạng thái mở thành quyết định đã chốt."
+    resolution_edge_cases:
+      - "Quyết định này cũng cần nhất quán với hướng xử lý ở F008 (thời điểm kiểm tra Mastery Profile)."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F019"
+    lens: "QA"
+    severity: "major"
+    section: "§2 Acceptance Criteria - AC10"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI trợ giảng đưa nhận xét đúng theo kết quả học tập của từng học sinh + gợi ý BTVN Adaptive tương ứng."
+    finding: "AC10 chỉ nêu một outcome khái quát, mơ hồ ('nhận xét đúng') trong khi BR10 định nghĩa rõ 3 nhánh outcome khác hẳn nhau (chưa đạt/đạt hết/không dữ liệu) đều quan sát được ở người dùng. QA không thể tự AC10 viết được 3 test case tương ứng nếu không mở lại BR10 — khác với AC2, AC7, AC11 lân cận đã tách rõ outcome theo từng nhánh ngay trong câu AC."
+    suggestion: "Viết lại AC10 nêu rõ có 3 outcome khác nhau cần kiểm chứng: 'Cuối buổi học → AI trợ giảng đưa đúng 1 trong 3 dạng nhận xét theo nhánh kết quả học tập của học sinh (theo lỗ hổng NLO / khen ngợi + nâng cao / nhắc nhở tham gia) + gợi ý BTVN Adaptive tương ứng đúng nhánh đó. (BR: AICNew-01-UC1-BR10)'."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F020"
+    lens: "QA"
+    severity: "major"
+    section: "§2 AC5/AC6 vs BR5/BR6"
+    uc_id: "AICNew-01-UC1"
+    quote: "Nếu nhiều học sinh trả lời gần như đồng thời → hệ thống PHẢI đảm bảo mọi học sinh đều nhận được phản hồi"
+    finding: "Business Logic BR5/BR6 có nhánh riêng cho case nhiều học sinh trả lời gần như đồng thời, nhưng AC5/AC6 không có acceptance criterion nào test riêng nhánh này — rule tồn tại ở BR nhưng không trace được ra AC để viết test case."
+    suggestion: "Thêm một AC (hoặc mở rộng AC5/AC6) mô tả outcome quan sát được cho case nhiều học sinh trả lời đồng thời, tham chiếu đúng bullet 2 của BR5/BR6."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F021"
+    lens: "QA"
+    severity: "major"
+    section: "§2 AC8 vs BR8"
+    uc_id: "AICNew-01-UC1"
+    quote: "hệ thống gán đúng NLO theo đúng/sai của các câu đã trả lời"
+    finding: "Business Logic BR8 có 2 nhánh phức tạp riêng biệt (một câu liên quan nhiều NLO; một NLO được kiểm qua nhiều câu), nhưng AC8 chỉ viết một câu chung chung — không tách acceptance criterion cho từng nhánh nên không thể viết test case độc lập cho 2 quy tắc này."
+    suggestion: "Tách AC8 thành các acceptance criterion con (AC8a/AC8b) tương ứng 2 nhánh logic của BR8, giữ AC ở mức outcome quan sát được."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F022"
+    lens: "SA"
+    severity: "major"
+    section: "§1d Quy ước - định nghĩa \"Report buổi học\""
+    uc_id: "AICNew-01-UC1"
+    quote: "Report buổi học** (nhắc tới ở BR2, BR7, BR13, BR14, Screen 3)"
+    finding: "Định nghĩa entity 'Report buổi học' không nhất quán/không đầy đủ ở nhiều điểm: (1) danh sách 'nhắc tới ở' bỏ sót BR1, BR8, BR11 dù các trường điểm danh và 'danh sách NLO đã gán' chính là output của các BR này; (2) không rõ 'danh sách NLO đã gán' gồm cả đạt+chưa đạt hay chỉ chưa đạt (khác quy tắc chỉ-ghi-chưa-đạt của Mastery Profile ở BR9); (3) không rõ nhận xét của AI trợ giảng (BR10) có phải một trường thuộc entity này không, hay là luồng dữ liệu tách biệt hiển thị cùng lúc ở Screen 3; (4) BR2 yêu cầu ghi 'thời điểm vào trễ' nhưng entity chỉ liệt kê cờ 'vào trễ (nếu có)', thiếu trường lưu thời điểm cụ thể."
+    suggestion: "Viết lại định nghĩa Report buổi học ở §1d: bổ sung BR1, BR8, BR11 vào danh sách trích dẫn; làm rõ danh sách NLO gồm cả đạt/chưa đạt hay chỉ chưa đạt; xác nhận nhận xét AI trợ giảng có thuộc entity này không; bổ sung trường 'thời điểm vào trễ'."
+    resolution_edge_cases:
+      - "Làm rõ entity này trước khi Design Spec (Screen 3) được viết chính thức, vì Screen 3 hiện đang hiển thị dữ liệu chưa rõ nguồn gốc entity."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F023"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR2 / §4a User Flow (node TIME)"
+    uc_id: "AICNew-01-UC1"
+    quote: "Thời điểm vào lớp > giờ bắt đầu buổi → điểm danh đầu buổi = Không"
+    finding: "BR2 và flowchart (node TIME chỉ rẽ 'Có'/'Trễ') không xử lý trường hợp học sinh cố vào lớp SAU KHI buổi đã kết thúc (video GV Star đã phát hết) — chưa rõ có cho vào xem lại nội dung (tính là 'vào trễ' hay một trạng thái khác) hay chặn hẳn."
+    suggestion: "Bổ sung nhánh/Business Rule cho case học sinh vào lớp sau mốc kết thúc buổi (liên quan trực tiếp tới F004 — mốc kết thúc theo mô hình đồng bộ hay cá nhân)."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F024"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR5 / BR6"
+    uc_id: "AICNew-01-UC1"
+    quote: "áp cùng nguyên tắc đảm bảo phản hồi như BR5"
+    finding: "Chưa rõ case MỘT học sinh trả lời nhiều câu liên tiếp rất nhanh (nhanh hơn thời gian một đoạn AI Voice phát xong) — các phản hồi có bị dồn/nối tiếp hay chỉ giữ phản hồi mới nhất? Ở lớp rất đông, hàng đợi phát nối tiếp có thể kéo dài tới mức phản hồi không còn liên quan ngữ cảnh hiện tại — chưa có ngưỡng nghiệp vụ chấp nhận độ trễ tối đa. Cũng chưa rõ thứ tự ưu tiên khi hàng đợi chào tên (BR4) và khích lệ/động viên (BR5/BR6) cùng tồn tại."
+    suggestion: "Cần PO xác nhận: (1) một học sinh trả lời nhiều câu cực nhanh có bị dồn nhiều phản hồi nối tiếp không, hay chỉ giữ phản hồi mới nhất? (2) có ngưỡng độ trễ tối đa trước khi phản hồi bị coi là 'quá cũ, không cần phát' không? (3) hàng đợi chào tên (BR4) và khích lệ/động viên (BR5/BR6) trùng thời điểm thì cái nào ưu tiên?"
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F025"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR5 / BR6 / BR8"
+    uc_id: "AICNew-01-UC1"
+    quote: "tổng hợp danh sách câu đúng/sai → đối chiếu mỗi câu về đúng NLO tương ứng"
+    finding: "Chưa nói rõ liệu một câu hỏi có cho phép học sinh chọn/đổi đáp án nhiều lần trước khi 'chốt' câu trả lời hay không. Nếu có: AI Voice có phát khích lệ/động viên theo MỖI lần chọn hay chỉ theo lựa chọn cuối cùng? BR8 khi tổng hợp đúng/sai để gán NLO dùng lựa chọn nào?"
+    suggestion: "Cần PO xác nhận: mỗi câu hỏi có cho phép đổi đáp án trước khi chốt không? Nếu có, AI Voice phản hồi theo lần nào, và BR8 tính đúng/sai theo lần nào?"
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F026"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR10"
+    uc_id: "AICNew-01-UC1"
+    quote: "gợi ý BTVN Adaptive đúng NLO đó"
+    finding: "BR10 dùng số ít 'gợi ý BTVN Adaptive đúng NLO đó' nhưng theo BR8 một học sinh có thể có NHIỀU NLO 'chưa đạt' cùng lúc trong một buổi — chưa rõ gợi ý BTVN cho tất cả các NLO chưa đạt hay chỉ một, và nếu chỉ một thì chọn theo tiêu chí gì."
+    suggestion: "Làm rõ trong BR10 cách xử lý khi có nhiều NLO chưa đạt cùng lúc (gợi ý tất cả, hay ưu tiên một NLO theo tiêu chí nào)."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F027"
+    lens: "SA"
+    severity: "major"
+    section: "Post-condition / BR10 vs BR11"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI trợ giảng đã đưa nhận xét cuối buổi, trước khi điểm danh cuối buổi được ghi nhận"
+    finding: "BR10 yêu cầu AI trợ giảng PHẢI nhận xét 'từng học sinh' trước khi điểm danh cuối buổi được ghi. Nhưng BR11 có nhánh 'học sinh đã thoát hẳn → không ghi điểm danh cuối buổi' — với nhóm học sinh này, PRD không nói rõ AI trợ giảng có vẫn tạo nhận xét hay không, và ràng buộc trình tự 'trước khi ghi điểm danh cuối buổi' áp dụng thế nào khi không có sự kiện điểm danh cuối buổi nào được ghi để so trình tự. Screen 3 cũng ngầm định học sinh đang có mặt để xem, mâu thuẫn với trường hợp đã thoát hẳn."
+    suggestion: "Làm rõ trong BR10 hoặc BR11: với học sinh đã thoát hẳn, AI trợ giảng có vẫn sinh nhận xét (lưu vào report để xem sau) hay bỏ qua bước này, và nếu có thì bỏ điều kiện trình tự 'trước điểm danh cuối buổi' cho riêng trường hợp này."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F028"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR10 / BR11 (thiếu nhánh lỗi)"
+    uc_id: "AICNew-01-UC1"
+    quote: "AI trợ giảng PHẢI nhận xét kết quả học tập cụ thể của từng học sinh và nhắc làm BTVN Adaptive tương ứng"
+    finding: "BR10 yêu cầu nhận xét PHẢI hoàn tất TRƯỚC khi ghi điểm danh cuối buổi (BR11), nhưng không có Business Rule nào xử lý trường hợp dịch vụ AI trợ giảng lỗi/timeout khi sinh nhận xét — về nguyên tắc có nguy cơ chặn luôn việc ghi điểm danh cuối buổi nếu bước này thất bại."
+    suggestion: "Bổ sung Business Rule xử lý lỗi/timeout của AI trợ giảng, làm rõ điểm danh cuối buổi có bị chặn theo hay tách độc lập khỏi bước nhận xét."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F029"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR11"
+    uc_id: "AICNew-01-UC1"
+    quote: "nếu học sinh vẫn còn trong lớp → ghi điểm danh cuối buổi = Có"
+    finding: "BR11 giả định trạng thái nhị phân tại mốc kết thúc buổi học: 'còn trong lớp' hoặc 'đã thoát hẳn'. Một học sinh đang 'rời kết nối tạm thời, chưa quay lại, và chưa đạt ngưỡng thoát hẳn' đúng vào thời điểm video kết thúc thì không rõ rơi vào nhánh nào."
+    suggestion: "Cần làm rõ nhánh xử lý cho học sinh đang mất kết nối tạm thời (chưa quay lại, chưa bị đánh giá thoát hẳn) đúng vào thời điểm video kết thúc: tính điểm danh cuối buổi là Có hay Không?"
+    resolution_edge_cases:
+      - "Liên quan trực tiếp F005 — phụ thuộc vào cách giải quyết logic OR của ngưỡng thoát hẳn."
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F030"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Business Rule - BR12"
+    uc_id: "AICNew-01-UC1"
+    quote: "Gọi LMS lấy danh sách lớp thất bại (lỗi/quá thời gian chờ) → chặn học sinh vào lớp"
+    finding: "BR12 chỉ xử lý trường hợp lời gọi LMS bị lỗi/timeout hoàn toàn. Chưa xử lý trường hợp LMS trả THÀNH CÔNG danh sách lớp nhưng học sinh cụ thể đang cố vào lớp lại KHÔNG có trong danh sách (dữ liệu đăng ký chưa đồng bộ, học sinh bị xoá khỏi lớp) — nhánh lỗi khác về bản chất (vấn đề một học sinh, không phải toàn lớp) nhưng có thể dẫn tới cùng hệ quả."
+    suggestion: "Bổ sung nhánh nghiệp vụ: khi LMS trả về thành công nhưng học sinh không có tên trong danh sách, hệ thống xử lý ra sao (chặn với thông báo khác BR12, hay cho vào với cảnh báo)?"
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F031"
+    lens: "SA"
+    severity: "major"
+    section: "§3 Business Rule - BR12 / §4 UI/UX Guidelines"
+    uc_id: "AICNew-01-UC1"
+    quote: "Hiển thị thông báo lỗi cho học sinh (nội dung cụ thể thuộc UI/UX Guidelines §4)"
+    finding: "BR12 tham chiếu '§4 UI/UX Guidelines' cho nội dung thông báo lỗi cụ thể, nhưng §4 (Screen 1/2/3 + User Flow) không có bất kỳ màn hình/wireframe nào cho trạng thái lỗi LMS — tham chiếu treo (dangling reference), thiếu tài liệu cho nhánh lỗi duy nhất chặn hẳn học sinh vào lớp."
+    suggestion: "Thêm một Screen/trạng thái lỗi trong §4b (hoặc ghi rõ 'nội dung lỗi cụ thể chưa thiết kế, cần bổ sung trước design spec chính thức') để khớp với tham chiếu ở BR12."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F032"
+    lens: "SA"
+    severity: "major"
+    section: "§4a User Flow (mermaid) - node LATE"
+    uc_id: "AICNew-01-UC1"
+    quote: "Ghi nhận vào trễ, không tính điểm danh đầu buổi (BR2)"
+    finding: "Node LATE trong flowchart chỉ ghi nhận vào trễ, không thể hiện AI Voice chào tên — trong khi BR4 nói rõ chào tên áp dụng CẢ khi 'điểm danh đầu buổi = Có (BR1) HOẶC khi học sinh vào trễ được ghi nhận (BR2)'. Diagram mâu thuẫn với BR4."
+    suggestion: "Sửa nhãn node LATE thành 'Ghi nhận vào trễ + AI Voice chào tên (BR2, BR4)' để khớp đúng BR4, tránh gây hiểu nhầm khi dùng flow này làm căn cứ thiết kế/test."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F033"
+    lens: "DEV"
+    severity: "major"
+    section: "§3 Use Case (thiếu Business Rule)"
+    uc_id: "AICNew-01-UC1"
+    quote: "đây là năng lực kỹ thuật lõi mà chính tính năng này dùng để tạo tương tác thời gian thực và phát nội dung"
+    finding: "Không có Business Rule/AC nào xử lý trường hợp dịch vụ AI Voice hoặc hệ thống phát video GV Star bị lỗi/gián đoạn TRONG LÚC buổi học đang diễn ra (chỉ có BR12 xử lý lỗi LMS lúc vào lớp) — trong khi banner đầu tài liệu tự nhận đây là năng lực kỹ thuật lõi cần rà soát trước khi bàn giao dev."
+    suggestion: "Thêm một Business Rule (song song BR12) mô tả outcome khi AI Voice/video GV Star gặp sự cố giữa buổi: buổi học có tiếp tục không, học sinh có được thông báo không, dữ liệu NLO/điểm danh xử lý ra sao."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  # ============================================================
+  # MINOR (15)
+  # ============================================================
+  - id: "F034"
+    lens: "QA"
+    severity: "minor"
+    section: "§1b Phạm vi (In Scope)"
+    uc_id: ""
+    quote: "Sinh tín hiệu Gap Detection từ dữ liệu gán NLO, ghi vào Mastery Profile của học sinh"
+    finding: "Bullet Scope này và bullet về AI trợ giảng nhận xét gần như trùng nguyên văn nội dung BR9/BR10 — thuộc tầng BR, không cần lặp lại ở tầng Scope."
+    suggestion: "Gộp các bullet liên quan thành một câu nêu tên năng lực, dẫn chiếu \"(chi tiết: xem BR8-BR10)\" thay vì lặp lại câu PHẢI của BR."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F035"
+    lens: "QA"
+    severity: "minor"
+    section: "§1d Quy ước - mốc \"kết thúc buổi học\""
+    uc_id: ""
+    quote: "(không phải theo đồng hồ thực nếu học sinh tạm dừng/xem lại một đoạn)"
+    finding: "Phần trong ngoặc mô tả cách hệ thống xử lý khi học sinh tạm dừng/xem lại video (chi tiết cơ chế theo dõi tiến trình phát video) thay vì chỉ nêu định nghĩa ranh giới của mốc — nội dung mang tính xử lý kỹ thuật, lẽ ra thuộc Business Logic của BR11."
+    suggestion: "Giữ ở §1d câu định nghĩa cốt lõi, chuyển phần lưu ý về tạm dừng/xem lại xuống Business Logic của BR11 dưới dạng ghi chú xử lý."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F036"
+    lens: "QA"
+    severity: "minor"
+    section: "§1d Quy ước - ngưỡng độ trễ phản hồi AI Voice"
+    uc_id: ""
+    quote: "tài liệu này tạm giả định \"vài giây\" cho mục đích demo/prototype"
+    finding: "\"Vài giây\" là định lượng không kiểm chứng được. Ngay trong cùng §1d, ngưỡng \"thoát hẳn\" lại dùng placeholder tường minh \"(TBD số phút)\" — hai ngưỡng cùng loại (đang chờ xác nhận kỹ thuật) nhưng trình bày không nhất quán về hình thức."
+    suggestion: "Đổi \"vài giây\" thành placeholder tường minh cùng định dạng, ví dụ \"(TBD số giây)\", để nhất quán và tránh đọc nhầm thành giá trị đã chốt."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F037"
+    lens: "QA"
+    severity: "minor"
+    section: "§1a User Story"
+    uc_id: ""
+    quote: "được gọi tên, khích lệ/động viên bằng AI Voice — điều Big Class hiện tại chưa có"
+    finding: "User Story đang mô tả chi tiết cơ chế AI Voice thay vì chỉ nêu mong muốn/outcome ở mức người dùng — nội dung lặp lại chi tiết đã có ở BR4/BR5/BR6."
+    suggestion: "Rút gọn phần trong ngoặc về mức outcome, ví dụ: \"được học tương tác cá nhân hơn qua AI Voice (điều Big Class hiện tại chưa có)\", bỏ liệt kê chi tiết 3 hành vi cụ thể."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F038"
+    lens: "DEV"
+    severity: "minor"
+    section: "§3 Business Rule - BR3 / BR4"
+    uc_id: "AICNew-01-UC1"
+    quote: "phát khi học sinh vào lớp (ngưỡng độ trễ: xem §1d)"
+    finding: "BR4 chỉ gắn điều kiện kích hoạt chào tên với sự kiện điểm danh đầu buổi/vào trễ (BR1/BR2), không đề cập sự kiện quay lại lớp sau rời kết nối tạm thời (BR3). Chưa rõ khi học sinh quay lại lớp giữa buổi, AI Voice có chào tên lại lần nữa hay không."
+    suggestion: "Cần xác nhận: khi học sinh quay lại lớp sau khi rời kết nối tạm thời (BR3), AI Voice có phát lại đoạn chào tên hay không?"
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F039"
+    lens: "DEV"
+    severity: "minor"
+    section: "§3 Business Rule - BR14"
+    uc_id: "AICNew-01-UC1"
+    quote: "Không lấy được ảnh chụp tại thời điểm điểm danh (đầu hoặc cuối buổi) → điểm danh vẫn = Có"
+    finding: "Rule không nói rõ hệ thống có được kỳ vọng thử chụp lại (ở một thời điểm sau đó trong cùng phiên điểm danh) trước khi chính thức đánh dấu 'thiếu ảnh điểm danh', hay chỉ một lần thử duy nhất là đủ."
+    suggestion: "Cần xác nhận: có kỳ vọng hệ thống nỗ lực chụp ảnh nhiều lần trước khi kết luận 'thiếu ảnh', hay một lần không lấy được là đủ để đánh dấu?"
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F040"
+    lens: "SA"
+    severity: "minor"
+    section: "Feature (footnote quan hệ tên gọi)"
+    uc_id: ""
+    quote: "đã được xác nhận từ trước, không phải hai sản phẩm trùng tên"
+    finding: "Footnote dẫn tới glossary mục \"Edupia Class\" để xác nhận quan hệ tên gọi, nhưng cụm từ chính xác PRD dùng (\"Edupia AI Class Plus\") không xuất hiện như một term riêng trong bảng Terms của glossary — chỉ có alias \"Edupia AI Class\"/\"AI Class Plus\"."
+    suggestion: "Bổ sung vào glossary một dòng ghi nhận \"Edupia AI Class Plus\" = tên dùng trong slide Concept 1.2 = cùng thực thể với \"AI Class Plus\"/\"Edupia AI Class\", để footnote trỏ đúng vào định nghĩa tường minh."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F041"
+    lens: "SA"
+    severity: "minor"
+    section: "§3 Actor"
+    uc_id: "AICNew-01-UC1"
+    quote: "Học sinh, AI Voice (giọng GV Star), AI trợ giảng"
+    finding: "Danh sách Actor của UC1 bỏ sót LMS (có Business Rule ràng buộc trực tiếp, có thể chặn toàn bộ luồng — BR12) và hệ thống phát video bài giảng GV Star (mốc trung tâm xác định kết thúc buổi học — BR11 phụ thuộc trực tiếp)."
+    suggestion: "Bổ sung LMS và hệ thống phát video GV Star vào danh sách Actor của UC1."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F042"
+    lens: "QA"
+    severity: "minor"
+    section: "§4b Screen 3"
+    uc_id: "AICNew-01-UC1"
+    quote: "hiển thị nhắc nhở tham gia tích cực hơn, không hiển thị bảng kết quả NLO"
+    finding: "Actions của Screen 3 chỉ mô tả cách hiển thị riêng cho case BR7 (không trả lời câu nào) nhưng không đề cập có hiển thị gì cho case BR13 (Mastery Profile chưa khởi tạo) hay BR14 (thiếu ảnh điểm danh) trên màn hình học sinh, hay các cờ này chỉ nằm trong report ẩn phục vụ Parent Mode."
+    suggestion: "Bổ sung Action mô tả cách Screen 3 thể hiện case BR13/BR14, hoặc ghi rõ các cờ này không hiển thị cho học sinh."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F043"
+    lens: "SA"
+    severity: "minor"
+    section: "§1c / Glossary - thuật ngữ Gap Detection"
+    uc_id: ""
+    quote: "Sinh tín hiệu Gap Detection từ dữ liệu gán NLO"
+    finding: "'Gap Detection' là thuật ngữ trung tâm dùng xuyên suốt PRD (Scope, §1c, BR9, BR13, định nghĩa Report buổi học) nhưng không có entry riêng trong glossary — chỉ được nhắc lồng bên trong định nghĩa 'Adaptive Learning'."
+    suggestion: "Bổ sung entry 'Gap Detection' riêng vào glossary (không sửa trong PRD này)."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F044"
+    lens: "QA"
+    severity: "minor"
+    section: "§1b Phạm vi (In Scope, dòng 1)"
+    uc_id: ""
+    quote: "Buổi học trực tuyến nhóm, phát nội dung bài giảng (GV Star — video quay sẵn)"
+    finding: "Vi phạm ranh giới tầng: cụm '(GV Star — video quay sẵn)' là một định nghĩa thuật ngữ đầy đủ nhét trực tiếp vào câu Scope, trong khi định nghĩa này đã có ở Note BR4-BR6 và ở glossary — lặp định nghĩa sai tầng thay vì chỉ nêu phạm vi."
+    suggestion: "Di chuyển phần định nghĩa 'video quay sẵn' ra khỏi câu Scope, chỉ giữ tên 'GV Star' và trỏ tham chiếu tới Note BR4-BR6/glossary."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F045"
+    lens: "QA"
+    severity: "minor"
+    section: "§1b Phạm vi (Out of Scope)"
+    uc_id: ""
+    quote: "là một tên gọi/vai trò khác với \"AI Tutor 30 phút\" (thành phần 30 phút riêng nêu trên)"
+    finding: "Vi phạm ranh giới tầng: câu phân biệt tên gọi 'AI trợ giảng' khác 'AI Tutor 30 phút' là một ghi chú thuật ngữ/glossary, không phải một tuyên bố phạm vi, nhưng được viết như một bullet Out of Scope."
+    suggestion: "Di chuyển câu phân biệt 'AI trợ giảng' vs 'AI Tutor' sang §1d Quy ước (hoặc glossary) thay vì để trong danh sách Out of Scope."
+    resolution_edge_cases: []
+    auto_fixable: true
+    status: "pending"
+    applied_via: ""
+
+  - id: "F046"
+    lens: "SA"
+    severity: "minor"
+    section: "§4a User Flow (mermaid)"
+    uc_id: "AICNew-01-UC1"
+    quote: "Trạng thái điểm danh (đầu/cuối buổi) đã ghi KHÔNG bị huỷ/reset"
+    finding: "Sơ đồ flowchart không thể hiện nhánh nào cho BR3 (học sinh rời kết nối tạm thời rồi quay lại giữa buổi, vẫn tính điểm danh đầy đủ) — toàn bộ luồng chỉ có một đường thẳng từ LEARN đến ENDCLASS, không có điểm rẽ nhánh/loop nào biểu diễn việc mất kết nối và quay lại, dù BR3 đã có ô Business Rule riêng."
+    suggestion: "Bổ sung một nhánh/loop trong flowchart mô tả 'rời kết nối tạm thời → quay lại', nối lại vào LEARN, ghi chú (BR3)."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F047"
+    lens: "PO"
+    severity: "minor"
+    section: "§1a User Story"
+    uc_id: "AICNew-01-UC1"
+    quote: "Là một (As a) phụ huynh có con học Edupia AI Class Plus"
+    finding: "User Story đặt actor là 'phụ huynh', trong khi Use Case Actor (§3) và toàn bộ AC/BR chỉ liệt kê Học sinh, AI Voice, AI trợ giảng — phụ huynh không xuất hiện trong bất kỳ luồng nghiệp vụ nào của PRD này (Parent Mode ngoài phạm vi). Chưa rõ đây là chủ đích (định vị buyer persona) hay PRD còn thiếu góc nhìn User Story cho actor thực sự trải nghiệm (học sinh)."
+    suggestion: "Làm rõ (ghi chú ngắn) User Story cố ý dùng góc nhìn phụ huynh như buyer/beneficiary persona theo chuẩn viết PRD của team, hoặc bổ sung một User Story phụ theo góc nhìn học sinh nếu cần cho Design/Dev."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+  - id: "F048"
+    lens: "SA"
+    severity: "minor"
+    section: "BR10 / §4b Screen 3"
+    uc_id: "AICNew-01-UC1"
+    quote: "Nhận xét của AI trợ giảng"
+    finding: "Theo glossary (entry GV Star), 'AI trợ giảng' là vai trò dùng hình ảnh + giọng nói AI (có avatar hiển thị và giọng nói). Business Logic BR10 và Screen 3 chỉ mô tả 'nhận xét' như nội dung/text chung chung, không đề cập hình thức trình bày (avatar, giọng nói, hay cả hai) — thiếu một Component tương ứng với định nghĩa actor này."
+    suggestion: "Bổ sung ghi chú (hoặc để dành cho Design Spec — đây là chi tiết visual) rằng nhận xét AI trợ giảng có kèm avatar/giọng nói theo đúng định nghĩa glossary, để Screen 3 không bị hiểu nhầm là chỉ hiển thị văn bản."
+    resolution_edge_cases: []
+    auto_fixable: false
+    status: "pending"
+    applied_via: ""
+
+summary:
+  total_findings: 48
+  by_severity: { critical: 9, major: 24, minor: 15 }
+  by_lens: { QA: 11, DEV: 17, SA: 14, PO: 6 }
+  recommendation: "BLOCKED"
+  convergence_rounds: 3

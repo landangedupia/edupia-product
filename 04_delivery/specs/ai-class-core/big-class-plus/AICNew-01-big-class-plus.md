@@ -9,13 +9,13 @@
 | Field         | Value                                    |
 |---------------|--------------------------------------------|
 | **PRD ID**    | AICNew-01                                |
-| **Version**   | 1.1                                       |
+| **Version**   | 1.2                                       |
 | **Status**    | draft                                     |
 | **Author**    | AI-assisted                               |
 | **PO**        | Đặng Ngọc Lân                             |
 | **Domain**    | ai-class-core                             |
 | **Created**   | 2026-09-05                                |
-| **Updated**   | 2026-09-05                                |
+| **Updated**   | 2026-09-16                                |
 | **Ticket**    | AICNew-01                                 |
 | **API Source** |                                           |
 
@@ -198,6 +198,7 @@ flowchart TD
 | **Screen** | Học sinh xem bài giảng GV Star, hệ thống điểm danh khi vào/ra lớp |
 | **Components** | - Video bài giảng (GV Star)<br/>- Danh sách học sinh trong lớp |
 | **Actions** | - Học sinh vào lớp → hệ thống điểm danh đầu buổi, AI Voice chào tên (BR1, BR4)<br/>- Học sinh vào trễ → vẫn học được, ghi nhận vào trễ (BR2) |
+| **Nội dung bài giảng bên trong video GV Star** *(grounded từ 1 buổi mẫu thật, xem note dưới)* | Theo đúng trình tự 7 bước lặp lại ở mỗi lesson: (1) New words → (2) Read & choose/Listen & say luyện từ vựng → (3) New structures → (4) Read & choose/Listen & say luyện cấu trúc → (5) Reading → (6) Group work → (7) Quiz time, mở đầu bằng khởi động (bài hát/luyện âm, chào lớp, nội quy, chia nhóm) và kết thúc bằng slide tổng kết từ vựng + chấm sao đánh giá buổi học |
 
 ---
 
@@ -208,6 +209,9 @@ flowchart TD
 | **Screen** | Học sinh trả lời câu hỏi trắc nghiệm trong lúc học |
 | **Components** | - Câu hỏi<br/>- Các đáp án để chọn |
 | **Actions** | - Chọn đáp án đúng → AI Voice khích lệ (BR5)<br/>- Chọn đáp án sai → AI Voice động viên (BR6) |
+| **Ví dụ câu hỏi thật** | MCQ chọn hình đúng cho từ vựng (vd "Read and choose" — đâu là *dolphin*?); MCQ hoàn thành cấu trúc câu (vd "___ is your favourite colour?" — A. Will / B. What / C. How); MCQ dạng tìm lỗi sai trong câu (vd "It is a dolphins." → Đúng/Sai) |
+
+> ⚠️ **Lưu ý — khoảng cách giữa PRD và design thật:** Design Spec (`./design-spec/AICNew-01-design-spec-web-big-class-plus.md`, Giả định AI #1) cho thấy "câu hỏi tương tác" không phải màn tách biệt mà là 1 state của Màn 1; đồng thời có ít nhất 4 dạng câu hỏi khác nhau (MCQ, iSpeak luyện nói, Bài tập nhóm, AI Speak hội thoại nhiều lượt) — PRD hiện chỉ mô tả 1 dạng MCQ nhị phân đúng/sai. **Chưa sửa lại Screen 2 thành nhiều state vì đây là quyết định phạm vi cần PO chốt, không tự suy diễn (xem Giả định AI Q6 bên dưới).**
 
 ---
 
@@ -218,6 +222,10 @@ flowchart TD
 | **Screen** | Hiển thị trước khi điểm danh cuối buổi |
 | **Components** | - Kết quả tổng hợp của học sinh trong buổi<br/>- Nhận xét của AI trợ giảng |
 | **Actions** | - Hiển thị kết quả NLO vừa gán (BR8)<br/>- AI trợ giảng nhận xét + nhắc BTVN Adaptive (BR10)<br/>- Học sinh thuộc trường hợp BR7 (không trả lời câu nào): hiển thị nhắc nhở tham gia tích cực hơn, không hiển thị bảng kết quả NLO |
+
+> ⚠️ **Phân biệt với slide tổng kết BÊN TRONG video GV Star:** Cuối video bài giảng mẫu quan sát được có một slide "Chúng ta đã học gì" (tổng kết từ vựng theo chủ đề) + slide chấm sao "Did you like the lesson" — đây là nội dung **thuộc video GV Star** (Màn hình 1), KHÁC với Screen 3 (màn hình nền tảng hiển thị kết quả NLO/nhận xét AI trợ giảng, xuất hiện SAU khi video kết thúc). Hai màn hình này không được gộp lại.
+
+**Nguồn ví dụ thật ở Screen 2 & 3:** [Timeline video buổi học mẫu — Concept 1.2, My Favourite Things](../../../../03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md), [Script giả lập lời AI Voice/GV Star](../../../../03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md). Đây là ví dụ từ **1 video mẫu duy nhất** — không đại diện cho mọi bài học của Concept 1.2 (xem Giả định AI Q6, Q7).
 
 ---
 
@@ -236,6 +244,8 @@ flowchart TD
 - BDD: [`./bdd/`](./bdd/)
 - Design spec: [`./design-spec/`](./design-spec/)
 - Từ điển nghiệp vụ: [`00_context/glossary.md`](../../../../00_context/glossary.md)
+- Timeline video buổi học mẫu (Concept 1.2 — My Favourite Things): [`03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md`](../../../../03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md)
+- Script giả lập lời AI Voice/GV Star: [`03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md`](../../../../03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md)
 
 ## Giả định AI
 
@@ -244,15 +254,18 @@ flowchart TD
 - **Q3 — [AI DRAFT] Ngưỡng đạt/chưa đạt của một NLO khi liên quan nhiều câu hỏi (BR8):** AI đề xuất quy tắc "một câu sai là đủ để tính NLO đó chưa đạt" theo nguyên tắc thận trọng (ưu tiên không bỏ sót lỗ hổng) — đây là suy luận, chưa phải quyết định nghiệp vụ đã được PO xác nhận trực tiếp. **Cần PO xác nhận quy tắc này có đúng ý đồ sản phẩm không.**
 - **Q4 — [AI DRAFT] Cách xử lý khi Mastery Profile chưa tồn tại (BR13):** AI đề xuất vẫn cho học sinh học bình thường, chỉ tạm hoãn ghi Gap Detection — khác với cách chặn hẳn khi LMS lỗi (BR12). Đây là suy luận dựa trên việc đây là vấn đề của một học sinh (không nên ảnh hưởng cả lớp), chưa phải quyết định đã được PO xác nhận trực tiếp. **Cần PO xác nhận hướng xử lý này.**
 - **Q5 — [AI DRAFT] Chính sách bảo mật ảnh chụp học sinh (Note BR1-BR3/BR11/BR14):** PRD yêu cầu chụp/lưu ảnh học sinh (trẻ em) nhưng chưa có chính sách lưu trữ/thời hạn/quyền truy cập/đồng ý phụ huynh — ngoài phạm vi hiểu biết của AI về chính sách nội bộ Edupia. **Cần Product/Pháp lý bổ sung chính sách trước khi bàn giao dev chính thức.**
+- **Q6 — [AI DRAFT] Screen 2 chưa phản ánh đủ 4 dạng câu hỏi tương tác thật:** Design Spec (v1.1, Giả định AI #2) và video buổi học mẫu (My Favourite Things, Lesson 1) cho thấy có ít nhất 3 dạng đã quan sát được (MCQ, Listen and say/iSpeak luyện phát âm, Bài tập nhóm điền từ) — chưa quan sát được dạng "AI Speak hội thoại nhiều lượt" trong mẫu này. PRD hiện chỉ viết BR5/BR6 cho 1 dạng MCQ nhị phân đúng/sai. **Cần PO xác nhận: BR5/BR6 có áp dụng chung cho cả 3-4 dạng câu hỏi, hay mỗi dạng cần Business Rule riêng (đặc biệt iSpeak có thang điểm Đạt 75%/50%/25%/Không đạt theo Design Spec, không phải nhị phân đúng/sai).**
+- **Q7 — [AI DRAFT] Ví dụ nội dung thật ở Screen 2/3 chỉ dựa trên 1 video mẫu:** Toàn bộ ví dụ cụ thể vừa bổ sung (§4b) lấy từ đúng 1 buổi học (Lesson 1 — My Favourite Things) — không đại diện cho các bài/buổi khác của Concept 1.2 (khác chủ đề, khác độ khó, có thể có dạng tương tác khác như AI Speak hội thoại hoặc "Ngôi sao hi vọng" chưa xuất hiện trong mẫu này). **Cần thêm video mẫu hoặc xác nhận PO trước khi coi bảng ví dụ này là đại diện đầy đủ cho mọi buổi Big Class Plus.**
 
 ---
 
 # Change Log
 
-> Hiện tại: **v1.1** (2026-09-05)
+> Hiện tại: **v1.2** (2026-09-16)
 
 | Version | Date | Changes (UC/AC/BR bị ảnh hưởng) |
 |---------|------|---------------------------------|
+| 1.2 | 2026-09-16 | Bổ sung ví dụ nội dung thật ở §4b (Screen 1/2/3), grounded từ video buổi học mẫu Concept 1.2 (My Favourite Things, Lesson 1) + timeline/script tương ứng; làm rõ ranh giới nội dung trong video GV Star (Màn 1) vs. màn tổng kết NLO (Màn 3); thêm Giả định AI Q6, Q7. Không thay đổi AC/BR đã chốt ở v1.1. |
 | 1.1 | 2026-09-05 | Áp dụng 31 finding từ `/review-context --resume` (F001-F031): UC1: sửa thuật ngữ kỹ thuật (BR8, §1b); di dời ràng buộc trình tự AC10→BR10; thêm BR13 (Mastery Profile chưa tồn tại), BR14 (thiếu ảnh điểm danh) + AC13, AC14; mở rộng BR4 sang cả học sinh vào trễ; làm rõ BR9 (chỉ ghi NLO chưa đạt), BR10 (3 nhánh nhận xét); PRD-global: thêm §1d Quy ước (định nghĩa report buổi học, mốc kết thúc buổi, ngưỡng AI Voice/thoát hẳn — một số còn ⛔ cần xác nhận kỹ thuật/PO, xem Giả định AI Q2-Q5); viết lại câu bị động ở Post-condition/AC8/AC9; làm rõ quan hệ tên gọi Big Class Plus/Edupia AI Class Plus, AI trợ giảng/AI Tutor, BTVN Adaptive. |
 | 1.0 | 2026-09-05 | Bản đầu — sinh từ product-definition. Phục vụ dựng prototype/demo cho khảo sát phụ huynh T9/2026 — **chưa chốt chính thức để bàn giao dev** (xem banner đầu tài liệu). |
 

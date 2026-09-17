@@ -7,7 +7,7 @@
 | Field              | Value                                                         |
 |--------------------|---------------------------------------------------------------|
 | **Spec ID**        | AICNew-01-DS-web                                              |
-| **Version**        | 1.0                                                            |
+| **Version**        | 1.1                                                            |
 | **Status**         | draft                                                          |
 | **Platform**       | web                                                            |
 | **Module**         | N/A (PO Spec repo — không có code)                             |
@@ -18,7 +18,7 @@
 | **Figma**          | [Edupia Design System 2025](https://www.figma.com/design/brMMSIB7GRExnnrLQqoluY/-Final_Vanh10-6--Edupia-Design-System-2025) (2/2 màn đã link & fetch) |
 | **Author**         | AI-assisted                                                     |
 | **Created**        | 2026-09-08                                                      |
-| **Updated**        | 2026-09-08                                                      |
+| **Updated**        | 2026-09-16                                                      |
 
 ---
 
@@ -93,6 +93,24 @@ Một layout toàn màn (fullscreen), không có sidebar/menu chính — vùng h
 | Hết buổi, 0 câu trả lời               | Hệ thống tự chuyển khi hết giờ học           | Không gán NLO, đánh dấu report (BR7), chuyển Màn 2 ở bản rút gọn          |
 | Còn trong lớp tới cuối buổi           | Học sinh không thoát trước khi kết thúc      | Điểm danh cuối buổi (BR11)                                                |
 | Thoát hẳn trước khi kết thúc          | Học sinh rời lớp sớm                        | Không ghi điểm danh cuối buổi (BR11)                                      |
+
+### Ví dụ nội dung thực tế (grounded từ Concept 1.2 — bài "My Favourite Things", Lesson 1)
+
+> Nguồn: video buổi học thật `02_discovery/lesson-recordings/BC1.G5.U2/BC1.G5.U2-lesson-video-720p.mp4` (63 phút 32 giây), đã bóc tách thành [timeline mốc thời gian](../../../../03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md) và [script giả lập lời AI Voice/GV Star](../../../../03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md). Bảng dưới đây minh hoạ cụ thể các state ở bảng Screen States phía trên bằng nội dung thật quan sát được — **KHÔNG thay thế** Business Rule/AC đã chốt trong PRD, chỉ bổ sung ví dụ cụ thể cho Designer/Dev hình dung đúng loại nội dung sẽ chạy qua từng state.
+
+**Lưu ý phạm vi quan trọng:** Toàn bộ nội dung bài giảng (New words → Read & choose/Listen & say → New structures → Reading → Group work → Quiz time → tổng kết từ vựng) nằm **BÊN TRONG video GV Star**, tức là thuộc **Màn hình 1 (Lớp học live)** — không phải Màn hình 2 (Tổng kết buổi học, nơi AI trợ giảng đưa nhận xét theo từng kỹ năng sau khi video kết thúc). Hai lớp nội dung này tách biệt, không được nhầm lẫn khi grounding.
+
+| State (từ bảng Screen States) | Mốc thời gian (video mẫu) | Nội dung ví dụ cụ thể |
+|---|---|---|
+| đang có câu hỏi trắc nghiệm (MCQ) | 16:00–29:00 (luyện từ vựng), 32:00–41:00 (luyện cấu trúc), 60:00–61:00 (Quiz time) | "Read and choose" chọn hình đúng cho từ *dolphin*; chọn từ để hỏi đúng: "___ is your favourite colour?" (A. Will / B. What / C. How); Quiz: "Anna: What's your favourite food? Ben: It's ___ sandwich." (A. an / B. a / C. many / D. any) |
+| đang có câu hỏi luyện nói | 16:00–29:00 (mỗi vòng luyện từ đều có bước "Listen and say" ngay sau "Read and choose") | Nghe và nói lại từ vừa chọn đúng (dolphin, panda, sandwich, black, pink, pizza, table tennis, football) |
+| đang có bài tập nhóm | 47:00–55:30 | "Read and fill in the blanks" — Bài 1: điền từ (sandwich, dolphin, food) vào hội thoại "What's your favourite food? – It's a sandwich."; Bài 2: điền từ (sport, favourite, black) — khớp đúng pattern "bấm chọn trực tiếp vào ô cần điền" đã mô tả ở Screen States |
+| Bảng xếp hạng theo nhóm (BXH) | 05:00–06:30 (kiểm tra nhóm đầu buổi); 46:30 (slide "How many points do you have?" dạng bục xếp hạng 1-2-3) | Chỉ quan sát được 2 điểm chạm liên quan xếp hạng nhóm; không thấy rõ giao diện BXH hiện đè lên nội dung chính giữa buổi như mô tả ở Component Inventory — cần Designer đối chiếu thêm |
+| đang có bài luyện nói hội thoại AI (AI Speak) | *(không quan sát được trong video mẫu)* | Không xuất hiện ở Lesson 1 bài "My Favourite Things" — cần xác nhận tính năng này có ở buổi/bài khác của Concept 1.2, hay chưa triển khai ở lesson dạng này |
+| Khối "Ngôi sao hi vọng" | *(không quan sát được trong video mẫu)* | Tương tự — không thấy cơ chế nhân điểm này xuất hiện trong 63 phút video |
+| Nhân vật hướng dẫn (Bài tập nhóm / AI Speak) | ~30:00 | Quan sát được 2 nhân vật (gà & cáo) xuất hiện ở đầu phần "New structures" để minh hoạ hội thoại mẫu — chưa rõ có cùng cơ chế "hiện 10s nhắc luật rồi ẩn" như mô tả ở Screen States hay không (cần Designer xác nhận) |
+
+> **Giả định bổ sung:** bảng trên dựa trên MỘT video mẫu duy nhất (Lesson 1, chủ đề My Favourite Things) — không đại diện cho mọi buổi/bài trong Concept 1.2. Hai dạng tương tác "AI Speak hội thoại" và "Ngôi sao hi vọng" nêu trong Component Inventory có thể thuộc bài học khác không nằm trong mẫu này; cần thêm video mẫu hoặc xác nhận từ PO trước khi kết luận là chưa triển khai.
 
 ---
 
@@ -231,6 +249,9 @@ Một khối nội dung căn giữa gồm hai phần: hình minh hoạ nhân v�
 
 - [AICNew-01](../AICNew-01-big-class-plus.md) — Business PRD (nguồn của AC, UC, BR)
 - [Edupia Design System 2025](https://www.figma.com/design/brMMSIB7GRExnnrLQqoluY/-Final_Vanh10-6--Edupia-Design-System-2025) — file Figma nguồn, thư viện design system team
+- [Timeline video buổi học mẫu (Concept 1.2 — My Favourite Things)](../../../../03_product/concepts/timeline-video-concept-1.2-my-favourite-things-2026-09-16.md) — nguồn ví dụ nội dung thực tế ở §2, Màn hình 1
+- [Script giả lập lời AI Voice/GV Star](../../../../03_product/concepts/teacher-script-concept-1.2-my-favourite-things-2026-09-16.md)
+- [Nội dung bài học tóm tắt](../../../../03_product/concepts/lesson-content-concept-1.2-my-favourite-things-2026-09-16.md)
 
 ## Giả định AI
 
@@ -244,6 +265,7 @@ Một khối nội dung căn giữa gồm hai phần: hình minh hoạ nhân v�
 6. **Responsive tablet/mobile**: mọi frame Figma fetch được đều ở breakpoint desktop (1440px). Chưa có tư liệu cho tablet/mobile — bảng Responsive ở §3A để trống, cần bổ sung khi có.
 7. **Hover/Focus states**: phần lớn chưa có ghi chú Figma tường minh cho các state này (§3B) — đã đánh dấu giả định, cần Designer xác nhận trước khi code hoá.
 8. **Error/empty state của Màn 2**: chưa có tư liệu Figma cho trạng thái lỗi khi không tổng hợp được kết quả — đã giả định hành vi tối thiểu, cần bổ sung khi có design.
+9. **Ví dụ nội dung thực tế (§2, Màn hình 1) chỉ dựa trên 1 video mẫu**: video buổi học "My Favourite Things" (Lesson 1) không cho thấy 2 dạng tương tác đã liệt kê trong Component Inventory là "AI Speak hội thoại" và "Ngôi sao hi vọng" — có thể do 2 dạng này thuộc bài/buổi khác trong Concept 1.2, hoặc chưa triển khai ở lesson dạng này. **Cần PO/Designer xác nhận trước khi coi đây là bằng chứng "chưa có" thay vì "chưa quan sát được".**
 
 ---
 
@@ -251,4 +273,5 @@ Một khối nội dung căn giữa gồm hai phần: hình minh hoạ nhân v�
 
 | Version | Date         | Changes         |
 |---------|--------------|-----------------|
+| 1.1     | 2026-09-16   | Bổ sung mục "Ví dụ nội dung thực tế" ở §2 Màn hình 1, grounded từ video buổi học mẫu Concept 1.2 (My Favourite Things, Lesson 1) + timeline/script tương ứng; thêm Giả định AI #9; bổ sung 3 tài liệu tham khảo liên quan. |
 | 1.0     | 2026-09-08   | Initial version |
