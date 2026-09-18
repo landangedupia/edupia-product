@@ -789,6 +789,14 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-lesson-frame img[hidden],.aic2-lesson-frame video[hidden]{display:none;}
 .aic2-lesson-title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;
   padding:14px 26px;border-radius:14px;font-size:20px;font-weight:700;text-align:center;max-width:70%;z-index:2;}
+.aic2-lesson-title-card[hidden]{display:none;}
+/* Tạm dùng khi chưa có clip video thật (thay khung ảnh tĩnh cũ) — hiện thẳng nội dung bài giảng
+   (nlo.lesson.explain) dạng chữ dễ đọc, xem aic2StartLesson(). */
+.aic2-lesson-text{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:48px 64px;text-align:center;gap:18px;}
+.aic2-lesson-text[hidden]{display:none;}
+.aic2-lesson-text .lt-title{font-size:26px;font-weight:700;color:var(--n900);}
+.aic2-lesson-text .lt-explain{font-size:18px;line-height:1.7;color:var(--n700);max-width:600px;}
 .aic2-lesson-duration{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:8px;
   background:rgba(17,24,39,.75);color:#e5e7eb;padding:6px 14px;border-radius:10px;font-size:13px;font-weight:600;}
 .aic2-lesson-duration-bar{width:64px;height:6px;background:#374151;border-radius:6px;overflow:hidden;}
@@ -2061,9 +2069,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
           <!-- 2) Bài giảng ngắn (micro-lesson, 3 phút — tái dùng khung "frame chiếu bài giảng") -->
           <div class="aic2-view" id="aic2View_lesson">
             <div class="aic2-lesson-frame">
-              <img src="assets/classroom-bg.png" alt="" id="aic2LessonImg">
+              <img src="assets/classroom-bg.png" alt="" id="aic2LessonImg" hidden>
               <video id="aic2LessonVideo" hidden playsinline webkit-playsinline="true"></video>
-              <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
+              <div class="aic2-lesson-text" id="aic2LessonTextCard" hidden>
+                <div class="lt-title" id="aic2LessonTextTitle"></div>
+                <div class="lt-explain" id="aic2LessonTextExplain"></div>
+              </div>
+              <div class="aic2-lesson-title-card" id="aic2LessonTopic" hidden></div>
               <div class="aic2-lesson-duration" id="aic2LessonDuration">🎬 <span id="aic2LessonTimer">3:00</span> <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span></div>
               <button class="aic2-lesson-skip" id="aic2LessonSkipBtn" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
             </div>
@@ -2545,10 +2557,20 @@ function goto(id){
 }
 
 /* Dừng hẳn video + âm thanh bài giảng chính khoá khi rời màn lớp học (chuyển màn khác hoặc bấm
-   "Kết thúc buổi học") — tránh video/audio tiếp tục chạy ngầm sau khi đã rời màn hình. */
+   "Kết thúc buổi học") — tránh video/audio tiếp tục chạy ngầm sau khi đã rời màn hình.
+   BUGFIX 2026-09-18: chỉ gọi video.pause() thôi có lúc vẫn nghe được audio thêm 1 chút (báo lỗi
+   thực tế) — thêm video.muted=true và huỷ luôn src (thay vì chỉ pause) để CHẮC CHẮN cắt tiếng ngay,
+   không phụ thuộc trình duyệt xử lý pause() nhanh tới đâu. Gọi tường minh ở cả 2 nơi rời màn lớp
+   học (nút "Kết thúc buổi học" và forceAdvanceClassroom's "Bỏ qua") thay vì chỉ trông vào goto()
+   tự phát hiện — phòng trường hợp goto() chưa kịp nhận đúng màn đang rời trước khi đổi màn. */
 function stopLectureVideo(){
   const video = document.getElementById('lectureVideo');
-  if(video) video.pause();
+  if(!video) return;
+  video.pause();
+  video.muted = true;
+  video.removeAttribute('src');
+  video.load();
+  delete video.dataset.inited; // cho phép initLectureVideo() nạp lại nếu có lúc quay lại màn lớp học
 }
 
 /* ============ CAMERA THẬT — xuyên suốt từ điểm danh đầu buổi tới hết buổi bổ trợ ============
@@ -3111,6 +3133,7 @@ function forceAdvanceClassroom(){
     const correctCount = state.ispeakRoundResults.filter(Boolean).length;
     state.scores.ispeak = round1(correctCount / 8 * 10);
   }
+  stopLectureVideo(); // gọi tường minh, không chỉ trông vào goto() tự phát hiện đang rời màn lớp học
   goto('checkout');
 }
 
@@ -3392,7 +3415,7 @@ function renderClassroomStep(){
 
     case 'end-cta':
       overlay.innerHTML = `<div class="center-cta" style="position:absolute;bottom:190px;left:0;right:0;">
-        <button class="btn-primary" onclick="goto('checkout')" style="font-size:16px;padding:16px 32px;">Kết thúc buổi học</button>
+        <button class="btn-primary" onclick="stopLectureVideo(); goto('checkout');" style="font-size:16px;padding:16px 32px;">Kết thúc buổi học</button>
       </div>`;
       break;
   }
@@ -3897,7 +3920,7 @@ const AIC2_NLO = {
           ok:'Câu trả lời rất hay, con dùng từ vựng chính xác!' },
       ] },
     { name:`Ngữ pháp: Câu hỏi "What's your favourite...?"`, masteryPct:34,
-      video:'assets/video/aic2/reinforce_1.mp4', // cắt từ video thật: New structures (giới thiệu cấu trúc) 28:02–32:13
+      video:'https://pub-9cb3aa8ef36040168d311068734377de.r2.dev/video%20lesson%20demo/grammar.mp4', // clip thật New structures (28:02–32:13), lưu trên Cloudflare R2
       greet:'mình cùng ôn lại cách hỏi về sở thích nhé — đây là mẫu câu quan trọng nhất của bài học đó!',
       lesson:{ title:"What's your favourite...?", explain:'Hỏi sở thích ai đó, dùng: "What\'s your favourite + danh từ?" Trả lời: "It\'s + tên." Ví dụ: "What\'s your favourite colour? – It\'s pink."' },
       exercises:[
@@ -4064,6 +4087,8 @@ function aic2StartLesson(){
   clearInterval(state.aic2._lessonTick);
   const img = document.getElementById('aic2LessonImg');
   const video = document.getElementById('aic2LessonVideo');
+  const textCard = document.getElementById('aic2LessonTextCard');
+  const topicEl = document.getElementById('aic2LessonTopic');
   video.onended = null; video.ontimeupdate = null; video.pause();
 
   const durationEl = document.getElementById('aic2LessonDuration');
@@ -4078,7 +4103,9 @@ function aic2StartLesson(){
     durationEl.hidden = true;
     skipBtn.hidden = true;
     img.hidden = true;
+    textCard.hidden = true;
     video.hidden = false;
+    topicEl.hidden = false;
     video.src = nlo.video;
     aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé!`, null); // video có tiếng thật, không đọc lại audio giải thích
     video.onended = aic2FinishLesson;
@@ -4086,10 +4113,16 @@ function aic2StartLesson(){
     return;
   }
 
+  /* Chưa có video cho nhánh này: dùng thẻ text (title+explain) thay cho ảnh tĩnh, thay vì để
+     học sinh nhìn 1 ảnh minh hoạ không liên quan tới nội dung. */
   durationEl.hidden = false;
   skipBtn.hidden = false;
-  img.hidden = false;
+  img.hidden = true;
   video.hidden = true;
+  topicEl.hidden = true;
+  textCard.hidden = false;
+  document.getElementById('aic2LessonTextTitle').textContent = nlo.lesson.title;
+  document.getElementById('aic2LessonTextExplain').textContent = nlo.lesson.explain;
   aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`, `${state.aic2.track}_${state.aic2.stage}_lesson`);
   document.getElementById('aic2LessonTimer').textContent = '3:00';
   document.getElementById('aic2LessonBarFill').style.width = '100%';
