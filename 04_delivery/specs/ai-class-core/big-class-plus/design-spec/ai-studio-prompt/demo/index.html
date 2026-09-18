@@ -777,8 +777,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 
 /* Bài giảng ngắn (micro-lesson, 3 phút) */
 #aic2View_lesson{padding:0;}
-.aic2-lesson-frame{position:relative;width:100%;height:100%;overflow:hidden;}
-.aic2-lesson-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.aic2-lesson-frame{position:relative;width:100%;height:100%;overflow:hidden;background:#000;}
+/* BUGFIX 2026-09-18: img/video phải position:absolute+inset:0 để chồng ĐÚNG lên nhau trong khung
+   (trước đó không có, nên xếp theo flow bình thường — video bị đẩy xuống dưới, ra ngoài vùng nhìn
+   thấy do .aic2-lesson-frame có overflow:hidden). Selector video[hidden] phải để RIÊNG, không viết
+   chung display:block cho cả video — vì .aic2-lesson-frame video (class+type) có specificity CAO
+   HƠN [hidden] mặc định của trình duyệt, nên nếu gộp chung sẽ đè mất display:none khi ẩn video. */
+.aic2-lesson-frame img,.aic2-lesson-frame video{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.aic2-lesson-frame img{object-fit:cover;}
+.aic2-lesson-frame video{object-fit:contain;background:#000;}
+.aic2-lesson-frame img[hidden],.aic2-lesson-frame video[hidden]{display:none;}
 .aic2-lesson-title-card{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#12233f;color:#fff;
   padding:14px 26px;border-radius:14px;font-size:20px;font-weight:700;text-align:center;max-width:70%;z-index:2;}
 .aic2-lesson-duration{position:absolute;top:16px;left:16px;z-index:2;display:flex;align-items:center;gap:8px;
@@ -2053,10 +2061,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
           <!-- 2) Bài giảng ngắn (micro-lesson, 3 phút — tái dùng khung "frame chiếu bài giảng") -->
           <div class="aic2-view" id="aic2View_lesson">
             <div class="aic2-lesson-frame">
-              <img src="assets/classroom-bg.png" alt="">
+              <img src="assets/classroom-bg.png" alt="" id="aic2LessonImg">
+              <video id="aic2LessonVideo" hidden playsinline webkit-playsinline="true"></video>
               <div class="aic2-lesson-title-card" id="aic2LessonTopic"></div>
-              <div class="aic2-lesson-duration">🎬 <span id="aic2LessonTimer">3:00</span> <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span></div>
-              <button class="aic2-lesson-skip" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
+              <div class="aic2-lesson-duration" id="aic2LessonDuration">🎬 <span id="aic2LessonTimer">3:00</span> <span class="aic2-lesson-duration-bar"><i id="aic2LessonBarFill" style="width:100%;"></i></span></div>
+              <button class="aic2-lesson-skip" id="aic2LessonSkipBtn" onclick="aic2FinishLesson()">Chuyển sang phần Luyện tập →</button>
             </div>
           </div>
           <!-- 3) Câu hỏi ôn tập (adaptive question) — dùng chung cho cả 4 dạng bài mcq/gapfill/
@@ -3864,9 +3873,15 @@ function renderMasteryZone(containerId, prevOverall){
    12%, Câu hỏi "What's your favourite...?" 34%) — vá đúng lỗ hổng theo Mastery Profile giả lập đa
    buổi, không phải chọn tuỳ ý. advance = 2 NLO có mastery CAO NHẤT (Đồ ăn & thức uống 90%, Rút gọn
    What's/It's 88%) — mở rộng thêm cho học sinh đã vững, không dạy lại từ đầu. */
+/* Cập nhật 2026-09-18: mỗi NLO có thêm field "video" — đường dẫn clip video THẬT cắt từ buổi chính
+   khóa (mục kiến thức tương ứng), thay cho khung ảnh tĩnh + đọc chữ khi làm "bài giảng ngắn 3 phút"
+   (xem aic2StartLesson()). Để null nếu chưa có clip (demo tự dùng lại khung ảnh tĩnh + audio cũ,
+   không lỗi gì cả). "Ngữ pháp: Trả lời có lý do (because)" KHÔNG có clip thật tương ứng — nội dung
+   này do AI tự soạn thêm để mở rộng, không có trong video buổi chính khóa. */
 const AIC2_NLO = {
   reinforce: [
     { name:'Từ vựng: Môn thể thao (Sports)', masteryPct:12,
+      video:'https://pub-9cb3aa8ef36040168d311068734377de.r2.dev/video%20lesson%20demo/new_word_sport.mp4', // clip thật New words - Sports (14:48–15:28), lưu trên Cloudflare R2
       greet:'buổi vừa rồi mình đã học tên 2 môn thể thao table tennis và football rồi, giờ mình ôn lại thật chắc nhé!',
       lesson:{ title:'Sports', explain:'Table tennis (bóng bàn) và football (bóng đá) đều là môn thể thao (sport). Khi nói môn mình thích, dùng mẫu: "My favourite sport is + tên môn."' },
       exercises:[
@@ -3882,6 +3897,7 @@ const AIC2_NLO = {
           ok:'Câu trả lời rất hay, con dùng từ vựng chính xác!' },
       ] },
     { name:`Ngữ pháp: Câu hỏi "What's your favourite...?"`, masteryPct:34,
+      video:'assets/video/aic2/reinforce_1.mp4', // cắt từ video thật: New structures (giới thiệu cấu trúc) 28:02–32:13
       greet:'mình cùng ôn lại cách hỏi về sở thích nhé — đây là mẫu câu quan trọng nhất của bài học đó!',
       lesson:{ title:"What's your favourite...?", explain:'Hỏi sở thích ai đó, dùng: "What\'s your favourite + danh từ?" Trả lời: "It\'s + tên." Ví dụ: "What\'s your favourite colour? – It\'s pink."' },
       exercises:[
@@ -3899,6 +3915,7 @@ const AIC2_NLO = {
   ],
   advance: [
     { name:'Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)', masteryPct:90,
+      video:'assets/video/aic2/advance_0.mp4', // cắt từ video thật: New words (sandwich/pizza) 13:17–14:44
       greet:'con làm rất tốt phần đồ ăn rồi! Giờ mình mở rộng thêm cách miêu tả món ăn mình thích nhé.',
       lesson:{ title:'Describing Food', explain:'Miêu tả món ăn yêu thích, dùng mẫu: "My favourite food is + [món ăn] because + [lý do]." Ví dụ: "...because it\'s delicious."' },
       exercises:[
@@ -3914,6 +3931,7 @@ const AIC2_NLO = {
           ok:'Xuất sắc, con đã sẵn sàng cho phần nâng cao hơn rồi đó!' },
       ] },
     { name:`Ngữ pháp: Trả lời có lý do (because)`, masteryPct:88,
+      video:null, // không có clip thật — nội dung này AI tự soạn mở rộng, không dạy trong video buổi chính khóa
       greet:'giờ mình thử mở rộng thêm cách trả lời có lý do nhé, sẽ giúp câu trả lời của con hay hơn nhiều đó!',
       lesson:{ title:'Because...', explain:'Để giải thích lý do, dùng "because". Ví dụ: "It\'s a dolphin because it\'s very smart." Con có thể thêm lý do sau bất kỳ câu trả lời sở thích nào.' },
       exercises:[
@@ -4029,18 +4047,52 @@ function aic2ShowIntro(){
   autoAdvance(aic2StartLesson, 1800);
 }
 
-/* ---- Micro-lesson: bài giảng ngắn 3 phút, giao diện kiểu buổi chính khóa, trước khi mở
-   khóa 5 bài tập vi mô của NLO hiện tại. Đồng hồ nén 3 phút thật thành ~3s demo. ---- */
+/* ---- Micro-lesson: bài giảng ngắn, giao diện kiểu buổi chính khóa, trước khi mở khóa 5 bài tập
+   vi mô của NLO hiện tại. Cập nhật 2026-09-18: nếu NLO có clip video thật (nlo.video, cắt từ đúng
+   đoạn kiến thức trong buổi chính khóa — xem comment ở từng NLO trong AIC2_NLO), phát THẬT video đó
+   thay khung ảnh tĩnh, đồng hồ/thanh tiến trình đếm theo đúng thời lượng video thật (không còn nén
+   "3 phút thật thành ~3s" nữa vì giờ có nội dung thật để phát, không cần rút gọn giả lập) và tự
+   chuyển sang Luyện tập khi video phát hết ('ended'). Nếu nlo.video là null (chưa có clip, hoặc NLO
+   này không có clip thật tương ứng — ví dụ "Trả lời có lý do (because)" do AI tự soạn) → GIỮ NGUYÊN
+   hành vi cũ (khung ảnh tĩnh + đồng hồ đếm ngược cố định 180 giây rút gọn + đọc audio giải thích). */
 function aic2StartLesson(){
   const nlo = state.aic2.nloList[state.aic2.stage];
   if(!nlo) return;
   state.aic2.phase = 'lesson';
   document.getElementById('aic2LessonTopic').textContent = nlo.lesson.title;
+  aic2SwitchView('lesson');
+  clearInterval(state.aic2._lessonTick);
+  const img = document.getElementById('aic2LessonImg');
+  const video = document.getElementById('aic2LessonVideo');
+  video.onended = null; video.ontimeupdate = null; video.pause();
+
+  const durationEl = document.getElementById('aic2LessonDuration');
+  const skipBtn = document.getElementById('aic2LessonSkipBtn');
+
+  if(nlo.video){
+    /* Cập nhật 2026-09-18: bỏ hẳn UI đếm ngược + nút "Chuyển sang phần Luyện tập" khi đang xem
+       video thật — video tự có cảm giác "đang xem gì đó có thời lượng" rồi, không cần đồng hồ đè
+       lên, và học sinh không cần bấm gì cả, video hết là tự chuyển (video.onended, xem dưới). Vẫn
+       giữ nguyên đồng hồ+nút này cho trường hợp KHÔNG có video (ảnh tĩnh) bên dưới, vì lúc đó không
+       có mốc "hết" tự nhiên để biết khi nào chuyển tiếp. */
+    durationEl.hidden = true;
+    skipBtn.hidden = true;
+    img.hidden = true;
+    video.hidden = false;
+    video.src = nlo.video;
+    aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé!`, null); // video có tiếng thật, không đọc lại audio giải thích
+    video.onended = aic2FinishLesson;
+    video.play().catch(()=>{});
+    return;
+  }
+
+  durationEl.hidden = false;
+  skipBtn.hidden = false;
+  img.hidden = false;
+  video.hidden = true;
+  aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`, `${state.aic2.track}_${state.aic2.stage}_lesson`);
   document.getElementById('aic2LessonTimer').textContent = '3:00';
   document.getElementById('aic2LessonBarFill').style.width = '100%';
-  aic2SwitchView('lesson');
-  aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`, `${state.aic2.track}_${state.aic2.stage}_lesson`);
-  clearInterval(state.aic2._lessonTick);
   let remain = 180;
   state.aic2._lessonTick = setInterval(()=>{
     remain -= 1;
@@ -4292,6 +4344,7 @@ function aic2Exit(){
   // resume thật (xem finding F011/F026 — cửa sổ hợp lệ để resume còn là open question ở PRD).
   clearInterval(state.aic2._lessonTick);
   stopAic2Speech();
+  document.getElementById('aic2LessonVideo').pause();
   toast('⏸ Đã lưu vị trí, tạm dừng thời lượng — mô phỏng BR9');
   setTimeout(()=>goto('schedule'), 900);
 }
