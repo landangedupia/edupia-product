@@ -3983,32 +3983,30 @@ function aic2SwitchView(name){
 }
 /* ============ TEXT-TO-SPEECH GIÁO VIÊN AI (2026-09-18, Web Speech API) ============
    Đọc thành tiếng kịch bản "Teacher Jenny" bằng SpeechSynthesis có sẵn trình duyệt (Chrome/Edge) —
-   MIỄN PHÍ, không cần backend/API key, cùng họ công nghệ với SpeechRecognition đã dùng cho iSpeak.
-   Đã trao đổi và chốt đây là phương án ưu tiên #1 (xem thảo luận 2026-09-18) trước khi cân nhắc
-   phương án tạo trước file âm thanh (chỉ dùng nếu chất lượng giọng qua trình duyệt không đạt khi
-   demo thật). Giọng đọc phụ thuộc trình duyệt/máy người xem, không đồng nhất 100% giữa các máy. */
-const AIC2_TTS_SUPPORTED = 'speechSynthesis' in window;
-function speakText(text, lang){
-  if(!AIC2_TTS_SUPPORTED || !text) return;
-  const plain = String(text).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  if(!plain) return;
-  window.speechSynthesis.cancel(); // huỷ câu đang đọc dở để không chồng giọng khi chuyển bước nhanh
-  const utter = new SpeechSynthesisUtterance(plain);
-  utter.lang = lang || 'vi-VN';
-  utter.rate = 1;
-  window.speechSynthesis.speak(utter);
+   Cập nhật 2026-09-18: ĐÃ ĐỔI sang phát file mp3 pre-generate bằng Vbee (thay cho Web Speech API
+   sống dùng tạm lúc đầu) — chất lượng giọng tốt hơn, đồng nhất giữa mọi máy, không phụ thuộc trình
+   duyệt hỗ trợ TTS hay không. Nguồn kịch bản/đối chiếu ID: assets/audio/aic2-tts-script.json.
+   File audio đặt tại assets/audio/aic2/<audioId>.mp3, <audioId> truyền vào aic2SetMsg() ở từng nơi
+   gọi (xem danh sách 43 ID đã dùng để tạo audio). */
+let _aic2AudioEl = null;
+function playAic2Audio(id){
+  if(!id) return;
+  if(_aic2AudioEl){ _aic2AudioEl.pause(); _aic2AudioEl.currentTime = 0; }
+  _aic2AudioEl = new Audio(`assets/audio/aic2/${id}.mp3`);
+  _aic2AudioEl.play().catch(()=>{}); // bỏ qua nếu bị chặn autoplay — hiếm khi xảy ra vì luôn phát sau thao tác bấm của học sinh
 }
 function stopAic2Speech(){
-  if(AIC2_TTS_SUPPORTED) window.speechSynthesis.cancel();
+  if(_aic2AudioEl){ _aic2AudioEl.pause(); _aic2AudioEl.currentTime = 0; }
 }
 
 /* Thẻ nhận xét "Teacher Jenny" dưới thẻ chính — luôn hiển thị, đổi nội dung theo từng bước
    thay vì khung chat cuộn như bản cũ (khớp đúng bố cục Figma: 1 thẻ nhận xét cố định).
-   Cập nhật 2026-09-18: mỗi lần đổi nội dung cũng đọc thành tiếng luôn (xem speakText() ở trên). */
-function aic2SetMsg(label, html){
+   Cập nhật 2026-09-18: audioId (tham số thứ 3) là ID file mp3 tương ứng đã pre-generate — bắt buộc
+   truyền đúng khi gọi hàm này, nếu không sẽ không có tiếng đọc (không lỗi, chỉ im lặng). */
+function aic2SetMsg(label, html, audioId){
   document.getElementById('aic2MsgLabel').textContent = label;
   document.getElementById('aic2MsgBody').innerHTML = `<b>Teacher Jenny:</b> ${html}`;
-  speakText(html, 'vi-VN');
+  playAic2Audio(audioId);
 }
 function aic2ShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
 
@@ -4027,7 +4025,7 @@ function aic2ShowIntro(){
   document.getElementById('aic2IntroCat2').textContent = p2.cat;
   document.getElementById('aic2IntroDetail2').textContent = p2.detail;
   aic2SwitchView('intro');
-  aic2SetMsg('Ôn lại lý thuyết', 'Chào con! Cô là Jenny, cô sẽ đồng hành cùng con trong buổi học bổ trợ ngày hôm nay nhé');
+  aic2SetMsg('Ôn lại lý thuyết', 'Chào con! Cô là Jenny, cô sẽ đồng hành cùng con trong buổi học bổ trợ ngày hôm nay nhé', 'intro');
   autoAdvance(aic2StartLesson, 1800);
 }
 
@@ -4041,7 +4039,7 @@ function aic2StartLesson(){
   document.getElementById('aic2LessonTimer').textContent = '3:00';
   document.getElementById('aic2LessonBarFill').style.width = '100%';
   aic2SwitchView('lesson');
-  aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`);
+  aic2SetMsg('Ôn lại lý thuyết', `Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về "${nlo.lesson.title}" nhé! ${nlo.lesson.explain}`, `${state.aic2.track}_${state.aic2.stage}_lesson`);
   clearInterval(state.aic2._lessonTick);
   let remain = 180;
   state.aic2._lessonTick = setInterval(()=>{
@@ -4059,7 +4057,7 @@ function aic2FinishLesson(){
   const greet = state.aic2.stage===0
     ? `Chào Vân Anh, buổi trước chúng ta đã học phần "${nlo.name}". ${nlo.greet}`
     : nlo.greet;
-  aic2SetMsg('Luyện tập', greet);
+  aic2SetMsg('Luyện tập', greet, `${state.aic2.track}_${state.aic2.stage}_greet`);
   updateAic2Progress();
   autoAdvance(aic2RenderExercise, 500);
 }
@@ -4135,7 +4133,8 @@ function aic2SubmitMcq(){
     submitBtn.textContent = 'Chọn lại';
     submitBtn.disabled = false;
     submitBtn.onclick = aic2ResetMcq;
-    aic2SetMsg('Luyện tập', ex.wrong || 'Chưa đúng, con thử chọn lại nhé!');
+    aic2SetMsg('Luyện tập', ex.wrong || 'Chưa đúng, con thử chọn lại nhé!',
+      ex.wrong ? `${state.aic2.track}_${state.aic2.stage}_ex${state.aic2.exerciseIndex}_wrong` : 'mcq_wrong_default');
   }
 }
 function aic2ResetMcq(){
@@ -4193,7 +4192,10 @@ function aic2ToggleSpeak(){
    Khác bản cũ: giữ nguyên câu hỏi/đáp án đã tô màu đúng-sai trên thẻ chính, chỉ đổi nội dung
    thẻ nhận xét bên dưới — khớp đúng cách Figma tách 2 thẻ (câu hỏi ở trên, nhận xét ở dưới). */
 function aic2Feedback(correct, ex){
-  aic2SetMsg('Luyện tập', (correct || !ex.wrong) ? ex.ok : ex.wrong);
+  const isOk = correct || !ex.wrong;
+  const suffix = isOk ? 'ok' : 'wrong';
+  aic2SetMsg('Luyện tập', isOk ? ex.ok : ex.wrong,
+    `${state.aic2.track}_${state.aic2.stage}_ex${state.aic2.exerciseIndex}_${suffix}`);
   aic2AdvanceExercise();
 }
 function aic2AdvanceExercise(){
@@ -4216,7 +4218,7 @@ function aic2ShowCelebration(nloName){
   document.getElementById('aic2CelebrateMsg').textContent = `Chúc mừng! Con đã hoàn thành ${nloName}`;
   document.getElementById('aic2CelebrateStars').innerHTML =
     Array.from({length:5}).map(()=>'<img src="assets/icon-banner-star.svg" alt="">').join('');
-  aic2SetMsg('Luyện tập', 'Con đã hoàn thành rất tốt, giờ chúng ta sẽ chuyển sang phần tiếp theo nhé');
+  aic2SetMsg('Luyện tập', 'Con đã hoàn thành rất tốt, giờ chúng ta sẽ chuyển sang phần tiếp theo nhé', 'celebrate');
   autoAdvance(()=>{
     state.aic2.stage++;
     if(state.aic2.stage < state.aic2.nloList.length){

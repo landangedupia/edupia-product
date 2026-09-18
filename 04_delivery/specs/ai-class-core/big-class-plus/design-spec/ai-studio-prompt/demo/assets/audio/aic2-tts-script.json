@@ -1,0 +1,363 @@
+{
+  "_readme": [
+    "Kịch bản giọng đọc 'Teacher Jenny' cho màn AI Bổ trợ 30 phút (aic2-interact) — xuất 2026-09-18",
+    "để pre-generate TTS thay cho Web Speech API (live) đang dùng tạm trong demo.",
+    "",
+    "QUY ƯỚC:",
+    "- Mỗi object là 1 file audio cần tạo. 'id' = tên file không đuôi mở rộng.",
+    "- Đặt file kết quả đúng theo 'suggested_path' (mp3, 44.1kHz, mono ổn định cho web là đủ).",
+    "- 'lang' luôn là vi-VN — script chủ yếu tiếng Việt, có xen từ/câu tiếng Anh ngắn (từ vựng bài",
+    "  học) đọc tự nhiên trong giọng đọc tiếng Việt, KHÔNG cần đổi giọng riêng cho từ tiếng Anh.",
+    "- 'text' là nguyên văn ĐÃ ghép sẵn (không còn biến số) — dùng đúng y nguyên, không chỉnh sửa,",
+    "  để khớp 100% với nội dung đang hiển thị trên màn hình khi audio phát.",
+    "- Sau khi có đủ file audio, báo lại tôi để tôi nối dây (wiring) code phát file thay cho",
+    "  speechSynthesis hiện tại (thay lời gọi speakText() bằng phát Audio() theo 'id')."
+  ],
+  "clips": [
+    {
+      "id": "intro",
+      "context": "Lời chào đầu buổi bổ trợ, hiện ngay khi vào màn Tương tác (mọi track/mọi NLO)",
+      "suggested_path": "assets/audio/aic2/intro.mp3",
+      "lang": "vi-VN",
+      "text": "Chào con! Cô là Jenny, cô sẽ đồng hành cùng con trong buổi học bổ trợ ngày hôm nay nhé"
+    },
+    {
+      "id": "celebrate",
+      "context": "Sau khi hoàn thành 5 bài tập của 1 NLO, trước khi chuyển NLO tiếp theo hoặc kết thúc buổi",
+      "suggested_path": "assets/audio/aic2/celebrate.mp3",
+      "lang": "vi-VN",
+      "text": "Con đã hoàn thành rất tốt, giờ chúng ta sẽ chuyển sang phần tiếp theo nhé"
+    },
+    {
+      "id": "mcq_wrong_default",
+      "context": "Dự phòng an toàn — chỉ phát nếu 1 bài MCQ nào đó thiếu sẵn câu 'wrong' riêng (hiện tại mọi câu MCQ/gapfill trong AIC2_NLO đều đã có 'wrong' riêng nên clip này gần như không dùng tới, tạo cho đủ bộ)",
+      "suggested_path": "assets/audio/aic2/mcq_wrong_default.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con thử chọn lại nhé!"
+    },
+
+    {
+      "id": "reinforce_0_greet",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Lời chào đầu tiên khi bắt đầu luyện tập (sau bài giảng ngắn) — NLO này luôn ở vị trí đầu buổi (stage 0) nên có thêm câu nhắc lại buổi trước",
+      "suggested_path": "assets/audio/aic2/reinforce_0_greet.mp3",
+      "lang": "vi-VN",
+      "text": "Chào Vân Anh, buổi trước chúng ta đã học phần \"Từ vựng: Môn thể thao (Sports)\". buổi vừa rồi mình đã học tên 2 môn thể thao table tennis và football rồi, giờ mình ôn lại thật chắc nhé!"
+    },
+    {
+      "id": "reinforce_0_lesson",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Lời dẫn bài giảng ngắn 3 phút",
+      "suggested_path": "assets/audio/aic2/reinforce_0_lesson.mp3",
+      "lang": "vi-VN",
+      "text": "Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về \"Sports\" nhé! Table tennis (bóng bàn) và football (bóng đá) đều là môn thể thao (sport). Khi nói môn mình thích, dùng mẫu: \"My favourite sport is + tên môn.\""
+    },
+    {
+      "id": "reinforce_0_ex0_ok",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 1/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex0_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác! Table tennis là bóng bàn."
+    },
+    {
+      "id": "reinforce_0_ex0_wrong",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 1/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex0_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng rồi, con thử nghĩ xem: môn này chơi TRÊN MẶT BÀN bằng vợt nhỏ, không phải dưới nước hay ngoài sân đâu!"
+    },
+    {
+      "id": "reinforce_0_ex1_ok",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 2/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex1_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Đúng rồi, \"table tennis\" là tên môn thể thao."
+    },
+    {
+      "id": "reinforce_0_ex1_wrong",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 2/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex1_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con điền tên 1 MÔN THỂ THAO mình vừa học nhé, không phải đồ ăn hay con vật đâu!"
+    },
+    {
+      "id": "reinforce_0_ex2_ok",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 3/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex2_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác, con nhớ rất tốt!"
+    },
+    {
+      "id": "reinforce_0_ex2_wrong",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 3/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex2_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con nhớ lại xem: đây là môn chơi bằng CHÂN với 1 quả bóng to nhé!"
+    },
+    {
+      "id": "reinforce_0_ex3_ok",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 4/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex3_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Tốt lắm, \"football\" là môn thể thao hợp nghĩa nhất."
+    },
+    {
+      "id": "reinforce_0_ex3_wrong",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 4/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex3_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, đây là 1 MÔN THỂ THAO chơi bằng chân, không phải món ăn hay màu sắc đâu!"
+    },
+    {
+      "id": "reinforce_0_ex4_ok",
+      "nlo": "Từ vựng: Môn thể thao (Sports)",
+      "context": "Bài 5/5 (chat, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/reinforce_0_ex4_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Câu trả lời rất hay, con dùng từ vựng chính xác!"
+    },
+
+    {
+      "id": "reinforce_1_greet",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Lời chào khi bắt đầu luyện tập — NLO này luôn ở vị trí thứ 2 trong buổi nên KHÔNG có câu nhắc lại buổi trước",
+      "suggested_path": "assets/audio/aic2/reinforce_1_greet.mp3",
+      "lang": "vi-VN",
+      "text": "mình cùng ôn lại cách hỏi về sở thích nhé — đây là mẫu câu quan trọng nhất của bài học đó!"
+    },
+    {
+      "id": "reinforce_1_lesson",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Lời dẫn bài giảng ngắn 3 phút",
+      "suggested_path": "assets/audio/aic2/reinforce_1_lesson.mp3",
+      "lang": "vi-VN",
+      "text": "Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về \"What's your favourite...?\" nhé! Hỏi sở thích ai đó, dùng: \"What's your favourite + danh từ?\" Trả lời: \"It's + tên.\" Ví dụ: \"What's your favourite colour? – It's pink.\""
+    },
+    {
+      "id": "reinforce_1_ex0_ok",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 1/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex0_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác! Dùng \"What\" để hỏi về sở thích."
+    },
+    {
+      "id": "reinforce_1_ex0_wrong",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 1/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex0_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con nhớ lại từ để hỏi \"CÁI GÌ\" ở đầu câu hỏi về sở thích nhé!"
+    },
+    {
+      "id": "reinforce_1_ex1_ok",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 2/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex1_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Đúng rồi, \"sandwich\" là món ăn hợp câu trả lời."
+    },
+    {
+      "id": "reinforce_1_ex1_wrong",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 2/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex1_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, câu hỏi về \"favourite food\" thì đáp án phải là 1 MÓN ĂN nhé, không phải màu sắc hay hành động đâu!"
+    },
+    {
+      "id": "reinforce_1_ex2_ok",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 3/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex2_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác, đúng cấu trúc câu hỏi rồi!"
+    },
+    {
+      "id": "reinforce_1_ex2_wrong",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 3/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex2_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con để ý đúng thứ tự: \"What's your favourite + danh từ?\" nhé, đừng đảo các từ lộn xộn!"
+    },
+    {
+      "id": "reinforce_1_ex3_ok",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 4/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex3_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Tốt lắm, dùng \"It's\" để trả lời về 1 sự vật."
+    },
+    {
+      "id": "reinforce_1_ex3_wrong",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 4/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex3_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, khi trả lời về 1 SỰ VẬT (không phải người), mình dùng từ nào để bắt đầu câu nhỉ?"
+    },
+    {
+      "id": "reinforce_1_ex4_ok",
+      "nlo": "Ngữ pháp: Câu hỏi \"What's your favourite...?\"",
+      "context": "Bài 5/5 (chat, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/reinforce_1_ex4_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Câu rất hay, con dùng đúng mẫu câu rồi!"
+    },
+
+    {
+      "id": "advance_0_greet",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Lời chào khi bắt đầu luyện tập — NLO này luôn ở vị trí đầu buổi (stage 0) nên có thêm câu nhắc lại buổi trước",
+      "suggested_path": "assets/audio/aic2/advance_0_greet.mp3",
+      "lang": "vi-VN",
+      "text": "Chào Vân Anh, buổi trước chúng ta đã học phần \"Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)\". con làm rất tốt phần đồ ăn rồi! Giờ mình mở rộng thêm cách miêu tả món ăn mình thích nhé."
+    },
+    {
+      "id": "advance_0_lesson",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Lời dẫn bài giảng ngắn 3 phút",
+      "suggested_path": "assets/audio/aic2/advance_0_lesson.mp3",
+      "lang": "vi-VN",
+      "text": "Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về \"Describing Food\" nhé! Miêu tả món ăn yêu thích, dùng mẫu: \"My favourite food is + [món ăn] because + [lý do].\" Ví dụ: \"...because it's delicious.\""
+    },
+    {
+      "id": "advance_0_ex0_ok",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 1/5 (nói theo mẫu, luôn coi là đúng — điểm phát âm thật chấm riêng qua ASR)",
+      "suggested_path": "assets/audio/aic2/advance_0_ex0_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Phát âm rất tốt, ngữ điệu tự nhiên!"
+    },
+    {
+      "id": "advance_0_ex1_ok",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 2/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/advance_0_ex1_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác, \"delicious\" phù hợp để khen món ăn."
+    },
+    {
+      "id": "advance_0_ex1_wrong",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 2/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/advance_0_ex1_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con nhớ lại từ tiếng Anh nghĩa là \"NGON\" nhé, không phải \"nặng\", \"chậm\" hay \"vuông\" đâu!"
+    },
+    {
+      "id": "advance_0_ex2_ok",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 3/5 (nói theo mẫu, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/advance_0_ex2_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Con nói rất trôi chảy, tiếp tục phát huy nhé!"
+    },
+    {
+      "id": "advance_0_ex3_ok",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 4/5 (chat, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/advance_0_ex3_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Câu rất hay và đúng mẫu câu!"
+    },
+    {
+      "id": "advance_0_ex4_ok",
+      "nlo": "Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)",
+      "context": "Bài 5/5 (nói theo mẫu, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/advance_0_ex4_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Xuất sắc, con đã sẵn sàng cho phần nâng cao hơn rồi đó!"
+    },
+
+    {
+      "id": "advance_1_greet",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Lời chào khi bắt đầu luyện tập — NLO này luôn ở vị trí thứ 2 trong buổi nên KHÔNG có câu nhắc lại buổi trước",
+      "suggested_path": "assets/audio/aic2/advance_1_greet.mp3",
+      "lang": "vi-VN",
+      "text": "giờ mình thử mở rộng thêm cách trả lời có lý do nhé, sẽ giúp câu trả lời của con hay hơn nhiều đó!"
+    },
+    {
+      "id": "advance_1_lesson",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Lời dẫn bài giảng ngắn 3 phút",
+      "suggested_path": "assets/audio/aic2/advance_1_lesson.mp3",
+      "lang": "vi-VN",
+      "text": "Con hãy theo dõi bài giảng ngắn sau và ghi nhớ nội dung về \"Because...\" nhé! Để giải thích lý do, dùng \"because\". Ví dụ: \"It's a dolphin because it's very smart.\" Con có thể thêm lý do sau bất kỳ câu trả lời sở thích nào."
+    },
+    {
+      "id": "advance_1_ex0_ok",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 1/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/advance_1_ex0_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác, \"because\" dùng để giải thích lý do."
+    },
+    {
+      "id": "advance_1_ex0_wrong",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 1/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/advance_1_ex0_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, mình cần 1 từ nối để GIẢI THÍCH LÝ DO, không phải \"và/nhưng/vậy nên\" đâu!"
+    },
+    {
+      "id": "advance_1_ex1_ok",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 2/5 (MCQ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/advance_1_ex1_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Chính xác! Đúng thứ tự \"vì [lý do]\" rồi."
+    },
+    {
+      "id": "advance_1_ex1_wrong",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 2/5 (MCQ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/advance_1_ex1_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, con để ý đúng thứ tự \"I like ... because + lý do\" nhé, đừng đảo ngược các từ!"
+    },
+    {
+      "id": "advance_1_ex2_ok",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 3/5 (điền từ) — chọn đúng",
+      "suggested_path": "assets/audio/aic2/advance_1_ex2_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Đúng rồi, \"because\" giải thích lý do thích môn đó."
+    },
+    {
+      "id": "advance_1_ex2_wrong",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 3/5 (điền từ) — chọn sai",
+      "suggested_path": "assets/audio/aic2/advance_1_ex2_wrong.mp3",
+      "lang": "vi-VN",
+      "text": "Chưa đúng, mình cần 1 từ nối để GIẢI THÍCH LÝ DO thích môn đó nhé!"
+    },
+    {
+      "id": "advance_1_ex3_ok",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 4/5 (chat, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/advance_1_ex3_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Câu rất tự nhiên, con dùng đúng cấu trúc rồi!"
+    },
+    {
+      "id": "advance_1_ex4_ok",
+      "nlo": "Ngữ pháp: Trả lời có lý do (because)",
+      "context": "Bài 5/5 (nói theo mẫu, luôn coi là đúng)",
+      "suggested_path": "assets/audio/aic2/advance_1_ex4_ok.mp3",
+      "lang": "vi-VN",
+      "text": "Phát âm rất tốt, câu nghe rất tự nhiên!"
+    }
+  ]
+}
