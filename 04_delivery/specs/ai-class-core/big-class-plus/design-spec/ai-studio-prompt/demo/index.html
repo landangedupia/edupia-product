@@ -797,10 +797,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
 .aic2-q-label{font-size:13px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;}
 .aic2-q-text{font-size:18px;font-weight:600;line-height:26px;color:var(--n900);flex-shrink:0;}
 .aic2-mcq-opts{display:flex;flex-direction:column;gap:12px;}
-.aic2-opt-btn{display:flex;align-items:center;gap:14px;background:var(--n100);border:none;border-radius:10px;
-  padding:14px 16px;font-size:16px;font-weight:500;color:var(--n900);text-align:left;width:100%;}
+.aic2-opt-btn{display:flex;align-items:center;gap:14px;background:var(--n50);border:none;border-radius:12px;
+  padding:12px 14px;font-size:14px;font-weight:500;color:var(--n700);text-align:left;width:100%;}
 .aic2-opt-btn .letter{display:flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;
-  border-radius:50%;background:var(--n700);color:#fff;font-size:13px;font-weight:700;}
+  border-radius:8px;background:var(--n500);color:#fff;font-size:13px;font-weight:700;}
+/* Trạng thái đang chọn (chưa nộp) — khớp Figma node 192:27754 */
+.aic2-opt-btn.selected{background:rgba(143,228,255,.33);}
+.aic2-opt-btn.selected .letter{background:var(--primary);}
 .aic2-opt-btn.correct{background:#e3f7df;}
 .aic2-opt-btn.correct .letter{background:var(--success);}
 .aic2-opt-btn.wrong{background:#fde3e2;}
@@ -2029,7 +2032,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;}
   <section class="screen" id="screen-aic2-interact">
     <div class="aic2-interact-screen">
       <div class="aic2-content-pane">
-        <div class="aic2-header-text">Mục tiêu <b id="aic2GoalIdx">1/2</b>: <span id="aic2GoalVerb">Củng cố lại kiến thức chưa thành thạo</span> <b id="aic2GoalName"></b></div>
+        <div class="aic2-header-text">Mục tiêu <b id="aic2GoalIdx">1/2</b>: <span id="aic2GoalVerb">Củng cố lại kiến thức chưa thành thạo</span> <b id="aic2GoalName"></b> <span id="aic2GoalReason" style="opacity:.75;font-weight:400;"></span></div>
         <div class="aic2-main-card">
           <!-- 1) Nội dung bổ trợ (giới thiệu đầu buổi) -->
           <div class="aic2-view" id="aic2View_intro">
@@ -2471,6 +2474,7 @@ const state = {
   ispeakCurrentWord: null,
   ispeakCurrentRound: null,
   ispeakPhase: 'choose',
+  ispeakPhaseEnterT: null,
   ispeakChoice: null,
   ispeakSubmitted: false,
   seekDragging: false,
@@ -2512,6 +2516,7 @@ function goto(id){
   const prevActive = document.querySelector('.screen.active');
   const leavingClassroom = !!prevActive && prevActive.id === 'screen-classroom' && id !== 'classroom';
   const leavingSummary = !!prevActive && prevActive.id === 'screen-summary' && id !== 'summary';
+  const leavingAic2 = !!prevActive && prevActive.id === 'screen-aic2-interact' && id !== 'aic2-interact';
   document.querySelectorAll('.screen').forEach(s=>{
     s.classList.remove('active');
     s.style.display = 'none';
@@ -2527,6 +2532,7 @@ function goto(id){
   else if(id!=='summary') stopCamStream();
   if(leavingClassroom) stopLectureVideo();
   if(leavingSummary) stopSummaryCountdown();
+  if(leavingAic2) stopAic2Speech();
 }
 
 /* Dừng hẳn video + âm thanh bài giảng chính khoá khi rời màn lớp học (chuyển màn khác hoặc bấm
@@ -2863,15 +2869,24 @@ function updateIspeakTimerPill(t){
   const n = state.ispeakCurrentRound;
   if(!n) return;
   const el = document.getElementById('ispeakTimerPill');
+  /* BUGFIX 2026-09-18: đếm ngược trước đây tính thẳng từ mốc cố định (ISPEAK_START_T/SPEAK_T) trừ đi
+     t — nếu người xem TUA THẲNG (seek) vào giữa pha thay vì xem tuần tự từ đầu vòng, "left" đã âm
+     sẵn ngay khi màn vừa hiện ra, khiến submitIspeakChoice() tự bắn NGAY LẬP TỨC (thấy chọn được đáp
+     án nhưng bấm "Nộp bài" không có phản ứng gì vì đã tự nộp từ trước đó rồi). Giờ tính "left" theo
+     mốc THỜI ĐIỂM MÀN HÌNH NÀY THỰC SỰ HIỆN RA (state.ispeakPhaseEnterT, gán trong
+     renderIspeakChoosePhase/renderIspeakSpeakPhase) thay vì mốc tuyệt đối của vòng — luôn cho đủ 20
+     giây thật để tương tác kể từ lúc màn hiện ra, dù xem tuần tự hay tua thẳng tới. Tua lùi để làm
+     lại vẫn hoạt động bình thường vì mốc này được gán lại mỗi lần màn được vẽ lại. */
+  const enterT = state.ispeakPhaseEnterT != null ? state.ispeakPhaseEnterT : t;
   if(state.ispeakPhase === 'choose'){
-    const left = Math.max(0, Math.ceil(ISPEAK_START_T[n-1] + ISPEAK_CHOOSE_SECONDS - t));
+    const left = Math.max(0, Math.ceil(ISPEAK_CHOOSE_SECONDS - (t - enterT)));
     if(el) el.textContent = `⏱ ${formatMmSs(left)}`;
     if(left <= 0 && !state.ispeakSubmitted) submitIspeakChoice();
   } else {
     /* BUGFIX 2026-09-17: pha nói trước đây đếm tới tận lúc vòng KẾ TIẾP bắt đầu (34-51 giây tuỳ
        vòng — nhìn như "55 giây") thay vì đúng 20 giây thật kể từ lúc cô giáo nói "Con hãy nói to
        vào mic nha" (ISPEAK_SPEAK_T). Sửa lại đúng 20 giây, cùng công thức với pha chọn. */
-    const left = Math.max(0, Math.ceil(ISPEAK_SPEAK_T[n-1] + ISPEAK_SPEAK_SECONDS - t));
+    const left = Math.max(0, Math.ceil(ISPEAK_SPEAK_SECONDS - (t - enterT)));
     if(el) el.textContent = `⏱ ${formatMmSs(left)}`;
     // Hết 20 giây mà chưa nói (chưa có kết quả ASR) — tính là bỏ qua, không chờ tới lúc tua qua vòng.
     if(left <= 0 && state.ispeakRoundResults[n-1] == null && !state.recording){
@@ -3202,6 +3217,10 @@ function renderClassroomStep(){
 
   switch(step){
     case 'team-announce':
+      /* Tạm ẩn 2026-09-18 theo yêu cầu — popup "Thông báo" chào mừng/phân nhóm đầu buổi. Giữ
+         nguyên nhịp thời gian cũ (chờ 3s rồi mới vào lecture1) để không đổi luồng, chỉ không hiển
+         thị overlay nữa. Muốn bật lại: bỏ comment khối overlay.innerHTML bên dưới và đổi lại
+         autoAdvance(nextClassStep, 3000) thành đúng cơ chế đếm ngược trên nút cũ.
       overlay.innerHTML = `<div class="announce-modal">
         <h3>Thông báo</h3>
         <div class="body-text">Hôm nay con đã được cô giáo phân vào nhóm <b>"Gấu trúc"</b><br>
@@ -3214,19 +3233,8 @@ function renderClassroomStep(){
           <div class="member"><span class="av">🧒</span> Hoàng thượng</div>
         </div>
         <button id="announceBtn">Sẵn sàng sau 3s</button>
-      </div>`;
-      /* Popup giới thiệu nhóm chỉ là overlay mở đầu, tự tắt sau vài giây — KHÔNG chờ theo mốc
-         thời gian thật của video (mốc 7:41 "HS nhắn tên nhóm vào chat" là một khoảnh khắc khác,
-         nằm trong chính video, không cần popup riêng của demo che lên). */
-      { let n = 3;
-        const iv = setInterval(()=>{
-          n--;
-          const btn = document.getElementById('announceBtn');
-          if(!btn){ clearInterval(iv); return; }
-          if(n<=0){ clearInterval(iv); nextClassStep(); }
-          else { btn.textContent = `Sẵn sàng sau ${n}s`; }
-        }, 700);
-      }
+      </div>`; */
+      autoAdvance(nextClassStep, 3000);
       break;
 
     case 'lecture1':
@@ -3485,7 +3493,8 @@ function renderIspeakChoosePhase(n){
     </div>
     <button class="cc-btn">CC</button>`;
   const video = document.getElementById('lectureVideo');
-  updateIspeakTimerPill(video ? video.currentTime : ISPEAK_START_T[n-1]); // vẽ ngay số đúng, khỏi nháy "00:20"
+  state.ispeakPhaseEnterT = video ? video.currentTime : ISPEAK_START_T[n-1];
+  updateIspeakTimerPill(state.ispeakPhaseEnterT); // vẽ ngay số đúng, khỏi nháy "00:20"
 }
 
 function selectIspeakOption(letter){
@@ -3533,7 +3542,8 @@ function renderIspeakSpeakPhase(n){
     </div>
     <button class="cc-btn">CC</button>`;
   const video = document.getElementById('lectureVideo');
-  if(video) updateIspeakTimerPill(video.currentTime);
+  state.ispeakPhaseEnterT = video ? video.currentTime : ISPEAK_SPEAK_T[n-1];
+  updateIspeakTimerPill(state.ispeakPhaseEnterT);
 }
 
 function groupReady(){
@@ -3744,38 +3754,48 @@ function stopSummaryCountdown(){
 /* ============ MASTERY MAP (Bản đồ năng lực toàn môn) ============ */
 /* Kiểu Khan Academy: vòng % tổng + ô vuông từng NLO theo 4 mảng kỹ năng, chia 2 cột để tối ưu
    chiều cao/diện tích hiển thị (cột 1: Từ vựng + Ngữ pháp, cột 2: Phát âm + Nghe-Nói). */
+/* BUGFIX 2026-09-18: thay toàn bộ NLO "Musical Instruments/Household items/Occupations..." (sai chủ
+   đề, sót lại từ bản demo cũ trước khi có video thật) bằng đúng NLO thật của Unit 1/2/3 lấy từ
+   03_product/concepts/nlo-framework-concept-1.2-grade5-unit2-2026-09-17.md — Unit 2 "My Favourite
+   Things" (✅ Fact, buổi vừa học) đã đưa ĐỦ cả 9 NLO vào đây; Unit 1/3 (◆ Assumption, buổi trước/sau)
+   lấy đúng NLO đã có trong file đó. Vài ô còn lại (Phát âm/Nghe-Nói) không thuộc Unit 1-3 đã tài
+   liệu hoá — giữ nguyên như bản giả định demo cũ, chưa gắn được vào unit cụ thể nào.
+   Bộ số % ở đây đóng vai trò "Mastery Profile giả lập tổng hợp NHIỀU BUỔI trước" (không phải điểm
+   buổi vừa học) — dùng làm input cho AIC2_NLO/computeAic2Gaps() bên dưới, theo đúng yêu cầu demo
+   phải thể hiện được góc nhìn đa buổi, không chỉ tính từ 1 buổi vừa xong. Vẫn là số ◆ giả định demo,
+   không phải Mastery Profile thật (nền tảng đó chưa tồn tại — xem AICNew-02 §Note phụ thuộc). */
 const MASTERY_STRANDS = [
   { label:'Từ vựng', los:[
-    ['Tên các loại nhạc cụ (Musical Instruments)',82],
-    ['Đồ dùng gia đình (Household items)',76],
-    ['Nghề nghiệp (Occupations)',45],
-    ['Thời tiết & mùa (Weather & Seasons)',12],
-    ['Đồ ăn & thức uống (Food & Drinks)',90],
-    ['Phương tiện giao thông (Transportation)',0],
+    ['Con vật (Animals)',82],                      // Unit 2 — Fact
+    ['Đồ dùng học tập (School supplies)',76],       // Unit 1 — Assumption
+    ['Màu sắc (Colours)',45],                       // Unit 2 — Fact
+    ['Môn thể thao (Sports)',12],                   // Unit 2 — Fact — mastery thấp nhất Từ vựng
+    ['Đồ ăn & thức uống (Food & Drinks)',90],       // Unit 2 — Fact
+    ['Hoạt động giải trí (Free-time activities)',0],// Unit 3 — Assumption, chưa học
   ]},
   { label:'Ngữ pháp', los:[
-    ['Thì hiện tại đơn (Present Simple)',58],
-    ['Thì tương lai đơn (Future Simple)',34],
-    ['Danh từ số ít – số nhiều',88],
-    ['Giới từ chỉ nơi chốn (Prepositions)',40],
-    ['So sánh hơn (Comparatives)',0],
-    ['Động từ khiếm khuyết (can/should)',0],
+    ['Thì hiện tại đơn (Present Simple)',58],                 // Unit 3 — Assumption
+    [`Câu hỏi "What's your favourite...?"`,34],               // Unit 2 — Fact
+    [`Rút gọn What's/It's + mạo từ a/an`,88],                 // Unit 2 — Fact
+    [`Rút gọn "I'm = I am"`,40],                               // Unit 1 — Assumption
+    ['Vị trí trạng từ tần suất trong câu',0],                 // Unit 3 — Assumption, chưa học
+    ['Động từ khiếm khuyết (can/should)',0],                  // Chưa gắn unit cụ thể
   ]},
   { label:'Phát âm', los:[
-    ['Nguyên âm dài /i:/',34],
-    ['Nguyên âm ngắn /ɪ/',71],
-    ['Phụ âm cuối /s/ /z/',65],
-    ['Trọng âm từ 2 âm tiết',20],
-    ['Ngữ điệu câu hỏi',0],
-    ['Nối âm cơ bản',0],
+    ['Nguyên âm dài /i:/',34],           // Chưa gắn unit cụ thể
+    ['Nguyên âm ngắn /ɪ/',71],           // Unit 1 — Assumption
+    ['Phụ âm cuối /s/ /z/',65],          // Unit 3 — Assumption (đuôi -s/-es động từ)
+    ['Trọng âm từ 2 âm tiết',20],        // Unit 2 — ◆ Assumption trong chính Unit 2 (dolphin/sandwich)
+    ['Ngữ điệu câu hỏi',0],              // Chưa gắn unit cụ thể
+    ['Nối âm cơ bản',0],                 // Chưa gắn unit cụ thể
   ]},
   { label:'Nghe – Nói', los:[
-    ['Giao tiếp tình huống mua sắm',90],
-    ['Hỏi đường (Asking for directions)',55],
-    ['Giới thiệu bản thân',95],
-    ['Nghe hiểu hội thoại ngắn',48],
-    ['Đặt câu hỏi Wh-question',30],
-    ['Nghe số đếm & thời gian',0],
+    ['Giao tiếp tình huống mua sắm',90],       // Chưa gắn unit cụ thể
+    ['Hỏi đường (Asking for directions)',55],  // Chưa gắn unit cụ thể
+    ['Giới thiệu bản thân',95],                // Unit 1 — Assumption
+    ['Nghe hiểu hội thoại ngắn',48],           // Chưa gắn unit cụ thể (khác "Đọc hiểu" bên dưới — nghe vs đọc)
+    ['Hỏi & đáp về sở thích cá nhân',30],      // Unit 2 — Fact
+    ['Đọc hiểu hội thoại ngắn',0],             // Unit 2 — Fact, chưa học
   ]},
 ];
 function masteryLevel(pct){
@@ -3838,69 +3858,75 @@ function renderMasteryZone(containerId, prevOverall){
    Thay vì bắt học lại cả Unit, mỗi NLO là 1 Micro-lesson: bài giảng ngắn 3 phút (giao diện
    kiểu buổi chính khóa) rồi mở khóa đúng 5 bài tập vi mô trộn dạng (mcq/gapfill/speak/chat)
    để giải quyết triệt để đúng NLO đang hổng — áp dụng cho cả nhánh Củng cố và Nâng cao. */
+/* BUGFIX 2026-09-18: thay toàn bộ nội dung "Musical Instruments/Future Simple" (sai chủ đề, sót lại
+   từ bản demo cũ) bằng đúng nội dung Unit 2 "My Favourite Things" — khớp NLO thật trong
+   MASTERY_STRANDS ở trên. reinforce = 2 NLO có mastery giả lập THẤP NHẤT trong Unit 2 (Môn thể thao
+   12%, Câu hỏi "What's your favourite...?" 34%) — vá đúng lỗ hổng theo Mastery Profile giả lập đa
+   buổi, không phải chọn tuỳ ý. advance = 2 NLO có mastery CAO NHẤT (Đồ ăn & thức uống 90%, Rút gọn
+   What's/It's 88%) — mở rộng thêm cho học sinh đã vững, không dạy lại từ đầu. */
 const AIC2_NLO = {
   reinforce: [
-    { name:'Từ vựng: Tên các loại nhạc cụ (Musical Instruments)',
-      greet:'buổi trước chúng ta đã học các loại nhạc cụ như guitar, piano, violin — hãy cùng ôn lại thật chắc nhé!',
-      lesson:{ title:'Musical Instruments', explain:'Guitar (đàn ghi-ta), Piano (đàn dương cầm), Violin (đàn vi-ô-lông) đều là nhạc cụ. Với nhạc cụ có dây (guitar, violin) ta dùng động từ "play the + tên nhạc cụ", ví dụ: "play the guitar".' },
+    { name:'Từ vựng: Môn thể thao (Sports)', masteryPct:12,
+      greet:'buổi vừa rồi mình đã học tên 2 môn thể thao table tennis và football rồi, giờ mình ôn lại thật chắc nhé!',
+      lesson:{ title:'Sports', explain:'Table tennis (bóng bàn) và football (bóng đá) đều là môn thể thao (sport). Khi nói môn mình thích, dùng mẫu: "My favourite sport is + tên môn."' },
       exercises:[
-        { type:'mcq', question:'Nhạc cụ nào có 6 dây và chơi bằng cách gảy?', options:['Piano','Guitar','Trống','Sáo'], answerIndex:1,
-          ok:'Chính xác! Guitar có dây và được gảy.', wrong:'Chưa đúng, đáp án là Guitar — nhạc cụ có dây gảy.' },
-        { type:'gapfill', pre:'She can play the', post:'very well.', options:['guitar','book','chair','shoe'], answerIndex:0,
-          ok:'Đúng rồi, "guitar" là nhạc cụ có dây.', wrong:'Chưa đúng, đáp án là "guitar".' },
-        { type:'mcq', question:'"Piano" trong tiếng Việt nghĩa là gì?', options:['Đàn ghi-ta','Đàn dương cầm','Trống','Sáo'], answerIndex:1,
-          ok:'Chính xác, con nhớ rất tốt!', wrong:'Chưa đúng, "Piano" nghĩa là đàn dương cầm.' },
-        { type:'gapfill', pre:'My brother plays the', post:'every morning.', options:['violin','table','pencil','door'], answerIndex:0,
-          ok:'Tốt lắm, "violin" là từ hợp nghĩa nhất.', wrong:'Chưa đúng, đáp án là "violin".' },
-        { type:'chat', ask:'Con hãy kể tên 1 nhạc cụ con thích và giải thích ngắn gọn vì sao nhé?',
+        { type:'mcq', question:'Môn nào chơi bằng vợt và quả bóng nhỏ trên bàn?', options:['Football','Table tennis','Swimming','Running'], answerIndex:1,
+          ok:'Chính xác! Table tennis là bóng bàn.', wrong:'Chưa đúng rồi, con thử nghĩ xem: môn này chơi TRÊN MẶT BÀN bằng vợt nhỏ, không phải dưới nước hay ngoài sân đâu!' },
+        { type:'gapfill', pre:'My favourite sport is', post:'.', options:['table tennis','sandwich','dolphin','pink'], answerIndex:0,
+          ok:'Đúng rồi, "table tennis" là tên môn thể thao.', wrong:'Chưa đúng, con điền tên 1 MÔN THỂ THAO mình vừa học nhé, không phải đồ ăn hay con vật đâu!' },
+        { type:'mcq', question:'"Football" trong tiếng Việt nghĩa là gì?', options:['Bóng bàn','Bóng đá','Bơi lội','Cầu lông'], answerIndex:1,
+          ok:'Chính xác, con nhớ rất tốt!', wrong:'Chưa đúng, con nhớ lại xem: đây là môn chơi bằng CHÂN với 1 quả bóng to nhé!' },
+        { type:'gapfill', pre:'I like playing', post:'with my friends.', options:['football','pizza','pink','book'], answerIndex:0,
+          ok:'Tốt lắm, "football" là môn thể thao hợp nghĩa nhất.', wrong:'Chưa đúng, đây là 1 MÔN THỂ THAO chơi bằng chân, không phải món ăn hay màu sắc đâu!' },
+        { type:'chat', ask:'Con hãy kể tên môn thể thao con thích và giải thích ngắn gọn vì sao nhé?',
           ok:'Câu trả lời rất hay, con dùng từ vựng chính xác!' },
       ] },
-    { name:'Ngữ pháp: Thì hiện tại đơn (Present Simple)',
-      greet:'giờ mình ôn lại thì hiện tại đơn nhé, đây là kiến thức rất quan trọng cho giao tiếp hàng ngày.',
-      lesson:{ title:'Present Simple', explain:'Với chủ ngữ số ít (He/She/It), động từ thêm "-s/-es": "She goes to school." Với I/You/We/They, giữ nguyên động từ: "They go to school."' },
+    { name:`Ngữ pháp: Câu hỏi "What's your favourite...?"`, masteryPct:34,
+      greet:'mình cùng ôn lại cách hỏi về sở thích nhé — đây là mẫu câu quan trọng nhất của bài học đó!',
+      lesson:{ title:"What's your favourite...?", explain:'Hỏi sở thích ai đó, dùng: "What\'s your favourite + danh từ?" Trả lời: "It\'s + tên." Ví dụ: "What\'s your favourite colour? – It\'s pink."' },
       exercises:[
-        { type:'gapfill', pre:'She', post:'to school every day.', options:['go','goes','going','went'], answerIndex:1,
-          ok:'Chuẩn rồi, dùng "goes" vì chủ ngữ "She" là ngôi số ít.', wrong:'Chưa đúng, đáp án đúng là "goes".' },
-        { type:'mcq', question:'Câu nào đúng ngữ pháp thì hiện tại đơn?', options:['He play football.','He plays football.','He playing football.','He played football.'], answerIndex:1,
-          ok:'Chính xác! "He plays" mới đúng ngôi số ít.', wrong:'Chưa đúng, đáp án đúng là "He plays football."' },
-        { type:'gapfill', pre:'They', post:'to the park on Sundays.', options:['go','goes','going','went'], answerIndex:0,
-          ok:'Đúng rồi, "They" giữ nguyên động từ "go".', wrong:'Chưa đúng, đáp án là "go".' },
-        { type:'mcq', question:'Từ nào KHÔNG cần thêm "-s/-es" ở thì hiện tại đơn?', options:['She (watch)','He (do)','I (like)','It (fly)'], answerIndex:2,
-          ok:'Chính xác, "I" không chia động từ thêm -s.', wrong:'Chưa đúng, đáp án là "I (like)".' },
-        { type:'chat', ask:'Con hãy đặt 1 câu ở thì hiện tại đơn nói về việc con làm mỗi sáng?',
-          ok:'Câu rất hay, con chia đúng ngôi rồi!' },
+        { type:'mcq', question:'___ is your favourite animal?', options:['What','Who','When','Where'], answerIndex:0,
+          ok:'Chính xác! Dùng "What" để hỏi về sở thích.', wrong:'Chưa đúng, con nhớ lại từ để hỏi "CÁI GÌ" ở đầu câu hỏi về sở thích nhé!' },
+        { type:'gapfill', pre:"What's your favourite food? – It's a", post:'.', options:['sandwich','blue','run','quickly'], answerIndex:0,
+          ok:'Đúng rồi, "sandwich" là món ăn hợp câu trả lời.', wrong:'Chưa đúng, câu hỏi về "favourite food" thì đáp án phải là 1 MÓN ĂN nhé, không phải màu sắc hay hành động đâu!' },
+        { type:'mcq', question:'Câu hỏi nào đúng ngữ pháp?', options:["What's your favourite colour?","What your favourite is colour?","Favourite what's your colour?","Colour what's favourite your?"], answerIndex:0,
+          ok:'Chính xác, đúng cấu trúc câu hỏi rồi!', wrong:'Chưa đúng, con để ý đúng thứ tự: "What\'s your favourite + danh từ?" nhé, đừng đảo các từ lộn xộn!' },
+        { type:'gapfill', pre:"What's your favourite sport?", post:'football.', options:["It's","He's","They're","I'm"], answerIndex:0,
+          ok:'Tốt lắm, dùng "It\'s" để trả lời về 1 sự vật.', wrong:'Chưa đúng, khi trả lời về 1 SỰ VẬT (không phải người), mình dùng từ nào để bắt đầu câu nhỉ?' },
+        { type:'chat', ask:"Con hãy đặt 1 câu hỏi \"What's your favourite...?\" về chủ đề con thích và tự trả lời nhé?",
+          ok:'Câu rất hay, con dùng đúng mẫu câu rồi!' },
       ] },
   ],
   advance: [
-    { name:'Mở rộng: Nhạc cụ nâng cao (Advanced Instruments)',
-      greet:'con làm rất tốt buổi vừa rồi! Giờ mình mở rộng thêm cách miêu tả nhạc cụ mình yêu thích nhé.',
-      lesson:{ title:'Describing Instruments', explain:'Để miêu tả nhạc cụ yêu thích, dùng mẫu câu: "My favorite instrument is the + [tên nhạc cụ] because + [lý do]." Ví dụ: "...because it sounds beautiful."' },
+    { name:'Mở rộng: Đồ ăn & thức uống (Food & Drinks nâng cao)', masteryPct:90,
+      greet:'con làm rất tốt phần đồ ăn rồi! Giờ mình mở rộng thêm cách miêu tả món ăn mình thích nhé.',
+      lesson:{ title:'Describing Food', explain:'Miêu tả món ăn yêu thích, dùng mẫu: "My favourite food is + [món ăn] because + [lý do]." Ví dụ: "...because it\'s delicious."' },
       exercises:[
-        { type:'speak', prompt:'My favorite instrument is the violin because it sounds beautiful.',
+        { type:'speak', prompt:"My favourite food is pizza because it's delicious.",
           ok:'Phát âm rất tốt, ngữ điệu tự nhiên!' },
-        { type:'mcq', question:'Từ nào diễn tả ÂM THANH hay của nhạc cụ?', options:['Heavy','Beautiful','Slow','Square'], answerIndex:1,
-          ok:'Chính xác, "beautiful" phù hợp để khen âm thanh.', wrong:'Chưa đúng, đáp án là "Beautiful".' },
-        { type:'speak', prompt:'I want to learn how to play the piano next year.',
+        { type:'mcq', question:'Từ nào diễn tả món ăn NGON?', options:['Heavy','Delicious','Slow','Square'], answerIndex:1,
+          ok:'Chính xác, "delicious" phù hợp để khen món ăn.', wrong:'Chưa đúng, con nhớ lại từ tiếng Anh nghĩa là "NGON" nhé, không phải "nặng", "chậm" hay "vuông" đâu!' },
+        { type:'speak', prompt:'I want to try a new sandwich next week.',
           ok:'Con nói rất trôi chảy, tiếp tục phát huy nhé!' },
-        { type:'chat', ask:'Con hãy đặt 1 câu miêu tả nhạc cụ con muốn học thêm, dùng mẫu "I want to learn..."?',
+        { type:'chat', ask:'Con hãy đặt 1 câu miêu tả món ăn con muốn thử, dùng mẫu "I want to try..."?',
           ok:'Câu rất hay và đúng mẫu câu!' },
-        { type:'speak', prompt:'Playing an instrument every day helps me relax.',
+        { type:'speak', prompt:'Eating breakfast every morning helps me feel energetic.',
           ok:'Xuất sắc, con đã sẵn sàng cho phần nâng cao hơn rồi đó!' },
       ] },
-    { name:'Ngữ pháp: Thì tương lai đơn (Future Simple)',
-      greet:'giờ mình thử mở rộng thêm với thì tương lai đơn nhé.',
-      lesson:{ title:'Future Simple ("will")', explain:'Dùng "will + động từ nguyên mẫu" để nói về dự định/dự đoán trong tương lai: "I will visit my grandma this weekend." Thể phủ định: "will not / won\'t".' },
+    { name:`Ngữ pháp: Trả lời có lý do (because)`, masteryPct:88,
+      greet:'giờ mình thử mở rộng thêm cách trả lời có lý do nhé, sẽ giúp câu trả lời của con hay hơn nhiều đó!',
+      lesson:{ title:'Because...', explain:'Để giải thích lý do, dùng "because". Ví dụ: "It\'s a dolphin because it\'s very smart." Con có thể thêm lý do sau bất kỳ câu trả lời sở thích nào.' },
       exercises:[
-        { type:'gapfill', pre:'I', post:'visit my grandma this weekend.', options:['will','am','was','did'], answerIndex:0,
-          ok:'Chính xác, "will" dùng cho thì tương lai đơn.', wrong:'Chưa đúng, đáp án là "will".' },
-        { type:'chat', ask:'Con hãy đặt 1 câu với "will" nói về việc con sẽ làm cuối tuần này?',
-          ok:'Câu rất hay, con dùng "will" chính xác!' },
-        { type:'mcq', question:'Thể phủ định của "will" là gì?', options:['won\'t','not will','willn\'t','no will'], answerIndex:0,
-          ok:'Chính xác! "won\'t" = "will not".', wrong:'Chưa đúng, đáp án là "won\'t".' },
-        { type:'gapfill', pre:'She', post:'be happy to see you.', options:['will','wills','willing','will to'], answerIndex:0,
-          ok:'Đúng rồi, "will" giữ nguyên với mọi chủ ngữ.', wrong:'Chưa đúng, đáp án là "will".' },
-        { type:'chat', ask:'Con hãy đoán xem thời tiết ngày mai thế nào, dùng câu với "will"?',
-          ok:'Câu dự đoán rất tự nhiên, con dùng đúng cấu trúc rồi!' },
+        { type:'gapfill', pre:"It's a dolphin", post:"it's very smart.", options:['because','and','but','so'], answerIndex:0,
+          ok:'Chính xác, "because" dùng để giải thích lý do.', wrong:'Chưa đúng, mình cần 1 từ nối để GIẢI THÍCH LÝ DO, không phải "và/nhưng/vậy nên" đâu!' },
+        { type:'mcq', question:'Câu nào dùng lý do đúng cách?', options:["I like pizza because it's tasty.","I like pizza because tasty it's.","Because I like pizza it's tasty.","I like tasty because pizza."], answerIndex:0,
+          ok:'Chính xác! Đúng thứ tự "vì [lý do]" rồi.', wrong:'Chưa đúng, con để ý đúng thứ tự "I like ... because + lý do" nhé, đừng đảo ngược các từ!' },
+        { type:'gapfill', pre:'My favourite sport is football', post:"it's exciting.", options:['because','or','if','when'], answerIndex:0,
+          ok:'Đúng rồi, "because" giải thích lý do thích môn đó.', wrong:'Chưa đúng, mình cần 1 từ nối để GIẢI THÍCH LÝ DO thích môn đó nhé!' },
+        { type:'chat', ask:'Con hãy đặt 1 câu trả lời sở thích có dùng "because" để giải thích lý do nhé?',
+          ok:'Câu rất tự nhiên, con dùng đúng cấu trúc rồi!' },
+        { type:'speak', prompt:"My favourite colour is pink because it's bright and cheerful.",
+          ok:'Phát âm rất tốt, câu nghe rất tự nhiên!' },
       ] },
   ],
 };
@@ -3919,6 +3945,7 @@ function computeAic2Track(){
    điểm bắt đầu thật sự của phiên bổ trợ, cần đảm bảo mỗi lần bắt đầu lại (kể cả không qua
    resetDemo) không bị dính state cũ từ lượt chạy trước. ---- */
 function startAic2Interact(){
+  stopAic2Speech(); // huỷ giọng đọc còn sót lại từ lượt chạy trước, tránh chồng tiếng
   document.getElementById('aic2Cta').style.display='none';
   state.aic2.stage = 0;
   state.aic2.phase = 'lesson';
@@ -3933,11 +3960,20 @@ function startAic2Interact(){
 function updateAic2Progress(){
   const total = state.aic2.nloList.length;
   const idx = Math.min(state.aic2.stage, total-1);
-  const nloName = state.aic2.nloList[idx] ? state.aic2.nloList[idx].name : '';
+  const nlo = state.aic2.nloList[idx];
   document.getElementById('aic2GoalIdx').textContent = `${idx+1}/${total}`;
   document.getElementById('aic2GoalVerb').textContent = state.aic2.track==='advance'
     ? 'Mở rộng kiến thức' : 'Củng cố lại kiến thức chưa thành thạo';
-  document.getElementById('aic2GoalName').textContent = nloName;
+  document.getElementById('aic2GoalName').textContent = nlo ? nlo.name : '';
+  /* 2026-09-18: hiện lý do chọn NLO này (mastery % giả lập từ MASTERY_STRANDS/AIC2_NLO.masteryPct)
+     để demo thể hiện rõ đây là kết quả "Routing Engine" chọn theo Mastery Profile đa buổi, không
+     phải tuỳ ý — xem yêu cầu phân tích module AI Bổ trợ 2026-09-18. */
+  const reasonEl = document.getElementById('aic2GoalReason');
+  if(reasonEl){
+    reasonEl.textContent = (nlo && nlo.masteryPct != null)
+      ? (state.aic2.track==='advance' ? `(đang vững ${nlo.masteryPct}%)` : `(đang hổng ${nlo.masteryPct}%)`)
+      : '';
+  }
 }
 /* Chuyển giữa 4 trạng thái nội dung của thẻ trắng chính (khớp Figma node 192:27387). */
 function aic2SwitchView(name){
@@ -3945,11 +3981,34 @@ function aic2SwitchView(name){
   const el = document.getElementById('aic2View_'+name);
   if(el) el.classList.add('active');
 }
+/* ============ TEXT-TO-SPEECH GIÁO VIÊN AI (2026-09-18, Web Speech API) ============
+   Đọc thành tiếng kịch bản "Teacher Jenny" bằng SpeechSynthesis có sẵn trình duyệt (Chrome/Edge) —
+   MIỄN PHÍ, không cần backend/API key, cùng họ công nghệ với SpeechRecognition đã dùng cho iSpeak.
+   Đã trao đổi và chốt đây là phương án ưu tiên #1 (xem thảo luận 2026-09-18) trước khi cân nhắc
+   phương án tạo trước file âm thanh (chỉ dùng nếu chất lượng giọng qua trình duyệt không đạt khi
+   demo thật). Giọng đọc phụ thuộc trình duyệt/máy người xem, không đồng nhất 100% giữa các máy. */
+const AIC2_TTS_SUPPORTED = 'speechSynthesis' in window;
+function speakText(text, lang){
+  if(!AIC2_TTS_SUPPORTED || !text) return;
+  const plain = String(text).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if(!plain) return;
+  window.speechSynthesis.cancel(); // huỷ câu đang đọc dở để không chồng giọng khi chuyển bước nhanh
+  const utter = new SpeechSynthesisUtterance(plain);
+  utter.lang = lang || 'vi-VN';
+  utter.rate = 1;
+  window.speechSynthesis.speak(utter);
+}
+function stopAic2Speech(){
+  if(AIC2_TTS_SUPPORTED) window.speechSynthesis.cancel();
+}
+
 /* Thẻ nhận xét "Teacher Jenny" dưới thẻ chính — luôn hiển thị, đổi nội dung theo từng bước
-   thay vì khung chat cuộn như bản cũ (khớp đúng bố cục Figma: 1 thẻ nhận xét cố định). */
+   thay vì khung chat cuộn như bản cũ (khớp đúng bố cục Figma: 1 thẻ nhận xét cố định).
+   Cập nhật 2026-09-18: mỗi lần đổi nội dung cũng đọc thành tiếng luôn (xem speakText() ở trên). */
 function aic2SetMsg(label, html){
   document.getElementById('aic2MsgLabel').textContent = label;
   document.getElementById('aic2MsgBody').innerHTML = `<b>Teacher Jenny:</b> ${html}`;
+  speakText(html, 'vi-VN');
 }
 function aic2ShowHint(){ toast('💡 Gợi ý: trả lời bằng 1 câu tiếng Anh ngắn liên quan chủ đề vừa học'); }
 
@@ -4047,21 +4106,50 @@ function aic2RenderExercise(){
 }
 function aic2PickMcq(i){
   const btn = document.getElementById('aic2Opt'+i);
-  if(!btn) return;
-  document.querySelectorAll('.aic2-opt-btn').forEach(b=>b.classList.remove('selected'));
+  if(!btn || btn.disabled) return;
+  document.querySelectorAll('.aic2-opt-btn').forEach(b=>{ if(!b.disabled) b.classList.remove('selected'); });
   btn.classList.add('selected');
   state.aic2._mcqPick = i;
   document.getElementById('aic2McqSubmitBtn').disabled = false;
 }
+/* Kịch bản 2026-09-18: chọn ĐÚNG mới chuyển câu tiếp theo (tự động, như cũ); chọn SAI thì bôi đỏ
+   đáp án sai + hiện giải thích/gợi ý (ex.wrong), khoá toàn bộ đáp án lại và đổi nút "Nộp bài" thành
+   "Chọn lại" — bấm "Chọn lại" (aic2ResetMcq) mới quay về trạng thái CHƯA chọn để bấm đáp án khác,
+   không tự chuyển câu khi còn chọn sai. */
 function aic2SubmitMcq(){
   const ex = state.aic2.nloList[state.aic2.stage].exercises[state.aic2.exerciseIndex];
   if(state.aic2._mcqPick===null || state.aic2._mcqPick===undefined) return;
   const correct = state.aic2._mcqPick === ex.answerIndex;
-  document.querySelectorAll('.aic2-opt-btn').forEach(b=>{ b.onclick=null; b.disabled=true; });
   const picked = document.getElementById('aic2Opt'+state.aic2._mcqPick);
-  if(picked) picked.classList.add(correct?'correct':'wrong');
-  document.getElementById('aic2McqSubmitBtn').style.display='none';
-  aic2Feedback(correct, ex);
+  const submitBtn = document.getElementById('aic2McqSubmitBtn');
+  document.querySelectorAll('.aic2-opt-btn').forEach(b=>{ b.onclick=null; b.disabled=true; });
+  if(correct){
+    if(picked) picked.classList.add('correct');
+    submitBtn.style.display='none';
+    aic2Feedback(true, ex);
+  } else {
+    if(picked){
+      picked.classList.remove('selected');
+      picked.classList.add('wrong');
+    }
+    submitBtn.textContent = 'Chọn lại';
+    submitBtn.disabled = false;
+    submitBtn.onclick = aic2ResetMcq;
+    aic2SetMsg('Luyện tập', ex.wrong || 'Chưa đúng, con thử chọn lại nhé!');
+  }
+}
+function aic2ResetMcq(){
+  state.aic2._mcqPick = null;
+  document.querySelectorAll('.aic2-opt-btn').forEach(b=>{
+    b.classList.remove('selected','wrong','correct');
+    b.disabled = false;
+    const i = Number(b.id.replace('aic2Opt',''));
+    b.onclick = ()=>aic2PickMcq(i);
+  });
+  const submitBtn = document.getElementById('aic2McqSubmitBtn');
+  submitBtn.textContent = 'Nộp bài';
+  submitBtn.disabled = true;
+  submitBtn.onclick = aic2SubmitMcq;
 }
 function aic2PickGap(i){
   const blank = document.getElementById('aic2GapBlank');
@@ -4201,6 +4289,7 @@ function aic2Exit(){
   // Mô phỏng BR9 (thoát giữa chừng → lưu vị trí, tạm dừng thời lượng). Demo không triển khai
   // resume thật (xem finding F011/F026 — cửa sổ hợp lệ để resume còn là open question ở PRD).
   clearInterval(state.aic2._lessonTick);
+  stopAic2Speech();
   toast('⏸ Đã lưu vị trí, tạm dừng thời lượng — mô phỏng BR9');
   setTimeout(()=>goto('schedule'), 900);
 }
